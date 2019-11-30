@@ -1,0 +1,153 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+$arrowSize: 10px;
+
+.tooltip-container {
+  position: relative;
+}
+
+.tooltip-toggle {
+  &:hover ~ .tooltip {
+    display: block;
+  }
+}
+
+.tooltip {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%);
+  min-width: 150px;
+  max-width: 300px;
+  padding: 10px 16px;
+  background: #1f9ef7;
+  border-radius: 10px;
+  box-shadow: 4px 4px 30px rgba(#1f9ef7, 0.3);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.2;
+  z-index: 1003;
+  box-sizing: border-box;
+
+  @include appear('tooltip', $translateX: -50%, $translateToX: -50%);
+
+  :hover > &:not(&--no-hover) {
+    display: block;
+  }
+
+  &--visible {
+    display: block;
+  }
+
+  &::after {
+    content: '';
+    width: $arrowSize;
+    height: $arrowSize;
+    position: absolute;
+    left: 50%;
+    bottom: -($arrowSize / 2);
+    transform: translateX(-50%) rotate(45deg);
+    background: #1f9ef7;
+  }
+
+  &--bottom {
+    left: auto;
+    bottom: auto;
+    top: calc(100% + 15px);
+    transform: translate(0, -50%);
+
+    @include appear('tooltip-bottom', $translateY: 20px, $translateX: -50%, $translateToX: -50%);
+
+    &::after {
+      bottom: auto;
+      top: -($arrowSize / 2);
+      transform: translateX(0) rotate(45deg);
+    }
+  }
+
+  &--left {
+    width: auto;
+    min-width: 190px;
+    left: auto;
+    bottom: auto;
+    right: calc(100% + 15px);
+    top: 50%;
+    transform: translate(0, -50%);
+    @include appear('tooltip-left', $translateX: -20px, $translateY: -50%, $translateToY: -50%);
+
+    &::after {
+      bottom: auto;
+      left: auto;
+      top: 50%;
+      right: -($arrowSize / 2);
+      transform: translate(0, -50%) rotate(45deg);
+    }
+  }
+
+  &--right {
+    width: auto;
+    min-width: 190px;
+    left: calc(100% + 15px);
+    right: auto;
+    bottom: auto;
+    top: 50%;
+    transform: translate(0, -50%);
+    @include appear('tooltip-right', $translateX: 20px, $translateY: -50%, $translateToY: -50%);
+
+    &::after {
+      bottom: auto;
+      top: 50%;
+      left: -($arrowSize / 2);
+      transform: translate(0, -50%) rotate(45deg);
+    }
+  }
+
+  &--no-min-width {
+    min-width: auto;
+  }
+
+  &--nowrap {
+    white-space: nowrap;
+  }
+
+  &__title {
+    text-align: left;
+    font-weight: 500;
+  }
+
+  &__title + &__text {
+    margin: 4px 0 0;
+  }
+
+  &__text + &__title {
+    margin: 8px 0 0;
+  }
+
+  &__text {
+    color: rgba(#fff, 0.9);
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 7px 0 0;
+    text-align: left;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  &__row-title {
+    color: rgba(#fff, 0.87);
+  }
+
+  &__row-number {
+    margin: 0 0 0 8px;
+    font-weight: 500;
+  }
+}

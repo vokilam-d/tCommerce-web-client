@@ -1,0 +1,61 @@
+<app-header></app-header>
+
+<div class="page container product" *ngIf="product">
+  <breadcrumbs class="product__breadcrumbs" [item]="product"></breadcrumbs>
+
+  <h1 class="product__title">
+    {{ product.name }}
+  </h1>
+
+  <div class="product__sku">
+    Код: {{ product.sku }}
+  </div>
+
+  <div class="product__gallery gallery">
+    <div class="gallery__img-container">
+      <img class="gallery__img" [src]="product.mediaUrls[0]" [alt]="product.name">
+    </div>
+
+    <div class="gallery__thumbnails" *ngIf="product.mediaUrls.length > 1">
+      <img class="gallery__thumbnail"
+           *ngFor="let url of product.mediaUrls"
+           (click)="selectThumbnail(url)"
+           [src]="url"
+           [alt]="product.name"
+      >
+    </div>
+  </div>
+
+  <div class="product__short-description">
+    {{ product.shortDescription }}
+  </div>
+
+  <div class="product__price">
+    {{ product.price }} <span class="product__currency">грн</span>
+  </div>
+
+  <div class="product__actions">
+    <button class="btn product__buy">
+      <i class="mbi mbi-cart product__buy-icon"></i>
+      Купить
+    </button>
+
+    <button class="product__wishlist">
+      <i class="mbi mbi-heart product__wishlist-icon"></i>
+    </button>
+  </div>
+
+  <div class="product__categories">
+    Категории: <a class="product__category"
+                  *ngFor="let categoryUrl of product.categoryIds, last as last"
+                  [routerLink]="'/' + categoryUrl"
+  >{{ categoryUrl }}<ng-container *ngIf="!last">, </ng-container></a>
+  </div>
+
+  <div class="product__full-description">
+    {{ product.fullDescription }}
+  </div>
+
+</div>
+
+<app-footer></app-footer>

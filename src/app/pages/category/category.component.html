@@ -1,0 +1,28 @@
+<app-header></app-header>
+
+<div class="page container category" *ngIf="category">
+  <breadcrumbs class="category__breadcrumbs" [item]="category"></breadcrumbs>
+
+  <div class="category__container">
+
+    <aside class="category__sidebar">
+      <h1 class="category__title">
+        {{ category.name }}
+      </h1>
+
+      <app-filter class="category__filter"></app-filter>
+    </aside>
+
+    <main class="category__content">
+      <sorting class="category__sorting"></sorting>
+
+      <ol class="category__items">
+        <li class="category__item" *ngFor="let item of items">
+          <category-item [item]="item" (buy)="onItemBuy(item)"></category-item>
+        </li>
+      </ol>
+    </main>
+  </div>
+</div>
+
+<app-footer></app-footer>

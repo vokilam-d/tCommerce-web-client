@@ -1,0 +1,112 @@
+@import "variables";
+@import "mixins";
+
+.footer {
+  padding: 40px 0 70px;
+  border-top: 1px solid $borderColor;
+
+  &__content {
+    @include respond-to($media_medium) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    @include respond-to($media_large) {
+      flex-wrap: nowrap;
+    }
+  }
+
+  &__block {
+    margin: 50px 0 0;
+
+    @include respond-to($media_medium) {
+      width: 50%;
+      margin-top: 0;
+    }
+
+    @include respond-to($media_large) {
+      width: 25%;
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+.contacts {
+  padding: 0 0 0 40px;
+  font-size: 16px;
+
+  @include respond-to($media_medium) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  &__phones {
+    margin: 10px 0 0;
+  }
+
+  &__phone {
+    display: block;
+    padding: 5px 0;
+  }
+
+  &__email {
+    display: block;
+    margin: 10px 0 0;
+  }
+}
+
+.menu {
+  padding: 0 0 0 40px;
+  font-size: 16px;
+
+  @include respond-to($media_medium) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  @include respond-to($media_large) {
+    width: 50%;
+    margin-top: 30px;
+    padding-left: 60px;
+  }
+
+  &__links {
+  }
+
+  &__link {
+    display: block;
+    padding: 7px 0;
+  }
+}
+
+.methods {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include respond-to($media_medium) {
+    justify-content: flex-start;
+    margin-top: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  @include respond-to($media_large) {
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+
+  &__item {
+    display: block;
+    width: 60px;
+    margin: 0 20px;
+  }
+}

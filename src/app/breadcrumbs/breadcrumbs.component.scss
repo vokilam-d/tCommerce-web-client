@@ -1,0 +1,20 @@
+@import "variables";
+
+.breadcrumbs {
+  margin: 20px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.breadcrumbs__item {
+  position: relative;
+  margin: 0 10px 0 0;
+
+  &:not(:last-child)::after {
+    content: '/';
+    margin: 0 0 0 10px;
+    color: #aaa;
+  }
+}

@@ -1,0 +1,13 @@
+@import "variables";
+
+.btn {
+  padding: 9px 15px 10px;
+  background: $primary;
+  border: 1px solid $primary;
+  border-radius: 5px;
+  font-size: 16px;
+
+  &--transparent {
+    background: transparent;
+  }
+}

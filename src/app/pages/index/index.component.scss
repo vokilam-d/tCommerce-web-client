@@ -1,0 +1,139 @@
+@import "variables";
+@import "mixins";
+
+.banner {
+  $brk-point: 500px;
+
+  margin: 40px 0 0;
+
+  @include respond-to($brk-point) {
+    display: flex;
+  }
+
+  &__img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__slider {
+    @include respond-to($brk-point) {
+      width: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+    }
+  }
+
+  &__imgs-row {
+    display: flex;
+  }
+}
+
+.categories {
+  margin: 30px 0 0;
+
+  @include respond-to($media_medium) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
+
+.category {
+  margin: 0 0 30px;
+  border: 1px solid $borderColor;
+  padding: 15px 20px 25px;
+
+  @include respond-to($media_medium) {
+    width: 45%;
+  }
+
+  @include respond-to($media_large) {
+    display: flex;
+  }
+
+  &__img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    @include respond-to($media_large) {
+      width: 50%;
+      flex-shrink: 0;
+    }
+  }
+
+  &__img {
+    max-height: 150px;
+  }
+
+  &__info {
+    margin: 20px 0 0;
+
+    @include respond-to($media_large) {
+      margin-top: 10px;
+    }
+  }
+
+  &__title {
+    font-size: 18px;
+  }
+
+  &__subcategories {
+    margin: 10px 0 0;
+  }
+
+  &__subcategory {
+    padding: 5px 0;
+    font-size: 14px;
+  }
+}
+
+.perks {
+  margin: 50px 0 0;
+  padding: 0 30px;
+
+  @include respond-to($media_medium) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.perk {
+  display: flex;
+  align-items: center;
+  margin: 0 0 30px;
+
+  @include respond-to($media_medium) {
+    width: 50%;
+    padding: 0 15px;
+  }
+
+  @include respond-to($media_large) {
+    width: 25%;
+  }
+
+  &__img {
+    font-size: 40px;
+    color: $primary;
+  }
+
+  &__info {
+    margin: 0 0 0 20px;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &__text {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: $grey;
+  }
+}

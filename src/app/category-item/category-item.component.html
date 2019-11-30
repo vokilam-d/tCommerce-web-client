@@ -1,0 +1,29 @@
+<div class="item">
+  <header class="item__header">
+    <div class="item__img-container">
+      <img class="item__img" [src]="item.mediaUrls[0]" [alt]="item.name">
+    </div>
+
+    <h2 class="item__name">
+      <a class="item__link" [routerLink]="'/' + item.slug">{{ item.name }}</a>
+    </h2>
+  </header>
+
+  <div class="item__info">
+    <div class="item__price">
+      {{ item.price }} <span class="item__currency">грн</span>
+    </div>
+
+    <div class="item__actions">
+      <button class="btn item__buy" (click)="buy()">
+        <i class="mbi mbi-cart item__buy-icon"></i>
+        Купить
+      </button>
+
+      <button class="item__wishlist" (click)="addToWishlist()">
+        <i class="mbi mbi-heart item__wishlist-icon"></i>
+      </button>
+
+    </div>
+  </div>
+</div>
