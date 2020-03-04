@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WebClientHeaderComponent } from './header.component';
+import { HeaderComponent } from './header.component';
 import { RouterModule } from '@angular/router';
-import { WebClientServiceMenuComponent } from './service-menu/service-menu.component';
-import { WebClientSearchBarComponent } from './search-bar/search-bar.component';
+import { ServiceMenuComponent } from './service-menu/service-menu.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
-    WebClientHeaderComponent,
-    WebClientServiceMenuComponent,
-    WebClientSearchBarComponent
+    HeaderComponent,
+    ServiceMenuComponent,
+    SearchBarComponent
   ],
   imports: [
     CommonModule,
     RouterModule
   ],
   exports: [
-    WebClientHeaderComponent
+    HeaderComponent
   ]
 })
-export class WebClientHeaderModule { }
+export class HeaderModule { }

@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { WebClientProductRoutingModule } from './product-routing.module';
-import { WebClientProductComponent } from './product.component';
-import { WebClientHeaderModule } from '../../header/header.module';
-import { WebClientFooterModule } from '../../footer/footer.module';
-import { WebClientBreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
+import { ProductRoutingModule } from './product-routing.module';
+import { ProductComponent } from './product.component';
+import { HeaderModule } from '../../header/header.module';
+import { FooterModule } from '../../footer/footer.module';
+import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 
 @NgModule({
-  declarations: [WebClientProductComponent],
+  declarations: [ProductComponent],
   imports: [
     CommonModule,
-    WebClientProductRoutingModule,
-    WebClientHeaderModule,
-    WebClientFooterModule,
-    WebClientBreadcrumbsModule
+    ProductRoutingModule,
+    HeaderModule,
+    FooterModule,
+    BreadcrumbsModule
   ]
 })
-export class WebClientProductModule { }
+export class ProductModule { }

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { ServerModule } from '@angular/platform-server';
 
-import { WebClientAppModule } from './app.module';
-import { WebClientAppComponent } from './app.component';
+import { AppModule } from './app.module';
+import { AppComponent } from './app.component';
 
 @NgModule({
   imports: [
-    WebClientAppModule,
+    AppModule,
     ServerModule
 ],
-  bootstrap: [WebClientAppComponent],
+  bootstrap: [AppComponent],
 })
 export class AppServerModule {}

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WebClientSortingComponent } from './sorting.component';
+import { SortingComponent } from './sorting.component';
 
-describe('WebClientSortingComponent', () => {
-  let component: WebClientSortingComponent;
-  let fixture: ComponentFixture<WebClientSortingComponent>;
+describe('SortingComponent', () => {
+  let component: SortingComponent;
+  let fixture: ComponentFixture<SortingComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WebClientSortingComponent ]
+      declarations: [ SortingComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WebClientSortingComponent);
+    fixture = TestBed.createComponent(SortingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { WebClientCategoryComponent } from './category.component';
+import { CategoryComponent } from './category.component';
 
 const routes: Routes = [{
   path: '',
-  component: WebClientCategoryComponent
+  component: CategoryComponent
 }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class WebClientCategoryRoutingModule { }
+export class CategoryRoutingModule { }

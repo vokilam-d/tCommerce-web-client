@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   templateUrl: './category-item.component.html',
   styleUrls: ['./category-item.component.scss']
 })
-export class WebClientCategoryItemComponent implements OnInit {
+export class CategoryItemComponent implements OnInit {
 
   @Input() item: any;
   @Output('buy') buyEmitter = new EventEmitter();

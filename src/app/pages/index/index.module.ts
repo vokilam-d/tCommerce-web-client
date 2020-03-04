@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { WebClientIndexRoutingModule } from './index-routing.module';
-import { WebClientIndexComponent } from './index.component';
-import { WebClientHeaderModule } from '../../header/header.module';
-import { WebClientFooterModule } from '../../footer/footer.module';
+import { IndexRoutingModule } from './index-routing.module';
+import { IndexComponent } from './index.component';
+import { HeaderModule } from '../../header/header.module';
+import { FooterModule } from '../../footer/footer.module';
 
 @NgModule({
-  declarations: [WebClientIndexComponent],
+  declarations: [IndexComponent],
   imports: [
     CommonModule,
-    WebClientIndexRoutingModule,
-    WebClientHeaderModule,
-    WebClientFooterModule
+    IndexRoutingModule,
+    HeaderModule,
+    FooterModule
   ]
 })
-export class WebClientIndexModule { }
+export class IndexModule { }

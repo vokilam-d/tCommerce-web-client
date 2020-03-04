@@ -19,7 +19,7 @@ export function dynamicModuleResolver(slug: string = 'not-found') {
             return ngModule;
           })
           .catch(() => {
-            console.warn(`Lazy load of module '${pageType}' failed. Loading Not found...`);
+            console.warn(`Lazy load of module '${pageType}' failed. Loading Not found module...`);
             return importNotFound();
           });
       })

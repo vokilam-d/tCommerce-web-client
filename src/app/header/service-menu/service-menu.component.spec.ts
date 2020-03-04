@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WebClientServiceMenuComponent } from './service-menu.component';
+import { ServiceMenuComponent } from './service-menu.component';
 
 describe('TopMenuComponent', () => {
-  let component: WebClientServiceMenuComponent;
-  let fixture: ComponentFixture<WebClientServiceMenuComponent>;
+  let component: ServiceMenuComponent;
+  let fixture: ComponentFixture<ServiceMenuComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WebClientServiceMenuComponent ]
+      declarations: [ ServiceMenuComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WebClientServiceMenuComponent);
+    fixture = TestBed.createComponent(ServiceMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

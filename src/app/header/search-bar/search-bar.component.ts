@@ -5,7 +5,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss']
 })
-export class WebClientSearchBarComponent implements OnInit {
+export class SearchBarComponent implements OnInit {
 
   @Output('search') searchEmitter = new EventEmitter();
 
