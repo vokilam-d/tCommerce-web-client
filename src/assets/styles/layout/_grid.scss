@@ -1,7 +1,12 @@
 @import "../abstracts/mixins";
 
 .container {
-  padding: 0 15px;
+  padding: 0 8px;
+
+  @include respond-to($media_medium) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 
   @include respond-to($media_max-content-width) {
     width: 1200px;

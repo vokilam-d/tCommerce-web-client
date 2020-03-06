@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { FilterModule } from '../../filter/filter.module';
 import { SortingModule } from '../../sorting/sorting.module';
-import { CategoryItemModule } from '../../category-item/category-item.module';
+import { ProductListItemModule } from '../../category-item/product-list-item.module';
 
 @NgModule({
   declarations: [CategoryComponent],
@@ -20,7 +20,7 @@ import { CategoryItemModule } from '../../category-item/category-item.module';
     BreadcrumbsModule,
     FilterModule,
     SortingModule,
-    CategoryItemModule
+    ProductListItemModule
   ]
 })
 export class CategoryModule { }

@@ -1,7 +1,7 @@
 <div class="item">
   <header class="item__header">
     <div class="item__img-container">
-      <img class="item__img" [src]="item.mediaUrls[0]" [alt]="item.name">
+      <img class="item__img" [src]="'http://localhost:3500' + item.mediaUrl" [alt]="item.name">
     </div>
 
     <h2 class="item__name">
@@ -11,7 +11,7 @@
 
   <div class="item__info">
     <div class="item__price">
-      {{ item.price }} <span class="item__currency">грн</span>
+      {{ item.priceInDefaultCurrency }} <span class="item__currency">грн</span>
     </div>
 
     <div class="item__actions">

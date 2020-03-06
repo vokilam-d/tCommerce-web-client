@@ -23,26 +23,20 @@ export class CategoryComponent implements OnInit {
   private fetchCategory() {
     const slug = this.route.snapshot.paramMap.get('slug');
     this.categoryService.fetchCategory(slug).subscribe(
-      category => {
-        this.category = category;
+      response => {
+        this.category = response.data;
         this.fetchCategoryItems();
-
-        console.log(this.category);
       },
       error => console.warn(error)
     );
   }
 
   private fetchCategoryItems() {
-    this.categoryService.fetchCategoryItems(this.category.id).subscribe(
-      items => {
-        this.items = items;
+    this.categoryService.fetchCategoryItems(this.category.slug).subscribe(
+      response => {
+        this.items = response.data;
       },
       error => console.warn(error)
     )
-  }
-
-  onItemBuy(item: any) {
-    console.log('buy!', item);
   }
 }
