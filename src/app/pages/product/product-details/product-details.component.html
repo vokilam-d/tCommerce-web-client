@@ -1,0 +1,49 @@
+<div class="details">
+  <ng-container *ngFor="let entry of indices | keyvalue: keyValuePipeComparator" [ngSwitch]="entry.value">
+
+    <div class="details__title"
+         [class.details__title--active]="activeIdx === entry.value"
+         (click)="toggleContent(entry.value)"
+    >
+      <ng-container *ngSwitchCase="indices.description">Описание</ng-container>
+      <ng-container *ngSwitchCase="indices.chars">Характеристики</ng-container>
+      <ng-container *ngSwitchCase="indices.reviews">
+        Отзывы
+        <span class="details__reviews-count" *ngIf="product.reviewsCount > 0">({{ product.reviewsCount }})</span>
+      </ng-container>
+
+      <i class="mbi mbi-chevron-down details__title-icon"
+         [class.details__title-icon--active]="activeIdx === entry.value"
+      ></i>
+    </div>
+
+    <div class="details__content" [class.details__content--visible]="activeIdx === entry.value">
+
+      <ng-container *ngSwitchCase="indices.description" [ngTemplateOutlet]="descTmpl"></ng-container>
+      <ng-container *ngSwitchCase="indices.chars" [ngTemplateOutlet]="charsTmpl"></ng-container>
+      <ng-container *ngSwitchCase="indices.reviews" [ngTemplateOutlet]="reviewsTmpl"></ng-container>
+
+    </div>
+
+  </ng-container>
+</div>
+
+
+<ng-template #descTmpl>
+  <div class="description product-description" [innerHTML]="product.fullDescription"></div>
+</ng-template>
+
+<ng-template #charsTmpl>
+  <div class="chars">
+    <div class="chars__item" *ngFor="let char of product.characteristics">
+      <div class="chars__label">{{ char.label }}</div>
+      <div class="chars__value">{{ char.value }}</div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #reviewsTmpl>
+  <div class="reviews">
+    {{ reviews | json }}
+  </div>
+</ng-template>

@@ -4,6 +4,8 @@ import { ProductService } from './product.service';
 import { ProductDto } from '../../shared/dtos/product.dto';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { ScrollToService } from '../../shared/services/scroll-to/scroll-to.service';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'product',
@@ -14,11 +16,11 @@ export class ProductComponent implements OnInit {
 
   product: ProductDto;
   breadcrumbs: IBreadcrumb[] = [];
+  qtyControl: FormControl = new FormControl(1);
 
-  @ViewChild('reviews') reviewsRef: ElementRef;
+  @ViewChild(ProductDetailsComponent) detailsCmp: ProductDetailsComponent;
 
   constructor(private route: ActivatedRoute,
-              private scrollToService: ScrollToService,
               private productService: ProductService) {
   }
 
@@ -48,6 +50,18 @@ export class ProductComponent implements OnInit {
   }
 
   scrollToReviews() {
-    this.scrollToService.scrollTo({ target: this.reviewsRef });
+    this.detailsCmp.openReviews();
+  }
+
+  incrementQty() {
+    let qty = this.qtyControl.value;
+    this.qtyControl.setValue(++qty);
+  }
+
+  decrementQty() {
+    let qty = this.qtyControl.value;
+    if (qty <= 1) { return; }
+
+    this.qtyControl.setValue(--qty);
   }
 }

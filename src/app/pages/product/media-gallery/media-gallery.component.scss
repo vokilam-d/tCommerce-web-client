@@ -3,9 +3,27 @@
 .gallery {
   display: flex;
 
+  &__thumbnails {
+    width: 80px;
+    padding: 0 10px 0 0;
+  }
+
+  &__thumbnail {
+    width: 60px;
+    height: 60px;
+    margin: 0 10px 0 0;
+    padding: 2px;
+    object-fit: contain;
+    border: 1px solid transparent;
+
+    &--active {
+      border-color: $primary;
+    }
+  }
+
   &__img-container {
     position: relative;
-    width: calc(100% - 80px);
+    width: 100%;
     max-width: 400px;
     margin: 0 auto;
 
@@ -14,6 +32,10 @@
       display: block;
       padding-bottom: 100%;
     }
+  }
+
+  &__thumbnails + &__img-container {
+    width: calc(100% - 80px);
   }
 
   &__img-inner-container {
@@ -32,23 +54,5 @@
   &__img {
     max-height: 100%;
     max-width: 100%;
-  }
-
-  &__thumbnails {
-    width: 80px;
-    padding: 0 10px 0 0;
-  }
-
-  &__thumbnail {
-    width: 60px;
-    height: 60px;
-    margin: 0 10px 0 0;
-    padding: 2px;
-    object-fit: contain;
-    border: 1px solid transparent;
-
-    &--active {
-      border-color: $primary;
-    }
   }
 }

@@ -9,16 +9,19 @@ import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { ProductRatingModule } from '../../product-rating/product-rating.module';
 import { MediaGalleryComponent } from './media-gallery/media-gallery.component';
 import { MediaGalleryModalComponent } from './media-gallery-modal/media-gallery-modal.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ProductComponent, MediaGalleryComponent, MediaGalleryModalComponent],
+  declarations: [ProductComponent, MediaGalleryComponent, MediaGalleryModalComponent, ProductDetailsComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,
     HeaderModule,
     FooterModule,
     BreadcrumbsModule,
-    ProductRatingModule
+    ProductRatingModule,
+    ReactiveFormsModule
   ]
 })
 export class ProductModule { }
