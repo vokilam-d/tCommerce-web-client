@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { IBreadcrumb } from './breadcrumbs.interface';
 
 @Component({
   selector: 'breadcrumbs',
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BreadcrumbsComponent implements OnInit {
 
-  @Input() item: any;
+  @Input() breadcrumbs: IBreadcrumb[];
 
   constructor() { }
 

@@ -1,0 +1,29 @@
+<div class="gallery">
+  <div class="gallery__thumbnails" *ngIf="medias.length > 1">
+    <img class="gallery__thumbnail"
+         *ngFor="let media of medias, index as i"
+         [class.gallery__thumbnail--active]="activeMediaIdx === i"
+         [src]="'http://localhost:3500' + media.variantsUrls.small"
+         [alt]="media.altText"
+         (mouseenter)="setActiveIndex(i)"
+         (click)="onMediaClick(i)"
+    >
+  </div>
+
+  <div class="gallery__img-container">
+    <div class="gallery__img-inner-container">
+      <img class="gallery__img"
+           *ngIf="medias[activeMediaIdx] as media"
+           [src]="'http://localhost:3500' + media.variantsUrls.medium"
+           [alt]="media.altText"
+           (click)="onMediaClick(activeMediaIdx)"
+      >
+    </div>
+  </div>
+</div>
+
+<media-gallery-modal *ngIf="isModalVisible"
+                     [medias]="medias"
+                     [activeMediaIdx]="activeMediaIdx"
+                     (close)="hideModal()"
+></media-gallery-modal>

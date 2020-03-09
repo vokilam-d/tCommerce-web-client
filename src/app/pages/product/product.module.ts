@@ -6,15 +6,19 @@ import { ProductComponent } from './product.component';
 import { HeaderModule } from '../../header/header.module';
 import { FooterModule } from '../../footer/footer.module';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
+import { ProductRatingModule } from '../../product-rating/product-rating.module';
+import { MediaGalleryComponent } from './media-gallery/media-gallery.component';
+import { MediaGalleryModalComponent } from './media-gallery-modal/media-gallery-modal.component';
 
 @NgModule({
-  declarations: [ProductComponent],
+  declarations: [ProductComponent, MediaGalleryComponent, MediaGalleryModalComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,
     HeaderModule,
     FooterModule,
-    BreadcrumbsModule
+    BreadcrumbsModule,
+    ProductRatingModule
   ]
 })
 export class ProductModule { }

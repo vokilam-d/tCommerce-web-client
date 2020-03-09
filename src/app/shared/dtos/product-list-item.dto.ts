@@ -1,13 +1,4 @@
-export class ProductListItemVariantDto {
-  slug: string;
-  label: string;
-  isSelected: boolean;
-}
-
-export class ProductListItemVariantGroupDto {
-  label: string;
-  variants: ProductListItemVariantDto[];
-}
+import { ProductVariantGroupDto } from './product-variant.dto';
 
 export class ProductListItemDto {
   productId: number;
@@ -20,5 +11,5 @@ export class ProductListItemDto {
   isInStock: boolean;
   sku: string;
   slug: string;
-  variantGroups: ProductListItemVariantGroupDto[];
+  variantGroups: ProductVariantGroupDto[];
 }

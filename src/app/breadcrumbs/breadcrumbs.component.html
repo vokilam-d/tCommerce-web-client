@@ -1,8 +1,30 @@
-<ul class="breadcrumbs">
-  <li class="breadcrumbs__item">
-    <a class="breadcrumbs__link" routerLink="/">Главная</a>
+<ul class="breadcrumbs" vocab="http://schema.org/" typeof="BreadcrumbList">
+  <li class="breadcrumbs__item" property="itemListElement" typeof="ListItem">
+    <a class="breadcrumbs__link" routerLink="/" property="item" typeof="WebPage">
+      Главная
+      <meta property="name" content="Главная">
+    </a>
   </li>
-  <li class="breadcrumbs__item" *ngIf="item">
-    <a class="breadcrumbs__link" [routerLink]="item.slug">{{ item.name }}</a>
+
+  <li class="breadcrumbs__item"
+      *ngFor="let breadcrumb of breadcrumbs"
+      property="item"
+      typeof="WebPage"
+  >
+    <a class="breadcrumbs__link"
+       *ngIf="breadcrumb.link; else noLink"
+       [routerLink]="breadcrumb.link"
+       property="item"
+       typeof="WebPage"
+    >
+      {{ breadcrumb.title }}
+
+      <meta property="name" [content]="breadcrumb.title">
+    </a>
+
+    <ng-template #noLink>
+      {{ breadcrumb.title }}
+      <meta property="name" [content]="breadcrumb.title">
+    </ng-template>
   </li>
 </ul>

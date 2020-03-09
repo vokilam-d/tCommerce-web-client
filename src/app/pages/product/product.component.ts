@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from './product.service';
+import { ProductDto } from '../../shared/dtos/product.dto';
+import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
+import { ScrollToService } from '../../shared/services/scroll-to/scroll-to.service';
 
 @Component({
   selector: 'product',
@@ -9,9 +12,13 @@ import { ProductService } from './product.service';
 })
 export class ProductComponent implements OnInit {
 
-  product: any;
+  product: ProductDto;
+  breadcrumbs: IBreadcrumb[] = [];
+
+  @ViewChild('reviews') reviewsRef: ElementRef;
 
   constructor(private route: ActivatedRoute,
+              private scrollToService: ScrollToService,
               private productService: ProductService) {
   }
 
@@ -21,16 +28,26 @@ export class ProductComponent implements OnInit {
 
   private fetchProduct() {
     const slug = this.route.snapshot.paramMap.get('slug');
+
     this.productService.fetchProduct(slug).subscribe(
-      product => {
-        this.product = product;
-        console.log(this.product);
+      response => {
+        this.product = response.data;
+        this.buildBreadcrumbs();
       },
       error => console.warn(error)
     );
   }
 
-  selectThumbnail(url: any) {
-    console.log('select thumbnail!', url);
+  private buildBreadcrumbs() {
+    this.breadcrumbs = this.product.breadcrumbs.map(breadcrumb => ({
+      title: breadcrumb.name,
+      link: breadcrumb.slug
+    }));
+
+    this.breadcrumbs.push({ title: this.product.name });
+  }
+
+  scrollToReviews() {
+    this.scrollToService.scrollTo({ target: this.reviewsRef });
   }
 }

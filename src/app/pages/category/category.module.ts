@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { FilterModule } from '../../filter/filter.module';
 import { SortingModule } from '../../sorting/sorting.module';
-import { ProductListItemModule } from '../../category-item/product-list-item.module';
+import { ProductListItemModule } from '../../product-list-item/product-list-item.module';
 
 @NgModule({
   declarations: [CategoryComponent],

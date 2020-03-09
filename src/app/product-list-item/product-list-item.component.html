@@ -1,7 +1,19 @@
 <div class="item">
   <header class="item__header">
-    <div class="item__img-container">
-      <img class="item__img" [src]="'http://localhost:3500' + item.mediaUrl" [alt]="item.name">
+    <div class="item__img-container" [class.item__img-container--with-hover]="item.mediaHoverUrl">
+      <a class="item__link" [routerLink]="'/' + item.slug">
+
+        <img class="item__img item__img-primary"
+             [src]="'http://localhost:3500' + item.mediaUrl"
+             [alt]="item.mediaAltText"
+        >
+
+        <img class="item__img item__img-secondary"
+             *ngIf="item.mediaHoverUrl"
+             [src]="'http://localhost:3500' + item.mediaHoverUrl"
+             [alt]="item.mediaAltText"
+        >
+      </a>
     </div>
 
     <h2 class="item__name">

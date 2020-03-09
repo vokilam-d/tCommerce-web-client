@@ -1,29 +1,28 @@
 <app-header></app-header>
 
 <div class="page container product" *ngIf="product">
-  <breadcrumbs class="product__breadcrumbs" [item]="product"></breadcrumbs>
+  <breadcrumbs class="product__breadcrumbs" [breadcrumbs]="breadcrumbs"></breadcrumbs>
 
   <h1 class="product__title">
     {{ product.name }}
   </h1>
 
-  <div class="product__sku">
-    Код: {{ product.sku }}
+  <div class="product__sku-container">
+
+    <product-rating class="product__rating"
+                    *ngIf="product.reviewsAvgRating"
+                    [rating]="product.reviewsAvgRating"
+                    [reviewsCount]="product.reviewsCount"
+                    (click)="scrollToReviews()"
+    ></product-rating>
+
+    <div class="product__sku">
+      Код: <span class="product__sku-value">{{ product.sku }}</span>
+    </div>
   </div>
 
-  <div class="product__gallery gallery">
-    <div class="gallery__img-container">
-      <img class="gallery__img" [src]="product.mediaUrls[0]" [alt]="product.name">
-    </div>
-
-    <div class="gallery__thumbnails" *ngIf="product.mediaUrls.length > 1">
-      <img class="gallery__thumbnail"
-           *ngFor="let url of product.mediaUrls"
-           (click)="selectThumbnail(url)"
-           [src]="url"
-           [alt]="product.name"
-      >
-    </div>
+  <div class="product__gallery">
+    <media-gallery [medias]="product.medias"></media-gallery>
   </div>
 
   <div class="product__short-description">
@@ -31,7 +30,7 @@
   </div>
 
   <div class="product__price">
-    {{ product.price }} <span class="product__currency">грн</span>
+    {{ product.priceInDefaultCurrency }} <span class="product__currency">грн</span>
   </div>
 
   <div class="product__actions">
@@ -47,13 +46,19 @@
 
   <div class="product__categories">
     Категории: <a class="product__category"
-                  *ngFor="let categoryUrl of product.categoryIds, last as last"
-                  [routerLink]="'/' + categoryUrl"
-  >{{ categoryUrl }}<ng-container *ngIf="!last">, </ng-container></a>
+                  *ngFor="let category of product.categories, last as last"
+                  [routerLink]="'/' + category.slug"
+                  target="_blank"
+  >
+    {{ category.name }}<ng-container *ngIf="!last">, </ng-container>
+  </a>
   </div>
 
   <div class="product__full-description">
     {{ product.fullDescription }}
+  </div>
+
+  <div class="product__reviews" #reviews>
   </div>
 
 </div>

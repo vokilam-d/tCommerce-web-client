@@ -9,10 +9,25 @@
     line-height: 1.2;
   }
 
-  &__sku {
+  &__sku-container {
     margin: 20px 0 0;
+    padding: 0 10px 0 5px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__rating {
+    width: 50%;
+    position: relative;
+    margin-right: auto;
+  }
+
+  &__sku {
     font-size: 16px;
-    color: $grey;
+  }
+
+  &__sku-value {
+    color: #999;
   }
 
   &__gallery {
@@ -72,18 +87,8 @@
     font-size: 16px;
     line-height: 1.3;
   }
-}
 
-.gallery {
-  &__thumbnails {
-    margin: 15px 0 0;
-    display: flex;
-  }
-
-  &__thumbnail {
-    width: 60px;
-    height: 60px;
-    margin: 0 10px 0 0;
-    object-fit: contain;
+  &__category {
+    color: $blue;
   }
 }
