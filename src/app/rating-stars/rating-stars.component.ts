@@ -1,14 +1,13 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'product-rating',
-  templateUrl: './product-rating.component.html',
-  styleUrls: ['./product-rating.component.scss']
+  selector: 'rating-stars',
+  templateUrl: './rating-stars.component.html',
+  styleUrls: ['./rating-stars.component.scss']
 })
-export class ProductRatingComponent implements OnInit, AfterViewInit{
+export class RatingStarsComponent implements OnInit, AfterViewInit {
 
   @Input() rating: number;
-  @Input() reviewsCount: number;
 
   @ViewChild('stopElement') stopElement: ElementRef;
 
@@ -20,5 +19,4 @@ export class ProductRatingComponent implements OnInit, AfterViewInit{
   ngAfterViewInit(): void {
     this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', `${this.rating / 5}`);
   }
-
 }

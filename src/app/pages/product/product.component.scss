@@ -20,6 +20,13 @@
     width: 50%;
     position: relative;
     margin-right: auto;
+    display: flex;
+    align-items: center;
+  }
+
+  &__rating-count {
+    margin: 0 0 0 8px;
+    color: #666;
   }
 
   &__sku {

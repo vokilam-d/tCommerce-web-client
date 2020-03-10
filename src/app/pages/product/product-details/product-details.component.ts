@@ -3,6 +3,9 @@ import { ProductDto } from '../../../shared/dtos/product.dto';
 import { HttpClient } from '@angular/common/http';
 import { KeyValue } from '@angular/common';
 import { ScrollToService } from '../../../shared/services/scroll-to/scroll-to.service';
+import { ProductReviewService } from '../product-review.service';
+import { ProductReviewDto } from '../../../shared/dtos/product-review.dto';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'product-details',
@@ -18,11 +21,13 @@ export class ProductDetailsComponent implements OnInit {
     reviews: 2
   };
   activeIdx: number = 0;
+  voteSuccess: boolean = false;
 
-  reviews: [];
+  reviews: ProductReviewDto[] = [];
 
   constructor(private http: HttpClient,
               private scrollToService: ScrollToService,
+              private productReviewService: ProductReviewService,
               private elementRef: ElementRef) {
   }
 
@@ -37,7 +42,12 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   private fetchReviews() {
-    this.reviews = [];
+    this.productReviewService.fetchProductReviews(this.product.productId)
+      .subscribe(
+        response => {
+          this.reviews = response.data;
+        }
+      );
   }
 
   toggleContent(idx: number, force: boolean = false) {
@@ -52,5 +62,37 @@ export class ProductDetailsComponent implements OnInit {
 
   keyValuePipeComparator(a: KeyValue<string, number>, b: KeyValue<string, number>): number {
     return a.value - b.value;
+  }
+
+  toggleCommentForm(review: ProductReviewDto, state: boolean = !review.isCommentFormVisible) {
+    review.isCommentFormVisible = state;
+  }
+
+  vote(review: ProductReviewDto) {
+    this.productReviewService.vote(review.id)
+      .subscribe(
+        response => {
+          this.voteSuccess = true;
+        }
+      );
+  }
+
+  downvote(review: ProductReviewDto) {
+    this.productReviewService.downvote(review.id)
+      .subscribe(
+        response => {
+          this.voteSuccess = true;
+        }
+      );
+  }
+
+  onCommentFormSubmit(review: ProductReviewDto, formValue: any) {
+    this.productReviewService.addComment(review.id, formValue)
+      .subscribe(
+        response => {
+          review.isCommentFormVisible = false;
+          review.comments = response.data.comments;
+        }
+      );
   }
 }

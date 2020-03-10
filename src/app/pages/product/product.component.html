@@ -9,12 +9,14 @@
 
   <div class="product__sku-container">
 
-    <product-rating class="product__rating"
-                    *ngIf="product.reviewsAvgRating"
+    <div class="product__rating" *ngIf="product.reviewsAvgRating">
+      <rating-stars class="product__rating-cmp"
                     [rating]="product.reviewsAvgRating"
-                    [reviewsCount]="product.reviewsCount"
                     (click)="scrollToReviews()"
-    ></product-rating>
+      ></rating-stars>
+
+      <div class="product__rating-count">{{ product.reviewsCount }}</div>
+    </div>
 
     <div class="product__sku">
       Код: <span class="product__sku-value">{{ product.sku }}</span>
