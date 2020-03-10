@@ -13,7 +13,7 @@
   >
     <a class="breadcrumbs__link"
        *ngIf="breadcrumb.link; else noLink"
-       [routerLink]="breadcrumb.link"
+       [routerLink]="['/', breadcrumb.link]"
        property="item"
        typeof="WebPage"
     >
