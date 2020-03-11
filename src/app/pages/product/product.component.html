@@ -52,12 +52,12 @@
   </div>
 
   <div class="product__actions">
-    <button class="btn product__buy">
+    <button class="btn product__buy" (click)="addToCart()" type="button">
       <i class="mbi mbi-cart product__buy-icon"></i>
       Купить
     </button>
 
-    <button class="product__wishlist">
+    <button class="product__wishlist" (click)="addToWishlist()" type="button">
       <i class="mbi mbi-heart product__wishlist-icon"></i>
     </button>
   </div>

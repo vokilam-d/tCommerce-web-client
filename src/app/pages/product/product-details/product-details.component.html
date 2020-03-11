@@ -76,9 +76,15 @@
         </button>
 
         <div class="review__vote" *ngIf="!review.hasClientVoted">
-          <ng-container *ngIf="voteSuccess; else voteBtns">
+          <ng-container *ngIf="review.voteSuccess; else notVoted">
             Спасибо за Ваше мнение
           </ng-container>
+
+          <ng-template #notVoted>
+            <ng-container *ngIf="review.voteError; else voteBtns">
+              {{ review.voteError }}
+            </ng-container>
+          </ng-template>
 
           <ng-template #voteBtns>
             Поддержать?

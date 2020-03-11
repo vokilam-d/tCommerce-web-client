@@ -6,6 +6,8 @@ import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { FormControl } from '@angular/forms';
 import { HeadService, IOgTags } from '../../shared/services/head/head.service';
+import { CartService } from '../../shared/services/cart/cart.service';
+import { WishlistService } from '../../shared/services/wishlist/wishlist.service';
 
 @Component({
   selector: 'product',
@@ -22,6 +24,8 @@ export class ProductComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private headService: HeadService,
+              private wishlistService: WishlistService,
+              private cartService: CartService,
               private productService: ProductService) {
   }
 
@@ -79,5 +83,13 @@ export class ProductComponent implements OnInit {
     }
 
     this.headService.setMeta(this.product.metaTags, ogTags);
+  }
+
+  addToCart() {
+    this.cartService.addToCart(this.product, this.qtyControl.value);
+  }
+
+  addToWishlist() {
+    this.wishlistService.addToWishlist(this.product);
   }
 }

@@ -43,4 +43,6 @@ export class ProductReviewDto extends AddProductReviewDto {
 
   // custom transforms
   isCommentFormVisible: boolean;
+  voteSuccess: boolean;
+  voteError: string;
 }

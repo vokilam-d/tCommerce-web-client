@@ -23,7 +23,6 @@ export class ProductDetailsComponent implements OnInit {
     reviews: 2
   };
   activeIdx: number = 0;
-  voteSuccess: boolean = false;
   mediaUploadUrl: string = 'http://localhost:3500/api/v1/product-reviews/media';
 
   reviews: ProductReviewDto[] = [];
@@ -82,7 +81,10 @@ export class ProductDetailsComponent implements OnInit {
     this.productReviewService.vote(review.id)
       .subscribe(
         response => {
-          this.voteSuccess = true;
+          review.voteSuccess = true;
+        },
+        error => {
+          review.voteError = error.error.message;
         }
       );
   }
@@ -91,7 +93,10 @@ export class ProductDetailsComponent implements OnInit {
     this.productReviewService.downvote(review.id)
       .subscribe(
         response => {
-          this.voteSuccess = true;
+          review.voteSuccess = true;
+        },
+        error => {
+          review.voteError = error.error.message;
         }
       );
   }

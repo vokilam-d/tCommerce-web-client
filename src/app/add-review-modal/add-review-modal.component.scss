@@ -1,10 +1,12 @@
+@import "variables";
+
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(#000, 0.5);
   cursor: pointer;
   z-index: 1;
 }
@@ -90,7 +92,7 @@
 
   &__submit {
     margin: 25px 0 0;
-    background: orange;
+    background: $primary;
   }
 
   &__upload {
@@ -119,7 +121,6 @@
   &__media {
     margin: 0 15px 15px 0;
   }
-
 }
 
 .media {
