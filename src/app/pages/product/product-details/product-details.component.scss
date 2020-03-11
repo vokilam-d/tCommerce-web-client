@@ -12,6 +12,10 @@
 
   &__title-icon {
     margin-left: auto;
+
+    &--active {
+      transform: rotate(180deg);
+    }
   }
 
   &__content {
@@ -60,6 +64,28 @@
   }
 }
 
+.reviews {
+  &__add {
+    margin: 10px 0 20px;
+    padding: 17px 15px 20px;
+    background: #f2f2f2;
+    border: 1px solid #e9e9e9;
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  &__add-btn {
+    display: block;
+    width: 100%;
+    margin: 25px 0 0;
+    padding: 10px 15px;
+    background: orange;
+    border-radius: 3px;
+    font-size: 16px;
+  }
+}
+
 .review {
   margin: 15px 0 0;
   padding: 0 0 20px;
@@ -95,6 +121,14 @@
     display: flex;
     align-items: center;
     font-size: 12px;
+  }
+
+  &__medias {
+    margin: 15px 0 0;
+  }
+
+  &__medias + &__actions {
+    margin-top: 5px;
   }
 
   &__vote {
@@ -161,11 +195,6 @@
   }
 
   &__label {
-    &::after {
-      content: '*';
-      margin: 0 0 0 2px;
-      color: $red;
-    }
   }
 
   &__input {

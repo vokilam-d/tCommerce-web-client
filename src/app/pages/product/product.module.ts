@@ -7,13 +7,15 @@ import { HeaderModule } from '../../header/header.module';
 import { FooterModule } from '../../footer/footer.module';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { RatingStarsModule } from '../../rating-stars/rating-stars.module';
-import { MediaGalleryComponent } from './media-gallery/media-gallery.component';
-import { MediaGalleryModalComponent } from './media-gallery-modal/media-gallery-modal.component';
+import { ProductGalleryComponent } from './product-gallery/product-gallery.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddReviewModalModule } from '../../add-review-modal/add-review-modal.module';
+import { ReviewGalleryModule } from '../../review-gallery/review-gallery.module';
+import { MediaGalleryModalModule } from '../../media-gallery-modal/media-gallery-modal.module';
 
 @NgModule({
-  declarations: [ProductComponent, MediaGalleryComponent, MediaGalleryModalComponent, ProductDetailsComponent],
+  declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,
@@ -22,7 +24,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BreadcrumbsModule,
     RatingStarsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AddReviewModalModule,
+    MediaGalleryModalModule,
+    ReviewGalleryModule
   ]
 })
 export class ProductModule { }

@@ -9,11 +9,12 @@
     line-height: 1.2;
   }
 
-  &__sku-container {
+  &__ratin-sku {
     margin: 20px 0 0;
     padding: 0 5px 0 0;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
   }
 
   &__rating {
@@ -29,12 +30,28 @@
     color: #666;
   }
 
+  &__sku-container {
+    display: flex;
+    justify-content: space-between;
+
+    &--with-vendor {
+      margin: 10px 0 0;
+      width: 100%;
+    }
+  }
+
   &__sku {
     font-size: 16px;
   }
 
   &__sku-value {
     color: #999;
+  }
+
+  &__sku + &__vendor-code {
+    //margin: 0 0 0 10px;
+    //padding: 0 0 0 10px;
+    //border-left: 1px solid $borderColor;
   }
 
   &__gallery {

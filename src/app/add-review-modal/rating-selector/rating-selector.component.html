@@ -1,0 +1,19 @@
+<div class="rating">
+  <div class="rating__value"
+       *ngFor="let ratingValue of [5, 4, 3, 2, 1]"
+       [class.rating__value--selected]="ratingValue <= value"
+       (click)="selectRating(ratingValue)"
+  >
+    <svg class="rating__icon" viewBox="0 0 40 37">
+      <path d="m19.1147.533962c.3614-.711949 1.409-.711949 1.7704 0l5.4156 10.644638c.1443.283.4223.479.7439.524l12.1088 1.7076c.81.1143 1.1331 1.0805.5478 1.634l-8.7633 8.2861c-.2322.2197-.3389.5373-.2833.8476l2.0679 11.7c.139.7827-.7078 1.3797-1.433 1.0097l-10.8297-5.5231c-.2878-.1467-.632-.1467-.9198 0l-10.83049 5.5231c-.72439.37-1.57126-.227-1.43225-1.0097l2.06797-11.7c.05485-.3103-.0511-.6279-.28405-.8476l-8.761789-8.2861c-.586123-.5535-.2630038-1.5197.547049-1.634l12.10946-1.7076c.3209-.045.5996-.241.7432-.524z"></path>
+    </svg>
+
+    <div class="rating__label" [ngSwitch]="ratingValue">
+      <ng-container *ngSwitchCase="1">Плохо</ng-container>
+      <ng-container *ngSwitchCase="2">Так себе</ng-container>
+      <ng-container *ngSwitchCase="3">Нормально</ng-container>
+      <ng-container *ngSwitchCase="4">Хорошо</ng-container>
+      <ng-container *ngSwitchCase="5">Отлично</ng-container>
+    </div>
+  </div>
+</div>

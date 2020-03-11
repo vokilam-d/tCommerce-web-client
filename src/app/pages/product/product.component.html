@@ -1,13 +1,13 @@
 <app-header></app-header>
 
 <div class="page container product" *ngIf="product">
-  <breadcrumbs class="product__breadcrumbs" [breadcrumbs]="breadcrumbs"></breadcrumbs>
+  <breadcrumbs class="product__breadcrumbs" [breadcrumbs]="breadcrumbs" [currentLink]="product.slug"></breadcrumbs>
 
   <h1 class="product__title">
     {{ product.name }}
   </h1>
 
-  <div class="product__sku-container">
+  <div class="product__ratin-sku">
 
     <div class="product__rating" *ngIf="product.reviewsAvgRating">
       <rating-stars class="product__rating-cmp"
@@ -18,12 +18,18 @@
       <div class="product__rating-count">{{ product.reviewsCount }}</div>
     </div>
 
-    <div class="product__sku">
-      Код: <span class="product__sku-value">{{ product.sku }}</span>
+    <div class="product__sku-container" [class.product__sku-container--with-vendor]="product.vendorCode">
+      <div class="product__sku">
+        Код: <span class="product__sku-value">{{ product.sku }}</span>
+      </div>
+
+      <div class="product__sku product__vendor-code" *ngIf="product.vendorCode">
+        Артикул: <span class="product__sku-value">{{ product.vendorCode }}</span>
+      </div>
     </div>
   </div>
 
-  <media-gallery class="product__gallery" [medias]="product.medias"></media-gallery>
+  <product-gallery class="product__gallery" [medias]="product.medias"></product-gallery>
 
   <div class="product__short-description">
     {{ product.shortDescription }}
@@ -61,9 +67,9 @@
                   *ngFor="let category of product.categories, last as last"
                   [routerLink]="'/' + category.slug"
                   target="_blank"
-  >
-    {{ category.name }}<ng-container *ngIf="!last">, </ng-container>
-  </a>
+    >
+      {{ category.name }}<ng-container *ngIf="!last">, </ng-container>
+    </a>
   </div>
 
   <product-details class="product__details" [product]="product"></product-details>

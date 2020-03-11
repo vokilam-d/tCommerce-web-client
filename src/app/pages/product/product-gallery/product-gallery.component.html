@@ -22,8 +22,4 @@
   </div>
 </div>
 
-<media-gallery-modal *ngIf="isModalVisible"
-                     [medias]="medias"
-                     [activeMediaIdx]="activeMediaIdx"
-                     (close)="hideModal()"
-></media-gallery-modal>
+<media-gallery-modal [medias]="medias"></media-gallery-modal>

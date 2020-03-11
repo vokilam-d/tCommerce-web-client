@@ -1,11 +1,13 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ProductDto } from '../../../shared/dtos/product.dto';
 import { HttpClient } from '@angular/common/http';
 import { KeyValue } from '@angular/common';
 import { ScrollToService } from '../../../shared/services/scroll-to/scroll-to.service';
 import { ProductReviewService } from '../product-review.service';
-import { ProductReviewDto } from '../../../shared/dtos/product-review.dto';
-import { finalize } from 'rxjs/operators';
+import { AddProductReviewDto, ProductReviewDto } from '../../../shared/dtos/product-review.dto';
+import { JsonLdService } from '../../../shared/services/json-ld/json-ld.service';
+import { SafeHtml } from '@angular/platform-browser';
+import { AddReviewModalComponent, IAddReviewFormValue } from '../../../add-review-modal/add-review-modal.component';
 
 @Component({
   selector: 'product-details',
@@ -14,7 +16,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  @Input() product: ProductDto;
+  jsonLd: SafeHtml;
   indices = {
     description: 0,
     chars: 1,
@@ -22,11 +24,16 @@ export class ProductDetailsComponent implements OnInit {
   };
   activeIdx: number = 0;
   voteSuccess: boolean = false;
+  mediaUploadUrl: string = 'http://localhost:3500/api/v1/product-reviews/media';
 
   reviews: ProductReviewDto[] = [];
 
+  @Input() product: ProductDto;
+  @ViewChild(AddReviewModalComponent) addReviewCmp: AddReviewModalComponent;
+
   constructor(private http: HttpClient,
               private scrollToService: ScrollToService,
+              private jsonLdService: JsonLdService,
               private productReviewService: ProductReviewService,
               private elementRef: ElementRef) {
   }
@@ -34,10 +41,12 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
     if (this.product.reviewsCount > 0) {
       this.fetchReviews();
+    } else {
+      this.setJsonLd();
     }
   }
 
-  openReviews() {
+  openReviewsTab() {
     this.toggleContent(this.indices.reviews);
   }
 
@@ -46,6 +55,7 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe(
         response => {
           this.reviews = response.data;
+          this.setJsonLd();
         }
       );
   }
@@ -94,5 +104,93 @@ export class ProductDetailsComponent implements OnInit {
           review.comments = response.data.comments;
         }
       );
+  }
+
+  openReviewModal() {
+    this.addReviewCmp.openModal();
+  }
+
+  onReviewAdd(formValue: IAddReviewFormValue) {
+    const reviewDto = new AddProductReviewDto();
+    reviewDto.name = formValue.name;
+    reviewDto.text = formValue.text;
+    reviewDto.email = formValue.email;
+    reviewDto.medias = formValue.medias;
+    reviewDto.rating = formValue.rating;
+
+    reviewDto.productId = this.product.productId;
+    reviewDto.productVariantId = this.product.variantId;
+    reviewDto.productName = this.product.name;
+
+
+    this.productReviewService.addReview(reviewDto)
+      .subscribe(
+        response => {
+          this.reviews.push(response.data);
+          this.addReviewCmp.closeModal();
+        },
+        error => {
+          console.warn(error);
+        }
+      )
+
+  }
+
+  private setJsonLd() {
+
+    const jsonLd: any = {
+      '@context': "http://schema.org",
+      '@type': "Product",
+      'itemCondition': "https://schema.org/NewCondition",
+      'description': this.product.fullDescription,
+      'name': this.product.name,
+      'offers': {
+        '@type': "Offer",
+        'availability': this.product.isInStock ? "http://schema.org/InStock" : 'http://schema.org/OutOfStock',
+        'price': this.product.priceInDefaultCurrency,
+        'priceCurrency': "UAH",
+        'priceValidUntil': "2040-12-08",
+        'url': `https://klondike.com.ua/${this.product.slug}`
+      },
+      'url': `https://klondike.com.ua/${this.product.slug}`
+    };
+
+    if (this.product.vendorCode) {
+      jsonLd.sku = this.product.vendorCode;
+      jsonLd.identifier = this.product.sku;
+    } else {
+      jsonLd.sku = this.product.sku;
+    }
+
+    if (this.product.gtin) {
+      jsonLd.gtin = this.product.gtin;
+    }
+
+    const manufacturer = this.product.characteristics.find(c => c.code === 'manufacturer');
+    if (manufacturer) {
+      jsonLd.brand = manufacturer;
+      jsonLd.manufacturer = manufacturer;
+    }
+
+    if (this.product.medias[0]) {
+      jsonLd.image = `https://klondike.com.ua${this.product.medias[0].variantsUrls.original}`;
+    }
+
+    if (this.product.reviewsCount > 0) {
+      jsonLd.aggregateRating = {
+        '@type': "AggregateRating",
+        'ratingValue': this.product.reviewsAvgRating,
+        'reviewCount': this.product.reviewsCount
+      };
+
+      jsonLd.review = this.reviews.map(review => ({
+        '@type': "Review",
+        'author': review.name,
+        'datePublished': review.createdAt,
+        'description': review.text
+      }));
+    }
+
+    this.jsonLd = this.jsonLdService.getSafeJsonLd(jsonLd);
   }
 }

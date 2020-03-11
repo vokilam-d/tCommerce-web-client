@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
-import { MediaDto } from '../../../shared/dtos/media.dto';
+import { MediaDto } from '../shared/dtos/media.dto';
 
 @Component({
   selector: 'media-gallery-modal',
@@ -8,24 +8,29 @@ import { MediaDto } from '../../../shared/dtos/media.dto';
 })
 export class MediaGalleryModalComponent implements OnInit, OnDestroy {
 
+  isModalVisible: boolean = false;
   private unlisten: () => void;
 
-  @Input() activeMediaIdx: number = 0;
+  activeMediaIdx: number = 0;
   @Input() medias: MediaDto[] = [];
-  @Output('close') closeEmitter = new EventEmitter();
 
   constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void {
-    this.unlisten = this.renderer.listen('window', 'keyup', event => this.onKeyPress(event));
   }
 
   ngOnDestroy(): void {
-    this.unlisten();
   }
 
-  close() {
-    this.closeEmitter.emit();
+  openModal(activeMediaIdx: number = 0) {
+    this.activeMediaIdx = activeMediaIdx;
+    this.isModalVisible = true;
+    this.unlisten = this.renderer.listen('window', 'keyup', event => this.onKeyPress(event));
+  }
+
+  closeModal() {
+    if (this.unlisten) { this.unlisten(); }
+    this.isModalVisible = false;
   }
 
   private onKeyPress(event: KeyboardEvent) {
@@ -37,7 +42,7 @@ export class MediaGalleryModalComponent implements OnInit, OnDestroy {
         this.prev();
         break;
       case 'Escape':
-        this.close();
+        this.closeModal();
         break;
     }
   }

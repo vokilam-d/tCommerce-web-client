@@ -10,6 +10,7 @@ export class ProductBreadcrumbDto {
 
 export class ProductCharacteristic {
   label: string;
+  code: string;
   value: string;
 }
 
@@ -38,4 +39,5 @@ export class ProductDto {
   sku: string;
   slug: string;
   vendorCode: string;
+  gtin: string;
 }

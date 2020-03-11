@@ -1,11 +1,11 @@
-<div class="gallery">
+<div class="gallery" *ngIf="isModalVisible">
   <img class="gallery__img"
        *ngIf="medias[activeMediaIdx] as media"
        [src]="'http://localhost:3500' + media.variantsUrls.medium"
        [alt]="media.altText"
   >
 
-  <button class="gallery__btn gallery__close" (click)="close()">
+  <button class="gallery__btn gallery__close" (click)="closeModal()">
     <i class="mbi mbi-cross"></i>
   </button>
 

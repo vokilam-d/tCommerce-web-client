@@ -1,3 +1,5 @@
+<div [innerHTML]="jsonLd"></div>
+
 <div class="details">
   <ng-container *ngFor="let entry of indices | keyvalue: keyValuePipeComparator" [ngSwitch]="entry.value">
 
@@ -44,6 +46,13 @@
 
 <ng-template #reviewsTmpl>
   <div class="reviews">
+
+    <div class="reviews__add">
+      Оставьте свой отзыв об этом товаре
+
+      <button class="reviews__add-btn" (click)="openReviewModal()" type="button">Написать отзыв</button>
+    </div>
+
     <div class="review" *ngFor="let review of reviews">
       <div class="review__votes-count" *ngIf="review.votesCount > 0">
         Этот отзыв поддержали {{ review.votesCount }} раз
@@ -58,6 +67,8 @@
       <div class="review__text">
         {{ review.text }}
       </div>
+
+      <review-gallery class="review__medias" *ngIf="review.medias.length" [medias]="review.medias"></review-gallery>
 
       <div class="review__actions">
         <button class="review__add-comment" (click)="toggleCommentForm(review)" type="button">
@@ -119,3 +130,5 @@
     </div>
   </div>
 </ng-template>
+
+<add-review-modal [uploadUrl]="mediaUploadUrl" (addReview)="onReviewAdd($event)"></add-review-modal>

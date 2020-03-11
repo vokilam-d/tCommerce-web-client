@@ -1,0 +1,41 @@
+@import "variables";
+
+.rating {
+  $rating: &;
+
+  width: fit-content;
+  display: flex;
+  flex-direction: row-reverse;
+  user-select: none;
+
+  &__value {
+    margin: 0 0 0 8px;
+    text-align: center;
+    cursor: pointer;
+
+    &:last-child {
+      margin-left: 0;
+    }
+
+    &:hover,
+    &:hover ~ &,
+    &--selected {
+      #{$rating}__icon {
+        fill: $primary;
+      }
+    }
+  }
+
+  &__icon {
+    width: 24px;
+    height: 22px;
+    fill: #d2d2d2;
+    transition: fill 0.2s ease;
+  }
+
+  &__label {
+    margin: 4px 0 0;
+    font-size: 11px;
+    color: #4d4b4b;
+  }
+}

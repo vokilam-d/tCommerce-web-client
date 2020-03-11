@@ -1,11 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from './product.service';
 import { ProductDto } from '../../shared/dtos/product.dto';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
-import { ScrollToService } from '../../shared/services/scroll-to/scroll-to.service';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { FormControl } from '@angular/forms';
+import { HeadService, IOgTags } from '../../shared/services/head/head.service';
 
 @Component({
   selector: 'product',
@@ -21,6 +21,7 @@ export class ProductComponent implements OnInit {
   @ViewChild(ProductDetailsComponent) detailsCmp: ProductDetailsComponent;
 
   constructor(private route: ActivatedRoute,
+              private headService: HeadService,
               private productService: ProductService) {
   }
 
@@ -35,6 +36,7 @@ export class ProductComponent implements OnInit {
       response => {
         this.product = response.data;
         this.buildBreadcrumbs();
+        this.setMeta();
       },
       error => console.warn(error)
     );
@@ -50,7 +52,7 @@ export class ProductComponent implements OnInit {
   }
 
   scrollToReviews() {
-    this.detailsCmp.openReviews();
+    this.detailsCmp.openReviewsTab();
   }
 
   incrementQty() {
@@ -63,5 +65,19 @@ export class ProductComponent implements OnInit {
     if (qty <= 1) { return; }
 
     this.qtyControl.setValue(--qty);
+  }
+
+  private setMeta() {
+    const ogTags: IOgTags = {
+      type: 'product',
+      url: `https://klondike.com.ua/${this.product.slug}`,
+      description: this.product.metaTags.description,
+      title: this.product.metaTags.title
+    };
+    if (this.product.medias[0]) {
+      ogTags.image = `https://klondike.com.ua${this.product.medias[0].variantsUrls.original}`;
+    }
+
+    this.headService.setMeta(this.product.metaTags, ogTags);
   }
 }

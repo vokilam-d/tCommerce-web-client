@@ -12,7 +12,18 @@ export class ProductReviewCommentDto extends AddProductReviewCommentDto {
   createdAt: Date;
 }
 
-export class ProductReviewDto {
+export class AddProductReviewDto {
+  email: string;
+  name: string;
+  productId: number;
+  productName: string;
+  productVariantId: string;
+  rating: number;
+  text: string;
+  medias: MediaDto[];
+}
+
+export class ProductReviewDto extends AddProductReviewDto {
   productId: number;
   productName: string;
   productVariantId: string;

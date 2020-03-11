@@ -1,0 +1,18 @@
+:host {
+  display: block;
+}
+
+.medias {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.media {
+  margin: 0 15px 10px 0;
+
+  &__img {
+    width: 70px;
+    max-height: 70px;
+    object-fit: cover;
+  }
+}
