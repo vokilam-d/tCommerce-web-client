@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angu
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../shared/services/user/user.service';
 import { HttpClient } from '@angular/common/http';
-import { inputMediaAcceptTypes } from '../shared/constants';
+import { INPUT_MEDIA_ACCEPT_TYPES } from '../shared/constants';
 import { MediaDto } from '../shared/dtos/media.dto';
 
 enum EAddReviewFormControl {
@@ -88,7 +88,7 @@ export class AddReviewModalComponent implements OnInit {
   uploadPhotos() {
     const fileInput = document.createElement('input');
     fileInput.setAttribute('type', 'file');
-    fileInput.setAttribute('accept', inputMediaAcceptTypes);
+    fileInput.setAttribute('accept', INPUT_MEDIA_ACCEPT_TYPES);
     fileInput.click();
 
     fileInput.addEventListener('change', () => {

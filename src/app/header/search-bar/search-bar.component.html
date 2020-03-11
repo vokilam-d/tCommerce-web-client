@@ -1,4 +1,41 @@
-<div class="search-bar">
-  <input class="search-bar__input" type="text" title="Поиск" placeholder="Для поиска введите артикул или название товара">
-  <button class="search-bar__btn" (click)="search()" type="button">Поиск</button>
+<div class="overlay" *ngIf="isInFocus" (click)="isInFocus = false"></div>
+
+<div class="search-bar" [class.search-bar--in-focus]="isInFocus">
+  <input class="search-bar__input"
+         [formControl]="searchControl"
+         (focus)="isInFocus = true"
+         type="text"
+         title="Поиск"
+         placeholder="Поиск"
+  >
+
+  <button class="search-bar__clear" *ngIf="isInFocus && searchControl.value" (click)="clearInput()" type="button">
+    <i class="mbi mbi-cross search-bar__clear-icon"></i>
+  </button>
+
+  <button class="search-bar__btn" (click)="search()" type="button">Найти</button>
+
+  <div class="search-bar__results" *ngIf="isInFocus && (searchResults || searchError || isSearchInProgress)">
+
+    <preloader class="search-bar__preloader" *ngIf="isSearchInProgress; else loadedTmpl"></preloader>
+
+    <ng-template #loadedTmpl>
+      <div class="search-bar__error" *ngIf="searchError as error">{{ searchError }}</div>
+
+      <ng-container *ngIf="searchResults">
+        <div class="search-bar__no-result" *ngIf="!searchResults.length">
+          По Вашему запросу ничего не найдено
+        </div>
+
+        <a class="search-bar__result product"
+           *ngFor="let product of searchResults"
+           [routerLink]="['/', product.slug]"
+        >
+          <img class="product__image" [src]="'http://localhost:3500' + product.mediaUrl">
+
+          <div class="product__name">{{ product.name }}</div>
+        </a>
+      </ng-container>
+    </ng-template>
+  </div>
 </div>

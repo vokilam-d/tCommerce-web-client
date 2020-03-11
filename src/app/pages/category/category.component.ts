@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from './category.service';
+import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
 
 @Component({
   selector: 'category',
@@ -10,7 +11,7 @@ import { CategoryService } from './category.service';
 export class CategoryComponent implements OnInit {
 
   category: any;
-  items: any[];
+  items: ProductListItemDto[];
 
   constructor(private route: ActivatedRoute,
               private categoryService: CategoryService) {

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ResponseDto } from '../../shared/dtos/response.dto';
 import { CategoryDto } from '../../shared/dtos/category.dto';
 import { CategoryTreeItem } from '../../shared/dtos/category-tree.dto';
+import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,6 @@ export class CategoryService {
   }
 
   fetchCategoryItems(id: string) {
-    return this.http.get<ResponseDto<any[]>>(`http://localhost:3500/api/v1/categories/${id}/items`);
+    return this.http.get<ResponseDto<ProductListItemDto[]>>(`http://localhost:3500/api/v1/categories/${id}/items`);
   }
 }

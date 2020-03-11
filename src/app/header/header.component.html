@@ -5,7 +5,7 @@
     <div class="header__content">
 
       <a class="header__logo" routerLink="/">
-        <img class="header__logo-img" src="https://klondike.com.ua/media/logo/default/logo_1.png" alt="Klondike">
+        <img class="header__logo-img" src="../../assets/images/logo.png" alt="Klondike">
         <span class="header__logo-text">Клондайк - товары для творчества!</span>
       </a>
 
@@ -14,25 +14,29 @@
           <i class="search-bar__close-icon mbi mbi-cross"></i>
         </div>
 
-        <search-bar class="search-bar__content" (search)="onSearch($event)"></search-bar>
+
       </div>
 
       <div class="header__toolbar toolbar">
         <div class="toolbar__item toolbar__item--menu" (click)="openMenu()">
           <i class="toolbar__item-icon mbi mbi-menu"></i>
         </div>
-        <div class="toolbar__item toolbar__item--search" (click)="showSearchbar()">
-          <i class="toolbar__item-icon mbi mbi-magnifier"></i>
-        </div>
-        <div class="toolbar__item">
-          <i class="toolbar__item-icon mbi mbi-heart"></i>
-        </div>
+
+        <search-bar class="toolbar__search-bar"></search-bar>
+
         <div class="toolbar__item">
           <i class="toolbar__item-icon mbi mbi-cart"></i>
         </div>
-        <div class="toolbar__item">
-          <i class="toolbar__item-icon mbi mbi-user"></i>
-        </div>
+
+<!--        <div class="toolbar__item toolbar__item&#45;&#45;search" (click)="showSearchbar()">-->
+<!--          <i class="toolbar__item-icon mbi mbi-magnifier"></i>-->
+<!--        </div>-->
+<!--        <div class="toolbar__item">-->
+<!--          <i class="toolbar__item-icon mbi mbi-heart"></i>-->
+<!--        </div>-->
+<!--        <div class="toolbar__item">-->
+<!--          <i class="toolbar__item-icon mbi mbi-user"></i>-->
+<!--        </div>-->
       </div>
 
     </div>

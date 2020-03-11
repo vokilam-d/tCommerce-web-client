@@ -1,24 +1,119 @@
 @import "variables";
 
+$inputBorderColor: #ddd;
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(#000, 0.5);
+  z-index: 1;
+}
+
 .search-bar {
+  $bar: &;
+
+  position: relative;
   display: flex;
+  width: 100%;
+  transform: translateX(0);
+  transition: all 0.2s ease;
+
+  &--in-focus {
+    width: calc(100% + 80px);
+    transform: translateX(-40px);
+    z-index: 2;
+
+    #{$bar}__input {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: none;
+    }
+
+    #{$bar}__btn {
+      display: block;
+    }
+  }
 
   &__input {
     width: 100%;
-    padding: 12px 20px 13px;
-    border: 1px solid $borderColor;
-    border-right: none;
-    border-radius: 3px 0 0 3px;
+    padding: 7px 15px 8px;
+    border: 1px solid $inputBorderColor;
+    border-radius: 3px;
     font-size: 16px;
   }
 
   &__btn {
+    display: none;
     flex-shrink: 0;
-    width: 110px;
-    padding: 12px 0;
+    padding: 1px 15px 0;
     background: $primary;
     border-radius: 0 3px 3px 0;
     font-size: 14px;
+  }
+
+  &__clear {
+    padding: 1px 9px 0;
+    background: #fff;
+    border-top: 1px solid $inputBorderColor;
+    border-bottom: 1px solid $inputBorderColor;
+  }
+
+  &__clear-icon {
     font-weight: 600;
+    color: #bbb;
+  }
+
+  &__results {
+    position: absolute;
+    top: calc(100% - 1px);
+    left: 0;
+    right: 0;
+    padding: 7px 10px;
+    background: #fff;
+    border-top: 1px solid $inputBorderColor;
+    border-radius: 0 0 3px 3px;
+    z-index: 3;
+  }
+
+  &__preloader {
+    margin: 20px 0;
+  }
+
+  &__no-result {
+    margin: 20px 0;
+    padding: 0 15px;
+    font-size: 14px;
+    line-height: 1.4;
+    color: rgba($dark, 0.8);
+  }
+
+  &__result {
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+}
+
+.product {
+  display: flex;
+  align-items: center;
+
+  .product__image {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+  }
+
+  .product__name {
+    margin: 0 0 0 20px;
+    font-size: 14px;
+    line-height: 1.2;
+    color: rgba($dark, 0.9);
   }
 }

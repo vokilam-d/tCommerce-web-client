@@ -82,6 +82,7 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe(
         response => {
           review.voteSuccess = true;
+          review.votesCount = response.data.votesCount;
         },
         error => {
           review.voteError = error.error.message;
@@ -94,6 +95,7 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe(
         response => {
           review.voteSuccess = true;
+          review.votesCount = response.data.votesCount;
         },
         error => {
           review.voteError = error.error.message;
