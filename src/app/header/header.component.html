@@ -1,4 +1,4 @@
-<service-menu class="service-menu"></service-menu>
+<service-menu class="service-menu" [storeReviewsCount]="storeReviewsCount"></service-menu>
 
 <div class="header">
   <div class="container">
@@ -8,14 +8,6 @@
         <img class="header__logo-img" src="../../assets/images/logo.png" alt="Klondike">
         <span class="header__logo-text">Клондайк - товары для творчества!</span>
       </a>
-
-      <div class="header__search-bar search-bar" [class.search-bar--visible]="isSearchbarVisible">
-        <div class="search-bar__overlay" (click)="hideSearchbar()">
-          <i class="search-bar__close-icon mbi mbi-cross"></i>
-        </div>
-
-
-      </div>
 
       <div class="header__toolbar toolbar">
         <div class="toolbar__item toolbar__item--menu" (click)="openMenu()">
@@ -43,32 +35,5 @@
   </div>
 </div>
 
-<div class="menu-overlay"
-     [class.menu-overlay--visible]="isMenuOpened"
-     (click)="closeMenu()"
->
-  <div class="menu-overlay__close">
-    <i class="menu-overlay__close-icon mbi mbi-arrow-left"></i>
-  </div>
-</div>
 
-<div class="menu" [class.menu--visible]="isMenuOpened">
-  <div class="menu__content">
-    <a class="menu__logo" routerLink="/">
-      <img class="menu__logo-img" src="https://klondike.com.ua/media/logo/default/logo_1.png" alt="Klondike">
-    </a>
-
-    <div class="menu__items">
-      <a class="menu__link" routerLink="/">Золочение</a>
-      <a class="menu__link" routerLink="/">Краски, патины, воски</a>
-      <a class="menu__link" routerLink="/">Кисти</a>
-      <a class="menu__link" routerLink="/">Лаки</a>
-      <a class="menu__link" routerLink="/">Состаривание</a>
-      <a class="menu__link" routerLink="/">Клеи</a>
-      <a class="menu__link" routerLink="/">Пигменты</a>
-      <a class="menu__link" routerLink="/">Инструменты и аксессуары</a>
-    </div>
-
-    <service-menu class="menu__service-menu" [vertical]="true"></service-menu>
-  </div>
-</div>
+<header-sidebar [categories]="categories"></header-sidebar>

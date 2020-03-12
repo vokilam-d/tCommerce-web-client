@@ -5,4 +5,7 @@ export class CategoryTreeItem {
   name: CategoryDto['name'];
   slug: CategoryDto['slug'];
   children: CategoryTreeItem[];
+
+  // custom transforms
+  isExpanded: boolean = false;
 }

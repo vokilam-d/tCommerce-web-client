@@ -13,8 +13,8 @@ export class CategoryService {
   constructor(private http: HttpClient) {
   }
 
-  fetchCategoriesTree(slug: string) {
-    return this.http.get<ResponseDto<CategoryTreeItem[]>>(`http://localhost:3500/api/v1/categories/${slug}`);
+  fetchCategoriesTree() {
+    return this.http.get<ResponseDto<CategoryTreeItem[]>>(`http://localhost:3500/api/v1/categories/tree`);
   }
 
   fetchCategory(slug: string) {

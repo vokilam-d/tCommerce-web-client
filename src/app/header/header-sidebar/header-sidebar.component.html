@@ -1,0 +1,32 @@
+<div class="menu-overlay"
+     [class.menu-overlay--visible]="isMenuOpened"
+     (click)="closeMenu()"
+>
+  <div class="menu-overlay__close">
+    <i class="menu-overlay__close-icon mbi mbi-arrow-left"></i>
+  </div>
+</div>
+
+<div class="menu" [class.menu--visible]="isMenuOpened">
+  <div class="menu__content">
+    <a class="menu__logo" routerLink="/">
+      <img class="menu__logo-img" src="../../assets/images/logo.png" alt="Klondike">
+    </a>
+
+    <div class="menu__title">Каталог:</div>
+    <catalog-menu class="menu__catalog-menu" [categories]="categories"></catalog-menu>
+
+    <div class="menu__title menu__title--service">Меню:</div>
+
+    <div class="menu__link" (click)="navigateToAccount()">Мой кабинет</div>
+    <a class="menu__link" [routerLink]="['/', 'wishlist']">Мои желания</a>
+
+    <service-menu class="menu__service-menu" [storeReviewsCount]="storeReviewsCount" layout="vertical"></service-menu>
+
+    <div class="menu__phones">
+      <a class="menu__phone" href="tel:+380502627214">+38 (050) 26-27-214</a>
+      <a class="menu__phone" href="tel:+380678811962">+38 (067) 88-11-962</a>
+      <a class="menu__phone" href="tel:+380933444342">+38 (093) 34-44-342</a>
+    </div>
+  </div>
+</div>

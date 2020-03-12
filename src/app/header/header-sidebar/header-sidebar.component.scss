@@ -1,0 +1,87 @@
+@import "variables";
+
+.menu-overlay {
+  display: none;
+
+  &--visible {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(#000, 0.8);
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  &__close {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    padding: 10px;
+    font-size: 25px;
+    color: #fff;
+  }
+}
+
+.menu {
+  max-width: 460px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 45px;
+  padding: 15px 20px 60px;
+  background: #fff;
+  box-sizing: border-box;
+  z-index: 11;
+  transform: translate3d(-100%, 0, 0);
+  transition: all 0.25s $cubicBezier;
+  overflow: auto;
+
+  &--visible {
+    transform: translate3d(0, 0, 0);
+  }
+
+  &__logo-img {
+    display: block;
+    width: 190px;
+    margin: 0 auto;
+  }
+
+  &__catalog-menu {
+    display: block;
+    margin: 5px 0 0;
+  }
+
+  &__service-menu {
+  }
+
+  &__title {
+    margin: 20px 0 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba($dark, 0.4);
+
+    &--service {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 8px 15px;
+    font-size: 13px;
+  }
+
+  &__phones {
+    margin: 10px 0 0;
+  }
+
+  &__phone {
+    display: block;
+    padding: 5px 15px;
+    font-size: 14px;
+  }
+}

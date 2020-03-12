@@ -7,7 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ServiceMenuComponent implements OnInit {
 
-  @Input() vertical: boolean = false;
+  @Input() layout: 'horizontal' | 'vertical' = 'horizontal';
+  @Input() storeReviewsCount: number;
 
   constructor() { }
 

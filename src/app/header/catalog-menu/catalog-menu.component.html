@@ -1,0 +1,29 @@
+<ul class="menu">
+  <ng-container *ngFor="let category of categories">
+    <ng-container *ngTemplateOutlet="categoryTmpl; context: { category: category }"></ng-container>
+  </ng-container>
+</ul>
+
+<ng-template let-category="category" #categoryTmpl>
+  <li class="menu__item" [class.menu__item--with-children]="category.children.length">
+    <div class="menu__link-container">
+      <a class="menu__link" [routerLink]="['/', category.slug]">
+        {{ category.name }}
+      </a>
+
+      <span class="menu__arrow"
+            *ngIf="category.children.length"
+            [class.menu__arrow--expanded]="category.isExpanded"
+            (click)="category.isExpanded = !category.isExpanded"
+      >
+        <i class="mbi mbi-chevron-down menu__arrow-icon" [class.menu__expand-icon--active]="category.isExpanded"></i>
+      </span>
+    </div>
+
+    <ul class="menu__submenu" *ngIf="category.children.length" [class.menu__submenu--expanded]="category.isExpanded">
+      <ng-container *ngFor="let subCategory of category.children">
+        <ng-container *ngTemplateOutlet="categoryTmpl; context: { category: subCategory }"></ng-container>
+      </ng-container>
+    </ul>
+  </li>
+</ng-template>

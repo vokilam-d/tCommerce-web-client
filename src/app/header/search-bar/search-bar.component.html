@@ -1,4 +1,6 @@
-<div class="overlay" *ngIf="isInFocus" (click)="isInFocus = false"></div>
+<div class="overlay" *ngIf="isInFocus" (click)="isInFocus = false">
+  <i class="mbi mbi-cross overlay__close"></i>
+</div>
 
 <div class="search-bar" [class.search-bar--in-focus]="isInFocus">
   <input class="search-bar__input"

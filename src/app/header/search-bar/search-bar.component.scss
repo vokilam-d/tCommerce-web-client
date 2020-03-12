@@ -8,8 +8,18 @@ $inputBorderColor: #ddd;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(#000, 0.5);
+  background: rgba(#000, 0.7);
   z-index: 1;
+  animation: fadeIn 0.2s ease;
+
+  &__close {
+    position: fixed;
+    top: 10px;
+    right: 7px;
+    padding: 10px;
+    color: #fff;
+    font-size: 26px;
+  }
 }
 
 .search-bar {
@@ -115,5 +125,14 @@ $inputBorderColor: #ddd;
     font-size: 14px;
     line-height: 1.2;
     color: rgba($dark, 0.9);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

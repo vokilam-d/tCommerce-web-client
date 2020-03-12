@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { CategoryService } from '../pages/category/category.service';
+import { CategoryTreeItem } from '../shared/dtos/category-tree.dto';
+import { StoreReviewService } from '../shared/services/store-review/store-review.service';
+import { HeaderSidebarComponent } from './header-sidebar/header-sidebar.component';
 
 @Component({
   selector: 'app-header',
@@ -7,31 +11,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  isMenuOpened: boolean = false;
-  isSearchbarVisible: boolean = false;
+  categories: CategoryTreeItem[];
+  storeReviewsCount: number;
 
-  constructor() { }
+  @ViewChild(HeaderSidebarComponent) sidebarCmp: HeaderSidebarComponent;
 
-  ngOnInit() {
+  constructor(private categoryService: CategoryService,
+              private storeReviewService: StoreReviewService) {
   }
 
-  onSearch(event: any) {
-    console.log(event);
+  ngOnInit() {
+    this.fetchCategories();
+    this.fetchReviewCount();
   }
 
   openMenu() {
-    this.isMenuOpened = true;
+    this.sidebarCmp.openMenu();
   }
 
-  closeMenu() {
-    this.isMenuOpened = false;
+  private fetchCategories() {
+    this.categoryService.fetchCategoriesTree()
+      .subscribe(
+        response => {
+          this.categories = response.data;
+        },
+        error => {
+          console.warn(error);
+        }
+      );
   }
 
-  showSearchbar() {
-    this.isSearchbarVisible = true;
-  }
-
-  hideSearchbar() {
-    this.isSearchbarVisible = false;
+  private fetchReviewCount() {
+    this.storeReviewService.fetchStoreReviewsCount()
+      .subscribe(
+        response => {
+          this.storeReviewsCount = response.data;
+        },
+        error => {
+          console.warn(error);
+        }
+      );
   }
 }

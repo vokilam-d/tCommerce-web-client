@@ -6,12 +6,16 @@ import { ServiceMenuComponent } from './service-menu/service-menu.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { CatalogMenuComponent } from './catalog-menu/catalog-menu.component';
+import { HeaderSidebarComponent } from './header-sidebar/header-sidebar.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     ServiceMenuComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    CatalogMenuComponent,
+    HeaderSidebarComponent
   ],
   imports: [
     CommonModule,

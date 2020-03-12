@@ -1,0 +1,47 @@
+@import "variables";
+
+.menu {
+  &__item {
+  }
+
+  &__link-container {
+    position: relative;
+    border-bottom: 1px solid $borderColor;
+    padding: 12px 40px 12px 10px;
+  }
+
+  &__link {
+    display: block;
+    font-size: 16px;
+  }
+
+  &__arrow {
+    padding: 10px;
+    position: absolute;
+    top: 3px;
+    right: 0;
+    transform: rotate(0);
+    transition: all 0.2s ease;
+
+    &--expanded {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__arrow-icon {
+    font-size: 14px;
+  }
+
+  &__submenu {
+    width: 100%;
+    max-height: 0;
+    padding: 0 0 0 10px;
+    border-left: 1px solid $borderColor;
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+
+    &--expanded {
+      max-height: 600px;
+    }
+  }
+}

@@ -4,33 +4,17 @@
 .service-menu {
   $menu: &;
 
-  &--vertical {
-    .container {
-      max-width: 100%;
-    }
-  }
-
-  &__content {
+  &--horizontal &__content {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    #{$menu}--vertical & {
-      display: block;
-    }
   }
 
-  &__link {
+  &--vertical &__link {
     display: block;
-    padding: 13px 15px;
+    padding: 8px 15px;
     font-size: 13px;
-    white-space: nowrap;
     transition: all 0.2s ease;
-
-    @include respond-to($media_large) {
-      padding-left: 25px;
-      padding-right: 25px;
-    }
 
     &:hover {
       color: $primary;
