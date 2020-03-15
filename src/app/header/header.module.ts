@@ -8,13 +8,17 @@ import { SharedModule } from '../shared/shared.module';
 import { CatalogMenuComponent } from './catalog-menu/catalog-menu.component';
 import { HeaderSidebarComponent } from './header-sidebar/header-sidebar.component';
 import { ServiceMenuModule } from '../service-menu/service-menu.module';
+import { MiniCartComponent } from './mini-cart/mini-cart.component';
+import { MiniAccountComponent } from './mini-account/mini-account.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     SearchBarComponent,
     CatalogMenuComponent,
-    HeaderSidebarComponent
+    HeaderSidebarComponent,
+    MiniCartComponent,
+    MiniAccountComponent
   ],
   imports: [
     CommonModule,

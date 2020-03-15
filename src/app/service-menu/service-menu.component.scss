@@ -9,10 +9,14 @@
     align-items: center;
     justify-content: center;
   }
+  &--vertical &__content {
+    display: inline-block;
+  }
 
   &__link {
     font-size: 13px;
     transition: all 0.2s ease;
+    cursor: pointer;
 
     &:hover {
       color: $primary;

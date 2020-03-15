@@ -1,35 +1,75 @@
 @import "variables";
+@import "mixins";
 
 .menu {
+  @include respond-to($media_large) {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
   &__item {
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      @include respond-to($media_large) {
+        background: $primary;
+      }
+    }
   }
 
   &__link-container {
     position: relative;
     border-bottom: 1px solid $borderColor;
-    padding: 12px 40px 12px 10px;
+
+    @include respond-to($media_large) {
+      border-bottom: none;
+    }
   }
 
   &__link {
     display: block;
+    padding: 12px 40px 12px 10px;
     font-size: 16px;
+
+    @include respond-to($media_large) {
+      padding-left: 15px;
+    }
+
+    &:hover {
+      @include respond-to($media_large) {
+        color: $dark;
+      }
+    }
   }
 
-  &__arrow {
+  &__hover-arrow {
+    display: none;
+
+    @include respond-to($media_large) {
+      display: block;
+      position: absolute;
+      top: 13px;
+      right: 15px;
+      font-size: 14px;
+    }
+  }
+
+  &__expand-arrow {
     padding: 10px;
     position: absolute;
     top: 3px;
     right: 0;
     transform: rotate(0);
     transition: all 0.2s ease;
+    font-size: 14px;
+
+    @include respond-to($media_large) {
+      display: none;
+    }
 
     &--expanded {
       transform: rotate(180deg);
     }
-  }
-
-  &__arrow-icon {
-    font-size: 14px;
   }
 
   &__submenu {
@@ -40,8 +80,31 @@
     transition: max-height 0.3s ease;
     overflow: hidden;
 
+    @include respond-to($media_large) {
+      overflow: initial;
+      max-height: initial;
+      width: 270px;
+
+      position: absolute;
+      left: 100%;
+      top: 0;
+      min-height: 100%;
+      margin-top: 30px;
+      padding: 10px 0;
+      background: #fff;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.18s ease, opacity 0.18s ease, margin 0.18s ease;
+      box-shadow: 0 1px 3px rgba($dark, 0.12), 0 1px 4px rgba($dark, 0.24);
+    }
+
     &--expanded {
       max-height: 600px;
     }
+  }
+  &__item:hover &__submenu {
+    margin-top: 0;
+    visibility: visible;
+    opacity: 1;
   }
 }

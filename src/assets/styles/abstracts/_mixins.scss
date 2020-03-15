@@ -16,53 +16,13 @@
 }
 
 @mixin respond-to($value) {
-  //$type: type_of($value);
-  //
-  //@if $type == string {
-  //  @if map_has_key($media-breakpoints, $value) {
-  //    @media (min-width: map_get($media-breakpoints, $value)) {
-  //      @content;
-  //    }
-  //  }
-  //
-  //  @else {
-  //    @warn "Key `#{$value}` doesn't exist in $media-breakpoints map!";
-  //  }
-  //}
-  //
-  //@else if $type == number {
-  //  @media (min-width: #{$value}) {
-  //    @content;
-  //  }
-  //}
-  
   @media (min-width: #{$value}) {
     @content;
   }
 }
 
 @mixin respond-to-less-than($value) {
-  //$type: type_of($value);
-  //
-  //@if $type == string {
-  //  @if map_has_key($media-breakpoints, $value) {
-  //    @media (max-width: map_get($media-breakpoints, $value) - 1px) {
-  //      @content;
-  //    }
-  //  }
-  //
-  //  @else {
-  //    @warn "Key `#{$value}` doesn't exist in $media-breakpoints map!";
-  //  }
-  //}
-  //
-  //@else if $type == number {
-  //  @media (max-width: #{$value}) {
-  //    @content;
-  //  }
-  //}
-
-  @media (max-width: #{$value}) {
+  @media (max-width: calc(#{$value} - 1px)) {
     @content;
   }
 }

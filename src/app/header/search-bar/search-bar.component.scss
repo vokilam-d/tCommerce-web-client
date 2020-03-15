@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 $inputBorderColor: #ddd;
 
@@ -11,6 +12,10 @@ $inputBorderColor: #ddd;
   background: rgba(#000, 0.7);
   z-index: 1;
   animation: fadeIn 0.2s ease;
+
+  @include respond-to($media_large) {
+    background: transparent;
+  }
 
   &__close {
     position: fixed;
@@ -32,18 +37,25 @@ $inputBorderColor: #ddd;
   transition: all 0.2s ease;
 
   &--in-focus {
-    width: calc(100% + 80px);
-    transform: translateX(-40px);
     z-index: 2;
 
+    @include respond-to-less-than($media_large) {
+      width: calc(100% + 80px);
+      transform: translateX(-40px);
+    }
+
     #{$bar}__input {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      border-right: none;
+      @include respond-to-less-than($media_large) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: none;
+      }
     }
 
     #{$bar}__btn {
-      display: block;
+      @include respond-to-less-than($media_large) {
+        display: block;
+      }
     }
   }
 
@@ -53,6 +65,14 @@ $inputBorderColor: #ddd;
     border: 1px solid $inputBorderColor;
     border-radius: 3px;
     font-size: 16px;
+
+    @include respond-to($media_large) {
+      padding-top: 10px;
+      padding-bottom: 11px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: none;
+    }
   }
 
   &__btn {
@@ -62,6 +82,13 @@ $inputBorderColor: #ddd;
     background: $primary;
     border-radius: 0 3px 3px 0;
     font-size: 14px;
+
+    @include respond-to($media_large) {
+      display: block;
+      font-weight: 500;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
   }
 
   &__clear {
@@ -81,11 +108,17 @@ $inputBorderColor: #ddd;
     top: calc(100% - 1px);
     left: 0;
     right: 0;
-    padding: 7px 10px;
+    padding: 7px 0;
     background: #fff;
-    border-top: 1px solid $inputBorderColor;
+    border: 1px solid transparent;
+    border-top-color: $inputBorderColor;
     border-radius: 0 0 3px 3px;
     z-index: 3;
+
+    @include respond-to($media_large) {
+      border-color: $inputBorderColor;
+      box-shadow: 0 5px 10px rgba($dark, 0.1);
+    }
   }
 
   &__preloader {
@@ -103,6 +136,11 @@ $inputBorderColor: #ddd;
   &__result {
     padding: 10px 15px;
     border-bottom: 1px solid #eee;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background: #eee;
+    }
 
     &:last-child {
       border-bottom: 0;
@@ -114,13 +152,13 @@ $inputBorderColor: #ddd;
   display: flex;
   align-items: center;
 
-  .product__image {
+  &__image {
     width: 30px;
     height: 30px;
     object-fit: contain;
   }
 
-  .product__name {
+  &__name {
     margin: 0 0 0 20px;
     font-size: 14px;
     line-height: 1.2;

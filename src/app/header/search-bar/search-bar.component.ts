@@ -50,6 +50,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   clearInput() {
     this.searchControl.setValue('');
     this.searchResults = null;
+    this.inputRef.nativeElement.focus();
   }
 
   private handleAutocomplete() {

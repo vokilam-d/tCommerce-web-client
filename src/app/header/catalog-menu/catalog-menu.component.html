@@ -5,19 +5,22 @@
 </ul>
 
 <ng-template let-category="category" #categoryTmpl>
-  <li class="menu__item" [class.menu__item--with-children]="category.children.length">
+  <li class="menu__item">
     <div class="menu__link-container">
       <a class="menu__link" [routerLink]="['/', category.slug]">
         {{ category.name }}
       </a>
 
-      <span class="menu__arrow"
-            *ngIf="category.children.length"
-            [class.menu__arrow--expanded]="category.isExpanded"
-            (click)="category.isExpanded = !category.isExpanded"
-      >
-        <i class="mbi mbi-chevron-down menu__arrow-icon" [class.menu__expand-icon--active]="category.isExpanded"></i>
-      </span>
+      <ng-container *ngIf="category.children.length">
+        <i class="mbi mbi-ios-arrow-right menu__hover-arrow"></i>
+
+        <span class="menu__expand-arrow"
+              [class.menu__arrow--expanded]="category.isExpanded"
+              (click)="category.isExpanded = !category.isExpanded"
+        >
+          <i class="mbi mbi-chevron-down" [class.menu__expand-icon--active]="category.isExpanded"></i>
+        </span>
+      </ng-container>
     </div>
 
     <ul class="menu__submenu" *ngIf="category.children.length" [class.menu__submenu--expanded]="category.isExpanded">

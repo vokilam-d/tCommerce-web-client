@@ -2,12 +2,24 @@
 @import "mixins";
 
 .banner {
-  $brk-point: 500px;
+  $brk_point: 500px;
 
   margin: 40px 0 0;
 
-  @include respond-to($brk-point) {
+  @include respond-to($media_large) {
     display: flex;
+    justify-content: flex-end;
+  }
+
+  &__content {
+    @include respond-to($brk_point) {
+      display: flex;
+    }
+
+    @include respond-to($media_large) {
+      width: calc(100% - 300px);
+      padding: 0 20px;
+    }
   }
 
   &__img-wrapper {
@@ -18,8 +30,8 @@
   }
 
   &__slider {
-    @include respond-to($brk-point) {
-      width: 50%;
+    @include respond-to($brk_point) {
+      width: 60%;
       flex-shrink: 0;
       display: flex;
       align-content: center;
@@ -27,8 +39,26 @@
     }
   }
 
+  &__imgs {
+    @include respond-to($brk_point) {
+      width: 40%;
+    }
+  }
+
   &__imgs-row {
     display: flex;
+  }
+
+  &__main-img {
+    max-height: 250px;
+
+    @include respond-to($brk_point) {
+      max-height: 320px;
+    }
+
+    @include respond-to($media_large) {
+      max-height: 350px;
+    }
   }
 }
 
@@ -48,12 +78,12 @@
   padding: 15px 20px 25px;
 
   @include respond-to($media_medium) {
-    width: 45%;
+    width: 47%;
   }
 
   @include respond-to($media_max-content-width) {
     display: flex;
-    width: 30%;
+    width: 32%;
   }
 
   &__img-wrapper {
