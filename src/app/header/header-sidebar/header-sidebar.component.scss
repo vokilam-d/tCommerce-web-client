@@ -13,6 +13,7 @@
     background: rgba(#000, 0.8);
     cursor: pointer;
     z-index: 10;
+    animation: fadeIn 0.3s ease;
   }
 
   &__close {
@@ -37,7 +38,7 @@
   box-sizing: border-box;
   z-index: 11;
   transform: translate3d(-100%, 0, 0);
-  transition: all 0.25s $cubicBezier;
+  transition: all 0.5s ease;
   overflow: auto;
 
   &--visible {
