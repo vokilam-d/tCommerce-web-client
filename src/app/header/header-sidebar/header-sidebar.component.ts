@@ -25,7 +25,5 @@ export class HeaderSidebarComponent implements OnInit {
     this.isMenuOpened = false;
   }
 
-  navigateToAccount() {
-    console.log('navigateToAccount!');
-  }
+
 }

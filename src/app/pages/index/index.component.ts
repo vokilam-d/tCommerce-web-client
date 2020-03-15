@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from '../category/category.service';
+import { CategoryTreeItem } from '../../shared/dtos/category-tree.dto';
 
 @Component({
   selector: 'index',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  get categories(): CategoryTreeItem[] { return this.categoryService.categories; }
+
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit() {
   }

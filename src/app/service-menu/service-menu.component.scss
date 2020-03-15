@@ -1,5 +1,5 @@
-@import "variables";
-@import "mixins";
+@import "src/assets/styles/abstracts/variables";
+@import "src/assets/styles/abstracts/mixins";
 
 .service-menu {
   $menu: &;
@@ -10,14 +10,20 @@
     justify-content: center;
   }
 
-  &--vertical &__link {
-    display: block;
-    padding: 8px 15px;
+  &__link {
     font-size: 13px;
     transition: all 0.2s ease;
 
     &:hover {
       color: $primary;
+    }
+
+    #{$menu}--horizontal & {
+      padding: 12px 25px;
+    }
+    #{$menu}--vertical & {
+      display: block;
+      padding: 8px 15px;
     }
   }
 

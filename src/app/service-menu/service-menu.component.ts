@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { UserService } from '../shared/services/user/user.service';
 
 @Component({
   selector: 'service-menu',
@@ -10,9 +11,13 @@ export class ServiceMenuComponent implements OnInit {
   @Input() layout: 'horizontal' | 'vertical' = 'horizontal';
   @Input() storeReviewsCount: number;
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+  }
+
+  navigateToAccount() {
+    this.userService.navigateToAccount();
   }
 
 }

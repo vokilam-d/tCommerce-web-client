@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { SearchService } from '../../shared/services/search/search.service';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { catchError, debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { fromEvent, Subject } from 'rxjs';
 import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
 import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
 
@@ -12,7 +12,7 @@ import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss']
 })
-export class SearchBarComponent implements OnInit, OnDestroy {
+export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isInFocus: boolean = false;
   searchControl = new FormControl('');
@@ -22,11 +22,17 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   private ngUnsubscribe = new Subject();
 
+  @ViewChild('inputRef') inputRef: ElementRef;
+
   constructor(private searchService: SearchService,
               private router: Router) { }
 
   ngOnInit() {
     this.handleAutocomplete();
+  }
+
+  ngAfterViewInit(): void {
+    this.handleHotkeys();
   }
 
   ngOnDestroy(): void {
@@ -36,6 +42,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   search() {
     const value = this.searchControl.value;
+    if (!value) { return; }
+
     this.router.navigate(['/', 'search'], { queryParams: { q: value } });
   }
 
@@ -67,6 +75,24 @@ export class SearchBarComponent implements OnInit, OnDestroy {
           this.searchResults = response.data;
           this.searchError = null;
           this.isSearchInProgress = false;
+        }
+      );
+  }
+
+  private handleHotkeys() {
+    fromEvent(this.inputRef.nativeElement, 'keyup')
+      .pipe( takeUntil(this.ngUnsubscribe) )
+      .subscribe(
+        (event: KeyboardEvent) => {
+          switch (event.key) {
+            case 'Escape':
+              this.inputRef.nativeElement.blur();
+              this.isInFocus = false;
+              break;
+            case 'Enter':
+              this.search();
+              break;
+          }
         }
       );
   }

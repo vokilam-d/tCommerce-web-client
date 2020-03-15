@@ -10,11 +10,19 @@ import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
 })
 export class CategoryService {
 
+  categories: CategoryTreeItem[];
+
   constructor(private http: HttpClient) {
+    this.setCategories();
   }
 
-  fetchCategoriesTree() {
-    return this.http.get<ResponseDto<CategoryTreeItem[]>>(`http://localhost:3500/api/v1/categories/tree`);
+  setCategories() {
+    this.http.get<ResponseDto<CategoryTreeItem[]>>(`http://localhost:3500/api/v1/categories/tree`)
+      .subscribe(
+        response => {
+          this.categories = response.data;
+        }
+      );
   }
 
   fetchCategory(slug: string) {

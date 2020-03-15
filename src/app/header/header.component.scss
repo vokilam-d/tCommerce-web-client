@@ -1,11 +1,26 @@
 @import "variables";
 @import "mixins";
 
-.service-menu {
+.top-menu {
   display: none;
 
-  @include respond-to($media_medium) {
+  @include respond-to($media_large) {
     display: block;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__menu {
+    min-width: 0;
+    flex-grow: 2;
+  }
+
+  &__phones {
+    flex-shrink: 0;
+    min-width: 0;
   }
 }
 
@@ -23,10 +38,15 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-direction: row-reverse;
     }
   }
 
-  &__logo {}
+  &__logo {
+    @include respond-to($media_medium) {
+      width: 40%;
+    }
+  }
 
   &__logo-img {
     display: block;
@@ -45,21 +65,12 @@
     }
   }
 
-  &__search-bar {
-    display: none;
-
-    @include respond-to($media_medium) {
-      display: block;
-      flex-grow: 2;
-      margin: 0 40px;
-    }
-  }
-
   &__toolbar {
     margin: 20px 0 0;
 
     @include respond-to($media_medium) {
-      margin-top: 0;
+      margin-top: 5px;
+      width: 60%;
     }
   }
 }
@@ -92,5 +103,48 @@
   &__search-bar {
     display: block;
     flex-grow: 2;
+  }
+}
+
+.phones {
+  overflow: hidden;
+  max-height: 17px;
+
+  &:hover {
+    overflow: initial;
+  }
+
+  &__content {
+    position: relative;
+    top: -7px;
+    padding: 4px 23px 8px 13px;
+    background: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.7;
+    z-index: 1;
+  }
+
+  &__phone {
+    display: block;
+    transition: all 0.2s ease;
+
+    & + & {
+      opacity: 0;
+    }
+  }
+
+  &:hover &__content {
+    box-shadow: 0 0 6px rgba($dark, 0.4);
+  }
+  &:hover &__phone {
+    opacity: 1;
+  }
+
+  &__arrow {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    font-size: 18px;
   }
 }

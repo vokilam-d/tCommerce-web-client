@@ -1,0 +1,24 @@
+<div class="service-menu"
+     [ngClass]="{
+       'service-menu--horizontal': layout === 'horizontal',
+       'service-menu--vertical': layout === 'vertical'
+     }"
+>
+  <div class="service-menu__content">
+
+    <ng-container *ngIf="layout === 'vertical'">
+      <div class="service-menu__link" (click)="navigateToAccount()">Мой кабинет</div>
+      <a class="service-menu__link" *ngIf="false" [routerLink]="['/', 'account', 'wishlist']">Мои желания</a>
+    </ng-container>
+
+    <a class="service-menu__link" routerLink="/skidki">Накопительные скидки</a>
+    <a class="service-menu__link" routerLink="/dostavka-i-oplata">Доставка и оплата</a>
+    <a class="service-menu__link" routerLink="/vozvrat-tovara">Возврат и обмен</a>
+    <a class="service-menu__link" routerLink="/contacts">Контакты</a>
+    <a class="service-menu__link" routerLink="/blog">Блог</a>
+    <a class="service-menu__link" routerLink="/otzyvy">
+      Отзывы
+      <span class="service-menu__count" *ngIf="storeReviewsCount"> ({{ storeReviewsCount }})</span>
+    </a>
+  </div>
+</div>

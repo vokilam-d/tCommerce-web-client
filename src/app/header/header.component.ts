@@ -11,7 +11,7 @@ import { HeaderSidebarComponent } from './header-sidebar/header-sidebar.componen
 })
 export class HeaderComponent implements OnInit {
 
-  categories: CategoryTreeItem[];
+  get categories(): CategoryTreeItem[] { return this.categoryService.categories; }
   storeReviewsCount: number;
 
   @ViewChild(HeaderSidebarComponent) sidebarCmp: HeaderSidebarComponent;
@@ -21,24 +21,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fetchCategories();
     this.fetchReviewCount();
   }
 
   openMenu() {
     this.sidebarCmp.openMenu();
-  }
-
-  private fetchCategories() {
-    this.categoryService.fetchCategoriesTree()
-      .subscribe(
-        response => {
-          this.categories = response.data;
-        },
-        error => {
-          console.warn(error);
-        }
-      );
   }
 
   private fetchReviewCount() {

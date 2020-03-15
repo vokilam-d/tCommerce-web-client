@@ -4,240 +4,52 @@
 
   <section class="banner">
     <div class="banner__slider">
-      <a class="banner__img-wrapper" routerLink="/">
-        <img class="banner__img" src="https://klondike.com.ua/media/wysiwyg/big_3_600.jpg" alt="">
+      <a class="banner__img-wrapper" routerLink="/rulon-potali-150-mm-zoloto-2-5.html">
+        <img class="banner__img" src="../../../assets/images/transfernaya-potal-15-sm-zoloto-600-600.jpg" alt="">
       </a>
     </div>
     <div class="banner__imgs">
       <div class="banner__imgs-row">
-        <a class="banner__img-wrapper" routerLink="/">
-          <img class="banner__img" src="https://klondike.com.ua/media/wysiwyg/sm_1_600.jpg" alt="">
+        <a class="banner__img-wrapper" routerLink="/vodnyj-klej-dlya-potali-ferrario-la-doratura-ad-acqua-250.html">
+          <img class="banner__img" src="../../../assets/images/ferrario-vodniy-250-steklo-600-600.jpg" alt="">
         </a>
-        <a class="banner__img-wrapper" routerLink="/">
-          <img class="banner__img" src="https://klondike.com.ua/media/wysiwyg/sm_2_600.jpg" alt="">
+        <a class="banner__img-wrapper" routerLink="/la-doratura-ferrario-maslyanyj-kley-dlya-potali-75-ml-3-h.html">
+          <img class="banner__img" src="../../../assets/images/ferrario-kley-3-h-600-600.jpg" alt="">
         </a>
       </div>
 
-      <a class="banner__img-wrapper" routerLink="/">
-        <img class="banner__img" src="https://klondike.com.ua/media/wysiwyg/med_1_600.jpg" alt="">
+      <a class="banner__img-wrapper" routerLink="/ferrario-metallicheskiy-pigment-03-blednoe-bogatoe-zoloto-25-ml.html">
+        <img class="banner__img" src="../../../assets/images/3-pigmenta.jpg" alt="">
       </a>
     </div>
   </section>
 
   <ul class="categories">
-    <li class="category">
-      <a class="category__img-wrapper" routerLink="/zolochenie">
-        <img class="category__img" src="https://klondike.com.ua/media/images/ferrario_potal_v_knige_1.jpg" alt="Золочение">
+    <li class="category" *ngFor="let category of categories">
+      <a class="category__img-wrapper" [routerLink]="'/' + category.slug" [ngSwitch]="category.name">
+        <img class="category__img" *ngSwitchCase="'Золочение'" src="../../../assets/images/ferrario_potal_v_knige_1.jpg" alt="Золочение">
+        <img class="category__img" *ngSwitchCase="'Краски, патины, воски'" src="../../../assets/images/ferrario_paints.jpg" alt="Краски, патины, воски">
+        <img class="category__img" *ngSwitchCase="'Картины по номерам'" src="../../../assets/images/kartiny_po_nomeram.jpg" alt="Картины по номерам">
+        <img class="category__img" *ngSwitchCase="'Кисти'" src="../../../assets/images/hudogheztvennye_kisti.jpg" alt="Кисти">
+        <img class="category__img" *ngSwitchCase="'Лаки'" src="../../../assets/images/vanishes.jpg" alt="Лаки">
+        <img class="category__img" *ngSwitchCase="'Состаривание'" src="../../../assets/images/sostarivanie.jpg" alt="Состаривание">
+        <img class="category__img" *ngSwitchCase="'Клеи'" src="../../../assets/images/klei.jpg" alt="Клеи">
+        <img class="category__img" *ngSwitchCase="'Пигменты'" src="../../../assets/images/pigments.jpg" alt="Пигменты">
+        <img class="category__img" *ngSwitchCase="'Инструменты и аксессуары'" src="../../../assets/images/instrumenty.jpg" alt="Инструменты и аксессуары">
       </a>
 
       <div class="category__info">
         <h2 class="category__title">
-          <a routerLink="/zolochenie">Золочение</a>
+          <a [routerLink]="'/' + category.slug">{{ category.name }}</a>
         </h2>
 
-        <ul class="category__subcategories">
-          <li>
+        <ul class="category__subcategories" *ngIf="category.children.length">
+          <li *ngFor="let subcategory of category.children">
             <h3 class="category__subcategory">
-              <a routerLink="/potal">Поталь</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Зеркальная поталь</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Клеи для позолоты</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Лаки для позолоты</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Жидкая поталь</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Металлические пигменты, вата, хлопья</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Состаривание позолоты</a>
+              <a [routerLink]="'/' + subcategory.slug">{{ subcategory.name }}</a>
             </h3>
           </li>
         </ul>
-      </div>
-    </li>
-
-    <li class="category">
-      <a class="category__img-wrapper" routerLink="/">
-        <img class="category__img" src="https://klondike.com.ua/media/images/ferrario_paints.jpg" alt="Краски, патины, воски">
-      </a>
-
-      <div class="category__info">
-        <h2 class="category__title">
-          <a routerLink="/">Краски, патины, воски</a>
-        </h2>
-
-        <ul class="category__subcategories">
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Акриловые краски</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Патины</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Металлизированные краски</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Воски</a>
-            </h3>
-          </li>
-        </ul>
-      </div>
-    </li>
-
-    <li class="category">
-      <a class="category__img-wrapper" routerLink="/">
-        <img class="category__img" src="https://klondike.com.ua/media/images/hudogheztvennye_kisti.jpg" alt="Кисти">
-      </a>
-
-      <div class="category__info">
-        <h2 class="category__title">
-          <a routerLink="/">Кисти</a>
-        </h2>
-
-        <ul class="category__subcategories">
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Акриловые краски</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Патины</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Металлизированные краски</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Воски</a>
-            </h3>
-          </li>
-        </ul>
-      </div>
-    </li>
-
-    <li class="category">
-      <a class="category__img-wrapper" routerLink="/">
-        <img class="category__img" src="https://klondike.com.ua/media/images/vanishes.jpg" alt="Лаки">
-      </a>
-
-      <div class="category__info">
-        <h2 class="category__title">
-          <a routerLink="/">Лаки</a>
-        </h2>
-
-        <ul class="category__subcategories">
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Водные лаки</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Масляные лаки</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Спиртовые лаки</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Грунты</a>
-            </h3>
-          </li>
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Лаки на растворителях (нитро, акрил)</a>
-            </h3>
-          </li>
-        </ul>
-      </div>
-    </li>
-
-    <li class="category">
-      <a class="category__img-wrapper" routerLink="/">
-        <img class="category__img" src="https://klondike.com.ua/media/images/sostarivanie.jpg" alt="Состаривание">
-      </a>
-
-      <div class="category__info">
-        <h2 class="category__title">
-          <a routerLink="/">Состаривание</a>
-        </h2>
-      </div>
-    </li>
-
-    <li class="category">
-      <a class="category__img-wrapper" routerLink="/klei">
-        <img class="category__img" src="https://klondike.com.ua/media/images/klei.jpg" alt="Клеи">
-      </a>
-
-      <div class="category__info">
-        <h2 class="category__title">
-          <a routerLink="/klei">Клеи</a>
-        </h2>
-      </div>
-    </li>
-
-    <li class="category">
-      <a class="category__img-wrapper" routerLink="/">
-        <img class="category__img" src="https://klondike.com.ua/media/images/pigments.jpg" alt="Пигменты">
-      </a>
-
-      <div class="category__info">
-        <h2 class="category__title">
-          <a routerLink="/">Пигменты</a>
-        </h2>
-
-        <ul class="category__subcategories">
-          <li>
-            <h3 class="category__subcategory">
-              <a routerLink="/">Металлические пигменты</a>
-            </h3>
-          </li>
-        </ul>
-      </div>
-    </li>
-
-    <li class="category">
-      <a class="category__img-wrapper" routerLink="/">
-        <img class="category__img" src="https://klondike.com.ua/media/images/instrumenty.jpg" alt="Инструменты и аксессуары">
-      </a>
-
-      <div class="category__info">
-        <h2 class="category__title">
-          <a routerLink="/">Инструменты и аксессуары</a>
-        </h2>
       </div>
     </li>
   </ul>

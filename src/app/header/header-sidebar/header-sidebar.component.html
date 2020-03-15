@@ -14,12 +14,10 @@
     </a>
 
     <div class="menu__title">Каталог:</div>
+
     <catalog-menu class="menu__catalog-menu" [categories]="categories"></catalog-menu>
 
-    <div class="menu__title menu__title--service">Меню:</div>
-
-    <div class="menu__link" (click)="navigateToAccount()">Мой кабинет</div>
-    <a class="menu__link" [routerLink]="['/', 'wishlist']">Мои желания</a>
+    <div class="menu__title">Меню:</div>
 
     <service-menu class="menu__service-menu" [storeReviewsCount]="storeReviewsCount" layout="vertical"></service-menu>
 

@@ -51,8 +51,9 @@
     width: 45%;
   }
 
-  @include respond-to($media_large) {
+  @include respond-to($media_max-content-width) {
     display: flex;
+    width: 30%;
   }
 
   &__img-wrapper {
@@ -61,20 +62,22 @@
     align-items: center;
     text-align: center;
 
-    @include respond-to($media_large) {
+    @include respond-to($media_max-content-width) {
       width: 50%;
+      padding: 0 15px 0 0;
       flex-shrink: 0;
+      align-items: flex-start;
     }
   }
 
   &__img {
-    max-height: 150px;
   }
 
   &__info {
     margin: 20px 0 0;
 
-    @include respond-to($media_large) {
+    @include respond-to($media_max-content-width) {
+      width: 50%;
       margin-top: 10px;
     }
   }
