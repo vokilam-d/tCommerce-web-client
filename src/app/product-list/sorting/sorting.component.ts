@@ -9,7 +9,10 @@ export class SortingComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
+  getValue() {
+    return '-sortOrder';
+  }
 }

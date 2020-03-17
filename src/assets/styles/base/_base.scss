@@ -29,6 +29,16 @@ img {
   img {
     height: auto;
   }
+
+  ul,
+  ol {
+    padding-left: 25px;
+    margin: 0 0 0.5rem;
+
+    li {
+      list-style-type: inherit;
+    }
+  }
 }
 
 @keyframes fadeIn {

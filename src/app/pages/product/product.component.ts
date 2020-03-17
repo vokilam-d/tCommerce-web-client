@@ -39,20 +39,20 @@ export class ProductComponent implements OnInit {
     this.productService.fetchProduct(slug).subscribe(
       response => {
         this.product = response.data;
-        this.buildBreadcrumbs();
+        this.setBreadcrumbs();
         this.setMeta();
       },
       error => console.warn(error)
     );
   }
 
-  private buildBreadcrumbs() {
+  private setBreadcrumbs() {
     this.breadcrumbs = this.product.breadcrumbs.map(breadcrumb => ({
       title: breadcrumb.name,
       link: breadcrumb.slug
     }));
 
-    this.breadcrumbs.push({ title: this.product.name });
+    this.breadcrumbs.push({ title: this.product.name, link: this.product.slug });
   }
 
   scrollToReviews() {

@@ -1,4 +1,5 @@
 import { MetaTagsDto } from './meta-tags.dto';
+import { BreadcrumbDto } from './breadcrumb.dto';
 
 export class CategoryDto {
   description: string;
@@ -7,4 +8,5 @@ export class CategoryDto {
   name: string;
   parentId: number;
   slug: string;
+  breadcrumbs: BreadcrumbDto[];
 }

@@ -19,7 +19,7 @@
 
   &__img-container {
     position: relative;
-    height: 160px;
+    height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,6 +34,10 @@
         }
       }
     }
+  }
+
+  &__img {
+    max-height: 100%;
   }
 
   &__name {

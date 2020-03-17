@@ -1,12 +1,7 @@
 import { MetaTagsDto } from './meta-tags.dto';
 import { MediaDto } from './media.dto';
 import { ProductVariantGroupDto } from './product-variant.dto';
-
-export class ProductBreadcrumbDto {
-  id: number;
-  name: string;
-  slug: string;
-}
+import { BreadcrumbDto } from './breadcrumb.dto';
 
 export class ProductCharacteristic {
   label: string;
@@ -27,7 +22,7 @@ export class ProductDto {
   categories: ProductCategoryDto[];
   variantGroups: ProductVariantGroupDto[];
   characteristics: ProductCharacteristic[];
-  breadcrumbs: ProductBreadcrumbDto[];
+  breadcrumbs: BreadcrumbDto[];
   fullDescription: string;
   shortDescription: string;
   medias: MediaDto[];

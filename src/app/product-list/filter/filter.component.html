@@ -1,0 +1,82 @@
+<div class="overlay" [class.overlay--visible]="isOpened"></div>
+
+<div class="filters" [class.filters--opened]="isOpened">
+
+  <div class="filters__header">
+    <span class="filters__close" (click)="closeFilters()">
+      <i class="mbi mbi-chevron-left"></i>
+    </span>
+
+    Фильтры
+  </div>
+
+  <div class="filters__selected-filters">
+    <div class="filters__selected-filter selected">
+      <div class="selected__info">
+        <div class="selected__title">
+          Производитель
+        </div>
+
+        <div class="selected__values">
+          Китай, Манетти (Manetti)
+        </div>
+      </div>
+
+      <button class="selected__reset" (click)="unselect()" type="button">
+        <i class="mbi mbi-cross"></i>
+      </button>
+    </div>
+  </div>
+
+  <dl class="filters__options">
+    <div class="filters__block">
+      <dt class="filters__title">Производитель</dt>
+
+      <dd>
+        <label class="filters__value">
+          <input class="filters__checkbox" type="checkbox">
+          Каденс (Cadence)
+        </label>
+      </dd>
+
+      <dd>
+        <label class="filters__value">
+          <input class="filters__checkbox" type="checkbox">
+          Китай
+        </label>
+      </dd>
+
+      <dd>
+        <label class="filters__value">
+          <input class="filters__checkbox" type="checkbox">
+          Манетти (Manetti)
+        </label>
+      </dd>
+    </div>
+
+    <div class="filters__block">
+      <dt class="filters__title">Цвет поталь</dt>
+
+      <dd>
+        <label class="filters__value">
+          <input class="filters__checkbox" type="checkbox">
+          Серебро
+        </label>
+      </dd>
+
+      <dd>
+        <label class="filters__value">
+          <input class="filters__checkbox" type="checkbox">
+          Золото 2.5
+        </label>
+      </dd>
+
+      <dd>
+        <label class="filters__value">
+          <input class="filters__checkbox" type="checkbox">
+          Золото 2.0
+        </label>
+      </dd>
+    </div>
+  </dl>
+</div>

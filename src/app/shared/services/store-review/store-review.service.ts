@@ -10,6 +10,6 @@ export class StoreReviewService {
   constructor(private http: HttpClient) { }
 
   fetchStoreReviewsCount() {
-    return this.http.get<ResponseDto<number>>('http://localhost:3500/store-reviews/count')
+    return this.http.get<ResponseDto<number>>('http://localhost:3500/api/v1/store-reviews/count')
   }
 }

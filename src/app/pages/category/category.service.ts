@@ -28,8 +28,4 @@ export class CategoryService {
   fetchCategory(slug: string) {
     return this.http.get<ResponseDto<CategoryDto>>(`http://localhost:3500/api/v1/categories/${slug}`);
   }
-
-  fetchCategoryItems(id: string) {
-    return this.http.get<ResponseDto<ProductListItemDto[]>>(`http://localhost:3500/api/v1/categories/${id}/items`);
-  }
 }

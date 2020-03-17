@@ -6,9 +6,7 @@ import { HeaderModule } from '../../header/header.module';
 import { FooterModule } from '../../footer/footer.module';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
-import { FilterModule } from '../../filter/filter.module';
-import { SortingModule } from '../../sorting/sorting.module';
-import { ProductListItemModule } from '../../product-list-item/product-list-item.module';
+import { ProductListModule } from '../../product-list/product-list.module';
 
 @NgModule({
   declarations: [CategoryComponent],
@@ -18,9 +16,7 @@ import { ProductListItemModule } from '../../product-list-item/product-list-item
     FooterModule,
     CommonModule,
     BreadcrumbsModule,
-    FilterModule,
-    SortingModule,
-    ProductListItemModule
+    ProductListModule
   ]
 })
 export class CategoryModule { }

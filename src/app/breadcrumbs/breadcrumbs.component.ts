@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IBreadcrumb } from './breadcrumbs.interface';
 import { JsonLdService } from '../shared/services/json-ld/json-ld.service';
 import { SafeHtml } from '@angular/platform-browser';
@@ -8,16 +8,20 @@ import { SafeHtml } from '@angular/platform-browser';
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss']
 })
-export class BreadcrumbsComponent implements OnInit {
+export class BreadcrumbsComponent implements OnInit, OnChanges {
 
   jsonLd: SafeHtml;
   @Input() breadcrumbs: IBreadcrumb[];
-  @Input() currentLink: string;
 
   constructor(private jsonLdService: JsonLdService) { }
 
   ngOnInit() {
-    this.setJsonLd();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.breadcrumbs && changes.breadcrumbs.currentValue) {
+      this.setJsonLd();
+    }
   }
 
   private setJsonLd() {
@@ -27,7 +31,7 @@ export class BreadcrumbsComponent implements OnInit {
       'itemListElement': this.breadcrumbs.map((breadcrumb, index) => ({
         '@type': "ListItem",
         'item': {
-          '@id': `https://klondike.com.ua/${breadcrumb.link || this.currentLink}`,
+          '@id': `https://klondike.com.ua/${breadcrumb.link}`,
           'name': breadcrumb.title
         },
         'position': index

@@ -1,7 +1,7 @@
 <div class="gallery" *ngIf="isModalVisible">
   <img class="gallery__img"
        *ngIf="medias[activeMediaIdx] as media"
-       [src]="'http://localhost:3500' + media.variantsUrls.medium"
+       [src]="'http://localhost:3500' + media.variantsUrls.large"
        [alt]="media.altText"
   >
 

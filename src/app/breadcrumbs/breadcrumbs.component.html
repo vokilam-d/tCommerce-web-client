@@ -7,9 +7,9 @@
     </a>
   </li>
 
-  <li class="breadcrumbs__item" *ngFor="let breadcrumb of breadcrumbs">
+  <li class="breadcrumbs__item" *ngFor="let breadcrumb of breadcrumbs, last as last">
     <a class="breadcrumbs__link"
-       *ngIf="breadcrumb.link; else noLink"
+       *ngIf="!last; else noLink"
        [routerLink]="['/', breadcrumb.link]"
     >
       {{ breadcrumb.title }}

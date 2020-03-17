@@ -1,20 +1,17 @@
 <div class="item">
   <header class="item__header">
-    <div class="item__img-container" [class.item__img-container--with-hover]="item.mediaHoverUrl">
-      <a class="item__link" [routerLink]="'/' + item.slug">
+    <a class="item__img-container" [routerLink]="'/' + item.slug" [class.item__img-container--with-hover]="item.mediaHoverUrl">
+      <img class="item__img item__img-primary"
+           [src]="'http://localhost:3500' + item.mediaUrl"
+           [alt]="item.mediaAltText"
+      >
 
-        <img class="item__img item__img-primary"
-             [src]="'http://localhost:3500' + item.mediaUrl"
-             [alt]="item.mediaAltText"
-        >
-
-        <img class="item__img item__img-secondary"
-             *ngIf="item.mediaHoverUrl"
-             [src]="'http://localhost:3500' + item.mediaHoverUrl"
-             [alt]="item.mediaAltText"
-        >
-      </a>
-    </div>
+      <img class="item__img item__img-secondary"
+           *ngIf="item.mediaHoverUrl"
+           [src]="'http://localhost:3500' + item.mediaHoverUrl"
+           [alt]="item.mediaAltText"
+      >
+    </a>
 
     <h2 class="item__name">
       <a class="item__link" [routerLink]="'/' + item.slug">{{ item.name }}</a>
@@ -32,7 +29,7 @@
         Купить
       </button>
 
-      <button class="item__wishlist" (click)="addToWishlist()">
+      <button class="item__wishlist" *ngIf="false" (click)="addToWishlist()">
         <i class="mbi mbi-heart item__wishlist-icon"></i>
       </button>
 

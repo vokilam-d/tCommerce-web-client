@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from './category.service';
 import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
+import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
+import { CategoryDto } from '../../shared/dtos/category.dto';
+import { ProductService } from '../product/product.service';
+import { IProductListFilter } from '../../product-list/product-list-filter.interface';
+import { ProductDto } from '../../shared/dtos/product.dto';
 
 @Component({
   selector: 'category',
@@ -10,10 +15,12 @@ import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
 })
 export class CategoryComponent implements OnInit {
 
-  category: any;
-  items: ProductListItemDto[];
+  category: CategoryDto;
+  breadcrumbs: IBreadcrumb[];
+  productListFilters: IProductListFilter[];
 
   constructor(private route: ActivatedRoute,
+              private productService: ProductService,
               private categoryService: CategoryService) {
   }
 
@@ -26,18 +33,27 @@ export class CategoryComponent implements OnInit {
     this.categoryService.fetchCategory(slug).subscribe(
       response => {
         this.category = response.data;
-        this.fetchCategoryItems();
+        this.setListFilters();
+        this.setBreadcrumbs();
+        this.setMeta();
       },
       error => console.warn(error)
     );
   }
 
-  private fetchCategoryItems() {
-    this.categoryService.fetchCategoryItems(this.category.slug).subscribe(
-      response => {
-        this.items = response.data;
-      },
-      error => console.warn(error)
-    )
+  private setListFilters() {
+    this.productListFilters = [{ fieldName: 'categoryIds', value: this.category.id }];
+  }
+
+  private setBreadcrumbs() {
+    this.breadcrumbs = this.category.breadcrumbs.map(breadcrumb => ({
+      title: breadcrumb.name,
+      link: breadcrumb.slug
+    }));
+
+    this.breadcrumbs.push({ title: this.category.name, link: this.category.slug });
+  }
+
+  private setMeta() {
   }
 }
