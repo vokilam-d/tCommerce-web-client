@@ -1,29 +1,32 @@
 <div class="product-list">
   <aside class="product-list__sidebar">
-    <app-filter class="product-list__filter"></app-filter>
+    <app-filter class="product-list__filter" (valueChanged)="fetchProducts()"></app-filter>
   </aside>
 
   <main class="product-list__content">
 
     <div class="product-list__header">
-      <div class="product-list__filter-toggle filter-toggle" (click)="openFilters()">
-        Фильтр
+      <button class="product-list__filter-toggle filter-toggle" (click)="openFilters()">
+        Фильтры
         <i class="mbi mbi-cross filter-toggle__icon"></i>
-      </div>
+      </button>
 
       <div class="product-list__selected-filters">
-
       </div>
 
-      <sorting class="product-list__sorting"></sorting>
+      <sorting class="product-list__sorting" (valueChanged)="fetchProducts()"></sorting>
     </div>
 
-    <ol class="product-list__items">
+    <ol class="product-list__items" #itemsRef>
       <li class="product-list__item" *ngFor="let item of items">
         <product-list-item [item]="item"></product-list-item>
       </li>
+
+      <li class="product-list__no-items" *ngIf="items && !items.length">
+        По заданным параметрам не найдено ни одного товара
+      </li>
     </ol>
 
-    <pagination></pagination>
+    <pagination class="product-list__pagination" [pagesTotal]="pagesTotal" (valueChanged)="onPaginationChanged()"></pagination>
   </main>
 </div>

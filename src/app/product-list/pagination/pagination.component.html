@@ -1,1 +1,51 @@
-<p>pagination works!</p>
+<div class="pagination">
+<!--  <button class="pagination__load-next" (click)="loadNextItems()" type="button"></button>-->
+
+  <div class="pagination__actions">
+    <button class="pagination__arrow-btn pagination__arrow-btn--prev"
+            [disabled]="isPrevBtnDisabled"
+            (click)="selectPrevPage()"
+    >
+      <i class="mbi mbi-chevron-left"></i>
+    </button>
+
+    <ul class="pagination__pages">
+      <li class="pagination__page"
+          [class.pagination__page--active]="1 === activePage"
+          (click)="selectPage(1)"
+      >
+        1
+      </li>
+
+      <li class="pagination__spread" *ngIf="isPrevSpreadShown()">
+        ...
+      </li>
+
+      <li class="pagination__page"
+          *ngFor="let page of pages"
+          [class.pagination__page--active]="page === activePage"
+          (click)="selectPage(page)"
+      >
+        {{ page }}
+      </li>
+
+      <li class="pagination__spread" *ngIf="isNextSpreadShown()">
+        ...
+      </li>
+
+      <li class="pagination__page"
+          [class.pagination__page--active]="pagesTotal === activePage"
+          (click)="selectPage(pagesTotal)"
+      >
+        {{ pagesTotal }}
+      </li>
+    </ul>
+
+    <button class="pagination__arrow-btn pagination__arrow-btn--next"
+            [disabled]="isNextBtnDisabled"
+            (click)="selectNextPage()"
+    >
+      <i class="mbi mbi-chevron-right"></i>
+    </button>
+  </div>
+</div>

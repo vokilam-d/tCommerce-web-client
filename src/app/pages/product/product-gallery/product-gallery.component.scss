@@ -1,11 +1,17 @@
 @import "variables";
 
 .gallery {
+  position: relative;
   display: flex;
 
   &__thumbnails {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 80px;
+    height: 100%;
     padding: 0 10px 0 0;
+    overflow-y: auto;
   }
 
   &__thumbnail {
@@ -36,6 +42,7 @@
 
   &__thumbnails + &__img-container {
     width: calc(100% - 80px);
+    margin-left: 80px;
   }
 
   &__img-inner-container {

@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from './category.service';
-import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { CategoryDto } from '../../shared/dtos/category.dto';
 import { ProductService } from '../product/product.service';
 import { IProductListFilter } from '../../product-list/product-list-filter.interface';
-import { ProductDto } from '../../shared/dtos/product.dto';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'category',
@@ -16,10 +15,12 @@ import { ProductDto } from '../../shared/dtos/product.dto';
 export class CategoryComponent implements OnInit {
 
   category: CategoryDto;
+  safeDescription: SafeHtml;
   breadcrumbs: IBreadcrumb[];
   productListFilters: IProductListFilter[];
 
   constructor(private route: ActivatedRoute,
+              private sanitizer: DomSanitizer,
               private productService: ProductService,
               private categoryService: CategoryService) {
   }
@@ -33,6 +34,7 @@ export class CategoryComponent implements OnInit {
     this.categoryService.fetchCategory(slug).subscribe(
       response => {
         this.category = response.data;
+        this.safeDescription = this.sanitizer.bypassSecurityTrustHtml(this.category.description);
         this.setListFilters();
         this.setBreadcrumbs();
         this.setMeta();

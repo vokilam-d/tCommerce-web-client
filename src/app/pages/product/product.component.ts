@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
 import { HeadService, IOgTags } from '../../shared/services/head/head.service';
 import { CartService } from '../../shared/services/cart/cart.service';
 import { WishlistService } from '../../shared/services/wishlist/wishlist.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'product',
@@ -24,6 +25,7 @@ export class ProductComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private headService: HeadService,
+              private sanitizer: DomSanitizer,
               private wishlistService: WishlistService,
               private cartService: CartService,
               private productService: ProductService) {
@@ -39,6 +41,7 @@ export class ProductComponent implements OnInit {
     this.productService.fetchProduct(slug).subscribe(
       response => {
         this.product = response.data;
+        this.product.safeFullDescription = this.sanitizer.bypassSecurityTrustHtml(this.product.fullDescription);
         this.setBreadcrumbs();
         this.setMeta();
       },

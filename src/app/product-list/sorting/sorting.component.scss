@@ -1,0 +1,23 @@
+@import "variables";
+
+.sort {
+  position: relative;
+
+  &__control {
+    display: block;
+    width: 100%;
+    padding: 7px 32px 8px 13px;
+    border: 1px solid #d2d2d2;
+    border-radius: 3px;
+    appearance: none;
+  }
+
+  &__arrow {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    font-size: 11px;
+    pointer-events: none;
+  }
+}

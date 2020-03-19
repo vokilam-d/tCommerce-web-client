@@ -1,6 +1,6 @@
 export class SortingPaginatingFilterDto {
   sort: string;
-  limit: number = 20;
+  limit: number = 30;
   page: number = 1;
 
   [fieldName: string]: any;

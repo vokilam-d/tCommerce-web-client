@@ -2,6 +2,7 @@ import { MetaTagsDto } from './meta-tags.dto';
 import { MediaDto } from './media.dto';
 import { ProductVariantGroupDto } from './product-variant.dto';
 import { BreadcrumbDto } from './breadcrumb.dto';
+import { SafeHtml } from '@angular/platform-browser';
 
 export class ProductCharacteristic {
   label: string;
@@ -35,4 +36,6 @@ export class ProductDto {
   slug: string;
   vendorCode: string;
   gtin: string;
+
+  safeFullDescription: SafeHtml;
 }

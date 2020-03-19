@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IProductListFilter } from '../product-list-filter.interface';
 
 @Component({
@@ -9,6 +9,7 @@ import { IProductListFilter } from '../product-list-filter.interface';
 export class FilterComponent implements OnInit {
 
   isOpened: boolean = false;
+  @Output() valueChanged = new EventEmitter();
 
   constructor() { }
 

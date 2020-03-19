@@ -21,7 +21,9 @@ img {
   max-width: 100%;
 }
 
-.product-description {
+.html-description {
+  line-height: 1.375;
+
   p {
     margin-bottom: 1rem;
   }
@@ -39,6 +41,18 @@ img {
       list-style-type: inherit;
     }
   }
+}
+
+.yt-video-wrapper {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.yt-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
 }
 
 @keyframes fadeIn {

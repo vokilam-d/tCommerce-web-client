@@ -1,1 +1,7 @@
-<p>sorting works!</p>
+<div class="sort">
+  <select class="sort__control" [formControl]="sortControl">
+    <option *ngFor="let option of sortOptions" [value]="option.value">{{ option.label }}</option>
+  </select>
+
+  <i class="mbi mbi-chevron-down sort__arrow"></i>
+</div>

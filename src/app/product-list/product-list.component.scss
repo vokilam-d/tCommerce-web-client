@@ -2,6 +2,24 @@
 @import "mixins";
 
 .product-list {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__filter-toggle {
+    width: 50%;
+    margin: 0 16px 0 0;
+  }
+
+  &__sorting {
+    width: 50%;
+  }
+
+  &__selected-filters {
+    display: none;
+  }
+
   &__items {
     margin: 15px 0 0;
     display: flex;
@@ -25,4 +43,27 @@
       padding: 20px 20px 35px;
     }
   }
+
+  &__pagination {
+    display: block;
+    margin: 30px 0 0;
+  }
 }
+
+
+.filter-toggle {
+  display: inline-block;
+  padding: 9px 15px 10px;
+  background: $primary;
+  border-radius: 3px;
+
+  &__icon {
+    margin: 0 0 0 5px;
+    display: inline-block;
+    vertical-align: bottom;
+    transform: rotate(45deg);
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+

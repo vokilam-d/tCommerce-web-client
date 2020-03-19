@@ -32,7 +32,7 @@
 
 
 <ng-template #descTmpl>
-  <div class="description product-description" [innerHTML]="product.fullDescription"></div>
+  <div class="description html-description" [innerHTML]="product.safeFullDescription"></div>
 </ng-template>
 
 <ng-template #charsTmpl>
