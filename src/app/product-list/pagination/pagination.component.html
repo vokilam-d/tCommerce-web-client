@@ -11,7 +11,7 @@
 
     <ul class="pagination__pages">
       <li class="pagination__page"
-          [class.pagination__page--active]="1 === activePage"
+          [class.pagination__page--active]="1 === activePage && pagesTotal > 2"
           (click)="selectPage(1)"
       >
         1
@@ -34,6 +34,7 @@
       </li>
 
       <li class="pagination__page"
+          *ngIf="pagesTotal > 1"
           [class.pagination__page--active]="pagesTotal === activePage"
           (click)="selectPage(pagesTotal)"
       >

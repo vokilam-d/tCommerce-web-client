@@ -16,7 +16,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   @Output() valueChanged = new EventEmitter();
 
   get isPrevBtnDisabled() { return this.activePage <= 1; }
-  get isNextBtnDisabled() { return this.activePage >= this.pagesTotal; }
+  get isNextBtnDisabled() { return this.pagesTotal === 1 || this.activePage >= this.pagesTotal; }
 
   constructor(private urlService: UrlService) { }
 

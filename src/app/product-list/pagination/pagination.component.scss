@@ -26,7 +26,7 @@
     padding: 6px 8px;
 
     &--active {
-      color: $primary;
+      color: darken($primary, 5%);
     }
   }
 
