@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomerService } from '../../shared/services/user/customer.service';
 
 @Component({
   selector: 'mini-account',
@@ -7,12 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MiniAccountComponent implements OnInit {
 
-  constructor() { }
+  get isLoggedIn() { return this.customerService.isLoggedIn; }
+  get customerName() { return this.customerService.customerName; }
+
+  constructor(private customerService: CustomerService) { }
 
   ngOnInit(): void {
   }
 
-  toggleDropdown() {
-    console.log('toggle account!');
+  onLoginClick() {
+    if (!this.isLoggedIn) {
+      this.customerService.showLoginModal();
+    }
+  }
+
+  logout() {
+    this.customerService.logout();
   }
 }

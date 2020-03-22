@@ -4,7 +4,7 @@
 .banner {
   $brk_point: 500px;
 
-  margin: 40px 0 0;
+  margin: 10px 0 0;
 
   @include respond-to($media_large) {
     display: flex;

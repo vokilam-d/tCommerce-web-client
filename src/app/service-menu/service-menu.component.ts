@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { UserService } from '../shared/services/user/user.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CustomerService } from '../shared/services/user/customer.service';
 
 @Component({
   selector: 'service-menu',
@@ -8,16 +8,22 @@ import { UserService } from '../shared/services/user/user.service';
 })
 export class ServiceMenuComponent implements OnInit {
 
+  get isLoggedIn() { return this.customerService.isLoggedIn; }
+
   @Input() layout: 'horizontal' | 'vertical' = 'horizontal';
   @Input() storeReviewsCount: number;
+  @Output() loginModalOpened = new EventEmitter();
 
-  constructor(private userService: UserService) { }
+  constructor(private customerService: CustomerService) { }
 
   ngOnInit() {
   }
 
-  navigateToAccount() {
-    this.userService.navigateToAccount();
+  onLoginClick() {
+    if (!this.isLoggedIn) {
+      this.customerService.showLoginModal();
+      this.loginModalOpened.emit();
+    }
   }
 
 }

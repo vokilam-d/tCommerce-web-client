@@ -1,3 +1,26 @@
-<div class="toolbar-item" (click)="toggleDropdown()">
-  <i class="toolbar-item__icon mbi mbi-user"></i>
+<div class="toolbar-item account">
+
+  <a class="account__link" [routerLink]="isLoggedIn ? ['/', 'account'] : ''" (click)="onLoginClick()">
+    <i class="toolbar-item__icon mbi mbi-user"></i>
+
+    <div class="account__login-text">
+      <ng-container *ngIf="isLoggedIn; else notLoggedIn"> {{ customerName }} </ng-container>
+      <ng-template #notLoggedIn> Войти </ng-template>
+    </div>
+  </a>
+
+  <ul class="account__menu" *ngIf="isLoggedIn">
+    <li>
+      <a class="account__menu-link" [routerLink]="['/', 'account']">Мой кабинет</a>
+    </li>
+    <li>
+      <a class="account__menu-link" [routerLink]="['/', 'cart']">Моя корзина</a>
+    </li>
+    <li>
+      <a class="account__menu-link" [routerLink]="['/', 'account', 'orders']">Мои заказы</a>
+    </li>
+    <li>
+      <div class="account__menu-link" (click)="logout()">Выход</div>
+    </li>
+  </ul>
 </div>

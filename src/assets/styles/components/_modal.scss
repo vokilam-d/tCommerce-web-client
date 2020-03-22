@@ -1,0 +1,51 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(#000, 0.5);
+  cursor: pointer;
+  z-index: 20;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px 20px 40px;
+  background: #fff;
+  z-index: 21;
+  overflow: auto;
+  animation: slideIn 0.4s ease;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  &__close {
+    font-size: 20px;
+  }
+
+  &__content {
+    margin: 20px 0 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

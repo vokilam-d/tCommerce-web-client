@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CategoryTreeItem } from '../../shared/dtos/category-tree.dto';
 
 @Component({
-  selector: 'header-sidebar',
-  templateUrl: './header-sidebar.component.html',
-  styleUrls: ['./header-sidebar.component.scss']
+  selector: 'sidebar-menu',
+  templateUrl: './sidebar-menu.component.html',
+  styleUrls: ['./sidebar-menu.component.scss']
 })
-export class HeaderSidebarComponent implements OnInit {
+export class SidebarMenuComponent implements OnInit {
 
   isMenuOpened: boolean = false;
   @Input() categories: CategoryTreeItem[];
@@ -24,6 +24,4 @@ export class HeaderSidebarComponent implements OnInit {
   closeMenu() {
     this.isMenuOpened = false;
   }
-
-
 }

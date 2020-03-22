@@ -1,0 +1,18 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CustomerModalComponent } from './customer-modal.component';
+import { LoginFormModule } from '../login-form/login-form.module';
+import { RegistrationFormModule } from '../registration-form/registration-form.module';
+
+
+
+@NgModule({
+  declarations: [CustomerModalComponent],
+  imports: [
+    CommonModule,
+    LoginFormModule,
+    RegistrationFormModule
+  ],
+  exports: [CustomerModalComponent]
+})
+export class CustomerModalModule { }

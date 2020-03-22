@@ -1,0 +1,51 @@
+<form class="auth-form login-form" [formGroup]="form" ngNativeValidate>
+
+  <div class="auth-form__control">
+    <label class="auth-form__label" for="login">Email или номер телефона</label>
+    <input class="auth-form__input"
+           [class.auth-form__input--invalid]="isControlInvalid('login')"
+           formControlName="login"
+           id="login"
+           type="text"
+           required
+    >
+  </div>
+
+  <div class="auth-form__control" *ngIf="state === 'login'">
+    <label class="auth-form__label" for="password">Пароль</label>
+    <input class="auth-form__input"
+           [class.auth-form__input--invalid]="isControlInvalid('password')"
+           formControlName="password"
+           id="password"
+           type="password"
+    >
+  </div>
+
+  <div class="login-form__reset-sent" *ngIf="state === 'reset' && isResetEmailSent">
+    На указанный email было отправлено письмо с инструкцией для восстановления пароля
+  </div>
+
+  <div class="auth-form__error" *ngIf="formError as error">
+    {{ error }}
+  </div>
+
+  <button class="auth-form__switch-auth login-form__toggle-state" (click)="toggleState()" type="button">
+    <ng-container *ngIf="state === 'login'">Забыл пароль</ng-container>
+    <ng-container *ngIf="state === 'reset'">Я вспомнил пароль</ng-container>
+  </button>
+
+  <button class="btn auth-form__submit" [class.auth-form__submit--loading]="isLoading" (click)="submit()" type="submit">
+    <ng-container *ngIf="state === 'login'">Войти</ng-container>
+    <ng-container *ngIf="state === 'reset'">Восстановить пароль</ng-container>
+
+    <preloader class="auth-form__submit-preloader" *ngIf="isLoading"></preloader>
+  </button>
+
+  <button class="auth-form__switch-auth" (click)="switchToRegister()" type="button">Создать новый аккаунт</button>
+
+  <div class="auth-form__delimiter">
+    <div class="auth-form__delimiter-text">или</div>
+  </div>
+
+  <auth-social class="auth-form__social"></auth-social>
+</form>

@@ -1,0 +1,12 @@
+<div class="noty"
+     *ngFor="let noty of noties"
+     [class.noty--info]="noty.type === 'info'"
+     [class.noty--error]="noty.type === 'error'"
+     [class.noty--hiding]="noty.isHiding"
+>
+  {{ noty.message }}
+
+  <div class="noty__close" (click)="hideNoty(noty)">
+    <i class="noty__close-icon mbi mbi-cross"></i>
+  </div>
+</div>

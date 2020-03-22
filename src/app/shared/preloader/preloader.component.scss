@@ -9,12 +9,10 @@
   display: block;
   margin: 0 auto;
   width: 80px;
-  height: 80px;
   animation: fadeIn 0.2s ease;
 
   &__item {
     position: absolute;
-    top: 33px;
     width: 13px;
     height: 13px;
     border-radius: 50%;

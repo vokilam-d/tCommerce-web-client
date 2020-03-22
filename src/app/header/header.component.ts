@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { CategoryService } from '../pages/category/category.service';
 import { CategoryTreeItem } from '../shared/dtos/category-tree.dto';
 import { StoreReviewService } from '../shared/services/store-review/store-review.service';
-import { HeaderSidebarComponent } from './header-sidebar/header-sidebar.component';
+import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   storeReviewsCount: number;
 
   @Input() isCatalogFixed: boolean = false;
-  @ViewChild(HeaderSidebarComponent) sidebarCmp: HeaderSidebarComponent;
+  @ViewChild(SidebarMenuComponent) sidebarCmp: SidebarMenuComponent;
 
   constructor(private categoryService: CategoryService,
               private storeReviewService: StoreReviewService) {

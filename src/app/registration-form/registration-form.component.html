@@ -1,0 +1,79 @@
+<form class="auth-form" [formGroup]="form" ngNativeValidate>
+
+  <div class="auth-form__control">
+    <label class="auth-form__label" for="firstName">Имя</label>
+    <input class="auth-form__input"
+           [class.auth-form__input--invalid]="isControlInvalid('firstName')"
+           formControlName="firstName"
+           id="firstName"
+           type="text"
+           required
+    >
+  </div>
+
+  <div class="auth-form__control">
+    <label class="auth-form__label" for="lastName">Фамилия</label>
+    <input class="auth-form__input"
+           [class.auth-form__input--invalid]="isControlInvalid('lastName')"
+           formControlName="lastName"
+           id="lastName"
+           type="text"
+           required
+    >
+  </div>
+
+  <div class="auth-form__control">
+    <label class="auth-form__label" for="email">Email</label>
+    <input class="auth-form__input"
+           [class.auth-form__input--invalid]="isControlInvalid('email')"
+           formControlName="email"
+           id="email"
+           type="email"
+           required
+    >
+  </div>
+
+  <div class="auth-form__control">
+    <label class="auth-form__label" for="password">Пароль</label>
+    <input class="auth-form__input"
+           [class.auth-form__input--invalid]="isControlInvalid('password')"
+           formControlName="password"
+           id="password"
+           type="password"
+           required
+    >
+    <div class="auth-form__input-error" *ngIf="isControlInvalid('password')">
+      Пароль должен быть не менее 6 символов, состоять из цифр и латинских букв, в том числе заглавных
+    </div>
+  </div>
+
+  <div class="auth-form__control">
+    <label class="auth-form__label" for="passwordConfirm">Повторите пароль</label>
+    <input class="auth-form__input"
+           [class.auth-form__input--invalid]="isControlInvalid('passwordConfirm')"
+           formControlName="passwordConfirm"
+           id="passwordConfirm"
+           type="password"
+    >
+    <div class="auth-form__input-error" *ngIf="isControlInvalid('passwordConfirm')">
+      Пароли не совпадают
+    </div>
+  </div>
+
+  <div class="auth-form__error" *ngIf="formError as error">
+    {{ error }}
+  </div>
+
+  <button class="btn auth-form__submit" [class.auth-form__submit--loading]="isLoading" (click)="submit()" type="submit">
+    Зарегистрироваться
+    <preloader class="auth-form__submit-preloader" *ngIf="isLoading"></preloader>
+  </button>
+
+  <button class="auth-form__switch-auth" (click)="switchToLogin()" type="button">У меня уже есть аккаунт</button>
+
+  <div class="auth-form__delimiter">
+    <div class="auth-form__delimiter-text">или</div>
+  </div>
+
+  <auth-social class="auth-form__social"></auth-social>
+</form>

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { UserService } from '../shared/services/user/user.service';
+import { CustomerService } from '../shared/services/user/customer.service';
 import { HttpClient } from '@angular/common/http';
 import { INPUT_MEDIA_ACCEPT_TYPES } from '../shared/constants';
 import { MediaDto } from '../shared/dtos/media.dto';
@@ -39,7 +39,7 @@ export class AddReviewModalComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private renderer: Renderer2,
               private http: HttpClient,
-              private userService: UserService) { }
+              private customerService: CustomerService) { }
 
   ngOnInit(): void {
     if (!this.uploadUrl) {
@@ -61,9 +61,9 @@ export class AddReviewModalComponent implements OnInit {
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      [EAddReviewFormControl.Name]: this.userService.getName(),
+      [EAddReviewFormControl.Name]: this.customerService.customerName,
       [EAddReviewFormControl.Text]: '',
-      [EAddReviewFormControl.Email]: this.userService.getEmail(),
+      [EAddReviewFormControl.Email]: this.customerService.customerEmail,
       [EAddReviewFormControl.Rating]: 5
     });
   }

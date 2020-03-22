@@ -1,0 +1,63 @@
+import { Component, OnInit, Renderer2 } from '@angular/core';
+import { CustomerService } from '../shared/services/user/customer.service';
+import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
+import { takeUntil } from 'rxjs/operators';
+import { CustomerDto } from '../shared/dtos/customer.dto';
+import { NotyService } from '../noty/noty.service';
+
+@Component({
+  selector: 'customer-modal',
+  templateUrl: './customer-modal.component.html',
+  styleUrls: ['./customer-modal.component.scss']
+})
+export class CustomerModalComponent extends NgUnsubscribe implements OnInit {
+
+  isModalVisible: boolean = false;
+  state: 'login' | 'registration' = 'login';
+  private unlisten: () => void;
+
+  constructor(private renderer: Renderer2,
+              private notyService: NotyService,
+              private customerService: CustomerService) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this.customerService.showLoginModal$
+      .pipe( takeUntil(this.ngUnsubscribe) )
+      .subscribe(() => this.openModal());
+  }
+
+  openModal() {
+    this.isModalVisible = true;
+    this.unlisten = this.renderer.listen('window', 'keyup', event => this.onKeyPress(event));
+  }
+
+  closeModal() {
+    if (this.unlisten) { this.unlisten(); }
+    this.isModalVisible = false;
+  }
+
+  toggleState() {
+    this.state = this.state === 'login' ? 'registration' : 'login';
+  }
+
+  private onKeyPress(event: KeyboardEvent) {
+    switch (event.key) {
+      case 'Escape':
+        this.closeModal();
+        break;
+    }
+  }
+
+  onLogin(customer: CustomerDto) {
+    this.customerService.setCustomer(customer);
+    this.closeModal();
+  }
+
+  onRegister(customer: CustomerDto) {
+    this.notyService.success(`Пожалуйста, подтведите почту - на указанный email было отправлено письмо с инструкцией.`);
+    this.customerService.setCustomer(customer);
+    this.closeModal();
+  }
+}

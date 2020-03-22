@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { CustomerModalModule } from './customer-modal/customer-modal.module';
+import { NotyModule } from './noty/noty.module';
 
 
 @NgModule({
@@ -15,6 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     CommonModule,
+    CustomerModalModule,
+    NotyModule,
     HttpClientModule
   ],
   providers: [],

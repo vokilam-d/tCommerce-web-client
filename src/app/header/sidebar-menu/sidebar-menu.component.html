@@ -19,7 +19,11 @@
 
     <div class="menu__title">Меню:</div>
 
-    <service-menu class="menu__service-menu" [storeReviewsCount]="storeReviewsCount" layout="vertical"></service-menu>
+    <service-menu class="menu__service-menu"
+                  [storeReviewsCount]="storeReviewsCount"
+                  layout="vertical"
+                  (loginModalOpened)="closeMenu()"
+    ></service-menu>
 
     <div class="menu__phones">
       <a class="menu__phone" href="tel:+380502627214">+38 (050) 26-27-214</a>

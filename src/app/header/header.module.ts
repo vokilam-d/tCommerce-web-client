@@ -6,7 +6,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { CatalogMenuComponent } from './catalog-menu/catalog-menu.component';
-import { HeaderSidebarComponent } from './header-sidebar/header-sidebar.component';
+import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 import { ServiceMenuModule } from '../service-menu/service-menu.module';
 import { MiniCartComponent } from './mini-cart/mini-cart.component';
 import { MiniAccountComponent } from './mini-account/mini-account.component';
@@ -16,7 +16,7 @@ import { MiniAccountComponent } from './mini-account/mini-account.component';
     HeaderComponent,
     SearchBarComponent,
     CatalogMenuComponent,
-    HeaderSidebarComponent,
+    SidebarMenuComponent,
     MiniCartComponent,
     MiniAccountComponent
   ],

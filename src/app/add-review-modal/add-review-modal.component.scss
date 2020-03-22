@@ -1,47 +1,5 @@
 @import "variables";
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(#000, 0.5);
-  cursor: pointer;
-  z-index: 1;
-}
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 20px 20px 40px;
-  background: #fff;
-  z-index: 2;
-  overflow: auto;
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &__title {
-    font-size: 22px;
-    font-weight: 500;
-  }
-
-  &__close {
-    font-size: 20px;
-  }
-
-  &__content {
-    margin: 20px 0 0;
-  }
-}
-
-
 .add-review {
   &__control {
     margin: 15px 0 0;

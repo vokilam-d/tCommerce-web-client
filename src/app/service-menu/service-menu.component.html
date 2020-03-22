@@ -7,7 +7,7 @@
   <div class="service-menu__content">
 
     <ng-container *ngIf="layout === 'vertical'">
-      <div class="service-menu__link" (click)="navigateToAccount()">Мой кабинет</div>
+      <a class="service-menu__link" [routerLink]="isLoggedIn ? ['/', 'account'] : ''" (click)="onLoginClick()">Мой кабинет</a>
       <a class="service-menu__link" *ngIf="false" [routerLink]="['/', 'account', 'wishlist']">Мои желания</a>
     </ng-container>
 

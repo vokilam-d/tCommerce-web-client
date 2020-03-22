@@ -74,6 +74,7 @@
             "open": true,
             "port": 4001,
             "aot": false,
+            "disableHostCheck": true,
             "liveReload": true
           },
           "configurations": {

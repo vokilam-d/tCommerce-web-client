@@ -1,0 +1,26 @@
+<div class="modal-overlay" *ngIf="isModalVisible" (click)="closeModal()"></div>
+
+<div class="modal" *ngIf="isModalVisible">
+  <div class="modal__header">
+    <div class="modal__title">
+      <ng-container *ngIf="state === 'login'">Вход</ng-container>
+      <ng-container *ngIf="state === 'registration'">Регистрация</ng-container>
+    </div>
+
+    <button class="modal__close" (click)="closeModal()">
+      <i class="mbi mbi-cross modal__close-icon"></i>
+    </button>
+  </div>
+
+  <div class="modal__content">
+    <login-form *ngIf="state === 'login'"
+                (loggedIn)="onLogin($event)"
+                (switchToRegister)="toggleState()"
+    ></login-form>
+
+    <registration-form *ngIf="state === 'registration'"
+                       (registered)="onRegister($event)"
+                       (switchToLogin)="toggleState()"
+    ></registration-form>
+  </div>
+</div>
