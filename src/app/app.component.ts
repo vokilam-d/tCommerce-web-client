@@ -22,10 +22,12 @@ export class AppComponent implements OnInit {
 
     this.router.events.subscribe(next => {
       if (next instanceof RouteConfigLoadEnd) {
-        this.router.resetConfig(this.router.config.map(route => {
-          delete route['_loadedConfig'];
-          return route;
-        }));
+        if (next.route.data && next.route.data.isDynamicRoute) {
+          this.router.resetConfig(this.router.config.map(route => {
+            delete route['_loadedConfig'];
+            return route;
+          }));
+        }
       }
     });
   }

@@ -7,9 +7,21 @@ import { ResponseDto } from '../../dtos/response.dto';
 })
 export class StoreReviewService {
 
-  constructor(private http: HttpClient) { }
+  storeReviewsCount: number;
 
-  fetchStoreReviewsCount() {
-    return this.http.get<ResponseDto<number>>('http://localhost:3500/api/v1/store-reviews/count')
+  constructor(private http: HttpClient) {
+    this.setReviewsCount();
+  }
+
+  setReviewsCount() {
+    this.http.get<ResponseDto<number>>('http://localhost:3500/api/v1/store-reviews/count')
+      .subscribe(
+        response => {
+          this.storeReviewsCount = response.data;
+        },
+        error => {
+          console.warn(error);
+        }
+      );
   }
 }

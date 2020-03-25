@@ -1,0 +1,104 @@
+@import "variables";
+
+.account {
+  &__confirm-contact {
+    margin: 20px 0 0;
+  }
+
+  &__tabs {
+    margin: 20px 0 0;
+  }
+
+  &__content {
+    margin: 5px 0 0;
+  }
+
+  &__preloader {
+    padding: 50px 0 0;
+  }
+}
+
+.confirm-contact {
+  padding: 17px 20px;
+  background: rgba($primary, 0.2);
+  border: 1px solid rgba($primary, 0.5);
+  border-radius: 5px;
+
+  &--success {
+    background: rgba($success, 0.2);
+    border-color: rgba($success, 0.5);
+  }
+
+  &__title {
+    font-size: 18px;
+  }
+
+  &__text {
+    margin: 10px 0 0;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  &__btn {
+    margin: 15px 0 0;
+    padding: 10px 15px 11px;
+    background: $primary;
+    border-radius: 3px;
+    font-size: 16px;
+  }
+}
+
+.tabs {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    background: linear-gradient(to right, rgba(#fff, 0), rgba(#fff, 0.8) 60%, #fff 100%);
+    pointer-events: none;
+  }
+
+  &__container {
+    position: relative;
+    overflow-x: auto;
+    padding: 0 0 10px;
+  }
+
+  &__inner-container {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 15px 0 0;
+    min-width: 0;
+  }
+
+  &__link {
+    display: block;
+    padding: 11px 14px;
+    background: rgba($dark, 0.05);
+    border: 1px solid rgba($dark, 0.1);
+    border-left-width: 0;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+
+    &--active {
+      background: rgba($primary, 0.4);
+      color: $dark;
+    }
+  }
+
+  &__tab:first-child &__link {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-left-width: 1px;
+  }
+
+  &__tab:last-child &__link {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+}
+

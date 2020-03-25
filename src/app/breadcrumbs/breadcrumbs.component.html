@@ -7,16 +7,18 @@
     </a>
   </li>
 
-  <li class="breadcrumbs__item" *ngFor="let breadcrumb of breadcrumbs, last as last">
-    <a class="breadcrumbs__link"
-       *ngIf="!last; else noLink"
-       [routerLink]="['/', breadcrumb.link]"
-    >
-      {{ breadcrumb.title }}
-    </a>
+  <ng-container *ngFor="let breadcrumb of breadcrumbs, last as last">
+    <li class="breadcrumbs__item" *ngIf="!last || showLastItem">
+      <a class="breadcrumbs__link"
+         *ngIf="!last; else noLink"
+         [routerLink]="['/', breadcrumb.link]"
+      >
+        {{ breadcrumb.title }}
+      </a>
 
-    <ng-template #noLink>
-      {{ breadcrumb.title }}
-    </ng-template>
-  </li>
+      <ng-template #noLink>
+        {{ breadcrumb.title }}
+      </ng-template>
+    </li>
+  </ng-container>
 </ul>

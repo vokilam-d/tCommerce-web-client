@@ -1,0 +1,47 @@
+@import "variables";
+
+.info {
+  &__title {
+    padding: 0 0 8px;
+    border-bottom: 1px solid rgba($dark, 0.1);
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  &__content {
+    margin: 15px 0 0;
+  }
+
+  &__form-message {
+    margin: 0 0 15px;
+    padding: 15px 17px;
+    border-radius: 5px;
+
+    &--success {
+      background: #e6f4ea;
+      border: 1px solid rgba(darken($success, 20%), 0.6);
+    }
+
+    &--error {
+      background: #ffe4e4;
+      border: 1px solid rgba($red, 0.4);
+      color: red;
+    }
+  }
+
+  &__row {
+    font-size: 14px;
+    margin: 15px 0 0;
+  }
+
+  &__btn-container {
+    margin: 15px 0 0;
+  }
+}
+
+.info-form {
+  &__cancel {
+    margin: 25px 0 0;
+    width: 100%;
+  }
+}

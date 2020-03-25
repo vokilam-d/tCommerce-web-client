@@ -12,7 +12,7 @@ import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 export class HeaderComponent implements OnInit {
 
   get categories(): CategoryTreeItem[] { return this.categoryService.categories; }
-  storeReviewsCount: number;
+  get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
   @Input() isCatalogFixed: boolean = false;
   @ViewChild(SidebarMenuComponent) sidebarCmp: SidebarMenuComponent;
@@ -22,22 +22,9 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fetchReviewCount();
   }
 
   openMenu() {
     this.sidebarCmp.openMenu();
-  }
-
-  private fetchReviewCount() {
-    this.storeReviewService.fetchStoreReviewsCount()
-      .subscribe(
-        response => {
-          this.storeReviewsCount = response.data;
-        },
-        error => {
-          console.warn(error);
-        }
-      );
   }
 }

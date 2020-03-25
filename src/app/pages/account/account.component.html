@@ -1,0 +1,59 @@
+<app-header></app-header>
+
+<div class="page container account">
+  <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
+
+  <div class="account__confirm-contact confirm-contact"
+       *ngIf="account && !emailConfirmationSent && !account.isEmailConfirmed"
+  >
+    <h3 class="confirm-contact__title">
+      Ваш email не подтверждён
+    </h3>
+
+    <div class="confirm-contact__text">
+      Пожалуйста, нажмите на кнопку ниже для подтверждения Вашей электронной почты
+    </div>
+
+    <button class="confirm-contact__btn" (click)="sendEmailConfirm()" type="button">Подтвердить email</button>
+  </div>
+
+  <div class="account__confirm-contact confirm-contact confirm-contact--success" *ngIf="emailConfirmationSent">
+    <h3 class="confirm-contact__title">
+      Спасибо!
+    </h3>
+
+    <div class="confirm-contact__text">
+      На ваш email было отправлено письмо с инструкциями для подтверждения электронной почты
+    </div>
+  </div>
+
+  <div class="account__tabs tabs">
+    <div class="tabs__container">
+      <ul class="tabs__inner-container">
+        <li class="tabs__tab" *ngFor="let route of childRoutes">
+          <a class="tabs__link"
+             [routerLink]="route.link"
+             [routerLinkActiveOptions]="{ exact: true }"
+             routerLinkActive="tabs__link--active"
+             #routerLink
+          >
+            {{ route.label }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="account__content" *ngIf="account; else preloaderTmpl">
+    <router-outlet (activate)="onActivate()"></router-outlet>
+  </div>
+
+  <ng-template #preloaderTmpl>
+    <div class="account__preloader">
+      <preloader></preloader>
+    </div>
+  </ng-template>
+
+</div>
+
+<app-footer></app-footer>

@@ -10,4 +10,16 @@
   &--transparent {
     background: transparent;
   }
+
+  &--default {
+    background: rgba($dark, 0.1);
+    border-color: rgba($dark, 0.1);
+    border-radius: 3px;
+  }
+
+  &--small {
+    padding: 7px 13px 8px;
+    font-size: 14px;
+    border-radius: 3px;
+  }
 }
