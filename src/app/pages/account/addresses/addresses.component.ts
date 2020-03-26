@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ShippingAddressDto } from '../../../shared/dtos/shipping-address.dto';
 import { DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { finalize } from 'rxjs/operators';
+import { DetailedCustomerDto } from '../../../shared/dtos/detailed-customer.dto';
 
 @Component({
   selector: 'addresses',
@@ -18,7 +19,7 @@ export class AddressesComponent implements OnInit {
   isLoading: boolean = false;
   formState: 'add' | 'edit' = null;
 
-  get addresses() { return this.customerService.account.addresses; }
+  get addresses() { return (this.customerService.customer as DetailedCustomerDto).addresses; }
 
   constructor(private customerService: CustomerService,
               private formBuilder: FormBuilder) {
@@ -60,7 +61,7 @@ export class AddressesComponent implements OnInit {
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         response => {
-          this.customerService.setAccount(response.data);
+          this.customerService.setCustomer(response.data);
           this.showSuccessMessage(`Адрес успешно добавлен`);
           this.closeForm();
         },
@@ -77,7 +78,7 @@ export class AddressesComponent implements OnInit {
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         response => {
-          this.customerService.setAccount(response.data);
+          this.customerService.setCustomer(response.data);
           this.showSuccessMessage(`Адрес успешно изменён`);
           this.closeForm();
         },

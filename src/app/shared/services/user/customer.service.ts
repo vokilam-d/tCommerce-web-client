@@ -7,7 +7,7 @@ import { ResponseDto } from '../../dtos/response.dto';
 import { LoginDto } from '../../dtos/login.dto';
 import { RegisterDto } from '../../dtos/registration.dto';
 import { ResetPasswordDto } from '../../dtos/reset-password.dto';
-import { AccountDto} from '../../dtos/account.dto';
+import { DetailedCustomerDto} from '../../dtos/detailed-customer.dto';
 import { ShippingAddressDto } from '../../dtos/shipping-address.dto';
 
 @Injectable({
@@ -15,8 +15,7 @@ import { ShippingAddressDto } from '../../dtos/shipping-address.dto';
 })
 export class CustomerService {
 
-  customer: CustomerDto;
-  account: AccountDto;
+  customer: CustomerDto | DetailedCustomerDto;
   private showLoginModalSource$ = new Subject();
   showLoginModal$ = this.showLoginModalSource$.asObservable();
 
@@ -33,21 +32,19 @@ export class CustomerService {
     this.http.get<ResponseDto<CustomerDto>>(`http://localhost:3500/api/v1/customer`)
       .subscribe(
         response => {
-          this.customer = response.data;
+          if (!this.customer) { // fallback if 'fetchCustomerDetails' got response faster
+            this.customer = response.data;
+          }
         }
       );
   }
 
-  setCustomer(customer: CustomerDto) {
+  setCustomer(customer: CustomerDto | DetailedCustomerDto) {
     this.customer = customer;
   }
 
-  setAccount(account: AccountDto) {
-    this.account = account;
-  }
-
-  fetchAccount() {
-    return this.http.get<ResponseDto<AccountDto>>(`http://localhost:3500/api/v1/customer/account`);
+  fetchCustomerDetails() {
+    return this.http.get<ResponseDto<DetailedCustomerDto>>(`http://localhost:3500/api/v1/customer/details`);
   }
 
   showLoginModal() {
@@ -87,10 +84,10 @@ export class CustomerService {
   }
 
   addShippingAddress(dto: ShippingAddressDto) {
-    return this.http.post<ResponseDto<AccountDto>>(`http://localhost:3500/api/v1/customer/address`, dto);
+    return this.http.post<ResponseDto<DetailedCustomerDto>>(`http://localhost:3500/api/v1/customer/address`, dto);
   }
 
   editShippingAddress(addressId: string, dto: ShippingAddressDto) {
-    return this.http.put<ResponseDto<AccountDto>>(`http://localhost:3500/api/v1/customer/address/${addressId}`, dto);
+    return this.http.put<ResponseDto<DetailedCustomerDto>>(`http://localhost:3500/api/v1/customer/address/${addressId}`, dto);
   }
 }

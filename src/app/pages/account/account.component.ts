@@ -9,11 +9,11 @@ import {
   ViewChildren
 } from '@angular/core';
 import { CustomerService } from '../../shared/services/user/customer.service';
-import { AccountDto } from '../../shared/dtos/account.dto';
+import { DetailedCustomerDto } from '../../shared/dtos/detailed-customer.dto';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
-import { takeUntil } from 'rxjs/operators';
+import { finalize, takeUntil } from 'rxjs/operators';
 
 type ChildRoute = { link: string; label: string };
 
@@ -27,11 +27,12 @@ export class AccountComponent extends NgUnsubscribe implements OnInit, OnDestroy
   childRoutes: ChildRoute[];
   breadcrumbs: IBreadcrumb[] = [{ title: 'Контакты' }];
   emailConfirmationSent: boolean;
+  isLoading: boolean;
   private isFirstRouteActivated: boolean = false;
 
   @ViewChildren('routerLink') routerLinksRefs: QueryList<ElementRef>;
 
-  get account(): AccountDto { return this.customerService.account; }
+  get customer(): DetailedCustomerDto { return this.customerService.customer as DetailedCustomerDto; }
 
   constructor(private customerService: CustomerService,
               private route: ActivatedRoute,
@@ -47,15 +48,16 @@ export class AccountComponent extends NgUnsubscribe implements OnInit, OnDestroy
   }
 
   ngOnDestroy(): void {
-    this.customerService.account = null;
     super.ngOnDestroy();
   }
 
   private fetchAccount() {
-    this.customerService.fetchAccount()
+    this.isLoading = true;
+    this.customerService.fetchCustomerDetails()
+      .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         response => {
-          this.customerService.account = response.data;
+          this.customerService.setCustomer(response.data);
         },
         error => {
           if (error.error.statusCode === 401) {

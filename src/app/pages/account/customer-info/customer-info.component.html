@@ -34,16 +34,16 @@
       </div>
     </ng-container>
 
-    <form class="auth-form info-form" *ngIf="infoForm"
+    <form class="form info-form" *ngIf="infoForm"
           [formGroup]="infoForm"
           (ngSubmit)="onInfoFormSubmit()"
           ngNativeValidate
     >
 
-      <div class="auth-form__control">
-        <label for="firstName" class="auth-form__label">Имя</label>
-        <input class="auth-form__input"
-               [class.auth-form__input--invalid]="isControlInvalid(infoForm, 'firstName')"
+      <div class="form__control">
+        <label for="firstName" class="form__label">Имя</label>
+        <input class="form__input"
+               [class.form__input--invalid]="isControlInvalid(infoForm, 'firstName')"
                formControlName="firstName"
                id="firstName"
                type="text"
@@ -51,10 +51,10 @@
         >
       </div>
 
-      <div class="auth-form__control">
-        <label for="lastName" class="auth-form__label">Фамилия</label>
-        <input class="auth-form__input"
-               [class.auth-form__input--invalid]="isControlInvalid(infoForm, 'lastName')"
+      <div class="form__control">
+        <label for="lastName" class="form__label">Фамилия</label>
+        <input class="form__input"
+               [class.form__input--invalid]="isControlInvalid(infoForm, 'lastName')"
                formControlName="lastName"
                id="lastName"
                type="text"
@@ -62,10 +62,10 @@
         >
       </div>
 
-      <div class="auth-form__control">
-        <label for="email" class="auth-form__label">Email</label>
-        <input class="auth-form__input"
-               [class.auth-form__input--invalid]="isControlInvalid(infoForm, 'email')"
+      <div class="form__control">
+        <label for="email" class="form__label">Email</label>
+        <input class="form__input"
+               [class.form__input--invalid]="isControlInvalid(infoForm, 'email')"
                formControlName="email"
                id="email"
                type="email"
@@ -73,26 +73,26 @@
         >
       </div>
 
-      <button class="btn auth-form__submit" [class.auth-form__submit--loading]="isLoading" type="submit">
+      <button class="btn form__submit" [class.form__submit--loading]="isLoading" type="submit">
         Сохранить
 
-        <preloader class="auth-form__submit-preloader" *ngIf="isLoading"></preloader>
+        <preloader class="form__submit-preloader" *ngIf="isLoading"></preloader>
       </button>
 
       <button class="btn btn--default info-form__cancel" (click)="closeForms()" type="button">Отменить</button>
     </form>
 
-    <form class="auth-form info-form"
+    <form class="form info-form"
           *ngIf="passwordForm"
           [formGroup]="passwordForm"
           (ngSubmit)="onPasswordFormSubmit()"
           ngNativeValidate
     >
 
-      <div class="auth-form__control">
-        <label class="auth-form__label" for="currentPassword">Старый пароль</label>
-        <input class="auth-form__input"
-               [class.auth-form__input--invalid]="isControlInvalid(passwordForm, 'currentPassword')"
+      <div class="form__control">
+        <label class="form__label" for="currentPassword">Старый пароль</label>
+        <input class="form__input"
+               [class.form__input--invalid]="isControlInvalid(passwordForm, 'currentPassword')"
                formControlName="currentPassword"
                id="currentPassword"
                type="password"
@@ -100,37 +100,37 @@
         >
       </div>
 
-      <div class="auth-form__control">
-        <label class="auth-form__label" for="newPassword">Новый пароль</label>
-        <input class="auth-form__input"
-               [class.auth-form__input--invalid]="isControlInvalid(passwordForm, 'newPassword')"
+      <div class="form__control">
+        <label class="form__label" for="newPassword">Новый пароль</label>
+        <input class="form__input"
+               [class.form__input--invalid]="isControlInvalid(passwordForm, 'newPassword')"
                formControlName="newPassword"
                id="newPassword"
                type="password"
                required
         >
-        <div class="auth-form__input-error" *ngIf="isControlInvalid(passwordForm, 'newPassword')">
+        <div class="form__input-error" *ngIf="isControlInvalid(passwordForm, 'newPassword')">
           Пароль должен быть не менее 6 символов, состоять из цифр и латинских букв, в том числе заглавных
         </div>
       </div>
 
-      <div class="auth-form__control">
-        <label class="auth-form__label" for="newPasswordConfirm">Повторите новый пароль</label>
-        <input class="auth-form__input"
-               [class.auth-form__input--invalid]="isControlInvalid(passwordForm, 'newPasswordConfirm')"
+      <div class="form__control">
+        <label class="form__label" for="newPasswordConfirm">Повторите новый пароль</label>
+        <input class="form__input"
+               [class.form__input--invalid]="isControlInvalid(passwordForm, 'newPasswordConfirm')"
                formControlName="newPasswordConfirm"
                id="newPasswordConfirm"
                type="password"
         >
-        <div class="auth-form__input-error" *ngIf="isControlInvalid(passwordForm, 'newPasswordConfirm')">
+        <div class="form__input-error" *ngIf="isControlInvalid(passwordForm, 'newPasswordConfirm')">
           Пароли не совпадают
         </div>
       </div>
 
-      <button class="btn auth-form__submit" [class.auth-form__submit--loading]="isLoading" type="submit">
+      <button class="btn form__submit" [class.form__submit--loading]="isLoading" type="submit">
         Сохранить
 
-        <preloader class="auth-form__submit-preloader" *ngIf="isLoading"></preloader>
+        <preloader class="form__submit-preloader" *ngIf="isLoading"></preloader>
       </button>
 
       <button class="btn btn--default info-form__cancel" (click)="closeForms()" type="button">Отменить</button>

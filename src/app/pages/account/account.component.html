@@ -4,7 +4,7 @@
   <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
 
   <div class="account__confirm-contact confirm-contact"
-       *ngIf="account && !emailConfirmationSent && !account.isEmailConfirmed"
+       *ngIf="customer && !emailConfirmationSent && !customer.isEmailConfirmed"
   >
     <h3 class="confirm-contact__title">
       Ваш email не подтверждён
@@ -23,7 +23,7 @@
     </h3>
 
     <div class="confirm-contact__text">
-      На ваш email <b>{{ account.email }}</b> было отправлено письмо с инструкцией для подтверждения электронной почты
+      На ваш email <b>{{ customer.email }}</b> было отправлено письмо с инструкцией для подтверждения электронной почты
     </div>
   </div>
 
@@ -44,7 +44,7 @@
     </div>
   </div>
 
-  <div class="account__content" *ngIf="account; else preloaderTmpl">
+  <div class="account__content" *ngIf="!isLoading; else preloaderTmpl">
     <router-outlet (activate)="onActivate()"></router-outlet>
   </div>
 
