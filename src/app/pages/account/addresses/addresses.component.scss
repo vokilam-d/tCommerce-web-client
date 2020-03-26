@@ -1,0 +1,72 @@
+@import "variables";
+
+.addresses {
+  &__title {
+    margin: 0 0 15px;
+    padding: 0 3px 8px;
+    border-bottom: 1px solid rgba($dark, 0.1);
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  &__item {
+    margin: 15px 0 0;
+    line-height: 1.3;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  &__default {
+    margin: 5px 0 0;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 22px;
+    color: rgba($success, 0.8);
+  }
+
+  &__edit {
+    margin: 3px 0 0;
+    color: $blue;
+    border-bottom: 1px dashed;
+    letter-spacing: 0.2px;
+  }
+
+  &__add {
+    margin: 30px 0 0;
+  }
+
+  &__form-message {
+    margin: 0 0 15px;
+    padding: 15px 17px;
+    border-radius: 5px;
+
+    &--success {
+      background: #e6f4ea;
+      border: 1px solid rgba(darken($success, 20%), 0.6);
+    }
+
+    &--error {
+      background: #ffe4e4;
+      border: 1px solid rgba($red, 0.4);
+      color: red;
+    }
+  }
+}
+
+.is-default {
+  &__input {
+    margin: 0 0 0 4px;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+  }
+}
+
+.address-form {
+  &__cancel {
+    width: 100%;
+    margin: 20px 0 0;
+  }
+}

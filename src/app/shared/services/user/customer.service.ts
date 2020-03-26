@@ -8,16 +8,17 @@ import { LoginDto } from '../../dtos/login.dto';
 import { RegisterDto } from '../../dtos/registration.dto';
 import { ResetPasswordDto } from '../../dtos/reset-password.dto';
 import { AccountDto} from '../../dtos/account.dto';
+import { ShippingAddressDto } from '../../dtos/shipping-address.dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
 
-  private customer: CustomerDto;
+  customer: CustomerDto;
+  account: AccountDto;
   private showLoginModalSource$ = new Subject();
   showLoginModal$ = this.showLoginModalSource$.asObservable();
-  account: AccountDto;
 
   get isLoggedIn(): boolean { return !!this.customer; }
   get customerName(): string { return this.customer ? `${this.customer.firstName} ${this.customer.lastName}` : ''; }
@@ -39,6 +40,10 @@ export class CustomerService {
 
   setCustomer(customer: CustomerDto) {
     this.customer = customer;
+  }
+
+  setAccount(account: AccountDto) {
+    this.account = account;
   }
 
   fetchAccount() {
@@ -79,5 +84,13 @@ export class CustomerService {
 
   updatePassword(dto: UpdatePasswordDto) {
     return this.http.post<ResponseDto<CustomerDto>>(`http://localhost:3500/api/v1/customer/password`, dto);
+  }
+
+  addShippingAddress(dto: ShippingAddressDto) {
+    return this.http.post<ResponseDto<AccountDto>>(`http://localhost:3500/api/v1/customer/address`, dto);
+  }
+
+  editShippingAddress(addressId: string, dto: ShippingAddressDto) {
+    return this.http.put<ResponseDto<AccountDto>>(`http://localhost:3500/api/v1/customer/address/${addressId}`, dto);
   }
 }

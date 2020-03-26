@@ -1,7 +1,7 @@
 <div class="info">
-  <div class="info__title">
+  <h3 class="info__title">
     Контактная информация
-  </div>
+  </h3>
 
   <div class="info__content">
 
@@ -15,14 +15,14 @@
 
     <ng-container *ngIf="!infoForm && !passwordForm">
       <div class="info__row">
-        {{ account.firstName }} {{ account.lastName }}
+        {{ customer.firstName }} {{ customer.lastName }}
       </div>
 
       <div class="info__row">
-        {{ account.email }}
+        {{ customer.email }}
       </div>
 
-      <div class="info__row" *ngIf="account.phoneNumber as phone">
+      <div class="info__row" *ngIf="customer.phoneNumber as phone">
         {{ phone }}
       </div>
 

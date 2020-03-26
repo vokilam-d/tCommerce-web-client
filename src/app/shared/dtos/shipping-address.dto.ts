@@ -1,9 +1,10 @@
 export class ShippingAddressDto {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  city: string;
-  streetName: string;
-  novaposhtaOffice: any;
-  isDefault: boolean;
+  id: string;
+  firstName: string = '';
+  lastName: string = '';
+  phoneNumber: string = '';
+  city: string = '';
+  streetName: string = '';
+  novaposhtaOffice: any = '';
+  isDefault: boolean = false;
 }

@@ -1,1 +1,117 @@
-<p>addresses works!</p>
+<div class="addresses">
+  <h3 class="addresses__title">Адреса доставок</h3>
+
+  <div class="addresses__form-message addresses__form-message--success" *ngIf="formSuccess as successMessage">
+    {{ successMessage }}
+  </div>
+
+  <div class="addresses__form-message addresses__form-message--error" *ngIf="formError as error">
+    {{ error }}
+  </div>
+
+  <ng-container *ngIf="!addressForm">
+    <ul class="addresses__list">
+      <li class="addresses__item" *ngFor="let address of addresses">
+        {{ address.lastName}} {{ address.firstName }}, {{ address.phoneNumber }}, {{ address.city }}<ng-container *ngIf="address.streetName as street">, {{ street }}</ng-container><br>
+
+        <ng-container *ngIf="address.novaposhtaOffice as post">
+          Отделение Новой почты № {{ post }} <br>
+        </ng-container>
+
+        <ng-container *ngIf="address.isDefault">
+          <span class="addresses__default"><i class="mbi mbi-checkmark"></i></span> выбран по умолчанию <br>
+        </ng-container>
+
+        <button class="addresses__edit" (click)="openAddressForm(address)" type="button">Изменить</button>
+      </li>
+    </ul>
+
+    <button class="btn addresses__add" (click)="openAddressForm()" type="button">Добавить новый адрес</button>
+  </ng-container>
+
+  <form class="form address-form" *ngIf="addressForm" [formGroup]="addressForm" ngNativeValidate>
+
+    <div class="form__control">
+      <label class="form__label" for="firstName">Имя</label>
+      <input class="form__input"
+             [class.form__input--invalid]="isControlInvalid('firstName')"
+             formControlName="firstName"
+             id="firstName"
+             type="text"
+             required
+      >
+    </div>
+
+    <div class="form__control">
+      <label class="form__label" for="lastName">Фамилия</label>
+      <input class="form__input"
+             [class.form__input--invalid]="isControlInvalid('lastName')"
+             formControlName="lastName"
+             id="lastName"
+             type="text"
+             required
+      >
+    </div>
+
+    <div class="form__control">
+      <label class="form__label" for="phoneNumber">Номер телефона</label>
+      <input class="form__input"
+             [class.form__input--invalid]="isControlInvalid('phoneNumber')"
+             formControlName="phoneNumber"
+             id="phoneNumber"
+             type="phoneNumber"
+             required
+      >
+    </div>
+
+    <div class="form__control">
+      <label class="form__label" for="city">Город</label>
+      <input class="form__input"
+             [class.form__input--invalid]="isControlInvalid('city')"
+             formControlName="city"
+             id="city"
+             type="text"
+             required
+      >
+    </div>
+
+    <div class="form__control">
+      <label class="form__label" for="streetName">Улица</label>
+      <input class="form__input"
+             [class.form__input--invalid]="isControlInvalid('streetName')"
+             formControlName="streetName"
+             id="streetName"
+             type="text"
+      >
+    </div>
+
+    <div class="form__control">
+      <label class="form__label" for="novaposhtaOffice">Отделение Новой почты</label>
+      <input class="form__input"
+             [class.form__input--invalid]="isControlInvalid('novaposhtaOffice')"
+             formControlName="novaposhtaOffice"
+             id="novaposhtaOffice"
+             type="text"
+      >
+    </div>
+
+    <div class="form__control is-default">
+      <label class="is-default__label" for="isDefault">Установить по умолчанию? </label>
+      <input class="is-default__input"
+             formControlName="isDefault"
+             id="isDefault"
+             type="checkbox"
+      >
+    </div>
+
+    <button class="btn form__submit" [class.form__submit--loading]="isLoading" (click)="submit()" type="submit">
+      Сохранить
+      <preloader class="form__submit-preloader" *ngIf="isLoading"></preloader>
+    </button>
+
+    <button class="btn btn--default address-form__cancel" (click)="closeForm()" type="button">
+      Отменить
+    </button>
+
+  </form>
+</div>

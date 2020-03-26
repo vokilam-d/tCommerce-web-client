@@ -19,7 +19,7 @@ export class CustomerInfoComponent implements OnInit {
   formSuccess: string | null = null;
   isLoading: boolean = false;
 
-  get account() { return this.customerService.account; }
+  get customer() { return this.customerService.customer; }
 
   constructor(private customerService: CustomerService,
               private formBuilder: FormBuilder) {
@@ -30,9 +30,9 @@ export class CustomerInfoComponent implements OnInit {
 
   openInfoForm() {
     const infoControls: Partial<Record<keyof AccountDto, any>> = {
-      firstName: [this.customerService.account.firstName],
-      lastName: [this.customerService.account.lastName],
-      email: [this.customerService.account.email, Validators.pattern(isEmailRegex)]
+      firstName: [this.customerService.customer.firstName],
+      lastName: [this.customerService.customer.lastName],
+      email: [this.customerService.customer.email, Validators.pattern(isEmailRegex)]
     };
 
     this.infoForm = this.formBuilder.group(infoControls);
@@ -42,7 +42,7 @@ export class CustomerInfoComponent implements OnInit {
     this.passwordForm = this.formBuilder.group({
       currentPassword: [''],
       newPassword: ['', Validators.pattern(validPasswordRegex)],
-      newPasswordConfirm: ['', Validators.pattern(validPasswordRegex)],
+      newPasswordConfirm: [''],
     });
 
     const confirmValidator = CustomValidators.passwordConfirm(this.passwordForm.get('newPassword'));
@@ -107,8 +107,7 @@ export class CustomerInfoComponent implements OnInit {
           this.closeForms();
         },
         error => {
-          this.formError = error.error ? error.error.message : DEFAULT_ERROR_TEXT;
-          console.warn(error);
+          this.showErrorMessage(error);
         }
       );
   }
@@ -123,9 +122,7 @@ export class CustomerInfoComponent implements OnInit {
           this.closeForms();
         },
         error => {
-          this.formError = error.error ? error.error.message : DEFAULT_ERROR_TEXT;
-          console.log(this.formError);
-          console.warn(error);
+          this.showErrorMessage(error);
         }
       );
   }
@@ -133,5 +130,10 @@ export class CustomerInfoComponent implements OnInit {
   private showSuccessMessage(msg: string) {
     this.formSuccess = msg;
     setTimeout(() => this.formSuccess = null, 5000);
+  }
+
+  private showErrorMessage(error: any) {
+    this.formError = error.error ? error.error.message : DEFAULT_ERROR_TEXT;
+    console.warn(error);
   }
 }
