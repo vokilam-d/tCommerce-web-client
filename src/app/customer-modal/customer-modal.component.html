@@ -14,12 +14,12 @@
 
   <div class="modal__content">
     <login-form *ngIf="state === 'login'"
-                (loggedIn)="onLogin($event)"
+                (loggedIn)="onLogin()"
                 (switchToRegister)="toggleState()"
     ></login-form>
 
     <registration-form *ngIf="state === 'registration'"
-                       (registered)="onRegister($event)"
+                       (registered)="onRegister()"
                        (switchToLogin)="toggleState()"
     ></registration-form>
   </div>

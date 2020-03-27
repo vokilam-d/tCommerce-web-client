@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { CustomerModalModule } from './customer-modal/customer-modal.module';
 import { NotyModule } from './noty/noty.module';
+import { CartModalModule } from './cart-modal/cart-modal.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { NotyModule } from './noty/noty.module';
     CommonModule,
     CustomerModalModule,
     NotyModule,
-    HttpClientModule
+    HttpClientModule,
+    CartModalModule
   ],
   providers: [],
   bootstrap: [AppComponent]

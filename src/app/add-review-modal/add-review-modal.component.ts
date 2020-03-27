@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { CustomerService } from '../shared/services/user/customer.service';
+import { CustomerService } from '../shared/services/customer/customer.service';
 import { HttpClient } from '@angular/common/http';
 import { INPUT_MEDIA_ACCEPT_TYPES } from '../shared/constants';
 import { MediaDto } from '../shared/dtos/media.dto';
@@ -25,7 +25,7 @@ export interface IAddReviewFormValue {
   templateUrl: './add-review-modal.component.html',
   styleUrls: ['./add-review-modal.component.scss']
 })
-export class AddReviewModalComponent implements OnInit {
+export class AddReviewModalComponent implements OnInit, OnDestroy {
 
   isModalVisible: boolean = false;
   form: FormGroup;
@@ -47,6 +47,10 @@ export class AddReviewModalComponent implements OnInit {
     }
 
     this.buildForm();
+  }
+
+  ngOnDestroy(): void {
+    if (this.unlisten) { this.unlisten(); }
   }
 
   openModal() {

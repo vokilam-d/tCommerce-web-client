@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { DetailedCustomerDto } from '../../../shared/dtos/detailed-customer.dto';
 import { DEFAULT_ERROR_TEXT, isEmailRegex, validPasswordRegex } from '../../../shared/constants';
 import { CustomValidators } from '../../../shared/classes/validators';
-import { CustomerService } from '../../../shared/services/user/customer.service';
+import { CustomerService } from '../../../shared/services/customer/customer.service';
 import { UpdateCustomerDto } from '../../../shared/dtos/customer.dto';
 
 @Component({
@@ -101,8 +101,7 @@ export class CustomerInfoComponent implements OnInit {
     const dto: UpdateCustomerDto = this.infoForm.value;
     this.customerService.updateCustomer(dto)
       .subscribe(
-        response => {
-          this.customerService.setCustomer(response.data);
+        _ => {
           this.showSuccessMessage('Ваши данные успешно изменены');
           this.closeForms();
         },

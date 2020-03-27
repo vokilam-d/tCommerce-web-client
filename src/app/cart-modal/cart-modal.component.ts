@@ -2,28 +2,24 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { CustomerService } from '../shared/services/customer/customer.service';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
 import { takeUntil } from 'rxjs/operators';
-import { CustomerDto } from '../shared/dtos/customer.dto';
-import { NotyService } from '../noty/noty.service';
 
 @Component({
-  selector: 'customer-modal',
-  templateUrl: './customer-modal.component.html',
-  styleUrls: ['./customer-modal.component.scss']
+  selector: 'cart-modal',
+  templateUrl: './cart-modal.component.html',
+  styleUrls: ['./cart-modal.component.scss']
 })
-export class CustomerModalComponent extends NgUnsubscribe implements OnInit {
+export class CartModalComponent extends NgUnsubscribe implements OnInit {
 
   isModalVisible: boolean = false;
-  state: 'login' | 'registration' = 'login';
   private unlisten: () => void;
 
-  constructor(private renderer: Renderer2,
-              private notyService: NotyService,
-              private customerService: CustomerService) {
+  constructor(private customerService: CustomerService,
+              private renderer: Renderer2) {
     super();
   }
 
   ngOnInit(): void {
-    this.customerService.showLoginModal$
+    this.customerService.showCartModal$
       .pipe( takeUntil(this.ngUnsubscribe) )
       .subscribe(() => this.openModal());
   }
@@ -33,7 +29,7 @@ export class CustomerModalComponent extends NgUnsubscribe implements OnInit {
     super.ngOnDestroy();
   }
 
-  openModal() {
+  private openModal() {
     this.isModalVisible = true;
     this.unlisten = this.renderer.listen('window', 'keyup', event => this.onKeyPress(event));
   }
@@ -43,24 +39,11 @@ export class CustomerModalComponent extends NgUnsubscribe implements OnInit {
     this.isModalVisible = false;
   }
 
-  toggleState() {
-    this.state = this.state === 'login' ? 'registration' : 'login';
-  }
-
   private onKeyPress(event: KeyboardEvent) {
     switch (event.key) {
       case 'Escape':
         this.closeModal();
         break;
     }
-  }
-
-  onLogin() {
-    this.closeModal();
-  }
-
-  onRegister() {
-    this.notyService.success(`Пожалуйста, подтведите почту - на указанный email было отправлено письмо с инструкцией.`);
-    this.closeModal();
   }
 }

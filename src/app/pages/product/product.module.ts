@@ -9,21 +9,22 @@ import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { RatingStarsModule } from '../../rating-stars/rating-stars.module';
 import { ProductGalleryComponent } from './product-gallery/product-gallery.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AddReviewModalModule } from '../../add-review-modal/add-review-modal.module';
 import { ReviewGalleryModule } from '../../review-gallery/review-gallery.module';
 import { MediaGalleryModalModule } from '../../media-gallery-modal/media-gallery-modal.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,
+    SharedModule,
     HeaderModule,
     FooterModule,
     BreadcrumbsModule,
     RatingStarsModule,
-    ReactiveFormsModule,
     FormsModule,
     AddReviewModalModule,
     MediaGalleryModalModule,

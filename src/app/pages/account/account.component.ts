@@ -8,7 +8,7 @@ import {
   Renderer2,
   ViewChildren
 } from '@angular/core';
-import { CustomerService } from '../../shared/services/user/customer.service';
+import { CustomerService } from '../../shared/services/customer/customer.service';
 import { DetailedCustomerDto } from '../../shared/dtos/detailed-customer.dto';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';

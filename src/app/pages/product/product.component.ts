@@ -6,9 +6,12 @@ import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { FormControl } from '@angular/forms';
 import { HeadService, IOgTags } from '../../shared/services/head/head.service';
-import { CartService } from '../../shared/services/cart/cart.service';
 import { WishlistService } from '../../shared/services/wishlist/wishlist.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CustomerService } from '../../shared/services/customer/customer.service';
+import { finalize } from 'rxjs/operators';
+import { FlyToCartDirective } from '../../shared/directives/fly-to-cart.directive';
+import { QuantityControlComponent } from '../../shared/quantity-control/quantity-control.component';
 
 @Component({
   selector: 'product',
@@ -19,15 +22,17 @@ export class ProductComponent implements OnInit {
 
   product: ProductDto;
   breadcrumbs: IBreadcrumb[] = [];
-  qtyControl: FormControl = new FormControl(1);
+  isLoading: boolean = false;
 
   @ViewChild(ProductDetailsComponent) detailsCmp: ProductDetailsComponent;
+  @ViewChild(FlyToCartDirective) flyToCart: FlyToCartDirective;
+  @ViewChild(QuantityControlComponent) qtyCmp: QuantityControlComponent;
 
   constructor(private route: ActivatedRoute,
               private headService: HeadService,
+              private customerService: CustomerService,
               private sanitizer: DomSanitizer,
               private wishlistService: WishlistService,
-              private cartService: CartService,
               private productService: ProductService) {
   }
 
@@ -62,18 +67,6 @@ export class ProductComponent implements OnInit {
     this.detailsCmp.openReviewsTab();
   }
 
-  incrementQty() {
-    let qty = this.qtyControl.value;
-    this.qtyControl.setValue(++qty);
-  }
-
-  decrementQty() {
-    let qty = this.qtyControl.value;
-    if (qty <= 1) { return; }
-
-    this.qtyControl.setValue(--qty);
-  }
-
   private setMeta() {
     const ogTags: IOgTags = {
       type: 'product',
@@ -89,7 +82,14 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart() {
-    this.cartService.addToCart(this.product, this.qtyControl.value);
+    this.flyToCart.start();
+
+    const qty = this.qtyCmp.getValue();
+    this.isLoading = true;
+
+    this.customerService.addToCart(this.product, qty)
+      .pipe( finalize(() => this.isLoading = false) )
+      .subscribe();
   }
 
   addToWishlist() {

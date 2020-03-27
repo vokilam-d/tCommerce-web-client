@@ -1,3 +1,5 @@
-<div class="toolbar-item" (click)="openCart()">
+<div class="toolbar-item cart" (click)="openCart()">
   <i class="toolbar-item__icon mbi mbi-cart"></i>
+
+  <div class="cart__items-count" *ngIf="items?.length as count">{{ count }}</div>
 </div>

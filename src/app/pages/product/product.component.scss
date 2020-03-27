@@ -85,12 +85,26 @@
   }
 
   &__buy {
+    position: relative;
     display: flex;
     align-items: center;
     padding: 13px 50px 14px;
     font-size: 20px;
     border-radius: 3px;
+
+    &--loading {
+      color: transparent;
+      opacity: 0.8;
+    }
   }
+
+  &__preloader {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(calc(-50% + 5px));
+  }
+
 
   &__buy-icon {
     margin: 0 10px 0 0;
@@ -118,47 +132,5 @@
 
   &__category {
     color: $blue;
-  }
-}
-
-
-.qty {
-  position: relative;
-  display: inline-block;
-  border: 1px solid #d9d9d9;
-
-  &__control {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &--inc {
-      right: 0;
-    }
-
-    &--dec {
-      left: 0;
-    }
-  }
-
-  &__control-icon {
-    font-size: 12px;
-  }
-
-  &__input {
-    width: 120px;
-    height: 52px;
-    padding: 0 40px;
-    text-align: center;
-
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
   }
 }

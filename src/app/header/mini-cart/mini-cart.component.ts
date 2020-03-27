@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomerService } from '../../shared/services/customer/customer.service';
 
 @Component({
   selector: 'mini-cart',
@@ -7,12 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MiniCartComponent implements OnInit {
 
-  constructor() { }
+  get items() { return this.customerService.cart; }
+
+  constructor(private customerService: CustomerService) { }
 
   ngOnInit(): void {
   }
 
   openCart() {
-    console.log('openCart');
+    this.customerService.showCartModal();
   }
 }

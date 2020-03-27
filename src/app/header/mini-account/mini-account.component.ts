@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from '../../shared/services/user/customer.service';
+import { CustomerService } from '../../shared/services/customer/customer.service';
 
 @Component({
   selector: 'mini-account',

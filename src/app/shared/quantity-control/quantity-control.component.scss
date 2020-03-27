@@ -1,0 +1,48 @@
+@import "variables";
+
+.qty {
+  position: relative;
+  display: inline-block;
+  border: 1px solid rgba($dark, 0.15);
+  transition: border-color 0.15s ease;
+
+  &:focus-within {
+    border-color: rgba($dark, 0.3);
+  }
+
+  &__control {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--inc {
+      right: 0;
+    }
+
+    &--dec {
+      left: 0;
+    }
+  }
+
+  &__control-icon {
+    font-size: 12px;
+  }
+
+  &__input {
+    width: 140px;
+    height: 52px;
+    padding: 0 40px;
+    text-align: center;
+    font-size: 16px;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}

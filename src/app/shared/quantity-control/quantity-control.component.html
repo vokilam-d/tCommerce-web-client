@@ -1,0 +1,11 @@
+<div class="qty">
+  <span class="qty__control qty__control--dec" (click)="decrementQty()">
+    <i class="mbi mbi-minus qty__control-icon"></i>
+  </span>
+
+  <input class="qty__input" [formControl]="qtyControl" type="number" min="1">
+
+  <span class="qty__control qty__control--inc" (click)="incrementQty()">
+    <i class="mbi mbi-plus qty__control-icon"></i>
+  </span>
+</div>

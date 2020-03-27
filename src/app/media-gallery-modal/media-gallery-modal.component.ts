@@ -20,6 +20,7 @@ export class MediaGalleryModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.unlisten) { this.unlisten(); }
   }
 
   openModal(activeMediaIdx: number = 0) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from '../../../shared/services/user/customer.service';
+import { CustomerService } from '../../../shared/services/customer/customer.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ShippingAddressDto } from '../../../shared/dtos/shipping-address.dto';
 import { DEFAULT_ERROR_TEXT } from '../../../shared/constants';
@@ -60,8 +60,7 @@ export class AddressesComponent implements OnInit {
     this.customerService.addShippingAddress(dto)
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
-        response => {
-          this.customerService.setCustomer(response.data);
+        _ => {
           this.showSuccessMessage(`Адрес успешно добавлен`);
           this.closeForm();
         },
@@ -77,8 +76,7 @@ export class AddressesComponent implements OnInit {
     this.customerService.editShippingAddress(dto.id, dto)
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
-        response => {
-          this.customerService.setCustomer(response.data);
+        _ => {
           this.showSuccessMessage(`Адрес успешно изменён`);
           this.closeForm();
         },
