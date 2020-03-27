@@ -73,7 +73,7 @@
             "browserTarget": "web-client:build",
             "open": true,
             "port": 4001,
-            "aot": false,
+            "aot": true,
             "disableHostCheck": true,
             "liveReload": true
           },
