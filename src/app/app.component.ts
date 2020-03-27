@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RouteConfigLoadEnd, Router } from '@angular/router';
 import { SafeHtml } from '@angular/platform-browser';
 import { JsonLdService } from './shared/services/json-ld/json-ld.service';
 
@@ -13,21 +12,11 @@ export class AppComponent implements OnInit {
   localBusinessJsonLd: SafeHtml;
   webSiteJsonLd: SafeHtml;
 
-  constructor(private router: Router,
-              private jsonLdService: JsonLdService) {
+  constructor(private jsonLdService: JsonLdService) {
   }
 
   ngOnInit() {
     this.setJsonLd();
-
-    this.router.events.subscribe(next => {
-      if (next instanceof RouteConfigLoadEnd && next.route.data && next.route.data.isDynamicRoute) {
-        this.router.resetConfig(this.router.config.map(route => {
-          delete route['_loadedConfig'];
-          return route;
-        }));
-      }
-    });
   }
 
   private setJsonLd() {

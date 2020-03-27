@@ -1,5 +1,14 @@
 import { NgModule } from '@angular/core';
-import { Route, RouterModule, Routes, UrlMatchResult, UrlSegment, UrlSegmentGroup } from '@angular/router';
+import {
+  Route,
+  RouteConfigLoadEnd,
+  Router,
+  RouterModule,
+  Routes,
+  UrlMatchResult,
+  UrlSegment,
+  UrlSegmentGroup
+} from '@angular/router';
 import { dynamicModuleResolver } from './functions/dynamic-module-resolver.function';
 
 
@@ -16,6 +25,10 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login-page.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'checkout',
+    loadChildren: () => import('./pages/checkout/checkout.module').then(m => m.CheckoutModule)
   },
   {
     matcher: (segments: UrlSegment[], group: UrlSegmentGroup, route: Route): UrlMatchResult => {
@@ -39,4 +52,19 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {
+
+  constructor(private router: Router) {
+    this.handleRouteConfigReset();
+  }
+
+  private handleRouteConfigReset() {
+    this.router.events.subscribe(next => {
+      if (next instanceof RouteConfigLoadEnd && next.route.data && next.route.data.isDynamicRoute) {
+        this.router.resetConfig(this.router.config.map(route => {
+          delete route['_loadedConfig'];
+          return route;
+        }));
+      }
+    });
+  }
 }

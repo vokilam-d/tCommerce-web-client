@@ -13,7 +13,7 @@ export function dynamicModuleResolver(slug: string = 'not-found') {
         return import(`../pages/${pageType}/${pageType}.module`)
           .then(importedModule => {
             const keys = Object.keys(importedModule);
-            const ngModule =  importedModule[keys[0]];
+            const ngModule = importedModule[keys[0]];
 
             MODULES_CACHE[slug] = ngModule;
             return ngModule;
