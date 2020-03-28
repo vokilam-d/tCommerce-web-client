@@ -6,7 +6,7 @@ import { AccountComponent } from './account.component';
 import { HeaderModule } from '../../header/header.module';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { FooterModule } from '../../footer/footer.module';
-import { CustomerInfoComponent } from './customer-info/customer-info.component';
+import { AccountCustomerInfoComponent } from './customer-info/account-customer-info.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { AddressesComponent } from './addresses/addresses.component';
 import { AccountReviewsComponent } from './account-reviews/account-reviews.component';
@@ -19,7 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AccountComponent,
-    CustomerInfoComponent,
+    AccountCustomerInfoComponent,
     WishlistComponent,
     AddressesComponent,
     AccountReviewsComponent,

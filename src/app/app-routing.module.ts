@@ -31,6 +31,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/checkout/checkout.module').then(m => m.CheckoutModule)
   },
   {
+    path: 'order-success',
+    loadChildren: () => import('./pages/order-success/order-success.module').then(m => m.OrderSuccessModule)
+  },
+  {
     matcher: (segments: UrlSegment[], group: UrlSegmentGroup, route: Route): UrlMatchResult => {
       const path = segments.map(s => s.path).join('/');
       route.loadChildren = dynamicModuleResolver(path);

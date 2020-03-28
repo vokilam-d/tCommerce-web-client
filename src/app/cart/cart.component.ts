@@ -3,6 +3,7 @@ import { CustomerService } from '../shared/services/customer/customer.service';
 import { QuantityControlComponent } from '../shared/quantity-control/quantity-control.component';
 import { OrderItemDto } from '../shared/dtos/order-item.dto';
 import { finalize } from 'rxjs/operators';
+import { DEFAULT_ERROR_TEXT } from '../shared/constants';
 
 @Component({
   selector: 'cart',
@@ -12,6 +13,8 @@ import { finalize } from 'rxjs/operators';
 export class CartComponent implements OnInit {
 
   isLoading: boolean = false;
+  cartError: string | null = null;
+  private cartErrorTimeout: number | undefined;
 
   @Output('checkout') checkoutEmitter = new EventEmitter();
   @ViewChild(QuantityControlComponent) qtyCmp: QuantityControlComponent;
@@ -26,22 +29,38 @@ export class CartComponent implements OnInit {
   }
 
   onQtyChange(item: OrderItemDto, qty: number) {
+    this.resetCartError();
     this.isLoading = true;
     this.customerService.updateQtyInCart(item, qty)
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         response => { },
         error => {
-          this.qtyCmp.setValue(1, false);
+          this.qtyCmp.setValue(item.qty, false);
+          this.setCartError(error);
         }
       );
   }
 
   deleteFromCart(item: OrderItemDto) {
     this.customerService.deleteFromCart(item);
+    this.resetCartError();
   }
 
   checkout() {
     this.checkoutEmitter.emit();
+    this.resetCartError();
+  }
+
+  private setCartError(error) {
+    clearTimeout(this.cartErrorTimeout);
+
+    this.cartError = error.error ? error.error.message : DEFAULT_ERROR_TEXT;
+    this.cartErrorTimeout = setTimeout(() => this.resetCartError(), 10000);
+  }
+
+  private resetCartError() {
+    this.cartError = null;
+    clearTimeout(this.cartErrorTimeout);
   }
 }

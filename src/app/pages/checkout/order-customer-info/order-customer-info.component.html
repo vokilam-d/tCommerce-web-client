@@ -1,0 +1,112 @@
+<form class="checkout-form" [formGroup]="form" *ngIf="!isLoggedIn" #formRef>
+
+  <div class="checkout-control">
+    <label class="checkout-control__label" for="email">Адрес электронной почты</label>
+
+    <input class="checkout-control__input"
+           [formControl]="emailControl"
+           [class.checkout-control__input--invalid]="isEmailInvalid()"
+           id="email"
+           type="text"
+    >
+
+    <div class="checkout-control__error" *ngIf="isEmailInvalid()">
+      Некорректный адрес электронной почты
+    </div>
+  </div>
+
+  <div class="checkout-control">
+    <label class="checkout-control__label" for="firstName">Имя</label>
+
+    <input class="checkout-control__input"
+           [class.checkout-control__input--invalid]="isControlInvalid('firstName')"
+           formControlName="firstName"
+           id="firstName"
+           type="text"
+           required
+    >
+
+    <div class="checkout-control__error" *ngIf="isControlInvalid('firstName')">
+      Это обязательное поле
+    </div>
+  </div>
+
+  <div class="checkout-control">
+    <label class="checkout-control__label" for="lastName">Фамилия</label>
+
+    <input class="checkout-control__input"
+           [class.checkout-control__input--invalid]="isControlInvalid('lastName')"
+           formControlName="lastName"
+           id="lastName"
+           type="text"
+           required
+    >
+
+    <div class="checkout-control__error" *ngIf="isControlInvalid('lastName')">
+      Это обязательное поле
+    </div>
+  </div>
+
+  <div class="checkout-control">
+    <label class="checkout-control__label" for="phoneNumber">Номер телефона</label>
+
+    <input class="checkout-control__input"
+           [class.checkout-control__input--invalid]="isControlInvalid('phoneNumber')"
+           formControlName="phoneNumber"
+           id="phoneNumber"
+           type="tel"
+           required
+    >
+
+    <div class="checkout-control__error" *ngIf="isControlInvalid('phoneNumber')">
+      Это обязательное поле
+    </div>
+  </div>
+
+  <div class="checkout-control">
+    <label class="checkout-control__label" for="city">Город, область</label>
+
+    <input class="checkout-control__input"
+           [class.checkout-control__input--invalid]="isControlInvalid('city')"
+           formControlName="city"
+           id="city"
+           type="text"
+           required
+    >
+
+    <div class="checkout-control__error" *ngIf="isControlInvalid('city')">
+      Это обязательное поле
+    </div>
+  </div>
+
+  <div class="checkout-control" *ngIf="isShippingMethod('address')">
+    <label class="checkout-control__label" for="streetName">Адрес доставки, улица, дом</label>
+
+    <input class="checkout-control__input"
+           [class.checkout-control__input--invalid]="isControlInvalid('streetName')"
+           formControlName="streetName"
+           id="streetName"
+           type="text"
+    >
+
+    <div class="checkout-control__error" *ngIf="isControlInvalid('streetName')">
+      Это обязательное поле
+    </div>
+  </div>
+
+  <div class="checkout-control" *ngIf="isShippingMethod('post')">
+    <label class="checkout-control__label" for="novaposhtaOffice">Номер отделения Новой Почты</label>
+
+    <input class="checkout-control__input post-office-input"
+           [class.checkout-control__input--invalid]="isControlInvalid('novaposhtaOffice')"
+           formControlName="novaposhtaOffice"
+           id="novaposhtaOffice"
+           type="number"
+    >
+
+    <div class="checkout-control__error" *ngIf="isControlInvalid('novaposhtaOffice')">
+      Это обязательное поле
+    </div>
+  </div>
+
+</form>

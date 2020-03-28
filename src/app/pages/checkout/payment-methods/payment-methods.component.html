@@ -1,0 +1,29 @@
+<div class="checkout-block__title">Способы оплаты</div>
+
+<div class="checkout-block__content">
+
+  <div class="checkout-block__preloader" *ngIf="isLoading">
+    <preloader></preloader>
+  </div>
+
+  <div class="checkout-block__error" *ngIf="error; else noErrorTmpl" (click)="fetchMethods()">
+    При загрузке способов оплаты произошла ошибка<br>
+    Пожалуйста, нажмите сюда, чтобы попробовать ещё раз
+  </div>
+
+  <ng-template #noErrorTmpl>
+    <label class="checkout-control checkout-control--radio" *ngFor="let method of methods">
+      <input class="checkout-control__radio-input"
+             [value]="method.id"
+             [formControl]="methodControl"
+             name="payment-method"
+             type="radio"
+      >
+
+      <i class="mbi mbi-checkmark-outline checkout-control__radio-icon checkout-control__radio-icon-selected"></i>
+      <i class="mbi mbi-circle-outline checkout-control__radio-icon checkout-control__radio-icon-not-selected"></i>
+
+      {{ method.name }}
+    </label>
+  </ng-template>
+</div>

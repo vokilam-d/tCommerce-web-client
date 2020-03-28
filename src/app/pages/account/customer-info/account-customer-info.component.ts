@@ -7,11 +7,11 @@ import { CustomerService } from '../../../shared/services/customer/customer.serv
 import { UpdateCustomerDto } from '../../../shared/dtos/customer.dto';
 
 @Component({
-  selector: 'customer-info',
-  templateUrl: './customer-info.component.html',
-  styleUrls: ['./customer-info.component.scss']
+  selector: 'account-customer-info',
+  templateUrl: './account-customer-info.component.html',
+  styleUrls: ['./account-customer-info.component.scss']
 })
-export class CustomerInfoComponent implements OnInit {
+export class AccountCustomerInfoComponent implements OnInit {
 
   infoForm: FormGroup;
   passwordForm: FormGroup;

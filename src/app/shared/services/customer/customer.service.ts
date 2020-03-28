@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { CustomerDto, UpdateCustomerDto, UpdatePasswordDto } from '../../dtos/customer.dto';
 import { HttpClient } from '@angular/common/http';
@@ -9,7 +9,7 @@ import { RegisterDto } from '../../dtos/registration.dto';
 import { ResetPasswordDto } from '../../dtos/reset-password.dto';
 import { DetailedCustomerDto } from '../../dtos/detailed-customer.dto';
 import { ShippingAddressDto } from '../../dtos/shipping-address.dto';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { CreateOrUpdateOrderItemDto, OrderItemDto } from '../../dtos/order-item.dto';
 import { ProductDto } from '../../dtos/product.dto';
 
@@ -20,15 +20,16 @@ export class CustomerService {
 
   private _customer: CustomerDto | DetailedCustomerDto;
   private _cart: OrderItemDto[];
-  private isFirstCustomerSet: boolean = false;
-  private showLoginModalSource = new Subject();
-  private showCartModalSource = new Subject<string>();
-  showLoginModal$ = this.showLoginModalSource.asObservable();
-  showCartModal$ = this.showCartModalSource.asObservable();
+  private _showLoginModal$ = new Subject();
+  private _showCartModal$ = new Subject<string>();
+  showLoginModal$ = this._showLoginModal$.asObservable();
+  showCartModal$ = this._showCartModal$.asObservable();
+  cartInit$ = new BehaviorSubject(false);
+
 
   get customer() { return this._customer; }
   get cart() { return this._cart; }
-  get cartTotalCost() { return this._cart.reduce((acc, item) => acc + item.totalCost, 0); }
+  get cartTotalCost() { return this._cart && this._cart.reduce((acc, item) => acc + item.totalCost, 0); }
   get isLoggedIn(): boolean { return !!this.customer; }
   get customerName(): string { return this.customer ? `${this.customer.firstName} ${this.customer.lastName}` : ''; }
   get customerEmail(): string { return this.customer ? this.customer.email : ''; }
@@ -52,10 +53,7 @@ export class CustomerService {
   setCustomer(customer: CustomerDto | DetailedCustomerDto) {
     this._customer = customer;
 
-    if (!this.isFirstCustomerSet) {
-      this.isFirstCustomerSet = true;
-      this.initCart();
-    }
+    this.initCart();
   }
 
   fetchCustomerDetails() {
@@ -63,11 +61,11 @@ export class CustomerService {
   }
 
   showLoginModal() {
-    this.showLoginModalSource.next();
+    this._showLoginModal$.next();
   }
 
   showCartModal() {
-    this.showCartModalSource.next();
+    this._showCartModal$.next();
   }
 
   login(loginDto: LoginDto) {
@@ -126,11 +124,11 @@ export class CustomerService {
   }
 
   private initCart() {
-    if (this.customer) {
-      this._cart = this.customer.cart || [];
-    } else {
-      this._cart = JSON.parse(localStorage.getItem('cart')) || [];
-    }
+    if (this.cartInit$.getValue()) { return; }
+
+    const savedCart = this.customer ? this.customer.cart : JSON.parse(localStorage.getItem('cart'));
+    this._cart = savedCart || [];
+    this.cartInit$.next(true);
   }
 
   addToCart(product: ProductDto, qty: number) {
@@ -142,7 +140,7 @@ export class CustomerService {
       .pipe(
         tap(response => {
           this.saveToCart(response.data);
-          this.showCartModalSource.next();
+          this._showCartModal$.next();
         })
       );
   }
@@ -184,14 +182,26 @@ export class CustomerService {
       };
     }
 
-    console.log(this._cart);
-
     this.saveCartToStorage();
   }
 
   private saveCartToStorage() {
-    if (!this.customer) {
+    if (this.customer) {
+      localStorage.removeItem('cart');
+    } else {
       localStorage.setItem('cart', JSON.stringify(this.cart));
     }
+  }
+
+  resetCart() {
+    this._cart = null;
+    localStorage.removeItem('cart');
+  }
+
+  isEmailAvailable(email: string): Observable<boolean> {
+    const encoded = encodeURIComponent(email);
+
+    return this.http.get<ResponseDto<boolean>>(`http://localhost:3500/api/v1/customer/is-email-available/${encoded}`)
+      .pipe( map(response => response.data) );
   }
 }

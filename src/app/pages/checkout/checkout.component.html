@@ -1,1 +1,84 @@
-<p>checkout works!</p>
+<div class="container">
+  <header class="header">
+    <a class="header__logo" routerLink="/">
+      <img class="header__logo-img" src="../../assets/images/logo.png" alt="Klondike">
+    </a>
+
+    <h1 class="header__title">
+      Оформление заказа
+    </h1>
+  </header>
+
+  <div class="subheader">
+    <div class="subheader__subtitle">
+      Пожалуйста, введите свои данные ниже, чтобы завершить покупку
+    </div>
+
+    <div class="subheader__login-container" *ngIf="!isLoggedIn">
+      <button class="btn btn--small btn--transparent subheader__login" (click)="login()">
+        <i class="mbi mbi-user subheader__login-icon"></i>
+        Войти в личный кабинет
+      </button>
+
+      <div class="subheader__login-text">
+        Или вы можете создать учетную запись после оформления заказа
+      </div>
+    </div>
+  </div>
+
+  <div class="checkout">
+    <main class="checkout__form">
+      <order-customer-info class="checkout__block"></order-customer-info>
+
+      <shipping-methods class="checkout__block"></shipping-methods>
+
+      <payment-methods class="checkout__block"></payment-methods>
+
+      <callback-needed class="checkout__block"></callback-needed>
+
+      <order-note class="checkout__block"></order-note>
+    </main>
+
+    <aside class="checkout__info">
+      <div class="checkout__cart">
+
+        <div class="cart-item" *ngFor="let item of cart">
+          <img class="cart-item__img" [src]="'http://localhost:3500/' + item.imageUrl" alt="">
+
+          <div class="cart-item__info">
+            <a class="cart-item__name" [routerLink]="['/', item.slug]" target="_blank">
+              {{ item.name }}
+            </a>
+
+            <div class="cart-item__qty-price">
+              <div class="cart-item__qty">
+                {{ item.qty }} шт.
+              </div>
+
+              <div class="cart-item__price">
+                {{ item.totalCost }} грн
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="checkout__edit">
+        <button class="checkout__edit-btn" (click)="editCart()" type="button">Редактировать заказ</button>
+      </div>
+
+      <div class="checkout__total">
+        <span>Итого</span> <span class="checkout__total-price">{{ cartTotalCost }} грн</span>
+      </div>
+
+      <button class="btn checkout__submit" (click)="placeOrder()" type="button">Оформить заказ</button>
+    </aside>
+  </div>
+
+  <div class="footer">
+    2015-2020 Интернет-магазин "Клондайк" - товары для творчества
+  </div>
+
+</div>
+

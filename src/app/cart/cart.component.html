@@ -18,6 +18,10 @@
 
     </div>
 
+    <div class="cart__error" *ngIf="cartError as error">
+      {{ error }}
+    </div>
+
     <div class="cart__items" [class.cart__items--loading]="isLoading">
 
       <div class="item" *ngFor="let item of items">

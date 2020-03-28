@@ -60,7 +60,7 @@ export class CustomerModalComponent extends NgUnsubscribe implements OnInit {
   }
 
   onRegister() {
-    this.notyService.success(`Пожалуйста, подтведите почту - на указанный email было отправлено письмо с инструкцией.`);
+    this.notyService.success(`Пожалуйста, подтвердите почту - на указанный email было отправлено письмо с инструкцией.`);
     this.closeModal();
   }
 }
