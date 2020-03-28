@@ -1,0 +1,18 @@
+<app-header></app-header>
+
+<div class="page container cart-page">
+  <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
+
+  <h1 class="page__title">
+    Корзина
+  </h1>
+
+  <cart class="cart-page__cart"></cart>
+
+  <div class="cart-page__empty">
+    <a class="btn cart-page__empty-btn" *ngIf="isCartEmpty" routerLink="/">Вперёд к покупкам!</a>
+  </div>
+
+</div>
+
+<app-footer></app-footer>
