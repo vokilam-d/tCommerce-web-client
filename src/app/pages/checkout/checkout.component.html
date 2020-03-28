@@ -26,7 +26,14 @@
     </div>
   </div>
 
-  <div class="checkout">
+  <div class="checkout" [class.checkout--loading]="isOrderLoading" #checkoutRef>
+
+    <div class="checkout__error" *ngIf="orderError as error">
+      {{ error }}
+    </div>
+
+    <preloader class="checkout__preloader" *ngIf="isOrderLoading"></preloader>
+
     <main class="checkout__form">
       <order-customer-info class="checkout__block"></order-customer-info>
 

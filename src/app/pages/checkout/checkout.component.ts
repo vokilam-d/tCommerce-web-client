@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CustomerService } from '../../shared/services/customer/customer.service';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { filter, finalize, takeUntil } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { AddOrderDto } from '../../shared/dtos/order.dto';
 import { OrderService } from './order.service';
 import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
 import { normalizePhoneNumber } from '../../shared/helpers/normalize-phone-number.function';
+import { ScrollToService } from '../../shared/services/scroll-to/scroll-to.service';
 
 @Component({
   selector: 'checkout',
@@ -24,9 +25,11 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   get isLoggedIn() { return this.customerService.isLoggedIn; }
 
   @ViewChild(OrderCustomerInfoComponent) infoCmp: OrderCustomerInfoComponent;
+  @ViewChild('checkoutRef') checkoutRef: ElementRef;
 
   constructor(private customerService: CustomerService,
               private orderService: OrderService,
+              private scrollToService: ScrollToService,
               private router: Router) {
     super();
   }
@@ -58,6 +61,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
     dto.note = this.orderService.note;
     dto.items = this.customerService.cart;
 
+    this.orderError = null;
     this.isOrderLoading = true;
     this.orderService.placeOrder(dto)
       .pipe( finalize(() => this.isOrderLoading = false) )
@@ -65,11 +69,16 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
         response => {
           this.router.navigate(['/', 'order-success'], { state: { order: response.data } });
         },
-        error => this.orderError = error.error ? error.error.message : DEFAULT_ERROR_TEXT
+        error => this.setError(error)
       );
   }
 
   editCart() {
     this.customerService.showCartModal();
+  }
+
+  private setError(error) {
+    this.orderError = error.error ? error.error.message : DEFAULT_ERROR_TEXT;
+    this.scrollToService.scrollTo({ target: this.checkoutRef, offset: -60 });
   }
 }
