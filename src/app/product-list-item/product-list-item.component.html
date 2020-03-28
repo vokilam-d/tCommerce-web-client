@@ -20,13 +20,19 @@
 
   <div class="item__info">
     <div class="item__price">
-      {{ item.priceInDefaultCurrency }} <span class="item__currency">грн</span>
+      {{ item.price }} <span class="item__currency">грн</span>
     </div>
 
     <div class="item__actions">
-      <button class="btn item__buy" (click)="buy()">
+      <button class="btn item__buy"
+              [class.item__buy--loading]="isLoading"
+              [disabled]="isLoading"
+              (click)="addToCart()"
+      >
         <i class="mbi mbi-cart item__buy-icon"></i>
         Купить
+
+        <preloader class="item__preloader" *ngIf="isLoading"></preloader>
       </button>
 
       <button class="item__wishlist" *ngIf="false" (click)="addToWishlist()">

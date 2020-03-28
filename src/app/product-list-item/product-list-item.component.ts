@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
+import { finalize } from 'rxjs/operators';
+import { CustomerService } from '../shared/services/customer/customer.service';
 
 @Component({
   selector: 'product-list-item',
@@ -8,15 +10,20 @@ import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
 })
 export class ProductListItemComponent implements OnInit {
 
+  isLoading: boolean = false;
   @Input() item: ProductListItemDto;
 
-  constructor() { }
+  constructor(private customerService: CustomerService) { }
 
   ngOnInit() {
   }
 
-  buy() {
-    console.log('buy!', this.item);
+  addToCart() {
+    this.isLoading = true;
+
+    this.customerService.addToCart(this.item, 1)
+      .pipe( finalize(() => this.isLoading = false) )
+      .subscribe();
   }
 
   addToWishlist() {

@@ -67,12 +67,25 @@
   }
 
   &__buy {
+    position: relative;
     padding-left: 10px;
     padding-right: 10px;
     display: flex;
     align-items: center;
     font-size: 14px;
     border-radius: 3px;
+
+    &--loading {
+      color: transparent;
+      opacity: 0.8;
+    }
+  }
+
+  &__preloader {
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    transform: translateX(calc(-50% + 3px));
   }
 
   &__buy-icon {

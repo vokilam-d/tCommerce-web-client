@@ -29,7 +29,7 @@ export class ProductDto {
   medias: MediaDto[];
   metaTags: MetaTagsDto;
   name: string;
-  priceInDefaultCurrency: number;
+  price: number;
   reviewsAvgRating: number;
   reviewsCount: number;
   sku: string;

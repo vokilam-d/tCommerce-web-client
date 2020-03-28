@@ -12,6 +12,7 @@ import { ShippingAddressDto } from '../../dtos/shipping-address.dto';
 import { map, tap } from 'rxjs/operators';
 import { CreateOrUpdateOrderItemDto, OrderItemDto } from '../../dtos/order-item.dto';
 import { ProductDto } from '../../dtos/product.dto';
+import { ProductListItemDto } from '../../dtos/product-list-item.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -131,7 +132,7 @@ export class CustomerService {
     this.cartInit$.next(true);
   }
 
-  addToCart(product: ProductDto, qty: number) {
+  addToCart(product: ProductDto | ProductListItemDto, qty: number) {
     const alreadyAdded = this.cart.find(item => item.sku === product.sku);
     if (alreadyAdded) { qty += alreadyAdded.qty; }
 

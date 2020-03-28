@@ -1,1 +1,134 @@
-<p>order-success works!</p>
+<app-header></app-header>
+<div class="page container success" *ngIf="order">
+  <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
+
+  <h1 class="page__title">
+    Спасибо за покупку!
+  </h1>
+
+  <h2 class="success__subtitle">Ваш заказ №{{ order.id }}</h2>
+
+  <div class="order-info">
+    <div class="order-info__title">
+      Информация о заказе
+    </div>
+
+    <div class="order-info__row">
+      <div class="order-info__label">
+        Получатель
+      </div>
+
+      <div class="order-info__value">
+        {{ order.address.firstName }} {{ order.address.lastName }}, {{ order.address.phoneNumber }}
+      </div>
+    </div>
+
+    <div class="order-info__row">
+      <div class="order-info__label">
+        Адрес доставки
+      </div>
+
+      <div class="order-info__value">
+        {{ order.address.city }},&nbsp;
+        <span *ngIf="order.address.streetName as street">{{ street }}</span>
+        <span *ngIf="order.address.novaposhtaOffice as post">отделение Новой Почты №{{ post }}</span>
+      </div>
+    </div>
+
+    <div class="order-info__row">
+      <div class="order-info__label">
+        Способ доставки
+      </div>
+
+      <div class="order-info__value">
+        {{ order.shippingMethodName }}
+      </div>
+    </div>
+
+    <div class="order-info__row">
+      <div class="order-info__label">
+        Способ оплаты
+      </div>
+
+      <div class="order-info__value">
+        {{ order.paymentMethodName }}
+      </div>
+    </div>
+
+    <div class="order-info__row" *ngIf="order.note as note">
+      <div class="order-info__label">
+        Ваш комментарий
+      </div>
+
+      <div class="order-info__value">
+        {{ note }}
+      </div>
+    </div>
+
+    <div class="order-info__row">
+      <div class="order-info__label">
+        Перезванивать ли Вам для уточнения заказа?
+      </div>
+
+      <div class="order-info__value" [ngSwitch]="order.isCallbackNeeded">
+        <ng-container *ngSwitchCase="true">Да</ng-container>
+        <ng-container *ngSwitchCase="false">Нет</ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="items">
+    <div class="items__title">
+      Товары в заказе
+    </div>
+
+    <div class="item" *ngFor="let item of order.items">
+      <div class="item__img-container">
+        <img class="item__img" [src]="'http://localhost:3500/' + item.imageUrl">
+      </div>
+
+      <div class="item__info">
+        <a class="item__name" [routerLink]="['/', item.slug]">
+          {{ item.name }}
+        </a>
+
+        <div class="item__qty-price">
+          <div class="item__qty">
+            {{ item.qty }} шт.
+          </div>
+
+          <div class="item__price">
+            {{ item.price }} грн
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="items__row">
+      <div class="items__label">Стоимость товаров</div>
+
+      <div class="items__value">{{ order.totalItemsCost }} грн</div>
+    </div>
+
+    <div class="items__row">
+      <div class="items__label">{{ order.discountLabel }}</div>
+
+      <div class="items__value">{{ order.discountValue }} грн</div>
+    </div>
+
+    <div class="items__row items__row--total">
+      <div class="items__label">Итого</div>
+
+      <div class="items__value">{{ order.totalCost }} грн</div>
+    </div>
+  </div>
+
+  <div class="continue-shopping">
+    <a class="btn continue-shopping__btn" routerLink="/" target="_blank">
+      Продолжить покупки
+    </a>
+  </div>
+
+</div>
+
+<app-footer></app-footer>
