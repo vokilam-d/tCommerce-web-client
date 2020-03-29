@@ -3,7 +3,7 @@
     <img class="gallery__thumbnail"
          *ngFor="let media of medias, index as i"
          [class.gallery__thumbnail--active]="activeMediaIdx === i"
-         [src]="'http://localhost:3500' + media.variantsUrls.small"
+         [src]="'http://173.249.23.253:3080' + media.variantsUrls.small"
          [alt]="media.altText"
          (mouseenter)="setActiveIndex(i)"
          (click)="onMediaClick(i)"
@@ -14,7 +14,7 @@
     <div class="gallery__img-inner-container">
       <img class="gallery__img"
            *ngIf="medias[activeMediaIdx] as media"
-           [src]="'http://localhost:3500' + media.variantsUrls.medium"
+           [src]="'http://173.249.23.253:3080' + media.variantsUrls.medium"
            [alt]="media.altText"
            (click)="onMediaClick(activeMediaIdx)"
       >

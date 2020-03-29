@@ -34,7 +34,7 @@
            *ngFor="let product of searchResults"
            [routerLink]="['/', product.slug]"
         >
-          <img class="product__image" [src]="'http://localhost:3500' + product.mediaUrl">
+          <img class="product__image" [src]="'http://173.249.23.253:3080' + product.mediaUrl">
 
           <div class="product__name">{{ product.name }}</div>
         </a>

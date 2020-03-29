@@ -23,7 +23,7 @@ export class OrderService {
   }
 
   placeOrder(addOrderDto: AddOrderDto) {
-    return this.http.post<ResponseDto<OrderDto>>(`http://localhost:3500/api/v1/order`, addOrderDto)
+    return this.http.post<ResponseDto<OrderDto>>(`http://173.249.23.253:3080/api/v1/order`, addOrderDto)
       .pipe( tap(_ => this.resetOrder()) );
   }
 

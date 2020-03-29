@@ -32,7 +32,7 @@ export class ShippingMethodsComponent extends NgUnsubscribe implements OnInit {
 
   fetchMethods() {
     this.isLoading = true;
-    this.http.get<ResponseDto<ShippingMethodDto[]>>(`http://localhost:3500/api/v1/shipping-method`)
+    this.http.get<ResponseDto<ShippingMethodDto[]>>(`http://173.249.23.253:3080/api/v1/shipping-method`)
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         response => {

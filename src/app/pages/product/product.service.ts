@@ -14,10 +14,10 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   fetchProduct(slug: string) {
-    return this.http.get<ResponseDto<ProductDto>>(`http://localhost:3500/api/v1/products/${slug}`);
+    return this.http.get<ResponseDto<ProductDto>>(`http://173.249.23.253:3080/api/v1/products/${slug}`);
   }
 
   fetchProductsByFilters(spf: SortingPaginatingFilterDto) {
-    return this.http.get<ResponseDto<ProductListItemDto[]>>(`http://localhost:3500/api/v1/products`, { params: toHttpParams(spf) });
+    return this.http.get<ResponseDto<ProductListItemDto[]>>(`http://173.249.23.253:3080/api/v1/products`, { params: toHttpParams(spf) });
   }
 }

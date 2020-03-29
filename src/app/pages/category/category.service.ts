@@ -17,7 +17,7 @@ export class CategoryService {
   }
 
   setCategories() {
-    this.http.get<ResponseDto<CategoryTreeItem[]>>(`http://localhost:3500/api/v1/categories/tree`)
+    this.http.get<ResponseDto<CategoryTreeItem[]>>(`http://173.249.23.253:3080/api/v1/categories/tree`)
       .subscribe(
         response => {
           this.categories = response.data;
@@ -26,6 +26,6 @@ export class CategoryService {
   }
 
   fetchCategory(slug: string) {
-    return this.http.get<ResponseDto<CategoryDto>>(`http://localhost:3500/api/v1/categories/${slug}`);
+    return this.http.get<ResponseDto<CategoryDto>>(`http://173.249.23.253:3080/api/v1/categories/${slug}`);
   }
 }

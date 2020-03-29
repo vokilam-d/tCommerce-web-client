@@ -50,7 +50,7 @@
       <div class="checkout__cart">
 
         <div class="cart-item" *ngFor="let item of cart">
-          <img class="cart-item__img" [src]="'http://localhost:3500/' + item.imageUrl" alt="">
+          <img class="cart-item__img" [src]="'http://173.249.23.253:3080/' + item.imageUrl" alt="">
 
           <div class="cart-item__info">
             <a class="cart-item__name" [routerLink]="['/', item.slug]" target="_blank">

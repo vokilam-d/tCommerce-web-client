@@ -16,22 +16,22 @@ export class ProductReviewService {
   constructor(private http: HttpClient) { }
 
   fetchProductReviews(productId: number) {
-    return this.http.get<ResponseDto<ProductReviewDto[]>>(`http://localhost:3500/api/v1/product-reviews`, { params: toHttpParams({ productId }) });
+    return this.http.get<ResponseDto<ProductReviewDto[]>>(`http://173.249.23.253:3080/api/v1/product-reviews`, { params: toHttpParams({ productId }) });
   }
 
   addReview(reviewDto: AddProductReviewDto) {
-    return this.http.post<ResponseDto<ProductReviewDto>>(`http://localhost:3500/api/v1/product-reviews`, reviewDto);
+    return this.http.post<ResponseDto<ProductReviewDto>>(`http://173.249.23.253:3080/api/v1/product-reviews`, reviewDto);
   }
 
   vote(reviewId: number) {
-    return this.http.post<ResponseDto<ProductReviewDto>>(`http://localhost:3500/api/v1/product-reviews/${reviewId}/vote`, {});
+    return this.http.post<ResponseDto<ProductReviewDto>>(`http://173.249.23.253:3080/api/v1/product-reviews/${reviewId}/vote`, {});
   }
 
   downvote(reviewId: number) {
-    return this.http.post<ResponseDto<ProductReviewDto>>(`http://localhost:3500/api/v1/product-reviews/${reviewId}/downvote`, {});
+    return this.http.post<ResponseDto<ProductReviewDto>>(`http://173.249.23.253:3080/api/v1/product-reviews/${reviewId}/downvote`, {});
   }
 
   addComment(reviewId: number, commentDto: AddProductReviewCommentDto) {
-    return this.http.post<ResponseDto<ProductReviewDto>>(`http://localhost:3500/api/v1/product-reviews/${reviewId}/comment`, commentDto);
+    return this.http.post<ResponseDto<ProductReviewDto>>(`http://173.249.23.253:3080/api/v1/product-reviews/${reviewId}/comment`, commentDto);
   }
 }

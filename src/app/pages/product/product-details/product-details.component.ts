@@ -23,7 +23,7 @@ export class ProductDetailsComponent implements OnInit {
     reviews: 2
   };
   activeIdx: number = 0;
-  mediaUploadUrl: string = 'http://localhost:3500/api/v1/product-reviews/media';
+  mediaUploadUrl: string = 'http://173.249.23.253:3080/api/v1/product-reviews/media';
 
   reviews: ProductReviewDto[] = [];
 

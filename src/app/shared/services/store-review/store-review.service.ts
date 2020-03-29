@@ -14,7 +14,7 @@ export class StoreReviewService {
   }
 
   setReviewsCount() {
-    this.http.get<ResponseDto<number>>('http://localhost:3500/api/v1/store-reviews/count')
+    this.http.get<ResponseDto<number>>('http://173.249.23.253:3080/api/v1/store-reviews/count')
       .subscribe(
         response => {
           this.storeReviewsCount = response.data;
