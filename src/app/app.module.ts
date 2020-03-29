@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CustomerModalModule } from './customer-modal/customer-modal.module';
 import { NotyModule } from './noty/noty.module';
 import { CartModalModule } from './cart-modal/cart-modal.module';
+import { TransferHttpCacheModule } from '@nguniversal/common';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { CartModalModule } from './cart-modal/cart-modal.module';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    TransferHttpCacheModule,
     AppRoutingModule,
     CommonModule,
     CustomerModalModule,

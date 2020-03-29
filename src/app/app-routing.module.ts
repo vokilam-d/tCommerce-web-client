@@ -62,6 +62,8 @@ const routes: Routes = [
 export class AppRoutingModule {
 
   constructor(private router: Router) {
+    // console.log(this.router.config);
+    // reset config, get from providers, inject in server.ts ?
     this.handleRouteConfigReset();
   }
 

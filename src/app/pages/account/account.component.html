@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<div class="page container account">
+<div class="page container account" *ngIf="customer">
   <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
 
   <div class="account__confirm-contact confirm-contact"

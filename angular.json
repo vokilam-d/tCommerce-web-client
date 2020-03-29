@@ -83,6 +83,19 @@
             }
           }
         },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "web-client:build",
+            "serverTarget": "web-client:server"
+          },
+          "configurations": {
+            "prod": {
+              "browserTarget": "web-client:build:prod",
+              "serverTarget": "web-client:server:prod"
+            }
+          }
+        },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
@@ -94,7 +107,12 @@
           "options": {
             "outputPath": "dist/server",
             "main": "server.ts",
-            "tsConfig": "tsconfig.server.json"
+            "tsConfig": "tsconfig.server.json",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/assets/styles/abstracts"
+              ]
+            }
           },
           "configurations": {
             "production": {

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { CustomerDto, UpdateCustomerDto, UpdatePasswordDto } from '../../dtos/customer.dto';
@@ -13,6 +13,7 @@ import { map, tap } from 'rxjs/operators';
 import { CreateOrUpdateOrderItemDto, OrderItemDto } from '../../dtos/order-item.dto';
 import { ProductDto } from '../../dtos/product.dto';
 import { ProductListItemDto } from '../../dtos/product-list-item.dto';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,7 @@ export class CustomerService {
   get customerEmail(): string { return this.customer ? this.customer.email : ''; }
 
   constructor(private router: Router,
+              @Inject(PLATFORM_ID) private platformId: any,
               private http: HttpClient) {
     this.init();
   }
@@ -125,7 +127,7 @@ export class CustomerService {
   }
 
   private initCart() {
-    if (this.cartInit$.getValue()) { return; }
+    if (this.cartInit$.getValue() || !isPlatformBrowser(this.platformId)) { return; }
 
     const savedCart = this.customer ? this.customer.cart : JSON.parse(localStorage.getItem('cart'));
     this._cart = savedCart || [];
