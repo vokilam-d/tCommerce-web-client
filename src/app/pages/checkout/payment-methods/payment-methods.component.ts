@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { OrderService } from '../order.service';
 import { ResponseDto } from '../../../shared/dtos/response.dto';
 import { finalize, takeUntil } from 'rxjs/operators';
-import { DEFAULT_ERROR_TEXT } from '../../../shared/constants';
+import { API_HOST, DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { NgUnsubscribe } from '../../../shared/directives/ng-unsubscribe.directive';
 import { PaymentMethodDto } from '../../../shared/dtos/payment-method.dto';
 
@@ -32,7 +32,7 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
 
   fetchMethods() {
     this.isLoading = true;
-    this.http.get<ResponseDto<PaymentMethodDto[]>>(`http://173.249.23.253:3080/api/v1/payment-method`)
+    this.http.get<ResponseDto<PaymentMethodDto[]>>(`${API_HOST}/api/v1/payment-method`)
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         response => {

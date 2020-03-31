@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ResponseDto } from '../../dtos/response.dto';
+import { API_HOST } from '../../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class StoreReviewService {
   }
 
   setReviewsCount() {
-    this.http.get<ResponseDto<number>>('http://173.249.23.253:3080/api/v1/store-reviews/count')
+    this.http.get<ResponseDto<number>>(`${API_HOST}/api/v1/store-reviews/count`)
       .subscribe(
         response => {
           this.storeReviewsCount = response.data;

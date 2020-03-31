@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ResponseDto } from '../../../shared/dtos/response.dto';
 import { ShippingMethodDto } from '../../../shared/dtos/shipping-method.dto';
-import { DEFAULT_ERROR_TEXT } from '../../../shared/constants';
+import { API_HOST, DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { NgUnsubscribe } from '../../../shared/directives/ng-unsubscribe.directive';
@@ -32,7 +32,7 @@ export class ShippingMethodsComponent extends NgUnsubscribe implements OnInit {
 
   fetchMethods() {
     this.isLoading = true;
-    this.http.get<ResponseDto<ShippingMethodDto[]>>(`http://173.249.23.253:3080/api/v1/shipping-method`)
+    this.http.get<ResponseDto<ShippingMethodDto[]>>(`${API_HOST}/api/v1/shipping-method`)
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         response => {

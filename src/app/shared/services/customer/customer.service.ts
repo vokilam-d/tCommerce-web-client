@@ -14,6 +14,7 @@ import { CreateOrUpdateOrderItemDto, OrderItemDto } from '../../dtos/order-item.
 import { ProductDto } from '../../dtos/product.dto';
 import { ProductListItemDto } from '../../dtos/product-list-item.dto';
 import { isPlatformBrowser } from '@angular/common';
+import { API_HOST } from '../../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,9 @@ export class CustomerService {
   }
 
   private init() {
-    this.http.get<ResponseDto<CustomerDto>>(`http://173.249.23.253:3080/api/v1/customer`)
+    if (!isPlatformBrowser(this.platformId)) { return; }
+
+    this.http.get<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer`)
       .subscribe(
         response => {
           if (!this.customer) { // guard if 'fetchCustomerDetails' got response faster
@@ -60,7 +63,7 @@ export class CustomerService {
   }
 
   fetchCustomerDetails() {
-    return this.http.get<ResponseDto<DetailedCustomerDto>>(`http://173.249.23.253:3080/api/v1/customer/details`);
+    return this.http.get<ResponseDto<DetailedCustomerDto>>(`${API_HOST}/api/v1/customer/details`);
   }
 
   showLoginModal() {
@@ -72,25 +75,25 @@ export class CustomerService {
   }
 
   login(loginDto: LoginDto) {
-    return this.http.post<ResponseDto<CustomerDto>>(`http://173.249.23.253:3080/api/v1/customer/login`, loginDto)
+    return this.http.post<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer/login`, loginDto)
       .pipe(
         tap(response => this.setCustomer(response.data))
       );
   }
 
   resetPassword(resetDto: ResetPasswordDto) {
-    return this.http.post<any>(`http://173.249.23.253:3080/api/v1/customer/reset`, resetDto);
+    return this.http.post<any>(`${API_HOST}/api/v1/customer/reset`, resetDto);
   }
 
   register(registerDto: RegisterDto) {
-    return this.http.post<ResponseDto<CustomerDto>>(`http://173.249.23.253:3080/api/v1/customer/register`, registerDto)
+    return this.http.post<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer/register`, registerDto)
       .pipe(
         tap(response => this.setCustomer(response.data))
       );
   }
 
   logout(): void {
-    this.http.post(`http://173.249.23.253:3080/api/v1/customer/logout`, { }).subscribe(
+    this.http.post(`${API_HOST}/api/v1/customer/logout`, { }).subscribe(
       _ => {
         this.setCustomer(null);
       }
@@ -98,29 +101,29 @@ export class CustomerService {
   }
 
   sendEmailConfirm() {
-    return this.http.post<ResponseDto<boolean>>(`http://173.249.23.253:3080/api/v1/customer/send-confirm-email`, { });
+    return this.http.post<ResponseDto<boolean>>(`${API_HOST}/api/v1/customer/send-confirm-email`, { });
   }
 
   updateCustomer(dto: UpdateCustomerDto) {
-    return this.http.patch<ResponseDto<CustomerDto>>(`http://173.249.23.253:3080/api/v1/customer`, dto)
+    return this.http.patch<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer`, dto)
       .pipe(
         tap(response => this.setCustomer(response.data))
       );
   }
 
   updatePassword(dto: UpdatePasswordDto) {
-    return this.http.post<ResponseDto<CustomerDto>>(`http://173.249.23.253:3080/api/v1/customer/password`, dto);
+    return this.http.post<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer/password`, dto);
   }
 
   addShippingAddress(dto: ShippingAddressDto) {
-    return this.http.post<ResponseDto<DetailedCustomerDto>>(`http://173.249.23.253:3080/api/v1/customer/address`, dto)
+    return this.http.post<ResponseDto<DetailedCustomerDto>>(`${API_HOST}/api/v1/customer/address`, dto)
       .pipe(
         tap(response => this.setCustomer(response.data))
       );
   }
 
   editShippingAddress(addressId: string, dto: ShippingAddressDto) {
-    return this.http.put<ResponseDto<DetailedCustomerDto>>(`http://173.249.23.253:3080/api/v1/customer/address/${addressId}`, dto)
+    return this.http.put<ResponseDto<DetailedCustomerDto>>(`${API_HOST}/api/v1/customer/address/${addressId}`, dto)
       .pipe(
         tap(response => this.setCustomer(response.data))
       );
@@ -139,7 +142,7 @@ export class CustomerService {
     if (alreadyAdded) { qty += alreadyAdded.qty; }
 
     const dto: CreateOrUpdateOrderItemDto = { sku: product.sku, qty };
-    return this.http.put<ResponseDto<OrderItemDto>>(`http://173.249.23.253:3080/api/v1/cart`, dto)
+    return this.http.put<ResponseDto<OrderItemDto>>(`${API_HOST}/api/v1/cart`, dto)
       .pipe(
         tap(response => {
           this.saveToCart(response.data);
@@ -151,7 +154,7 @@ export class CustomerService {
   updateQtyInCart(orderItemDto: OrderItemDto, qty: number) {
     const dto: CreateOrUpdateOrderItemDto = { sku: orderItemDto.sku, qty };
 
-    return this.http.put<ResponseDto<OrderItemDto>>(`http://173.249.23.253:3080/api/v1/cart`, dto)
+    return this.http.put<ResponseDto<OrderItemDto>>(`${API_HOST}/api/v1/cart`, dto)
       .pipe(
         tap(response => {
           this.saveToCart(response.data);
@@ -169,7 +172,7 @@ export class CustomerService {
     this.saveCartToStorage();
 
     if (this.isLoggedIn) {
-      this.http.delete<ResponseDto<boolean>>(`http://173.249.23.253:3080/api/v1/cart/${cartItemToDelete.sku}`)
+      this.http.delete<ResponseDto<boolean>>(`${API_HOST}/api/v1/cart/${cartItemToDelete.sku}`)
         .subscribe();
     }
   }
@@ -204,7 +207,7 @@ export class CustomerService {
   isEmailAvailable(email: string): Observable<boolean> {
     const encoded = encodeURIComponent(email);
 
-    return this.http.get<ResponseDto<boolean>>(`http://173.249.23.253:3080/api/v1/customer/is-email-available/${encoded}`)
+    return this.http.get<ResponseDto<boolean>>(`${API_HOST}/api/v1/customer/is-email-available/${encoded}`)
       .pipe( map(response => response.data) );
   }
 }

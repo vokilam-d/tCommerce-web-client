@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_HOST } from '../shared/constants';
 
 const MODULES_CACHE: { [slug: string]: any; } = { };
 
@@ -7,7 +8,7 @@ export function dynamicModuleResolver(slug: string = 'not-found') {
     return () => MODULES_CACHE[slug];
   }
 
-  return () => axios.get(`http://173.249.23.253:3080/api/v1/pages/${slug}`)
+  return () => axios.get(`${API_HOST}/api/v1/pages/${slug}`)
       .then(res => {
         const pageType = res.data;
         return import(`../pages/${pageType}/${pageType}.module`)

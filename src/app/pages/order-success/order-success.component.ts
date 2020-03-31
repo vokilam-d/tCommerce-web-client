@@ -3,6 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { OrderDto } from '../../shared/dtos/order.dto';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
+import { API_HOST } from '../../shared/constants';
 
 @Component({
   selector: 'order-success',
@@ -11,6 +12,7 @@ import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 })
 export class OrderSuccessComponent implements OnInit {
 
+  uploadedHost = API_HOST;
   order: OrderDto;
   breadcrumbs: IBreadcrumb[] = SUCCESS_BREADCRUMBS;
 
@@ -32,7 +34,6 @@ export class OrderSuccessComponent implements OnInit {
 
   private init() {
     this.breadcrumbs.push({ title: `Заказ №${this.order.id}` });
-    console.log({order: this.order});
   }
 }
 

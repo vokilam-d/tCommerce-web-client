@@ -8,6 +8,7 @@ import { AddProductReviewDto, ProductReviewDto } from '../../../shared/dtos/prod
 import { JsonLdService } from '../../../shared/services/json-ld/json-ld.service';
 import { SafeHtml } from '@angular/platform-browser';
 import { AddReviewModalComponent, IAddReviewFormValue } from '../../../add-review-modal/add-review-modal.component';
+import { API_HOST } from '../../../shared/constants';
 
 @Component({
   selector: 'product-details',
@@ -23,7 +24,7 @@ export class ProductDetailsComponent implements OnInit {
     reviews: 2
   };
   activeIdx: number = 0;
-  mediaUploadUrl: string = 'http://173.249.23.253:3080/api/v1/product-reviews/media';
+  mediaUploadUrl: string = `${API_HOST}/api/v1/product-reviews/media`;
 
   reviews: ProductReviewDto[] = [];
 

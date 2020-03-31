@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 import { MediaDto } from '../shared/dtos/media.dto';
+import { API_HOST } from '../shared/constants';
 
 @Component({
   selector: 'media-gallery-modal',
@@ -8,6 +9,7 @@ import { MediaDto } from '../shared/dtos/media.dto';
 })
 export class MediaGalleryModalComponent implements OnInit, OnDestroy {
 
+  uploadedHost = API_HOST;
   isModalVisible: boolean = false;
   private unlisten: () => void;
 

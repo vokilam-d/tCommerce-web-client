@@ -39,6 +39,10 @@
     {{ product.price }} <span class="product__currency">грн</span>
   </div>
 
+  <div class="product__error" *ngIf="error as error">
+    {{ error }}
+  </div>
+
   <div class="product__qty">
     <quantity-control></quantity-control>
   </div>

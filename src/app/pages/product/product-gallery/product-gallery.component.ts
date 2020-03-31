@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MediaDto } from '../../../shared/dtos/media.dto';
 import { MediaGalleryModalComponent } from '../../../media-gallery-modal/media-gallery-modal.component';
+import { API_HOST } from '../../../shared/constants';
 
 @Component({
   selector: 'product-gallery',
@@ -9,6 +10,7 @@ import { MediaGalleryModalComponent } from '../../../media-gallery-modal/media-g
 })
 export class ProductGalleryComponent implements OnInit {
 
+  uploadedHost = API_HOST;
   activeMediaIdx: number = 0;
 
   @Input() medias: MediaDto[] = [];

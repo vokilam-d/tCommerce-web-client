@@ -7,6 +7,7 @@ import { CustomerService } from '../../shared/services/customer/customer.service
 import { ShippingAddressDto } from '../../shared/dtos/shipping-address.dto';
 import { tap } from 'rxjs/operators';
 import { ResponseDto } from '../../shared/dtos/response.dto';
+import { API_HOST } from '../../shared/constants';
 
 @Injectable()
 export class OrderService {
@@ -23,7 +24,7 @@ export class OrderService {
   }
 
   placeOrder(addOrderDto: AddOrderDto) {
-    return this.http.post<ResponseDto<OrderDto>>(`http://173.249.23.253:3080/api/v1/order`, addOrderDto)
+    return this.http.post<ResponseDto<OrderDto>>(`${API_HOST}/api/v1/order`, addOrderDto)
       .pipe( tap(_ => this.resetOrder()) );
   }
 

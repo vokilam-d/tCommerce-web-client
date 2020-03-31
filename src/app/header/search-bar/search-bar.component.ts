@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
 import { catchError, debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { fromEvent, Subject } from 'rxjs';
 import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
-import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
+import { DEFAULT_ERROR_TEXT, API_HOST } from '../../shared/constants';
 
 @Component({
   selector: 'search-bar',
@@ -14,6 +14,7 @@ import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
 })
 export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  uploadedHost = API_HOST;
   isInFocus: boolean = false;
   searchControl = new FormControl('');
   searchResults: ProductListItemDto[] = null;

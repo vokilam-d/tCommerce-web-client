@@ -26,7 +26,7 @@
 
       <div class="item" *ngFor="let item of items">
         <div class="item__img-container">
-          <img class="item__img" [src]="'http://173.249.23.253:3080/' + item.imageUrl" alt="">
+          <img class="item__img" [src]="uploadedHost + item.imageUrl" alt="">
         </div>
 
         <a class="item__name" [routerLink]="['/', item.slug]">

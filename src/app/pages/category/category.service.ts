@@ -4,6 +4,7 @@ import { ResponseDto } from '../../shared/dtos/response.dto';
 import { CategoryDto } from '../../shared/dtos/category.dto';
 import { CategoryTreeItem } from '../../shared/dtos/category-tree.dto';
 import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
+import { API_HOST } from '../../shared/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class CategoryService {
   }
 
   setCategories() {
-    this.http.get<ResponseDto<CategoryTreeItem[]>>(`http://173.249.23.253:3080/api/v1/categories/tree`)
+    this.http.get<ResponseDto<CategoryTreeItem[]>>(`${API_HOST}/api/v1/categories/tree`)
       .subscribe(
         response => {
           this.categories = response.data;
@@ -26,6 +27,6 @@ export class CategoryService {
   }
 
   fetchCategory(slug: string) {
-    return this.http.get<ResponseDto<CategoryDto>>(`http://173.249.23.253:3080/api/v1/categories/${slug}`);
+    return this.http.get<ResponseDto<CategoryDto>>(`${API_HOST}/api/v1/categories/${slug}`);
   }
 }
