@@ -48,7 +48,7 @@ const routes: Routes = [
         posParams: {
           slug: segments[0]
         }
-      }
+      };
     },
     loadChildren: dynamicModuleResolver(),
     data: { isDynamicRoute: true }
