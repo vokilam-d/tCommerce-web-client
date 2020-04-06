@@ -51,7 +51,7 @@ export class RegistrationFormComponent implements OnInit {
     });
 
     if (this.form.invalid) {
-      this.validateControls()
+      this.validateControls();
     } else {
       this.register();
     }
@@ -71,7 +71,7 @@ export class RegistrationFormComponent implements OnInit {
           this.formError = error.error && error.error.message || DEFAULT_ERROR_TEXT;
           console.warn(error.error || error);
         }
-      )
+      );
   }
 
   private validateControls() {

@@ -29,7 +29,6 @@ export class CustomerService {
   showCartModal$ = this._showCartModal$.asObservable();
   cartInit$ = new BehaviorSubject(false);
 
-
   get customer() { return this._customer; }
   get cart() { return this._cart; }
   get cartTotalCost() { return this._cart && this._cart.reduce((acc, item) => acc + item.totalCost, 0); }
@@ -44,8 +43,6 @@ export class CustomerService {
   }
 
   private init() {
-    if (!isPlatformBrowser(this.platformId)) { return; }
-
     this.http.get<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer`)
       .subscribe(
         response => {

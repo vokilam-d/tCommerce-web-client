@@ -30,6 +30,7 @@ export class ProductDto {
   metaTags: MetaTagsDto;
   name: string;
   price: number;
+  oldPrice: number;
   reviewsAvgRating: number;
   reviewsCount: number;
   sku: string;

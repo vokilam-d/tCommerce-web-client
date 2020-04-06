@@ -20,7 +20,7 @@
   background: #fff;
   z-index: 21;
   overflow: auto;
-  animation: slideIn 0.4s ease;
+  animation: fadeIn 0.3s ease, slideIn 0.4s ease;
 
   &__header {
     display: flex;

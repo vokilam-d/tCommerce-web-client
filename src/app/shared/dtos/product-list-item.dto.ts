@@ -8,6 +8,7 @@ export class ProductListItemDto {
   mediaHoverUrl: string;
   mediaAltText: string;
   price: number;
+  oldPrice: number;
   isInStock: boolean;
   sku: string;
   slug: string;

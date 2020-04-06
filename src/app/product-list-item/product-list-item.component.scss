@@ -40,6 +40,18 @@
     max-height: 100%;
   }
 
+  &__sale-label {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    padding: 4px 5px;
+    background: saturate($red, 8%);
+    border-radius: 2px;
+    color: #fff;
+    font-size: 13px;
+    z-index: 1;
+  }
+
   &__name {
     margin: 8px 0 0;
     font-size: 13px;
@@ -51,13 +63,35 @@
   }
 
   &__price {
-    font-size: 20px;
+    font-size: 18px;
+
+    &--special {
+      color: $red;
+    }
   }
 
   &__currency {
     display: inline-block;
-    vertical-align: top;
+    vertical-align: middle;
+    font-size: 0.7em;
+  }
+
+  &__old-price {
+    position: relative;
+    display: inline-block;
+    margin: 3px 0 0;
     font-size: 14px;
+    color: rgba($dark, 0.6);
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      border-bottom: 1px solid;
+    }
   }
 
   &__actions {

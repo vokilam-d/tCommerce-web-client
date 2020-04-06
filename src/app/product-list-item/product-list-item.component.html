@@ -11,6 +11,10 @@
            [src]="uploadedHost + item.mediaHoverUrl"
            [alt]="item.mediaAltText"
       >
+
+      <span class="item__sale-label" *ngIf="item.oldPrice">
+        -{{ discountValue }}%
+      </span>
     </a>
 
     <h2 class="item__name">
@@ -19,8 +23,14 @@
   </header>
 
   <div class="item__info">
-    <div class="item__price">
-      {{ item.price }} <span class="item__currency">грн</span>
+    <div class="item__price-container">
+      <div class="item__price" [class.item__price--special]="item.oldPrice">
+        {{ item.price }} <span class="item__currency">грн</span>
+      </div>
+
+      <div class="item__old-price" *ngIf="item.oldPrice as oldPrice">
+        {{ oldPrice }} <span class="item__currency">грн</span>
+      </div>
     </div>
 
     <div class="item__error" *ngIf="error as error">

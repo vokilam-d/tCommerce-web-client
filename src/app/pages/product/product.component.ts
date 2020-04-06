@@ -24,6 +24,7 @@ export class ProductComponent implements OnInit {
   product: ProductDto;
   breadcrumbs: IBreadcrumb[] = [];
   isLoading: boolean = false;
+  discountValue: number;
 
   @ViewChild(ProductDetailsComponent) detailsCmp: ProductDetailsComponent;
   @ViewChild(FlyToCartDirective) flyToCart: FlyToCartDirective;
@@ -48,6 +49,7 @@ export class ProductComponent implements OnInit {
       response => {
         this.product = response.data;
         this.product.safeFullDescription = this.sanitizer.bypassSecurityTrustHtml(this.product.fullDescription);
+        this.setDiscountValue();
         this.setBreadcrumbs();
         this.setMeta();
       },
@@ -101,5 +103,9 @@ export class ProductComponent implements OnInit {
 
   addToWishlist() {
     this.wishlistService.addToWishlist(this.product);
+  }
+
+  private setDiscountValue() {
+    this.discountValue = Math.ceil((this.product.oldPrice - this.product.price) / this.product.oldPrice * 100);
   }
 }

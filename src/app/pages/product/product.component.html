@@ -7,7 +7,7 @@
     {{ product.name }}
   </h1>
 
-  <div class="product__ratin-sku">
+  <div class="product__rating-sku">
 
     <div class="product__rating" *ngIf="product.reviewsAvgRating">
       <rating-stars class="product__rating-cmp"
@@ -29,14 +29,26 @@
     </div>
   </div>
 
-  <product-gallery class="product__gallery" [medias]="product.medias"></product-gallery>
+  <div class="product__gallery">
+    <product-gallery [medias]="product.medias"></product-gallery>
+
+    <span class="product__sale-label" *ngIf="product.oldPrice">
+      -{{ discountValue }}%
+    </span>
+  </div>
 
   <div class="product__short-description">
     {{ product.shortDescription }}
   </div>
 
-  <div class="product__price">
-    {{ product.price }} <span class="product__currency">грн</span>
+  <div class="product__price-container">
+    <div class="product__price" [class.product__price--special]="product.oldPrice">
+      {{ product.price }} <span class="product__currency">грн</span>
+    </div>
+
+    <div class="product__old-price" *ngIf="product.oldPrice as oldPrice">
+      {{ oldPrice }} <span class="product__currency">грн</span>
+    </div>
   </div>
 
   <div class="product__error" *ngIf="error as error">

@@ -9,7 +9,7 @@
     line-height: 1.2;
   }
 
-  &__ratin-sku {
+  &__rating-sku {
     margin: 20px 0 0;
     padding: 0 5px 0 0;
     display: flex;
@@ -55,10 +55,22 @@
   }
 
   &__gallery {
+    position: relative;
     display: block;
     margin: 20px 0 0;
     padding: 20px 0 0;
     border-top: 1px solid $borderColor;
+  }
+
+  &__sale-label {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    padding: 5px 6px;
+    background: saturate($red, 8%);
+    border-radius: 2px;
+    color: #fff;
+    font-size: 14px;
   }
 
   &__short-description {
@@ -79,11 +91,42 @@
     line-height: 1.3;
   }
 
-  &__price {
+  &__price-container {
     margin: 20px 0 0;
     padding: 20px 0 0;
     border-top: 1px solid $borderColor;
+  }
+
+  &__price {
     font-size: 24px;
+
+    &--special {
+      color: $red;
+    }
+  }
+
+  &__old-price {
+    position: relative;
+    display: inline-block;
+    margin: 4px 0 0;
+    font-size: 16px;
+    color: rgba($dark, 0.6);
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      border-bottom: 1px solid;
+    }
+  }
+
+  &__currency {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0.7em;
   }
 
   &__qty {

@@ -87,7 +87,9 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "options": {
             "browserTarget": "web-client:build",
-            "serverTarget": "web-client:server"
+            "serverTarget": "web-client:server",
+            "open": true,
+            "port": 4002
           },
           "configurations": {
             "prod": {
