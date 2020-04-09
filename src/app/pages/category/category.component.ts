@@ -44,7 +44,7 @@ export class CategoryComponent implements OnInit {
   }
 
   private setListFilters() {
-    this.productListFilters = [{ fieldName: 'categoryIds', value: this.category.id }];
+    this.productListFilters = [{ fieldName: 'categoryId', value: this.category.id }];
   }
 
   private setBreadcrumbs() {
