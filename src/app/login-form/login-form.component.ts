@@ -33,7 +33,7 @@ export class LoginFormComponent implements OnInit {
 
   private buildForm() {
     const controls: Record<keyof LoginDto, any> = {
-      login: ['', Validators.pattern(/^(([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})|(((\+38)?|(38)?|(8)?)[( -]?\d{3}[) -]?[ -]?\d{3}[ -]?\d{2}[ -]?\d{2}))$/)],
+      login: ['', Validators.required],
       password: ['', Validators.required]
     };
 
