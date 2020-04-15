@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from './product.service';
 import { ProductDto } from '../../shared/dtos/product.dto';
@@ -18,13 +18,15 @@ import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, AfterViewInit {
 
   error: string | null = null;
   product: ProductDto;
   breadcrumbs: IBreadcrumb[] = [];
   isLoading: boolean = false;
   discountValue: number;
+  isReviewFromEmail: boolean = null;
+  needToShowReviews: boolean = false;
 
   @ViewChild(ProductDetailsComponent) detailsCmp: ProductDetailsComponent;
   @ViewChild(FlyToCartDirective) flyToCart: FlyToCartDirective;
@@ -39,7 +41,16 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isReviewFromEmail = JSON.parse(this.route.snapshot.queryParamMap.get('review-from-email'));
+    this.needToShowReviews = this.route.snapshot.fragment === 'reviews';
     this.fetchProduct();
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.handleReviewFromEmail();
+      this.handleUrlReviewsFragment();
+    });
   }
 
   private fetchProduct() {
@@ -52,6 +63,8 @@ export class ProductComponent implements OnInit {
         this.setDiscountValue();
         this.setBreadcrumbs();
         this.setMeta();
+        this.handleReviewFromEmail();
+        this.handleUrlReviewsFragment();
       },
       error => console.warn(error)
     );
@@ -66,8 +79,8 @@ export class ProductComponent implements OnInit {
     this.breadcrumbs.push({ title: this.product.name, link: this.product.slug });
   }
 
-  scrollToReviews() {
-    this.detailsCmp.openReviewsTab();
+  scrollToReviews(showSuccess: boolean = false) {
+    this.detailsCmp.openReviewsTab(showSuccess);
   }
 
   private setMeta() {
@@ -107,5 +120,19 @@ export class ProductComponent implements OnInit {
 
   private setDiscountValue() {
     this.discountValue = Math.ceil((this.product.oldPrice - this.product.price) / this.product.oldPrice * 100);
+  }
+
+  private handleReviewFromEmail() {
+    if (!this.isReviewFromEmail || !this.detailsCmp) { return; }
+    this.isReviewFromEmail = null;
+
+    this.scrollToReviews(true);
+  }
+
+  private handleUrlReviewsFragment() {
+    if (!this.needToShowReviews || !this.detailsCmp) { return; }
+    this.needToShowReviews = false;
+
+    this.scrollToReviews();
   }
 }

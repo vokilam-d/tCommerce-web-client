@@ -11,7 +11,7 @@ export class NotyComponent implements OnInit {
 
   noties: INoty[] = [];
   private counter: number = 0;
-  private timeToAutoHide: number = 50000000;
+  private timeToAutoHide: number = 5000;
 
   constructor(private notyService: NotyService) { }
 

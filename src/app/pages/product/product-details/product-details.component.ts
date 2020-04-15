@@ -9,6 +9,7 @@ import { JsonLdService } from '../../../shared/services/json-ld/json-ld.service'
 import { SafeHtml } from '@angular/platform-browser';
 import { AddReviewModalComponent, IAddReviewFormValue } from '../../../add-review-modal/add-review-modal.component';
 import { API_HOST } from '../../../shared/constants';
+import { NotyService } from '../../../noty/noty.service';
 
 @Component({
   selector: 'product-details',
@@ -25,7 +26,6 @@ export class ProductDetailsComponent implements OnInit {
   };
   activeIdx: number = 0;
   mediaUploadUrl: string = `${API_HOST}/api/v1/product-reviews/media`;
-
   reviews: ProductReviewDto[] = [];
 
   @Input() product: ProductDto;
@@ -35,6 +35,7 @@ export class ProductDetailsComponent implements OnInit {
               private scrollToService: ScrollToService,
               private jsonLdService: JsonLdService,
               private productReviewService: ProductReviewService,
+              private notyService: NotyService,
               private elementRef: ElementRef) {
   }
 
@@ -46,8 +47,12 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  openReviewsTab() {
+  openReviewsTab(showSuccess: boolean = false) {
     this.toggleContent(this.indices.reviews);
+
+    if (showSuccess) {
+      this.showReviewSuccess();
+    }
   }
 
   private fetchReviews() {
@@ -138,31 +143,31 @@ export class ProductDetailsComponent implements OnInit {
         response => {
           this.reviews.push(response.data);
           this.addReviewCmp.closeModal();
+          this.showReviewSuccess();
         },
         error => {
           console.warn(error);
         }
-      )
-
+      );
   }
 
   private setJsonLd() {
 
     const jsonLd: any = {
-      '@context': "http://schema.org",
-      '@type': "Product",
-      'itemCondition': "https://schema.org/NewCondition",
-      'description': this.product.fullDescription,
-      'name': this.product.name,
-      'offers': {
-        '@type': "Offer",
-        'availability': this.product.isInStock ? "http://schema.org/InStock" : 'http://schema.org/OutOfStock',
-        'price': this.product.price,
-        'priceCurrency': "UAH",
-        'priceValidUntil': "2040-12-08",
-        'url': `https://klondike.com.ua/${this.product.slug}`
+      '@context': 'http://schema.org',
+      '@type': 'Product',
+      itemCondition: 'https://schema.org/NewCondition',
+      description: this.product.fullDescription,
+      name: this.product.name,
+      offers: {
+        '@type': 'Offer',
+        availability: this.product.isInStock ? 'http://schema.org/InStock' : 'http://schema.org/OutOfStock',
+        price: this.product.price,
+        priceCurrency: 'UAH',
+        priceValidUntil: '2040-12-08',
+        url: `https://klondike.com.ua/${this.product.slug}`
       },
-      'url': `https://klondike.com.ua/${this.product.slug}`
+      url: `https://klondike.com.ua/${this.product.slug}`
     };
 
     if (this.product.vendorCode) {
@@ -188,19 +193,23 @@ export class ProductDetailsComponent implements OnInit {
 
     if (this.product.reviewsCount > 0) {
       jsonLd.aggregateRating = {
-        '@type': "AggregateRating",
-        'ratingValue': this.product.reviewsAvgRating,
-        'reviewCount': this.product.reviewsCount
+        '@type': 'AggregateRating',
+        ratingValue: this.product.reviewsAvgRating,
+        reviewCount: this.product.reviewsCount
       };
 
       jsonLd.review = this.reviews.map(review => ({
-        '@type': "Review",
-        'author': review.name,
-        'datePublished': review.createdAt,
-        'description': review.text
+        '@type': 'Review',
+        author: review.name,
+        datePublished: review.createdAt,
+        description: review.text
       }));
     }
 
     this.jsonLd = this.jsonLdService.getSafeJsonLd(jsonLd);
+  }
+
+  private showReviewSuccess() {
+    this.notyService.success(`Ваш отзыв успешно оставлен`);
   }
 }
