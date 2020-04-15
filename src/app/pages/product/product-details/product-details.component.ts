@@ -81,9 +81,9 @@ export class ProductDetailsComponent implements OnInit {
   vote(review: ProductReviewDto) {
     this.productReviewService.vote(review.id)
       .subscribe(
-        response => {
+        _ => {
           review.voteSuccess = true;
-          review.votesCount = response.data.votesCount;
+          review.votesCount += 1;
         },
         error => {
           review.voteError = error.error.message;
@@ -94,9 +94,11 @@ export class ProductDetailsComponent implements OnInit {
   downvote(review: ProductReviewDto) {
     this.productReviewService.downvote(review.id)
       .subscribe(
-        response => {
+        _ => {
           review.voteSuccess = true;
-          review.votesCount = response.data.votesCount;
+          if (review.votesCount > 0) {
+            review.votesCount -= 1;
+          }
         },
         error => {
           review.voteError = error.error.message;
