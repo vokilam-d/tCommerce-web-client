@@ -12,6 +12,8 @@ export class NotyComponent implements OnInit {
   noties: INoty[] = [];
   private counter: number = 0;
   private timeToAutoHide: number = 5000;
+  private timeToErrorAutoHide: number = 15000;
+  private autoHideTimeout: any;
 
   constructor(private notyService: NotyService) { }
 
@@ -28,13 +30,12 @@ export class NotyComponent implements OnInit {
   }
 
   private showNoty(noty: INoty) {
+    clearTimeout(this.autoHideTimeout);
     this.noties.push(noty);
 
-    if (noty.type === 'error') {
-      setTimeout(() => this.removeAllNotiesExcept(noty), 300);
-    } else {
-      setTimeout(() => this.hideNoty(noty), this.timeToAutoHide);
-    }
+    const timeToAutoHide = noty.type === 'error' ? this.timeToErrorAutoHide : this.timeToAutoHide;
+    setTimeout(() => this.hideNoty(noty), timeToAutoHide);
+    this.autoHideTimeout = setTimeout(() => this.removeAllNotiesExcept(noty), 300);
   }
 
   hideNoty(noty: INoty) {
