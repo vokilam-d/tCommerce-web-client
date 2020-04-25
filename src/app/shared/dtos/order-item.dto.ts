@@ -1,3 +1,5 @@
+import { ProductListItemDto } from './product-list-item.dto';
+
 export class CreateOrUpdateOrderItemDto {
   sku: string;
   qty: number;
@@ -16,4 +18,5 @@ export class OrderItemDto {
   totalCost: number;
   imageUrl: string;
   slug: string;
+  crossSellProducts: ProductListItemDto[];
 }

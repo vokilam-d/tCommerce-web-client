@@ -24,33 +24,40 @@
 
     <div class="cart__items" [class.cart__items--loading]="isLoading">
 
-      <div class="item" *ngFor="let item of items">
-        <div class="item__img-container">
-          <img class="item__img" [src]="uploadedHost + item.imageUrl" alt="">
+      <ng-container *ngFor="let item of items, index as i">
+        <div class="item">
+          <div class="item__img-container">
+            <img class="item__img" [src]="uploadedHost + item.imageUrl" alt="">
+          </div>
+
+          <a class="item__name" [routerLink]="['/', item.slug]">
+            {{ item.name }}
+          </a>
+
+          <div class="item__qty-container">
+            <quantity-control class="item__qty"
+                              [initialValue]="item.qty"
+                              (valueChanged)="onQtyChange(item, $event)"
+            ></quantity-control>
+          </div>
+
+          <div class="item__row">
+            <div class="item__label">Цена</div>
+
+            <div class="item__value">{{ item.totalCost }} грн</div>
+          </div>
+
+          <button class="item__delete" (click)="deleteFromCart(item)" type="button">
+            <i class="mbi mbi-trash2"></i>
+          </button>
+
         </div>
 
-        <a class="item__name" [routerLink]="['/', item.slug]">
-          {{ item.name }}
-        </a>
-
-        <div class="item__qty-container">
-          <quantity-control class="item__qty"
-                            [initialValue]="item.qty"
-                            (valueChanged)="onQtyChange(item, $event)"
-          ></quantity-control>
-        </div>
-
-        <div class="item__row">
-          <div class="item__label">Цена</div>
-
-          <div class="item__value">{{ item.totalCost }} грн</div>
-        </div>
-
-        <button class="item__delete" (click)="deleteFromCart(item)" type="button">
-          <i class="mbi mbi-trash2"></i>
-        </button>
-
-      </div>
+        <cross-sell-products class="cross-sell"
+                             *ngIf="isCrossSellVisible && i === 0"
+                             [products]="item.crossSellProducts"
+        ></cross-sell-products>
+      </ng-container>
     </div>
 
   </ng-template>

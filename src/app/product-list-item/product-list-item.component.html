@@ -39,6 +39,7 @@
 
     <div class="item__actions">
       <button class="btn item__buy"
+              *ngIf="item.isInStock; else outOfStockTmpl"
               [class.item__buy--loading]="isLoading"
               [disabled]="isLoading"
               (click)="addToCart()"
@@ -48,6 +49,12 @@
 
         <preloader class="item__preloader" *ngIf="isLoading"></preloader>
       </button>
+
+      <ng-template #outOfStockTmpl>
+        <span class="item__out-of-stock">
+           Нет в наличии
+        </span>
+      </ng-template>
 
       <button class="item__wishlist" *ngIf="false" (click)="addToWishlist()">
         <i class="mbi mbi-heart item__wishlist-icon"></i>

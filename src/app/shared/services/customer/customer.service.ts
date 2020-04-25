@@ -19,12 +19,12 @@ import { API_HOST } from '../../constants';
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
+export class CustomerService { // todo split to CartService
 
   private _customer: CustomerDto | DetailedCustomerDto;
-  private _cart: OrderItemDto[];
+  private _cart: OrderItemDto[] = [];
   private _showLoginModal$ = new Subject();
-  private _showCartModal$ = new Subject<string>();
+  private _showCartModal$ = new Subject<boolean>();
   showLoginModal$ = this._showLoginModal$.asObservable();
   showCartModal$ = this._showCartModal$.asObservable();
   cartInit$ = new BehaviorSubject(false);
@@ -143,7 +143,7 @@ export class CustomerService {
       .pipe(
         tap(response => {
           this.saveToCart(response.data);
-          this._showCartModal$.next();
+          this._showCartModal$.next(true);
         })
       );
   }
@@ -175,16 +175,18 @@ export class CustomerService {
   }
 
   private saveToCart(item: OrderItemDto) {
+    let itemToSave = { ...item };
+
     const alreadyAddedIdx = this._cart.findIndex(cartItem => cartItem.sku === item.sku);
-    if (alreadyAddedIdx === -1) {
-      this._cart.push(item);
-    } else {
-      this._cart[alreadyAddedIdx] = {
+    if (alreadyAddedIdx !== -1) {
+      itemToSave = {
         ...this._cart[alreadyAddedIdx],
         ...item
       };
+      this._cart.splice(alreadyAddedIdx, 1);
     }
 
+    this._cart.unshift(itemToSave);
     this.saveCartToStorage();
   }
 
@@ -197,7 +199,7 @@ export class CustomerService {
   }
 
   resetCart() {
-    this._cart = null;
+    this._cart = [];
     localStorage.removeItem('cart');
   }
 

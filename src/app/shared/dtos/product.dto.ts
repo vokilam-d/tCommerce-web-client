@@ -3,6 +3,7 @@ import { MediaDto } from './media.dto';
 import { ProductVariantGroupDto } from './product-variant.dto';
 import { BreadcrumbDto } from './breadcrumb.dto';
 import { SafeHtml } from '@angular/platform-browser';
+import { LinkedProductDto } from './linked-product.dto';
 
 export class ProductCharacteristic {
   label: string;
@@ -37,6 +38,7 @@ export class ProductDto {
   slug: string;
   vendorCode: string;
   gtin: string;
+  relatedProducts: LinkedProductDto[];
 
   safeFullDescription: SafeHtml;
 }

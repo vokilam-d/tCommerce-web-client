@@ -127,6 +127,11 @@
     }
   }
 
+  &__out-of-stock {
+    display: inline-block;
+    min-height: 35px;
+  }
+
   &__preloader {
     position: absolute;
     top: 11px;
