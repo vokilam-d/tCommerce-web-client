@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { NotyService } from './noty.service';
 import { INoty } from './noty.interface';
+import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'noty',
   templateUrl: './noty.component.html',
   styleUrls: ['./noty.component.scss']
 })
-export class NotyComponent implements OnInit {
+export class NotyComponent extends NgUnsubscribe implements OnInit {
 
   noties: INoty[] = [];
   private counter: number = 0;
@@ -15,18 +17,22 @@ export class NotyComponent implements OnInit {
   private timeToErrorAutoHide: number = 15000;
   private autoHideTimeout: any;
 
-  constructor(private notyService: NotyService) { }
+  constructor(private notyService: NotyService) {
+    super();
+  }
 
   ngOnInit() {
-    this.notyService.showNoty$.subscribe(
-      noty => {
-        this.showNoty({
-          id: this.counter++,
-          isHiding: false,
-          ...noty
-        });
-      }
-    );
+    this.notyService.showNoty$
+      .pipe( takeUntil(this.ngUnsubscribe) )
+      .subscribe(
+        noty => {
+          this.showNoty({
+            id: this.counter++,
+            isHiding: false,
+            ...noty
+          });
+        }
+      );
   }
 
   private showNoty(noty: INoty) {

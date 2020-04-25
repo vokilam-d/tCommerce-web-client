@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Inject, NgModule, PLATFORM_ID } from '@angular/core';
 import {
   Route,
   RouteConfigLoadEnd,
@@ -10,6 +10,7 @@ import {
   UrlSegmentGroup
 } from '@angular/router';
 import { dynamicModuleResolver } from './functions/dynamic-module-resolver.function';
+import { isPlatformBrowser } from '@angular/common';
 
 
 const routes: Routes = [
@@ -61,13 +62,16 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              @Inject(PLATFORM_ID) private platformId: any) {
     // console.log(this.router.config);
-    // reset config, get from providers, inject in server.ts ?
+    // todo reset config, get from providers, inject in server.ts ?
     this.handleRouteConfigReset();
   }
 
   private handleRouteConfigReset() {
+    if (!isPlatformBrowser(this.platformId)) { return; }
+    
     this.router.events.subscribe(next => {
       if (next instanceof RouteConfigLoadEnd && next.route.data && next.route.data.isDynamicRoute) {
         this.router.resetConfig(this.router.config.map(route => {
