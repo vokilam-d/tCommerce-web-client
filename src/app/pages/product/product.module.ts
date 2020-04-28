@@ -14,6 +14,7 @@ import { AddReviewModalModule } from '../../add-review-modal/add-review-modal.mo
 import { ReviewGalleryModule } from '../../review-gallery/review-gallery.module';
 import { MediaGalleryModalModule } from '../../media-gallery-modal/media-gallery-modal.module';
 import { SharedModule } from '../../shared/shared.module';
+import { RelatedProductsModule } from '../../related-products/related-products.module';
 
 @NgModule({
   declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent],
@@ -28,7 +29,8 @@ import { SharedModule } from '../../shared/shared.module';
     FormsModule,
     AddReviewModalModule,
     MediaGalleryModalModule,
-    ReviewGalleryModule
+    ReviewGalleryModule,
+    RelatedProductsModule
   ]
 })
 export class ProductModule { }

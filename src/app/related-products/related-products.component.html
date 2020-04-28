@@ -1,0 +1,27 @@
+<div class="related" *ngIf="linkedProducts?.length">
+
+  <h3 class="related__title">
+    Сопутствующие товары
+  </h3>
+
+  <div class="related__carousel carousel">
+    <button class="carousel__arrow carousel__arrow--prev" *ngIf="isArrowVisible()" (click)="prev()">
+      <i class="mbi mbi-chevron-left"></i>
+    </button>
+
+    <div class="carousel__items-container">
+      <div class="carousel__items" #itemsContainerRef>
+        <div class="carousel__item" *ngFor="let item of items" #itemRef>
+          <product-list-item [item]="item"></product-list-item>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel__arrow carousel__arrow--next" *ngIf="isArrowVisible()" (click)="next()">
+      <i class="mbi mbi-chevron-right"></i>
+    </button>
+
+    <preloader class="carousel__preloader" *ngIf="isLoading"></preloader>
+  </div>
+
+</div>
