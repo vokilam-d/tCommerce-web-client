@@ -9,6 +9,7 @@ import { OrderService } from './order.service';
 import { DEFAULT_ERROR_TEXT, API_HOST } from '../../shared/constants';
 import { normalizePhoneNumber } from '../../shared/helpers/normalize-phone-number.function';
 import { ScrollToService } from '../../shared/services/scroll-to/scroll-to.service';
+import { NotyService } from '../../noty/noty.service';
 
 @Component({
   selector: 'checkout',
@@ -51,6 +52,14 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
 
   placeOrder() {
     if (!this.infoCmp.checkInfoValidity()) { return; }
+    if (!this.orderService.shippingMethod) {
+      this.setError(`Не выбран способ доставки`);
+      return;
+    }
+    if (!this.orderService.paymentMethod) {
+      this.setError(`Не выбран способ оплаты`);
+      return;
+    }
 
     const dto = new AddOrderDto();
     dto.email = this.orderService.email;
@@ -70,7 +79,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
         response => {
           this.router.navigate(['/', 'order-success'], { state: { order: response.data } });
         },
-        error => this.setError(error)
+        error => this.setError(error.error?.message || DEFAULT_ERROR_TEXT)
       );
   }
 
@@ -79,7 +88,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   }
 
   private setError(error) {
-    this.orderError = error.error ? error.error.message : DEFAULT_ERROR_TEXT;
+    this.orderError = error;
     this.scrollToService.scrollTo({ target: this.checkoutRef, offset: -60 });
   }
 }

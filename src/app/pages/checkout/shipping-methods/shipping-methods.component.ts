@@ -31,6 +31,7 @@ export class ShippingMethodsComponent extends NgUnsubscribe implements OnInit {
   }
 
   fetchMethods() {
+    this.error = null;
     this.isLoading = true;
     this.http.get<ResponseDto<ShippingMethodDto[]>>(`${API_HOST}/api/v1/shipping-method`)
       .pipe( finalize(() => this.isLoading = false) )
@@ -41,7 +42,7 @@ export class ShippingMethodsComponent extends NgUnsubscribe implements OnInit {
           this.buildForm();
         },
         error => {
-          this.error = error.error ? error.error.message : DEFAULT_ERROR_TEXT;
+          this.error = error.error?.message || DEFAULT_ERROR_TEXT;
         }
       );
   }

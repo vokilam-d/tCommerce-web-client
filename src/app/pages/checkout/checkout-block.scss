@@ -9,6 +9,14 @@
   &__content {
     margin: 20px 0 0;
   }
+
+  &__error {
+    color: $red;
+  }
+
+  &__preloader {
+    min-height: 15px;
+  }
 }
 
 .checkout-control {

@@ -109,7 +109,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       .subscribe(
         _ => { },
         error => {
-          this.error = error.error ? error.error.message : DEFAULT_ERROR_TEXT;
+          this.error = error.error?.message || DEFAULT_ERROR_TEXT;
         }
       );
   }

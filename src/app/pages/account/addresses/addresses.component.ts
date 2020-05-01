@@ -113,7 +113,7 @@ export class AddressesComponent implements OnInit {
   }
 
   private showErrorMessage(error: any) {
-    this.formError = error.error ? error.error.message : DEFAULT_ERROR_TEXT;
+    this.formError = error.error?.message || DEFAULT_ERROR_TEXT;
     console.warn(error);
   }
 }

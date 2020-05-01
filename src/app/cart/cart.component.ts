@@ -55,7 +55,7 @@ export class CartComponent implements OnInit {
   private setCartError(error) {
     clearTimeout(this.cartErrorTimeout);
 
-    this.cartError = error.error ? error.error.message : DEFAULT_ERROR_TEXT;
+    this.cartError = error.error?.message || DEFAULT_ERROR_TEXT;
     this.cartErrorTimeout = setTimeout(() => this.resetCartError(), 10000) as any;
   }
 
