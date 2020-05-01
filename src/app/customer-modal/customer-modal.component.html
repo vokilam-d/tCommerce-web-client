@@ -20,6 +20,7 @@
 
     <registration-form *ngIf="state === 'registration'"
                        (registered)="onRegister()"
+                       (registeredBySocial)="onRegisterBySocial()"
                        (switchToLogin)="toggleState()"
     ></registration-form>
   </div>

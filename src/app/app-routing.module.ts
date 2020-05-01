@@ -40,6 +40,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/cart-page/cart-page.module').then(m => m.CartPageModule)
   },
   {
+    path: 'oauth-success',
+    loadChildren: () => import('./pages/oauth-success/oauth-success.module').then(m => m.OauthSuccessModule)
+  },
+  {
     matcher: (segments: UrlSegment[], group: UrlSegmentGroup, route: Route): UrlMatchResult => {
       const path = segments.map(s => s.path).join('/');
       route.loadChildren = dynamicModuleResolver(path);
@@ -71,7 +75,7 @@ export class AppRoutingModule {
 
   private handleRouteConfigReset() {
     if (!isPlatformBrowser(this.platformId)) { return; }
-    
+
     this.router.events.subscribe(next => {
       if (next instanceof RouteConfigLoadEnd && next.route.data && next.route.data.isDynamicRoute) {
         this.router.resetConfig(this.router.config.map(route => {

@@ -19,6 +19,7 @@ export class RegistrationFormComponent implements OnInit {
   isLoading: boolean = false;
 
   @Output() registered = new EventEmitter<CustomerDto>();
+  @Output() registeredBySocial = new EventEmitter();
   @Output('switchToLogin') switchToLoginEmitter = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder,
@@ -92,5 +93,9 @@ export class RegistrationFormComponent implements OnInit {
   switchToLogin() {
     this.formError = null;
     this.switchToLoginEmitter.emit();
+  }
+
+  socialAuthFinish() {
+    this.registeredBySocial.emit();
   }
 }

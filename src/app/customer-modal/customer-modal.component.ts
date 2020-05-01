@@ -59,8 +59,14 @@ export class CustomerModalComponent extends NgUnsubscribe implements OnInit {
     this.closeModal();
   }
 
-  onRegister() {
-    this.notyService.success(`Пожалуйста, подтвердите почту - на указанный email было отправлено письмо с инструкцией.`);
+  onRegister(isEmailConfirmed: boolean = false) {
+    if (!isEmailConfirmed) {
+      this.notyService.success(`Пожалуйста, подтвердите почту - на указанный email было отправлено письмо с инструкцией.`);
+    }
     this.closeModal();
+  }
+
+  onRegisterBySocial() {
+    this.onRegister(true);
   }
 }

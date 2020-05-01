@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CustomerService } from '../shared/services/customer/customer.service';
 
 @Component({
   selector: 'auth-social',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthSocialComponent implements OnInit {
 
-  constructor() { }
+  @Output('authFinish') authFinishEmitter = new EventEmitter();
+
+  constructor(private customerService: CustomerService) { }
 
   ngOnInit(): void {
   }
 
+  authSocial(provider: 'google' | 'facebook') {
+    const url = this.customerService.getLoginSocialUrl(provider);
+    const child = window.open(url, '', "menubar=0,toolbar=0,status=0,width=626,height=436");
+
+    const interval = setInterval(() => {
+      if (child.closed) {
+        this.customerService.fetchCustomer();
+        this.authFinishEmitter.emit();
+        clearInterval(interval);
+      }
+    }, 500);
+  }
 }

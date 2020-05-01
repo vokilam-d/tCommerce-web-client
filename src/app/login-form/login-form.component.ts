@@ -123,4 +123,8 @@ export class LoginFormComponent implements OnInit {
     this.isResetEmailSent = false;
     this.formError = null;
   }
+
+  socialAuthFinish() {
+    this.loggedIn.emit();
+  }
 }

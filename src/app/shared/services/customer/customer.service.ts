@@ -39,10 +39,10 @@ export class CustomerService { // todo split to CartService
   constructor(private router: Router,
               @Inject(PLATFORM_ID) private platformId: any,
               private http: HttpClient) {
-    this.init();
+    this.fetchCustomer();
   }
 
-  private init() {
+  fetchCustomer() {
     this.http.get<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer`)
       .subscribe(
         response => {
@@ -76,6 +76,10 @@ export class CustomerService { // todo split to CartService
       .pipe(
         tap(response => this.setCustomer(response.data))
       );
+  }
+
+  getLoginSocialUrl(provider: 'google' | 'facebook') {
+    return `${API_HOST}/api/v1/customer/login/${provider}`;
   }
 
   resetPassword(resetDto: ResetPasswordDto) {

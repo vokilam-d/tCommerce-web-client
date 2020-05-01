@@ -1,0 +1,44 @@
+@import "variables";
+
+.social {
+  &__btn {
+    margin: 20px 0 0;
+    height: 45px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba($dark, 0.08);
+    border: 1px solid rgba($dark, 0.1);
+    border-radius: 3px;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $blue;
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+
+  &__icon {
+    flex-shrink: 0;
+    min-width: 10px;
+    margin: 0 7px 0 0;
+
+    &--facebook {
+      margin-top: 1px;
+      width: 11px;
+      height: 19px;
+      fill: #23599b;
+    }
+
+    &--google {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+}
