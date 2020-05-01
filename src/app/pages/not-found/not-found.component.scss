@@ -1,0 +1,16 @@
+.not-found {
+  &__title {
+    margin: 20px 0 0;
+    text-align: center;
+  }
+
+  &__sub-title {
+    margin: 10px 0 0;
+    line-height: 1.25;
+  }
+
+  &__index-link {
+    display: inline-block;
+    border-bottom: 1px solid;
+  }
+}

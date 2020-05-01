@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 
 @Component({
   selector: 'not-found',
@@ -7,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotFoundComponent implements OnInit {
 
+  breadcrumbs: IBreadcrumb[] = [{ title: '404' }];
+
   constructor() {
   }
 
   ngOnInit() {
   }
-
 }
