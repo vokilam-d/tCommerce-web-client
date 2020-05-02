@@ -12,6 +12,7 @@ export class ServiceMenuComponent implements OnInit {
 
   @Input() layout: 'horizontal' | 'vertical' = 'horizontal';
   @Input() storeReviewsCount: number;
+  @Input() isInFooter: boolean = false;
   @Output() loginModalOpened = new EventEmitter();
 
   constructor(private customerService: CustomerService) { }

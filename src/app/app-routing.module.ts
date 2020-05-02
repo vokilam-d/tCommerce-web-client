@@ -44,6 +44,30 @@ const routes: Routes = [
     loadChildren: () => import('./pages/oauth-success/oauth-success.module').then(m => m.OauthSuccessModule)
   },
   {
+    path: 'skidki',
+    loadChildren: () => import('./pages/info-pages/discounts/discounts.module').then(m => m.DiscountsModule)
+  },
+  {
+    path: 'dostavka-i-oplata',
+    loadChildren: () => import('./pages/info-pages/shipment-payment-page/shipment-payment-page.module').then(m => m.ShipmentPaymentPageModule)
+  },
+  {
+    path: 'vozvrat-tovara',
+    loadChildren: () => import('./pages/info-pages/repayments/repayments.module').then(m => m.RepaymentsModule)
+  },
+  {
+    path: 'contacts',
+    loadChildren: () => import('./pages/info-pages/contacts/contacts.module').then(m => m.ContactsModule)
+  },
+  {
+    path: 'politika-konfidencialnosti',
+    loadChildren: () => import('./pages/info-pages/policy/policy.module').then(m => m.PolicyModule)
+  },
+  {
+    path: 'otzyvy',
+    loadChildren: () => import('./pages/store-reviews/store-reviews.module').then(m => m.StoreReviewsModule)
+  },
+  {
     matcher: (segments: UrlSegment[], group: UrlSegmentGroup, route: Route): UrlMatchResult => {
       const path = segments.map(s => s.path).join('/');
       route.loadChildren = dynamicModuleResolver(path);
@@ -61,7 +85,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { initialNavigation: 'enabled' })],
+  imports: [RouterModule.forRoot(routes, { initialNavigation: 'enabled', scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
@@ -74,7 +98,9 @@ export class AppRoutingModule {
   }
 
   private handleRouteConfigReset() {
-    if (!isPlatformBrowser(this.platformId)) { return; }
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
 
     this.router.events.subscribe(next => {
       if (next instanceof RouteConfigLoadEnd && next.route.data && next.route.data.isDynamicRoute) {

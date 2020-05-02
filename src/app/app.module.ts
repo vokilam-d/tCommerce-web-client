@@ -10,6 +10,7 @@ import { NotyModule } from './noty/noty.module';
 import { CartModalModule } from './cart-modal/cart-modal.module';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import localeRu from '@angular/common/locales/ru';
+import { HeaderModule } from './header/header.module';
 
 registerLocaleData(localeRu);
 
@@ -21,11 +22,11 @@ registerLocaleData(localeRu);
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     TransferHttpCacheModule,
+    HttpClientModule,
     AppRoutingModule,
     CommonModule,
     CustomerModalModule,
     NotyModule,
-    HttpClientModule,
     CartModalModule
   ],
   providers: [

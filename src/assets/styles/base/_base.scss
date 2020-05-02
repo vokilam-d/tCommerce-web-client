@@ -55,6 +55,23 @@ img {
   height: 0;
 }
 
+.info-page {
+  font-size: 16px;
+  line-height: 1.4;
+
+  p {
+    margin: 0 0 1em;
+  }
+
+  a {
+    color: darken($primary, 10%);
+
+    &:hover {
+      color: $primary
+    }
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
