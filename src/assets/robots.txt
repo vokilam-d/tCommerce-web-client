@@ -1,0 +1,10 @@
+User-Agent: *
+
+Disallow: /admin
+Disallow: /search
+Disallow: /account
+Disallow: /login
+Disallow: /register
+Disallow: /*?*
+
+Allow: /*?gclid=*

@@ -25,6 +25,7 @@ export function app() {
     maxAge: '1y'
   }));
 
+  server.get(`/robots.txt`, (req, res) => res.sendFile(join(distFolder, 'assets', 'robots.txt')));
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
     res.render('index', { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
