@@ -198,7 +198,13 @@ export class ProductDetailsComponent implements OnInit {
         '@type': 'Review',
         author: review.name,
         datePublished: review.createdAt,
-        description: review.text
+        description: review.text,
+        "reviewRating": {
+          "@type": "Rating",
+          "bestRating": "5",
+          "ratingValue": review.rating,
+          "worstRating": "1"
+        }
       }));
     }
 

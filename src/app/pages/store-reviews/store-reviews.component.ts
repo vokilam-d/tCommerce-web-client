@@ -5,6 +5,8 @@ import { API_HOST, DEFAULT_ERROR_TEXT } from '../../shared/constants';
 import { AddStoreReviewDto, StoreReviewDto } from '../../shared/dtos/store-review.dto';
 import { StoreReviewService } from '../../shared/services/store-review/store-review.service';
 import { NotyService } from '../../noty/noty.service';
+import { JsonLdService } from '../../shared/services/json-ld/json-ld.service';
+import { SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'store-reviews',
@@ -13,6 +15,7 @@ import { NotyService } from '../../noty/noty.service';
 })
 export class StoreReviewsComponent implements OnInit {
 
+  jsonLd: SafeHtml;
   reviews: StoreReviewDto[];
   mediaUploadUrl: string = `${API_HOST}/api/v1/store-reviews/media`;
   error: string;
@@ -21,6 +24,7 @@ export class StoreReviewsComponent implements OnInit {
 
   constructor(private headService: HeadService,
               private notyService: NotyService,
+              private jsonLdService: JsonLdService,
               private storeReviewService: StoreReviewService) {
 
   }
@@ -35,6 +39,7 @@ export class StoreReviewsComponent implements OnInit {
       .subscribe(
         response => {
           this.reviews = response.data;
+          this.setJsonLd();
         },
         error => this.error = error.error?.message || DEFAULT_ERROR_TEXT
       );
@@ -103,5 +108,32 @@ export class StoreReviewsComponent implements OnInit {
 
   private showReviewSuccess() {
     this.notyService.success(`Ваш отзыв успешно оставлен`);
+  }
+
+  private setJsonLd() {
+    const jsonLd: any = {
+      '@context': 'http://schema.org',
+      '@type': 'Store',
+      'name': 'Klondike',
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": `${this.reviews.reduce((acc, review) => acc + review.rating, 0) / this.reviews.length}}`,
+        "reviewCount": `${this.reviews.length}}`
+      },
+      "review": this.reviews.map(review => ({
+        "@type": "Review",
+        "author": review.name,
+        "datePublished": review.createdAt,
+        "description": review.text,
+        "reviewRating": {
+          "@type": "Rating",
+          "bestRating": "5",
+          "ratingValue": review.rating,
+          "worstRating": "1"
+        }
+      }))
+    };
+
+    this.jsonLd = this.jsonLdService.getSafeJsonLd(jsonLd);
   }
 }
