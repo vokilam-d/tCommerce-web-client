@@ -53,87 +53,13 @@
       <button class="reviews__add-btn" (click)="openReviewModal()" type="button">Написать отзыв</button>
     </div>
 
-    <div class="review" *ngFor="let review of reviews">
-      <div class="review__votes-count" *ngIf="review.votesCount > 0">
-        Этот отзыв поддержали {{ review.votesCount }} раз
-      </div>
-
-      <rating-stars class="review__rating" [rating]="review.rating"></rating-stars>
-
-      <div class="review__name-container">
-        <span class="review__name">{{ review.name }}</span><span class="review__date"> {{ review.createdAt | date }}</span>
-      </div>
-
-      <div class="review__text">
-        {{ review.text }}
-      </div>
-
-      <review-gallery class="review__medias" *ngIf="review.medias.length" [medias]="review.medias"></review-gallery>
-
-      <div class="review__actions">
-        <button class="review__add-comment" (click)="toggleCommentForm(review)" type="button">
-          Ответить
-        </button>
-
-        <div class="review__vote" *ngIf="!review.hasClientVoted">
-          <ng-container *ngIf="review.voteSuccess; else notVoted">
-            Спасибо за Ваше мнение
-          </ng-container>
-
-          <ng-template #notVoted>
-            <ng-container *ngIf="review.voteError; else voteBtns">
-              {{ review.voteError }}
-            </ng-container>
-          </ng-template>
-
-          <ng-template #voteBtns>
-            Поддержать?
-            <button class="review__vote-btn" (click)="vote(review)" type="button">Да</button>
-            <button class="review__vote-btn" (click)="downvote(review)" type="button">Нет</button>
-          </ng-template>
-        </div>
-      </div>
-
-      <div class="review__comment" *ngFor="let comment of review.comments">
-        <div class="review__name-container">
-          <span class="review__name">{{ comment.name }}</span><span class="review__date"> {{ comment.createdAt | date }}</span>
-        </div>
-
-        <div class="review__comment-text">
-          {{ comment.text }}
-        </div>
-      </div>
-
-      <form class="review__comment review__comment-form comment-form"
-            *ngIf="review.isCommentFormVisible"
-            (ngSubmit)="onCommentFormSubmit(review, form.value)"
-            ngNativeValidate
-            #form="ngForm"
-      >
-        <div class="comment-form__title">
-          Оставить комментарий
-        </div>
-
-        <div class="comment-form__control">
-          <label class="comment-form__label" [for]="'name' + review.id">Имя</label>
-          <input class="comment-form__input" [id]="'name' + review.id" ngModel name="name" type="text" required />
-        </div>
-
-        <div class="comment-form__control">
-          <label class="comment-form__label" [for]="'text' + review.id">Текст</label>
-          <textarea class="comment-form__input" [id]="'text' + review.id" ngModel name="text" rows="3" required></textarea>
-        </div>
-
-        <div class="comment-form__control">
-          <label class="comment-form__label" [for]="'email' + review.id">Электронная почта</label>
-          <input class="comment-form__input" [id]="'email' + review.id" ngModel name="email" type="email" required />
-        </div>
-
-        <button class="comment-form__submit" type="submit">Оставить комментарий</button>
-        <br>
-        <button class="comment-form__cancel" type="button" (click)="toggleCommentForm(review, false)">Отменить</button>
-      </form>
-    </div>
+    <review class="reviews__review"
+            *ngFor="let review of reviews"
+            [review]="review"
+            (vote)="vote(review)"
+            (downvote)="downvote(review)"
+            (addComment)="onAddComment(review, $event)"
+    ></review>
   </div>
 </ng-template>
 

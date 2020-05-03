@@ -8,7 +8,7 @@ import { AddProductReviewDto, ProductReviewDto } from '../../../shared/dtos/prod
 import { JsonLdService } from '../../../shared/services/json-ld/json-ld.service';
 import { SafeHtml } from '@angular/platform-browser';
 import { AddReviewModalComponent, IAddReviewFormValue } from '../../../add-review-modal/add-review-modal.component';
-import { API_HOST } from '../../../shared/constants';
+import { API_HOST, DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { NotyService } from '../../../noty/noty.service';
 
 @Component({
@@ -79,10 +79,6 @@ export class ProductDetailsComponent implements OnInit {
     return a.value - b.value;
   }
 
-  toggleCommentForm(review: ProductReviewDto, state: boolean = !review.isCommentFormVisible) {
-    review.isCommentFormVisible = state;
-  }
-
   vote(review: ProductReviewDto) {
     this.productReviewService.vote(review.id)
       .subscribe(
@@ -111,13 +107,13 @@ export class ProductDetailsComponent implements OnInit {
       );
   }
 
-  onCommentFormSubmit(review: ProductReviewDto, formValue: any) {
+  onAddComment(review: ProductReviewDto, formValue: any) {
     this.productReviewService.addComment(review.id, formValue)
       .subscribe(
         response => {
-          review.isCommentFormVisible = false;
           review.comments = response.data.comments;
-        }
+        },
+        error => this.notyService.error(error.error?.message || DEFAULT_ERROR_TEXT)
       );
   }
 

@@ -1,1 +1,33 @@
-<p>store-reviews works!</p>
+<app-header></app-header>
+
+<div class="page container">
+  <breadcrumbs [breadcrumbs]="[{ title: 'Отзывы об интернет-магазине Klondike, предложения' }]"></breadcrumbs>
+
+  <h1 class="page__title">Отзывы об интернет-магазине "Klondike", предложения</h1>
+
+  <div class="page__content">
+    <p class="info-page">
+      Тут Вы можете оставить отзыв о магазине “Клондайк” (например, оценить скорость доставки, качество консультации).<br>
+      Мы очень благодарны за обратную связь, каждый Ваш отзыв вдохновляет нас!
+    </p>
+
+    <div class="store-reviews">
+      <button class="btn store-reviews__btn" (click)="openReviewModal()" type="button">Оставить отзыв</button>
+
+      <div class="store-reviews__list">
+        <review class="store-reviews__review"
+                *ngFor="let review of reviews"
+                [review]="review"
+                [canLeaveComment]="false"
+                (vote)="vote(review)"
+                (downvote)="downvote(review)"
+        ></review>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<app-footer></app-footer>
+
+<add-review-modal [uploadUrl]="mediaUploadUrl" (addReview)="onReviewAdd($event)"></add-review-modal>

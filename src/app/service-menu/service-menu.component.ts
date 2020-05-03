@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CustomerService } from '../shared/services/customer/customer.service';
+import { StoreReviewService } from '../shared/services/store-review/store-review.service';
 
 @Component({
   selector: 'service-menu',
@@ -9,13 +10,15 @@ import { CustomerService } from '../shared/services/customer/customer.service';
 export class ServiceMenuComponent implements OnInit {
 
   get isLoggedIn() { return this.customerService.isLoggedIn; }
+  get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
   @Input() layout: 'horizontal' | 'vertical' = 'horizontal';
-  @Input() storeReviewsCount: number;
   @Input() isInFooter: boolean = false;
   @Output() loginModalOpened = new EventEmitter();
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService,
+              private storeReviewService: StoreReviewService) {
+  }
 
   ngOnInit() {
   }

@@ -10,7 +10,6 @@ export class SidebarMenuComponent implements OnInit {
 
   isMenuOpened: boolean = false;
   @Input() categories: CategoryTreeItem[];
-  @Input() storeReviewsCount: number;
 
   constructor() { }
 

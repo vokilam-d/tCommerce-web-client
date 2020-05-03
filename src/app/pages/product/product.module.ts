@@ -11,10 +11,10 @@ import { ProductGalleryComponent } from './product-gallery/product-gallery.compo
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { FormsModule } from '@angular/forms';
 import { AddReviewModalModule } from '../../add-review-modal/add-review-modal.module';
-import { ReviewGalleryModule } from '../../review-gallery/review-gallery.module';
 import { MediaGalleryModalModule } from '../../media-gallery-modal/media-gallery-modal.module';
 import { SharedModule } from '../../shared/shared.module';
 import { RelatedProductsModule } from '../../related-products/related-products.module';
+import { ReviewModule } from '../../review/review.module';
 
 @NgModule({
   declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent],
@@ -29,8 +29,8 @@ import { RelatedProductsModule } from '../../related-products/related-products.m
     FormsModule,
     AddReviewModalModule,
     MediaGalleryModalModule,
-    ReviewGalleryModule,
-    RelatedProductsModule
+    RelatedProductsModule,
+    ReviewModule
   ]
 })
 export class ProductModule { }

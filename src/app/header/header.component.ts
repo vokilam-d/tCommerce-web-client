@@ -12,13 +12,11 @@ import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 export class HeaderComponent implements OnInit {
 
   get categories(): CategoryTreeItem[] { return this.categoryService.categories; }
-  get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
   @Input() isCatalogFixed: boolean = false;
   @ViewChild(SidebarMenuComponent) sidebarCmp: SidebarMenuComponent;
 
-  constructor(private categoryService: CategoryService,
-              private storeReviewService: StoreReviewService) {
+  constructor(private categoryService: CategoryService) {
   }
 
   ngOnInit() {
