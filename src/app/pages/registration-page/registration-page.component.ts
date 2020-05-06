@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerDto } from '../../shared/dtos/customer.dto';
 import { Router } from '@angular/router';
 import { CustomerService } from '../../shared/services/customer/customer.service';
 
 @Component({
-  selector: 'login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  selector: 'registration-page',
+  templateUrl: './registration-page.component.html',
+  styleUrls: ['./registration-page.component.scss']
 })
-export class LoginPageComponent implements OnInit {
+export class RegistrationPageComponent implements OnInit {
 
   constructor(private router: Router,
               private customerService: CustomerService) {
@@ -20,11 +19,11 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
-  onLogin(customer: CustomerDto) {
+  onRegister() {
     this.router.navigate(['/']);
   }
 
-  switchToRegister() {
-    this.router.navigate(['/', 'register']);
+  switchToLogin() {
+    this.router.navigate(['/', 'login']);
   }
 }

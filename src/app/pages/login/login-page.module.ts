@@ -6,6 +6,7 @@ import { LoginPageComponent } from './login-page.component';
 import { HeaderModule } from '../../header/header.module';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { FooterModule } from '../../footer/footer.module';
+import { LoginFormModule } from '../../login-form/login-form.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FooterModule } from '../../footer/footer.module';
     LoginPageRoutingModule,
     HeaderModule,
     BreadcrumbsModule,
-    FooterModule
+    FooterModule,
+    LoginFormModule
   ]
 })
 export class LoginPageModule { }

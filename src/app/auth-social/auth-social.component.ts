@@ -21,8 +21,13 @@ export class AuthSocialComponent implements OnInit {
 
     const interval = setInterval(() => {
       if (child.closed) {
-        this.customerService.fetchCustomer();
-        this.authFinishEmitter.emit();
+        this.customerService.fetchCustomer().subscribe(
+          response => {
+            if (response.data) {
+              this.authFinishEmitter.emit();
+            }
+          }
+        );
         clearInterval(interval);
       }
     }, 500);

@@ -21,40 +21,43 @@ import { API_HOST } from '../../constants';
 })
 export class CustomerService { // todo split to CartService
 
-  private _customer: CustomerDto | DetailedCustomerDto;
+  private _customer = new BehaviorSubject<CustomerDto | DetailedCustomerDto>(null);
   private _cart: OrderItemDto[] = [];
   private _showLoginModal$ = new Subject();
   private _showCartModal$ = new Subject<boolean>();
+  customer$ = this._customer.asObservable();
   showLoginModal$ = this._showLoginModal$.asObservable();
   showCartModal$ = this._showCartModal$.asObservable();
   cartInit$ = new BehaviorSubject(false);
 
-  get customer() { return this._customer; }
+  get customer() { return this._customer.getValue(); }
   get cart() { return this._cart; }
   get cartTotalCost() { return this._cart && this._cart.reduce((acc, item) => acc + item.totalCost, 0); }
   get isLoggedIn(): boolean { return !!this.customer; }
   get customerName(): string { return this.customer ? `${this.customer.firstName} ${this.customer.lastName}` : ''; }
   get customerEmail(): string { return this.customer ? this.customer.email : ''; }
 
-  constructor(private router: Router,
-              @Inject(PLATFORM_ID) private platformId: any,
+  constructor(@Inject(PLATFORM_ID) private platformId: any,
+              private router: Router,
               private http: HttpClient) {
-    this.fetchCustomer();
+    this.fetchCustomer().subscribe();
   }
 
-  fetchCustomer() {
-    this.http.get<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer`)
-      .subscribe(
-        response => {
-          if (!this.customer) { // guard if 'fetchCustomerDetails' got response faster
-            this.setCustomer(response.data);
+  fetchCustomer(): Observable<ResponseDto<CustomerDto>> {
+    return this.http.get<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer`)
+      .pipe(
+        tap(
+          response => {
+            if (!this.customer) { // guard if 'fetchCustomerDetails' got response faster
+              this.setCustomer(response.data);
+            }
           }
-        }
+        )
       );
   }
 
   setCustomer(customer: CustomerDto | DetailedCustomerDto) {
-    this._customer = customer;
+    this._customer.next(customer);
 
     this.initCart();
   }

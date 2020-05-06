@@ -68,6 +68,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/store-reviews/store-reviews.module').then(m => m.StoreReviewsModule)
   },
   {
+    path: 'register',
+    loadChildren: () => import('./pages/registration-page/registration-page.module').then(m => m.RegistrationPageModule)
+  },
+  {
     matcher: (segments: UrlSegment[], group: UrlSegmentGroup, route: Route): UrlMatchResult => {
       const path = segments.map(s => s.path).join('/');
       route.loadChildren = dynamicModuleResolver(path);

@@ -1,13 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef, Inject,
-  OnDestroy,
-  OnInit, PLATFORM_ID,
-  QueryList,
-  Renderer2,
-  ViewChildren
-} from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, QueryList, Renderer2, ViewChildren } from '@angular/core';
 import { CustomerService } from '../../shared/services/customer/customer.service';
 import { DetailedCustomerDto } from '../../shared/dtos/detailed-customer.dto';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -23,7 +14,7 @@ type ChildRoute = { link: string; label: string };
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']
 })
-export class AccountComponent extends NgUnsubscribe implements OnInit, OnDestroy {
+export class AccountComponent extends NgUnsubscribe implements OnInit {
 
   childRoutes: ChildRoute[];
   breadcrumbs: IBreadcrumb[] = [{ title: 'Контакты' }];
@@ -49,10 +40,7 @@ export class AccountComponent extends NgUnsubscribe implements OnInit, OnDestroy
 
     this.fetchAccount();
     this.handleBreadrumbsUpdate();
-  }
-
-  ngOnDestroy(): void {
-    super.ngOnDestroy();
+    this.handleLogout();
   }
 
   private fetchAccount() {
@@ -112,10 +100,22 @@ export class AccountComponent extends NgUnsubscribe implements OnInit, OnDestroy
   }
 
   onActivate() {
-    if (this.isFirstRouteActivated) { return; }
+    if (this.isFirstRouteActivated || !isPlatformBrowser(this.platformId)) { return; }
     this.isFirstRouteActivated = true;
 
     const { nativeElement: activeEl } = this.routerLinksRefs.find(elRef => elRef.nativeElement.className.includes('--active'));
     activeEl.offsetParent.scrollLeft = activeEl.offsetLeft + activeEl.offsetWidth - activeEl.offsetParent.offsetWidth + 40;
+  }
+
+  private handleLogout() {
+    this.customerService.customer$
+      .pipe( takeUntil(this.ngUnsubscribe) )
+      .subscribe(
+        customer => {
+          if (!customer) {
+            this.router.navigate(['/']);
+          }
+        }
+      )
   }
 }

@@ -3,7 +3,14 @@
 <div class="page container not-found">
   <breadcrumbs [breadcrumbs]="[{ title: 'Войти' }]"></breadcrumbs>
 
-  <h1 class="page__title"></h1>
+  <h1 class="page__title">Вход</h1>
+
+  <div class="page__content">
+    <login-form (loggedIn)="onLogin($event)"
+                (switchToRegister)="switchToRegister()"
+    >
+    </login-form>
+  </div>
 </div>
 
 <app-footer></app-footer>
