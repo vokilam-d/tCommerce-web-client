@@ -1,4 +1,6 @@
 <div class="gallery" *ngIf="isModalVisible">
+  <div class="gallery__overlay" (click)="closeModal()"></div>
+
   <img class="gallery__img"
        *ngIf="medias[activeMediaIdx] as media"
        [src]="uploadedHost + media.variantsUrls.large"
