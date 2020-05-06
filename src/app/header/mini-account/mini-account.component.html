@@ -1,6 +1,6 @@
 <div class="toolbar-item account">
 
-  <a class="account__link" [routerLink]="isLoggedIn ? ['/', 'account'] : null" (click)="onLoginClick()">
+  <a class="account__link" [routerLink]="isLoggedIn ? ['/', 'account'] : '#'" (click)="onLoginClick()">
     <i class="toolbar-item__icon mbi mbi-user"></i>
 
     <div class="account__login-text">

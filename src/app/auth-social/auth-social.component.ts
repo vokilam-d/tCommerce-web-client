@@ -8,7 +8,7 @@ import { CustomerService } from '../shared/services/customer/customer.service';
 })
 export class AuthSocialComponent implements OnInit {
 
-  @Output('authFinish') authFinishEmitter = new EventEmitter();
+  @Output('authSuccess') authSuccessEmitter = new EventEmitter();
 
   constructor(private customerService: CustomerService) { }
 
@@ -16,7 +16,7 @@ export class AuthSocialComponent implements OnInit {
   }
 
   authSocial(provider: 'google' | 'facebook') {
-    const url = this.customerService.getLoginSocialUrl(provider);
+    const url = this.customerService.getSocialLoginUrl(provider);
     const child = window.open(url, '', "menubar=0,toolbar=0,status=0,width=626,height=436");
 
     const interval = setInterval(() => {
@@ -24,7 +24,7 @@ export class AuthSocialComponent implements OnInit {
         this.customerService.fetchCustomer().subscribe(
           response => {
             if (response.data) {
-              this.authFinishEmitter.emit();
+              this.authSuccessEmitter.emit();
             }
           }
         );

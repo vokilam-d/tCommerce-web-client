@@ -72,6 +72,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/registration-page/registration-page.module').then(m => m.RegistrationPageModule)
   },
   {
+    path: 'reset-password',
+    loadChildren: () => import('./pages/reset-password/reset-password.module').then(m => m.ResetPasswordModule)
+  },
+  {
     matcher: (segments: UrlSegment[], group: UrlSegmentGroup, route: Route): UrlMatchResult => {
       const path = segments.map(s => s.path).join('/');
       route.loadChildren = dynamicModuleResolver(path);

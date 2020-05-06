@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { ResponseDto } from '../../dtos/response.dto';
 import { LoginDto } from '../../dtos/login.dto';
 import { RegisterDto } from '../../dtos/registration.dto';
-import { ResetPasswordDto } from '../../dtos/reset-password.dto';
+import { InitResetPasswordDto } from '../../dtos/init-reset-password.dto';
 import { DetailedCustomerDto } from '../../dtos/detailed-customer.dto';
 import { ShippingAddressDto } from '../../dtos/shipping-address.dto';
 import { map, tap } from 'rxjs/operators';
@@ -15,6 +15,7 @@ import { ProductDto } from '../../dtos/product.dto';
 import { ProductListItemDto } from '../../dtos/product-list-item.dto';
 import { isPlatformBrowser } from '@angular/common';
 import { API_HOST } from '../../constants';
+import { ResetPasswordDto } from '../../dtos/reset-password.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -81,12 +82,16 @@ export class CustomerService { // todo split to CartService
       );
   }
 
-  getLoginSocialUrl(provider: 'google' | 'facebook') {
+  getSocialLoginUrl(provider: 'google' | 'facebook') {
     return `${API_HOST}/api/v1/customer/login/${provider}`;
   }
 
+  initResetPassword(initResetDto: InitResetPasswordDto) {
+    return this.http.post<any>(`${API_HOST}/api/v1/customer/init-reset-password`, initResetDto);
+  }
+
   resetPassword(resetDto: ResetPasswordDto) {
-    return this.http.post<any>(`${API_HOST}/api/v1/customer/reset`, resetDto);
+    return this.http.post<any>(`${API_HOST}/api/v1/customer/reset-password`, resetDto);
   }
 
   register(registerDto: RegisterDto) {

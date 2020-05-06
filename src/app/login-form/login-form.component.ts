@@ -82,7 +82,7 @@ export class LoginFormComponent implements OnInit {
     login = normalizeEmailOrPhoneNumber(login);
 
     this.isLoading = true;
-    this.customerService.resetPassword({ login })
+    this.customerService.initResetPassword({ login })
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         _ => {

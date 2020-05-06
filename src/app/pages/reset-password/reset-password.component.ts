@@ -1,40 +1,51 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CustomerDto } from '../shared/dtos/customer.dto';
-import { CustomerService } from '../shared/services/customer/customer.service';
-import { RegisterDto } from '../shared/dtos/registration.dto';
-import { CustomValidators } from '../shared/classes/validators';
-import { DEFAULT_ERROR_TEXT, isEmailRegex, validPasswordRegex } from '../shared/constants';
+import { CustomerService } from '../../shared/services/customer/customer.service';
+import { DEFAULT_ERROR_TEXT, validPasswordRegex } from '../../shared/constants';
+import { CustomValidators } from '../../shared/classes/validators';
 import { finalize } from 'rxjs/operators';
+import { ResetPasswordDto } from '../../shared/dtos/reset-password.dto';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'registration-form',
-  templateUrl: './registration-form.component.html',
-  styleUrls: ['./registration-form.component.scss']
+  selector: 'reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.scss']
 })
-export class RegistrationFormComponent implements OnInit {
+export class ResetPasswordComponent implements OnInit {
 
   form: FormGroup;
   formError: string;
   isLoading: boolean = false;
-
-  @Output() registered = new EventEmitter<CustomerDto>();
-  @Output() registeredBySocial = new EventEmitter();
-  @Output('switchToLogin') switchToLoginEmitter = new EventEmitter();
+  success: boolean = false;
+  private token: string;
 
   constructor(private formBuilder: FormBuilder,
+              private route: ActivatedRoute,
+              private router: Router,
               private customerService: CustomerService) {
   }
 
   ngOnInit(): void {
+    if (!this.checkToken()) {
+      return;
+    }
+
     this.buildForm();
   }
 
+  private checkToken() {
+    this.token = this.route.snapshot.queryParamMap.get('token');
+    if (this.token === undefined) {
+      this.router.navigate(['/']);
+      return false;
+    }
+
+    return true;
+  }
+
   private buildForm() {
-    const controls: Record<keyof RegisterDto, any> = {
-      firstName: [''],
-      lastName: [''],
-      email: ['', Validators.pattern(isEmailRegex)],
+    const controls: Record<keyof Omit<ResetPasswordDto, 'token'>, any> = {
       password: ['', Validators.pattern(validPasswordRegex)]
     };
     (controls as any).passwordConfirm = [''];
@@ -54,19 +65,23 @@ export class RegistrationFormComponent implements OnInit {
     if (this.form.invalid) {
       this.validateControls();
     } else {
-      this.register();
+      this.resetPassword();
     }
   }
 
-  private register() {
-    const { passwordConfirm, ...registerDto } = this.form.value;
+  private resetPassword() {
+    const { password } = this.form.value;
+    const resetDto: ResetPasswordDto = {
+      password,
+      token: this.token
+    };
 
     this.isLoading = true;
-    this.customerService.register(registerDto)
+    this.customerService.resetPassword(resetDto)
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         response => {
-          this.registered.emit(response.data);
+          this.success = true;
         },
         error => {
           this.formError = error.error && error.error.message || DEFAULT_ERROR_TEXT;
@@ -88,14 +103,5 @@ export class RegistrationFormComponent implements OnInit {
   isControlInvalid(controlName: string): boolean {
     const control = this.form.get(controlName);
     return !control.valid && control.touched;
-  }
-
-  switchToLogin() {
-    this.formError = null;
-    this.switchToLoginEmitter.emit();
-  }
-
-  socialAuthSuccess() {
-    this.registeredBySocial.emit();
   }
 }
