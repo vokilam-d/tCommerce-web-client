@@ -1,0 +1,32 @@
+<div class="toolbar">
+  <div class="toolbar__title" (click)="toggleContent(content.Categories)">
+    Категории
+    <i class="mbi mbi-io-add toolbar__title-icon"></i>
+  </div>
+
+  <ul class="toolbar__content categories"
+      [class.toolbar__content--visible]="isVisible[content.Categories]"
+  >
+    <li *ngFor="let category of categories">
+      <a class="category" [routerLink]="['/', 'blog', category.slug]">
+        <i class="mbi mbi-ios-arrow-right category__icon"></i>
+        {{ category.name }} ({{ category.postsCount }})
+      </a>
+    </li>
+  </ul>
+
+  <div class="toolbar__title" (click)="toggleContent(content.LastPosts)">
+    Последние статьи
+    <i class="mbi mbi-io-add toolbar__title-icon"></i>
+  </div>
+
+  <ul class="toolbar__content last-posts"
+      [class.toolbar__content--visible]="isVisible[content.LastPosts]"
+  >
+    <li *ngFor="let lastPost of lastPosts">
+      <a class="last-post" [routerLink]="['/', 'blog', lastPost.slug]">
+        {{ lastPost.name }}
+      </a>
+    </li>
+  </ul>
+</div>

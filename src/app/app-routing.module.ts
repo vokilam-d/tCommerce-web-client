@@ -76,6 +76,31 @@ const routes: Routes = [
     loadChildren: () => import('./pages/reset-password/reset-password.module').then(m => m.ResetPasswordModule)
   },
   {
+    path: 'blog',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/blog-pages/blog/blog.module').then(m => m.BlogModule)
+      },
+      {
+        matcher: (segments: UrlSegment[], group: UrlSegmentGroup, route: Route): UrlMatchResult => {
+          const path = segments.map(s => s.path).join('/');
+          route.loadChildren = dynamicModuleResolver(path, 'blog-pages/');
+
+          return {
+            consumed: segments,
+            posParams: {
+              slug: segments[0]
+            }
+          };
+        },
+        loadChildren: dynamicModuleResolver(),
+        data: { isDynamicRoute: true }
+      }
+
+    ]
+  },
+  {
     matcher: (segments: UrlSegment[], group: UrlSegmentGroup, route: Route): UrlMatchResult => {
       const path = segments.map(s => s.path).join('/');
       route.loadChildren = dynamicModuleResolver(path);

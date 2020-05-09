@@ -3,7 +3,7 @@ import { API_HOST } from '../shared/constants';
 
 const MODULES_CACHE: { [slug: string]: any; } = { };
 
-export function dynamicModuleResolver(slug: string = 'not-found') {
+export function dynamicModuleResolver(slug: string = 'not-found', dirPrefix: string = '') {
   if (MODULES_CACHE[slug]) {
     return () => MODULES_CACHE[slug];
   }
@@ -11,7 +11,7 @@ export function dynamicModuleResolver(slug: string = 'not-found') {
   return () => axios.get(`${API_HOST}/api/v1/pages/${slug}`)
       .then(res => {
         const pageType = res.data;
-        return import(`../pages/${pageType}/${pageType}.module`)
+        return import(`../pages/${dirPrefix}${pageType}/${pageType}.module`)
           .then(importedModule => {
             const keys = Object.keys(importedModule);
             const ngModule = importedModule[keys[0]];
