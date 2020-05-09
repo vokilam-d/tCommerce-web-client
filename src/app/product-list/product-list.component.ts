@@ -5,7 +5,7 @@ import { ProductService } from '../pages/product/product.service';
 import { SortingPaginatingFilterDto } from '../shared/dtos/spf.dto';
 import { FilterComponent } from './filter/filter.component';
 import { SortingComponent } from './sorting/sorting.component';
-import { PaginationComponent } from './pagination/pagination.component';
+import { PaginationComponent } from '../pagination/pagination.component';
 import { ScrollToService } from '../shared/services/scroll-to/scroll-to.service';
 
 @Component({

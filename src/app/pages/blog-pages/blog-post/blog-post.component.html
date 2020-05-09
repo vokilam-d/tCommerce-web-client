@@ -1,7 +1,9 @@
+<div [innerHTML]="jsonLd"></div>
+
 <app-header></app-header>
 
 <div class="page container blog-page">
-  <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
+  <breadcrumbs [breadcrumbs]="breadcrumbs" [showLastItem]="false"></breadcrumbs>
 
   <h1 class="page__title blog-page__title">
 

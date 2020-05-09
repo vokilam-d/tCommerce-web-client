@@ -1,1 +1,34 @@
-<p>blog-posts-list works!</p>
+<div [innerHTML]="jsonLd"></div>
+
+<div class="items" #itemsRef>
+  <div class="items__error" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <div class="items__item item" *ngFor="let item of items">
+    <a class="item__img-container" [routerLink]="['/', 'blog', item.slug]">
+      <img class="item__img" [src]="uploadedHost + item.featuredMedia.variantsUrls.original" [alt]="item.name">
+    </a>
+
+    <a class="item__name" [routerLink]="['/', 'blog', item.slug]">
+      {{ item.name }}
+    </a>
+
+    <div class="item__footer">
+      <div class="item__content">
+        {{ item.shortContent }}
+      </div>
+
+      <div class="item__category">
+        Категория: <a class="item__category-link" *ngIf="item.category" [routerLink]="['/', 'blog', item.category.slug]">{{ item.category.name }}</a>
+      </div>
+
+      <div class="item__publish-date">
+        Добавлено: <time>{{ item.publishedAt | date }}</time>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<pagination class="pagination" [pagesTotal]="pagesTotal" (valueChanged)="onPaginationChanged()"></pagination>

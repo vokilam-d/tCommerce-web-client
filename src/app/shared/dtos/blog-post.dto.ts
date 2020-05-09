@@ -12,5 +12,7 @@ export class BlogPostDto {
   medias: MediaDto[];
   metaTags: MetaTagsDto;
   name: string;
+  slug: string;
   publishedAt: Date;
+  updatedAt: Date;
 }

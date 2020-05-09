@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { BlogPostListItemDto } from '../../dtos/blog-post-list-item.dto';
 import { API_HOST } from '../../constants';
 import { tap } from 'rxjs/operators';
+import { BlogCategoryDto } from '../../dtos/blog-category.dto';
+import { BlogPostDto } from '../../dtos/blog-post.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,14 @@ export class BlogService {
     return this.http
       .get<ResponseDto<BlogCategoryListItemDto[]>>(`${API_HOST}/api/v1/blog/categories`)
       .pipe( tap(response => this.categories = response.data) );
+  }
+
+  getCategory(slug: string) {
+    return this.http.get<ResponseDto<BlogCategoryDto>>(`${API_HOST}/api/v1/blog/categories/${slug}`);
+  }
+
+  getPost(slug: string) {
+    return this.http.get<ResponseDto<BlogPostDto>>(`${API_HOST}/api/v1/blog/posts/${slug}`);
   }
 
   getLastPosts(): Observable<ResponseDto<BlogPostListItemDto[]>> {

@@ -11,7 +11,7 @@
     <li class="breadcrumbs__item" *ngIf="!last || showLastItem">
       <a class="breadcrumbs__link"
          *ngIf="!last; else noLink"
-         [routerLink]="['/', breadcrumb.link]"
+         [routerLink]="'/' + breadcrumb.link"
       >
         {{ breadcrumb.title }}
       </a>

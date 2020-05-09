@@ -3,7 +3,7 @@ import { MetaTagsDto } from '../../dtos/meta-tags.dto';
 import { Meta, Title } from '@angular/platform-browser';
 
 export interface IOgTags {
-  type: 'product';
+  type: 'product' | 'article';
   title: string;
   image?: string;
   description: string;

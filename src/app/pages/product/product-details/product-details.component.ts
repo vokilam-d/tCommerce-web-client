@@ -19,7 +19,7 @@ import { NotyService } from '../../../noty/noty.service';
 export class ProductDetailsComponent implements OnInit {
 
   jsonLd: SafeHtml;
-  indices = {
+  indices = { // Can't use enum 'cause of pipe in template
     description: 0,
     chars: 1,
     reviews: 2

@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { BlogService } from '../../../shared/services/blog/blog.service';
+import { HeadService } from '../../../shared/services/head/head.service';
+import { ActivatedRoute } from '@angular/router';
+import { BlogCategoryDto } from '../../../shared/dtos/blog-category.dto';
+import { IBreadcrumb } from '../../../breadcrumbs/breadcrumbs.interface';
+import { BlogPostListItemDto } from '../../../shared/dtos/blog-post-list-item.dto';
 
 @Component({
   selector: 'blog-category',
@@ -6,11 +12,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./blog-category.component.scss', '../blog-page.scss']
 })
 export class BlogCategoryComponent implements OnInit {
-  breadcrumbs: any;
 
-  constructor() { }
+  breadcrumbs: IBreadcrumb[];
+  category: BlogCategoryDto;
 
-  ngOnInit(): void {
+  constructor(private blogService: BlogService,
+              private route: ActivatedRoute,
+              private headService: HeadService) {
   }
 
+  ngOnInit(): void {
+    this.fetchCategory();
+  }
+
+  private fetchCategory() {
+    const slug = this.route.snapshot.paramMap.get('slug');
+    this.blogService.getCategory(slug)
+      .pipe()
+      .subscribe(
+        response => {
+          this.category = response.data;
+          this.setBreadcrumbs();
+          this.setMeta();
+        }
+      );
+  }
+
+  private setBreadcrumbs() {
+    this.breadcrumbs = [{ title: 'Блог', link: 'blog' }, { title: this.category.name }];
+  }
+
+  private setMeta() {
+    this.headService.setMeta(this.category.metaTags);
+  }
 }
