@@ -1,0 +1,7 @@
+<div class="medias">
+  <div class="media" *ngFor="let media of medias, index as i" (click)="onMediaClick(i)">
+    <img class="media__img" [src]="uploadedHost + media.variantsUrls[thumbnailProp]" [alt]="media.altText">
+  </div>
+</div>
+
+<media-gallery-modal [medias]="medias" [imageForModalProp]="imageForModalProp"></media-gallery-modal>

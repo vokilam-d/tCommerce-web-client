@@ -3,7 +3,7 @@
 
   <img class="gallery__img"
        *ngIf="medias[activeMediaIdx] as media"
-       [src]="uploadedHost + media.variantsUrls.large"
+       [src]="uploadedHost + media.variantsUrls[imageForModalProp]"
        [alt]="media.altText"
   >
 

@@ -8,6 +8,7 @@ import { IBreadcrumb } from '../../../breadcrumbs/breadcrumbs.interface';
 import { ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { DEFAULT_ERROR_TEXT } from '../../../shared/constants';
+import { EMediaVariant } from '../../../shared/enums/media-variant.enum';
 
 @Component({
   selector: 'blog-post',
@@ -21,6 +22,7 @@ export class BlogPostComponent implements OnInit {
   post: BlogPostDto;
   error: string;
   isLoading: boolean = false;
+  mediaVariants = EMediaVariant;
 
   constructor(private jsonLdService: JsonLdService,
               private route: ActivatedRoute,

@@ -1,0 +1,33 @@
+@import "variables";
+
+.post {
+  &__content {
+    font-size: 16px;
+  }
+
+  &__section-title {
+    margin: 20px 0 0;
+    font-size: 24px;
+  }
+
+  &__gallery-list {
+    margin: 10px 0 0;
+  }
+
+  &__footer-title {
+    font-weight: 600;
+  }
+
+  &__category-link {
+    color: $blue;
+  }
+
+  &__footer {
+    margin: 20px 0 0;
+    font-size: 16px;
+  }
+
+  &__category {
+    margin: 10px 0 0;
+  }
+}

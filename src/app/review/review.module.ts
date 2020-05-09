@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReviewComponent } from './review.component';
 import { RatingStarsModule } from '../rating-stars/rating-stars.module';
-import { ReviewGalleryModule } from '../review-gallery/review-gallery.module';
+import { MediaGalleryModule } from '../media-gallery/media-gallery.module';
 import { FormsModule } from '@angular/forms';
 
 
@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RatingStarsModule,
-    ReviewGalleryModule,
+    MediaGalleryModule,
     FormsModule
   ],
   exports: [ReviewComponent]

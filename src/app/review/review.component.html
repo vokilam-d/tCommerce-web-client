@@ -13,7 +13,7 @@
     {{ review.text }}
   </div>
 
-  <review-gallery class="review__medias" *ngIf="review.medias.length" [medias]="review.medias"></review-gallery>
+  <media-gallery class="review__medias" *ngIf="review.medias.length" [medias]="review.medias"></media-gallery>
 
   <div class="review__actions">
     <button class="review__add-comment" *ngIf="canLeaveComment" (click)="toggleCommentForm()" type="button">

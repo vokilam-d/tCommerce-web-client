@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 import { MediaDto } from '../shared/dtos/media.dto';
 import { API_HOST } from '../shared/constants';
+import { EMediaVariant } from '../shared/enums/media-variant.enum';
 
 @Component({
   selector: 'media-gallery-modal',
@@ -15,6 +16,7 @@ export class MediaGalleryModalComponent implements OnInit, OnDestroy {
 
   activeMediaIdx: number = 0;
   @Input() medias: MediaDto[] = [];
+  @Input() imageForModalProp: EMediaVariant = EMediaVariant.Large;
 
   constructor(private renderer: Renderer2) { }
 

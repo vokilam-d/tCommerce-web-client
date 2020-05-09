@@ -34,21 +34,22 @@
   }
 
   &__close {
-    top: 5px;
-    right: 5px;
+    top: 0;
+    right: 0;
     padding: 15px;
   }
 
   &__arrow {
-    top: 40px;
-    bottom: 40px;
+    padding: 15px 10px 12px;
 
     &--prev {
       left: 0;
+      padding-left: 8px;
     }
 
     &--next {
       right: 0;
+      padding-right: 8px;
     }
   }
 }

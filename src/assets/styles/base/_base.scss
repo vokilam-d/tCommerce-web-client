@@ -42,6 +42,14 @@ img {
       list-style-type: inherit;
     }
   }
+
+  a {
+    color: $blue;
+
+    &:hover {
+      color: darken($blue, 10%);
+    }
+  }
 }
 
 .yt-video-wrapper {

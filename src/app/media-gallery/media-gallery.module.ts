@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReviewGalleryComponent } from './review-gallery.component';
+import { MediaGalleryComponent } from './media-gallery.component';
 import { MediaGalleryModalModule } from '../media-gallery-modal/media-gallery-modal.module';
 
 
 @NgModule({
-  declarations: [ReviewGalleryComponent],
+  declarations: [MediaGalleryComponent],
   imports: [
     CommonModule,
     MediaGalleryModalModule
   ],
-  exports: [ReviewGalleryComponent]
+  exports: [MediaGalleryComponent]
 })
-export class ReviewGalleryModule { }
+export class MediaGalleryModule { }
