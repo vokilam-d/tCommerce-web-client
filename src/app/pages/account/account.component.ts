@@ -6,6 +6,7 @@ import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
+import { HeadService } from '../../shared/services/head/head.service';
 
 type ChildRoute = { link: string; label: string };
 
@@ -30,6 +31,7 @@ export class AccountComponent extends NgUnsubscribe implements OnInit {
               @Inject(PLATFORM_ID) private platformId: any,
               private route: ActivatedRoute,
               private renderer: Renderer2,
+              private headService: HeadService,
               private router: Router) {
     super();
   }
@@ -41,6 +43,7 @@ export class AccountComponent extends NgUnsubscribe implements OnInit {
     this.fetchAccount();
     this.handleBreadrumbsUpdate();
     this.handleLogout();
+    this.setMeta();
   }
 
   private fetchAccount() {
@@ -117,5 +120,9 @@ export class AccountComponent extends NgUnsubscribe implements OnInit {
           }
         }
       )
+  }
+
+  private setMeta() {
+    this.headService.setMeta({ title: 'Личный кабинет', description: 'Личный кабинет' });
   }
 }

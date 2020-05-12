@@ -5,6 +5,7 @@ import { DEFAULT_ERROR_TEXT, isEmailRegex, validPasswordRegex } from '../../../s
 import { CustomValidators } from '../../../shared/classes/validators';
 import { CustomerService } from '../../../shared/services/customer/customer.service';
 import { UpdateCustomerDto } from '../../../shared/dtos/customer.dto';
+import { HeadService } from '../../../shared/services/head/head.service';
 
 @Component({
   selector: 'account-customer-info',
@@ -22,10 +23,12 @@ export class AccountCustomerInfoComponent implements OnInit {
   get customer() { return this.customerService.customer; }
 
   constructor(private customerService: CustomerService,
+              private headService: HeadService,
               private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
+    this.setMeta();
   }
 
   openInfoForm() {
@@ -134,5 +137,9 @@ export class AccountCustomerInfoComponent implements OnInit {
   private showErrorMessage(error: any) {
     this.formError = error.error?.message || DEFAULT_ERROR_TEXT;
     console.warn(error);
+  }
+
+  private setMeta() {
+    this.headService.setMeta({ title: 'Личный кабинет', description: 'Личный кабинет' });
   }
 }

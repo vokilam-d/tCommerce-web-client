@@ -5,6 +5,7 @@ import { ShippingAddressDto } from '../../../shared/dtos/shipping-address.dto';
 import { DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { finalize } from 'rxjs/operators';
 import { DetailedCustomerDto } from '../../../shared/dtos/detailed-customer.dto';
+import { HeadService } from '../../../shared/services/head/head.service';
 
 @Component({
   selector: 'addresses',
@@ -22,10 +23,12 @@ export class AddressesComponent implements OnInit {
   get addresses() { return (this.customerService.customer as DetailedCustomerDto).addresses; }
 
   constructor(private customerService: CustomerService,
+              private headService: HeadService,
               private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
+    this.setMeta();
   }
 
   submit() {
@@ -115,5 +118,9 @@ export class AddressesComponent implements OnInit {
   private showErrorMessage(error: any) {
     this.formError = error.error?.message || DEFAULT_ERROR_TEXT;
     console.warn(error);
+  }
+
+  private setMeta() {
+    this.headService.setMeta({ title: 'Мои адреса', description: 'Мои адреса' });
   }
 }

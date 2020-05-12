@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { JsonLdService } from '../../../shared/services/json-ld/json-ld.service';
 import { BlogPostDto } from '../../../shared/dtos/blog-post.dto';
 import { BlogService } from '../../../shared/services/blog/blog.service';
@@ -23,10 +23,12 @@ export class BlogPostComponent implements OnInit {
   error: string;
   isLoading: boolean = false;
   mediaVariants = EMediaVariant;
+  contentHtml: SafeHtml;
 
   constructor(private jsonLdService: JsonLdService,
               private route: ActivatedRoute,
               private headService: HeadService,
+              private domSanitizer: DomSanitizer,
               private blogService: BlogService) {
   }
 
@@ -43,6 +45,7 @@ export class BlogPostComponent implements OnInit {
       .subscribe(
         response => {
           this.post = response.data;
+          this.contentHtml = this.domSanitizer.bypassSecurityTrustHtml(this.post.content);
           this.setBreadcrumbs();
           this.setMeta();
           this.setJsonLd();

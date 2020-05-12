@@ -1,5 +1,5 @@
 export class MetaTagsDto {
   title: string;
-  keywords: string;
+  keywords?: string;
   description: string;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeadService } from '../../../shared/services/head/head.service';
 
 @Component({
   selector: 'account-orders',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountOrdersComponent implements OnInit {
 
-  constructor() { }
+  constructor(private headService: HeadService) { }
 
   ngOnInit(): void {
+    this.setMeta();
   }
 
+
+  private setMeta() {
+    this.headService.setMeta({ title: 'Мои заказы', description: 'Мои заказы' });
+  }
 }

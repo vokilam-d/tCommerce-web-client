@@ -6,6 +6,7 @@ import { CategoryDto } from '../../shared/dtos/category.dto';
 import { ProductService } from '../product/product.service';
 import { IProductListFilter } from '../../product-list/product-list-filter.interface';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { HeadService } from '../../shared/services/head/head.service';
 
 @Component({
   selector: 'category',
@@ -21,6 +22,7 @@ export class CategoryComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private sanitizer: DomSanitizer,
+              private headService: HeadService,
               private productService: ProductService,
               private categoryService: CategoryService) {
   }
@@ -57,5 +59,6 @@ export class CategoryComponent implements OnInit {
   }
 
   private setMeta() {
+    this.headService.setMeta(this.category.metaTags);
   }
 }
