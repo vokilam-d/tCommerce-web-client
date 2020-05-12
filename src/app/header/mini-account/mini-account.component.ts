@@ -17,9 +17,7 @@ export class MiniAccountComponent implements OnInit {
   }
 
   onLoginClick() {
-    if (!this.isLoggedIn) {
-      this.customerService.showLoginModal();
-    }
+    this.customerService.showLoginModal();
   }
 
   logout() {

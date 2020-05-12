@@ -13,3 +13,14 @@
     font-size: 30px;
   }
 }
+
+.account {
+  &__link {
+    display: flex;
+    align-items: center;
+  }
+
+  &__login-text {
+    margin: 2px 0 0 2px;
+  }
+}
