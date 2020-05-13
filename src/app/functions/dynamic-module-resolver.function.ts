@@ -16,10 +16,14 @@ export function dynamicModuleResolver(slug: string = 'not-found', dirPrefix: str
             const keys = Object.keys(importedModule);
             const ngModule = importedModule[keys[0]];
 
-            MODULES_CACHE[slug] = ngModule;
+            if (typeof window !== 'undefined') {
+              MODULES_CACHE[slug] = ngModule;
+            }
+
             return ngModule;
           })
-          .catch(() => {
+          .catch((err) => {
+            console.error(err);
             console.warn(`Lazy load of module '${pageType}' failed. Loading Not found module...`);
             return importNotFound();
           });
