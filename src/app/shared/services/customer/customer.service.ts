@@ -16,6 +16,7 @@ import { ProductListItemDto } from '../../dtos/product-list-item.dto';
 import { isPlatformBrowser } from '@angular/common';
 import { API_HOST } from '../../constants';
 import { ResetPasswordDto } from '../../dtos/reset-password.dto';
+import { OrderDto } from '../../dtos/order.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -220,5 +221,9 @@ export class CustomerService { // todo split to CartService
 
     return this.http.get<ResponseDto<boolean>>(`${API_HOST}/api/v1/customer/is-email-available/${encoded}`)
       .pipe( map(response => response.data) );
+  }
+
+  fetchOrders() {
+    return this.http.get<ResponseDto<OrderDto[]>>(`${API_HOST}/api/v1/customer/order`);
   }
 }

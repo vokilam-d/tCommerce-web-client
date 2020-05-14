@@ -1,1 +1,113 @@
-<p>account-orders works!</p>
+<div class="error" *ngIf="error">
+  {{ error }}
+</div>
+
+<preloader class="preloader" *ngIf="isLoading"></preloader>
+
+<div class="order" *ngFor="let order of orders">
+
+  <div class="order__header">
+    <div class="order__number">
+      №{{ order.id }}
+    </div>
+
+    <time class="order__date">
+      {{ order.createdAt | date:'medium' }}
+    </time>
+
+    <button class="order__expand"
+            [class.order__expand--expanded]="order.isExpanded"
+            (click)="order.isExpanded = !order.isExpanded"
+    >
+      <i class="mbi mbi-chevron-down"></i>
+    </button>
+  </div>
+
+  <div class="order__preview" *ngIf="!order.isExpanded" (click)="order.isExpanded = !order.isExpanded">
+    <img class="order__img"
+         *ngFor="let item of order.items"
+         [src]="uploadedHost + item.imageUrl"
+         [alt]="item.name"
+    >
+  </div>
+
+  <div class="order__content" *ngIf="order.isExpanded">
+    <div class="order__item item" *ngFor="let item of order.items">
+      <img class="order__img item__img" [src]="uploadedHost + item.imageUrl" [alt]="item.name">
+
+      <div class="item__description">
+        <a class="item__name" [routerLink]="['/', item.slug]" target="_blank">
+          {{ item.name }}
+        </a>
+
+        <div class="item__price-container">
+          <div class="item__price">{{ item.price }} грн</div>
+          <div class="item__qty">{{ item.qty }} шт.</div>
+          <div class="item__cost">{{ item.cost }} грн</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="order__info">
+      <div class="order__info-label">
+        Адрес доставки:
+      </div>
+      <div class="order__info-value">
+        {{ order.address.city }},&nbsp;
+        <span *ngIf="order.address.streetName as street">{{ street }}</span>
+        <span *ngIf="order.address.novaposhtaOffice as post">отделение Новой Почты №{{ post }}</span>
+      </div>
+    </div>
+
+    <div class="order__info">
+      <div class="order__info-label">
+        Способ доставки:
+      </div>
+      <div class="order__info-value">
+        {{ order.shippingMethodName }}
+      </div>
+    </div>
+
+    <div class="order__info">
+      <div class="order__info-label">
+        Способ оплаты:
+      </div>
+      <div class="order__info-value">
+        {{ order.paymentMethodName }}
+      </div>
+    </div>
+
+    <div class="order__info" *ngIf="order.note">
+      <div class="order__info-label">
+        Комментарий:
+      </div>
+      <div class="order__info-value">
+        {{ order.note }}
+      </div>
+    </div>
+
+    <div class="order__info" *ngIf="order.novaposhtaTrackingId">
+      <div class="order__info-label">
+        Номер ТТН Новой почты:
+      </div>
+      <div class="order__info-value">
+        {{ order.novaposhtaTrackingId }}
+      </div>
+    </div>
+
+    <div class="order__info order__discount" *ngIf="order.discountValue">
+      {{ order.discountLabel }}: {{ order.discountValue }} грн
+    </div>
+  </div>
+
+  <div class="order__footer">
+    <div class="order__status">
+      {{ order.status }}
+    </div>
+
+    <div class="order__price">
+      Итого: {{ order.totalCost }} грн
+    </div>
+  </div>
+
+</div>

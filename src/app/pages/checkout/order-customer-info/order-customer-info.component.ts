@@ -94,7 +94,7 @@ export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit 
     }
   }
 
-  isShippingMethod(method: 'address' | 'post'): boolean { // this method is ugly, deep refactor needed
+  isShippingMethod(method: 'address' | 'post'): boolean { // todo this method is ugly, deep refactor needed
     if (!this.orderService.shippingMethod) { return true; }
 
     const includesAddress = this.orderService.shippingMethod.name.toLowerCase().indexOf('адрес') !== -1;

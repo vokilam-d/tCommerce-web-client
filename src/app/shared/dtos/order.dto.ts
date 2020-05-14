@@ -22,4 +22,8 @@ export class OrderDto extends AddOrderDto {
   discountValue: number;
   discountLabel: string;
   totalCost: number;
+  createdAt: Date;
+
+  // custom transforms
+  isExpanded: boolean;
 }
