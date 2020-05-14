@@ -1,5 +1,10 @@
 @import "variables";
 
+.error {
+  margin: 20px 0 0;
+  color: $red;
+}
+
 .order {
   padding: 20px 0;
   border-bottom: 1px solid rgba($dark, 0.15);

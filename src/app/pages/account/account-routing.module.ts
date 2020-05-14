@@ -18,7 +18,7 @@ const routes: Routes = [
       { path: 'orders', component: AccountOrdersComponent, data: { label: 'Мои заказы' } },
       // { path: 'wishlist', component: WishlistComponent, data: { label: 'Список желаний' } },
       { path: 'addresses', component: AddressesComponent, data: { label: 'Адреса доставки' } },
-      { path: 'reviews', component: AccountReviewsComponent, data: { label: 'Мои отзывы' } },
+      // { path: 'reviews', component: AccountReviewsComponent, data: { label: 'Мои отзывы' } },
       { path: 'discount', component: AccountDiscountComponent, data: { label: 'Скидки' } }
     ]
   }
