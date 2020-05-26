@@ -1,6 +1,6 @@
 <div class="product-list">
   <aside class="product-list__sidebar">
-    <app-filter class="product-list__filter" (valueChanged)="fetchProducts()"></app-filter>
+    <app-filter class="product-list__filter" [filters]="filters" (valueChanged)="fetchProducts()"></app-filter>
   </aside>
 
   <main class="product-list__content">
@@ -18,12 +18,21 @@
     </div>
 
     <ol class="product-list__items" #itemsRef>
+
+      <li class="product-list__preloader-container" *ngIf="isLoading">
+        <preloader class="product-list__preloader"></preloader>
+      </li>
+
       <li class="product-list__item" *ngFor="let item of items">
         <product-list-item [item]="item"></product-list-item>
       </li>
 
       <li class="product-list__no-items" *ngIf="items && !items.length">
         По заданным параметрам не найдено ни одного товара
+      </li>
+
+      <li class="product-list__error" *ngIf="error as error">
+        {{ error }}
       </li>
     </ol>
 

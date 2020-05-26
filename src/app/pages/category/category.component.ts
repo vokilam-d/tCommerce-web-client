@@ -4,7 +4,7 @@ import { CategoryService } from './category.service';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { CategoryDto } from '../../shared/dtos/category.dto';
 import { ProductService } from '../product/product.service';
-import { IProductListFilter } from '../../product-list/product-list-filter.interface';
+import { ISelectedFilter } from '../../product-list/filter/selected-filter.interface';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HeadService } from '../../shared/services/head/head.service';
 
@@ -18,7 +18,7 @@ export class CategoryComponent implements OnInit {
   category: CategoryDto;
   safeDescription: SafeHtml;
   breadcrumbs: IBreadcrumb[];
-  productListFilters: IProductListFilter[];
+  productListFilters: ISelectedFilter[];
 
   constructor(private route: ActivatedRoute,
               private sanitizer: DomSanitizer,
@@ -46,7 +46,7 @@ export class CategoryComponent implements OnInit {
   }
 
   private setListFilters() {
-    this.productListFilters = [{ fieldName: 'categoryId', value: this.category.id }];
+    this.productListFilters = [{ id: 'categoryId', valueId: this.category.id }];
   }
 
   private setBreadcrumbs() {

@@ -10,7 +10,7 @@ export function toHttpParams(obj: { [key: string]: any }): HttpParams {
     // if (key === 'filters') {
     //   value = (value as IGridFilter[])
     //     .filter(f => f.value)
-    //     .map(f => `${f.fieldName}:${f.value}`);
+    //     .map(f => `${f.id}:${f.value}`);
     // }
 
     if (Array.isArray(value)) {

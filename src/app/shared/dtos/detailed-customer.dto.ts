@@ -11,4 +11,3 @@ export class DetailedCustomerDto extends CustomerDto {
   reviewIds: number[];
   wishlistProductIds: number[];
 }
-

@@ -21,6 +21,7 @@
   }
 
   &__items {
+    position: relative;
     margin: 15px 0 0;
     display: flex;
     flex-wrap: wrap;
@@ -47,6 +48,38 @@
   &__pagination {
     display: block;
     margin: 30px 0 0;
+  }
+
+  &__no-items,
+  &__error {
+    margin: 40px 0 0;
+    padding: 0 20px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  &__no-items {
+    color: rgba($dark, 0.6);
+  }
+
+  &__error {
+    color: $red;
+    word-break: break-word;
+  }
+
+  &__preloader-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(#fff, 0.6);
+    z-index: 1;
+  }
+
+  &__preloader {
+    margin: 15vh 0;
   }
 }
 

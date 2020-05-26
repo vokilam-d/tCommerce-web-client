@@ -6,6 +6,7 @@ import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
 import { toHttpParams } from '../../shared/helpers/to-http-params.function';
 import { SortingPaginatingFilterDto } from '../../shared/dtos/spf.dto';
 import { API_HOST } from '../../shared/constants';
+import { ProductListResponseDto } from '../../shared/dtos/product-list-response.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,6 @@ export class ProductService {
   }
 
   fetchProductsByFilters(spf: SortingPaginatingFilterDto) {
-    return this.http.get<ResponseDto<ProductListItemDto[]>>(`${API_HOST}/api/v1/products`, { params: toHttpParams(spf) });
+    return this.http.get<ProductListResponseDto>(`${API_HOST}/api/v1/products`, { params: toHttpParams(spf) });
   }
 }
