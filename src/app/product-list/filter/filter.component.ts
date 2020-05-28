@@ -26,7 +26,7 @@ export class FilterComponent implements OnInit {
       .filter(filter => filter.values.length);
   }
 
-  isOpened: boolean = false;
+  isOpened: boolean = true;
   @Input() filters: FilterDto[];
   @Input() filteredCount: number;
   @Output() valueChanged = new EventEmitter();

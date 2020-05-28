@@ -1,6 +1,52 @@
-<div>
-  range: {{ range.min }} - {{ range.max }}
-</div>
-<div>
-  selected: {{ selected.min }} - {{ range.max }}
+<div class="slider">
+  <form class="slider__inputs" ngNativeValidate (ngSubmit)="submit()">
+    <input class="slider__input"
+           [(ngModel)]="selected.min"
+           [ngModelOptions]="{ updateOn: 'blur' }"
+           [min]="range.min"
+           [max]="range.max"
+           step="1"
+           name="min"
+           type="number"
+    >
+
+    <span class="slider__input-delimiter"> — </span>
+
+    <input class="slider__input"
+           [(ngModel)]="selected.max"
+           [ngModelOptions]="{ updateOn: 'blur' }"
+           [max]="range.max"
+           step="1"
+           name="max"
+           type="number"
+    >
+
+    <button class="btn slider__submit" type="submit">OK</button>
+  </form>
+
+  <div class="slider__ranges">
+    <div class="slider__range-btns">
+      <button class="slider__range slider__range--left"
+              [style.left]="getOffset('min') + '%'"
+              (mousedown)="startMove($event, 'min')"
+              type="button"
+      >
+      </button>
+
+      <div class="slider__active-line"
+           [style.left]="getOffset('min') + '%'"
+           [style.right]="100 - getOffset('max') + '%'"
+      >
+      </div>
+
+      <button class="slider__range slider__range--right"
+              [style.left]="getOffset('max') + '%'"
+              (mousedown)="startMove($event, 'max')"
+              type="button"
+      >
+      </button>
+    </div>
+
+    <div class="slider__line"></div>
+  </div>
 </div>
