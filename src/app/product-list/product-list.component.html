@@ -1,6 +1,10 @@
 <div class="product-list">
   <aside class="product-list__sidebar">
-    <app-filter class="product-list__filter" [filters]="filters" (valueChanged)="fetchProducts()"></app-filter>
+    <app-filter class="product-list__filter"
+                [filters]="filters"
+                [filteredCount]="filteredCount"
+                (valueChanged)="fetchProducts()"
+    ></app-filter>
   </aside>
 
   <main class="product-list__content">

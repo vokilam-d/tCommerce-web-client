@@ -21,6 +21,10 @@
       </div>
     </ng-container>
 
+    <div class="filters__selected-count" *ngIf="filteredCount">
+      Выбрано товаров: {{ filteredCount }}.
+    </div>
+
     <button class="btn btn--transparent filters__clear-all" (click)="unselectAll()">
       Сбросить все
     </button>

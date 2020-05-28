@@ -28,6 +28,7 @@ export class FilterComponent implements OnInit {
 
   isOpened: boolean = false;
   @Input() filters: FilterDto[];
+  @Input() filteredCount: number;
   @Output() valueChanged = new EventEmitter();
 
   constructor(private route: ActivatedRoute,

@@ -20,6 +20,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
   items: ProductListItemDto[];
   itemsTotal: number;
+  filteredCount: number;
   pagesTotal: number;
   page: number;
   filters: FilterDto[];
@@ -73,6 +74,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
         response => {
           this.items = response.data;
           this.itemsTotal = response.itemsTotal;
+          this.filteredCount = response.itemsFiltered;
           this.pagesTotal = response.pagesTotal;
           this.page = response.page;
           this.filters = response.filters;
