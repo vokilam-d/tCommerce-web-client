@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { ISelectedFilter } from './selected-filter.interface';
 import { ActivatedRoute } from '@angular/router';
-import { FilterDto, FilterValueDto } from '../../shared/dtos/filter.dto';
+import { FilterDto, FilterValueDto, Range } from '../../shared/dtos/filter.dto';
 import { UrlService } from '../../shared/services/url/url.service';
 
 @Component({
@@ -21,12 +21,31 @@ import { UrlService } from '../../shared/services/url/url.service';
 export class FilterComponent implements OnInit {
 
   get activeFilters(): FilterDto[] {
-    return this.filters
-      ?.map(filter => ({ ...filter, values: filter.values.filter(value => value.isSelected) }))
-      .filter(filter => filter.values.length);
+    const active: FilterDto[] = [];
+
+    this.filters?.forEach(filter => {
+      switch (filter.type) {
+        case 'checkbox':
+          const selectedValues = filter.values.filter(v => v.isSelected);
+          if (selectedValues.length) {
+            active.push({ ...filter, values: selectedValues });
+          }
+          break;
+        case 'range':
+          if (
+            filter.rangeValues.range.min !== filter.rangeValues.selected.min
+            || filter.rangeValues.range.max !== filter.rangeValues.selected.max
+          ) {
+            active.push(filter);
+          }
+          break;
+      }
+    });
+
+    return active;
   }
 
-  isOpened: boolean = true;
+  isOpened: boolean = false;
   @Input() filters: FilterDto[];
   @Input() filteredCount: number;
   @Output() valueChanged = new EventEmitter();
@@ -41,7 +60,7 @@ export class FilterComponent implements OnInit {
 
   getValue(): ISelectedFilter[] {
     if (this.filters) {
-      return this.transformFilters();
+      return this.buildSelectedFilters();
     } else {
       return this.getFiltersByQueryParams();
     }
@@ -57,8 +76,18 @@ export class FilterComponent implements OnInit {
     this.cdr.markForCheck();
   }
 
-  unselect(filter: FilterDto, value: FilterValueDto) {
-    value.isSelected = false;
+  unselect(filter: FilterDto, value?: FilterValueDto) {
+    switch (filter.type) {
+      case 'checkbox':
+        value.isSelected = false;
+        this.updateQuery(filter, value);
+        break;
+      case 'range':
+        filter.rangeValues.selected.min = filter.rangeValues.range.min;
+        filter.rangeValues.selected.max = filter.rangeValues.range.max;
+        this.urlService.deleteQueryParam(filter.id);
+        break;
+    }
     this.valueChanged.emit();
     this.cdr.markForCheck();
   }
@@ -67,13 +96,24 @@ export class FilterComponent implements OnInit {
     let isChanged: boolean = false;
 
     this.filters.forEach(filter => {
-      filter.values.forEach(value => {
-        if (value.isSelected) {
-          value.isSelected = false;
+      switch (filter.type) {
+        case 'checkbox':
+          filter.values.forEach(value => {
+            if (value.isSelected) {
+              value.isSelected = false;
+              this.urlService.deleteQueryParam(filter.id);
+              isChanged = true;
+            }
+          });
+          break;
+
+        case 'range':
+          filter.rangeValues.selected.min = filter.rangeValues.range.min;
+          filter.rangeValues.selected.max = filter.rangeValues.range.max;
           this.urlService.deleteQueryParam(filter.id);
           isChanged = true;
-        }
-      });
+          break;
+      }
     });
 
     if (isChanged) {
@@ -91,19 +131,58 @@ export class FilterComponent implements OnInit {
     return selectedFilters;
   }
 
-  private transformFilters(): ISelectedFilter[] {
+  private buildSelectedFilters(): ISelectedFilter[] {
     const selectedFilters: ISelectedFilter[] = [];
 
-    this.activeFilters.forEach(filterDto => {
-      filterDto.values.forEach(value => {
-        selectedFilters.push({ id: filterDto.id, valueId: value.id });
-      });
+    this.filters?.forEach(filter => {
+      switch (filter.type) {
+        case 'checkbox':
+          filter.values.forEach(value => {
+            if (!value.isSelected) { return; }
+
+            selectedFilters.push({ id: filter.id, valueId: value.id });
+          });
+          break;
+        case 'range':
+          if (
+            filter.rangeValues.range.min === filter.rangeValues.selected.min
+            && filter.rangeValues.range.max === filter.rangeValues.selected.max
+          ) { return; }
+
+          selectedFilters.push({ id: filter.id, valueId: `${filter.rangeValues.selected.min}-${filter.rangeValues.selected.max}` });
+          break;
+      }
     });
 
     return selectedFilters;
   }
 
-  checkboxToggle() {
+  checkboxToggle(filter: FilterDto, value: FilterValueDto) {
+    this.updateQuery(filter, value);
     this.valueChanged.emit();
+  }
+
+  rangeValueChanged(filter: FilterDto, range: Range) {
+    filter.rangeValues.selected = range;
+    this.urlService.setQueryParam(filter.id, `${range.min}-${range.max}`);
+    this.valueChanged.emit();
+  }
+
+  private updateQuery(filter: FilterDto, value: FilterValueDto) {
+    const valuesArr = this.urlService.getQueryParam(filter.id)?.split(',') || [];
+
+    if (value.isSelected) {
+      valuesArr.push(value.id);
+    } else {
+      const idx = valuesArr.indexOf(value.id);
+      if (idx !== -1) { valuesArr.splice(idx, 1); }
+    }
+
+    if (valuesArr.length) {
+      const newValue = valuesArr.join(',');
+      this.urlService.setQueryParam(filter.id, newValue);
+    } else {
+      this.urlService.deleteQueryParam(filter.id);
+    }
   }
 }

@@ -1,7 +1,7 @@
 <div class="slider">
   <form class="slider__inputs" ngNativeValidate (ngSubmit)="submit()">
     <input class="slider__input"
-           [(ngModel)]="selected.min"
+           [(ngModel)]="newSelected.min"
            [ngModelOptions]="{ updateOn: 'blur' }"
            [min]="range.min"
            [max]="range.max"
@@ -13,8 +13,9 @@
     <span class="slider__input-delimiter"> — </span>
 
     <input class="slider__input"
-           [(ngModel)]="selected.max"
+           [(ngModel)]="newSelected.max"
            [ngModelOptions]="{ updateOn: 'blur' }"
+           [min]="range.min"
            [max]="range.max"
            step="1"
            name="max"

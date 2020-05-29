@@ -21,7 +21,6 @@ export class FilterDto {
   label: string;
   type: 'checkbox' | 'range';
   isDisabled: boolean;
-  isSelected: boolean;
   values: FilterValueDto[];
   rangeValues?: FilterRangeValuesDto;
 }

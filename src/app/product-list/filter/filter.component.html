@@ -10,15 +10,30 @@
   </div>
 
   <div class="filters__selected-filters" *ngIf="activeFilters?.length">
-    <ng-container *ngFor="let activeFilter of activeFilters">
-      <div class="filters__selected-filter selected" *ngFor="let value of activeFilter.values">
-        <div class="selected__label">
-          {{ value.label }}
+    <ng-container *ngFor="let activeFilter of activeFilters" [ngSwitch]="activeFilter.type">
+
+      <ng-container *ngSwitchCase="'checkbox'">
+        <div class="filters__selected-filter selected" *ngFor="let value of activeFilter.values">
+          <div class="selected__label">
+            {{ value.label }}
+          </div>
+          <button class="selected__reset" (click)="unselect(activeFilter, value)" type="button">
+            <i class="mbi mbi-cross"></i>
+          </button>
         </div>
-        <button class="selected__reset" (click)="unselect(activeFilter, value)" type="button">
-          <i class="mbi mbi-cross"></i>
-        </button>
-      </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'range'">
+        <div class="filters__selected-filter selected">
+          <div class="selected__label">
+            {{ activeFilter.label }}: {{ activeFilter.rangeValues.selected.min }}-{{ activeFilter.rangeValues.selected.max }}
+          </div>
+          <button class="selected__reset" (click)="unselect(activeFilter)" type="button">
+            <i class="mbi mbi-cross"></i>
+          </button>
+        </div>
+      </ng-container>
+
     </ng-container>
 
     <div class="filters__selected-count" *ngIf="filteredCount">
@@ -40,7 +55,7 @@
           <label class="filters__value">
             <input class="filters__checkbox"
                    [(ngModel)]="value.isSelected"
-                   (ngModelChange)="checkboxToggle()"
+                   (ngModelChange)="checkboxToggle(filter, value)"
                    type="checkbox"
             >
 
@@ -53,6 +68,7 @@
       <ng-container *ngIf="filter.type === 'range'">
         <range-slider [range]="filter.rangeValues.range"
                       [selected]="filter.rangeValues.selected"
+                      (valueChanged)="rangeValueChanged(filter, $event)"
         ></range-slider>
       </ng-container>
     </div>

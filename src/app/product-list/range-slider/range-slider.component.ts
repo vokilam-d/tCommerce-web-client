@@ -3,10 +3,10 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
-  Input,
+  Input, OnChanges,
   OnInit,
   Output,
-  Renderer2
+  Renderer2, SimpleChanges
 } from '@angular/core';
 import { Range } from '../../shared/dtos/filter.dto';
 
@@ -16,7 +16,9 @@ import { Range } from '../../shared/dtos/filter.dto';
   styleUrls: ['./range-slider.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RangeSliderComponent implements OnInit {
+export class RangeSliderComponent implements OnInit, OnChanges {
+
+  newSelected: Range = { min: 0, max: 0 };
 
   @Input() range: Range;
   @Input() selected: Range;
@@ -26,6 +28,14 @@ export class RangeSliderComponent implements OnInit {
               private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const selected: Range = changes?.selected.currentValue;
+    if (selected) {
+      this.newSelected.min = selected.min;
+      this.newSelected.max = selected.max;
+    }
   }
 
   getOffset(btn: 'min' | 'max'): number {
@@ -55,11 +65,11 @@ export class RangeSliderComponent implements OnInit {
   }
 
   private calcOffset(btn: 'min' | 'max'): number {
-    return (this.selected[btn] - this.range.min) / (this.range.max - this.range.min) * 100;
+    return (this.newSelected[btn] - this.range.min) / (this.range.max - this.range.min) * 100;
   }
 
   submit() {
-    this.valueChanged.emit(this.selected);
+    this.valueChanged.emit(this.newSelected);
   }
 
   startMove(downEvt: MouseEvent, btn: 'min' | 'max') {
@@ -80,32 +90,32 @@ export class RangeSliderComponent implements OnInit {
       switch (btn) {
         case 'min':
           if (moveX <= containerMinX) {
-            this.selected.min = this.range.min;
+            this.newSelected.min = this.range.min;
           } else {
             const newValue = startedSelectedMin + Math.round((this.range.max - this.range.min) * offsetRate);
 
             if (newValue >= this.selected.max) {
-              this.selected.min = this.selected.max - 1;
+              this.newSelected.min = this.selected.max - 1;
             } else if (newValue <= this.range.min) {
-              this.selected.min = this.range.min;
+              this.newSelected.min = this.range.min;
             } else {
-              this.selected.min = newValue;
+              this.newSelected.min = newValue;
             }
           }
           break;
 
         case 'max':
           if (moveX >= containerMaxX) {
-            this.selected.max = this.range.max;
+            this.newSelected.max = this.range.max;
           } else {
             const newValue = startedSelectedMax + Math.round((this.range.max - this.range.min) * offsetRate);
 
             if (newValue <= this.selected.min) {
-              this.selected.max = this.selected.min + 1;
+              this.newSelected.max = this.selected.min + 1;
             } else if (newValue >= this.range.max) {
-              this.selected.max = this.range.max;
+              this.newSelected.max = this.range.max;
             } else {
-              this.selected.max = newValue;
+              this.newSelected.max = newValue;
             }
           }
           break;
