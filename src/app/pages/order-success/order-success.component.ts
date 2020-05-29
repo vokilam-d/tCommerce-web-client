@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { OrderDto } from '../../shared/dtos/order.dto';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { API_HOST } from '../../shared/constants';
+import { CustomerService } from '../../shared/services/customer/customer.service';
+import { HeadService } from '../../shared/services/head/head.service';
 
 @Component({
   selector: 'order-success',
@@ -17,6 +19,7 @@ export class OrderSuccessComponent implements OnInit {
   breadcrumbs: IBreadcrumb[] = SUCCESS_BREADCRUMBS;
 
   constructor(@Inject(PLATFORM_ID) private platformId: any,
+              private headService: HeadService,
               private router: Router) {
   }
 
@@ -34,6 +37,11 @@ export class OrderSuccessComponent implements OnInit {
 
   private init() {
     this.breadcrumbs.push({ title: `Заказ №${this.order.id}` });
+    this.setMeta();
+  }
+
+  private setMeta() {
+    this.headService.setMeta({ title: 'Заказ №${this.order.id}', description: 'Заказ №${this.order.id}' });
   }
 }
 

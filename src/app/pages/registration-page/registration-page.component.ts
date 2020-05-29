@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomerService } from '../../shared/services/customer/customer.service';
+import { HeadService } from '../../shared/services/head/head.service';
 
 @Component({
   selector: 'registration-page',
@@ -10,10 +11,12 @@ import { CustomerService } from '../../shared/services/customer/customer.service
 export class RegistrationPageComponent implements OnInit {
 
   constructor(private router: Router,
+              private headService: HeadService,
               private customerService: CustomerService) {
   }
 
   ngOnInit(): void {
+    this.setMeta();
     if (this.customerService.customer) {
       this.router.navigate(['/', 'account']);
     }
@@ -25,5 +28,9 @@ export class RegistrationPageComponent implements OnInit {
 
   switchToLogin() {
     this.router.navigate(['/', 'login']);
+  }
+
+  private setMeta() {
+    this.headService.setMeta({ title: 'Регистрация в интернет-магазине Клондайк', description: 'Регистрация в интернет-магазине Клондайк' });
   }
 }

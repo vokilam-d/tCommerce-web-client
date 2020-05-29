@@ -6,10 +6,10 @@ import { Router } from '@angular/router';
 import { OrderCustomerInfoComponent } from './order-customer-info/order-customer-info.component';
 import { AddOrderDto } from '../../shared/dtos/order.dto';
 import { OrderService } from './order.service';
-import { DEFAULT_ERROR_TEXT, API_HOST } from '../../shared/constants';
+import { API_HOST, DEFAULT_ERROR_TEXT } from '../../shared/constants';
 import { normalizePhoneNumber } from '../../shared/helpers/normalize-phone-number.function';
 import { ScrollToService } from '../../shared/services/scroll-to/scroll-to.service';
-import { NotyService } from '../../noty/noty.service';
+import { HeadService } from '../../shared/services/head/head.service';
 
 @Component({
   selector: 'checkout',
@@ -30,6 +30,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   @ViewChild('checkoutRef') checkoutRef: ElementRef;
 
   constructor(private customerService: CustomerService,
+              private headService: HeadService,
               private orderService: OrderService,
               private scrollToService: ScrollToService,
               private router: Router) {
@@ -37,6 +38,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setMeta();
     this.customerService.cartInit$
       .pipe( takeUntil(this.ngUnsubscribe), filter(value => !!value) )
       .subscribe(() => {
@@ -90,5 +92,9 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   private setError(error) {
     this.orderError = error;
     this.scrollToService.scrollTo({ target: this.checkoutRef, offset: -60 });
+  }
+
+  private setMeta() {
+    this.headService.setMeta({ title: 'Оформление заказа', description: 'Оформление заказа' });
   }
 }

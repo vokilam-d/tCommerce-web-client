@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerDto } from '../../shared/dtos/customer.dto';
 import { Router } from '@angular/router';
 import { CustomerService } from '../../shared/services/customer/customer.service';
+import { HeadService } from '../../shared/services/head/head.service';
 
 @Component({
   selector: 'login-page',
@@ -11,10 +12,12 @@ import { CustomerService } from '../../shared/services/customer/customer.service
 export class LoginPageComponent implements OnInit {
 
   constructor(private router: Router,
+              private headService: HeadService,
               private customerService: CustomerService) {
   }
 
   ngOnInit(): void {
+    this.setMeta();
     if (this.customerService.customer) {
       this.router.navigate(['/', 'account']);
     }
@@ -26,5 +29,9 @@ export class LoginPageComponent implements OnInit {
 
   switchToRegister() {
     this.router.navigate(['/', 'register']);
+  }
+
+  private setMeta() {
+    this.headService.setMeta({ title: 'Войти в интернет-магазин Клондайк', description: 'Войти в интернет-магазин Клондайк' });
   }
 }

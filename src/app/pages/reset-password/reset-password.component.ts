@@ -6,6 +6,7 @@ import { CustomValidators } from '../../shared/classes/validators';
 import { finalize } from 'rxjs/operators';
 import { ResetPasswordDto } from '../../shared/dtos/reset-password.dto';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HeadService } from '../../shared/services/head/head.service';
 
 @Component({
   selector: 'reset-password',
@@ -22,11 +23,13 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
+              private headService: HeadService,
               private router: Router,
               private customerService: CustomerService) {
   }
 
   ngOnInit(): void {
+    this.setMeta();
     if (!this.checkToken()) {
       return;
     }
@@ -103,5 +106,9 @@ export class ResetPasswordComponent implements OnInit {
   isControlInvalid(controlName: string): boolean {
     const control = this.form.get(controlName);
     return !control.valid && control.touched;
+  }
+
+  private setMeta() {
+    this.headService.setMeta({ title: 'Восстановление пароля', description: 'Восстановление пароля' });
   }
 }
