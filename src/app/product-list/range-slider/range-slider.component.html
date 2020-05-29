@@ -30,6 +30,7 @@
       <button class="slider__range slider__range--left"
               [style.left]="getOffset('min') + '%'"
               (mousedown)="startMove($event, 'min')"
+              (touchstart)="startMove($event, 'min')"
               type="button"
       >
       </button>
@@ -43,6 +44,7 @@
       <button class="slider__range slider__range--right"
               [style.left]="getOffset('max') + '%'"
               (mousedown)="startMove($event, 'max')"
+              (touchstart)="startMove($event, 'max')"
               type="button"
       >
       </button>

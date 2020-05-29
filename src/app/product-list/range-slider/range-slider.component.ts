@@ -9,6 +9,7 @@ import {
   Renderer2, SimpleChanges
 } from '@angular/core';
 import { Range } from '../../shared/dtos/filter.dto';
+import { isTouchDevice } from '../../shared/helpers/is-touch-device.function';
 
 @Component({
   selector: 'range-slider',
@@ -72,8 +73,10 @@ export class RangeSliderComponent implements OnInit, OnChanges {
     this.valueChanged.emit(this.newSelected);
   }
 
-  startMove(downEvt: MouseEvent, btn: 'min' | 'max') {
-    const startX = downEvt.clientX;
+  startMove(downEvt: TouchEvent | MouseEvent, btn: 'min' | 'max') {
+    const isTouch = isTouchDevice();
+
+    const startX = isTouch ? (downEvt as TouchEvent).touches[0].clientX : (downEvt as MouseEvent).clientX;
     const startedSelectedMin = this.selected.min;
     const startedSelectedMax = this.selected.max;
 
@@ -81,8 +84,11 @@ export class RangeSliderComponent implements OnInit, OnChanges {
     let { left: parentMinX, right: parentMaxX } = parent.getBoundingClientRect();
     let { left: containerMinX, right: containerMaxX } = parent.offsetParent.getBoundingClientRect();
 
-    const moveUnlisten = this.renderer.listen('window', 'mousemove', evt => {
-      const moveX = evt.clientX;
+    const moveEventName = isTouch ? 'touchmove' : 'mousemove';
+    const upEventName = isTouch ? 'touchend' : 'mouseup';
+
+    const moveUnlisten = this.renderer.listen('window', moveEventName, evt => {
+      const moveX = isTouch ? (evt as TouchEvent).touches[0].clientX : (evt as MouseEvent).clientX;
       const diffX = moveX - startX;
       const offsetRate = diffX / (parentMaxX - parentMinX);
       if (offsetRate === 0) { return; }
@@ -124,7 +130,7 @@ export class RangeSliderComponent implements OnInit, OnChanges {
       this.cdr.markForCheck();
     });
 
-    const upUnlisten = this.renderer.listen('window', 'mouseup', _ => {
+    const upUnlisten = this.renderer.listen('window', upEventName, _ => {
       this.submit();
 
       moveUnlisten();
