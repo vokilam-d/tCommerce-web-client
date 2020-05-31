@@ -20,7 +20,8 @@ import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
 })
 export class ProductComponent implements OnInit, AfterViewInit {
 
-  error: string | null = null;
+  fetchError: string | null = null;
+  addToCartError: string | null = null;
   product: ProductDto;
   breadcrumbs: IBreadcrumb[] = [];
   isLoading: boolean = false;
@@ -66,7 +67,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.handleReviewFromEmail();
         this.handleUrlReviewsFragment();
       },
-      error => console.warn(error)
+      error => this.fetchError = error.error?.message || DEFAULT_ERROR_TEXT
     );
   }
 
@@ -102,14 +103,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
     const qty = this.qtyCmp.getValue();
 
-    this.error = null;
+    this.addToCartError = null;
     this.isLoading = true;
     this.customerService.addToCart(this.product, qty)
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         _ => { },
         error => {
-          this.error = error.error?.message || DEFAULT_ERROR_TEXT;
+          this.addToCartError = error.error?.message || DEFAULT_ERROR_TEXT;
         }
       );
   }

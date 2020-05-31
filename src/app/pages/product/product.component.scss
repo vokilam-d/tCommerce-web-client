@@ -192,4 +192,60 @@
   &__category {
     color: $blue;
   }
+
+  &__fetch-error {
+    padding: 50px 20px;
+    font-size: 16px;
+    color: $red;
+    text-align: center;
+  }
+}
+
+.placeholder {
+  &__title {
+    margin: 20px 0 0;
+    height: 20px;
+  }
+
+  &__sku {
+    margin: 15px 0 0;
+    height: 16px;
+    width: 100px;
+  }
+
+  &__image {
+    margin: 20px 0 0;
+    height: 300px;
+  }
+
+  &__short-description {
+    margin: 20px 0 0;
+    height: 16px;
+  }
+
+  &__short-description--2 {
+    margin-top: 3px;
+  }
+
+  &__short-description--3 {
+    margin-top: 3px;
+    width: 70%;
+  }
+
+  &__price {
+    margin: 20px 0 0;
+    height: 24px;
+    width: 80px;
+  }
+
+  &__btn {
+    margin: 20px 0 0;
+    height: 50px;
+    width: 200px;
+  }
+
+  &__details {
+    margin: 20px 0 0;
+    height: 16px;
+  }
 }

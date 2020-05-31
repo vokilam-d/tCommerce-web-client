@@ -1,0 +1,16 @@
+@import "variables";
+
+.placeholder {
+  &__item {
+    background: rgba($dark, 0.09);
+    border-radius: 4px;
+  }
+
+  &__text {
+    margin-top: 3px !important;
+
+    &--last {
+      width: 70%;
+    }
+  }
+}

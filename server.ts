@@ -29,7 +29,7 @@ export function app() {
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
     res.render('index', { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
-    // Object.entries(process.memoryUsage()).forEach(item => console.log(`${item[0]}: ${(item[1] / 1024 / 1024).toFixed(4)} MB`))
+    Object.entries(process.memoryUsage()).forEach(item => console.log(`${item[0]}: ${(item[1] / 1024 / 1024).toFixed(4)} MB`))
   });
 
   return server;

@@ -1,97 +1,117 @@
 <app-header></app-header>
 
-<div class="page container product" *ngIf="product">
+<div class="page container product">
   <breadcrumbs class="product__breadcrumbs" [breadcrumbs]="breadcrumbs" [showLastItem]="false"></breadcrumbs>
 
-  <h1 class="product__title">
-    {{ product.name }}
-  </h1>
-
-  <div class="product__rating-sku">
-
-    <div class="product__rating" *ngIf="product.reviewsAvgRating">
-      <rating-stars class="product__rating-cmp"
-                    [rating]="product.reviewsAvgRating"
-                    (click)="scrollToReviews()"
-      ></rating-stars>
-
-      <div class="product__rating-count">{{ product.reviewsCount }}</div>
-    </div>
-
-    <div class="product__sku-container" [class.product__sku-container--with-vendor]="product.vendorCode">
-      <div class="product__sku">
-        Код: <span class="product__sku-value">{{ product.sku }}</span>
-      </div>
-
-      <div class="product__sku product__vendor-code" *ngIf="product.vendorCode">
-        Артикул: <span class="product__sku-value">{{ product.vendorCode }}</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="product__gallery">
-    <product-gallery [medias]="product.medias"></product-gallery>
-
-    <span class="product__sale-label" *ngIf="product.oldPrice">
-      -{{ discountValue }}%
-    </span>
-  </div>
-
-  <div class="product__short-description">
-    {{ product.shortDescription }}
-  </div>
-
-  <div class="product__price-container">
-    <div class="product__price" [class.product__price--special]="product.oldPrice">
-      {{ product.price }} <span class="product__currency">грн</span>
-    </div>
-
-    <div class="product__old-price" *ngIf="product.oldPrice as oldPrice">
-      {{ oldPrice }} <span class="product__currency">грн</span>
-    </div>
-  </div>
-
-  <div class="product__error" *ngIf="error as error">
+  <div class="product__fetch-error" *ngIf="fetchError as error">
     {{ error }}
   </div>
 
-  <div class="product__qty">
-    <quantity-control></quantity-control>
+  <div class="placeholder" *ngIf="!product && !fetchError">
+    <div class="placeholder__item placeholder__title"></div>
+    <div class="placeholder__item placeholder__text placeholder__text--last placeholder__title"></div>
+    <div class="placeholder__item placeholder__sku"></div>
+    <div class="placeholder__item placeholder__image"></div>
+    <div class="placeholder__item placeholder__short-description"></div>
+    <div class="placeholder__item placeholder__price"></div>
+    <div class="placeholder__item placeholder__btn"></div>
+    <div class="placeholder__item placeholder__details"></div>
+    <div class="placeholder__item placeholder__text placeholder__details"></div>
+    <div class="placeholder__item placeholder__text placeholder__details"></div>
+    <div class="placeholder__item placeholder__text placeholder__text--last placeholder__details"></div>
   </div>
 
-  <div class="product__actions">
-    <button class="btn product__buy"
-            [class.product__buy--loading]="isLoading"
-            [disabled]="isLoading"
-            [flyToCart]="product.medias[0]"
-            (click)="addToCart()"
-            type="button"
-    >
-      <i class="mbi mbi-cart product__buy-icon"></i>
-      Купить
+  <ng-container *ngIf="product">
+    <h1 class="product__title">
+      {{ product.name }}
+    </h1>
 
-      <preloader class="product__preloader" *ngIf="isLoading"></preloader>
-    </button>
+    <div class="product__rating-sku">
 
-    <button class="product__wishlist" *ngIf="false" (click)="addToWishlist()" type="button">
-      <i class="mbi mbi-heart product__wishlist-icon"></i>
-    </button>
-  </div>
+      <div class="product__rating" *ngIf="product.reviewsAvgRating">
+        <rating-stars class="product__rating-cmp"
+                      [rating]="product.reviewsAvgRating"
+                      (click)="scrollToReviews()"
+        ></rating-stars>
 
-  <div class="product__categories">
-    Категории:&nbsp;
+        <div class="product__rating-count">{{ product.reviewsCount }}</div>
+      </div>
 
-    <a class="product__category"
-       *ngFor="let category of product.categories, last as last"
-       [routerLink]="'/' + category.slug"
-    >
-      {{ category.name }}<ng-container *ngIf="!last">, </ng-container>
-    </a>
-  </div>
+      <div class="product__sku-container" [class.product__sku-container--with-vendor]="product.vendorCode">
+        <div class="product__sku">
+          Код: <span class="product__sku-value">{{ product.sku }}</span>
+        </div>
 
-  <product-details class="product__details" [product]="product"></product-details>
+        <div class="product__sku product__vendor-code" *ngIf="product.vendorCode">
+          Артикул: <span class="product__sku-value">{{ product.vendorCode }}</span>
+        </div>
+      </div>
+    </div>
 
-  <related-products class="product__related" [linkedProducts]="product.relatedProducts"></related-products>
+    <div class="product__gallery">
+      <product-gallery [medias]="product.medias"></product-gallery>
+
+      <span class="product__sale-label" *ngIf="product.oldPrice">
+        -{{ discountValue }}%
+      </span>
+    </div>
+
+    <div class="product__short-description">
+      {{ product.shortDescription }}
+    </div>
+
+    <div class="product__price-container">
+      <div class="product__price" [class.product__price--special]="product.oldPrice">
+        {{ product.price }} <span class="product__currency">грн</span>
+      </div>
+
+      <div class="product__old-price" *ngIf="product.oldPrice as oldPrice">
+        {{ oldPrice }} <span class="product__currency">грн</span>
+      </div>
+    </div>
+
+    <div class="product__error" *ngIf="addToCartError as error">
+      {{ error }}
+    </div>
+
+    <div class="product__qty">
+      <quantity-control></quantity-control>
+    </div>
+
+    <div class="product__actions">
+      <button class="btn product__buy"
+              [class.product__buy--loading]="isLoading"
+              [disabled]="isLoading"
+              [flyToCart]="product.medias[0]"
+              (click)="addToCart()"
+              type="button"
+      >
+        <i class="mbi mbi-cart product__buy-icon"></i>
+        Купить
+
+        <preloader class="product__preloader" *ngIf="isLoading"></preloader>
+      </button>
+
+      <button class="product__wishlist" *ngIf="false" (click)="addToWishlist()" type="button">
+        <i class="mbi mbi-heart product__wishlist-icon"></i>
+      </button>
+    </div>
+
+    <div class="product__categories">
+      Категории:&nbsp;
+
+      <a class="product__category"
+         *ngFor="let category of product.categories, last as last"
+         [routerLink]="'/' + category.slug"
+      >
+        {{ category.name }}<ng-container *ngIf="!last">, </ng-container>
+      </a>
+    </div>
+
+    <product-details class="product__details" [product]="product"></product-details>
+
+    <related-products class="product__related" [linkedProducts]="product.relatedProducts"></related-products>
+  </ng-container>
 
 </div>
 

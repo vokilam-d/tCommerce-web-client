@@ -23,15 +23,25 @@
 
     <ol class="product-list__items" #itemsRef>
 
-      <li class="product-list__preloader-container" *ngIf="isLoading">
-        <preloader class="product-list__preloader"></preloader>
-      </li>
-
       <li class="product-list__item" *ngFor="let item of items">
         <product-list-item [item]="item"></product-list-item>
       </li>
 
-      <li class="product-list__no-items" *ngIf="items && !items.length">
+      <li class="product-list__preloader-container" *ngIf="isLoading" [class.product-list__preloader-container--overlay]="items">
+        <preloader class="product-list__preloader"></preloader>
+      </li>
+
+      <ng-container *ngIf="!items && !error">
+        <li class="product-list__item placeholder" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+          <div class="placeholder__item placeholder__image"></div>
+          <div class="placeholder__item placeholder__name"></div>
+          <div class="placeholder__item placeholder__text placeholder__text--last placeholder__name"></div>
+          <div class="placeholder__item placeholder__price"></div>
+          <div class="placeholder__item placeholder__btn"></div>
+        </li>
+      </ng-container>
+
+      <li class="product-list__no-items" *ngIf="items?.length === 0">
         По заданным параметрам не найдено ни одного товара
       </li>
 

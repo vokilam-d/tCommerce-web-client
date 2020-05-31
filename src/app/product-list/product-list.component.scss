@@ -74,8 +74,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(#fff, 0.6);
     z-index: 1;
+
+    &--overlay {
+      background: rgba(#fff, 0.6);
+    }
   }
 
   &__preloader {
@@ -100,3 +103,25 @@
   }
 }
 
+.placeholder {
+  &__image {
+    height: 150px;
+  }
+
+  &__name {
+    margin: 8px 0 0;
+    height: 12px;
+  }
+
+  &__price {
+    margin: 10px 0 0;
+    height: 16px;
+    width: 40%;
+  }
+
+  &__btn {
+    margin: 15px 0 0;
+    height: 35px;
+    width: 60%;
+  }
+}
