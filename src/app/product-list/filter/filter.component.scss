@@ -40,6 +40,14 @@
   z-index: 22;
   overflow-y: auto;
 
+  @include respond-to($media_large) {
+    position: static;
+    min-width: auto;
+    width: auto;
+    transform: none;
+    padding: 0 5px;
+  }
+
   &--opened {
     transform: translateX(0);
   }
@@ -47,12 +55,22 @@
   &__header {
     font-size: 24px;
     font-weight: 500;
+
+    @include respond-to($media_large) {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   }
 
   &__block {
     margin: 20px 0 0;
     padding: 0 0 20px;
     border-bottom: 1px solid #d8d8d8;
+
+    @include respond-to($media_large) {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   }
 
   &__title {
@@ -75,6 +93,11 @@
 
   &__selected-filters {
     margin: 20px 0 0;
+
+    @include respond-to($media_large) {
+      padding-left: 10px;
+      padding-right: 30px;
+    }
   }
 
   &__selected-filter {
@@ -118,5 +141,23 @@
   }
 
   &__label {
+  }
+}
+
+.placeholder {
+  &__block {
+    margin: 25px 0 0;
+    padding: 0 10px;
+    width: 210px;
+  }
+
+  &__title {
+    margin: 10px 0 5px;
+    width: 70px;
+    height: 16px;
+  }
+
+  &__item {
+    height: 14px;
   }
 }

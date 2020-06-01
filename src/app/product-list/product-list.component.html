@@ -27,7 +27,10 @@
         <product-list-item [item]="item"></product-list-item>
       </li>
 
-      <li class="product-list__preloader-container" *ngIf="isLoading" [class.product-list__preloader-container--overlay]="items">
+      <li class="product-list__preloader-container"
+          *ngIf="isLoading"
+          [class.product-list__preloader-container--overlay]="items"
+      >
         <preloader class="product-list__preloader"></preloader>
       </li>
 

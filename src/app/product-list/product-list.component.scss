@@ -2,6 +2,23 @@
 @import "mixins";
 
 .product-list {
+  @include respond-to($media_large) {
+    display: flex;
+  }
+
+  &__sidebar {
+    @include respond-to($media_large) {
+      width: 280px;
+      flex-shrink: 0;
+    }
+  }
+
+  &__content {
+    @include respond-to($media_large) {
+      flex-grow: 2;
+    }
+  }
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -10,10 +27,19 @@
   &__filter-toggle {
     width: 50%;
     margin: 0 16px 0 0;
+
+    @include respond-to($media_large) {
+      display: none !important;
+    }
   }
 
   &__sorting {
     width: 50%;
+
+    @include respond-to($media_large) {
+      margin-left: auto;
+      width: auto;
+    }
   }
 
   &__selected-filters {
