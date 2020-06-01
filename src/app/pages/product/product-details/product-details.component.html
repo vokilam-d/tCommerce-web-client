@@ -37,9 +37,9 @@
 
 <ng-template #charsTmpl>
   <div class="chars">
-    <div class="chars__item" *ngFor="let char of product.characteristics">
-      <div class="chars__label">{{ char.label }}</div>
-      <div class="chars__value">{{ char.value }}</div>
+    <div class="chars__item" *ngFor="let char of product.characteristics, first as first">
+      <div class="chars__cell chars__label" [class.chars__cell--first]="first">{{ char.label }}</div>
+      <div class="chars__cell chars__value" [class.chars__cell--first]="first">{{ char.value }}</div>
     </div>
   </div>
 </ng-template>

@@ -10,6 +10,7 @@ import { SafeHtml } from '@angular/platform-browser';
 import { AddReviewModalComponent, IAddReviewFormValue } from '../../../add-review-modal/add-review-modal.component';
 import { API_HOST, DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { NotyService } from '../../../noty/noty.service';
+import { DeviceService } from '../../../shared/services/device-detector/device.service';
 
 @Component({
   selector: 'product-details',
@@ -19,7 +20,7 @@ import { NotyService } from '../../../noty/noty.service';
 export class ProductDetailsComponent implements OnInit {
 
   jsonLd: SafeHtml;
-  indices = { // Can't use enum 'cause of pipe in template
+  indices = { // Can't use enum because of pipe in template
     description: 0,
     chars: 1,
     reviews: 2
@@ -32,6 +33,7 @@ export class ProductDetailsComponent implements OnInit {
   @ViewChild(AddReviewModalComponent) addReviewCmp: AddReviewModalComponent;
 
   constructor(private http: HttpClient,
+              private deviceService: DeviceService,
               private scrollToService: ScrollToService,
               private jsonLdService: JsonLdService,
               private productReviewService: ProductReviewService,
@@ -72,7 +74,9 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     this.activeIdx = idx;
-    this.scrollToService.scrollTo({ target: this.elementRef, offset: -20 });
+    if (this.deviceService.isMobile()) {
+      this.scrollToService.scrollTo({ target: this.elementRef, offset: -20 });
+    }
   }
 
   keyValuePipeComparator(a: KeyValue<string, number>, b: KeyValue<string, number>): number {

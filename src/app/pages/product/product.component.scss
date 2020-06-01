@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 .product {
   font-size: 16px;
@@ -54,12 +55,30 @@
     //border-left: 1px solid $borderColor;
   }
 
-  &__gallery {
-    position: relative;
-    display: block;
+  &__info-container {
     margin: 20px 0 0;
     padding: 20px 0 0;
     border-top: 1px solid $borderColor;
+
+    @include respond-to($media_medium) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__gallery {
+    position: relative;
+    display: block;
+
+    @include respond-to($media_medium) {
+      width: 48%;
+    }
+  }
+
+  &__info {
+    @include respond-to($media_medium) {
+      width: 48%;
+    }
   }
 
   &__sale-label {
@@ -77,6 +96,10 @@
     margin: 20px 0 0;
     font-size: 16px;
     line-height: 1.3;
+
+    @include respond-to($media_medium) {
+      margin-top: 0;
+    }
   }
 
   &__error {
@@ -91,14 +114,32 @@
     line-height: 1.3;
   }
 
-  &__price-container {
+  &__buy-info {
     margin: 20px 0 0;
     padding: 20px 0 0;
     border-top: 1px solid $borderColor;
+
+    @include respond-to($media_large) {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__price-container {
+  }
+
+  &__stock {
+    margin: 0 0 5px;
+    font-size: 16px;
+
+    &--available {
+      color: #690;
+    }
   }
 
   &__price {
     font-size: 24px;
+    font-weight: 600;
 
     &--special {
       color: $red;
@@ -131,12 +172,20 @@
 
   &__qty {
     margin: 15px 0 0;
+
+    @include respond-to($media_large) {
+      margin: 0 0 0 20px;
+    }
   }
 
   &__actions {
     margin: 10px 0 0;
     display: flex;
     justify-content: space-between;
+
+    @include respond-to($media_large) {
+      margin: 0 0 0 20px;
+    }
   }
 
   &__buy {

@@ -1,17 +1,66 @@
 @import "variables";
+@import "mixins";
 
 .details {
   font-size: 14px;
 
+  @include respond-to($media_medium) {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
   &__title {
+    position: relative;
     display: flex;
     padding: 15px 0;
     font-size: 16px;
     font-weight: 600;
+    cursor: pointer;
+
+    @include respond-to($media_medium) {
+      margin: 0 5px;
+      padding-left: 20px;
+      padding-right: 20px;
+      font-weight: 400;
+      color: rgba($dark, 0.6);
+    }
+
+    &::after {
+      @include respond-to($media_medium) {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -2px;
+        border-bottom: 3px solid transparent;
+        transition: border-bottom-color 0.2s ease;
+      }
+    }
+
+    &:hover::after {
+      border-bottom-color: rgba($primary, 0.4);
+    }
+
+    &--active {
+      @include respond-to($media_medium) {
+        color: $dark;
+      }
+
+      &::after {
+        @include respond-to($media_medium) {
+          border-bottom-color: $primary;
+        }
+      }
+    }
   }
 
   &__title-icon {
     margin-left: auto;
+
+    @include respond-to($media_medium) {
+      display: none;
+    }
 
     &--active {
       transform: rotate(180deg);
@@ -22,8 +71,19 @@
     display: none;
     padding: 10px 0;
 
+    @include respond-to($media_medium) {
+      order: 4;
+      width: 100%;
+      padding-top: 20px;
+      border-top: 1px solid #e9e9e9;
+    }
+
     &--visible {
       display: block;
+
+      @include respond-to($media_medium) {
+
+      }
     }
   }
 
@@ -34,45 +94,93 @@
 }
 
 .description {
-  line-height: 1.3;
   text-align: justify;
+
+  @include respond-to($media_medium) {
+    font-size: 15px;
+  }
 }
 
 .chars {
   padding: 0 10px;
   font-size: 15px;
 
+  @include respond-to($media_medium) {
+    display: table;
+    width: auto;
+    margin: 0 auto;
+  }
+
   &__item {
     margin: 10px 0 0;
     display: flex;
 
+    @include respond-to($media_medium) {
+      margin-top: 0;
+      display: table-row;
+    }
+
     &:first-child {
       margin-top: 0;
+      border-top: none;
+    }
+  }
+
+  &__cell {
+    @include respond-to($media_medium) {
+      display: table-cell;
+      width: 50%;
+      padding: 10px 30px;
+      border-top: 1px solid rgba($dark, 0.2);
+    }
+
+    &--first {
+      @include respond-to($media_medium) {
+        border-top: none;
+      }
     }
   }
 
   &__label {
     font-weight: 500;
 
+    @include respond-to($media_medium) {
+      text-align: right;
+      border-right: 1px solid rgba($dark, 0.2);
+    }
+
     &::after {
       content: ':';
+
+      @include respond-to($media_medium) {
+        content: none;
+      }
     }
   }
 
   &__value {
     margin: 0 0 0 11px;
+
+    @include respond-to($media_medium) {
+      margin-left: 0;
+    }
   }
 }
 
 .reviews {
   &__add {
-    margin: 10px 0 20px;
+    margin: 10px auto 20px;
     padding: 17px 15px 20px;
     background: #f2f2f2;
     border: 1px solid #e9e9e9;
     border-radius: 5px;
     font-size: 18px;
     text-align: center;
+
+    @include respond-to($media_medium) {
+      max-width: 450px;
+      padding: 25px 40px;
+    }
   }
 
   &__add-btn {

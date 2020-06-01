@@ -48,64 +48,78 @@
       </div>
     </div>
 
-    <div class="product__gallery">
-      <product-gallery [medias]="product.medias"></product-gallery>
+    <div class="product__info-container">
+      <div class="product__gallery">
+        <product-gallery [medias]="product.medias"></product-gallery>
 
-      <span class="product__sale-label" *ngIf="product.oldPrice">
-        -{{ discountValue }}%
-      </span>
-    </div>
-
-    <div class="product__short-description">
-      {{ product.shortDescription }}
-    </div>
-
-    <div class="product__price-container">
-      <div class="product__price" [class.product__price--special]="product.oldPrice">
-        {{ product.price }} <span class="product__currency">грн</span>
+        <span class="product__sale-label" *ngIf="product.oldPrice">
+          -{{ discountValue }}%
+        </span>
       </div>
 
-      <div class="product__old-price" *ngIf="product.oldPrice as oldPrice">
-        {{ oldPrice }} <span class="product__currency">грн</span>
+      <div class="product__info">
+
+        <div class="product__short-description">
+          {{ product.shortDescription }}
+        </div>
+
+        <div class="product__error" *ngIf="addToCartError as error">
+          {{ error }}
+        </div>
+
+        <div class="product__buy-info">
+
+          <div class="product__price-container">
+            <div class="product__stock" [class.product__stock--available]="product.isInStock">
+              <ng-container *ngIf="product.isInStock">В наличии</ng-container>
+              <ng-container *ngIf="!product.isInStock">Нет в наличии</ng-container>
+            </div>
+
+            <div class="product__price" [class.product__price--special]="product.oldPrice">
+              {{ product.price }} <span class="product__currency">грн</span>
+            </div>
+
+            <div class="product__old-price" *ngIf="product.oldPrice as oldPrice">
+              {{ oldPrice }} <span class="product__currency">грн</span>
+            </div>
+          </div>
+
+          <div class="product__qty" *ngIf="product.isInStock">
+            <quantity-control></quantity-control>
+          </div>
+
+          <div class="product__actions">
+            <button class="btn product__buy"
+                    *ngIf="product.isInStock"
+                    [class.product__buy--loading]="isLoading"
+                    [disabled]="isLoading"
+                    [flyToCart]="product.medias[0]"
+                    (click)="addToCart()"
+                    type="button"
+            >
+              <i class="mbi mbi-cart product__buy-icon"></i>
+              Купить
+
+              <preloader class="product__preloader" *ngIf="isLoading"></preloader>
+            </button>
+
+            <button class="product__wishlist" *ngIf="false" (click)="addToWishlist()" type="button">
+              <i class="mbi mbi-heart product__wishlist-icon"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="product__categories">
+          Категории:&nbsp;
+
+          <a class="product__category"
+             *ngFor="let category of product.categories, last as last"
+             [routerLink]="'/' + category.slug"
+          >
+            {{ category.name }}<ng-container *ngIf="!last">, </ng-container>
+          </a>
+        </div>
       </div>
-    </div>
-
-    <div class="product__error" *ngIf="addToCartError as error">
-      {{ error }}
-    </div>
-
-    <div class="product__qty">
-      <quantity-control></quantity-control>
-    </div>
-
-    <div class="product__actions">
-      <button class="btn product__buy"
-              [class.product__buy--loading]="isLoading"
-              [disabled]="isLoading"
-              [flyToCart]="product.medias[0]"
-              (click)="addToCart()"
-              type="button"
-      >
-        <i class="mbi mbi-cart product__buy-icon"></i>
-        Купить
-
-        <preloader class="product__preloader" *ngIf="isLoading"></preloader>
-      </button>
-
-      <button class="product__wishlist" *ngIf="false" (click)="addToWishlist()" type="button">
-        <i class="mbi mbi-heart product__wishlist-icon"></i>
-      </button>
-    </div>
-
-    <div class="product__categories">
-      Категории:&nbsp;
-
-      <a class="product__category"
-         *ngFor="let category of product.categories, last as last"
-         [routerLink]="'/' + category.slug"
-      >
-        {{ category.name }}<ng-container *ngIf="!last">, </ng-container>
-      </a>
     </div>
 
     <product-details class="product__details" [product]="product"></product-details>

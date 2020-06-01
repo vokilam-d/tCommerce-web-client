@@ -8,6 +8,11 @@
     padding-right: 16px;
   }
 
+  @include respond-to($media_large) {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
   @include respond-to($media_max-content-width) {
     width: 1200px;
     margin: 0 auto;
