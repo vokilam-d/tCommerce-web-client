@@ -13,15 +13,25 @@
     color: $dark;
     background: darken($primary, 3%);
   }
+  &:active {
+    background: darken($primary, 5%);
+  }
 
   &--transparent {
     background: transparent;
   }
 
   &--default {
-    background: rgba($dark, 0.1);
-    border-color: rgba($dark, 0.1);
+    background: #f5f5f5;
+    border: 1px solid #e5e5e5;
     border-radius: 3px;
+
+    &:hover {
+      background: rgba($dark, 0.08);
+    }
+    &:active {
+      background: rgba($dark, 0.12);
+    }
   }
 
   &--small {

@@ -21,6 +21,7 @@
     border-radius: 3px;
     font-size: 16px;
     height: 32px;
+    transition: border-color 0.2s ease;
 
     &:hover,
     &:focus {
@@ -45,17 +46,11 @@
     width: 100%;
     padding: 13px 20px;
     border-radius: 3px;
-    border: 1px solid transparent;
+    font-size: 14px;
   }
 
   &__submit {
     margin: 25px 0 0;
-    background: $primary;
-  }
-
-  &__upload {
-    background: #f5f5f5;
-    border-color: #e5e5e5;
   }
 
   &__upload-icon {

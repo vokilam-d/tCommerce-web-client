@@ -33,6 +33,14 @@
     font-size: 36px;
     color: rgba($dark, 0.6);
     background: rgba(#fff, 0.3);
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background: rgba(#fff, 0.5);
+    }
+    &:active {
+      background: rgba(#fff, 0.4);
+    }
   }
 
   &__close {
