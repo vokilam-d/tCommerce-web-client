@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 .header {
   padding: 13px 0 0;
@@ -41,10 +42,15 @@
   }
 }
 
-
 .checkout {
   position: relative;
   margin: 20px 0 0;
+
+  @include respond-to($media_large) {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
 
   &--loading {
     &::after {
@@ -93,8 +99,24 @@
   }
 
   &__info {
+    position: sticky;
+    top: 20px;
     margin: 25px 0 0;
     padding: 0 0 15px;
+
+    @include respond-to($media_large) {
+      margin-top: 0;
+      margin-left: 50px;
+      width: 400px;
+      flex-shrink: 0;
+    }
+  }
+
+  &__form {
+    @include respond-to($media_large) {
+      flex-grow: 2;
+      max-width: 600px;
+    }
   }
 
   &__edit {
@@ -106,6 +128,11 @@
     padding: 0 0 2px;
     color: $blue;
     border-bottom: 1px dashed;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: darken($blue, 12%);
+    }
   }
 
   &__total {
@@ -150,7 +177,6 @@
   }
 
   &__name {
-    color: $blue;
     font-size: 12px;
   }
 

@@ -191,15 +191,12 @@ export class CustomerService { // todo split to CartService
     let itemToSave = { ...item };
 
     const alreadyAddedIdx = this._cart.findIndex(cartItem => cartItem.sku === item.sku);
-    if (alreadyAddedIdx !== -1) {
-      itemToSave = {
-        ...this._cart[alreadyAddedIdx],
-        ...item
-      };
-      this._cart.splice(alreadyAddedIdx, 1);
+    if (alreadyAddedIdx === -1) {
+      this._cart.unshift(itemToSave);
+    } else {
+      this._cart[alreadyAddedIdx] = itemToSave;
     }
 
-    this._cart.unshift(itemToSave);
     this.saveCartToStorage();
   }
 
