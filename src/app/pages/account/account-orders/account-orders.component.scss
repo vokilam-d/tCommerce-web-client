@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 .error {
   margin: 20px 0 0;
@@ -6,11 +7,26 @@
 }
 
 .order {
+  $order: &;
+
   padding: 20px 0;
   border-bottom: 1px solid rgba($dark, 0.15);
 
+  @include respond-to($media_large) {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-right: 40px;
+  }
+
   &:first-child {
     padding-top: 0;
+  }
+
+  &--expanded {
+    @include respond-to($media_large) {
+      display: block;
+    }
   }
 
   &__info {
@@ -32,20 +48,52 @@
 
   &__content {
     margin: 0 0 10px;
+
+    @include respond-to($media_large) {
+      margin-top: 20px;
+    }
   }
 
   &__header {
     display: flex;
     justify-content: space-between;
     font-size: 13px;
+
+    @include respond-to($media_large) {
+      display: block;
+    }
+
+    #{$order}--expanded & {
+      @include respond-to($media_large) {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+    }
   }
 
-  &__date {
-    color: rgba($dark, 0.6);
+  &__number {
+    @include respond-to($media_large) {
+      font-size: 18px;
+    }
   }
 
   &__date {
     margin: 0 0 0 auto;
+    color: rgba($dark, 0.6);
+
+    @include respond-to($media_large) {
+      display: block;
+      margin-top: 7px;
+    }
+
+    #{$order}--expanded & {
+      @include respond-to($media_large) {
+        margin-top: 0;
+        margin-left: 20px;
+        font-size: 15px;
+      }
+    }
   }
 
   &__expand {
@@ -55,7 +103,20 @@
     padding: 5px;
     font-size: 14px;
     transform-origin: center;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+
+    @include respond-to($media_large) {
+      position: absolute;
+      top: 20px;
+      right: 0;
+      margin: 0;
+      font-size: 16px;
+    }
+
+    &:hover {
+      color: rgba($dark, 0.7);
+    }
 
     &--expanded {
       top: -8px;
@@ -66,6 +127,11 @@
   &__preview {
     display: flex;
     flex-wrap: wrap;
+    cursor: pointer;
+
+    @include respond-to($media_large) {
+      margin-left: 24px;
+    }
   }
 
   &__img {
@@ -77,6 +143,24 @@
     display: flex;
     justify-content: space-between;
     font-size: 15px;
+
+    @include respond-to($media_large) {
+      margin: 0 0 0 auto;
+    }
+
+    #{$order}--expanded & {
+      @include respond-to($media_large) {
+        margin-top: 15px;
+        font-size: 18px;
+      }
+    }
+  }
+
+  &__price {
+    @include respond-to($media_large) {
+      margin-left: 15px;
+      font-weight: 600;
+    }
   }
 }
 
@@ -101,12 +185,20 @@
   &__name {
     font-size: 13px;
     color: $blue;
+
+    @include respond-to($media_large) {
+      font-size: 15px;
+    }
   }
 
   &__price-container {
     margin: 5px 0 0;
     display: flex;
     justify-content: space-between;
+
+    @include respond-to($media_large) {
+      margin-top: 15px;
+    }
   }
 
   &__img {

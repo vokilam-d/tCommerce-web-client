@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 .info {
   &__title {
@@ -37,6 +38,12 @@
 }
 
 .info-form {
+  @include respond-to($media_large) {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   &__cancel {
     margin: 25px 0 0;
     width: 100%;

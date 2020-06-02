@@ -4,7 +4,7 @@
 
 <preloader class="preloader" *ngIf="isLoading"></preloader>
 
-<div class="order" *ngFor="let order of orders">
+<div class="order" *ngFor="let order of orders" [class.order--expanded]="order.isExpanded">
 
   <div class="order__header">
     <div class="order__number">

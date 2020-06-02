@@ -2,7 +2,8 @@
 @import "mixins";
 
 .toolbar-item {
-  padding: 0 10px;
+  padding: 10px 10px;
+  cursor: pointer;
 
   @include respond-to($media_large) {
     padding-left: 20px;
@@ -15,12 +16,55 @@
 }
 
 .account {
+  position: relative;
+
   &__link {
     display: flex;
     align-items: center;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: rgba($dark, 0.7);
+    }
   }
 
   &__login-text {
     margin: 2px 0 0 2px;
+  }
+
+  &__menu {
+    display: none;
+    position: absolute;
+    top: 95%;
+    right: 0;
+    min-width: 100%;
+    padding: 10px 0;
+    background: #fff;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 1px 1px 6px 0 rgba($dark, 0.3);
+    animation: slideIn 0.3s ease;
+  }
+  &:hover &__menu {
+    display: block;
+  }
+
+  &__menu-link {
+    display: block;
+    padding: 8px 15px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      color: $dark;
+      background: $primary;
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    transform: translateY(0);
   }
 }

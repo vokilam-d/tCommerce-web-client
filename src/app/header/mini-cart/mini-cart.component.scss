@@ -3,10 +3,16 @@
 
 .toolbar-item {
   padding: 0 10px;
+  transition: color 0.2s ease;
+  cursor: pointer;
 
   @include respond-to($media_large) {
     padding-left: 20px;
     padding-right: 20px;
+  }
+
+  &:hover {
+    color: rgba($dark, 0.7);
   }
 
   &__icon {
