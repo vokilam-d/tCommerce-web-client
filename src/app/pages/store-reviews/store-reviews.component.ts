@@ -7,13 +7,15 @@ import { StoreReviewService } from '../../shared/services/store-review/store-rev
 import { NotyService } from '../../noty/noty.service';
 import { JsonLdService } from '../../shared/services/json-ld/json-ld.service';
 import { SafeHtml } from '@angular/platform-browser';
+import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'store-reviews',
   templateUrl: './store-reviews.component.html',
   styleUrls: ['./store-reviews.component.scss']
 })
-export class StoreReviewsComponent implements OnInit {
+export class StoreReviewsComponent extends NgUnsubscribe implements OnInit {
 
   jsonLd: SafeHtml;
   reviews: StoreReviewDto[];
@@ -26,7 +28,7 @@ export class StoreReviewsComponent implements OnInit {
               private notyService: NotyService,
               private jsonLdService: JsonLdService,
               private storeReviewService: StoreReviewService) {
-
+    super();
   }
 
   ngOnInit(): void {
@@ -36,6 +38,7 @@ export class StoreReviewsComponent implements OnInit {
 
   fetchReviews() {
     this.storeReviewService.fetchAllReviews()
+      .pipe( takeUntil(this.ngUnsubscribe) )
       .subscribe(
         response => {
           this.reviews = response.data;

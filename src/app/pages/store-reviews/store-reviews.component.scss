@@ -1,8 +1,39 @@
+@import "variables";
+
 .store-reviews {
   margin: 25px 0 0;
+
+  &__error {
+    margin: 20px 0 0;
+    color: $red;
+  }
 
   &__review {
     display: block;
     margin: 25px 0 0;
+    max-width: 800px;
+  }
+}
+
+.placeholder {
+  &__rating {
+    height: 14px;
+    width: 75px;
+  }
+
+  &__name {
+    height: 12px;
+    margin: 5px 0 12px;
+    width: 130px;
+  }
+
+  &__content {
+    height: 14px;
+  }
+
+  &__actions {
+    height: 12px;
+    margin: 10px 0 0;
+    width: 160px;
   }
 }
