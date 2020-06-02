@@ -2,11 +2,11 @@
 
 <app-header></app-header>
 
-<div class="page container blog-page" *ngIf="post">
+<div class="page container blog-page">
   <breadcrumbs [breadcrumbs]="breadcrumbs" [showLastItem]="false"></breadcrumbs>
 
   <h1 class="page__title blog-page__title">
-    {{ post.name }}
+    {{ post?.name }}
   </h1>
 
   <div class="blog-page__container">
@@ -15,27 +15,37 @@
     </div>
 
     <div class="blog-page__content post">
-      <div class="post__content html-description" [innerHTML]="contentHtml"></div>
 
-      <div class="post__gallery" *ngIf="post.medias.length">
-        <h2 class="post__section-title">Галерея</h2>
-
-        <div class="post__gallery-list">
-          <media-gallery [medias]="post.medias"
-                         [thumbnailProp]="mediaVariants.Original"
-                         [imageForModalProp]="mediaVariants.Original"
-          ></media-gallery>
+      <div class="placeholder" *ngIf="!post">
+        <div class="placeholder__text-block" *ngFor="let i of [1,2,3]">
+          <div class="placeholder__item placeholder__content placeholder__text" *ngFor="let i of [1,2,3,4,5]"></div>
+          <div class="placeholder__item placeholder__content placeholder__text placeholder__text--last"></div>
         </div>
       </div>
 
-      <div class="post__footer">
-        <div class="post__publish-date">
-          <span class="post__footer-title">Добавлено: </span><time>{{ post.publishedAt | date }}</time>
+      <ng-container *ngIf="post">
+        <div class="post__content html-description" [innerHTML]="contentHtml"></div>
+
+        <div class="post__gallery" *ngIf="post.medias.length">
+          <h2 class="post__section-title">Галерея</h2>
+
+          <div class="post__gallery-list">
+            <media-gallery [medias]="post.medias"
+                           [thumbnailProp]="mediaVariants.Original"
+                           [imageForModalProp]="mediaVariants.Original"
+            ></media-gallery>
+          </div>
         </div>
-        <div class="post__category" *ngIf="post.category">
-          <span class="post__footer-title">Категория: </span> <a class="post__category-link" [routerLink]="['/', 'blog', post.category.slug]">{{ post.category.name }}</a>
+
+        <div class="post__footer">
+          <div class="post__publish-date">
+            <span class="post__footer-title">Добавлено: </span><time>{{ post.publishedAt | date }}</time>
+          </div>
+          <div class="post__category" *ngIf="post.category">
+            <span class="post__footer-title">Категория: </span> <a class="post__category-link" [routerLink]="['/', 'blog', post.category.slug]">{{ post.category.name }}</a>
+          </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
 </div>

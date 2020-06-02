@@ -1,3 +1,6 @@
+@import "variables";
+@import "mixins";
+
 :host {
   display: block;
 }
@@ -13,7 +16,18 @@
 
   &__img {
     width: 70px;
-    max-height: 70px;
+    height: 70px;
     object-fit: cover;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    @include respond-to($media_large) {
+      width: 100px;
+      height: 100px;
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }

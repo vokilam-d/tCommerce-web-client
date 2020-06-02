@@ -1,6 +1,8 @@
 @import "variables";
+@import "mixins";
 
 .items {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -8,6 +10,27 @@
   &__item {
     width: 48%;
     margin: 0 0 20px;
+
+    @include respond-to($media_large) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__preloader-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+
+    &--overlay {
+      background: rgba(#fff, 0.6);
+    }
+  }
+
+  &__preloader {
+    margin: 8vh 0;
   }
 }
 
@@ -20,6 +43,10 @@
     margin: 0 auto;
     height: 140px;
     object-fit: cover;
+
+    @include respond-to($media_large) {
+      height: 220px;
+    }
   }
 
   &__name {
@@ -35,7 +62,7 @@
     font-size: 13px;
     color: rgba($dark, 0.8);
     line-height: 1.1;
-    height: 4.4em;
+    max-height: 4.4em;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -63,4 +90,33 @@
 
 .pagination {
   margin: 20px 0 0;
+}
+
+.placeholder {
+  &__img {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+
+    @include respond-to($media_large) {
+      height: 220px;
+      width: 220px;
+    }
+  }
+
+  &__name {
+    margin: 10px 0 0;
+    height: 15px;
+  }
+
+  &__category {
+    margin: 10px 0 0;
+    height: 13px;
+  }
+
+  &__date {
+    margin: 5px 0 0;
+    height: 10px;
+    width: 70px;
+  }
 }

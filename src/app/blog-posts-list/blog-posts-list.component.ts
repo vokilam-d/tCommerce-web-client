@@ -36,7 +36,7 @@ export class BlogPostsListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.fetchList();
+    setTimeout(() => this.fetchList());
   }
 
   private fetchList() {

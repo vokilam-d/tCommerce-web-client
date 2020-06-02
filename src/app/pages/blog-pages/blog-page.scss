@@ -1,13 +1,38 @@
+@import "variables";
+@import "mixins";
+
 .blog-page {
   &__title {
     text-align: center;
   }
 
+  &__container {
+    @include respond-to($media_large) {
+      margin: 30px 0 0;
+      display: flex;
+      align-items: flex-start;
+    }
+  }
+
   &__toolbar {
     margin: 20px 0 0;
+
+    @include respond-to($media_large) {
+      order: 2;
+      flex-shrink: 0;
+      margin-top: 0;
+      margin-left: 50px;
+      width: 300px;
+    }
   }
 
   &__content {
     margin: 20px 0 0;
+
+    @include respond-to($media_large) {
+      order: 1;
+      margin-top: 0;
+      flex-grow: 2;
+    }
   }
 }

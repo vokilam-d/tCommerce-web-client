@@ -5,6 +5,23 @@
     {{ error }}
   </div>
 
+  <ng-container *ngIf="!items && !error">
+    <div class="items__item placeholder" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+      <div class="placeholder__item placeholder__img"></div>
+      <div class="placeholder__item placeholder__name"></div>
+      <div class="placeholder__item placeholder__text placeholder__text--last placeholder__name"></div>
+      <div class="placeholder__item placeholder__category"></div>
+      <div class="placeholder__item placeholder__date"></div>
+    </div>
+  </ng-container>
+
+  <div class="items__preloader-container"
+      *ngIf="isLoading"
+      [class.items__preloader-container--overlay]="items"
+  >
+    <preloader class="items__preloader"></preloader>
+  </div>
+
   <div class="items__item item" *ngFor="let item of items">
     <a class="item__img-container" *ngIf="item.featuredMedia" [routerLink]="['/', 'blog', item.slug]">
       <img class="item__img" [src]="uploadedHost + item.featuredMedia.variantsUrls.original" [alt]="item.name">

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BlogPostsListComponent } from './blog-posts-list.component';
 import { RouterModule } from '@angular/router';
 import { PaginationModule } from '../pagination/pagination.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -11,7 +12,8 @@ import { PaginationModule } from '../pagination/pagination.module';
   imports: [
     CommonModule,
     RouterModule,
-    PaginationModule
+    PaginationModule,
+    SharedModule
   ],
   exports: [BlogPostsListComponent]
 })
