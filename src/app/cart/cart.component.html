@@ -35,17 +35,19 @@
               {{ item.name }}
             </a>
 
-            <div class="item__qty-container">
-              <quantity-control class="item__qty"
-                                [initialValue]="item.qty"
-                                (valueChanged)="onQtyChange(item, $event)"
-              ></quantity-control>
-            </div>
+            <div class="item__buy-info">
+              <div class="item__qty-container">
+                <quantity-control class="item__qty"
+                                  [initialValue]="item.qty"
+                                  (valueChanged)="onQtyChange(item, $event)"
+                ></quantity-control>
+              </div>
 
-            <div class="item__row">
-              <div class="item__label">Цена</div>
+              <div class="item__row">
+                <div class="item__label">Цена</div>
 
-              <div class="item__value">{{ item.totalCost }} грн</div>
+                <div class="item__value">{{ item.totalCost }} грн</div>
+              </div>
             </div>
 
             <button class="item__delete" (click)="deleteFromCart(item)" type="button">
