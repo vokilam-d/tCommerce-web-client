@@ -1,3 +1,6 @@
+@import "variables";
+@import "mixins";
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -16,11 +19,26 @@
   left: 0;
   right: 0;
   bottom: 0;
+  max-height: 100vh;
   padding: 20px 20px 40px;
   background: #fff;
   z-index: 21;
   overflow: auto;
   animation: fadeIn 0.3s ease, slideIn 0.4s ease;
+
+  @include respond-to($media_large) {
+    right: auto;
+    bottom: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    width: 70vw;
+    max-width: 600px;
+    max-height: 90vh;
+    padding: 40px 50px 50px;
+    border-radius: 10px;
+    animation: fadeIn 0.3s ease, slideInCentered 0.4s ease;
+  }
 
   &__header {
     display: flex;
@@ -30,10 +48,28 @@
   &__title {
     font-size: 22px;
     font-weight: 500;
+
+    @include respond-to($media_large) {
+      font-size: 24px;
+    }
   }
 
   &__close {
     font-size: 20px;
+    transition: color 0.2s ease;
+
+    @include respond-to($media_large) {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      padding: 10px;
+      color: rgba($dark, 0.6);
+      font-size: 24px;
+    }
+
+    &:hover {
+      color: $dark;
+    }
   }
 
   &__content {
@@ -47,5 +83,13 @@
   }
   to {
     transform: translateY(0);
+  }
+}
+@keyframes slideInCentered {
+  from {
+    transform: translate3d(-50%, -40%, 0)
+  }
+  to {
+    transform: translate3d(-50%, -50%, 0)
   }
 }

@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 .cart {
   &__error {
@@ -75,6 +76,13 @@
   border: 1px solid rgba($dark, 0.15);
   border-radius: 3px;
 
+  @include respond-to($media_large) {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 15px;
+    padding-right: 40px;
+  }
+
   &:first-child {
     margin-top: 0;
   }
@@ -84,6 +92,12 @@
     align-items: center;
     justify-content: center;
     height: 140px;
+
+    @include respond-to($media_large) {
+      width: 120px;
+      height: auto;
+      flex-shrink: 0;
+    }
   }
 
   &__img {
@@ -91,16 +105,33 @@
     object-fit: contain;
   }
 
+  &__info {
+    @include respond-to($media_large) {
+      flex-grow: 2;
+      margin-left: 20px;
+    }
+  }
+
   &__name {
     display: block;
     margin: 10px 0 0;
     font-size: 14px;
     line-height: 1.2;
+
+    @include respond-to($media_large) {
+      margin-top: 0;
+      font-size: 15px;
+      line-height: 1;
+    }
   }
 
   &__qty-container {
     margin: 10px 0 0;
     text-align: center;
+
+    @include respond-to($media_large) {
+      margin-top: 15px;
+    }
   }
 
   &__qty {
@@ -128,5 +159,10 @@
     padding: 10px;
     font-size: 18px;
     color: rgba($red, 0.8);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: darken($red, 15%);
+    }
   }
 }

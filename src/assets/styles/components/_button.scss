@@ -19,6 +19,13 @@
 
   &--transparent {
     background: transparent;
+
+    &:hover {
+      background: $primary;
+    }
+    &:active {
+      background: $primary;
+    }
   }
 
   &--default {

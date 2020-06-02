@@ -30,26 +30,28 @@
             <img class="item__img" [src]="uploadedHost + item.imageUrl" alt="">
           </div>
 
-          <a class="item__name" [routerLink]="['/', item.slug]">
-            {{ item.name }}
-          </a>
+          <div class="item__info">
+            <a class="item__name" [routerLink]="['/', item.slug]">
+              {{ item.name }}
+            </a>
 
-          <div class="item__qty-container">
-            <quantity-control class="item__qty"
-                              [initialValue]="item.qty"
-                              (valueChanged)="onQtyChange(item, $event)"
-            ></quantity-control>
+            <div class="item__qty-container">
+              <quantity-control class="item__qty"
+                                [initialValue]="item.qty"
+                                (valueChanged)="onQtyChange(item, $event)"
+              ></quantity-control>
+            </div>
+
+            <div class="item__row">
+              <div class="item__label">Цена</div>
+
+              <div class="item__value">{{ item.totalCost }} грн</div>
+            </div>
+
+            <button class="item__delete" (click)="deleteFromCart(item)" type="button">
+              <i class="mbi mbi-trash2"></i>
+            </button>
           </div>
-
-          <div class="item__row">
-            <div class="item__label">Цена</div>
-
-            <div class="item__value">{{ item.totalCost }} грн</div>
-          </div>
-
-          <button class="item__delete" (click)="deleteFromCart(item)" type="button">
-            <i class="mbi mbi-trash2"></i>
-          </button>
 
         </div>
 
