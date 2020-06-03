@@ -8,6 +8,22 @@
 
   <h2 class="success__subtitle">Ваш заказ №{{ order.id }}</h2>
 
+  <div class="success__pay-error" *ngIf="paymentError as error">
+    {{ error | json }}
+  </div>
+
+  <div class="success__pay-success">
+    Ваш заказ успешно оплачен
+  </div>
+
+  <button class="success__pay-btn"
+          *ngIf="order.isOnlinePayment && !paymentSuccess"
+          (click)="initOnlinePayment()"
+          type="button"
+  >
+    Оплатить
+  </button>
+
   <div class="order-info">
     <div class="order-info__title">
       Информация о заказе

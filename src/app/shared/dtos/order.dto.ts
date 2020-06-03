@@ -23,6 +23,7 @@ export class OrderDto extends AddOrderDto {
   discountLabel: string;
   totalCost: number;
   createdAt: Date;
+  isOnlinePayment: boolean;
 
   // custom transforms
   isExpanded: boolean;

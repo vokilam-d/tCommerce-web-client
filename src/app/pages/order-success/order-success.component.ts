@@ -3,9 +3,12 @@ import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { OrderDto } from '../../shared/dtos/order.dto';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
-import { API_HOST } from '../../shared/constants';
+import { API_HOST, DEFAULT_ERROR_TEXT } from '../../shared/constants';
 import { CustomerService } from '../../shared/services/customer/customer.service';
 import { HeadService } from '../../shared/services/head/head.service';
+import { OrderService } from '../checkout/order.service';
+
+declare const Wayforpay: any;
 
 @Component({
   selector: 'order-success',
@@ -17,9 +20,13 @@ export class OrderSuccessComponent implements OnInit {
   uploadedHost = API_HOST;
   order: OrderDto;
   breadcrumbs: IBreadcrumb[] = SUCCESS_BREADCRUMBS;
+  paymentError: string = null;
+  paymentSuccess: boolean = false;
+  private wayforpay: any;
 
   constructor(@Inject(PLATFORM_ID) private platformId: any,
               private headService: HeadService,
+              private orderService: OrderService,
               private router: Router) {
   }
 
@@ -38,8 +45,44 @@ export class OrderSuccessComponent implements OnInit {
   private init() {
     this.breadcrumbs.push({ title: `Заказ №${this.order.id}` });
     this.setMeta();
-    this.showGoogleCustomerReview();
+
+    if (this.order.isOnlinePayment) {
+      this.initOnlinePayment();
+    } else {
+      this.showGoogleCustomerReview();
+    }
   }
+
+  private initOnlinePayment() {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://secure.wayforpay.com/server/pay-widget.js';
+    script.onerror = error => this.paymentError = (error as any) || DEFAULT_ERROR_TEXT;
+    script.onload = () => {
+      this.wayforpay = new Wayforpay;
+      this.pay();
+    }
+
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  pay() {
+    this.orderService.getPaymentDetails(this.order.id)
+      .subscribe(
+        response => {
+          const wfpPayload = response.data;
+          wfpPayload.straightWidget =  true;
+
+          this.wayforpay.run(
+            wfpPayload,
+            () => this.paymentSuccess = true,
+            error => this.paymentError = error || DEFAULT_ERROR_TEXT
+          );
+        },
+        error => this.paymentError = error.error?.message || DEFAULT_ERROR_TEXT
+      );
+  }
+
 
   private setMeta() {
     this.headService.setMeta({ title: `Заказ №${this.order.id}`, description: `Заказ №${this.order.id}` });

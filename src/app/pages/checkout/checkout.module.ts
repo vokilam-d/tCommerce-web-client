@@ -9,7 +9,6 @@ import { CallbackNeededComponent } from './callback-needed/callback-needed.compo
 import { OrderNoteComponent } from './order-note/order-note.component';
 import { OrderCustomerInfoComponent } from './order-customer-info/order-customer-info.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { OrderService } from './order.service';
 import { SharedModule } from '../../shared/shared.module';
 
 
@@ -28,8 +27,6 @@ import { SharedModule } from '../../shared/shared.module';
     ReactiveFormsModule,
     SharedModule
   ],
-  providers: [
-    OrderService
-  ]
+  providers: []
 })
 export class CheckoutModule { }

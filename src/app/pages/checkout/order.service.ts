@@ -9,7 +9,9 @@ import { tap } from 'rxjs/operators';
 import { ResponseDto } from '../../shared/dtos/response.dto';
 import { API_HOST } from '../../shared/constants';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class OrderService {
 
   email: string = '';
@@ -26,6 +28,10 @@ export class OrderService {
   placeOrder(addOrderDto: AddOrderDto) {
     return this.http.post<ResponseDto<OrderDto>>(`${API_HOST}/api/v1/order`, addOrderDto)
       .pipe( tap(_ => this.resetOrder()) );
+  }
+
+  getPaymentDetails(orderId: string) {
+    return this.http.get<ResponseDto<any>>(`${API_HOST}/api/v1/order/${orderId}/payment`);
   }
 
   private resetOrder() {
