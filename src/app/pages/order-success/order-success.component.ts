@@ -38,10 +38,38 @@ export class OrderSuccessComponent implements OnInit {
   private init() {
     this.breadcrumbs.push({ title: `Заказ №${this.order.id}` });
     this.setMeta();
+    this.showGoogleCustomerReview();
   }
 
   private setMeta() {
-    this.headService.setMeta({ title: 'Заказ №${this.order.id}', description: 'Заказ №${this.order.id}' });
+    this.headService.setMeta({ title: `Заказ №${this.order.id}`, description: `Заказ №${this.order.id}` });
+  }
+
+  private showGoogleCustomerReview() {
+    const orderId = this.order.id;
+    const email = this.order.email;
+    const deliveryDate = new Date();
+    deliveryDate.setDate(deliveryDate.getDate() + 7);
+
+    (window as any).renderOptIn = function() {
+      (window as any).gapi.load('surveyoptin', function() {
+        (window as any).gapi.surveyoptin.render(
+          {
+            "merchant_id": 139367975,
+            "order_id": orderId,
+            "email": email,
+            "delivery_country": "UA",
+            "estimated_delivery_date": deliveryDate,
+            "opt_in_style": "CENTER_DIALOG"
+          });
+      });
+    }
+
+    const gcrScript = document.createElement('script');
+    gcrScript.setAttribute("src", "https://apis.google.com/js/platform.js?onload=renderOptIn");
+    gcrScript.setAttribute("async", 'true');
+    gcrScript.setAttribute("defer", 'true');
+    document.getElementsByTagName("head")[0].appendChild(gcrScript);
   }
 }
 

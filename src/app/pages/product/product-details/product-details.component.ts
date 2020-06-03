@@ -162,7 +162,7 @@ export class ProductDetailsComponent implements OnInit {
       offers: {
         '@type': 'Offer',
         availability: this.product.isInStock ? 'http://schema.org/InStock' : 'http://schema.org/OutOfStock',
-        price: this.product.price,
+        price: Math.round(this.product.price),
         priceCurrency: 'UAH',
         priceValidUntil: '2040-12-08',
         url: `https://klondike.com.ua/${this.product.slug}`

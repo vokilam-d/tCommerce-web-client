@@ -10,6 +10,7 @@ import { API_HOST, DEFAULT_ERROR_TEXT } from '../../shared/constants';
 import { normalizePhoneNumber } from '../../shared/helpers/normalize-phone-number.function';
 import { ScrollToService } from '../../shared/services/scroll-to/scroll-to.service';
 import { HeadService } from '../../shared/services/head/head.service';
+import { AnalyticsService } from '../../shared/services/analytics/analytics.service';
 
 @Component({
   selector: 'checkout',
@@ -31,6 +32,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
 
   constructor(private customerService: CustomerService,
               private headService: HeadService,
+              private analytics: AnalyticsService,
               private orderService: OrderService,
               private scrollToService: ScrollToService,
               private router: Router) {
@@ -79,7 +81,10 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
       .pipe( finalize(() => this.isOrderLoading = false) )
       .subscribe(
         response => {
-          this.router.navigate(['/', 'order-success'], { state: { order: response.data } });
+          const order = response.data;
+          this.analytics.placeOrder(order.id, order.totalCost);
+
+          this.router.navigate(['/', 'order-success'], { state: { order } });
         },
         error => this.setError(error.error?.message || DEFAULT_ERROR_TEXT)
       );
