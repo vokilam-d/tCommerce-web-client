@@ -62,6 +62,18 @@
     margin-top: 10px;
   }
 
+  &__rating {
+    display: flex;
+    align-items: center;
+    margin: 0 0 7px;
+  }
+
+  &__rating-count {
+    margin: 0 0 0 5px;
+    font-size: 13px;
+    color: #666;
+  }
+
   &__price {
     font-size: 18px;
 

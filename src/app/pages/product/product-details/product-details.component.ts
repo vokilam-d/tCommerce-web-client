@@ -74,9 +74,8 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     this.activeIdx = idx;
-    if (this.deviceService.isMobile()) {
-      this.scrollToService.scrollTo({ target: this.elementRef, offset: -20 });
-    }
+    const offset = this.deviceService.isMobile() ? -20 : -200;
+    this.scrollToService.scrollTo({ target: this.elementRef, offset });
   }
 
   keyValuePipeComparator(a: KeyValue<string, number>, b: KeyValue<string, number>): number {

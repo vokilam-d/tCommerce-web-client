@@ -51,7 +51,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.handleReviewFromEmail();
       this.handleUrlReviewsFragment();
-    });
+    }, 100);
   }
 
   private fetchProduct() {

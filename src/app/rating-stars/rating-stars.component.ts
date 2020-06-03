@@ -8,6 +8,7 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChi
 export class RatingStarsComponent implements OnInit, AfterViewInit {
 
   @Input() rating: number;
+  @Input() size: 'default' | 'small' = 'default';
 
   @ViewChild('stopElement') stopElement: ElementRef;
 
