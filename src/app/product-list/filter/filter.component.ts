@@ -11,6 +11,7 @@ import { ISelectedFilter } from './selected-filter.interface';
 import { ActivatedRoute } from '@angular/router';
 import { FilterDto, FilterValueDto, Range } from '../../shared/dtos/filter.dto';
 import { UrlService } from '../../shared/services/url/url.service';
+import { SEARCH_QUERY_PARAM } from '../../shared/constants';
 
 @Component({
   selector: 'app-filter',
@@ -125,6 +126,8 @@ export class FilterComponent implements OnInit {
     const selectedFilters: ISelectedFilter[] = [];
 
     Object.keys(this.route.snapshot.queryParams).forEach(key => {
+      if (key === SEARCH_QUERY_PARAM) { return; }
+
       selectedFilters.push({ id: key, valueId: this.route.snapshot.queryParams[key] });
     });
 

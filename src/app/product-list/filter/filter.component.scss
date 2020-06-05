@@ -24,10 +24,14 @@
     font-size: 25px;
     color: #fff;
     z-index: 21;
+
+    @include respond-to($media_large) {
+      display: none;
+    }
   }
 
   &--visible &__close {
-    display: none;
+    display: block;
   }
 }
 

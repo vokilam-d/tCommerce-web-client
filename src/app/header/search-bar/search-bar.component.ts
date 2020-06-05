@@ -1,34 +1,39 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { SearchService } from '../../shared/services/search/search.service';
-import { Router } from '@angular/router';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
-import { catchError, debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { fromEvent, Subject } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { fromEvent, of } from 'rxjs';
 import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
-import { DEFAULT_ERROR_TEXT, API_HOST } from '../../shared/constants';
+import { API_HOST, DEFAULT_ERROR_TEXT, SEARCH_QUERY_PARAM } from '../../shared/constants';
+import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
+import { isPlatformBrowser } from '@angular/common';
+import { ProductService } from '../../pages/product/product.service';
 
 @Component({
   selector: 'search-bar',
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss']
 })
-export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterViewInit {
 
   uploadedHost = API_HOST;
   isInFocus: boolean = false;
-  searchControl = new FormControl('');
+  searchControl: FormControl;
   searchResults: ProductListItemDto[] = null;
   isSearchInProgress: boolean = false;
   searchError: string = null;
 
-  private ngUnsubscribe = new Subject();
-
   @ViewChild('inputRef') inputRef: ElementRef;
 
-  constructor(private searchService: SearchService,
-              private router: Router) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: any,
+              private productService: ProductService,
+              private route: ActivatedRoute,
+              private router: Router) {
+    super();
+  }
 
   ngOnInit() {
+    this.buildControl();
     this.handleAutocomplete();
   }
 
@@ -36,16 +41,17 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.handleHotkeys();
   }
 
-  ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+  private buildControl() {
+    const initialValue = this.route.snapshot.queryParamMap.get(SEARCH_QUERY_PARAM) || '';
+    this.searchControl = new FormControl(initialValue);
   }
 
   search() {
     const value = this.searchControl.value;
     if (!value) { return; }
 
-    this.router.navigate(['/', 'search'], { queryParams: { q: value } });
+    this.searchResults = null;
+    this.router.navigate(['/', 'search'], { queryParams: { [SEARCH_QUERY_PARAM]: value } });
   }
 
   clearInput() {
@@ -55,22 +61,23 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private handleAutocomplete() {
+    if (!isPlatformBrowser(this.platformId)) { return; }
+
     this.searchControl.valueChanges
       .pipe(
+        takeUntil(this.ngUnsubscribe),
         debounceTime(200),
         distinctUntilChanged(),
         map(value => value.trim()),
         map(value => value.replace(/,/g, '')), // ',' sign is reserved as array delimiter
-        filter(value => !!value),
         tap(() => this.isSearchInProgress = true),
-        switchMap(query => this.searchService.autocompleteProducts(query)),
+        switchMap(query => query ? this.productService.fetchProductsByAutocomplete(query) : of({ data: null })),
         catchError((err, caught) => {
           this.searchResults = null;
           this.searchError = (err.error && err.error.message) || DEFAULT_ERROR_TEXT;
           this.isSearchInProgress = false;
           return caught;
-        }),
-        takeUntil(this.ngUnsubscribe)
+        })
       )
       .subscribe(
         response => {
@@ -82,6 +89,8 @@ export class SearchBarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private handleHotkeys() {
+    if (!isPlatformBrowser(this.platformId)) { return; }
+
     fromEvent(this.inputRef.nativeElement, 'keyup')
       .pipe( takeUntil(this.ngUnsubscribe) )
       .subscribe(

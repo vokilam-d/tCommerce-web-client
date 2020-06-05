@@ -1,7 +1,7 @@
 @import "variables";
 @import "mixins";
 
-.category {
+.search {
   &__title {
     margin: 20px 0 0;
     font-size: 24px;
@@ -12,25 +12,11 @@
     display: block;
   }
 
-  &__description {
-    margin: 40px 0 0;
-  }
-
-  &__error {
+  &__no-query {
     margin: 40px 0 0;
     padding: 0 20px;
     text-align: center;
-    font-size: 16px;
-    line-height: 1.4;
-    color: $red;
+    font-size: 32px;
     word-break: break-word;
-  }
-}
-
-.placeholder {
-  &__title {
-    margin: 20px 0 100px;
-    height: 24px;
-    width: 200px;
   }
 }

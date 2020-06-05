@@ -7,6 +7,7 @@ import { ProductService } from '../product/product.service';
 import { ISelectedFilter } from '../../product-list/filter/selected-filter.interface';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HeadService } from '../../shared/services/head/head.service';
+import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
 
 @Component({
   selector: 'category',
@@ -17,8 +18,9 @@ export class CategoryComponent implements OnInit {
 
   category: CategoryDto;
   safeDescription: SafeHtml;
-  breadcrumbs: IBreadcrumb[];
+  breadcrumbs: IBreadcrumb[] = [];
   productListFilters: ISelectedFilter[];
+  error: string;
 
   constructor(private route: ActivatedRoute,
               private sanitizer: DomSanitizer,
@@ -41,7 +43,7 @@ export class CategoryComponent implements OnInit {
         this.setBreadcrumbs();
         this.setMeta();
       },
-      error => console.warn(error)
+      error => this.error = error.error?.message || DEFAULT_ERROR_TEXT
     );
   }
 

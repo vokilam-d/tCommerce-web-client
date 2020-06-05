@@ -1,0 +1,19 @@
+<app-header></app-header>
+
+<div class="page container search">
+  <breadcrumbs class="search__breadcrumbs" [breadcrumbs]="breadcrumbs"></breadcrumbs>
+
+  <div class="search__container">
+    <h1 class="search__title" *ngIf="searchQuery">
+      Поиск: "{{ searchQuery }}"
+    </h1>
+
+    <div class="search__no-query" *ngIf="!searchQuery">
+      Задайте поисковый запрос
+    </div>
+
+    <product-list class="search__products" *ngIf="searchQuery" [initialFilters]="productListFilters"></product-list>
+  </div>
+</div>
+
+<app-footer></app-footer>

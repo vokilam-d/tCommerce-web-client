@@ -179,7 +179,7 @@
   top: 100%;
   left: 0;
   width: 220px;
-  z-index: 2;
+  z-index: 3;
 
   @include respond-to($media_large) {
     display: block;

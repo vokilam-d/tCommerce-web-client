@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
 import { ISelectedFilter } from './filter/selected-filter.interface';
 import { ProductService } from '../pages/product/product.service';
@@ -16,7 +25,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent implements OnInit, AfterViewInit {
+export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
 
   items: ProductListItemDto[];
   itemsTotal: number;
@@ -40,6 +49,12 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.initialFilters?.firstChange === false) {
+      this.fetchProducts();
+    }
   }
 
   ngAfterViewInit(): void {

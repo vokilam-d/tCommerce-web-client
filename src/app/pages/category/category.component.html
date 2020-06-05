@@ -1,16 +1,27 @@
 <app-header></app-header>
 
-<div class="page container category" *ngIf="category">
+<div class="page container category">
   <breadcrumbs class="category__breadcrumbs" [breadcrumbs]="breadcrumbs"></breadcrumbs>
 
   <div class="category__container">
-    <h1 class="category__title">
-      {{ category.name }}
-    </h1>
 
-    <product-list class="category__products" [initialFilters]="productListFilters"></product-list>
+    <div class="placeholder" *ngIf="!category && !error">
+      <div class="placeholder__item placeholder__title"></div>
+    </div>
 
-    <div class="category__description html-description" [innerHTML]="safeDescription"></div>
+    <div class="category__error" *ngIf="error as error">
+      {{ error }}
+    </div>
+
+    <ng-container *ngIf="category">
+      <h1 class="category__title">
+        {{ category.name }}
+      </h1>
+
+      <product-list class="category__products" [initialFilters]="productListFilters"></product-list>
+
+      <div class="category__description html-description" [innerHTML]="safeDescription"></div>
+    </ng-container>
   </div>
 </div>
 

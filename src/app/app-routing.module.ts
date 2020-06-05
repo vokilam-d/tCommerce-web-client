@@ -76,6 +76,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/reset-password/reset-password.module').then(m => m.ResetPasswordModule)
   },
   {
+    path: 'search',
+    loadChildren: () => import('./pages/search-page/search-page.module').then(m => m.SearchPageModule)
+  },
+  {
     path: 'blog',
     children: [
       {
