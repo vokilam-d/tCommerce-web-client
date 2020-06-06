@@ -19,7 +19,7 @@ const oneHour = 60 * 60 * 1000;
 async function updatePages(apiHost: string) {
 
   try {
-    const { data: response } = await axios.get<ResponseDto<PageRegistryDto[]>>(`${apiHost}/api/v1/pages`);
+    const { data: response } = await axios.get<ResponseDto<PageRegistryDto[]>>(`http://${apiHost}/api/v1/pages`);
     pages = response.data;
   } catch (ex) {
     console.error('Could not update pages:');
@@ -85,6 +85,7 @@ function run() {
   // Start up the Node server
   const server = app();
   server.listen(port, '0.0.0.0', () => {
+    setInterval(() => Object.entries(process.memoryUsage()).forEach(item => console.log(`${item[0]}: ${(item[1] / 1024 / 1024).toFixed(4)} MB`)), 20000);
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
 }
