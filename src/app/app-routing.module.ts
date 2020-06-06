@@ -1,16 +1,7 @@
-import { Inject, NgModule, PLATFORM_ID } from '@angular/core';
-import {
-  Route,
-  RouteConfigLoadEnd,
-  Router,
-  RouterModule,
-  Routes,
-  UrlMatchResult,
-  UrlSegment,
-  UrlSegmentGroup
-} from '@angular/router';
-import { dynamicModuleResolver } from './functions/dynamic-module-resolver.function';
-import { isPlatformBrowser } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { DUMMY_PATH } from './shared/constants';
+import { PageTypeEnum } from './shared/enums/page-type.enum';
 
 
 const routes: Routes = [
@@ -81,43 +72,32 @@ const routes: Routes = [
   },
   {
     path: 'blog',
+    loadChildren: () => import('./pages/blog-pages/blog/blog.module').then(m => m.BlogModule)
+  },
+  {
+    path: DUMMY_PATH,
     children: [
       {
-        path: '',
-        loadChildren: () => import('./pages/blog-pages/blog/blog.module').then(m => m.BlogModule)
+        path: PageTypeEnum.Product,
+        loadChildren: () => import('./pages/product/product.module').then(m => m.ProductModule)
       },
       {
-        matcher: (segments: UrlSegment[], group: UrlSegmentGroup, route: Route): UrlMatchResult => {
-          const path = segments.map(s => s.path).join('/');
-          route.loadChildren = dynamicModuleResolver(path, 'blog-pages/');
-
-          return {
-            consumed: segments,
-            posParams: {
-              slug: segments[0]
-            }
-          };
-        },
-        loadChildren: dynamicModuleResolver(),
-        data: { isDynamicRoute: true }
+        path: PageTypeEnum.Category,
+        loadChildren: () => import('./pages/category/category.module').then(m => m.CategoryModule)
+      },
+      {
+        path: PageTypeEnum.BlogCategory,
+        loadChildren: () => import('./pages/blog-pages/blog-category/blog-category.module').then(m => m.BlogCategoryModule)
+      },
+      {
+        path: PageTypeEnum.BlogPost,
+        loadChildren: () => import('./pages/blog-pages/blog-post/blog-post.module').then(m => m.BlogPostModule)
       }
-
     ]
   },
   {
-    matcher: (segments: UrlSegment[], group: UrlSegmentGroup, route: Route): UrlMatchResult => {
-      const path = segments.map(s => s.path).join('/');
-      route.loadChildren = dynamicModuleResolver(path);
-
-      return {
-        consumed: segments,
-        posParams: {
-          slug: segments[0]
-        }
-      };
-    },
-    loadChildren: dynamicModuleResolver(),
-    data: { isDynamicRoute: true }
+    path: '**',
+    loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule)
   }
 ];
 
@@ -125,27 +105,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { initialNavigation: 'enabled', scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-
-  constructor(private router: Router,
-              @Inject(PLATFORM_ID) private platformId: any) {
-    // console.log(this.router.config);
-    // todo reset config, get from providers, inject in server.ts ?
-    this.handleRouteConfigReset();
-  }
-
-  private handleRouteConfigReset() {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
-
-    this.router.events.subscribe(next => {
-      if (next instanceof RouteConfigLoadEnd && next.route.data && next.route.data.isDynamicRoute) {
-        this.router.resetConfig(this.router.config.map(route => {
-          delete route['_loadedConfig'];
-          return route;
-        }));
-      }
-    });
-  }
-}
+export class AppRoutingModule {}

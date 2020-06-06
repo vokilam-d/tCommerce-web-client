@@ -55,7 +55,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   private fetchProduct() {
-    const slug = this.route.snapshot.paramMap.get('slug');
+    const slug = this.route.snapshot.data.slug;
 
     this.fetchError = null;
     this.productService.fetchProduct(slug).subscribe(

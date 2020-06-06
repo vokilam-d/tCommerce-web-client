@@ -37,7 +37,7 @@ export class BlogPostComponent implements OnInit {
   }
 
   fetchPost() {
-    const slug = this.route.snapshot.paramMap.get('slug');
+    const slug = this.route.snapshot.data.slug;
 
     this.isLoading = true;
     this.blogService.getPost(slug)

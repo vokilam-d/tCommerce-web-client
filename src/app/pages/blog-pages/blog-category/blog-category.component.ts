@@ -26,7 +26,7 @@ export class BlogCategoryComponent implements OnInit {
   }
 
   private fetchCategory() {
-    const slug = this.route.snapshot.paramMap.get('slug');
+    const slug = this.route.snapshot.data.slug;
     this.blogService.getCategory(slug)
       .pipe()
       .subscribe(

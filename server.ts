@@ -6,6 +6,29 @@ import { join } from 'path';
 
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
+import { PAGES_TOKEN } from './src/app/shared/factories/routes-resolver.function';
+import { PageRegistryDto } from './src/app/shared/dtos/page-registry.dto';
+import axios from 'axios';
+import { ResponseDto } from './src/app/shared/dtos/response.dto';
+import { environment } from './src/environments/environment';
+import { API_HOST } from './src/app/shared/constants';
+
+let pages: PageRegistryDto[] = [];
+
+const oneHour = 60 * 60 * 1000;
+async function updatePages(apiHost: string) {
+  console.log({apiHost});
+
+  try {
+    const { data: response } = await axios.get<ResponseDto<PageRegistryDto[]>>(`${apiHost}/api/v1/pages`);
+    pages = response.data;
+  } catch (ex) {
+    console.error('Could not update pages:');
+    console.error(ex);
+  }
+
+  setTimeout(() => updatePages(apiHost), oneHour);
+}
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
@@ -26,10 +49,32 @@ export function app() {
   }));
 
   server.get(`/robots.txt`, (req, res) => res.sendFile(join(distFolder, 'assets', 'robots.txt')));
+
   // All regular routes use the Universal engine
-  server.get('*', (req, res) => {
-    res.render('index', { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
-    Object.entries(process.memoryUsage()).forEach(item => console.log(`${item[0]}: ${(item[1] / 1024 / 1024).toFixed(4)} MB`))
+  let isPagesUpdateStarted: boolean = false;
+  server.get('*', async (req, res) => {
+    if (!isPagesUpdateStarted) {
+      const apiHost = environment.production ? req.get('host') : API_HOST;
+      await updatePages(apiHost);
+      isPagesUpdateStarted = true;
+    }
+
+    res.render(
+      'index',
+      {
+        req,
+        providers: [
+          {
+            provide: APP_BASE_HREF,
+            useValue: req.baseUrl
+          },
+          {
+            provide: PAGES_TOKEN,
+            useValue: pages
+          }
+        ]
+      }
+    );
   });
 
   return server;

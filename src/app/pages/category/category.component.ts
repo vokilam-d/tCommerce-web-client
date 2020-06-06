@@ -34,7 +34,7 @@ export class CategoryComponent implements OnInit {
   }
 
   private fetchCategory() {
-    const slug = this.route.snapshot.paramMap.get('slug');
+    const slug = this.route.snapshot.data.slug;
     this.categoryService.fetchCategory(slug).subscribe(
       response => {
         this.category = response.data;
