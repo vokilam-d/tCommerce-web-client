@@ -17,7 +17,6 @@ let pages: PageRegistryDto[] = [];
 
 const oneHour = 60 * 60 * 1000;
 async function updatePages(apiHost: string) {
-  console.log({apiHost});
 
   try {
     const { data: response } = await axios.get<ResponseDto<PageRegistryDto[]>>(`${apiHost}/api/v1/pages`);
