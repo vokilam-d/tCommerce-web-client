@@ -24,6 +24,12 @@
 
   &__page {
     padding: 6px 8px;
+    transition: color 0.2s ease;
+    cursor: pointer;
+
+    &:not(&--active):hover {
+      color: rgba($primary, 0.6);
+    }
 
     &--active {
       color: darken($primary, 5%);
