@@ -1,7 +1,8 @@
 @import "variables";
+@import "mixins";
 
 .form {
-  &__control {
+  &__control-container {
     margin: 13px 0 0;
 
     &:first-child {
@@ -14,21 +15,47 @@
     color: rgba($dark, 0.6);
   }
 
-  &__input {
+  &__control {
+    display: block;
+    margin: 6px 0 0;
+  }
+
+  &__input,
+  &__select, {
     width: 100%;
-    margin: 4px 0 0;
     padding: 8px 12px;
     border: 1px solid rgba($dark, 0.2);
     border-radius: 3px;
     font-size: 16px;
     transition: border-color 0.2s ease;
 
+    @include respond-to($media_large) {
+      font-size: 14px;
+    }
+
     &:focus {
       border-color: rgba($dark, 0.4);
     }
 
+    &[disabled] {
+      background: rgba($dark, 0.1);
+    }
+
     &--invalid {
       border-color: $red;
+    }
+
+    &::placeholder {
+      color: rgba($dark, 0.3) !important;
+    }
+    &::-webkit-input-placeholder {
+      color: rgba($dark, 0.3) !important;
+    }
+    &::-moz-placeholder {
+      color: rgba($dark, 0.3) !important;
+    }
+    &:-ms-input-placeholder {
+      color: rgba($dark, 0.3) !important;
     }
   }
 

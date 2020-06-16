@@ -5,15 +5,16 @@ import { NgUnsubscribe } from './directives/ng-unsubscribe.directive';
 import { FlyToCartDirective } from './directives/fly-to-cart.directive';
 import { QuantityControlComponent } from './quantity-control/quantity-control.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 
 @NgModule({
-  declarations: [PreloaderComponent, NgUnsubscribe, FlyToCartDirective, QuantityControlComponent],
+  declarations: [PreloaderComponent, NgUnsubscribe, FlyToCartDirective, QuantityControlComponent, ClickOutsideDirective],
   imports: [
     CommonModule,
     ReactiveFormsModule
   ],
-  exports: [PreloaderComponent, NgUnsubscribe, FlyToCartDirective, QuantityControlComponent]
+  exports: [PreloaderComponent, NgUnsubscribe, FlyToCartDirective, QuantityControlComponent, ClickOutsideDirective]
 })
-export class SharedModule { }
+export class SharedModule {
+}

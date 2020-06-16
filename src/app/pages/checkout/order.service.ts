@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ShippingMethodDto } from '../../shared/dtos/shipping-method.dto';
 import { PaymentMethodDto } from '../../shared/dtos/payment-method.dto';
 import { HttpClient } from '@angular/common/http';
 import { AddOrderDto, OrderDto } from '../../shared/dtos/order.dto';
 import { CustomerService } from '../../shared/services/customer/customer.service';
-import { ShippingAddressDto } from '../../shared/dtos/shipping-address.dto';
+import { ShipmentAddressDto } from '../../shared/dtos/shipment-address.dto';
 import { tap } from 'rxjs/operators';
 import { ResponseDto } from '../../shared/dtos/response.dto';
 import { API_HOST } from '../../shared/constants';
@@ -15,8 +14,7 @@ import { API_HOST } from '../../shared/constants';
 export class OrderService {
 
   email: string = '';
-  address: ShippingAddressDto = new ShippingAddressDto();
-  shippingMethod: ShippingMethodDto;
+  address: ShipmentAddressDto = new ShipmentAddressDto();
   paymentMethod: PaymentMethodDto;
   isCallbackNeeded: boolean = false;
   note: string = '';
@@ -36,8 +34,7 @@ export class OrderService {
 
   private resetOrder() {
     this.email = '';
-    this.address = new ShippingAddressDto();
-    this.shippingMethod = null;
+    this.address = new ShipmentAddressDto();
     this.paymentMethod = null;
     this.isCallbackNeeded = false;
     this.note = '';

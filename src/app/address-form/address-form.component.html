@@ -1,0 +1,160 @@
+<form class="form"
+      *ngIf="addressForm"
+      [formGroup]="addressForm"
+      novalidate
+>
+
+  <div class="form__control-container"
+       *ngIf="addressForm.get('lastName') as lastName"
+       [class.field--invalid]="isControlInvalid(lastName)"
+  >
+    <label for="addr-lastName" class="form__label">Фамилия</label>
+    <div class="form__control">
+      <input class="form__input" [formControl]="lastName" type="text" id="addr-lastName">
+    </div>
+  </div>
+
+  <div class="form__control-container"
+       *ngIf="addressForm.get('firstName') as firstName"
+       [class.field--invalid]="isControlInvalid(firstName)"
+  >
+    <label for="addr-firstName" class="form__label">Имя</label>
+    <div class="form__control">
+      <input class="form__input" [formControl]="firstName" type="text" id="addr-firstName">
+    </div>
+  </div>
+
+  <div class="form__control-container"
+       *ngIf="addressForm.get('middleName') as middleName"
+       [class.field--invalid]="isControlInvalid(middleName)"
+  >
+    <label for="addr-middleName" class="form__label">Отчество</label>
+    <div class="form__control">
+      <input class="form__input" [formControl]="middleName" type="text" id="addr-middleName">
+    </div>
+  </div>
+
+  <div class="form__control-container"
+       *ngIf="addressForm.get('phone') as phone"
+       [class.field--invalid]="isControlInvalid(phone)"
+  >
+    <label for="addr-phone" class="form__label">Телефон</label>
+    <div class="form__control">
+      <input class="form__input" [formControl]="phone" type="text" id="addr-phone">
+    </div>
+  </div>
+
+  <div class="form__control-container"
+       *ngIf="addressForm.get('addressType') as addressType"
+       [class.field--invalid]="isControlInvalid(addressType)"
+  >
+    <label class="form__label">Тип доставки</label>
+    <div class="form__control">
+      <div class="tabs">
+        <button class="tab"
+                *ngFor="let type of addressTypes"
+                [class.tab--active]="type.data === addressType.value"
+                (click)="setAddressType(type)"
+        >
+          {{ type.view }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form__control-container" *ngIf="addressForm.get('settlement') as settlementControl">
+    <label class="form__label">Город</label>
+    <div class="form__control">
+      <select-autocomplete type="settlement"
+                           [activeOptionLabel]="settlementControl.value"
+                           (select)="onSettlementSelect($event)"
+      ></select-autocomplete>
+
+      <div class="field__error" *ngIf="isControlInvalid(settlementControl)">
+        Это обязательное поле
+      </div>
+    </div>
+  </div>
+
+  <ng-container [ngSwitch]="addressForm.get('addressType').value">
+
+    <ng-container *ngSwitchCase="addressTypeEnum.WAREHOUSE">
+
+      <div class="form__control-container"
+           *ngIf="addressForm.get('address') as addressControl"
+           [class.field--invalid]="isControlInvalid(addressControl)"
+      >
+        <label class="form__label">Отделение</label>
+        <div class="form__control">
+          <select-autocomplete type="warehouse"
+                               [settlementId]="settlementIdControl.value"
+                               [isDisabled]="!settlementIdControl.value"
+                               [activeOptionLabel]="addressControl.value"
+                               (select)="onWarehouseSelect($event)"
+          ></select-autocomplete>
+
+          <div class="field__error" *ngIf="isControlInvalid(addressControl)">
+            Это обязательное поле
+          </div>
+        </div>
+      </div>
+
+    </ng-container>
+
+    <ng-container *ngSwitchCase="addressTypeEnum.DOORS">
+
+      <div class="form__control-container"
+           *ngIf="addressForm.get('address') as addressControl"
+           [class.field--invalid]="isControlInvalid(addressControl)"
+      >
+        <label class="form__label">Улица</label>
+        <div class="form__control">
+          <select-autocomplete type="street"
+                               [settlementId]="settlementIdControl.value"
+                               [isDisabled]="!settlementIdControl.value"
+                               [activeOptionLabel]="addressControl.value"
+                               (select)="onStreetSelect($event)"
+          ></select-autocomplete>
+
+          <div class="field__error" *ngIf="isControlInvalid(addressControl)">
+            Это обязательное поле
+          </div>
+        </div>
+      </div>
+
+      <div class="form__control-container"
+           *ngIf="addressForm.get('buildingNumber') as buildingNumber"
+           [class.field--invalid]="isOptionalControlInvalid('buildingNumber')"
+      >
+        <label for="addr-buildingNumber" class="form__label">Номер дома</label>
+        <div class="form__control">
+          <input class="form__input" [formControl]="buildingNumber" type="text" id="addr-buildingNumber">
+        </div>
+      </div>
+
+      <div class="form__control-container"
+           *ngIf="addressForm.get('flat') as flat"
+           [class.field--invalid]="isOptionalControlInvalid('flat')"
+      >
+        <label for="addr-flat" class="form__label">Квартира</label>
+        <div class="form__control">
+          <input class="form__input" [formControl]="flat" type="text" id="addr-flat">
+        </div>
+      </div>
+
+    </ng-container>
+  </ng-container>
+
+  <div class="form__control-container is-default"
+       *ngIf="showIsDefault && addressForm.get('isDefault') as isDefault"
+  >
+    <label class="form__label" for="addr-isDefault">Установить по умолчанию?</label>
+    <input class="is-default__input"
+           [formControl]="isDefault"
+           id="addr-isDefault"
+           type="checkbox"
+    >
+  </div>
+
+
+</form>

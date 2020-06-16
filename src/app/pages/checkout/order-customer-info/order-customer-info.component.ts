@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CustomerService } from '../../../shared/services/customer/customer.service';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ShippingAddressDto } from '../../../shared/dtos/shipping-address.dto';
+import { ShipmentAddressDto } from '../../../shared/dtos/shipment-address.dto';
 import { isEmailRegex } from '../../../shared/constants';
 import { catchError, debounceTime, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { OrderService } from '../order.service';
@@ -74,31 +74,9 @@ export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit 
     });
   }
 
-  isControlInvalid(controlName: keyof ShippingAddressDto | string): boolean {
+  isControlInvalid(controlName: keyof ShipmentAddressDto | string): boolean {
     const control = this.form.get(controlName);
-    switch (controlName) {
-      case 'streetName':
-        if (this.isShippingMethod('address')) {
-          return !control.value && control.touched;
-        } else {
-          return true;
-        }
-      case 'novaposhtaOffice':
-        if (this.isShippingMethod('post')) {
-          return !control.value && control.touched;
-        } else {
-          return true;
-        }
-      default:
-        return !control.valid && control.touched;
-    }
-  }
-
-  isShippingMethod(method: 'address' | 'post'): boolean { // todo this method is ugly, deep refactor needed
-    if (!this.orderService.shippingMethod) { return true; }
-
-    const includesAddress = this.orderService.shippingMethod.name.toLowerCase().indexOf('адрес') !== -1;
-    return method === 'address' ? includesAddress : !includesAddress;
+    return !control.valid && control.touched;
   }
 
   checkInfoValidity(): boolean {

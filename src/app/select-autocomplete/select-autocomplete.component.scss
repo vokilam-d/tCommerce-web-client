@@ -1,0 +1,42 @@
+@import "variables";
+@import "mixins";
+
+.autocomplete {
+  &__empty-active {
+    color: rgba($dark, 0.6);
+  }
+
+  &__input-container {
+    padding: 10px 13px;
+  }
+
+  &__options {
+    top: 0;
+    border-color: $borderColor;
+
+    &--hidden {
+      display: none;
+    }
+  }
+
+  &__no-options {
+    margin: 15px 0 20px;
+    color: rgba($dark, 0.6);
+    font-size: 12px;
+    text-align: center;
+
+    @include respond-to($media_large) {
+      margin-top: 20px;
+      margin-bottom: 25px;
+    }
+  }
+
+  &__preloader {
+    top: 45px;
+    padding-top: 25px;
+  }
+
+  &__option {
+    font-size: 13px;
+  }
+}

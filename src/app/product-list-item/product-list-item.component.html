@@ -4,12 +4,14 @@
       <img class="item__img item__img-primary"
            [src]="uploadedHost + item.mediaUrl"
            [alt]="item.mediaAltText"
+           loading="lazy"
       >
 
       <img class="item__img item__img-secondary"
            *ngIf="item.mediaHoverUrl"
            [src]="uploadedHost + item.mediaHoverUrl"
            [alt]="item.mediaAltText"
+           loading="lazy"
       >
 
       <span class="item__sale-label" *ngIf="item.oldPrice">

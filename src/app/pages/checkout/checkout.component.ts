@@ -56,10 +56,6 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
 
   placeOrder() {
     if (!this.infoCmp.checkInfoValidity()) { return; }
-    if (!this.orderService.shippingMethod) {
-      this.setError(`Не выбран способ доставки`);
-      return;
-    }
     if (!this.orderService.paymentMethod) {
       this.setError(`Не выбран способ оплаты`);
       return;
@@ -68,8 +64,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
     const dto = new AddOrderDto();
     dto.email = this.orderService.email;
     dto.address = this.orderService.address;
-    dto.address.phoneNumber = normalizePhoneNumber(dto.address.phoneNumber);
-    dto.shippingMethodId = this.orderService.shippingMethod.id;
+    dto.address.phone = normalizePhoneNumber(dto.address.phone);
     dto.paymentMethodId = this.orderService.paymentMethod.id;
     dto.isCallbackNeeded = this.orderService.isCallbackNeeded;
     dto.note = this.orderService.note;

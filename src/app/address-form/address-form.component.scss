@@ -1,0 +1,46 @@
+@import "variables";
+
+.is-default {
+  cursor: pointer;
+
+  &__input {
+    margin: 0 0 0 4px;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+  }
+}
+
+.tabs {
+  display: flex;
+}
+
+.tab {
+  padding: 13px 20px;
+  border: 1px solid $primary;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+
+  &:not(&--active):hover {
+    background: rgba($primary, 0.06);
+  }
+
+  &:not(&--active):active {
+    background: rgba($primary, 0.12);
+  }
+
+  &:first-child {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+
+  &:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-left: none;
+  }
+
+  &--active {
+    background: $primary;
+  }
+}

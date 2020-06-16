@@ -18,12 +18,16 @@ let pages: PageRegistryDto[] = [];
 const oneHour = 60 * 60 * 1000;
 async function updatePages(apiHost: string) {
 
+  if (apiHost.indexOf('http') !== 0) {
+    apiHost += 'http://';
+  }
+
   try {
-    const { data: response } = await axios.get<ResponseDto<PageRegistryDto[]>>(`http://${apiHost}/api/v1/pages`);
+    const { data: response } = await axios.get<ResponseDto<PageRegistryDto[]>>(`${apiHost}/api/v1/pages`);
     pages = response.data;
   } catch (ex) {
     console.error('Could not update pages:');
-    console.error(ex);
+    console.error(ex.response ? ex.response.data : ex);
   }
 
   setTimeout(() => updatePages(apiHost), oneHour);

@@ -1,8 +1,8 @@
 import { CustomerDto } from './customer.dto';
-import { ShippingAddressDto } from './shipping-address.dto';
+import { ShipmentAddressDto } from './shipment-address.dto';
 
 export class DetailedCustomerDto extends CustomerDto {
-  addresses: ShippingAddressDto[];
+  addresses: ShipmentAddressDto[];
   isEmailConfirmed: boolean;
   totalOrdersCount: number;
   totalOrdersCost: number;

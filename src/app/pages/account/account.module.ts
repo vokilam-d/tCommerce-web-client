@@ -14,6 +14,7 @@ import { AccountDiscountComponent } from './account-discount/account-discount.co
 import { AccountOrdersComponent } from './account-orders/account-orders.component';
 import { SharedModule } from '../../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddressFormModule } from '../../address-form/address-form.module';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BreadcrumbsModule,
     FooterModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AddressFormModule
   ]
 })
 export class AccountModule { }

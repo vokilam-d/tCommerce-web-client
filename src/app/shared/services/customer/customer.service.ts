@@ -8,7 +8,7 @@ import { LoginDto } from '../../dtos/login.dto';
 import { RegisterDto } from '../../dtos/registration.dto';
 import { InitResetPasswordDto } from '../../dtos/init-reset-password.dto';
 import { DetailedCustomerDto } from '../../dtos/detailed-customer.dto';
-import { ShippingAddressDto } from '../../dtos/shipping-address.dto';
+import { ShipmentAddressDto } from '../../dtos/shipment-address.dto';
 import { map, tap } from 'rxjs/operators';
 import { CreateOrUpdateOrderItemDto, OrderItemDto } from '../../dtos/order-item.dto';
 import { ProductDto } from '../../dtos/product.dto';
@@ -125,14 +125,14 @@ export class CustomerService { // todo split to CartService
     return this.http.post<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer/password`, dto);
   }
 
-  addShippingAddress(dto: ShippingAddressDto) {
+  addShippingAddress(dto: ShipmentAddressDto) {
     return this.http.post<ResponseDto<DetailedCustomerDto>>(`${API_HOST}/api/v1/customer/address`, dto)
       .pipe(
         tap(response => this.setCustomer(response.data))
       );
   }
 
-  editShippingAddress(addressId: string, dto: ShippingAddressDto) {
+  editShippingAddress(addressId: string, dto: ShipmentAddressDto) {
     return this.http.put<ResponseDto<DetailedCustomerDto>>(`${API_HOST}/api/v1/customer/address/${addressId}`, dto)
       .pipe(
         tap(response => this.setCustomer(response.data))

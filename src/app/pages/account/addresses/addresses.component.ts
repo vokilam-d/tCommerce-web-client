@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CustomerService } from '../../../shared/services/customer/customer.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ShippingAddressDto } from '../../../shared/dtos/shipping-address.dto';
+import { ShipmentAddressDto } from '../../../shared/dtos/shipment-address.dto';
 import { DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { finalize } from 'rxjs/operators';
 import { DetailedCustomerDto } from '../../../shared/dtos/detailed-customer.dto';
 import { HeadService } from '../../../shared/services/head/head.service';
+import { AddressTypeEnum } from '../../../shared/enums/address-type.enum';
+import { AddressFormComponent } from '../../../address-form/address-form.component';
 
 @Component({
   selector: 'addresses',
@@ -14,51 +16,42 @@ import { HeadService } from '../../../shared/services/head/head.service';
 })
 export class AddressesComponent implements OnInit {
 
-  addressForm: FormGroup;
   formError: string;
   formSuccess: string | null = null;
   isLoading: boolean = false;
-  formState: 'add' | 'edit' = null;
+  addressTypes = AddressTypeEnum;
+  activeAddress: ShipmentAddressDto;
+  private newAddress: ShipmentAddressDto = new ShipmentAddressDto();
 
   get addresses() { return (this.customerService.customer as DetailedCustomerDto).addresses; }
 
+  @ViewChild(AddressFormComponent) addressFormCmp: AddressFormComponent;
+
   constructor(private customerService: CustomerService,
-              private headService: HeadService,
-              private formBuilder: FormBuilder) {
+              private headService: HeadService) {
   }
 
   ngOnInit(): void {
     this.setMeta();
   }
 
-  submit() {
+  submitForm() {
     this.formError = null;
+    if (!this.addressFormCmp.checkValidity()) { return; }
 
-    Object.keys(this.addressForm.controls).forEach(controlName => {
-      const control = this.addressForm.get(controlName);
-      control.updateValueAndValidity();
-    });
-
-    if (this.addressForm.invalid) {
-      this.validateControls()
-    } else {
-      this.formState === 'add' ? this.addAddress() : this.editAddress();
-    }
+    const formValue: ShipmentAddressDto = this.addressFormCmp.getValue();
+    this.activeAddress === this.newAddress ? this.addAddress(formValue) : this.editAddress(formValue);
   }
 
-  openAddressForm(address?: ShippingAddressDto) {
+  openAddressForm(address?: ShipmentAddressDto) {
     if (!address) {
-      this.formState = 'add';
-      address = new ShippingAddressDto();
+      this.activeAddress = this.newAddress;
     } else {
-      this.formState = 'edit';
+      this.activeAddress = address;
     }
-
-    this.addressForm = this.formBuilder.group(address);
   }
 
-  private addAddress() {
-    const dto: ShippingAddressDto = this.addressForm.value;
+  private addAddress(dto: ShipmentAddressDto) {
     this.isLoading = true;
     this.customerService.addShippingAddress(dto)
       .pipe( finalize(() => this.isLoading = false) )
@@ -73,8 +66,7 @@ export class AddressesComponent implements OnInit {
       );
   }
 
-  private editAddress() {
-    const dto: ShippingAddressDto = this.addressForm.value;
+  private editAddress(dto: ShipmentAddressDto) {
     this.isLoading = true;
     this.customerService.editShippingAddress(dto.id, dto)
       .pipe( finalize(() => this.isLoading = false) )
@@ -89,25 +81,9 @@ export class AddressesComponent implements OnInit {
       );
   }
 
-  private validateControls() {
-    Object.keys(this.addressForm.controls).forEach(controlName => {
-      const control = this.addressForm.get(controlName);
-
-      if (control instanceof FormControl) {
-        control.markAsTouched({ onlySelf: true });
-      }
-    });
-  }
-
-  isControlInvalid(controlName: string): boolean {
-    const control = this.addressForm.get(controlName);
-    return !control.valid && control.touched;
-  }
-
   closeForm() {
-    this.addressForm = null;
+    this.activeAddress = null;
     this.formError = null;
-    this.formState = null;
   }
 
   private showSuccessMessage(msg: string) {
