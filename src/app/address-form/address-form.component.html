@@ -11,6 +11,10 @@
     <label for="addr-lastName" class="form__label">Фамилия</label>
     <div class="form__control">
       <input class="form__input" [formControl]="lastName" type="text" id="addr-lastName">
+
+      <div class="form__input-error" *ngIf="isControlInvalid(lastName)">
+        Это обязательное поле
+      </div>
     </div>
   </div>
 
@@ -21,6 +25,10 @@
     <label for="addr-firstName" class="form__label">Имя</label>
     <div class="form__control">
       <input class="form__input" [formControl]="firstName" type="text" id="addr-firstName">
+
+      <div class="form__input-error" *ngIf="isControlInvalid(firstName)">
+        Это обязательное поле
+      </div>
     </div>
   </div>
 
@@ -31,6 +39,10 @@
     <label for="addr-middleName" class="form__label">Отчество</label>
     <div class="form__control">
       <input class="form__input" [formControl]="middleName" type="text" id="addr-middleName">
+
+      <div class="form__input-error" *ngIf="isControlInvalid(middleName)">
+        Это обязательное поле
+      </div>
     </div>
   </div>
 
@@ -41,6 +53,10 @@
     <label for="addr-phone" class="form__label">Телефон</label>
     <div class="form__control">
       <input class="form__input" [formControl]="phone" type="text" id="addr-phone">
+
+      <div class="form__input-error" *ngIf="isControlInvalid(phone)">
+        Это обязательное поле
+      </div>
     </div>
   </div>
 
@@ -70,7 +86,7 @@
                            (select)="onSettlementSelect($event)"
       ></select-autocomplete>
 
-      <div class="field__error" *ngIf="isControlInvalid(settlementControl)">
+      <div class="form__input-error" *ngIf="isControlInvalid(settlementControl)">
         Это обязательное поле
       </div>
     </div>
@@ -93,7 +109,7 @@
                                (select)="onWarehouseSelect($event)"
           ></select-autocomplete>
 
-          <div class="field__error" *ngIf="isControlInvalid(addressControl)">
+          <div class="form__input-error" *ngIf="isControlInvalid(addressControl)">
             Это обязательное поле
           </div>
         </div>
@@ -116,7 +132,7 @@
                                (select)="onStreetSelect($event)"
           ></select-autocomplete>
 
-          <div class="field__error" *ngIf="isControlInvalid(addressControl)">
+          <div class="form__input-error" *ngIf="isControlInvalid(addressControl)">
             Это обязательное поле
           </div>
         </div>
@@ -129,6 +145,10 @@
         <label for="addr-buildingNumber" class="form__label">Номер дома</label>
         <div class="form__control">
           <input class="form__input" [formControl]="buildingNumber" type="text" id="addr-buildingNumber">
+
+          <div class="form__input-error" *ngIf="isControlInvalid(buildingNumber)">
+            Это обязательное поле
+          </div>
         </div>
       </div>
 

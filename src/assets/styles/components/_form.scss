@@ -63,7 +63,8 @@
     display: block;
     margin: 4px 0 0;
     font-size: 13px;
-    color: rgba($dark, 0.6);
+    //color: rgba($dark, 0.6);
+    color: $red;
   }
 
   &__error {
@@ -82,9 +83,8 @@
     position: relative;
     margin: 25px 0 0;
     width: 100%;
-    padding-top: 12px;
-    padding-bottom: 13px;
-    font-size: 18px;
+    padding-top: 11px;
+    padding-bottom: 12px;
     transition: all 0.2s ease;
 
     &--loading {

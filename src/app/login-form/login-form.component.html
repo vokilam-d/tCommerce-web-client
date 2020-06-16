@@ -1,6 +1,6 @@
 <form class="form login-form" [formGroup]="form" ngNativeValidate>
 
-  <div class="form__control">
+  <div class="form__control-container">
     <label class="form__label" for="login">Email или номер телефона</label>
     <input class="form__input"
            [class.form__input--invalid]="isControlInvalid('login')"
@@ -11,7 +11,7 @@
     >
   </div>
 
-  <div class="form__control" *ngIf="state === 'login'">
+  <div class="form__control-container" *ngIf="state === 'login'">
     <label class="form__label" for="password">Пароль</label>
     <input class="form__input"
            [class.form__input--invalid]="isControlInvalid('password')"

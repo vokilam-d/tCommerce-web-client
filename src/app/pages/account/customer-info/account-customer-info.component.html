@@ -40,7 +40,7 @@
           ngNativeValidate
     >
 
-      <div class="form__control">
+      <div class="form__control-container">
         <label for="firstName" class="form__label">Имя</label>
         <input class="form__input"
                [class.form__input--invalid]="isControlInvalid(infoForm, 'firstName')"
@@ -51,7 +51,7 @@
         >
       </div>
 
-      <div class="form__control">
+      <div class="form__control-container">
         <label for="lastName" class="form__label">Фамилия</label>
         <input class="form__input"
                [class.form__input--invalid]="isControlInvalid(infoForm, 'lastName')"
@@ -62,7 +62,7 @@
         >
       </div>
 
-      <div class="form__control">
+      <div class="form__control-container">
         <label for="email" class="form__label">Email</label>
         <input class="form__input"
                [class.form__input--invalid]="isControlInvalid(infoForm, 'email')"
@@ -89,7 +89,7 @@
           ngNativeValidate
     >
 
-      <div class="form__control">
+      <div class="form__control-container">
         <label class="form__label" for="currentPassword">Старый пароль</label>
         <input class="form__input"
                [class.form__input--invalid]="isControlInvalid(passwordForm, 'currentPassword')"
@@ -100,7 +100,7 @@
         >
       </div>
 
-      <div class="form__control">
+      <div class="form__control-container">
         <label class="form__label" for="newPassword">Новый пароль</label>
         <input class="form__input"
                [class.form__input--invalid]="isControlInvalid(passwordForm, 'newPassword')"
@@ -114,7 +114,7 @@
         </div>
       </div>
 
-      <div class="form__control">
+      <div class="form__control-container">
         <label class="form__label" for="newPasswordConfirm">Повторите новый пароль</label>
         <input class="form__input"
                [class.form__input--invalid]="isControlInvalid(passwordForm, 'newPasswordConfirm')"

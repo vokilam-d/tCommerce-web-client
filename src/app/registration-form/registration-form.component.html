@@ -1,6 +1,6 @@
 <form class="form" [formGroup]="form" ngNativeValidate>
 
-  <div class="form__control">
+  <div class="form__control-container">
     <label class="form__label" for="firstName">Имя</label>
     <input class="form__input"
            [class.form__input--invalid]="isControlInvalid('firstName')"
@@ -11,7 +11,7 @@
     >
   </div>
 
-  <div class="form__control">
+  <div class="form__control-container">
     <label class="form__label" for="lastName">Фамилия</label>
     <input class="form__input"
            [class.form__input--invalid]="isControlInvalid('lastName')"
@@ -22,7 +22,7 @@
     >
   </div>
 
-  <div class="form__control">
+  <div class="form__control-container">
     <label class="form__label" for="email">Email</label>
     <input class="form__input"
            [class.form__input--invalid]="isControlInvalid('email')"
@@ -33,7 +33,7 @@
     >
   </div>
 
-  <div class="form__control">
+  <div class="form__control-container">
     <label class="form__label" for="password">Пароль</label>
     <input class="form__input"
            [class.form__input--invalid]="isControlInvalid('password')"
@@ -47,7 +47,7 @@
     </div>
   </div>
 
-  <div class="form__control">
+  <div class="form__control-container">
     <label class="form__label" for="passwordConfirm">Повторите пароль</label>
     <input class="form__input"
            [class.form__input--invalid]="isControlInvalid('passwordConfirm')"

@@ -1,0 +1,11 @@
+@import "variables";
+@import "mixins";
+
+.login {
+  &__form {
+    @include respond-to($media_large) {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+}

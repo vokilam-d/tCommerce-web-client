@@ -1,15 +1,17 @@
 <app-header></app-header>
 
-<div class="page container not-found">
+<div class="page container login">
   <breadcrumbs [breadcrumbs]="[{ title: 'Войти' }]"></breadcrumbs>
 
   <h1 class="page__title">Вход</h1>
 
   <div class="page__content">
-    <login-form (loggedIn)="onLogin($event)"
-                (switchToRegister)="switchToRegister()"
-    >
-    </login-form>
+    <div class="login__form">
+      <login-form (loggedIn)="onLogin($event)"
+                  (switchToRegister)="switchToRegister()"
+      >
+      </login-form>
+    </div>
   </div>
 </div>
 

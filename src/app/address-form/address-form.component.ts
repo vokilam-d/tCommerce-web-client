@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ShipmentAddressDto } from '../shared/dtos/shipment-address.dto';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddressTypeEnum } from '../shared/enums/address-type.enum';
@@ -7,6 +7,7 @@ import { WarehouseDto } from '../shared/dtos/warehouse.dto';
 import { StreetDto } from '../shared/dtos/street.dto';
 import { takeUntil } from 'rxjs/operators';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
+import { ScrollToService } from '../shared/services/scroll-to/scroll-to.service';
 
 @Component({
   selector: 'address-form',
@@ -26,7 +27,9 @@ export class AddressFormComponent extends NgUnsubscribe implements OnChanges {
   @Input() address: ShipmentAddressDto = new ShipmentAddressDto();
   @Input() showIsDefault: boolean = true;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private scrollToService: ScrollToService,
+              private elementRef: ElementRef) {
     super();
   }
 
@@ -82,20 +85,25 @@ export class AddressFormComponent extends NgUnsubscribe implements OnChanges {
   }
 
   checkValidity(): boolean {
+    let isValid: boolean = true;
+
     if (this.addressForm.valid) {
       const addressTypeProp: keyof ShipmentAddressDto = 'addressType';
       const buildingProp: keyof ShipmentAddressDto = 'buildingNumber';
 
-      if (this.addressForm.get(addressTypeProp).value === AddressTypeEnum.DOORS) {
-        return !!this.addressForm.get(buildingProp).value;
-      } else {
-        return true;
+      if (this.addressForm.get(addressTypeProp).value === AddressTypeEnum.DOORS && !this.addressForm.get(buildingProp).value) {
+        isValid = false;
       }
 
     } else {
+      isValid = false;
       this.validateControls(this.addressForm);
-      return false;
     }
+
+    if (!isValid) {
+      this.scrollToService.scrollTo({ target: this.elementRef, offset: -50 });
+    }
+    return isValid;
   }
 
   getValue(): ShipmentAddressDto {
