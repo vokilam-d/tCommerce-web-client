@@ -125,4 +125,8 @@ export class AccountComponent extends NgUnsubscribe implements OnInit {
   private setMeta() {
     this.headService.setMeta({ title: 'Личный кабинет', description: 'Личный кабинет' });
   }
+
+  logout() {
+    this.customerService.logout();
+  }
 }
