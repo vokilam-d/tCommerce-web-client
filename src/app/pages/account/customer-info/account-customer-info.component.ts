@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DetailedCustomerDto } from '../../../shared/dtos/detailed-customer.dto';
 import { DEFAULT_ERROR_TEXT, isEmailRegex, validPasswordRegex } from '../../../shared/constants';
 import { CustomValidators } from '../../../shared/classes/validators';
 import { CustomerService } from '../../../shared/services/customer/customer.service';
-import { UpdateCustomerDto } from '../../../shared/dtos/customer.dto';
+import { CustomerDto, UpdateCustomerDto } from '../../../shared/dtos/customer.dto';
 import { HeadService } from '../../../shared/services/head/head.service';
 
 @Component({
@@ -32,7 +31,7 @@ export class AccountCustomerInfoComponent implements OnInit {
   }
 
   openInfoForm() {
-    const infoControls: Partial<Record<keyof DetailedCustomerDto, any>> = {
+    const infoControls: Partial<Record<keyof CustomerDto, any>> = {
       firstName: [this.customerService.customer.firstName],
       lastName: [this.customerService.customer.lastName],
       email: [this.customerService.customer.email, Validators.pattern(isEmailRegex)]

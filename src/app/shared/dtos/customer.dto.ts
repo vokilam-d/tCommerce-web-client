@@ -1,4 +1,5 @@
 import { OrderItemDto } from './order-item.dto';
+import { ShipmentAddressDto } from './shipment-address.dto';
 
 export class CustomerDto {
   id: number;
@@ -7,6 +8,14 @@ export class CustomerDto {
   email: string;
   phoneNumber: string;
   cart: OrderItemDto[];
+  addresses: ShipmentAddressDto[];
+  isEmailConfirmed: boolean;
+  totalOrdersCount: number;
+  totalOrdersCost: number;
+  discountPercent: number;
+  orderIds: number[];
+  reviewIds: number[];
+  wishlistProductIds: number[];
 }
 
 export class UpdateCustomerDto implements Pick<CustomerDto, 'firstName' | 'lastName' | 'email'> {

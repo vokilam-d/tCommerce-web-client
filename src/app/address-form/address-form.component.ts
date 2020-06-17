@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ShipmentAddressDto } from '../shared/dtos/shipment-address.dto';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddressTypeEnum } from '../shared/enums/address-type.enum';
@@ -8,13 +8,14 @@ import { StreetDto } from '../shared/dtos/street.dto';
 import { takeUntil } from 'rxjs/operators';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
 import { ScrollToService } from '../shared/services/scroll-to/scroll-to.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'address-form',
   templateUrl: './address-form.component.html',
   styleUrls: ['./address-form.component.scss']
 })
-export class AddressFormComponent extends NgUnsubscribe implements OnChanges {
+export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnChanges {
 
   addressForm: FormGroup;
   addressTypes = [{ data: AddressTypeEnum.WAREHOUSE, view: 'В отделение' }, { data: AddressTypeEnum.DOORS, view: 'Адресная курьером' }];
@@ -34,8 +35,14 @@ export class AddressFormComponent extends NgUnsubscribe implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.address && changes.address.currentValue) {
+    if (changes.address?.currentValue) {
       this.buildAddressForm(changes.address.currentValue);
+    }
+  }
+
+  ngOnInit() {
+    if (!this.addressForm) {
+      this.buildAddressForm(this.address);
     }
   }
 

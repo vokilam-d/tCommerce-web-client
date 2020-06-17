@@ -1,112 +1,57 @@
-<form class="checkout-form" [formGroup]="form" *ngIf="!isLoggedIn" #formRef>
+<div class="form__control-container" *ngIf="!(customer$ | async)" #emailRef>
+  <label class="form__label" for="email">Адрес электронной почты</label>
 
-  <div class="checkout-control">
-    <label class="checkout-control__label" for="email">Адрес электронной почты</label>
-
-    <input class="checkout-control__input"
+  <div class="form__control">
+    <input class="form__input"
            [formControl]="emailControl"
-           [class.checkout-control__input--invalid]="isEmailInvalid()"
+           [class.form__input--invalid]="isEmailInvalid()"
            id="email"
            type="text"
     >
 
-    <div class="checkout-control__error" *ngIf="isEmailInvalid()">
+    <div class="form__input-error" *ngIf="isEmailInvalid()">
       Некорректный адрес электронной почты
     </div>
   </div>
+</div>
 
-  <div class="checkout-control">
-    <label class="checkout-control__label" for="firstName">Имя</label>
-
-    <input class="checkout-control__input"
-           [class.checkout-control__input--invalid]="isControlInvalid('firstName')"
-           formControlName="firstName"
-           id="firstName"
-           type="text"
-           required
-    >
-
-    <div class="checkout-control__error" *ngIf="isControlInvalid('firstName')">
-      Это обязательное поле
-    </div>
+<div class="checkout-block" *ngIf="addressOptionControl">
+  <div class="checkout-block__title">
+    Адрес доставки
   </div>
 
-  <div class="checkout-control">
-    <label class="checkout-control__label" for="lastName">Фамилия</label>
-
-    <input class="checkout-control__input"
-           [class.checkout-control__input--invalid]="isControlInvalid('lastName')"
-           formControlName="lastName"
-           id="lastName"
-           type="text"
-           required
+  <label class="checkout-control checkout-control--radio" *ngFor="let address of (customer$ | async).addresses">
+    <input class="checkout-control__radio-input"
+           [value]="address"
+           [formControl]="addressOptionControl"
+           name="address-option"
+           type="radio"
     >
 
-    <div class="checkout-control__error" *ngIf="isControlInvalid('lastName')">
-      Это обязательное поле
-    </div>
-  </div>
+    <i class="mbi mbi-checkmark-outline checkout-control__radio-icon checkout-control__radio-icon-selected"></i>
+    <i class="mbi mbi-circle-outline checkout-control__radio-icon checkout-control__radio-icon-not-selected"></i>
 
-  <div class="checkout-control">
-    <label class="checkout-control__label" for="phoneNumber">Номер телефона</label>
+    {{ address.lastName }} {{ address.firstName }}, {{ address.phone }}, {{ address.settlement }}, {{ address.address }}<ng-container *ngIf="address.addressType === addressTypes.DOORS">, {{ address.buildingNumber }}, <ng-container *ngIf="address.flat as flat">{{ flat }}</ng-container></ng-container>
+  </label>
 
-    <input class="checkout-control__input"
-           [class.checkout-control__input--invalid]="isControlInvalid('phoneNumber')"
-           formControlName="phoneNumber"
-           id="phoneNumber"
-           type="tel"
-           required
+  <label class="checkout-control checkout-control--radio">
+    <input class="checkout-control__radio-input"
+           [value]="null"
+           [formControl]="addressOptionControl"
+           name="address-option"
+           type="radio"
     >
 
-    <div class="checkout-control__error" *ngIf="isControlInvalid('phoneNumber')">
-      Это обязательное поле
-    </div>
-  </div>
+    <i class="mbi mbi-checkmark-outline checkout-control__radio-icon checkout-control__radio-icon-selected"></i>
+    <i class="mbi mbi-circle-outline checkout-control__radio-icon checkout-control__radio-icon-not-selected"></i>
 
-  <div class="checkout-control">
-    <label class="checkout-control__label" for="city">Город, область</label>
+    Новый адрес
+  </label>
 
-    <input class="checkout-control__input"
-           [class.checkout-control__input--invalid]="isControlInvalid('city')"
-           formControlName="city"
-           id="city"
-           type="text"
-           required
-    >
+</div>
 
-    <div class="checkout-control__error" *ngIf="isControlInvalid('city')">
-      Это обязательное поле
-    </div>
-  </div>
 
-  <div class="checkout-control" *ngIf="isShippingMethod('address')">
-    <label class="checkout-control__label" for="streetName">Адрес доставки, улица, дом</label>
-
-    <input class="checkout-control__input"
-           [class.checkout-control__input--invalid]="isControlInvalid('streetName')"
-           formControlName="streetName"
-           id="streetName"
-           type="text"
-    >
-
-    <div class="checkout-control__error" *ngIf="isControlInvalid('streetName')">
-      Это обязательное поле
-    </div>
-  </div>
-
-  <div class="checkout-control" *ngIf="isShippingMethod('post')">
-    <label class="checkout-control__label" for="novaposhtaOffice">Номер отделения Новой Почты</label>
-
-    <input class="checkout-control__input post-office-input"
-           [class.checkout-control__input--invalid]="isControlInvalid('novaposhtaOffice')"
-           formControlName="novaposhtaOffice"
-           id="novaposhtaOffice"
-           type="number"
-    >
-
-    <div class="checkout-control__error" *ngIf="isControlInvalid('novaposhtaOffice')">
-      Это обязательное поле
-    </div>
-  </div>
-
-</form>
+<address-form class="address-form form__control-container"
+              *ngIf="!addressOptionControl?.value"
+              [showIsDefault]="false"
+></address-form>

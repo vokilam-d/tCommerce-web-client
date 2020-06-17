@@ -1,10 +1,9 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, LOCALE_ID, OnInit, PLATFORM_ID } from '@angular/core';
+import { formatDate, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { OrderDto } from '../../shared/dtos/order.dto';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { API_HOST, DEFAULT_ERROR_TEXT } from '../../shared/constants';
-import { CustomerService } from '../../shared/services/customer/customer.service';
 import { HeadService } from '../../shared/services/head/head.service';
 import { OrderService } from '../checkout/order.service';
 
@@ -25,6 +24,7 @@ export class OrderSuccessComponent implements OnInit {
   private wayforpay: any;
 
   constructor(@Inject(PLATFORM_ID) private platformId: any,
+              @Inject(LOCALE_ID) private locale: string,
               private headService: HeadService,
               private orderService: OrderService,
               private router: Router) {
@@ -43,7 +43,7 @@ export class OrderSuccessComponent implements OnInit {
   }
 
   private init() {
-    this.breadcrumbs.push({ title: `Заказ №${this.order.id}` });
+    this.breadcrumbs = [...SUCCESS_BREADCRUMBS, { title: `Заказ №${this.order.id}` }];
     this.setMeta();
 
     if (this.order.isOnlinePayment) {
@@ -93,6 +93,8 @@ export class OrderSuccessComponent implements OnInit {
     const email = this.order.email;
     const deliveryDate = new Date();
     deliveryDate.setDate(deliveryDate.getDate() + 7);
+    const formattedDate: string = formatDate(deliveryDate, 'yyyy-MM-dd', this.locale);
+    console.log({ formattedDate });
 
     (window as any).renderOptIn = function() {
       (window as any).gapi.load('surveyoptin', function() {
@@ -102,7 +104,7 @@ export class OrderSuccessComponent implements OnInit {
             "order_id": orderId,
             "email": email,
             "delivery_country": "UA",
-            "estimated_delivery_date": deliveryDate,
+            "estimated_delivery_date": formattedDate,
             "opt_in_style": "CENTER_DIALOG"
           });
       });

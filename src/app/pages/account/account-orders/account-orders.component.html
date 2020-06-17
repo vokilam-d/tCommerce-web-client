@@ -53,9 +53,9 @@
         Адрес доставки:
       </div>
       <div class="order__info-value">
-        {{ order.address.city }},&nbsp;
-        <span *ngIf="order.address.streetName as street">{{ street }}</span>
-        <span *ngIf="order.address.novaposhtaOffice as post">отделение Новой Почты №{{ post }}</span>
+        {{ order.shipment.recipient.settlement }}, {{ order.shipment.recipient.address }}
+        <span *ngIf="order.shipment.recipient.buildingNumber as buildingNumber">, {{ buildingNumber }}</span>&nbsp;
+        <span *ngIf="order.shipment.recipient.flat as flat">, {{ flat }}</span>
       </div>
     </div>
 
@@ -77,21 +77,41 @@
       </div>
     </div>
 
-    <div class="order__info" *ngIf="order.note">
+    <div class="order__info" *ngIf="order.clientNote as note">
       <div class="order__info-label">
         Комментарий:
       </div>
       <div class="order__info-value">
-        {{ order.note }}
+        {{ note }}
       </div>
     </div>
 
-    <div class="order__info" *ngIf="order.novaposhtaTrackingId">
+    <div class="order__info">
+      <div class="order__info-label">
+        Перезванивать ли Вам для уточнения заказа?
+      </div>
+
+      <div class="order__info-value" [ngSwitch]="order.isCallbackNeeded">
+        <ng-container *ngSwitchCase="true">Да</ng-container>
+        <ng-container *ngSwitchCase="false">Нет</ng-container>
+      </div>
+    </div>
+
+    <div class="order__info" *ngIf="order.shipment.trackingNumber">
       <div class="order__info-label">
         Номер ТТН Новой почты:
       </div>
       <div class="order__info-value">
-        {{ order.novaposhtaTrackingId }}
+        {{ order.shipment.trackingNumber }}
+      </div>
+    </div>
+
+    <div class="order__info" *ngIf="order.shipment.statusDescription">
+      <div class="order__info-label">
+        Статус посылки:
+      </div>
+      <div class="order__info-value">
+        {{ order.shipment.statusDescription }}
       </div>
     </div>
 

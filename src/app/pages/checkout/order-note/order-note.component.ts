@@ -25,7 +25,7 @@ export class OrderNoteComponent extends NgUnsubscribe implements OnInit {
     this.noteControl = new FormControl();
     this.noteControl.valueChanges
       .pipe( takeUntil(this.ngUnsubscribe) )
-      .subscribe(value => this.orderService.note = value);
+      .subscribe(value => this.orderService.clientNote = value);
 
     this.noteControl.setValue('');
   }

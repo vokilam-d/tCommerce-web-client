@@ -7,7 +7,6 @@ import { ResponseDto } from '../../dtos/response.dto';
 import { LoginDto } from '../../dtos/login.dto';
 import { RegisterDto } from '../../dtos/registration.dto';
 import { InitResetPasswordDto } from '../../dtos/init-reset-password.dto';
-import { DetailedCustomerDto } from '../../dtos/detailed-customer.dto';
 import { ShipmentAddressDto } from '../../dtos/shipment-address.dto';
 import { map, tap } from 'rxjs/operators';
 import { CreateOrUpdateOrderItemDto, OrderItemDto } from '../../dtos/order-item.dto';
@@ -23,7 +22,7 @@ import { OrderDto } from '../../dtos/order.dto';
 })
 export class CustomerService { // todo split to CartService
 
-  private _customer = new BehaviorSubject<CustomerDto | DetailedCustomerDto>(null);
+  private _customer = new BehaviorSubject<CustomerDto | null>(null);
   private _cart: OrderItemDto[] = [];
   private _showLoginModal$ = new Subject();
   private _showCartModal$ = new Subject<boolean>();
@@ -58,14 +57,14 @@ export class CustomerService { // todo split to CartService
       );
   }
 
-  setCustomer(customer: CustomerDto | DetailedCustomerDto) {
+  setCustomer(customer: CustomerDto) {
     this._customer.next(customer);
 
     this.initCart();
   }
 
   fetchCustomerDetails() {
-    return this.http.get<ResponseDto<DetailedCustomerDto>>(`${API_HOST}/api/v1/customer/details`);
+    return this.http.get<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer/details`);
   }
 
   showLoginModal() {
@@ -126,14 +125,14 @@ export class CustomerService { // todo split to CartService
   }
 
   addShippingAddress(dto: ShipmentAddressDto) {
-    return this.http.post<ResponseDto<DetailedCustomerDto>>(`${API_HOST}/api/v1/customer/address`, dto)
+    return this.http.post<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer/address`, dto)
       .pipe(
         tap(response => this.setCustomer(response.data))
       );
   }
 
   editShippingAddress(addressId: string, dto: ShipmentAddressDto) {
-    return this.http.put<ResponseDto<DetailedCustomerDto>>(`${API_HOST}/api/v1/customer/address/${addressId}`, dto)
+    return this.http.put<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer/address/${addressId}`, dto)
       .pipe(
         tap(response => this.setCustomer(response.data))
       );

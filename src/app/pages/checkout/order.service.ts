@@ -13,11 +13,9 @@ import { API_HOST } from '../../shared/constants';
 })
 export class OrderService {
 
-  email: string = '';
-  address: ShipmentAddressDto = new ShipmentAddressDto();
   paymentMethod: PaymentMethodDto;
   isCallbackNeeded: boolean = false;
-  note: string = '';
+  clientNote: string = '';
 
   constructor(private http: HttpClient,
               private customerService: CustomerService) {
@@ -33,11 +31,9 @@ export class OrderService {
   }
 
   private resetOrder() {
-    this.email = '';
-    this.address = new ShipmentAddressDto();
     this.paymentMethod = null;
     this.isCallbackNeeded = false;
-    this.note = '';
+    this.clientNote = '';
 
     this.customerService.resetCart();
   }

@@ -13,6 +13,7 @@
   &__options {
     top: 0;
     border-color: $borderColor;
+    min-height: 105px;
 
     &--hidden {
       display: none;
@@ -32,8 +33,11 @@
   }
 
   &__preloader {
-    top: 45px;
-    padding-top: 25px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding-top: 12px;
+    padding-bottom: 30px;
   }
 
   &__option {

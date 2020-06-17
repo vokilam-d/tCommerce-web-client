@@ -47,7 +47,7 @@
   }
 
   &__content {
-    margin: 0 0 10px;
+    margin: 0 0 30px;
 
     @include respond-to($media_large) {
       margin-top: 20px;
@@ -175,6 +175,7 @@
   }
 
   &__description {
+    flex-grow: 2;
     margin: 0 0 0 15px;
   }
 
@@ -203,6 +204,7 @@
 
   &__img {
     width: 80px;
+    flex-shrink: 0;
   }
 }
 

@@ -62,12 +62,12 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
     }
 
     const dto = new AddOrderDto();
-    dto.email = this.orderService.email;
-    dto.address = this.orderService.address;
+    dto.email = this.infoCmp.getEmail();
+    dto.address = this.infoCmp.getAddress();
     dto.address.phone = normalizePhoneNumber(dto.address.phone);
     dto.paymentMethodId = this.orderService.paymentMethod.id;
     dto.isCallbackNeeded = this.orderService.isCallbackNeeded;
-    dto.note = this.orderService.note;
+    dto.clientNote = this.orderService.clientNote;
     dto.items = this.customerService.cart;
 
     this.orderError = null;
@@ -95,6 +95,6 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   }
 
   private setMeta() {
-    this.headService.setMeta({ title: 'Оформление заказа', description: 'Оформление заказа' });
+    this.headService.setMeta({ title: 'Klondike | Оформление заказа', description: 'Оформление заказа' });
   }
 }

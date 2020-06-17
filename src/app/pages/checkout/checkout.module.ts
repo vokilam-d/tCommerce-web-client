@@ -9,6 +9,7 @@ import { OrderNoteComponent } from './order-note/order-note.component';
 import { OrderCustomerInfoComponent } from './order-customer-info/order-customer-info.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
+import { AddressFormModule } from '../../address-form/address-form.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { SharedModule } from '../../shared/shared.module';
     CommonModule,
     CheckoutRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    AddressFormModule
   ],
   providers: []
 })

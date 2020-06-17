@@ -2,7 +2,7 @@
 <div class="page container success" *ngIf="order">
   <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
 
-  <h1 class="page__title">
+  <h1 class="page__title success__title">
     Спасибо за покупку!
   </h1>
 
@@ -12,7 +12,7 @@
     {{ error | json }}
   </div>
 
-  <div class="success__pay-success">
+  <div class="success__pay-success" *ngIf="paymentSuccess">
     Ваш заказ успешно оплачен
   </div>
 
@@ -35,7 +35,7 @@
       </div>
 
       <div class="order-info__value">
-        {{ order.address.firstName }} {{ order.address.lastName }}, {{ order.address.phoneNumber }}
+        {{ order.shipment.recipient.firstName }} {{ order.shipment.recipient.lastName }}, {{ order.shipment.recipient.phone }}
       </div>
     </div>
 
@@ -45,9 +45,9 @@
       </div>
 
       <div class="order-info__value">
-        {{ order.address.city }},&nbsp;
-        <span *ngIf="order.address.streetName as street">{{ street }}</span>
-        <span *ngIf="order.address.novaposhtaOffice as post">отделение Новой Почты №{{ post }}</span>
+        {{ order.shipment.recipient.settlement }}, {{ order.shipment.recipient.address }}
+        <span *ngIf="order.shipment.recipient.buildingNumber as buildingNumber">, {{ buildingNumber }}</span>
+        <span *ngIf="order.shipment.recipient.flat as flat">, {{ flat }}</span>
       </div>
     </div>
 
@@ -71,7 +71,7 @@
       </div>
     </div>
 
-    <div class="order-info__row" *ngIf="order.note as note">
+    <div class="order-info__row" *ngIf="order.clientNote as note">
       <div class="order-info__label">
         Ваш комментарий
       </div>
@@ -126,7 +126,7 @@
       <div class="items__value">{{ order.totalItemsCost }} грн</div>
     </div>
 
-    <div class="items__row">
+    <div class="items__row" *ngIf="order.discountValue">
       <div class="items__label">{{ order.discountLabel }}</div>
 
       <div class="items__value">{{ order.discountValue }} грн</div>

@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CustomerService } from '../../../shared/services/customer/customer.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ShipmentAddressDto } from '../../../shared/dtos/shipment-address.dto';
 import { DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { finalize } from 'rxjs/operators';
-import { DetailedCustomerDto } from '../../../shared/dtos/detailed-customer.dto';
 import { HeadService } from '../../../shared/services/head/head.service';
 import { AddressTypeEnum } from '../../../shared/enums/address-type.enum';
 import { AddressFormComponent } from '../../../address-form/address-form.component';
@@ -23,7 +21,7 @@ export class AddressesComponent implements OnInit {
   activeAddress: ShipmentAddressDto;
   private newAddress: ShipmentAddressDto = new ShipmentAddressDto();
 
-  get addresses() { return (this.customerService.customer as DetailedCustomerDto).addresses; }
+  get addresses() { return this.customerService.customer.addresses; }
 
   @ViewChild(AddressFormComponent) addressFormCmp: AddressFormComponent;
 

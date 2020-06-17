@@ -1,19 +1,13 @@
 @import "variables";
 @import "mixins";
 
-.page__title {
-  @include respond-to($media_large) {
-    text-align: center;
-  }
-}
-
 .success {
   &__title {
     text-align: center;
   }
 
   &__subtitle {
-    margin: 7px 0 0;
+    margin: 15px 0 0;
     font-size: 18px;
     text-align: center;
 
@@ -27,7 +21,7 @@
     position: relative;
     display: block;
     width: 200px;
-    margin: 50px auto 10px;
+    margin: 30px auto;
     padding: 10px 20px;
     background: linear-gradient(110deg,#181e2f,#0980ad 40%,#0980ad 60%,#181e2f) center center;
     background-size: 150% 100%;
@@ -58,7 +52,9 @@
 }
 
 .order-info {
-  margin: 15px 0 0;
+  margin: 20px 0 0;
+  padding: 20px 0 0;
+  border-top: 1px solid rgba($dark, 0.1);
 
   @include respond-to($media_large) {
     max-width: 600px;
@@ -87,6 +83,8 @@
 
 .items {
   margin: 25px 0 0;
+  padding: 25px 0 0;
+  border-top: 1px solid rgba($dark, 0.1);
 
   @include respond-to($media_large) {
     max-width: 600px;
@@ -130,6 +128,7 @@
   }
 
   &__info {
+    flex-grow: 2;
     margin: 0 0 0 10px;
     padding: 0 20px 0 0;
   }

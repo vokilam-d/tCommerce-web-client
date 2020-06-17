@@ -11,8 +11,7 @@ export class FlyToCartDirective {
   constructor(private elementRef: ElementRef) { }
 
   start() {
-    console.log(this.media);
-    console.log(this.elementRef.nativeElement);
+    // console.log(this.media);
+    // console.log(this.elementRef.nativeElement);
   }
-
 }

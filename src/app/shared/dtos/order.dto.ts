@@ -3,17 +3,20 @@ import { ShipmentAddressDto } from './shipment-address.dto';
 import { ShipmentTypeEnum } from '../enums/shipment-type.enum';
 import { ShipmentDto } from './shipment.dto';
 
-export class AddOrderDto {
+class BaseOrderDto {
   email: string;
-  address: ShipmentAddressDto;
   paymentMethodId: string;
   shipmentType?: ShipmentTypeEnum;
   isCallbackNeeded: boolean;
   items: OrderItemDto[];
-  note: string;
+  clientNote: string;
 }
 
-export class OrderDto extends AddOrderDto {
+export class AddOrderDto extends BaseOrderDto {
+  address: ShipmentAddressDto;
+}
+
+export class OrderDto extends BaseOrderDto {
   id: string;
   shippingMethodName: string;
   paymentMethodName: string;

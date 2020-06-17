@@ -1,12 +1,14 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CustomerService } from '../../../shared/services/customer/customer.service';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ShipmentAddressDto } from '../../../shared/dtos/shipment-address.dto';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { isEmailRegex } from '../../../shared/constants';
-import { catchError, debounceTime, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { catchError, debounceTime, switchMap, takeUntil } from 'rxjs/operators';
 import { OrderService } from '../order.service';
 import { ScrollToService } from '../../../shared/services/scroll-to/scroll-to.service';
 import { NgUnsubscribe } from '../../../shared/directives/ng-unsubscribe.directive';
+import { AddressFormComponent } from '../../../address-form/address-form.component';
+import { AddressTypeEnum } from '../../../shared/enums/address-type.enum';
+import { ShipmentAddressDto } from '../../../shared/dtos/shipment-address.dto';
 
 @Component({
   selector: 'order-customer-info',
@@ -15,85 +17,86 @@ import { NgUnsubscribe } from '../../../shared/directives/ng-unsubscribe.directi
 })
 export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit {
 
-  form: FormGroup;
   emailControl: FormControl;
-  get isLoggedIn() { return this.customerService.isLoggedIn; }
+  addressOptionControl: FormControl | null;
+  addressTypes = AddressTypeEnum;
 
-  @ViewChild('formRef') formRef: ElementRef;
+  get customer$() { return this.customerService.customer$; }
+
+  @ViewChild('emailRef') emailRef: ElementRef;
+  @ViewChild(AddressFormComponent) addressFormCmp: AddressFormComponent;
 
   constructor(private customerService: CustomerService,
               private orderService: OrderService,
+              private cdr: ChangeDetectorRef,
               private scrollToService: ScrollToService,
               private formBuilder: FormBuilder) {
     super();
   }
 
   ngOnInit(): void {
-    this.buildEmailControl();
-    this.buildForm();
+    this.handleEmail();
+    this.buildAddressOptionControl();
   }
 
-  private buildEmailControl() {
-    this.emailControl = this.formBuilder.control(
-      this.orderService.email,
-      [Validators.pattern(isEmailRegex), Validators.required]
-    );
+  private handleEmail() {
+    this.emailControl = this.formBuilder.control('', [Validators.pattern(isEmailRegex), Validators.required]);
 
     this.emailControl.valueChanges
       .pipe(
+        takeUntil(this.ngUnsubscribe),
         debounceTime(1000),
-        tap(value => this.orderService.email = value),
         switchMap(email => this.customerService.isEmailAvailable(email)),
-        catchError((err, caught) => caught),
-        takeUntil(this.ngUnsubscribe)
+        catchError((err, caught) => caught)
       )
       .subscribe(isEmailAvailable => {
-        console.log({isEmailAvailable});
+        console.log({ isEmailAvailable });
       });
   }
 
-  private buildForm() {
-    this.form = this.formBuilder.group(this.orderService.address);
-    this.form.valueChanges
+  private buildAddressOptionControl() {
+    this.customerService.customer$
       .pipe( takeUntil(this.ngUnsubscribe) )
-      .subscribe(value => this.orderService.address = value);
+      .subscribe(customer => {
+        if (customer?.addresses?.length > 0) {
+          const defaultAddress = customer.addresses.find(address => address.isDefault) || customer.addresses[0];
+          this.addressOptionControl = this.formBuilder.control(defaultAddress);
+        } else {
+          this.addressOptionControl = null;
+        }
+
+        this.cdr.markForCheck();
+      });
   }
 
   isEmailInvalid() {
     return !this.emailControl.valid && this.emailControl.touched;
   }
 
-  private validateControl(control: AbstractControl) {
-    control.markAsTouched({ onlySelf: true });
-  }
-
-  private validateFormControls() {
-    Object.keys(this.form.controls).forEach(controlName => {
-      const control = this.form.get(controlName);
-      this.validateControl(control);
-    });
-  }
-
-  isControlInvalid(controlName: keyof ShipmentAddressDto | string): boolean {
-    const control = this.form.get(controlName);
-    return !control.valid && control.touched;
+  private validateEmailControl() {
+    this.emailControl.markAsTouched({ onlySelf: true });
   }
 
   checkInfoValidity(): boolean {
-    let isInfoValid: boolean = false;
-
-    if (this.isLoggedIn) {
-      isInfoValid = true;
-    } else {
-      isInfoValid = this.form.valid;
-      this.validateControl(this.emailControl);
-      this.validateFormControls();
+    if (!this.customerService.customer && this.emailControl.invalid) {
+      this.validateEmailControl();
+      this.scrollToService.scrollTo({ target: this.emailRef, offset: -40 });
+      return false;
     }
 
-    if (!isInfoValid) {
-      this.scrollToService.scrollTo({ target: this.formRef, offset: -40 });
+    if (!this.addressOptionControl?.value) {
+      return this.addressFormCmp.checkValidity();
     }
 
-    return isInfoValid;
+    return true;
+  }
+
+  getEmail(): string {
+    return this.customerService.customerEmail || this.emailControl.value;
+  }
+
+  getAddress(): ShipmentAddressDto {
+    const address = this.addressOptionControl?.value;
+    return address || this.addressFormCmp.getValue();
   }
 }

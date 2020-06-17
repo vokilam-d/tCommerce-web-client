@@ -2,23 +2,27 @@
 
   <div class="form__control-container">
     <label class="form__label" for="login">Email или номер телефона</label>
-    <input class="form__input"
-           [class.form__input--invalid]="isControlInvalid('login')"
-           formControlName="login"
-           id="login"
-           type="text"
-           required
-    >
+    <div class="form__control">
+      <input class="form__input"
+             [class.form__input--invalid]="isControlInvalid('login')"
+             formControlName="login"
+             id="login"
+             type="text"
+             required
+      >
+    </div>
   </div>
 
   <div class="form__control-container" *ngIf="state === 'login'">
     <label class="form__label" for="password">Пароль</label>
-    <input class="form__input"
-           [class.form__input--invalid]="isControlInvalid('password')"
-           formControlName="password"
-           id="password"
-           type="password"
-    >
+    <div class="form__control">
+      <input class="form__input"
+             [class.form__input--invalid]="isControlInvalid('password')"
+             formControlName="password"
+             id="password"
+             type="password"
+      >
+    </div>
   </div>
 
   <div class="login-form__reset-sent" *ngIf="state === 'reset' && isResetEmailSent">
@@ -47,5 +51,5 @@
     <div class="form__delimiter-text">или</div>
   </div>
 
-  <auth-social class="form__social" (authFinish)="socialAuthFinish()"></auth-social>
+  <auth-social class="form__social" (authSuccess)="socialAuthFinish()"></auth-social>
 </form>

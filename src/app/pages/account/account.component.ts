@@ -1,12 +1,12 @@
 import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, QueryList, Renderer2, ViewChildren } from '@angular/core';
 import { CustomerService } from '../../shared/services/customer/customer.service';
-import { DetailedCustomerDto } from '../../shared/dtos/detailed-customer.dto';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 import { HeadService } from '../../shared/services/head/head.service';
+import { CustomerDto } from '../../shared/dtos/customer.dto';
 
 type ChildRoute = { link: string; label: string };
 
@@ -25,7 +25,7 @@ export class AccountComponent extends NgUnsubscribe implements OnInit {
 
   @ViewChildren('routerLink') routerLinksRefs: QueryList<ElementRef>;
 
-  get customer(): DetailedCustomerDto { return this.customerService.customer as DetailedCustomerDto; }
+  get customer(): CustomerDto { return this.customerService.customer; }
 
   constructor(private customerService: CustomerService,
               @Inject(PLATFORM_ID) private platformId: any,
