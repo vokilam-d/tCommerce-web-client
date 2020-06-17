@@ -2,7 +2,6 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { CustomerService } from '../shared/services/customer/customer.service';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
 import { takeUntil } from 'rxjs/operators';
-import { CustomerDto } from '../shared/dtos/customer.dto';
 import { NotyService } from '../noty/noty.service';
 
 @Component({

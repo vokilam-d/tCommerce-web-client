@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { CustomerService } from '../shared/services/customer/customer.service';
 import { QuantityControlComponent } from '../shared/quantity-control/quantity-control.component';
 import { OrderItemDto } from '../shared/dtos/order-item.dto';
 import { finalize } from 'rxjs/operators';
-import { DEFAULT_ERROR_TEXT, API_HOST } from '../shared/constants';
+import { API_HOST, DEFAULT_ERROR_TEXT } from '../shared/constants';
 
 @Component({
   selector: 'cart',

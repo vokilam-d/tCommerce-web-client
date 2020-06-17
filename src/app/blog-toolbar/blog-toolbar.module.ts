@@ -4,7 +4,6 @@ import { BlogToolbarComponent } from './blog-toolbar.component';
 import { RouterModule } from '@angular/router';
 
 
-
 @NgModule({
   declarations: [BlogToolbarComponent],
   imports: [

@@ -6,7 +6,6 @@ import { PaginationModule } from '../pagination/pagination.module';
 import { SharedModule } from '../shared/shared.module';
 
 
-
 @NgModule({
   declarations: [BlogPostsListComponent],
   imports: [

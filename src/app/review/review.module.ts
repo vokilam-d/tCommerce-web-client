@@ -6,7 +6,6 @@ import { MediaGalleryModule } from '../media-gallery/media-gallery.module';
 import { FormsModule } from '@angular/forms';
 
 
-
 @NgModule({
   declarations: [ReviewComponent],
   imports: [

@@ -5,7 +5,6 @@ import { LoginFormModule } from '../login-form/login-form.module';
 import { RegistrationFormModule } from '../registration-form/registration-form.module';
 
 
-
 @NgModule({
   declarations: [CustomerModalComponent],
   imports: [

@@ -5,7 +5,6 @@ import { RatingSelectorComponent } from './rating-selector/rating-selector.compo
 import { ReactiveFormsModule } from '@angular/forms';
 
 
-
 @NgModule({
   declarations: [AddReviewModalComponent, RatingSelectorComponent],
   imports: [

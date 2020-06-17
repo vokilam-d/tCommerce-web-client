@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AccountComponent } from './account.component';
 import { AccountCustomerInfoComponent } from './customer-info/account-customer-info.component';
 import { AccountOrdersComponent } from './account-orders/account-orders.component';
-import { WishlistComponent } from './wishlist/wishlist.component';
 import { AddressesComponent } from './addresses/addresses.component';
-import { AccountReviewsComponent } from './account-reviews/account-reviews.component';
 import { AccountDiscountComponent } from './account-discount/account-discount.component';
 
 const routes: Routes = [

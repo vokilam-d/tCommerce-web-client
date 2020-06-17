@@ -94,7 +94,6 @@ export class OrderSuccessComponent implements OnInit {
     const deliveryDate = new Date();
     deliveryDate.setDate(deliveryDate.getDate() + 7);
     const formattedDate: string = formatDate(deliveryDate, 'yyyy-MM-dd', this.locale);
-    console.log({ formattedDate });
 
     (window as any).renderOptIn = function() {
       (window as any).gapi.load('surveyoptin', function() {

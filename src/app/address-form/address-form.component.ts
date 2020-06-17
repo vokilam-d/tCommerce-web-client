@@ -8,7 +8,6 @@ import { StreetDto } from '../shared/dtos/street.dto';
 import { takeUntil } from 'rxjs/operators';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
 import { ScrollToService } from '../shared/services/scroll-to/scroll-to.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'address-form',

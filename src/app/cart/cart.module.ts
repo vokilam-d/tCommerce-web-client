@@ -7,7 +7,6 @@ import { CrossSellProductsComponent } from './cross-sell-products/cross-sell-pro
 import { ProductListItemModule } from '../product-list-item/product-list-item.module';
 
 
-
 @NgModule({
   declarations: [CartComponent, CrossSellProductsComponent],
   imports: [

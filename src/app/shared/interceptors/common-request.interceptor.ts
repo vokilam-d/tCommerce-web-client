@@ -1,10 +1,5 @@
 import { Inject, Injectable, Optional } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor, HttpHeaders
-} from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { Request } from 'express';

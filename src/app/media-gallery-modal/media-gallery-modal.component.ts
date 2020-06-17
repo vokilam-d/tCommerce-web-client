@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { MediaDto } from '../shared/dtos/media.dto';
 import { API_HOST } from '../shared/constants';
 import { EMediaVariant } from '../shared/enums/media-variant.enum';

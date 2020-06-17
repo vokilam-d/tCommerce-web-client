@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AuthSocialComponent } from './auth-social.component';
 
 
-
 @NgModule({
   declarations: [AuthSocialComponent],
   imports: [

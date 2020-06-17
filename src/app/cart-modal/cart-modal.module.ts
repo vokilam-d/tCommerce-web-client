@@ -4,7 +4,6 @@ import { CartModalComponent } from './cart-modal.component';
 import { CartModule } from '../cart/cart.module';
 
 
-
 @NgModule({
   declarations: [CartModalComponent],
   imports: [

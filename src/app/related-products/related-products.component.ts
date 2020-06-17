@@ -1,5 +1,5 @@
 import {
-  AfterViewInit, ChangeDetectorRef,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   Inject,

@@ -6,7 +6,6 @@ import { AuthSocialModule } from '../auth-social/auth-social.module';
 import { SharedModule } from '../shared/shared.module';
 
 
-
 @NgModule({
   declarations: [LoginFormComponent],
   imports: [

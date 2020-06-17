@@ -5,7 +5,6 @@ import { ProductListItemModule } from '../product-list-item/product-list-item.mo
 import { SharedModule } from '../shared/shared.module';
 
 
-
 @NgModule({
   declarations: [RelatedProductsComponent],
   imports: [

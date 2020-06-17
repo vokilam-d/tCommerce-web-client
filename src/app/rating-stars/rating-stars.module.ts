@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RatingStarsComponent } from './rating-stars.component';
 
 
-
 @NgModule({
   declarations: [RatingStarsComponent],
   imports: [

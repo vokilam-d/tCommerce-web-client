@@ -4,7 +4,6 @@ import { SelectAutocompleteComponent } from './select-autocomplete.component';
 import { SharedModule } from '../shared/shared.module';
 
 
-
 @NgModule({
   declarations: [SelectAutocompleteComponent],
   imports: [

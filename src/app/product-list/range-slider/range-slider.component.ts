@@ -3,10 +3,12 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
-  Input, OnChanges,
+  Input,
+  OnChanges,
   OnInit,
   Output,
-  Renderer2, SimpleChanges
+  Renderer2,
+  SimpleChanges
 } from '@angular/core';
 import { Range } from '../../shared/dtos/filter.dto';
 import { isTouchDevice } from '../../shared/helpers/is-touch-device.function';

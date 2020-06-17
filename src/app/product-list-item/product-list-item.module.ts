@@ -6,7 +6,6 @@ import { SharedModule } from '../shared/shared.module';
 import { RatingStarsModule } from '../rating-stars/rating-stars.module';
 
 
-
 @NgModule({
   declarations: [ProductListItemComponent],
   imports: [

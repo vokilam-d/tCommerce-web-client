@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { NotyComponent } from './noty.component';
 
 
-
 @NgModule({
   declarations: [NotyComponent],
   imports: [

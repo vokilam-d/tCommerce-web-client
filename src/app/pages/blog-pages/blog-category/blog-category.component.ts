@@ -4,7 +4,6 @@ import { HeadService } from '../../../shared/services/head/head.service';
 import { ActivatedRoute } from '@angular/router';
 import { BlogCategoryDto } from '../../../shared/dtos/blog-category.dto';
 import { IBreadcrumb } from '../../../breadcrumbs/breadcrumbs.interface';
-import { BlogPostListItemDto } from '../../../shared/dtos/blog-post-list-item.dto';
 
 @Component({
   selector: 'blog-category',
