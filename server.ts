@@ -25,6 +25,7 @@ async function updatePages(apiHost: string) {
   try {
     const { data: response } = await axios.get<ResponseDto<PageRegistryDto[]>>(`${apiHost}/api/v1/pages`);
     pages = response.data;
+    console.log(`[updatePages]: fetched ${pages.length} pages`);
   } catch (ex) {
     console.error('Could not update pages:');
     console.error(ex.response ? ex.response.data : ex);
