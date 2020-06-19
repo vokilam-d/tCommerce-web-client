@@ -19,7 +19,7 @@ const oneHour = 60 * 60 * 1000;
 async function updatePages(apiHost: string) {
 
   if (apiHost.indexOf('http') !== 0) {
-    apiHost += 'http://';
+    apiHost = 'http://' + apiHost;
   }
 
   try {
