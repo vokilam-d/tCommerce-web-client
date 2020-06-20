@@ -8,3 +8,5 @@ Disallow: /register
 Disallow: /*?*
 
 Allow: /*?gclid=*
+
+Disallow: *
