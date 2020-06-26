@@ -52,7 +52,7 @@ export class RelatedProductsComponent extends NgUnsubscribe implements OnInit {
     if (!this.linkedProducts?.length || !isPlatformBrowser(this.platformId)) { return; }
 
     const spf = new SortingPaginatingFilterDto();
-    spf.id = this.linkedProducts.map(p => p.productId).join('|');
+    spf.id = this.linkedProducts.map(p => p.productId);
 
     this.isLoading = true;
     this.productService.fetchProductsByFilters(spf)
