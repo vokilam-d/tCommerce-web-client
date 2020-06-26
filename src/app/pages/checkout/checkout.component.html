@@ -28,13 +28,13 @@
 
   <div class="checkout" [class.checkout--loading]="isOrderLoading" #checkoutRef>
 
-    <div class="checkout__error" *ngIf="orderError as error">
-      {{ error }}
-    </div>
-
     <preloader class="checkout__preloader" *ngIf="isOrderLoading"></preloader>
 
     <main class="checkout__form">
+      <div class="checkout__error" *ngIf="orderError as error">
+        {{ error }}
+      </div>
+
       <order-customer-info class="checkout__block"></order-customer-info>
 
       <payment-methods class="checkout__block"></payment-methods>
