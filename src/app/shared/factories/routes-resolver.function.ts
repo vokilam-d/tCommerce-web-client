@@ -7,6 +7,7 @@ import { PageRegistryDto } from '../dtos/page-registry.dto';
 import { PageTypeEnum } from '../enums/page-type.enum';
 import { tap } from 'rxjs/operators';
 import { ResponseDto } from '../dtos/response.dto';
+import { isPlatformServer } from '@angular/common';
 
 export const PAGES_TOKEN = new InjectionToken<PageRegistryDto[]>('pages_token');
 export const PAGES_STATE_KEY = makeStateKey<PageRegistryDto[]>('pages_state_key');
@@ -35,15 +36,17 @@ function updateConfig(router: Router, pages: PageRegistryDto[]) {
   router.resetConfig([...staticRoutes.slice(0, -1), ...routesFromPages, staticRoutes[staticRoutes.length - 1]]);
 }
 
-export function routesResolver(http: HttpClient, router: Router, injector: Injector, state: TransferState) {
+export function routesResolver(http: HttpClient, router: Router, injector: Injector, state: TransferState, platformId: any) {
   return () => {
-    try {
-      const pagesFromServer = injector.get(PAGES_TOKEN); // token is present only in Server
-      state.set(PAGES_STATE_KEY, pagesFromServer);
-      updateConfig(router, pagesFromServer);
-      return;
-    } catch (e) {
-      console.error(`Error in routesResolver:`, e);
+    if (isPlatformServer(platformId)) {
+      try {
+        const pagesFromServer = injector.get(PAGES_TOKEN); // token is present only in Server
+        state.set(PAGES_STATE_KEY, pagesFromServer);
+        updateConfig(router, pagesFromServer);
+        return;
+      } catch (e) {
+        console.error(`Error in routesResolver:`, e);
+      }
     }
 
     const pagesFromSSR = state.get<PageRegistryDto[]>(PAGES_STATE_KEY, []);
