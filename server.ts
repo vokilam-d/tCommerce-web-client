@@ -15,7 +15,7 @@ import { API_HOST } from './src/app/shared/constants';
 
 let pages: PageRegistryDto[] = [];
 
-const oneHour = 60 * 60 * 1000;
+const tenMinutes = 10 * 60 * 1000;
 async function updatePages(apiHost: string) {
 
   if (apiHost.indexOf('http') !== 0) {
@@ -31,7 +31,7 @@ async function updatePages(apiHost: string) {
     console.error(ex.response ? ex.response.data : ex.toString());
   }
 
-  setTimeout(() => updatePages(apiHost), oneHour);
+  setTimeout(() => updatePages(apiHost), tenMinutes);
 }
 
 // The Express app is exported so that it can be used by serverless Functions.
