@@ -28,7 +28,7 @@ async function updatePages(apiHost: string) {
     console.log(`[updatePages]: fetched ${pages.length} pages`);
   } catch (ex) {
     console.error('Could not update pages:');
-    console.error(ex.response ? ex.response.data : ex);
+    console.error(ex.response ? ex.response.data : ex.toString());
   }
 
   setTimeout(() => updatePages(apiHost), oneHour);
@@ -53,6 +53,8 @@ export function app() {
   }));
 
   server.get(`/robots.txt`, (req, res) => res.sendFile(join(distFolder, 'assets', 'robots.txt')));
+
+  server.get(`/api/*`, (req, res) => res.send(`Api is not supported`));
 
   // All regular routes use the Universal engine
   let isPagesUpdateStarted: boolean = false;

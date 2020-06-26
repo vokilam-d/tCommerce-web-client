@@ -21,8 +21,8 @@ export class StoreReviewService {
         response => {
           this.storeReviewsCount = response.data;
         },
-        error => {
-          console.warn(error);
+        err => {
+          console.warn(`Could not set store reviews count`, err.message);
         }
       );
   }

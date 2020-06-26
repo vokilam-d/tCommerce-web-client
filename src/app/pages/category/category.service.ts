@@ -21,6 +21,9 @@ export class CategoryService {
       .subscribe(
         response => {
           this.categories = response.data;
+        },
+        err => {
+          console.warn(`Could not set categories`, err.message);
         }
       );
   }

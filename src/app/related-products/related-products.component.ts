@@ -18,6 +18,7 @@ import { debounceTime, finalize, takeUntil } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
 import { fromEvent } from 'rxjs';
+import { DeviceService } from '../shared/services/device-detector/device.service';
 
 @Component({
   selector: 'related-products',
@@ -30,7 +31,7 @@ export class RelatedProductsComponent extends NgUnsubscribe implements OnInit {
   isLoading: boolean = false;
   private itemWidth: number;
   private activeItemIdx: number = 0;
-  private itemsToShow: number = 2;
+  private itemsToShow: number = this.device.isMobile() ? 2 : 4;
 
   @Input() linkedProducts: LinkedProductDto[];
   @ViewChild('itemsContainerRef') itemsContainerRef: ElementRef;
@@ -38,6 +39,7 @@ export class RelatedProductsComponent extends NgUnsubscribe implements OnInit {
 
   constructor(private productService: ProductService,
               private cdr: ChangeDetectorRef,
+              private device: DeviceService,
               @Inject(PLATFORM_ID) private platformId: any) {
     super();
   }

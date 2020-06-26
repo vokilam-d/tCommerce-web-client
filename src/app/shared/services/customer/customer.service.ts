@@ -41,7 +41,10 @@ export class CustomerService { // todo split to CartService
   constructor(@Inject(PLATFORM_ID) private platformId: any,
               private router: Router,
               private http: HttpClient) {
-    this.fetchCustomer().subscribe();
+
+    this.fetchCustomer().subscribe({
+      error(err) { console.log(`Could not fetch customer`, err.message); }
+    });
   }
 
   fetchCustomer(): Observable<ResponseDto<CustomerDto>> {

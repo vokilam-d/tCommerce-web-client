@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { API_HOST, DUMMY_PATH } from '../constants';
 import { Router, Routes } from '@angular/router';
-import { tap } from 'rxjs/operators';
 import { InjectionToken, Injector } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { PageRegistryDto } from '../dtos/page-registry.dto';
-import { ResponseDto } from '../dtos/response.dto';
 import { PageTypeEnum } from '../enums/page-type.enum';
+import { tap } from 'rxjs/operators';
+import { ResponseDto } from '../dtos/response.dto';
 
 export const PAGES_TOKEN = new InjectionToken<PageRegistryDto[]>('pages_token');
 export const PAGES_STATE_KEY = makeStateKey<PageRegistryDto[]>('pages_state_key');
@@ -42,7 +42,9 @@ export function routesResolver(http: HttpClient, router: Router, injector: Injec
       state.set(PAGES_STATE_KEY, pagesFromServer);
       updateConfig(router, pagesFromServer);
       return;
-    } catch (e) { }
+    } catch (e) {
+      console.error(`Error in routesResolver:`, e);
+    }
 
     const pagesFromSSR = state.get<PageRegistryDto[]>(PAGES_STATE_KEY, []);
 
