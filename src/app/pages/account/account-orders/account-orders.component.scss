@@ -137,6 +137,8 @@
   &__img {
     margin: 0 10px 10px 0;
     width: 60px;
+    height: 60px;
+    object-fit: cover;
   }
 
   &__footer {
@@ -204,6 +206,8 @@
 
   &__img {
     width: 80px;
+    height: 80px;
+    object-fit: cover;
     flex-shrink: 0;
   }
 }
