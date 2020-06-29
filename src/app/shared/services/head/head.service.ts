@@ -21,7 +21,8 @@ export class HeadService {
   }
 
   setMeta(metaTags: MetaTagsDto, ogTags?: IOgTags) {
-    this.title.setTitle('STG | ' + metaTags.title || '');
+    // this.title.setTitle('STG | ' + metaTags.title || '');
+    this.title.setTitle(metaTags.title || '');
     this.meta.updateTag({ name: 'description', content: metaTags.description });
     this.meta.updateTag({ name: 'keywords', content: metaTags.keywords || metaTags.title });
 
