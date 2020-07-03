@@ -22,7 +22,7 @@ export class StoreReviewService {
           this.storeReviewsCount = response.data;
         },
         err => {
-          console.warn(`Could not set store reviews count`, err.message);
+          console.warn(`${new Date().toISOString()} - Could not set store reviews count`, err.message);
         }
       );
   }

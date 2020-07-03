@@ -43,7 +43,7 @@ export class CustomerService { // todo split to CartService
               private http: HttpClient) {
 
     this.fetchCustomer().subscribe({
-      error(err) { console.log(`Could not fetch customer`, err.message); }
+      error(err) { console.log(`${new Date().toISOString()} - Could not fetch customer`, err.message); }
     });
   }
 

@@ -23,7 +23,7 @@ export class CategoryService {
           this.categories = response.data;
         },
         err => {
-          console.warn(`Could not set categories`, err.message);
+          console.warn(`${new Date().toISOString()} - Could not set categories`, err.message);
         }
       );
   }
