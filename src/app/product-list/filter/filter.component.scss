@@ -63,7 +63,7 @@
 
   &__header {
     font-size: 24px;
-    font-weight: 500;
+    font-weight: 600;
 
     @include respond-to($media_large) {
       padding-left: 10px;
@@ -85,7 +85,7 @@
   &__title {
     margin: 0 0 15px;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
   }
 
@@ -135,7 +135,7 @@
 
   &__selected-count {
     margin: 15px 0 0;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   &__product-count {
