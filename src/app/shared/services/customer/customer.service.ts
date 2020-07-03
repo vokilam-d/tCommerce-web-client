@@ -116,6 +116,10 @@ export class CustomerService { // todo split to CartService
     return this.http.post<ResponseDto<boolean>>(`${API_HOST}/api/v1/customer/send-confirm-email`, { });
   }
 
+  confirmEmail(token: string) {
+    return this.http.post<ResponseDto<boolean>>(`${API_HOST}/api/v1/customer/confirm-email`, { token });
+  }
+
   updateCustomer(dto: UpdateCustomerDto) {
     return this.http.patch<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer`, dto)
       .pipe(

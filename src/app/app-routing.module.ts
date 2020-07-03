@@ -67,6 +67,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/reset-password/reset-password.module').then(m => m.ResetPasswordModule)
   },
   {
+    path: 'confirm-email',
+    loadChildren: () => import('./pages/confirm-email/confirm-email.module').then(m => m.ConfirmEmailModule)
+  },
+  {
     path: 'search',
     loadChildren: () => import('./pages/search-page/search-page.module').then(m => m.SearchPageModule)
   },
@@ -105,4 +109,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { initialNavigation: 'enabled', scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

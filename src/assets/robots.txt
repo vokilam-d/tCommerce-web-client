@@ -5,6 +5,8 @@ Disallow: /search
 Disallow: /account
 Disallow: /login
 Disallow: /register
+Disallow: /reset-password
+Disallow: /confirm-email
 Disallow: /*?*
 
 Allow: /*?gclid=*

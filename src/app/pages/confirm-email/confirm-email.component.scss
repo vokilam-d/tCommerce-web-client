@@ -1,0 +1,14 @@
+@import "variables";
+
+.confirm {
+  &__error {
+    color: $red;
+  }
+
+  &__success-link {
+    display: inline-block;
+    padding: 0 0 1px;
+    border-bottom: 1px solid;
+    color: $primary;
+  }
+}
