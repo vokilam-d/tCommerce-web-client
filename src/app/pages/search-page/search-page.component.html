@@ -12,7 +12,10 @@
       Задайте поисковый запрос
     </div>
 
-    <product-list class="search__products" *ngIf="searchQuery" [initialFilters]="productListFilters"></product-list>
+    <product-list class="search__products"
+                  *ngIf="searchQuery"
+                  [initialFilters]="productListFilters"
+    ></product-list>
   </div>
 </div>
 

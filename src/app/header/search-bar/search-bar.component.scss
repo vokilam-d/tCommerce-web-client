@@ -67,11 +67,12 @@ $inputBorderColor: #ddd;
     font-size: 16px;
 
     @include respond-to($media_large) {
-      padding-top: 10px;
-      padding-bottom: 11px;
+      padding-top: 11px;
+      padding-bottom: 10px;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       border-right: none;
+      font-size: 14px;
     }
   }
 

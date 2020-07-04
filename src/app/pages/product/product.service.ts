@@ -12,14 +12,20 @@ import { ProductListResponseDto } from '../../shared/dtos/product-list-response.
 })
 export class ProductService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   fetchProduct(slug: string) {
     return this.http.get<ResponseDto<ProductDto>>(`${API_HOST}/api/v1/products/${slug}`);
   }
 
   fetchProductsByAutocomplete(query: string) {
-    return this.http.get<ProductListResponseDto>(`${API_HOST}/api/v1/products`, { params: { [SEARCH_QUERY_PARAM]: query } });
+    const params = {
+      [SEARCH_QUERY_PARAM]: query,
+      autocomplete: 'true'
+    };
+
+    return this.http.get<ProductListResponseDto>(`${API_HOST}/api/v1/products`, { params });
   }
 
   fetchProductsByFilters(spf: SortingPaginatingFilterDto) {

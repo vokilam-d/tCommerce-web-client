@@ -35,7 +35,7 @@ export class SearchPageComponent extends NgUnsubscribe implements OnInit {
   }
 
   private setListFilters() {
-    this.productListFilters = [{ id: 'name', valueId: this.searchQuery }];
+    this.productListFilters = [{ id: SEARCH_QUERY_PARAM, valueId: this.searchQuery }];
   }
 
   private setBreadcrumbs() {
