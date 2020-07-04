@@ -12,6 +12,7 @@ import axios from 'axios';
 import { ResponseDto } from './src/app/shared/dtos/response.dto';
 import { environment } from './src/environments/environment';
 import { API_HOST } from './src/app/shared/constants';
+import { RESPONSE } from '@nguniversal/express-engine/tokens';
 
 let pages: PageRegistryDto[] = [];
 
@@ -73,6 +74,10 @@ export function app() {
           {
             provide: APP_BASE_HREF,
             useValue: req.baseUrl
+          },
+          {
+            provide: RESPONSE,
+            useValue: res
           },
           {
             provide: PAGES_TOKEN,
