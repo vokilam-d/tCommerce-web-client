@@ -9,14 +9,11 @@ import { API_HOST } from '../../../shared/constants';
   styleUrls: ['./posts-preview.component.scss']
 })
 export class PostsPreviewComponent implements OnInit {
-  // Din'kin code
-  // posts: BlogPostListItemDto[];
-  //to fetch different categories
-  @Input() category: string
+  uploadedHost = API_HOST;
+
+  @Input() category: string;
   posts: BlogPostListItemDto[];
   title: string;
-
-  uploadedHost = API_HOST;
 
   constructor(private blogService: BlogService) { }
 
@@ -24,7 +21,6 @@ export class PostsPreviewComponent implements OnInit {
     this.fetchPosts();
   }
 
-  // Din'kin code
   // fetchPosts() {
   //   this.blogService.getLastPosts()
   //     .subscribe(response => this.posts = response.data);
