@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { HeadService } from '../../shared/services/head/head.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from '../../shared/services/customer/customer.service';
 import { finalize } from 'rxjs/operators';
 import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
+import { DeviceService } from '../../shared/services/device-detector/device.service';
 
 @Component({
   selector: 'confirm-email',
@@ -17,6 +18,7 @@ export class ConfirmEmailComponent implements OnInit {
   private token: string;
 
   constructor(private headService: HeadService,
+              private deviceService: DeviceService,
               private customerService: CustomerService,
               private router: Router,
               private route: ActivatedRoute) {
@@ -28,6 +30,9 @@ export class ConfirmEmailComponent implements OnInit {
       return;
     }
 
+    if (this.deviceService.isPlatformServer()) {
+      return;
+    }
     this.confirmEmail();
   }
 
