@@ -1,23 +1,24 @@
-a {
-  color: #313131;
-}
+@import "variables";
 
-a:hover {
-  color: #FCB800;
+a {
+  color: $dark;
+
+  &:hover {
+    color: $primary;
+  }
 }
 
 .posts {
-  max-width: 1020px;
   max-height: 700px;
   padding: 0;
-  margin: 0 auto;
 
   &__header {
+    margin-top: 60px;
     padding-bottom: 40px;
+    padding-left: 100px;
   }
 
   &__items {
-    max-width: 1020px;
     display: flex;
     justify-content: center;
   }
@@ -30,10 +31,10 @@ a:hover {
 }
 
 .post {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-sizing: border-box;
 
   &:last-of-type {
     margin-right: 0;
@@ -68,7 +69,7 @@ a:hover {
   &__date {
     margin-top: 20px;
     padding: 5px 15px 15px 15px;
-    color: #999999;
+    color: $grey;
     font-size: 14px;
   }
 }

@@ -1,5 +1,6 @@
-<div class="posts">
-  <h2 class="posts__header">Недавно добавленные статьи</h2>
+<div class="posts" [ngSwitch]="category">
+
+  <h2 class="posts__header"> {{ title }} </h2>
 
   <div class="posts__items">
 
@@ -24,8 +25,9 @@
       <div class="post__date">
         Добавлено: {{ post.publishedAt | date: 'd MMMM, y' }}
       </div>
-    </div>
+     </div>
 
   </div>
 
+</div>
 
