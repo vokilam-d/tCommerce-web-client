@@ -55,7 +55,10 @@ export function app() {
 
   server.get(`/robots.txt`, (req, res) => res.sendFile(join(distFolder, 'assets', 'robots.txt')));
 
-  server.get(`/api/*`, (req, res) => res.send(`Api is not supported`));
+  server.get(`/api/*`, (req, res) => {
+    console.log(`${new Date().toISOString()} - Got api request: ${req.url}`)
+    res.send(`API is not supported`);
+  });
 
   // All regular routes use the Universal engine
   let isPagesUpdateStarted: boolean = false;
@@ -99,6 +102,12 @@ function run() {
   server.listen(port, '0.0.0.0', () => {
     setInterval(() => Object.entries(process.memoryUsage()).forEach(item => console.log(`${item[0]}: ${(item[1] / 1024 / 1024).toFixed(4)} MB`)), 20000);
     console.log(`Node Express server listening on http://localhost:${port}`);
+
+    const log = () => {
+      Object.entries(process.memoryUsage()).forEach(item => console.log(`${item[0]}: ${(item[1] / 1024 / 1024).toFixed(4)} MB`));
+      setTimeout(() => log(), 60 * 60 * 1000);
+    }
+    log();
   });
 }
 
