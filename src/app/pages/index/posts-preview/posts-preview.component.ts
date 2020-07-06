@@ -9,11 +9,9 @@ import { API_HOST } from '../../../shared/constants';
   styleUrls: ['./posts-preview.component.scss']
 })
 export class PostsPreviewComponent implements OnInit {
-  uploadedHost = API_HOST;
-
   @Input() category: string;
   posts: BlogPostListItemDto[];
-  title: string;
+  uploadedHost = API_HOST;
 
   constructor(private blogService: BlogService) { }
 
@@ -21,30 +19,20 @@ export class PostsPreviewComponent implements OnInit {
     this.fetchPosts();
   }
 
-  // fetchPosts() {
-  //   this.blogService.getLastPosts()
-  //     .subscribe(response => this.posts = response.data);
-  // }
-
-  //to fetch different categories
   fetchPosts() {
 
     switch (this.category) {
       case 'lastWorks': {
         return this.blogService.getPostsList({categoryId: 3, limit: 3})
-          .subscribe(response => {
-            this.posts = response.data;
-            this.title = this.posts[0].category.name;
-          });
+          .subscribe(response => this.posts = response.data);
       }
+
       case 'lastPosts': {
-        return this.blogService.getPostsList({categoryId: 5, limit: 3})
-          .subscribe(response => {
-            this.posts = response.data;
-            this.title = this.posts[0].category.name;
-          });
+        return this.blogService.getLastPosts()
+          .subscribe(response => this.posts = response.data);
       }
     }
+
   }
 
 }

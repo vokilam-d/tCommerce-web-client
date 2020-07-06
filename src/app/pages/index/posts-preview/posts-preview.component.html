@@ -1,6 +1,7 @@
 <div class="posts" [ngSwitch]="category">
 
-  <h2 class="posts__header"> {{ title }} </h2>
+  <h2 class="posts__header" *ngSwitchCase="'lastPosts'">Последние статьи</h2>
+  <h2 class="posts__header" *ngSwitchCase="'lastWorks'">Мастер-классы и примеры работ</h2>
 
   <div class="posts__items">
 
