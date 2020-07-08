@@ -10,3 +10,6 @@ Disallow: /confirm-email
 Disallow: /*?*
 
 Allow: /*?gclid=*
+
+User-agent:       Googlebot-Image
+Disallow:
