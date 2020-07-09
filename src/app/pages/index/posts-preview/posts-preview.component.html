@@ -1,0 +1,35 @@
+<div class="posts" [ngSwitch]="category">
+
+  <h2 class="posts__header" *ngSwitchCase="'lastPosts'">Последние статьи</h2>
+  <h2 class="posts__header" *ngSwitchCase="'lastWorks'">Мастер-классы и примеры работ</h2>
+
+  <div class="posts__items">
+
+    <div class="posts__item post" *ngFor="let post of posts | slice:0:3">
+      <div class="post__container">
+        <a class="post__img" [routerLink]="['/', 'blog', post.slug]" [title]="post.name">
+          <img [src]="uploadedHost + post.featuredMedia.variantsUrls.original"
+               [alt]="post.featuredMedia.altText"
+          >
+        </a>
+
+        <div class="post__info">
+          <div class="post__category">
+            <a  class="post__link" [routerLink]="['/', 'blog', post.category.slug + '.html']" [title]="post.category.name">
+              {{ post.category.name }}
+            </a>
+          </div>
+          <h3 class="post__title">
+            <a [routerLink]="['/', 'blog', post.slug]" [title]="post.name">{{ post.name }}</a>
+          </h3>
+          <div class="post__date">
+            Добавлено: {{ post.publishedAt | date: 'd MMMM, y' }}
+          </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
