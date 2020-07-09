@@ -20,19 +20,15 @@ export class PostsPreviewComponent implements OnInit {
   }
 
   fetchPosts() {
-
     switch (this.category) {
-      case 'lastWorks': {
+      case 'lastWorks':
         return this.blogService.getPostsList({categoryId: 3, limit: 3})
           .subscribe(response => this.posts = response.data);
-      }
 
-      case 'lastPosts': {
+      case 'lastPosts':
         return this.blogService.getLastPosts()
           .subscribe(response => this.posts = response.data);
-      }
     }
-
   }
 
 }

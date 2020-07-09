@@ -1,4 +1,6 @@
 @import "variables";
+@import "mixins";
+$breakpoint: 700px;
 
 a {
   color: $dark;
@@ -9,51 +11,117 @@ a {
 }
 
 .posts {
-  max-height: 700px;
   padding: 0;
 
   &__header {
-    margin-top: 60px;
+    width: 100%;
+    margin-top: 50px;
     padding-bottom: 40px;
-    padding-left: 100px;
+
+    @include respond-to($media_max-content-width) {
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 50px;
+      padding-bottom: 40px;
+    }
   }
 
   &__items {
-    display: flex;
-    justify-content: center;
+    width: 100%;
+
+    @include respond-to($breakpoint) {
+      display: flex;
+      justify-content: center;
+    }
   }
 
   &__item {
-    width: 320px;
-    margin-right: 20px;
-    box-shadow: 0.5px 1px 3px 0 #e7e6e6;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    box-shadow: 0 0 5px 0 #e7e6e6;
+
+    &:hover {
+      box-shadow: 1px 1px 5px 0 #dbdbdb;
+      transition: box-shadow 0.15s ease-in;
     }
+
+    @include respond-to($breakpoint) {
+      width: 40%;
+      margin-right: 11px;
+      margin-bottom: 0;
+      padding: 0;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+
+    @include respond-to($media_max-content-width) {
+      width: 26%;
+    }
+  }
 }
 
 .post {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  &__container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 
-  &:last-of-type {
-    margin-right: 0;
+    @include respond-to($breakpoint) {
+      flex-direction: column;
+      justify-content: flex-start;
+      height: 100%;
+    }
   }
 
   &__img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    border-radius: 3px;
-    &:hover {
-      opacity: .9;
-      transition: opacity .15s ease-in;
+    width: 30%;
+
+    @include respond-to($breakpoint) {
+      width: 85%;
+      text-align: center;
+    }
+
+    img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 1px;
+
+      @include respond-to($breakpoint) {
+        height: 195px;
+        margin-top: 2px;
+        object-fit: cover;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  &__info {
+    width: 70%;
+    padding-left: 10px;
+
+    @include respond-to($breakpoint) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: flex-start;
+      width: 100%;
+      height: 100%;
+      padding: 0;
     }
   }
 
   &__category {
-    margin: 10px 0;
-    padding: 5px 15px;
+    margin-bottom: 15px;
+    padding: 0;
+
+    @include respond-to($breakpoint) {
+      margin: 10px 0;
+      padding: 5px 15px;
+    }
   }
 
   &__link {
@@ -61,16 +129,22 @@ a {
   }
 
   &__title {
-    font-size: 1.2rem;
+    font-size: 16px;
     font-weight: 500;
-    padding: 5px 15px;
+
+    @include respond-to($breakpoint) {
+      padding: 5px 15px;
+    }
   }
 
   &__date {
     margin-top: 20px;
-    padding: 5px 15px 15px 15px;
     color: $grey;
     font-size: 14px;
+
+    @include respond-to($breakpoint) {
+      padding: 5px 15px 15px 15px;
+    }
   }
 }
 
