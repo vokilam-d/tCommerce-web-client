@@ -127,7 +127,9 @@ export class RelatedProductsComponent extends NgUnsubscribe implements OnInit {
 
   private setSizes() {
     const containerWidth = this.itemsContainerRef.nativeElement.parentElement.clientWidth;
-    this.itemWidth = containerWidth / 2;
+
+    this.itemWidth = containerWidth / this.itemsToShow;
+
     this.itemRef.forEach(itemRef => itemRef.nativeElement.style.width = `${this.itemWidth}px`);
   }
 

@@ -127,7 +127,7 @@ $breakpoint: 700px;
 
   &__title {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
 
     @include respond-to($breakpoint) {
       padding: 5px 15px;
@@ -135,11 +135,12 @@ $breakpoint: 700px;
   }
 
   &__date {
-    margin-top: 7px;
+    margin-top: 15px;
     color: $grey;
     font-size: 12px;
 
     @include respond-to($breakpoint) {
+      margin-top: 7px;
       padding: 5px 15px 15px 15px;
     }
   }
