@@ -153,5 +153,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
     localStorage.setItem('recentlyViewedProducts', JSON.stringify(recentlyViewedProducts));
   }
 
+  getRelatedProductsIds(): number[] {
+    return this.product.relatedProducts.map(p => p.productId);
+  }
+
 }
 

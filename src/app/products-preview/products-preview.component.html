@@ -1,9 +1,9 @@
-<div class="container" [ngSwitch]="productsTypeToDisplay">
+<div class="container" *ngIf="ids?.length" [ngSwitch]="type">
 
   <h3 class="related__title" *ngSwitchCase="'linkedProducts'">Сопутствующие товары</h3>
   <h3 class="related__title" *ngSwitchCase="'recentlyViewedProducts'">Недавно просмотренные товары</h3>
 
-  <div class="related" *ngIf="productsTypeToDisplay?.length">
+  <div class="related">
 
     <div class="related__carousel carousel">
     <button class="carousel__arrow carousel__arrow--prev" *ngIf="isArrowVisible()" (click)="prev()">

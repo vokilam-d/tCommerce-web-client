@@ -124,7 +124,7 @@
 
     <product-details class="product__details" [product]="product"></product-details>
 
-    <products-preview class="product__related" [linkedProducts]="product.relatedProducts" [productsTypeToDisplay]="'linkedProducts'"></products-preview>
+    <products-preview class="product__related" [ids]="getRelatedProductsIds()" [type]="'linkedProducts'"></products-preview>
   </ng-container>
 
 </div>

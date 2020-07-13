@@ -19,7 +19,6 @@ import { isPlatformBrowser } from '@angular/common';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
 import { fromEvent } from 'rxjs';
 import { DeviceService } from '../shared/services/device-detector/device.service';
-import { InvalidatingEntryPointManifest } from '@angular/compiler-cli/ngcc/src/packages/entry_point_manifest';
 
 @Component({
   selector: 'products-preview',
@@ -34,9 +33,8 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements OnInit {
   private activeItemIdx: number = 0;
   private itemsToShow: number = this.device.isMobile() ? 2 : 4;
 
-  @Input() linkedProducts: LinkedProductDto[];
-  @Input() recentlyViewedProducts: Array<number>;
-  @Input() productsTypeToDisplay: string;
+  @Input() ids: number[];
+  @Input() type: string;
   @ViewChild('itemsContainerRef') itemsContainerRef: ElementRef;
   @ViewChildren('itemRef') itemRef: QueryList<ElementRef>;
 
@@ -52,20 +50,10 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements OnInit {
   }
 
   private fetchItems() {
+    if (!this.ids?.length || !isPlatformBrowser(this.platformId)) { return; }
 
     const spf = new SortingPaginatingFilterDto();
-
-    if (this.productsTypeToDisplay === 'linkedProducts') {
-      if (!this.linkedProducts?.length || !isPlatformBrowser(this.platformId)) { return; }
-
-      spf.id = this.linkedProducts.map(p => p.productId);
-    }
-
-    if (this.productsTypeToDisplay === 'recentlyViewedProducts') {
-      if (!this.recentlyViewedProducts?.length || !isPlatformBrowser(this.platformId)) { return; }
-
-      spf.id = this.recentlyViewedProducts.map(id => id);
-    }
+    spf.id = this.ids;
 
     this.isLoading = true;
     this.productService.fetchProductsByFilters(spf)
@@ -113,19 +101,9 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements OnInit {
   }
 
   private setItems(items: ProductListItemDto[]) {
-    let idsArr;
-
-    if (this.productsTypeToDisplay === 'linkedProducts') {
-      idsArr = this.linkedProducts.map(p => p.productId);
-    }
-
-    if (this.productsTypeToDisplay === 'recentlyViewedProducts') {
-      idsArr = this.recentlyViewedProducts.map(id => id);
-    }
-
     this.items = items.sort((a, b) => {
-      const indexOfA = idsArr.indexOf(a.productId);
-      const indexOfB = idsArr.indexOf(b.productId);
+      const indexOfA = this.ids.indexOf(a.productId);
+      const indexOfB = this.ids.indexOf(b.productId);
 
       if (indexOfA > indexOfB) {
         return 1;
