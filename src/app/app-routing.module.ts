@@ -55,6 +55,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/info-pages/policy/policy.module').then(m => m.PolicyModule)
   },
   {
+    path: 'pg-gilding-tools-and-materials',
+    loadChildren: () => import('./pages/info-pages/pg/pg.module').then(m => m.PgModule)
+  },
+  {
     path: 'otzyvy',
     loadChildren: () => import('./pages/store-reviews/store-reviews.module').then(m => m.StoreReviewsModule)
   },
