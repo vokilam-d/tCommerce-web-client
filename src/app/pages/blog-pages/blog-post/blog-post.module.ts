@@ -8,6 +8,7 @@ import { BreadcrumbsModule } from '../../../breadcrumbs/breadcrumbs.module';
 import { BlogToolbarModule } from '../../../blog-toolbar/blog-toolbar.module';
 import { FooterModule } from '../../../footer/footer.module';
 import { MediaGalleryModule } from '../../../media-gallery/media-gallery.module';
+import { RecentlyViewedProductsModule } from '../../../recently-viewed-products/recently-viewed-products.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { MediaGalleryModule } from '../../../media-gallery/media-gallery.module'
     BreadcrumbsModule,
     BlogToolbarModule,
     FooterModule,
-    MediaGalleryModule
+    MediaGalleryModule,
+    RecentlyViewedProductsModule
   ]
 })
 export class BlogPostModule { }

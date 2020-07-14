@@ -8,6 +8,7 @@ import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { FooterModule } from '../../footer/footer.module';
 import { AddReviewModalModule } from '../../add-review-modal/add-review-modal.module';
 import { ReviewModule } from '../../review/review.module';
+import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ReviewModule } from '../../review/review.module';
     BreadcrumbsModule,
     FooterModule,
     AddReviewModalModule,
-    ReviewModule
+    ReviewModule,
+    RecentlyViewedProductsModule
   ]
 })
 export class StoreReviewsModule { }

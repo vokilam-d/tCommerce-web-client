@@ -6,6 +6,7 @@ import { NotFoundComponent } from './not-found.component';
 import { HeaderModule } from '../../header/header.module';
 import { FooterModule } from '../../footer/footer.module';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
+import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
 
 @NgModule({
   declarations: [NotFoundComponent],
@@ -14,7 +15,8 @@ import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
     NotFoundRoutingModule,
     HeaderModule,
     FooterModule,
-    BreadcrumbsModule
+    BreadcrumbsModule,
+    RecentlyViewedProductsModule
   ]
 })
 export class NotFoundModule { }

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecentlyViewedProductsComponent implements OnInit {
 
-  recentlyViewedProducts: Array<number>;
+  recentlyViewedProducts: number[];
 
   constructor() { }
 

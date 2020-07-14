@@ -10,7 +10,6 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import { LinkedProductDto } from '../shared/dtos/linked-product.dto';
 import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
 import { ProductService } from '../pages/product/product.service';
 import { SortingPaginatingFilterDto } from '../shared/dtos/spf.dto';

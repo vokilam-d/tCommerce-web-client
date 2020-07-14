@@ -15,6 +15,7 @@ import { MediaGalleryModalModule } from '../../media-gallery-modal/media-gallery
 import { SharedModule } from '../../shared/shared.module';
 import { ProductsPreviewModule } from '../../products-preview/products-preview.module';
 import { ReviewModule } from '../../review/review.module';
+import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
 
 @NgModule({
   declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent],
@@ -30,7 +31,8 @@ import { ReviewModule } from '../../review/review.module';
     AddReviewModalModule,
     MediaGalleryModalModule,
     ProductsPreviewModule,
-    ReviewModule
+    ReviewModule,
+    RecentlyViewedProductsModule
   ]
 })
 export class ProductModule { }
