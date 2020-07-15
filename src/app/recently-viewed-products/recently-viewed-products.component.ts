@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../pages/product/product.service';
+import { DeviceService } from '../shared/services/device-detector/device.service';
 
 @Component({
   selector: 'recently-viewed-products',
@@ -10,10 +11,14 @@ export class RecentlyViewedProductsComponent implements OnInit {
 
   recentlyViewedProducts: number[];
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+              private deviceService: DeviceService
+  ) { }
 
   ngOnInit(): void {
-    this.recentlyViewedProducts = this.productService.getViewedProductsFromLocalStorage();
+    if (this.deviceService.isPlatformBrowser()) {
+      this.recentlyViewedProducts = this.productService.getViewedProductsFromLocalStorage();
+    }
   }
 
 }

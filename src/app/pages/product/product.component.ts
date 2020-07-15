@@ -12,6 +12,7 @@ import { finalize } from 'rxjs/operators';
 import { FlyToCartDirective } from '../../shared/directives/fly-to-cart.directive';
 import { QuantityControlComponent } from '../../shared/quantity-control/quantity-control.component';
 import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
+import { DeviceService } from '../../shared/services/device-detector/device.service';
 
 @Component({
   selector: 'product',
@@ -38,8 +39,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
               private customerService: CustomerService,
               private sanitizer: DomSanitizer,
               private wishlistService: WishlistService,
-              private productService: ProductService) {
-  }
+              private productService: ProductService,
+              private deviceService: DeviceService
+  ) { }
 
   ngOnInit() {
     this.isReviewFromEmail = JSON.parse(this.route.snapshot.queryParamMap.get('review-from-email'));
@@ -67,7 +69,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.setMeta();
         this.handleReviewFromEmail();
         this.handleUrlReviewsFragment();
-        this.productService.addViewedProductIdToLocalStorage(this.product.productId);
+        this.handleRecentlyViewedProducts();
       },
       error => this.fetchError = error.error?.message || DEFAULT_ERROR_TEXT
     );
@@ -141,6 +143,12 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   getRelatedProductsIds(): number[] {
     return this.product.relatedProducts.map(p => p.productId);
+  }
+
+  private handleRecentlyViewedProducts() {
+    if (this.deviceService.isPlatformBrowser()) {
+      this.productService.addViewedProductIdToLocalStorage(this.product.productId);
+    }
   }
 
 }
