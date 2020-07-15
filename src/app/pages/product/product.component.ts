@@ -67,7 +67,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.setMeta();
         this.handleReviewFromEmail();
         this.handleUrlReviewsFragment();
-        this.addProductIdToLocalStorage();
+        this.productService.addViewedProductIdToLocalStorage(this.product.productId);
       },
       error => this.fetchError = error.error?.message || DEFAULT_ERROR_TEXT
     );
@@ -137,20 +137,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.needToShowReviews = false;
 
     this.scrollToReviews();
-  }
-
-  addProductIdToLocalStorage() {
-    let recentlyViewedProducts: any[] = localStorage.getItem('recentlyViewedProducts')
-      ? JSON.parse(localStorage.getItem('recentlyViewedProducts')) : [];
-
-    if (recentlyViewedProducts.length >= 30) {
-      recentlyViewedProducts.pop();
-    }
-
-    recentlyViewedProducts.unshift(this.product.productId);
-
-    recentlyViewedProducts = [...new Set(recentlyViewedProducts)];
-    localStorage.setItem('recentlyViewedProducts', JSON.stringify(recentlyViewedProducts));
   }
 
   getRelatedProductsIds(): number[] {

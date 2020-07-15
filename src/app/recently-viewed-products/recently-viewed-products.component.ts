@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../pages/product/product.service';
 
 @Component({
   selector: 'recently-viewed-products',
@@ -9,14 +10,10 @@ export class RecentlyViewedProductsComponent implements OnInit {
 
   recentlyViewedProducts: number[];
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.getProductsFromLocalStorage();
-  }
-
-  getProductsFromLocalStorage() {
-    this.recentlyViewedProducts = JSON.parse(localStorage.getItem('recentlyViewedProducts'));
+    this.recentlyViewedProducts = this.productService.getViewedProductsFromLocalStorage();
   }
 
 }
