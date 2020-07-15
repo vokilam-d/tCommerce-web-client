@@ -12,7 +12,6 @@ import { ProductListResponseDto } from '../../shared/dtos/product-list-response.
 })
 export class ProductService {
 
-  recentlyViewedProducts = viewedProductsIdsKey;
   maxViewedProductsArrLength = 30;
 
   constructor(private http: HttpClient) {
@@ -36,8 +35,8 @@ export class ProductService {
   }
 
   addViewedProductIdToLocalStorage(productId: number) {
-    let recentlyViewedProducts: any[] = localStorage.getItem(this.recentlyViewedProducts)
-      ? JSON.parse(localStorage.getItem(this.recentlyViewedProducts)) : [];
+    let recentlyViewedProducts: any[] = localStorage.getItem(viewedProductsIdsKey)
+      ? JSON.parse(localStorage.getItem(viewedProductsIdsKey)) : [];
 
     if (recentlyViewedProducts.length >= this.maxViewedProductsArrLength) {
       recentlyViewedProducts.pop();
@@ -46,12 +45,11 @@ export class ProductService {
     recentlyViewedProducts.unshift(productId);
 
     recentlyViewedProducts = [...new Set(recentlyViewedProducts)];
-    localStorage.setItem(this.recentlyViewedProducts, JSON.stringify(recentlyViewedProducts));
+    localStorage.setItem(viewedProductsIdsKey, JSON.stringify(recentlyViewedProducts));
   }
 
   getViewedProductsFromLocalStorage() {
-    return JSON.parse(localStorage.getItem(this.recentlyViewedProducts));
+    return JSON.parse(localStorage.getItem(viewedProductsIdsKey));
   }
-
 
 }
