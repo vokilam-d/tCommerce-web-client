@@ -13,8 +13,9 @@ import { FormsModule } from '@angular/forms';
 import { AddReviewModalModule } from '../../add-review-modal/add-review-modal.module';
 import { MediaGalleryModalModule } from '../../media-gallery-modal/media-gallery-modal.module';
 import { SharedModule } from '../../shared/shared.module';
-import { RelatedProductsModule } from '../../related-products/related-products.module';
+import { ProductsPreviewModule } from '../../products-preview/products-preview.module';
 import { ReviewModule } from '../../review/review.module';
+import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
 
 @NgModule({
   declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent],
@@ -29,8 +30,9 @@ import { ReviewModule } from '../../review/review.module';
     FormsModule,
     AddReviewModalModule,
     MediaGalleryModalModule,
-    RelatedProductsModule,
-    ReviewModule
+    ProductsPreviewModule,
+    ReviewModule,
+    RecentlyViewedProductsModule
   ]
 })
 export class ProductModule { }

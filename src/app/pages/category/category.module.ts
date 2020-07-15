@@ -7,6 +7,7 @@ import { FooterModule } from '../../footer/footer.module';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { ProductListModule } from '../../product-list/product-list.module';
+import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
 
 @NgModule({
   declarations: [CategoryComponent],
@@ -16,7 +17,8 @@ import { ProductListModule } from '../../product-list/product-list.module';
     FooterModule,
     CommonModule,
     BreadcrumbsModule,
-    ProductListModule
+    ProductListModule,
+    RecentlyViewedProductsModule
   ]
 })
 export class CategoryModule { }

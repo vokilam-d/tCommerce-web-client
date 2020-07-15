@@ -67,6 +67,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.setMeta();
         this.handleReviewFromEmail();
         this.handleUrlReviewsFragment();
+        this.productService.addViewedProductIdToLocalStorage(this.product.productId);
       },
       error => this.fetchError = error.error?.message || DEFAULT_ERROR_TEXT
     );
@@ -137,4 +138,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
     this.scrollToReviews();
   }
+
+  getRelatedProductsIds(): number[] {
+    return this.product.relatedProducts.map(p => p.productId);
+  }
+
 }
+

@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RelatedProductsComponent } from './related-products.component';
+import { ProductsPreviewComponent } from './products-preview.component';
 import { ProductListItemModule } from '../product-list-item/product-list-item.module';
 import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
-  declarations: [RelatedProductsComponent],
+  declarations: [ProductsPreviewComponent],
   imports: [
     CommonModule,
     ProductListItemModule,
     SharedModule
   ],
-  exports: [RelatedProductsComponent]
+  exports: [ProductsPreviewComponent]
 })
-export class RelatedProductsModule { }
+export class ProductsPreviewModule { }

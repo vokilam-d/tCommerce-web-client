@@ -7,6 +7,7 @@ import { HeaderModule } from '../../header/header.module';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { FooterModule } from '../../footer/footer.module';
 import { CartModule } from '../../cart/cart.module';
+import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { CartModule } from '../../cart/cart.module';
     HeaderModule,
     BreadcrumbsModule,
     FooterModule,
-    CartModule
+    CartModule,
+    RecentlyViewedProductsModule
   ]
 })
 export class CartPageModule { }

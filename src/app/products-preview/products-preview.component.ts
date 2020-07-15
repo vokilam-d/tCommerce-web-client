@@ -10,7 +10,6 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import { LinkedProductDto } from '../shared/dtos/linked-product.dto';
 import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
 import { ProductService } from '../pages/product/product.service';
 import { SortingPaginatingFilterDto } from '../shared/dtos/spf.dto';
@@ -21,11 +20,11 @@ import { fromEvent } from 'rxjs';
 import { DeviceService } from '../shared/services/device-detector/device.service';
 
 @Component({
-  selector: 'related-products',
-  templateUrl: './related-products.component.html',
-  styleUrls: ['./related-products.component.scss']
+  selector: 'products-preview',
+  templateUrl: './products-preview.component.html',
+  styleUrls: ['./products-preview.component.scss']
 })
-export class RelatedProductsComponent extends NgUnsubscribe implements OnInit {
+export class ProductsPreviewComponent extends NgUnsubscribe implements OnInit {
 
   items: ProductListItemDto[] = [];
   isLoading: boolean = false;
@@ -33,7 +32,8 @@ export class RelatedProductsComponent extends NgUnsubscribe implements OnInit {
   private activeItemIdx: number = 0;
   private itemsToShow: number = this.device.isMobile() ? 2 : 4;
 
-  @Input() linkedProducts: LinkedProductDto[];
+  @Input() ids: number[];
+  @Input() type: string;
   @ViewChild('itemsContainerRef') itemsContainerRef: ElementRef;
   @ViewChildren('itemRef') itemRef: QueryList<ElementRef>;
 
@@ -49,10 +49,10 @@ export class RelatedProductsComponent extends NgUnsubscribe implements OnInit {
   }
 
   private fetchItems() {
-    if (!this.linkedProducts?.length || !isPlatformBrowser(this.platformId)) { return; }
+    if (!this.ids?.length || !isPlatformBrowser(this.platformId)) { return; }
 
     const spf = new SortingPaginatingFilterDto();
-    spf.id = this.linkedProducts.map(p => p.productId);
+    spf.id = this.ids;
 
     this.isLoading = true;
     this.productService.fetchProductsByFilters(spf)
@@ -100,11 +100,9 @@ export class RelatedProductsComponent extends NgUnsubscribe implements OnInit {
   }
 
   private setItems(items: ProductListItemDto[]) {
-    const idsArr = this.linkedProducts.map(p => p.productId);
-
     this.items = items.sort((a, b) => {
-      const indexOfA = idsArr.indexOf(a.productId);
-      const indexOfB = idsArr.indexOf(b.productId);
+      const indexOfA = this.ids.indexOf(a.productId);
+      const indexOfB = this.ids.indexOf(b.productId);
 
       if (indexOfA > indexOfB) {
         return 1;

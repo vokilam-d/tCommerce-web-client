@@ -6,6 +6,7 @@ import { RepaymentsComponent } from './repayments.component';
 import { HeaderModule } from '../../../header/header.module';
 import { BreadcrumbsModule } from '../../../breadcrumbs/breadcrumbs.module';
 import { FooterModule } from '../../../footer/footer.module';
+import { RecentlyViewedProductsModule } from '../../../recently-viewed-products/recently-viewed-products.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FooterModule } from '../../../footer/footer.module';
     RepaymentsRoutingModule,
     HeaderModule,
     BreadcrumbsModule,
-    FooterModule
+    FooterModule,
+    RecentlyViewedProductsModule
   ]
 })
 export class RepaymentsModule { }
