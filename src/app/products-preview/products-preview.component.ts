@@ -17,7 +17,7 @@ import { debounceTime, finalize, takeUntil } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
 import { fromEvent } from 'rxjs';
-import { DeviceService } from '../shared/services/device-detector/device.service';
+import { DeviceService } from '../services/device-detector/device.service';
 
 @Component({
   selector: 'products-preview',

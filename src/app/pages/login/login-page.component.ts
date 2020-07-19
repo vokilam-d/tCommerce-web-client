@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerDto } from '../../shared/dtos/customer.dto';
 import { Router } from '@angular/router';
-import { CustomerService } from '../../shared/services/customer/customer.service';
-import { HeadService } from '../../shared/services/head/head.service';
+import { CustomerService } from '../../services/customer/customer.service';
+import { HeadService } from '../../services/head/head.service';
 
 @Component({
   selector: 'login-page',

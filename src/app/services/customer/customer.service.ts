@@ -1,21 +1,21 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { CustomerDto, UpdateCustomerDto, UpdatePasswordDto } from '../../dtos/customer.dto';
+import { CustomerDto, UpdateCustomerDto, UpdatePasswordDto } from '../../shared/dtos/customer.dto';
 import { HttpClient } from '@angular/common/http';
-import { ResponseDto } from '../../dtos/response.dto';
-import { LoginDto } from '../../dtos/login.dto';
-import { RegisterDto } from '../../dtos/registration.dto';
-import { InitResetPasswordDto } from '../../dtos/init-reset-password.dto';
-import { ShipmentAddressDto } from '../../dtos/shipment-address.dto';
+import { ResponseDto } from '../../shared/dtos/response.dto';
+import { LoginDto } from '../../shared/dtos/login.dto';
+import { RegisterDto } from '../../shared/dtos/registration.dto';
+import { InitResetPasswordDto } from '../../shared/dtos/init-reset-password.dto';
+import { ShipmentAddressDto } from '../../shared/dtos/shipment-address.dto';
 import { map, tap } from 'rxjs/operators';
-import { CreateOrUpdateOrderItemDto, OrderItemDto } from '../../dtos/order-item.dto';
-import { ProductDto } from '../../dtos/product.dto';
-import { ProductListItemDto } from '../../dtos/product-list-item.dto';
+import { CreateOrUpdateOrderItemDto, OrderItemDto } from '../../shared/dtos/order-item.dto';
+import { ProductDto } from '../../shared/dtos/product.dto';
+import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
 import { isPlatformBrowser } from '@angular/common';
-import { API_HOST } from '../../constants';
-import { ResetPasswordDto } from '../../dtos/reset-password.dto';
-import { OrderDto } from '../../dtos/order.dto';
+import { API_HOST } from '../../shared/constants';
+import { ResetPasswordDto } from '../../shared/dtos/reset-password.dto';
+import { OrderDto } from '../../shared/dtos/order.dto';
 
 @Injectable({
   providedIn: 'root'

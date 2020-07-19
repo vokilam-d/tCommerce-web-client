@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from '../../shared/services/customer/customer.service';
+import { CustomerService } from '../../services/customer/customer.service';
 
 @Component({
   selector: 'mini-cart',

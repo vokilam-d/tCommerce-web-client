@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { API_HOST } from '../../constants';
-import { StreetDto } from '../../dtos/street.dto';
-import { SettlementDto } from '../../dtos/settlement.dto';
-import { ResponseDto } from '../../dtos/response.dto';
-import { WarehouseDto } from '../../dtos/warehouse.dto';
+import { API_HOST } from '../../shared/constants';
+import { StreetDto } from '../../shared/dtos/street.dto';
+import { SettlementDto } from '../../shared/dtos/settlement.dto';
+import { ResponseDto } from '../../shared/dtos/response.dto';
+import { WarehouseDto } from '../../shared/dtos/warehouse.dto';
 
 @Injectable({
   providedIn: 'root'

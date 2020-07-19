@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { PaymentMethodDto } from '../../shared/dtos/payment-method.dto';
 import { HttpClient } from '@angular/common/http';
 import { AddOrderDto, OrderDto } from '../../shared/dtos/order.dto';
-import { CustomerService } from '../../shared/services/customer/customer.service';
+import { CustomerService } from '../../services/customer/customer.service';
 import { tap } from 'rxjs/operators';
 import { ResponseDto } from '../../shared/dtos/response.dto';
 import { API_HOST } from '../../shared/constants';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogService } from '../../../shared/services/blog/blog.service';
-import { HeadService } from '../../../shared/services/head/head.service';
+import { BlogService } from '../../../services/blog/blog.service';
+import { HeadService } from '../../../services/head/head.service';
 import { ActivatedRoute } from '@angular/router';
 import { BlogCategoryDto } from '../../../shared/dtos/blog-category.dto';
 import { IBreadcrumb } from '../../../breadcrumbs/breadcrumbs.interface';

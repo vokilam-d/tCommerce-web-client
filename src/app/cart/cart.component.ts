@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { CustomerService } from '../shared/services/customer/customer.service';
+import { CustomerService } from '../services/customer/customer.service';
 import { QuantityControlComponent } from '../shared/quantity-control/quantity-control.component';
 import { OrderItemDto } from '../shared/dtos/order-item.dto';
 import { finalize } from 'rxjs/operators';

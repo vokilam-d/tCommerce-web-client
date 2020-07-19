@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { OrderDto } from '../../shared/dtos/order.dto';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { API_HOST, DEFAULT_ERROR_TEXT } from '../../shared/constants';
-import { HeadService } from '../../shared/services/head/head.service';
+import { HeadService } from '../../services/head/head.service';
 import { OrderService } from '../checkout/order.service';
 
 declare const Wayforpay: any;

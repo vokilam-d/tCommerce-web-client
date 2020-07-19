@@ -1,11 +1,11 @@
 import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, QueryList, Renderer2, ViewChildren } from '@angular/core';
-import { CustomerService } from '../../shared/services/customer/customer.service';
+import { CustomerService } from '../../services/customer/customer.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
-import { HeadService } from '../../shared/services/head/head.service';
+import { HeadService } from '../../services/head/head.service';
 import { CustomerDto } from '../../shared/dtos/customer.dto';
 
 type ChildRoute = { link: string; label: string };

@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IBreadcrumb } from './breadcrumbs.interface';
-import { JsonLdService } from '../shared/services/json-ld/json-ld.service';
+import { JsonLdService } from '../services/json-ld/json-ld.service';
 import { SafeHtml } from '@angular/platform-browser';
 
 @Component({

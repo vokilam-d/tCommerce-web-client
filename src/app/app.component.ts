@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
-import { JsonLdService } from './shared/services/json-ld/json-ld.service';
+import { JsonLdService } from './services/json-ld/json-ld.service';
 
 @Component({
   selector: 'app-root',

@@ -6,7 +6,7 @@ import { CategoryDto } from '../../shared/dtos/category.dto';
 import { ProductService } from '../product/product.service';
 import { ISelectedFilter } from '../../product-list/filter/selected-filter.interface';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { HeadService } from '../../shared/services/head/head.service';
+import { HeadService } from '../../services/head/head.service';
 import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
 
 @Component({

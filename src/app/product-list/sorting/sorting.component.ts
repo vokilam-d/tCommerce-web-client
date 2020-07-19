@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { takeUntil } from 'rxjs/operators';
-import { UrlService } from '../../shared/services/url/url.service';
+import { UrlService } from '../../services/url/url.service';
 
 enum ESort {
   Popularity = 'popularity',

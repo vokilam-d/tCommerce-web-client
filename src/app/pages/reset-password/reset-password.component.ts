@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CustomerService } from '../../shared/services/customer/customer.service';
+import { CustomerService } from '../../services/customer/customer.service';
 import { DEFAULT_ERROR_TEXT, validPasswordRegex } from '../../shared/constants';
 import { CustomValidators } from '../../shared/classes/validators';
 import { finalize } from 'rxjs/operators';
 import { ResetPasswordDto } from '../../shared/dtos/reset-password.dto';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HeadService } from '../../shared/services/head/head.service';
+import { HeadService } from '../../services/head/head.service';
 
 @Component({
   selector: 'reset-password',

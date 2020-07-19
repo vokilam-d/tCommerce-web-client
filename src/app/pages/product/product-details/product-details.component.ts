@@ -2,15 +2,15 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ProductDto } from '../../../shared/dtos/product.dto';
 import { HttpClient } from '@angular/common/http';
 import { KeyValue } from '@angular/common';
-import { ScrollToService } from '../../../shared/services/scroll-to/scroll-to.service';
+import { ScrollToService } from '../../../services/scroll-to/scroll-to.service';
 import { ProductReviewService } from '../product-review.service';
 import { AddProductReviewDto, ProductReviewDto } from '../../../shared/dtos/product-review.dto';
-import { JsonLdService } from '../../../shared/services/json-ld/json-ld.service';
+import { JsonLdService } from '../../../services/json-ld/json-ld.service';
 import { SafeHtml } from '@angular/platform-browser';
 import { AddReviewModalComponent, IAddReviewFormValue } from '../../../add-review-modal/add-review-modal.component';
 import { API_HOST, DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { NotyService } from '../../../noty/noty.service';
-import { DeviceService } from '../../../shared/services/device-detector/device.service';
+import { DeviceService } from '../../../services/device-detector/device.service';
 
 @Component({
   selector: 'product-details',

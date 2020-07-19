@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { BlogPostListItemDto } from '../shared/dtos/blog-post-list-item.dto';
-import { BlogService } from '../shared/services/blog/blog.service';
+import { BlogService } from '../services/blog/blog.service';
 import { API_HOST, DEFAULT_ERROR_TEXT } from '../shared/constants';
 import { finalize } from 'rxjs/operators';
 import { PaginationComponent } from '../pagination/pagination.component';
-import { ScrollToService } from '../shared/services/scroll-to/scroll-to.service';
-import { JsonLdService } from '../shared/services/json-ld/json-ld.service';
+import { ScrollToService } from '../services/scroll-to/scroll-to.service';
+import { JsonLdService } from '../services/json-ld/json-ld.service';
 import { SafeHtml } from '@angular/platform-browser';
 
 @Component({

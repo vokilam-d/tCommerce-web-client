@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ResponseDto } from '../../dtos/response.dto';
-import { API_HOST } from '../../constants';
-import { AddStoreReviewDto, StoreReviewDto } from '../../dtos/store-review.dto';
+import { ResponseDto } from '../../shared/dtos/response.dto';
+import { API_HOST } from '../../shared/constants';
+import { AddStoreReviewDto, StoreReviewDto } from '../../shared/dtos/store-review.dto';
 
 @Injectable({
   providedIn: 'root'

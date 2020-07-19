@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { JsonLdService } from '../../../shared/services/json-ld/json-ld.service';
+import { JsonLdService } from '../../../services/json-ld/json-ld.service';
 import { BlogPostDto } from '../../../shared/dtos/blog-post.dto';
-import { BlogService } from '../../../shared/services/blog/blog.service';
-import { HeadService, IOgTags } from '../../../shared/services/head/head.service';
+import { BlogService } from '../../../services/blog/blog.service';
+import { HeadService, IOgTags } from '../../../services/head/head.service';
 import { IBreadcrumb } from '../../../breadcrumbs/breadcrumbs.interface';
 import { ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/operators';

@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { HeadService } from '../../shared/services/head/head.service';
+import { HeadService } from '../../services/head/head.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CustomerService } from '../../shared/services/customer/customer.service';
+import { CustomerService } from '../../services/customer/customer.service';
 import { finalize } from 'rxjs/operators';
 import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
-import { DeviceService } from '../../shared/services/device-detector/device.service';
+import { DeviceService } from '../../services/device-detector/device.service';
 
 @Component({
   selector: 'confirm-email',

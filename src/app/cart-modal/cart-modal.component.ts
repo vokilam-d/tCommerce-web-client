@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { CustomerService } from '../shared/services/customer/customer.service';
+import { CustomerService } from '../services/customer/customer.service';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
