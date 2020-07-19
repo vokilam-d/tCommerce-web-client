@@ -18,10 +18,19 @@ export class NotFoundComponent implements OnInit {
 
   constructor(private headService: HeadService,
               private deviceService: DeviceService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private urlService: UrlService,
               @Optional() @Inject(RESPONSE) private res: Response) {
   }
 
   ngOnInit() {
+    const autoReloadField = 'isAutoReload';
+    if (this.deviceService.isPlatformBrowser() && !window.history.state[autoReloadField]) {
+      this.router.navigate(this.route.snapshot.url, { state: { [autoReloadField]: true } }); // workaround for route matching before router reset on APP_INIT
+      return;
+    }
+
     this.setMeta();
     if (this.deviceService.isPlatformServer()) {
       this.res.status(404);
