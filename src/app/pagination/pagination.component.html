@@ -1,3 +1,8 @@
+<button class="load-more-btn" (click)="loadMoreItems()">
+  <img class="load-more-btn__img" src="/assets/images/refresh-btn.svg" alt="refresh button">
+  Загрузить еще 36 товаров
+</button>
+
 <div class="pagination">
 <!--  <button class="pagination__load-next" (click)="loadNextItems()" type="button"></button>-->
 
@@ -12,7 +17,7 @@
     <ul class="pagination__pages">
       <li class="pagination__page"
           [class.pagination__page--active]="1 === activePage && pagesTotal > 1"
-          (click)="selectPage(1)"
+          (click)="selectPage(1, false)"
       >
         1
       </li>
@@ -24,7 +29,7 @@
       <li class="pagination__page"
           *ngFor="let page of pages"
           [class.pagination__page--active]="page === activePage"
-          (click)="selectPage(page)"
+          (click)="selectPage(page, false)"
       >
         {{ page }}
       </li>
@@ -36,7 +41,7 @@
       <li class="pagination__page"
           *ngIf="pagesTotal > 1"
           [class.pagination__page--active]="pagesTotal === activePage"
-          (click)="selectPage(pagesTotal)"
+          (click)="selectPage(pagesTotal, false)"
       >
         {{ pagesTotal }}
       </li>

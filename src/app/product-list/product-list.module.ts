@@ -23,7 +23,7 @@ import { SharedModule } from '../shared/shared.module';
     PaginationModule,
     ReactiveFormsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
   ],
   exports: [ProductListComponent]
 })
