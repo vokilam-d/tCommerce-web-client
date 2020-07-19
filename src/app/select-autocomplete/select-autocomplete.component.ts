@@ -15,7 +15,7 @@ import { fromEvent, Observable, of } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ResponseDto } from '../shared/dtos/response.dto';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
-import { AddressService } from '../shared/services/address/address.service';
+import { AddressService } from '../services/address/address.service';
 import { StreetDto } from '../shared/dtos/street.dto';
 import { DEFAULT_ERROR_TEXT } from '../shared/constants';
 import { SettlementDto } from '../shared/dtos/settlement.dto';

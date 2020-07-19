@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../pages/product/product.service';
-import { DeviceService } from '../shared/services/device-detector/device.service';
+import { DeviceService } from '../services/device-detector/device.service';
 
 @Component({
   selector: 'recently-viewed-products',

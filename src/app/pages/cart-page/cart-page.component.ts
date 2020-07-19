@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
-import { CustomerService } from '../../shared/services/customer/customer.service';
-import { HeadService } from '../../shared/services/head/head.service';
+import { CustomerService } from '../../services/customer/customer.service';
+import { HeadService } from '../../services/head/head.service';
 
 @Component({
   selector: 'cart-page',

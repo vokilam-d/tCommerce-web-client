@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HeadService } from '../../../shared/services/head/head.service';
-import { CustomerService } from '../../../shared/services/customer/customer.service';
+import { HeadService } from '../../../services/head/head.service';
+import { CustomerService } from '../../../services/customer/customer.service';
 import { OrderDto } from '../../../shared/dtos/order.dto';
 import { API_HOST, DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { finalize } from 'rxjs/operators';

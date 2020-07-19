@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogCategoryListItemDto } from '../shared/dtos/blog-category-list-item.dto';
 import { BlogPostListItemDto } from '../shared/dtos/blog-post-list-item.dto';
-import { BlogService } from '../shared/services/blog/blog.service';
+import { BlogService } from '../services/blog/blog.service';
 
 enum Content {
   Categories,

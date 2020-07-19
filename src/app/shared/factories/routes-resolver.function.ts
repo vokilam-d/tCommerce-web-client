@@ -49,10 +49,9 @@ export function routesResolver(http: HttpClient, router: Router, injector: Injec
       }
     }
 
-    const pagesFromSSR = state.get<PageRegistryDto[]>(PAGES_STATE_KEY, []);
-
-    if (pagesFromSSR.length > 0) {
-      updateConfig(router, pagesFromSSR);
+    const pagesFromTransferState = state.get<PageRegistryDto[]>(PAGES_STATE_KEY, []);
+    if (pagesFromTransferState.length > 0) {
+      updateConfig(router, pagesFromTransferState);
       return;
     }
 

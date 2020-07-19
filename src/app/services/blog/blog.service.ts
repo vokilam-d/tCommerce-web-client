@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ResponseDto } from '../../dtos/response.dto';
-import { BlogCategoryListItemDto } from '../../dtos/blog-category-list-item.dto';
+import { ResponseDto } from '../../shared/dtos/response.dto';
+import { BlogCategoryListItemDto } from '../../shared/dtos/blog-category-list-item.dto';
 import { HttpClient } from '@angular/common/http';
-import { BlogPostListItemDto } from '../../dtos/blog-post-list-item.dto';
-import { API_HOST } from '../../constants';
+import { BlogPostListItemDto } from '../../shared/dtos/blog-post-list-item.dto';
+import { API_HOST } from '../../shared/constants';
 import { tap } from 'rxjs/operators';
-import { BlogCategoryDto } from '../../dtos/blog-category.dto';
-import { BlogPostDto } from '../../dtos/blog-post.dto';
+import { BlogCategoryDto } from '../../shared/dtos/blog-category.dto';
+import { BlogPostDto } from '../../shared/dtos/blog-post.dto';
 
 @Injectable({
   providedIn: 'root'

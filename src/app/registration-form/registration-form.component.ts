@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomerDto } from '../shared/dtos/customer.dto';
-import { CustomerService } from '../shared/services/customer/customer.service';
+import { CustomerService } from '../services/customer/customer.service';
 import { RegisterDto } from '../shared/dtos/registration.dto';
 import { CustomValidators } from '../shared/classes/validators';
 import { DEFAULT_ERROR_TEXT, isEmailRegex, validPasswordRegex } from '../shared/constants';

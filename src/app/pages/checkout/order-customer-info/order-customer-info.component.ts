@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CustomerService } from '../../../shared/services/customer/customer.service';
+import { CustomerService } from '../../../services/customer/customer.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { isEmailRegex } from '../../../shared/constants';
 import { catchError, debounceTime, switchMap, takeUntil } from 'rxjs/operators';
 import { OrderService } from '../order.service';
-import { ScrollToService } from '../../../shared/services/scroll-to/scroll-to.service';
+import { ScrollToService } from '../../../services/scroll-to/scroll-to.service';
 import { NgUnsubscribe } from '../../../shared/directives/ng-unsubscribe.directive';
 import { AddressFormComponent } from '../../../address-form/address-form.component';
 import { AddressTypeEnum } from '../../../shared/enums/address-type.enum';

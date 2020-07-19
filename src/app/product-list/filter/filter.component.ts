@@ -10,7 +10,7 @@ import {
 import { ISelectedFilter } from './selected-filter.interface';
 import { ActivatedRoute } from '@angular/router';
 import { FilterDto, FilterValueDto, Range } from '../../shared/dtos/filter.dto';
-import { UrlService } from '../../shared/services/url/url.service';
+import { UrlService } from '../../services/url/url.service';
 import { SEARCH_QUERY_PARAM } from '../../shared/constants';
 
 @Component({

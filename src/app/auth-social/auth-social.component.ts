@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { CustomerService } from '../shared/services/customer/customer.service';
+import { CustomerService } from '../services/customer/customer.service';
 
 @Component({
   selector: 'auth-social',

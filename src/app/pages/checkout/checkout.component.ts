@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CustomerService } from '../../shared/services/customer/customer.service';
+import { CustomerService } from '../../services/customer/customer.service';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { filter, finalize, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -8,9 +8,9 @@ import { AddOrderDto } from '../../shared/dtos/order.dto';
 import { OrderService } from './order.service';
 import { API_HOST, DEFAULT_ERROR_TEXT } from '../../shared/constants';
 import { normalizePhoneNumber } from '../../shared/helpers/normalize-phone-number.function';
-import { ScrollToService } from '../../shared/services/scroll-to/scroll-to.service';
-import { HeadService } from '../../shared/services/head/head.service';
-import { AnalyticsService } from '../../shared/services/analytics/analytics.service';
+import { ScrollToService } from '../../services/scroll-to/scroll-to.service';
+import { HeadService } from '../../services/head/head.service';
+import { AnalyticsService } from '../../services/analytics/analytics.service';
 
 @Component({
   selector: 'checkout',

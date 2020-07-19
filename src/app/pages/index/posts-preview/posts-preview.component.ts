@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BlogService } from '../../../shared/services/blog/blog.service';
+import { BlogService } from '../../../services/blog/blog.service';
 import { BlogPostListItemDto } from '../../../shared/dtos/blog-post-list-item.dto';
 import { API_HOST } from '../../../shared/constants';
 

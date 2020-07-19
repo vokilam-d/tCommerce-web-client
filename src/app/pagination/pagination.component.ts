@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { UrlService } from '../shared/services/url/url.service';
+import { UrlService } from '../services/url/url.service';
 
 @Component({
   selector: 'pagination',

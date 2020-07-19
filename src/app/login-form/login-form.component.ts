@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginDto } from '../shared/dtos/login.dto';
 import { CustomerDto } from '../shared/dtos/customer.dto';
-import { CustomerService } from '../shared/services/customer/customer.service';
+import { CustomerService } from '../services/customer/customer.service';
 import { normalizeEmailOrPhoneNumber } from '../shared/helpers/normalize-email-or-phone-number.function';
 import { DEFAULT_ERROR_TEXT } from '../shared/constants';
 import { finalize } from 'rxjs/operators';

@@ -4,15 +4,15 @@ import { ProductService } from './product.service';
 import { ProductDto } from '../../shared/dtos/product.dto';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import { HeadService, IOgTags } from '../../shared/services/head/head.service';
-import { WishlistService } from '../../shared/services/wishlist/wishlist.service';
+import { HeadService, IOgTags } from '../../services/head/head.service';
+import { WishlistService } from '../../services/wishlist/wishlist.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { CustomerService } from '../../shared/services/customer/customer.service';
+import { CustomerService } from '../../services/customer/customer.service';
 import { finalize } from 'rxjs/operators';
 import { FlyToCartDirective } from '../../shared/directives/fly-to-cart.directive';
 import { QuantityControlComponent } from '../../shared/quantity-control/quantity-control.component';
 import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
-import { DeviceService } from '../../shared/services/device-detector/device.service';
+import { DeviceService } from '../../services/device-detector/device.service';
 
 @Component({
   selector: 'product',

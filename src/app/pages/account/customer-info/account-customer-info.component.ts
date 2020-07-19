@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DEFAULT_ERROR_TEXT, isEmailRegex, validPasswordRegex } from '../../../shared/constants';
 import { CustomValidators } from '../../../shared/classes/validators';
-import { CustomerService } from '../../../shared/services/customer/customer.service';
+import { CustomerService } from '../../../services/customer/customer.service';
 import { CustomerDto, UpdateCustomerDto } from '../../../shared/dtos/customer.dto';
-import { HeadService } from '../../../shared/services/head/head.service';
+import { HeadService } from '../../../services/head/head.service';
 
 @Component({
   selector: 'account-customer-info',

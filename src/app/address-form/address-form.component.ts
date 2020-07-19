@@ -7,7 +7,7 @@ import { WarehouseDto } from '../shared/dtos/warehouse.dto';
 import { StreetDto } from '../shared/dtos/street.dto';
 import { takeUntil } from 'rxjs/operators';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
-import { ScrollToService } from '../shared/services/scroll-to/scroll-to.service';
+import { ScrollToService } from '../services/scroll-to/scroll-to.service';
 
 @Component({
   selector: 'address-form',

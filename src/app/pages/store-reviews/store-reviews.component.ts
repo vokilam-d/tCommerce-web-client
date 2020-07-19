@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HeadService } from '../../shared/services/head/head.service';
+import { HeadService } from '../../services/head/head.service';
 import { AddReviewModalComponent, IAddReviewFormValue } from '../../add-review-modal/add-review-modal.component';
 import { API_HOST, DEFAULT_ERROR_TEXT } from '../../shared/constants';
 import { AddStoreReviewDto, StoreReviewDto } from '../../shared/dtos/store-review.dto';
-import { StoreReviewService } from '../../shared/services/store-review/store-review.service';
+import { StoreReviewService } from '../../services/store-review/store-review.service';
 import { NotyService } from '../../noty/noty.service';
-import { JsonLdService } from '../../shared/services/json-ld/json-ld.service';
+import { JsonLdService } from '../../services/json-ld/json-ld.service';
 import { SafeHtml } from '@angular/platform-browser';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { takeUntil } from 'rxjs/operators';

@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { ISelectedFilter } from '../../product-list/filter/selected-filter.interface';
 import { ActivatedRoute } from '@angular/router';
-import { HeadService } from '../../shared/services/head/head.service';
+import { HeadService } from '../../services/head/head.service';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { SEARCH_QUERY_PARAM } from '../../shared/constants';
 

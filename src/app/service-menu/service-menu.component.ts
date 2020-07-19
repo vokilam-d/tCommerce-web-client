@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CustomerService } from '../shared/services/customer/customer.service';
-import { StoreReviewService } from '../shared/services/store-review/store-review.service';
+import { CustomerService } from '../services/customer/customer.service';
+import { StoreReviewService } from '../services/store-review/store-review.service';
 
 @Component({
   selector: 'service-menu',

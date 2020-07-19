@@ -1,6 +1,6 @@
 import { Observable, ReplaySubject } from 'rxjs';
 
-import { EASING } from '../statics/scroll-to-helpers';
+import { EASING } from './scroll-to-helpers';
 import { ScrollToConfigOptions, ScrollToListenerTarget } from '../models/scroll-to-config.model';
 
 /**

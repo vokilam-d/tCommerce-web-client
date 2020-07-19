@@ -1,9 +1,11 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
-import { HeadService } from '../../shared/services/head/head.service';
+import { HeadService } from '../../services/head/head.service';
 import { Response } from 'express';
 import { RESPONSE } from '@nguniversal/express-engine/tokens';
-import { DeviceService } from '../../shared/services/device-detector/device.service';
+import { DeviceService } from '../../services/device-detector/device.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UrlService } from '../../services/url/url.service';
 
 @Component({
   selector: 'not-found',

@@ -15,7 +15,7 @@ import { SortingPaginatingFilterDto } from '../shared/dtos/spf.dto';
 import { FilterComponent } from './filter/filter.component';
 import { SortingComponent } from './sorting/sorting.component';
 import { PaginationComponent } from '../pagination/pagination.component';
-import { ScrollToService } from '../shared/services/scroll-to/scroll-to.service';
+import { ScrollToService } from '../services/scroll-to/scroll-to.service';
 import { FilterDto } from '../shared/dtos/filter.dto';
 import { DEFAULT_ERROR_TEXT } from '../shared/constants';
 import { Subscription } from 'rxjs';

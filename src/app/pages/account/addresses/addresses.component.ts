@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CustomerService } from '../../../shared/services/customer/customer.service';
+import { CustomerService } from '../../../services/customer/customer.service';
 import { ShipmentAddressDto } from '../../../shared/dtos/shipment-address.dto';
 import { DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { finalize } from 'rxjs/operators';
-import { HeadService } from '../../../shared/services/head/head.service';
+import { HeadService } from '../../../services/head/head.service';
 import { AddressTypeEnum } from '../../../shared/enums/address-type.enum';
 import { AddressFormComponent } from '../../../address-form/address-form.component';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../category/category.service';
 import { CategoryTreeItem } from '../../shared/dtos/category-tree.dto';
-import { HeadService } from '../../shared/services/head/head.service';
+import { HeadService } from '../../services/head/head.service';
 
 @Component({
   selector: 'index',

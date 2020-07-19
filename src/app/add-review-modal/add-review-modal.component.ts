@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { CustomerService } from '../shared/services/customer/customer.service';
+import { CustomerService } from '../services/customer/customer.service';
 import { HttpClient } from '@angular/common/http';
 import { API_HOST, INPUT_MEDIA_ACCEPT_TYPES } from '../shared/constants';
 import { MediaDto } from '../shared/dtos/media.dto';
