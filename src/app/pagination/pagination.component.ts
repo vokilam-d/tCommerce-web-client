@@ -53,7 +53,6 @@ export class PaginationComponent implements OnInit, OnChanges {
     }
 
     this.setPages();
-
   }
 
   selectPrevPage() {
