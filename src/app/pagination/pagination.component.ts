@@ -12,6 +12,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   pages: number[];
   private pagesToDisplay: number = 3;
 
+  @Input() displayedOnPage: string;
   @Input() pagesTotal: number;
   @Output() pagination = new EventEmitter();
   @Output() paginationWithLoadMoreBtn = new EventEmitter();

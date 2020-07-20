@@ -55,6 +55,8 @@
 
     <pagination class="product-list__pagination" [pagesTotal]="pagesTotal"
                 (pagination)="onPagination()"
-                (paginationWithLoadMoreBtn)="onPaginationWithLoadMoreBtn()"></pagination>
+                (paginationWithLoadMoreBtn)="onPaginationWithLoadMoreBtn()"
+                [displayedOnPage]="'products-list'"
+    ></pagination>
   </main>
 </div>

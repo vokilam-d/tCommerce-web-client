@@ -92,7 +92,6 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
           } else {
             this.items = response.data;
           }
-
           this.itemsTotal = response.itemsTotal;
           this.filteredCount = response.itemsFiltered;
           this.pagesTotal = response.pagesTotal;
