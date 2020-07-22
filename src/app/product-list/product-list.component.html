@@ -23,7 +23,7 @@
 
     <ol class="product-list__items" #itemsRef>
 
-      <li class="product-list__item" *ngFor="let item of items">
+      <li class="product-list__item" *ngFor="let item of items" #itemRef>
         <product-list-item [item]="item"></product-list-item>
       </li>
 
@@ -53,10 +53,12 @@
       </li>
     </ol>
 
-    <pagination class="product-list__pagination" [pagesTotal]="pagesTotal"
+    <pagination class="product-list__pagination"
+                [pagesTotal]="pagesTotal"
+                [displayedOnPage]="'products-list'"
                 (pagination)="onPagination()"
                 (paginationWithLoadMoreBtn)="onPaginationWithLoadMoreBtn()"
-                [displayedOnPage]="'products-list'"
+                #paginationRef
     ></pagination>
   </main>
 </div>

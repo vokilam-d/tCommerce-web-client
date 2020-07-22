@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import { BlogPostListItemDto } from '../shared/dtos/blog-post-list-item.dto';
 import { BlogService } from '../services/blog/blog.service';
 import { API_HOST, DEFAULT_ERROR_TEXT } from '../shared/constants';
@@ -24,13 +34,16 @@ export class BlogPostsListComponent implements OnInit, AfterViewInit {
 
   @Input() categoryId: number;
   @Input() query: string;
+  @ViewChildren('itemRef') itemRefList: QueryList<ElementRef>;
   @ViewChild('itemsRef') itemsRef: ElementRef;
+  @ViewChild('paginationRef', { read: ElementRef }) paginationRef: ElementRef;
   @ViewChild(PaginationComponent) paginationCmp: PaginationComponent;
 
   constructor(private blogService: BlogService,
               private jsonLdService: JsonLdService,
-              private scrollToService: ScrollToService) {
-  }
+              private scrollToService: ScrollToService,
+              private changeDetectorRef: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
   }
@@ -50,6 +63,13 @@ export class BlogPostsListComponent implements OnInit, AfterViewInit {
       params.query = this.query;
     }
 
+    let scrollOffset;
+    if (withLoadMoreBtn) {
+      const paginationRect = this.paginationRef.nativeElement.getBoundingClientRect();
+      scrollOffset = window.pageYOffset + paginationRect.top + paginationRect.height - window.innerHeight;
+      window.scroll(0, scrollOffset);
+    }
+
     this.isLoading = true;
     this.blogService.getPostsList(params)
       .pipe( finalize(() => this.isLoading = false) )
@@ -57,6 +77,12 @@ export class BlogPostsListComponent implements OnInit, AfterViewInit {
         response => {
           if (withLoadMoreBtn) {
             this.items.push(...response.data);
+
+            this.changeDetectorRef.detectChanges();
+            window.scroll(0, scrollOffset);
+
+            const firstAddedItemIndex = this.items.length - response.data.length;
+            this.scrollToItem(firstAddedItemIndex);
           } else {
             this.items = response.data;
           }
@@ -74,6 +100,11 @@ export class BlogPostsListComponent implements OnInit, AfterViewInit {
 
   onPaginationWithLoadMoreBtn() {
     this.fetchList(true);
+  }
+
+  scrollToItem(itemIndex: number): void {
+    const firstAddedItem = this.itemRefList.find((reference, index) => index === itemIndex);
+    this.scrollToService.scrollTo({ target: firstAddedItem, offset: -80, duration: 700 });
   }
 
   private setJsonLd() {
