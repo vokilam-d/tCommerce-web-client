@@ -66,12 +66,8 @@ export class PaginationComponent implements OnInit, OnChanges {
     this.selectPage(this.activePage + 1, false);
   }
 
- loadMoreItems() {
+  loadMoreItems() {
     this.selectPage(this.activePage + 1, true);
-  }
-
-  loadNextItems() {
-    // todo
   }
 
   private setInitialValue() {
