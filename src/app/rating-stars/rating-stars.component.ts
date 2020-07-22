@@ -11,6 +11,7 @@ export class RatingStarsComponent implements OnInit, AfterViewInit {
   @Input() size: 'default' | 'small' = 'default';
 
   @ViewChild('stopElement') stopElement: ElementRef;
+  @ViewChild('pathElement') pathElement: ElementRef;
 
   constructor(private renderer: Renderer2) { }
 
@@ -19,5 +20,10 @@ export class RatingStarsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', `${this.rating / 5}`);
+    this.renderer.setAttribute(this.pathElement.nativeElement, 'fill', `url(#${this.getFillId()})`);
+  }
+
+  getFillId() {
+    return `rating-${this.rating}`;
   }
 }
