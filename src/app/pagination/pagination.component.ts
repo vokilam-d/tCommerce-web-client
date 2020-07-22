@@ -12,8 +12,10 @@ export class PaginationComponent implements OnInit, OnChanges {
   pages: number[];
   private pagesToDisplay: number = 3;
 
+  @Input() displayedOnPage: string;
   @Input() pagesTotal: number;
-  @Output() valueChanged = new EventEmitter();
+  @Output() pagination = new EventEmitter();
+  @Output() paginationWithLoadMoreBtn = new EventEmitter();
 
   get isPrevBtnDisabled() { return this.activePage <= 1; }
   get isNextBtnDisabled() { return this.pagesTotal === 1 || this.activePage >= this.pagesTotal; }
@@ -34,7 +36,7 @@ export class PaginationComponent implements OnInit, OnChanges {
     return this.activePage;
   }
 
-  selectPage(page: number) {
+  selectPage(page: number, withLoadMoreBtn: boolean) {
     if (this.activePage === page) { return; }
 
     this.activePage = page;
@@ -44,22 +46,28 @@ export class PaginationComponent implements OnInit, OnChanges {
     } else {
       this.urlService.setQueryParam('page', this.activePage);
     }
-    this.valueChanged.emit();
+
+    if (withLoadMoreBtn) {
+      this.paginationWithLoadMoreBtn.emit();
+    } else {
+      this.pagination.emit();
+    }
+
     this.setPages();
   }
 
   selectPrevPage() {
     if (this.isPrevBtnDisabled) { return; }
-    this.selectPage(this.activePage - 1);
+    this.selectPage(this.activePage - 1, false);
   }
 
   selectNextPage() {
     if (this.isNextBtnDisabled) { return; }
-    this.selectPage(this.activePage + 1);
+    this.selectPage(this.activePage + 1, false);
   }
 
-  loadNextItems() {
-    // todo
+  loadMoreItems() {
+    this.selectPage(this.activePage + 1, true);
   }
 
   private setInitialValue() {

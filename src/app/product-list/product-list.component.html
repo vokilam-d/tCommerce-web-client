@@ -53,6 +53,10 @@
       </li>
     </ol>
 
-    <pagination class="product-list__pagination" [pagesTotal]="pagesTotal" (valueChanged)="onPaginationChanged()"></pagination>
+    <pagination class="product-list__pagination" [pagesTotal]="pagesTotal"
+                (pagination)="onPagination()"
+                (paginationWithLoadMoreBtn)="onPaginationWithLoadMoreBtn()"
+                [displayedOnPage]="'products-list'"
+    ></pagination>
   </main>
 </div>

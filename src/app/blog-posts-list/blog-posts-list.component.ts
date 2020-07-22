@@ -39,7 +39,7 @@ export class BlogPostsListComponent implements OnInit, AfterViewInit {
     setTimeout(() => this.fetchList());
   }
 
-  private fetchList() {
+  private fetchList(withLoadMoreBtn?: boolean) {
     const params: any = {
       page: this.paginationCmp.getValue()
     };
@@ -55,7 +55,11 @@ export class BlogPostsListComponent implements OnInit, AfterViewInit {
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         response => {
-          this.items = response.data;
+          if (withLoadMoreBtn) {
+            this.items.push(...response.data);
+          } else {
+            this.items = response.data;
+          }
           this.pagesTotal = response.pagesTotal;
           this.setJsonLd();
         },
@@ -65,7 +69,11 @@ export class BlogPostsListComponent implements OnInit, AfterViewInit {
 
   onPaginationChanged() {
     this.scrollToService.scrollTo({ target: this.itemsRef, offset: -100, duration: 700 });
-    this.fetchList();
+    this.fetchList(false);
+  }
+
+  onPaginationWithLoadMoreBtn() {
+    this.fetchList(true);
   }
 
   private setJsonLd() {

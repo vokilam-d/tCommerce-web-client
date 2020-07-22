@@ -47,5 +47,9 @@
   </div>
 </div>
 
-
-<pagination class="pagination" [pagesTotal]="pagesTotal" (valueChanged)="onPaginationChanged()"></pagination>
+<pagination class="pagination"
+            [pagesTotal]="pagesTotal"
+            (pagination)="onPaginationChanged()"
+            (paginationWithLoadMoreBtn)="onPaginationWithLoadMoreBtn()"
+            [displayedOnPage]="'blog'"
+></pagination>

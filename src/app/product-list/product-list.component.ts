@@ -61,7 +61,7 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
     setTimeout(() => this.fetchProducts());
   }
 
-  fetchProducts() {
+  fetchProducts(withLoadMoreBtn?: boolean) {
     const filterValue = this.filterCmp.getValue();
     const sortingValue = this.sortingCmp.getValue();
     const paginationValue = this.paginationCmp.getValue();
@@ -87,7 +87,11 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
     this.fetchSub = this.productService.fetchProductsByFilters(spf)
       .subscribe(
         response => {
-          this.items = response.data;
+          if (withLoadMoreBtn) {
+            this.items.push(...response.data);
+          } else {
+            this.items = response.data;
+          }
           this.itemsTotal = response.itemsTotal;
           this.filteredCount = response.itemsFiltered;
           this.pagesTotal = response.pagesTotal;
@@ -102,8 +106,13 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
     this.filterCmp.openFilters();
   }
 
-  onPaginationChanged() {
+  onPagination() {
     this.scrollToService.scrollTo({ target: this.itemsRef, offset: -100, duration: 700 });
-    this.fetchProducts();
+    this.fetchProducts(false);
   }
+
+  onPaginationWithLoadMoreBtn() {
+    this.fetchProducts(true);
+  }
+
 }
