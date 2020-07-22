@@ -1,12 +1,12 @@
 import {
-  AfterViewInit,
+  AfterViewInit, ChangeDetectorRef,
   Component,
   ElementRef,
   Input,
   OnChanges,
-  OnInit,
+  OnInit, QueryList,
   SimpleChanges,
-  ViewChild
+  ViewChild, ViewChildren
 } from '@angular/core';
 import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
 import { ISelectedFilter } from './filter/selected-filter.interface';
@@ -39,14 +39,17 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() initialFilters: ISelectedFilter[] = [];
 
+  @ViewChildren('itemRef') itemRefList: QueryList<ElementRef>;
   @ViewChild('itemsRef') itemsRef: ElementRef;
+  @ViewChild('paginationRef', { read: ElementRef }) paginationRef: ElementRef;
   @ViewChild(FilterComponent) filterCmp: FilterComponent;
   @ViewChild(SortingComponent) sortingCmp: SortingComponent;
   @ViewChild(PaginationComponent) paginationCmp: PaginationComponent;
 
   constructor(private productService: ProductService,
-              private scrollToService: ScrollToService) {
-  }
+              private scrollToService: ScrollToService,
+              private changeDetectorRef: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
   }
@@ -83,12 +86,25 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
     spf.sort = sortingValue;
     spf.page = paginationValue;
 
+    let scrollOffset;
+    if (withLoadMoreBtn) {
+      const paginationRect = this.paginationRef.nativeElement.getBoundingClientRect();
+      scrollOffset = window.pageYOffset + paginationRect.top + paginationRect.height - window.innerHeight;
+      window.scroll(0, scrollOffset);
+    }
+
     if (this.isLoading) { this.fetchSub.unsubscribe(); }
     this.fetchSub = this.productService.fetchProductsByFilters(spf)
       .subscribe(
         response => {
           if (withLoadMoreBtn) {
             this.items.push(...response.data);
+
+            this.changeDetectorRef.detectChanges();
+            window.scroll(0, scrollOffset);
+
+            const firstAddedItemIndex = this.items.length - response.data.length;
+            this.scrollToItem(firstAddedItemIndex);
           } else {
             this.items = response.data;
           }
@@ -113,6 +129,11 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
 
   onPaginationWithLoadMoreBtn() {
     this.fetchProducts(true);
+  }
+
+  scrollToItem(itemIndex: number): void {
+    const firstAddedItem = this.itemRefList.find((reference, index) => index === itemIndex);
+    this.scrollToService.scrollTo({ target: firstAddedItem, offset: -15, duration: 700 });
   }
 
 }

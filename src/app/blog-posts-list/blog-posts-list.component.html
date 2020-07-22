@@ -22,7 +22,7 @@
     <preloader class="items__preloader"></preloader>
   </div>
 
-  <div class="items__item item" *ngFor="let item of items">
+  <div class="items__item item" *ngFor="let item of items" #itemRef>
     <a class="item__img-container" *ngIf="item.featuredMedia" [routerLink]="['/', 'blog', item.slug]">
       <img class="item__img" [src]="uploadedHost + item.featuredMedia.variantsUrls.original" [alt]="item.name">
     </a>
@@ -49,7 +49,8 @@
 
 <pagination class="pagination"
             [pagesTotal]="pagesTotal"
+            [displayedOnPage]="'blog'"
             (pagination)="onPaginationChanged()"
             (paginationWithLoadMoreBtn)="onPaginationWithLoadMoreBtn()"
-            [displayedOnPage]="'blog'"
+            #paginationRef
 ></pagination>
