@@ -48,7 +48,7 @@ export class ProductListItemComponent implements OnInit, OnChanges {
   }
 
   setItemThumbnail() {
-    if (this.item.mediaUrl === undefined) {
+    if (!this.item.mediaUrl) {
       return '/assets/images/no-img.png';
     } else {
       return this.uploadedHost + this.item.mediaUrl;
