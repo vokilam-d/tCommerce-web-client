@@ -29,4 +29,5 @@ export class ProductGalleryComponent implements OnInit {
     this.setActiveIndex(index);
     this.mediaModalCmp.openModal(index);
   }
+
 }

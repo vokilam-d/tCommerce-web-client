@@ -26,9 +26,14 @@
 
       <ng-container *ngFor="let item of items, index as i">
         <div class="item">
-          <div class="item__img-container">
+          <div class="item__img-container" *ngIf="item.imageUrl; else noImage">
             <img class="item__img" [src]="uploadedHost + item.imageUrl" alt="">
           </div>
+          <ng-template #noImage>
+            <div class="item__img-container">
+              <img class="item__img" [src]="'/assets/images/no-img.png'" alt="no image">
+            </div>
+          </ng-template>
 
           <div class="item__info">
             <a class="item__name" [routerLink]="['/', item.slug]">
