@@ -63,4 +63,13 @@ export class CartComponent implements OnInit {
     this.cartError = null;
     clearTimeout(this.cartErrorTimeout);
   }
+
+  setItemImg(item) {
+    if (!item.imageUrl) {
+      return '/assets/images/no-img.png';
+    } else {
+      return this.uploadedHost + item.imageUrl;
+    }
+  }
+
 }

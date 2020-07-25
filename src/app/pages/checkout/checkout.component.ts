@@ -97,4 +97,13 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   private setMeta() {
     this.headService.setMeta({ title: 'Klondike | Оформление заказа', description: 'Оформление заказа' });
   }
+
+  setItemImg(item) {
+    if (!item.imageUrl) {
+      return '/assets/images/no-img.png';
+    } else {
+      return this.uploadedHost + item.imageUrl;
+    }
+  }
+
 }

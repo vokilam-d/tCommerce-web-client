@@ -48,7 +48,7 @@
       <div class="checkout__cart">
 
         <div class="cart-item" *ngFor="let item of cart">
-          <img class="cart-item__img" [src]="uploadedHost + item.imageUrl" alt="">
+          <img class="cart-item__img" [src]="setItemImg(item)" alt="">
 
           <div class="cart-item__info">
             <a class="cart-item__name" [routerLink]="['/', item.slug]" target="_blank">

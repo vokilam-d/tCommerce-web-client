@@ -27,7 +27,7 @@
       <ng-container *ngFor="let item of items, index as i">
         <div class="item">
           <div class="item__img-container">
-            <img class="item__img" [src]="uploadedHost + item.imageUrl" alt="">
+            <img class="item__img" [src]="setItemImg(item)" alt="">
           </div>
 
           <div class="item__info">

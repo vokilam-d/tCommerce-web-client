@@ -2,7 +2,7 @@
   <header class="item__header">
     <a class="item__img-container" [routerLink]="'/' + item.slug" [class.item__img-container--with-hover]="item.mediaHoverUrl">
       <img class="item__img item__img-primary"
-           [src]="uploadedHost + item.mediaUrl"
+           [src]="setItemThumbnail()"
            [alt]="item.mediaAltText"
            loading="lazy"
       >

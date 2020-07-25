@@ -12,12 +12,14 @@
 
   <div class="gallery__img-container">
     <div class="gallery__img-inner-container">
-      <img class="gallery__img"
-           *ngIf="medias[activeMediaIdx] as media"
-           [src]="uploadedHost + media.variantsUrls.medium"
-           [alt]="media.altText"
-           (click)="onMediaClick(activeMediaIdx)"
+        <img class="gallery__img" *ngIf="medias[activeMediaIdx] as media; else noImage"
+             [src]="uploadedHost + media.variantsUrls.medium"
+             [alt]="media.altText"
+             (click)="onMediaClick(activeMediaIdx)"
       >
+      <ng-template #noImage>
+        <img class="gallery__img" [src]="'/assets/images/no-img.png'" [alt]="">
+      </ng-template>
     </div>
   </div>
 </div>

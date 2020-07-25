@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
 import { finalize } from 'rxjs/operators';
 import { CustomerService } from '../services/customer/customer.service';
@@ -46,4 +46,13 @@ export class ProductListItemComponent implements OnInit, OnChanges {
   addToWishlist() {
     console.log('add to wishlist!', this.item);
   }
+
+  setItemThumbnail() {
+    if (!this.item.mediaUrl) {
+      return '/assets/images/no-img.png';
+    } else {
+      return this.uploadedHost + this.item.mediaUrl;
+    }
+  }
+
 }
