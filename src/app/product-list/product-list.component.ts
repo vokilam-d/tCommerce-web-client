@@ -122,6 +122,11 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
     this.filterCmp.openFilters();
   }
 
+  onFiltersChange() {
+    this.paginationCmp.selectPage(1, false);
+    this.fetchProducts();
+  }
+
   onPagination() {
     this.scrollToService.scrollTo({ target: this.itemsRef, offset: -100, duration: 700 });
     this.fetchProducts(false);
