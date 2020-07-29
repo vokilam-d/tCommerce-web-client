@@ -7,6 +7,7 @@ import { HeaderModule } from '../../header/header.module';
 import { FooterModule } from '../../footer/footer.module';
 import { PostsPreviewComponent } from './posts-preview/posts-preview.component';
 import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
+import { ButtonUpModule } from '../../button-up/button-up.module';
 
 @NgModule({
   declarations: [IndexComponent, PostsPreviewComponent],
@@ -15,7 +16,8 @@ import { RecentlyViewedProductsModule } from '../../recently-viewed-products/rec
     IndexRoutingModule,
     HeaderModule,
     FooterModule,
-    RecentlyViewedProductsModule
+    RecentlyViewedProductsModule,
+    ButtonUpModule
   ]
 })
 export class IndexModule { }

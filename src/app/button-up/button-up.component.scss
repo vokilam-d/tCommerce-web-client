@@ -1,0 +1,21 @@
+.btn-up {
+  width: 35px;
+  height: 35px;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  opacity: 0.3;
+
+  &:hover {
+    opacity: 0.4;
+  }
+
+  &__img {
+    width: 35px;
+    height: 35px;
+  }
+}
