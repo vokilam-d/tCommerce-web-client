@@ -143,11 +143,6 @@
   &__subcategory {
     padding: 5px 0;
     font-size: 14px;
-
-    @include respond-to-less-than($media_medium) {
-      font-size: 15px;
-    }
-
   }
 }
 
