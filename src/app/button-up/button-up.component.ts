@@ -1,6 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ScrollToService } from '../services/scroll-to/scroll-to.service';
-import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'button-up',
@@ -10,8 +9,6 @@ import { HeaderComponent } from '../header/header.component';
 export class ButtonUpComponent implements OnInit {
 
   windowScrolled: boolean;
-
-  @ViewChild(HeaderComponent) headerLogo: ElementRef;
 
   constructor( private scrollToService: ScrollToService ) { }
 
@@ -28,7 +25,7 @@ export class ButtonUpComponent implements OnInit {
   }
 
   scrollTop() {
-    this.scrollToService.scrollTo({ target: this.headerLogo, offset: -window.scrollY, duration: 700 });
+    this.scrollToService.scrollTo({ container: 'body', offset: -window.scrollY, duration: 800 });
   }
 
 }
