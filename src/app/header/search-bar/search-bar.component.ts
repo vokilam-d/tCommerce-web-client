@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  HostListener,
   Inject,
   OnInit,
   PLATFORM_ID,
