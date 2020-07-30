@@ -12,14 +12,14 @@
   cursor: pointer;
   opacity: 0.3;
 
+  &:hover {
+    opacity: 0.4;
+  }
+
   @include respond-to($media_large) {
     bottom: 35px;
     right: 70px;
     opacity: 0.15;
-  }
-
-  &:hover {
-    opacity: 0.4;
   }
 
   &__img {

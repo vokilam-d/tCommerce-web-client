@@ -8,6 +8,7 @@ import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { ProductListModule } from '../../product-list/product-list.module';
 import { FooterModule } from '../../footer/footer.module';
 import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
+import { ButtonUpModule } from '../../button-up/button-up.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { RecentlyViewedProductsModule } from '../../recently-viewed-products/rec
     BreadcrumbsModule,
     ProductListModule,
     FooterModule,
-    RecentlyViewedProductsModule
+    RecentlyViewedProductsModule,
+    ButtonUpModule
   ]
 })
 export class SearchPageModule { }

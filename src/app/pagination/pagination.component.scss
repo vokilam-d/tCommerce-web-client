@@ -11,9 +11,14 @@
   &__arrow-btn {
     padding: 15px;
     font-size: 22px;
+    border: 1px solid $borderColor;
 
     &[disabled] {
       opacity: 0.2;
+    }
+
+    &:hover {
+      color: $primary;
     }
   }
 
