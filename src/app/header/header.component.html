@@ -24,7 +24,7 @@
         <span class="header__logo-text">Клондайк - товары для творчества!</span>
       </a>
 
-      <div class="header__toolbar toolbar">
+      <div class="header__toolbar toolbar" [ngClass]="{ fixed: isFixed }">
         <div class="toolbar__menu" (click)="openMenu()">
           <i class="toolbar__menu-icon mbi mbi-menu"></i>
         </div>

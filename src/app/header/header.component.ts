@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { CategoryService } from '../pages/category/category.service';
 import { CategoryTreeItem } from '../shared/dtos/category-tree.dto';
 import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
@@ -14,6 +14,18 @@ export class HeaderComponent implements OnInit {
 
   @Input() isCatalogFixed: boolean = false;
   @ViewChild(SidebarMenuComponent) sidebarCmp: SidebarMenuComponent;
+
+  isFixed: boolean;
+
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    if (window.pageYOffset > 100) {
+      this.isFixed = true;
+    }
+    if (window.pageYOffset < 100) {
+      this.isFixed = false;
+    }
+  }
 
   constructor(private categoryService: CategoryService) {
   }
