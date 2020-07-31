@@ -4,11 +4,12 @@
 .banner {
   $brk_point: 500px;
 
-  margin: 10px 0 0;
+  display: none;
 
-  @include respond-to($media_large) {
+  @include respond-to($media_medium) {
     display: flex;
     justify-content: flex-end;
+    margin: 10px 0 0;
   }
 
   &__content {
@@ -73,24 +74,37 @@
 }
 
 .category {
-  margin: 0 0 30px;
+  display: flex;
+  min-height: 150px;
+  margin: 0 0 15px;
+  padding: 15px 25px;
   border: 1px solid $borderColor;
-  padding: 15px 20px 25px;
 
   @include respond-to($media_medium) {
+    flex-direction: column;
     width: 47%;
+    min-height: 200px;
+    margin: 0 0 30px;
+    padding: 15px 20px 25px;
   }
 
   @include respond-to($media_max-content-width) {
-    display: flex;
+    flex-direction: row;
     width: 32%;
   }
 
   &__img-wrapper {
     display: flex;
+    width: 40%;
     justify-content: center;
     align-items: center;
+    padding-right: 35px;
     text-align: center;
+
+    @include respond-to($media_medium) {
+      width: auto;
+      padding-right: 0;
+    }
 
     @include respond-to($media_max-content-width) {
       width: 50%;
@@ -102,10 +116,22 @@
 
   &__img {
     max-height: 150px;
+    width: 150px;
+    border-radius: 2px;
+    object-fit: cover;
+
+    @include respond-to($media_medium) {
+      width: auto;
+    }
   }
 
   &__info {
-    margin: 20px 0 0;
+    width: 60%;
+    margin: 8px 0 0;
+
+    @include respond-to($media_medium) {
+      margin-top: 20px;
+    }
 
     @include respond-to($media_max-content-width) {
       width: 50%;
@@ -114,8 +140,14 @@
   }
 
   &__title {
-    font-size: 18px;
+    margin: 0 0 15px;
+    font-size: 23px;
     font-weight: 600;
+
+    @include respond-to($media_medium) {
+      margin: 0;
+      font-size: 18px;
+    }
   }
 
   &__subcategories {
@@ -124,7 +156,11 @@
 
   &__subcategory {
     padding: 5px 0;
-    font-size: 14px;
+    font-size: 17px;
+
+    @include respond-to($media_medium) {
+      font-size: 14px;
+    }
   }
 }
 
