@@ -95,18 +95,14 @@
 
   &__img-wrapper {
     display: flex;
+    width: 50%;
     justify-content: center;
     align-items: center;
     margin-right: 35px;
     text-align: center;
 
-    @include respond-to-less-than($media_medium) {
-      width: 150px;
-    }
-
     @include respond-to($media_medium) {
       margin: 0 auto;
-      padding: 0 15px 0 0;
     }
 
     @include respond-to($media_max-content-width) {
@@ -121,9 +117,14 @@
     max-height: 150px;
     border-radius: 2px;
     object-fit: cover;
+
+    @include respond-to-less-than($media_medium) {
+      width: 150px;
+    }
   }
 
   &__info {
+    width: 70%;
     margin: 8px 0 0;
 
     @include respond-to($media_medium) {
