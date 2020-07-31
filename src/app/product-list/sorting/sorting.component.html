@@ -1,5 +1,5 @@
 <div class="sort">
-  <select class="sort__control" [formControl]="sortControl">
+  <select class="sort__control" [ngClass]="{ fixed: isFixed }" [formControl]="sortControl">
     <option *ngFor="let option of sortOptions" [value]="option.value">{{ option.label }}</option>
   </select>
 

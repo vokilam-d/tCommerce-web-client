@@ -1,7 +1,7 @@
 import {
   AfterViewInit, ChangeDetectorRef,
   Component,
-  ElementRef,
+  ElementRef, HostListener,
   Input,
   OnChanges,
   OnInit, QueryList,
@@ -36,6 +36,7 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   error: string;
   private fetchSub: Subscription;
   get isLoading() { return this.fetchSub?.closed === false; }
+  isFixed: boolean;
 
   @Input() initialFilters: ISelectedFilter[] = [];
 
@@ -45,6 +46,16 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild(FilterComponent) filterCmp: FilterComponent;
   @ViewChild(SortingComponent) sortingCmp: SortingComponent;
   @ViewChild(PaginationComponent) paginationCmp: PaginationComponent;
+
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    if (window.pageYOffset > 280) {
+      this.isFixed = true;
+    }
+    if (window.pageYOffset < 100) {
+      this.isFixed = false;
+    }
+  }
 
   constructor(private productService: ProductService,
               private scrollToService: ScrollToService,

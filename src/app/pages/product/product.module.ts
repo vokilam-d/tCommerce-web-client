@@ -16,7 +16,6 @@ import { SharedModule } from '../../shared/shared.module';
 import { ProductsPreviewModule } from '../../products-preview/products-preview.module';
 import { ReviewModule } from '../../review/review.module';
 import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
-import { ButtonUpModule } from '../../button-up/button-up.module';
 
 @NgModule({
   declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent],
@@ -33,8 +32,7 @@ import { ButtonUpModule } from '../../button-up/button-up.module';
     MediaGalleryModalModule,
     ProductsPreviewModule,
     ReviewModule,
-    RecentlyViewedProductsModule,
-    ButtonUpModule
+    RecentlyViewedProductsModule
   ]
 })
 export class ProductModule { }

@@ -10,7 +10,6 @@ import { OrderCustomerInfoComponent } from './order-customer-info/order-customer
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { AddressFormModule } from '../../address-form/address-form.module';
-import { ButtonUpModule } from '../../button-up/button-up.module';
 
 
 @NgModule({
@@ -26,8 +25,7 @@ import { ButtonUpModule } from '../../button-up/button-up.module';
     CheckoutRoutingModule,
     ReactiveFormsModule,
     SharedModule,
-    AddressFormModule,
-    ButtonUpModule
+    AddressFormModule
   ],
   providers: []
 })

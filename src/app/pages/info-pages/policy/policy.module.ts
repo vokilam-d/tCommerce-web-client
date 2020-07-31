@@ -7,7 +7,6 @@ import { HeaderModule } from '../../../header/header.module';
 import { BreadcrumbsModule } from '../../../breadcrumbs/breadcrumbs.module';
 import { FooterModule } from '../../../footer/footer.module';
 import { RecentlyViewedProductsModule } from '../../../recently-viewed-products/recently-viewed-products.module';
-import { ButtonUpModule } from '../../../button-up/button-up.module';
 
 
 @NgModule({
@@ -18,8 +17,7 @@ import { ButtonUpModule } from '../../../button-up/button-up.module';
     HeaderModule,
     BreadcrumbsModule,
     FooterModule,
-    RecentlyViewedProductsModule,
-    ButtonUpModule
+    RecentlyViewedProductsModule
   ]
 })
 export class PolicyModule { }

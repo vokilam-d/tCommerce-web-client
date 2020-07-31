@@ -9,7 +9,6 @@ import { FooterModule } from '../../footer/footer.module';
 import { AddReviewModalModule } from '../../add-review-modal/add-review-modal.module';
 import { ReviewModule } from '../../review/review.module';
 import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
-import { ButtonUpModule } from '../../button-up/button-up.module';
 
 
 @NgModule({
@@ -22,8 +21,7 @@ import { ButtonUpModule } from '../../button-up/button-up.module';
     FooterModule,
     AddReviewModalModule,
     ReviewModule,
-    RecentlyViewedProductsModule,
-    ButtonUpModule
+    RecentlyViewedProductsModule
   ]
 })
 export class StoreReviewsModule { }

@@ -16,12 +16,7 @@ export class ButtonUpComponent implements OnInit {
 
   @HostListener("window:scroll", [])
   onWindowScroll() {
-    if (window.pageYOffset > 100) {
-      this.windowScrolled = true;
-    }
-    if (window.pageYOffset < 100) {
-      this.windowScrolled = false;
-    }
+    this.windowScrolled = window.pageYOffset > 100;
   }
 
   scrollTop() {

@@ -24,18 +24,20 @@
         <span class="header__logo-text">Клондайк - товары для творчества!</span>
       </a>
 
-      <div class="header__toolbar toolbar" [ngClass]="{ fixed: isFixed }">
+      <div>
+        <div class="header__toolbar toolbar" [ngClass]="{ fixed: isFixed }">
         <div class="toolbar__menu" (click)="openMenu()">
           <i class="toolbar__menu-icon mbi mbi-menu"></i>
         </div>
 
         <search-bar class="toolbar__search-bar"></search-bar>
 
-<!--        <div class="toolbar__item">-->
-<!--          <i class="toolbar__item-icon mbi mbi-heart"></i>-->
-<!--        </div>-->
+        <!--        <div class="toolbar__item">-->
+        <!--          <i class="toolbar__item-icon mbi mbi-heart"></i>-->
+        <!--        </div>-->
         <mini-cart class="toolbar__item toolbar__cart"></mini-cart>
         <mini-account class="toolbar__item toolbar__account"></mini-account>
+      </div>
       </div>
 
       <div class="catalog-toggle" [class.catalog-toggle--fixed]="isCatalogFixed">

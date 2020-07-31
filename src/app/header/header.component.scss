@@ -133,10 +133,14 @@
 .fixed {
   @include respond-to-less-than($media_medium) {
     position: fixed;
-    top: -13px;
+    top: 0;
     left: 0;
     width: 100%;
-    z-index: 99;
+    height: 35px;
+    margin: 0;
+    z-index: 6;
+    transition: all 0.5s ease-in-out;
+    background-color: #eeeeee;
   }
 }
 

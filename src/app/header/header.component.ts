@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
 
   @HostListener("window:scroll", [])
   onWindowScroll() {
-    if (window.pageYOffset > 100) {
+    if (window.pageYOffset > 280) {
       this.isFixed = true;
     }
     if (window.pageYOffset < 100) {

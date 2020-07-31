@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 .sort {
   position: relative;
@@ -20,5 +21,14 @@
     transform: translateY(-50%);
     font-size: 11px;
     pointer-events: none;
+  }
+}
+
+.fixed {
+  @include respond-to-less-than($media_medium) {
+    padding-top: 9px !important;
+    padding-bottom: 8px !important;
+    border: none !important;
+    border-radius: 0 !important;
   }
 }
