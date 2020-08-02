@@ -15,20 +15,24 @@ export class HeaderComponent implements OnInit {
   @Input() isCatalogFixed: boolean = false;
   @ViewChild(SidebarMenuComponent) sidebarCmp: SidebarMenuComponent;
   @ViewChild('toolbarRef') toolbarRef: ElementRef;
-  @ViewChild('headerRef') headerRef: ElementRef;
 
   isFixed: boolean;
+  elementPosition: number;
 
   @HostListener("window:scroll", [])
   onWindowScroll() {
-    this.isFixed = window.pageYOffset > this.toolbarRef.nativeElement.offsetTop;
-  }
+    if (!this.elementPosition) {
+      const targetElement = this.toolbarRef.nativeElement;
+      this.elementPosition = targetElement.getBoundingClientRect().top + document.documentElement.scrollTop;
+     }
+
+    this.isFixed = window.pageYOffset > this.elementPosition;
+    }
 
   constructor(private categoryService: CategoryService) {
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   openMenu() {
     this.sidebarCmp.openMenu();

@@ -39,22 +39,19 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   isFixed: boolean;
 
   @Input() initialFilters: ISelectedFilter[] = [];
+ elementPosition: number;
 
   @ViewChildren('itemRef') itemRefList: QueryList<ElementRef>;
   @ViewChild('itemsRef') itemsRef: ElementRef;
   @ViewChild('paginationRef', { read: ElementRef }) paginationRef: ElementRef;
+  @ViewChild('headerRef') productListHeaderRef: ElementRef;
   @ViewChild(FilterComponent) filterCmp: FilterComponent;
   @ViewChild(SortingComponent) sortingCmp: SortingComponent;
   @ViewChild(PaginationComponent) paginationCmp: PaginationComponent;
 
   @HostListener("window:scroll", [])
   onWindowScroll() {
-    if (window.pageYOffset > 280) {
-      this.isFixed = true;
-    }
-    if (window.pageYOffset < 100) {
-      this.isFixed = false;
-    }
+    this.isFixed = window.pageYOffset > this.elementPosition;
   }
 
   constructor(private productService: ProductService,
@@ -73,6 +70,9 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => this.fetchProducts());
+
+    const targetElement = this.productListHeaderRef.nativeElement;
+    this.elementPosition = targetElement.getBoundingClientRect().top + document.documentElement.scrollTop - targetElement.getBoundingClientRect().height;
   }
 
   fetchProducts(withLoadMoreBtn?: boolean) {

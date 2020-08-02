@@ -9,16 +9,19 @@
 
   <main class="product-list__content">
 
-    <div class="product-list__header" [ngClass]="{ fixed: isFixed }">
-      <button class="product-list__filter-toggle filter-toggle" (click)="openFilters()" [ngClass]="{ fixed__btn: isFixed }">
-        Фильтры
-        <i class="mbi mbi-cross filter-toggle__icon"></i>
-      </button>
 
-      <div class="product-list__selected-filters">
+    <div class="fixed-container">
+      <div class="product-list__header" #headerRef>
+
+        <button class="product-list__filter-toggle filter-toggle" (click)="openFilters()" [ngClass]="{ fixed: isFixed }">
+          Фильтры
+          <i class="mbi mbi-cross filter-toggle__icon"></i>
+        </button>
+
+        <div class="product-list__selected-filters"></div>
+
+        <sorting class="product-list__sorting" (valueChanged)="fetchProducts()" [elementPosition]="elementPosition"></sorting>
       </div>
-
-      <sorting class="product-list__sorting" (valueChanged)="fetchProducts()" [ngClass]="{ fixed__btn: isFixed }"></sorting>
     </div>
 
     <ol class="product-list__items" #itemsRef>
