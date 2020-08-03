@@ -4,7 +4,7 @@ import {
   ElementRef, HostListener,
   Input,
   OnChanges,
-  OnInit, QueryList,
+  OnInit, QueryList, Renderer2,
   SimpleChanges,
   ViewChild, ViewChildren
 } from '@angular/core';
@@ -34,12 +34,12 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   page: number;
   filters: FilterDto[];
   error: string;
+  isFixed: boolean;
+  headerPosition: number;
   private fetchSub: Subscription;
   get isLoading() { return this.fetchSub?.closed === false; }
-  isFixed: boolean;
 
   @Input() initialFilters: ISelectedFilter[] = [];
- elementPosition: number;
 
   @ViewChildren('itemRef') itemRefList: QueryList<ElementRef>;
   @ViewChild('itemsRef') itemsRef: ElementRef;
@@ -49,14 +49,10 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild(SortingComponent) sortingCmp: SortingComponent;
   @ViewChild(PaginationComponent) paginationCmp: PaginationComponent;
 
-  @HostListener("window:scroll", [])
-  onWindowScroll() {
-    this.isFixed = window.pageYOffset > this.elementPosition;
-  }
-
   constructor(private productService: ProductService,
               private scrollToService: ScrollToService,
-              private changeDetectorRef: ChangeDetectorRef
+              private changeDetectorRef: ChangeDetectorRef,
+              private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
@@ -70,9 +66,6 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => this.fetchProducts());
-
-    const targetElement = this.productListHeaderRef.nativeElement;
-    this.elementPosition = targetElement.getBoundingClientRect().top + document.documentElement.scrollTop - targetElement.getBoundingClientRect().height;
   }
 
   fetchProducts(withLoadMoreBtn?: boolean) {
@@ -150,6 +143,21 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   scrollToItem(itemIndex: number): void {
     const firstAddedItem = this.itemRefList.find((reference, index) => index === itemIndex);
     this.scrollToService.scrollTo({ target: firstAddedItem, offset: -15, duration: 700 });
+  }
+
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    const fixedMobileSearchBarHeight = 43;
+    const productListHeaderEl = this.productListHeaderRef.nativeElement;
+
+    this.isFixed = window.pageYOffset > this.headerPosition;
+
+    if (!this.isFixed) {
+      this.headerPosition = productListHeaderEl.getBoundingClientRect().top + document.documentElement.scrollTop - fixedMobileSearchBarHeight;
+      this.renderer.setStyle(productListHeaderEl, 'top', '0px');
+    } else {
+      this.renderer.setStyle(productListHeaderEl, 'top', `${fixedMobileSearchBarHeight}px`);
+    }
   }
 
 }

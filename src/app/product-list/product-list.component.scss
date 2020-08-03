@@ -2,17 +2,18 @@
 @import "mixins";
 
 .fixed-container {
-  height: 33px;
+  height: 35px;
 }
 
 .fixed {
   @include respond-to-less-than($media_medium) {
     position: fixed;
-    top: 35px;
-    left: 8px;
-    width: calc(50% - 16px) !important;
-    margin-right: 16px;
-    //border-radius: 3px 0 0 3px;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1px 8px 5px 8px;
+    border-bottom: 1px solid $borderColor;
+    background-color: #ffffff;
     z-index: 6;
   }
 }

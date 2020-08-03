@@ -24,14 +24,3 @@
   }
 }
 
-.fixed {
-  @include respond-to-less-than($media_medium) {
-    position: fixed;
-    top: 35px;
-    right: 8px;
-    width: calc(50% - 16px) !important;
-    //border-radius: 0 3px 3px 0;
-    border-left: none;
-    z-index: 6;
-  }
-}

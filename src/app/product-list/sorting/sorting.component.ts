@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { takeUntil } from 'rxjs/operators';
@@ -26,9 +26,6 @@ export class SortingComponent extends NgUnsubscribe implements OnInit {
   ];
   @Output() valueChanged = new EventEmitter();
 
-  isFixed: boolean;
-  @Input() elementPosition: number;
-
   constructor(private urlService: UrlService) {
     super();
   }
@@ -36,11 +33,6 @@ export class SortingComponent extends NgUnsubscribe implements OnInit {
   ngOnInit(): void {
     this.buildControl();
     this.handleValueChange();
-  }
-
-  @HostListener("window:scroll", [])
-  onWindowScroll() {
-    this.isFixed = window.pageYOffset > this.elementPosition;
   }
 
   getValue() {

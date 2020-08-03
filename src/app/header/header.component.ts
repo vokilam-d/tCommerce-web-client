@@ -10,24 +10,14 @@ import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 })
 export class HeaderComponent implements OnInit {
 
+  isFixed: boolean;
+  toolbarPosition: number;
+
   get categories(): CategoryTreeItem[] { return this.categoryService.categories; }
 
   @Input() isCatalogFixed: boolean = false;
   @ViewChild(SidebarMenuComponent) sidebarCmp: SidebarMenuComponent;
   @ViewChild('toolbarRef') toolbarRef: ElementRef;
-
-  isFixed: boolean;
-  elementPosition: number;
-
-  @HostListener("window:scroll", [])
-  onWindowScroll() {
-    if (!this.elementPosition) {
-      const targetElement = this.toolbarRef.nativeElement;
-      this.elementPosition = targetElement.getBoundingClientRect().top + document.documentElement.scrollTop;
-     }
-
-    this.isFixed = window.pageYOffset > this.elementPosition;
-    }
 
   constructor(private categoryService: CategoryService) {
   }
@@ -36,5 +26,15 @@ export class HeaderComponent implements OnInit {
 
   openMenu() {
     this.sidebarCmp.openMenu();
+  }
+
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    this.isFixed = window.pageYOffset > this.toolbarPosition;
+
+    if (!this.isFixed) {
+      const toolbarEl = this.toolbarRef.nativeElement;
+      this.toolbarPosition = toolbarEl.getBoundingClientRect().top + document.documentElement.scrollTop;
+    }
   }
 }

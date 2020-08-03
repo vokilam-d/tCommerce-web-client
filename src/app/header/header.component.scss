@@ -92,6 +92,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 4px 0;
+
+  @include respond-to($media_medium) {
+    width: 100%;
+    padding: initial;
+  }
 
   &__item {
     flex-shrink: 0;
@@ -132,6 +138,13 @@
 .fixed-container {
   height: 40px;
   margin: 20px 0 0;
+
+  @include respond-to($media_medium) {
+    width: 75%;
+    height: auto;
+    margin: 0;
+    padding: 0 0 0 30px;
+  }
 }
 
 .fixed {
@@ -140,10 +153,11 @@
     top: 0;
     left: 0;
     right: 0;
-    padding: 0 8px;
+    padding: 4px 8px;
     margin: 0;
-    z-index: 6;
+    border-bottom: 1px solid $borderColor;
     background-color: #ffffff;
+    z-index: 6;
   }
 }
 
