@@ -1,6 +1,23 @@
 @import "variables";
 @import "mixins";
 
+.fixed-container {
+  height: 35px;
+}
+
+.fixed {
+  @include respond-to-less-than($media_medium) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1px 8px 5px 8px;
+    border-bottom: 1px solid $borderColor;
+    background-color: #ffffff;
+    z-index: 6;
+  }
+}
+
 .product-list {
   @include respond-to($media_large) {
     display: flex;
@@ -112,7 +129,6 @@
     margin: 15vh 0;
   }
 }
-
 
 .filter-toggle {
   display: inline-block;

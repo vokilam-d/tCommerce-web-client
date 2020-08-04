@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { CategoryService } from '../pages/category/category.service';
 import { CategoryTreeItem } from '../shared/dtos/category-tree.dto';
 import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
@@ -10,18 +10,31 @@ import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 })
 export class HeaderComponent implements OnInit {
 
+  isFixed: boolean;
+  toolbarPosition: number;
+
   get categories(): CategoryTreeItem[] { return this.categoryService.categories; }
 
   @Input() isCatalogFixed: boolean = false;
   @ViewChild(SidebarMenuComponent) sidebarCmp: SidebarMenuComponent;
+  @ViewChild('toolbarRef') toolbarRef: ElementRef;
 
   constructor(private categoryService: CategoryService) {
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   openMenu() {
     this.sidebarCmp.openMenu();
+  }
+
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    this.isFixed = window.pageYOffset > this.toolbarPosition;
+
+    if (!this.isFixed) {
+      const toolbarEl = this.toolbarRef.nativeElement;
+      this.toolbarPosition = toolbarEl.getBoundingClientRect().top + document.documentElement.scrollTop;
+    }
   }
 }

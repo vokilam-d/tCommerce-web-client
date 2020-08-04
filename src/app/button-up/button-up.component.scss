@@ -1,0 +1,60 @@
+@import "mixins";
+@import "variables";
+
+.btn-up {
+  width: 40px;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  animation: appearLighter 1.5s ease-in-out;
+  opacity: 0.2;
+
+  &:hover {
+    opacity: 0.4;
+  }
+
+  @include respond-to($media_large) {
+    bottom: 35px;
+    right: 70px;
+    animation: appearDarker 1.5s ease-in-out;
+    opacity: 0.3;
+  }
+
+  &__img {
+    width: 100%;
+  }
+
+  @keyframes appearDarker {
+    0% {
+      opacity: 0.05;
+    }
+    25% {
+      opacity: 0.1;
+    }
+    50% {
+      opacity: 0.2;
+    }
+    100% {
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes appearLighter {
+    0% {
+      opacity: 0.030;
+    }
+    25% {
+      opacity: 0.090;
+    }
+    50% {
+      opacity: 0.15;
+    }
+    100% {
+      opacity: 0.2;
+    }
+  }
+}
