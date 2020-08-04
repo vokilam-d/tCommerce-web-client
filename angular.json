@@ -96,7 +96,8 @@
             "port": 4002,
             "aot": true,
             "disableHostCheck": true,
-            "liveReload": true
+            "liveReload": true,
+            "host": "0.0.0.0"
           },
           "configurations": {
             "production": {
