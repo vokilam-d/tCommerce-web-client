@@ -19,7 +19,7 @@ $inputBorderColor: #ddd;
 
   &__close {
     position: fixed;
-    top: 25px;
+    top: 35px;
     right: 7px;
     padding: 10px;
     color: #fff;
@@ -64,6 +64,7 @@ $inputBorderColor: #ddd;
     padding: 8px 15px 7px;
     border: 1px solid $inputBorderColor;
     border-radius: 3px;
+    line-height: 1;
     font-size: 16px;
 
     @include respond-to($media_large) {
