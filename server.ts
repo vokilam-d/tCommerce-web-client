@@ -16,7 +16,7 @@ import { RESPONSE } from '@nguniversal/express-engine/tokens';
 
 let pages: PageRegistryDto[] = [];
 
-const oneMinute = 1 * 60 * 1000;
+const thirtySeconds = 30 * 1000;
 async function updatePages(apiHost: string) {
 
   if (apiHost.indexOf('http') !== 0) {
@@ -32,7 +32,7 @@ async function updatePages(apiHost: string) {
     console.error(ex.response ? ex.response.data : ex.toString());
   }
 
-  setTimeout(() => updatePages(apiHost), oneMinute);
+  setTimeout(() => updatePages(apiHost), thirtySeconds);
 }
 
 // The Express app is exported so that it can be used by serverless Functions.
