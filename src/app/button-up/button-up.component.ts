@@ -20,7 +20,7 @@ export class ButtonUpComponent implements OnInit {
   }
 
   scrollTop() {
-    this.scrollToService.scrollTo({ container: 'body', offset: -window.scrollY, duration: 800 });
+    this.scrollToService.scrollTo({ container: 'body', offset: 0, duration: 800 });
   }
 
 }
