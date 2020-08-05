@@ -13,7 +13,7 @@ export class RatingStarsComponent implements OnInit, AfterViewInit {
   @ViewChild('stopElement') stopElement: ElementRef;
   @ViewChild('pathElement') pathElement: ElementRef;
 
-  constructor(private renderer: Renderer2) { }
+  constructor( private renderer: Renderer2 ) { }
 
   ngOnInit(): void {
   }
@@ -25,5 +25,20 @@ export class RatingStarsComponent implements OnInit, AfterViewInit {
 
   getFillId() {
     return `rating-${this.rating}`;
+  }
+
+  getRatingBarPosition() {
+    return this.stopElement.nativeElement.getBoundingClientRect().right;
+  }
+
+  setCursorPosition(event) {
+    const x = event.clientX;
+    const y = event.clientY;
+    console.log(`X coords: ${x}, Y coords: ${y}`)
+    return `X coords: ${x}, Y coords: ${y}`;
+  }
+
+  fillStars() {
+    const starWidth = '13px';
   }
 }

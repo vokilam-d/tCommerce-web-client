@@ -6,6 +6,13 @@
   width: 75px;
 
   &--small {
-    width: 60px;
+    width: 70px;
+  }
+}
+
+.filled {
+
+  &:hover {
+    cursor: pointer;
   }
 }
