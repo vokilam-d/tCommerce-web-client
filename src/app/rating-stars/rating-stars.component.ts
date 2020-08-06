@@ -7,11 +7,16 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChi
 })
 export class RatingStarsComponent implements OnInit, AfterViewInit {
 
+  ratingBarElParams: any;
+
   @Input() rating: number;
   @Input() size: 'default' | 'small' = 'default';
 
   @ViewChild('stopElement') stopElement: ElementRef;
+  @ViewChild('stopElementGray') stopElementGray: ElementRef;
   @ViewChild('pathElement') pathElement: ElementRef;
+  @ViewChild('ratingBarElement') ratingBarElement: ElementRef;
+
 
   constructor( private renderer: Renderer2 ) { }
 
@@ -21,24 +26,29 @@ export class RatingStarsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', `${this.rating / 5}`);
     this.renderer.setAttribute(this.pathElement.nativeElement, 'fill', `url(#${this.getFillId()})`);
+
+    this.ratingBarElParams = this.getRatingBarParams();
   }
 
   getFillId() {
     return `rating-${this.rating}`;
   }
 
-  getRatingBarPosition() {
-    return this.stopElement.nativeElement.getBoundingClientRect().right;
+  getRatingBarParams() {
+    const ratingBarEl = this.ratingBarElement.nativeElement;
+    return {
+      left: ratingBarEl.getBoundingClientRect().left,
+      width: ratingBarEl.getBoundingClientRect().width,
+    }
   }
 
-  setCursorPosition(event) {
-    const x = event.clientX;
-    const y = event.clientY;
-    console.log(`X coords: ${x}, Y coords: ${y}`)
-    return `X coords: ${x}, Y coords: ${y}`;
+  onMouseMove(e) {
+    const cursorPositionX = e.clientX;
+    const ratingBarElLeftPosition = this.ratingBarElParams.left;
+    const ratingBarElWidth = this.ratingBarElParams.width;
+    const starWidth = ratingBarElWidth / 5;
+
+    this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', `${ (cursorPositionX - ratingBarElLeftPosition) / (5 * starWidth)}`);
   }
 
-  fillStars() {
-    const starWidth = '13px';
-  }
 }
