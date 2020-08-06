@@ -11,7 +11,12 @@
     background: #f5f5f5;
     border: 1px solid #d2d2d2;
     border-radius: 3px;
+    font-size: 16px;
     appearance: none;
+
+    @include respond-to($media_medium) {
+      font-size: 14px;
+    }
   }
 
   &__arrow {
