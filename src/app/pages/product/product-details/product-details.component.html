@@ -47,12 +47,6 @@
 <ng-template #reviewsTmpl>
   <div class="reviews">
 
-    <div class="reviews__add">
-      Оставьте свой отзыв об этом товаре
-
-      <button class="btn reviews__add-btn" (click)="openReviewModal()" type="button">Написать отзыв</button>
-    </div>
-
     <review class="reviews__review"
             *ngFor="let review of reviews"
             [review]="review"
@@ -60,6 +54,12 @@
             (downvote)="downvote(review)"
             (addComment)="onAddComment(review, $event)"
     ></review>
+
+    <div class="reviews__add">
+      Оставьте свой отзыв об этом товаре
+
+      <button class="btn reviews__add-btn" (click)="openReviewModal()" type="button">Написать отзыв</button>
+    </div>
   </div>
 </ng-template>
 
