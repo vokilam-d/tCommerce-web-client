@@ -15,7 +15,7 @@
     appearance: none;
 
     @include respond-to($media_medium) {
-      font-size: 100%;
+      font-size: 14px;
     }
   }
 
