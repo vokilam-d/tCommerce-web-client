@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { BlogService } from '../../../services/blog/blog.service';
 import { BlogPostListItemDto } from '../../../shared/dtos/blog-post-list-item.dto';
 import { API_HOST } from '../../../shared/constants';
+import { onWindowLoad } from '../../../shared/helpers/on-window-load.function';
 
 @Component({
   selector: 'posts-preview',
@@ -16,7 +17,7 @@ export class PostsPreviewComponent implements OnInit {
   constructor(private blogService: BlogService) { }
 
   ngOnInit(): void {
-    this.fetchPosts();
+    onWindowLoad(this, this.fetchPosts);
   }
 
   fetchPosts() {
@@ -30,5 +31,4 @@ export class PostsPreviewComponent implements OnInit {
           .subscribe(response => this.posts = response.data);
     }
   }
-
 }

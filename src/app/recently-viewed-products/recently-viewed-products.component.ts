@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../pages/product/product.service';
-import { DeviceService } from '../services/device-detector/device.service';
+import { onWindowLoad } from '../shared/helpers/on-window-load.function';
 
 @Component({
   selector: 'recently-viewed-products',
@@ -11,14 +11,13 @@ export class RecentlyViewedProductsComponent implements OnInit {
 
   recentlyViewedProducts: number[];
 
-  constructor(private productService: ProductService,
-              private deviceService: DeviceService
-  ) { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    if (this.deviceService.isPlatformBrowser()) {
-      this.recentlyViewedProducts = this.productService.getViewedProductsFromLocalStorage();
-    }
+    onWindowLoad(this, this.init);
   }
 
+  private init() {
+    this.recentlyViewedProducts = this.productService.getViewedProductsFromLocalStorage();
+  }
 }

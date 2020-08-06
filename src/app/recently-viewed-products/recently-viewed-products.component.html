@@ -1,1 +1,4 @@
-<products-preview [ids]="recentlyViewedProducts" [type]="'recentlyViewedProducts'"></products-preview>
+<products-preview *ngIf="recentlyViewedProducts"
+                  [ids]="recentlyViewedProducts"
+                  [type]="'recentlyViewedProducts'"
+></products-preview>

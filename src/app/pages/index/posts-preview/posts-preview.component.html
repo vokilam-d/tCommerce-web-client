@@ -9,8 +9,10 @@
       <div class="posts__item post" *ngFor="let post of posts | slice:0:3">
         <div class="post__container">
           <a class="post__img-container link" [routerLink]="['/', 'blog', post.slug]" [title]="post.name">
-            <img class="post__img" [src]="uploadedHost + post.featuredMedia.variantsUrls.original"
+            <img class="post__img"
+                 [src]="uploadedHost + post.featuredMedia.variantsUrls.original"
                  [alt]="post.featuredMedia.altText"
+                 loading="lazy"
             >
           </a>
 

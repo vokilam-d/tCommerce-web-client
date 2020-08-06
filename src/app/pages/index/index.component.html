@@ -6,21 +6,21 @@
     <div class="banner__content">
       <div class="banner__slider">
         <a class="banner__img-wrapper" routerLink="/rulon-potali-150-mm-zoloto-2-5.html">
-          <img class="banner__img banner__main-img" src="../../../assets/images/transfernaya-potal-15-sm-zoloto-600-600.jpg" alt="">
+          <img class="banner__img banner__main-img" src="../../../assets/images/transfernaya-potal-15-sm-zoloto-600-600.jpg" loading="lazy" alt="">
         </a>
       </div>
       <div class="banner__imgs">
         <div class="banner__imgs-row">
           <a class="banner__img-wrapper" routerLink="/vodnyj-klej-dlya-potali-ferrario-la-doratura-ad-acqua-250.html">
-            <img class="banner__img" src="../../../assets/images/ferrario-vodniy-250-steklo-600-600.jpg" alt="">
+            <img class="banner__img" src="../../../assets/images/ferrario-vodniy-250-steklo-600-600.jpg" loading="lazy" alt="">
           </a>
           <a class="banner__img-wrapper" routerLink="/la-doratura-ferrario-maslyanyj-kley-dlya-potali-75-ml-3-h.html">
-            <img class="banner__img" src="../../../assets/images/ferrario-kley-3-h-600-600.jpg" alt="">
+            <img class="banner__img" src="../../../assets/images/ferrario-kley-3-h-600-600.jpg" loading="lazy" alt="">
           </a>
         </div>
 
         <a class="banner__img-wrapper" routerLink="/ferrario-metallicheskiy-pigment-03-blednoe-bogatoe-zoloto-25-ml.html">
-          <img class="banner__img" src="../../../assets/images/3-pigmenta.jpg" alt="">
+          <img class="banner__img" src="../../../assets/images/3-pigmenta.jpg" loading="lazy" alt="">
         </a>
       </div>
     </div>
@@ -29,15 +29,15 @@
   <ul class="categories">
     <li class="category" *ngFor="let category of categories">
       <a class="category__img-wrapper" [routerLink]="'/' + category.slug" [ngSwitch]="category.name">
-        <img class="category__img" *ngSwitchCase="'Золочение'" src="../../../assets/images/ferrario_potal_v_knige_1.jpg" alt="Золочение">
-        <img class="category__img" *ngSwitchCase="'Краски, патины, воски'" src="../../../assets/images/ferrario_paints.jpg" alt="Краски, патины, воски">
-        <img class="category__img" *ngSwitchCase="'Картины по номерам'" src="../../../assets/images/kartiny_po_nomeram.jpg" alt="Картины по номерам">
-        <img class="category__img" *ngSwitchCase="'Кисти'" src="../../../assets/images/hudogheztvennye_kisti.jpg" alt="Кисти">
-        <img class="category__img" *ngSwitchCase="'Лаки'" src="../../../assets/images/vanishes.jpg" alt="Лаки">
-        <img class="category__img" *ngSwitchCase="'Состаривание'" src="../../../assets/images/sostarivanie.jpg" alt="Состаривание">
-        <img class="category__img" *ngSwitchCase="'Клеи'" src="../../../assets/images/klei.jpg" alt="Клеи">
-        <img class="category__img" *ngSwitchCase="'Пигменты'" src="../../../assets/images/pigments.jpg" alt="Пигменты">
-        <img class="category__img" *ngSwitchCase="'Инструменты и аксессуары'" src="../../../assets/images/instrumenty.jpg" alt="Инструменты и аксессуары">
+        <img class="category__img" *ngSwitchCase="'Золочение'" src="../../../assets/images/ferrario_potal_v_knige_1.jpg" loading="lazy" alt="Золочение">
+        <img class="category__img" *ngSwitchCase="'Краски, патины, воски'" src="../../../assets/images/ferrario_paints.jpg" loading="lazy" alt="Краски, патины, воски">
+        <img class="category__img" *ngSwitchCase="'Картины по номерам'" src="../../../assets/images/kartiny_po_nomeram.jpg" loading="lazy" alt="Картины по номерам">
+        <img class="category__img" *ngSwitchCase="'Кисти'" src="../../../assets/images/hudogheztvennye_kisti.jpg" loading="lazy" alt="Кисти">
+        <img class="category__img" *ngSwitchCase="'Лаки'" src="../../../assets/images/vanishes.jpg" loading="lazy" alt="Лаки">
+        <img class="category__img" *ngSwitchCase="'Состаривание'" src="../../../assets/images/sostarivanie.jpg" loading="lazy" alt="Состаривание">
+        <img class="category__img" *ngSwitchCase="'Клеи'" src="../../../assets/images/klei.jpg" loading="lazy" alt="Клеи">
+        <img class="category__img" *ngSwitchCase="'Пигменты'" src="../../../assets/images/pigments.jpg" loading="lazy" alt="Пигменты">
+        <img class="category__img" *ngSwitchCase="'Инструменты и аксессуары'" src="../../../assets/images/instrumenty.jpg" loading="lazy" alt="Инструменты и аксессуары">
       </a>
 
       <div class="category__info">
