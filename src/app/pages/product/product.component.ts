@@ -40,7 +40,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
               private sanitizer: DomSanitizer,
               private wishlistService: WishlistService,
               private productService: ProductService,
-              private deviceService: DeviceService,
+              private deviceService: DeviceService
   ) { }
 
   ngOnInit() {
@@ -88,8 +88,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.detailsCmp.openReviewsTab(showSuccess);
   }
 
-  setProductRating() {
-    //
+  addQuickReview(product: ProductDto, rating: number) {
+    this.productService.addQuickReview(product, rating);
   }
 
   private setMeta() {
