@@ -46,9 +46,20 @@ export class RatingStarsComponent implements OnInit, AfterViewInit {
     const cursorPositionX = e.clientX;
     const ratingBarElLeftPosition = this.ratingBarElParams.left;
     const ratingBarElWidth = this.ratingBarElParams.width;
-    const starWidth = ratingBarElWidth / 5;
+    const starsWidthOnHover = cursorPositionX - ratingBarElLeftPosition;
 
-    this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', `${ (cursorPositionX - ratingBarElLeftPosition) / (5 * starWidth)}`);
+    const starWidth = ratingBarElWidth / 5;
+    const starNumber = Math.ceil(starsWidthOnHover / starWidth);
+
+    this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', `${starNumber / 5}`);
+  }
+
+  onMouseLeave() {
+    this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', '0');
   }
 
 }
+
+// убирать курсор - изначальный рейтинг
+// клик - бекэнд запрос с рейтингом от 1 до 5 эмитит событие на клик родителю
+// бекэнд отправляет родитель

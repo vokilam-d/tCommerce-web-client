@@ -1,4 +1,10 @@
-<svg class="stars" [class.stars--small]="'small'" viewBox="0 0 64 12" (mousemove)="onMouseMove($event)" #ratingBarElement>
+<svg class="stars"
+     [class.stars--small]="'small'"
+     viewBox="0 0 64 12"
+     (mousemove)="onMouseMove($event)"
+     (mouseleave)="onMouseLeave()"
+     #ratingBarElement
+>
   <g>
     <defs>
       <linearGradient gradientUnits="userSpaceOnUse" [id]="getFillId()">
