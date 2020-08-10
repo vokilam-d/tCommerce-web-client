@@ -31,7 +31,7 @@
       <div class="product__rating">
         <rating-stars class="product__rating-cmp"
                       [rating]="product.reviewsAvgRating"
-                      (click)="setProductRating()"
+                      (quickReview)="addQuickReview($event)"
         ></rating-stars>
 
         <div class="product__rating-count">{{ product.reviewsCount }}</div>

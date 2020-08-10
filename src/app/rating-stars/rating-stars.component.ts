@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
 
 @Component({
   selector: 'rating-stars',
@@ -8,9 +18,12 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChi
 export class RatingStarsComponent implements OnInit, AfterViewInit {
 
   ratingBarElParams: any;
+  ratingOnHover: number;
 
   @Input() rating: number;
   @Input() size: 'default' | 'small' = 'default';
+
+  @Output() quickReview = new EventEmitter<number>();
 
   @ViewChild('stopElement') stopElement: ElementRef;
   @ViewChild('stopElementGray') stopElementGray: ElementRef;
@@ -49,18 +62,17 @@ export class RatingStarsComponent implements OnInit, AfterViewInit {
     const starsWidthOnHover = cursorPositionX - ratingBarElLeftPosition;
 
     const starWidth = ratingBarElWidth / 5;
-    const starNumber = Math.ceil(starsWidthOnHover / starWidth);
+    this.ratingOnHover = Math.ceil(starsWidthOnHover / starWidth);
 
-    this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', `${starNumber / 5}`);
+    this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', `${this.ratingOnHover / 5}`);
   }
 
   onMouseLeave() {
-    this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', '0');
+    this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', `${this.rating / 5}`);
+  }
+
+  onClick() {
+    this.quickReview.emit(this.ratingOnHover);
   }
 
 }
-
-// убирать курсор - изначальный рейтинг
-// клик - бекэнд запрос с рейтингом от 1 до 5
-// бекэнд отправляет родитель
-// рейтинг старс компонент эмитит событие на клик родителю

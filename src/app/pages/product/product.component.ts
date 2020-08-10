@@ -88,8 +88,13 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.detailsCmp.openReviewsTab(showSuccess);
   }
 
-  addQuickReview(product: ProductDto, rating: number) {
-    this.productService.addQuickReview(product, rating);
+  addQuickReview(rating: number) {
+    this.productService.addQuickReview(this.product, rating).subscribe(
+      response => {
+        this.product.reviewsCount = response.data.reviewsCount;
+        this.product.reviewsAvgRating = response.data.reviewsAvgRating;
+      }
+    );
   }
 
   private setMeta() {
