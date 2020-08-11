@@ -37,6 +37,14 @@
         <div class="product__rating-count">{{ product.reviewsCount }}</div>
       </div>
 
+      <div class="product__rating-error" *ngIf="addQuickReviewError as error; else ratingSuccess">
+        {{ error }}
+      </div>
+
+      <ng-template class="product__rating-success" #ratingSuccess>
+        {{ addQuickReviewSuccess }}
+      </ng-template>
+
       <div class="product__sku-container" [class.product__sku-container--with-vendor]="product.vendorCode">
         <div class="product__sku">
           Код: <span class="product__sku-value">{{ product.sku }}</span>

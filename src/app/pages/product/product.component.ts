@@ -23,6 +23,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   fetchError: string | null = null;
   addToCartError: string | null = null;
+  addQuickReviewError: string | null = null;
+  addQuickReviewSuccess: string | null = null;
   product: ProductDto;
   breadcrumbs: IBreadcrumb[] = [];
   isLoading: boolean = false;
@@ -89,11 +91,15 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   addQuickReview(rating: number) {
+    this.addQuickReviewError = null;
+
     this.productService.addQuickReview(this.product, rating).subscribe(
       response => {
         this.product.reviewsCount = response.data.reviewsCount;
         this.product.reviewsAvgRating = response.data.reviewsAvgRating;
-      }
+        this.addQuickReviewSuccess = 'Спасибо! Ваш голос учтен';
+      },
+      error => this.addQuickReviewError = error.error?.message || DEFAULT_ERROR_TEXT
     );
   }
 

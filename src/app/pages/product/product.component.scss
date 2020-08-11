@@ -11,6 +11,7 @@
   }
 
   &__rating-sku {
+    position: relative;
     margin: 20px 0 0;
     padding: 0 5px 0 0;
     display: flex;
@@ -29,6 +30,18 @@
   &__rating-count {
     margin: 0 0 0 8px;
     color: #666;
+  }
+
+  &__rating-error, &__rating-success {
+    position: absolute;
+    top: 20px;
+    font-size: 12px;
+
+    @include respond-to($media_medium) {
+      top: auto;
+      left: 100px;
+      font-size: 14px;
+    }
   }
 
   &__sku-container {
