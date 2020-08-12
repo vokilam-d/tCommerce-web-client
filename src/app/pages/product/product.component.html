@@ -31,19 +31,21 @@
       <div class="product__rating">
         <rating-stars class="product__rating-cmp"
                       [rating]="product.reviewsAvgRating"
+                      [isDisabled]="addQuickReviewSuccess"
                       (quickReview)="addQuickReview($event)"
         ></rating-stars>
 
         <div class="product__rating-count">{{ product.reviewsCount }}</div>
-      </div>
 
-      <div class="product__rating-error" *ngIf="addQuickReviewError as error; else ratingSuccess">
-        {{ error }}
-      </div>
+        <div class="product__rating-error" *ngIf="addQuickReviewError as error">
+          {{ error }}
+        </div>
 
-      <ng-template class="product__rating-success" #ratingSuccess>
-        {{ addQuickReviewSuccess }}
-      </ng-template>
+        <div class="product__rating-error" *ngIf="addQuickReviewSuccess as success">
+          Спасибо! Ваш голос учтен
+        </div>
+
+      </div>
 
       <div class="product__sku-container" [class.product__sku-container--with-vendor]="product.vendorCode">
         <div class="product__sku">

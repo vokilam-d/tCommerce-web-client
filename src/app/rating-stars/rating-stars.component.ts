@@ -22,6 +22,7 @@ export class RatingStarsComponent implements OnInit, AfterViewInit {
 
   @Input() rating: number;
   @Input() size: 'default' | 'small' = 'default';
+  @Input() isDisabled: boolean = false;
 
   @Output() quickReview = new EventEmitter<number>();
 
@@ -56,6 +57,10 @@ export class RatingStarsComponent implements OnInit, AfterViewInit {
   }
 
   onMouseMove(e) {
+    if (this.isDisabled) {
+      return;
+    }
+
     const cursorPositionX = e.clientX;
     const ratingBarElLeftPosition = this.ratingBarElParams.left;
     const ratingBarElWidth = this.ratingBarElParams.width;
@@ -68,10 +73,18 @@ export class RatingStarsComponent implements OnInit, AfterViewInit {
   }
 
   onMouseLeave() {
+    if (this.isDisabled) {
+      return;
+    }
+
     this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', `${this.rating / 5}`);
   }
 
   onClick() {
+    if (this.isDisabled) {
+      return;
+    }
+
     this.quickReview.emit(this.ratingOnHover);
   }
 

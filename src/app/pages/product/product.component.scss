@@ -11,20 +11,26 @@
   }
 
   &__rating-sku {
-    position: relative;
     margin: 20px 0 0;
     padding: 0 5px 0 0;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+
+    @include respond-to($media_medium) {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
   }
 
   &__rating {
-    width: 50%;
     position: relative;
     margin-right: auto;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
+
+    @include respond-to($media_medium) {
+      margin-bottom: auto;
+    }
   }
 
   &__rating-count {
@@ -33,15 +39,16 @@
   }
 
   &__rating-error, &__rating-success {
-    position: absolute;
-    top: 20px;
+    margin-left: 20px;
     font-size: 12px;
 
     @include respond-to($media_medium) {
-      top: auto;
-      left: 100px;
       font-size: 14px;
     }
+  }
+
+  &__rating-error {
+    color: #626262;
   }
 
   &__sku-container {

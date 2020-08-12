@@ -1,15 +1,25 @@
+@import "mixins";
+
 :host {
   display: block;
 }
 
 .stars {
-  width: 75px;
+  width: 120px;
 
-  &--small {
-    width: 70px;
+  @include respond-to($media_medium) {
+    width: 80px;
   }
 
   &:hover {
     cursor: pointer;
+  }
+}
+
+.small {
+  width: 60px;
+
+  &:hover {
+    cursor: auto;
   }
 }

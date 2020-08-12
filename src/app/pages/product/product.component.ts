@@ -24,7 +24,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   fetchError: string | null = null;
   addToCartError: string | null = null;
   addQuickReviewError: string | null = null;
-  addQuickReviewSuccess: string | null = null;
+  addQuickReviewSuccess: boolean = false;
   product: ProductDto;
   breadcrumbs: IBreadcrumb[] = [];
   isLoading: boolean = false;
@@ -97,7 +97,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       response => {
         this.product.reviewsCount = response.data.reviewsCount;
         this.product.reviewsAvgRating = response.data.reviewsAvgRating;
-        this.addQuickReviewSuccess = 'Спасибо! Ваш голос учтен';
+        this.addQuickReviewSuccess = true;
       },
       error => this.addQuickReviewError = error.error?.message || DEFAULT_ERROR_TEXT
     );
