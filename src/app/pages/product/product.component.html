@@ -37,13 +37,9 @@
 
         <div class="product__rating-count">{{ product.reviewsCount }}</div>
 
-        <div class="product__rating-error" *ngIf="addQuickReviewError as error">
-          {{ error }}
-        </div>
-
-        <div class="product__rating-error" *ngIf="addQuickReviewSuccess as success">
-          Спасибо! Ваш голос учтен
-        </div>
+        <div class="product__rating-text" *ngIf="!addQuickReviewError && !addQuickReviewSuccess">Выберите звёздочку</div>
+        <div class="product__rating-text" *ngIf="addQuickReviewError as error">{{ error }}</div>
+        <div class="product__rating-text" *ngIf="addQuickReviewSuccess as success">Спасибо! Ваш голос учтен</div>
 
       </div>
 

@@ -28,7 +28,8 @@
     <a class="item__rating" *ngIf="item.reviewsCount > 0" [routerLink]="'/' + item.slug" fragment="reviews">
       <rating-stars class="item__rating-cmp"
                     [rating]="item.reviewsAvgRating"
-                    [size]="'small'"
+                    [isDisabled]="true"
+                    [isSmall]="true"
       ></rating-stars>
 
       <span class="item__rating-count">{{ item.reviewsCount }}</span>

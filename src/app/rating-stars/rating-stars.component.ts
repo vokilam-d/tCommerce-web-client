@@ -23,6 +23,7 @@ export class RatingStarsComponent implements OnInit, AfterViewInit {
   @Input() rating: number;
   @Input() size: 'default' | 'small' = 'default';
   @Input() isDisabled: boolean = false;
+  @Input() isSmall: boolean = false;
 
   @Output() quickReview = new EventEmitter<number>();
 

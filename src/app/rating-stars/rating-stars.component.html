@@ -1,5 +1,5 @@
 <svg class="stars"
-     [ngClass]="{ small: isDisabled }"
+     [ngClass]="{ 'stars--small': isSmall, 'stars--disabled': isDisabled }"
      viewBox="0 0 64 12"
      (mousemove)="onMouseMove($event)"
      (mouseleave)="onMouseLeave()"

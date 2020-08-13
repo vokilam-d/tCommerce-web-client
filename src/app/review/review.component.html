@@ -3,7 +3,7 @@
     Этот отзыв поддержали {{ review.votesCount }} раз
   </div>
 
-  <rating-stars class="review__rating" [rating]="review.rating" [isDisabled]="true"></rating-stars>
+  <rating-stars class="review__rating" [rating]="review.rating" [isDisabled]="true" [isSmall]="true"></rating-stars>
 
   <div class="review__name-container">
     <span class="review__name">{{ review.name }}</span><span class="review__date"> {{ review.createdAt | date }}</span>

@@ -6,20 +6,17 @@
 
 .stars {
   width: 120px;
+  cursor: pointer;
 
   @include respond-to($media_medium) {
     width: 80px;
   }
 
-  &:hover {
-    cursor: pointer;
+  &--small {
+    width: 60px;
   }
-}
 
-.small {
-  width: 60px;
-
-  &:hover {
-    cursor: auto;
+  &--disabled {
+    cursor: default;
   }
 }
