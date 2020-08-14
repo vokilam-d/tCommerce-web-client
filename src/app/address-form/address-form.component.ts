@@ -68,9 +68,16 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
     const addressProp: keyof ShipmentAddressDto = 'address';
     this.addressForm.get(addressTypeProp).valueChanges
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(_ => {
+      .subscribe((addressType: AddressTypeEnum) => {
         this.addressForm.get(addressIdProp).reset('');
         this.addressForm.get(addressProp).reset('');
+
+        if (addressType === AddressTypeEnum.WAREHOUSE) {
+          const buildingProp: keyof ShipmentAddressDto = 'buildingNumber';
+          const flantProp: keyof ShipmentAddressDto = 'flat';
+          this.addressForm.get(buildingProp).reset('');
+          this.addressForm.get(flantProp).reset('');
+        }
       })
   }
 
