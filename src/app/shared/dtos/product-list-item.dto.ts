@@ -15,5 +15,5 @@ export class ProductListItemDto {
   slug: string;
   variantGroups: ProductVariantGroupDto[];
   reviewsAvgRating: number;
-  reviewsCount: number;
+  allReviewsCount: number;
 }

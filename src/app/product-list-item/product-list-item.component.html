@@ -25,14 +25,14 @@
   </header>
 
   <div class="item__info">
-    <a class="item__rating" *ngIf="item.reviewsCount > 0" [routerLink]="'/' + item.slug" fragment="reviews">
+    <a class="item__rating" *ngIf="item.allReviewsCount > 0" [routerLink]="'/' + item.slug" fragment="reviews">
       <rating-stars class="item__rating-cmp"
                     [rating]="item.reviewsAvgRating"
                     [isDisabled]="true"
                     [isSmall]="true"
       ></rating-stars>
 
-      <span class="item__rating-count">{{ item.reviewsCount }}</span>
+      <span class="item__rating-count">{{ item.allReviewsCount }}</span>
     </a>
 
     <div class="item__price-container">
