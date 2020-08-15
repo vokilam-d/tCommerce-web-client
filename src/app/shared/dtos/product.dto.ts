@@ -34,7 +34,8 @@ export class ProductDto {
   price: number;
   oldPrice: number;
   reviewsAvgRating: number;
-  reviewsCount: number;
+  allReviewsCount: number;
+  textReviewsCount: number;
   sku: string;
   slug: string;
   vendorCode: string;

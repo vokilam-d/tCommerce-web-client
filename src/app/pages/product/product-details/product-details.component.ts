@@ -42,7 +42,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.product.reviewsCount > 0) {
+    if (this.product.textReviewsCount > 0) {
       this.fetchReviews();
     } else {
       this.setJsonLd();
@@ -190,11 +190,11 @@ export class ProductDetailsComponent implements OnInit {
       jsonLd.image = `https://klondike.com.ua${this.product.medias[0].variantsUrls.original}`;
     }
 
-    if (this.product.reviewsCount > 0) {
+    if (this.product.textReviewsCount > 0) {
       jsonLd.aggregateRating = {
         '@type': 'AggregateRating',
         ratingValue: this.product.reviewsAvgRating,
-        reviewCount: this.product.reviewsCount
+        reviewCount: this.product.allReviewsCount
       };
 
       jsonLd.review = this.reviews.map(review => ({

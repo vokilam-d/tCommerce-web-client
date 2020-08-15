@@ -35,7 +35,7 @@
                       (quickReview)="addQuickReview($event)"
         ></rating-stars>
 
-        <div class="product__rating-count">{{ product.reviewsCount }}</div>
+        <div class="product__rating-count">{{ product.allReviewsCount }}</div>
 
         <div class="product__rating-text" *ngIf="!addQuickReviewError && !addQuickReviewSuccess">Выберите звёздочку</div>
         <div class="product__rating-text" *ngIf="addQuickReviewError as error">{{ error }}</div>

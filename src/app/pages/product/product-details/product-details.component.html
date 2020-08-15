@@ -11,7 +11,7 @@
       <ng-container *ngSwitchCase="indices.chars">Характеристики</ng-container>
       <ng-container *ngSwitchCase="indices.reviews">
         Отзывы
-        <span class="details__reviews-count" *ngIf="product.reviewsCount > 0">({{ product.reviewsCount }})</span>
+        <span class="details__reviews-count" *ngIf="product.textReviewsCount > 0">({{ product.textReviewsCount }})</span>
       </ng-container>
 
       <i class="mbi mbi-chevron-down details__title-icon"

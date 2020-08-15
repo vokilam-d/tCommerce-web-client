@@ -95,7 +95,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
     this.productService.addQuickReview(this.product, rating).subscribe(
       response => {
-        this.product.reviewsCount = response.data.reviewsCount;
+        this.product.allReviewsCount = response.data.allReviewsCount;
         this.product.reviewsAvgRating = response.data.reviewsAvgRating;
         this.addQuickReviewSuccess = true;
       },
