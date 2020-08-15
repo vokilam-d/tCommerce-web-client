@@ -6,6 +6,7 @@ import { toHttpParams } from '../../shared/helpers/to-http-params.function';
 import { SortingPaginatingFilterDto } from '../../shared/dtos/spf.dto';
 import { API_HOST, SEARCH_QUERY_PARAM, viewedProductsIdsKey } from '../../shared/constants';
 import { ProductListResponseDto } from '../../shared/dtos/product-list-response.dto';
+import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
 import { AddProductQuickReviewDto } from '../../shared/dtos/product-review.dto';
 
 @Injectable({
@@ -33,6 +34,10 @@ export class ProductService {
 
   fetchProductsByFilters(spf: SortingPaginatingFilterDto) {
     return this.http.get<ProductListResponseDto>(`${API_HOST}/api/v1/products`, { params: toHttpParams(spf) });
+  }
+
+  fetchRecentlyAddedProducts() {
+    return this.http.get<ResponseDto<ProductListItemDto[]>>(`${API_HOST}/api/v1/products?lastAdded=true`);
   }
 
   addViewedProductIdToLocalStorage(productId: number) {

@@ -1,7 +1,8 @@
-<div class="container" *ngIf="ids?.length" [ngSwitch]="type">
+<div class="container" *ngIf="ids?.length || items?.length" [ngSwitch]="type">
 
   <h3 class="related__title" *ngSwitchCase="'linkedProducts'">Сопутствующие товары</h3>
   <h3 class="related__title" *ngSwitchCase="'recentlyViewedProducts'">Просмотренные товары</h3>
+  <h3 class="related__title" *ngSwitchCase="'recentlyAddedProducts'">Недавно добавленные товары</h3>
 
   <div class="related">
 
