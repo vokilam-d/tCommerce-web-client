@@ -1,9 +1,16 @@
-<svg class="stars" [class.stars--small]="'small'" viewBox="0 0 64 12">
+<svg class="stars"
+     [ngClass]="{ 'stars--small': isSmall, 'stars--disabled': isDisabled }"
+     viewBox="0 0 64 12"
+     (mousemove)="onMouseMove($event)"
+     (mouseleave)="onMouseLeave()"
+     (click)="onClick()"
+     #ratingBarElement
+>
   <g>
     <defs>
       <linearGradient gradientUnits="userSpaceOnUse" [id]="getFillId()">
         <stop offset="1" stop-color="#ffa900" stop-opacity="1" #stopElement></stop>
-        <stop stop-color="#d2d2d2" stop-opacity="1"></stop>
+        <stop stop-color="#d2d2d2" stop-opacity="1" #stopElementGray></stop>
       </linearGradient>
     </defs>
     <path

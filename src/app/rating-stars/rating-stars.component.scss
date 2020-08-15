@@ -1,11 +1,22 @@
+@import "mixins";
+
 :host {
   display: block;
 }
 
 .stars {
-  width: 75px;
+  width: 120px;
+  cursor: pointer;
+
+  @include respond-to($media_medium) {
+    width: 80px;
+  }
 
   &--small {
     width: 60px;
+  }
+
+  &--disabled {
+    cursor: default;
   }
 }

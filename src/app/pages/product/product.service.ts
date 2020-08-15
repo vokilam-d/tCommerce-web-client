@@ -7,6 +7,7 @@ import { SortingPaginatingFilterDto } from '../../shared/dtos/spf.dto';
 import { API_HOST, SEARCH_QUERY_PARAM, viewedProductsIdsKey } from '../../shared/constants';
 import { ProductListResponseDto } from '../../shared/dtos/product-list-response.dto';
 import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
+import { AddProductQuickReviewDto } from '../../shared/dtos/product-review.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,8 @@ export class ProductService {
 
   addViewedProductIdToLocalStorage(productId: number) {
     let recentlyViewedProducts: any[] = localStorage.getItem(viewedProductsIdsKey)
-      ? JSON.parse(localStorage.getItem(viewedProductsIdsKey)) : [];
+      ? JSON.parse(localStorage.getItem(viewedProductsIdsKey))
+      : [];
 
     if (recentlyViewedProducts.length >= this.maxViewedProductsArrLength) {
       recentlyViewedProducts.pop();
@@ -55,6 +57,14 @@ export class ProductService {
 
   getViewedProductsFromLocalStorage() {
     return JSON.parse(localStorage.getItem(viewedProductsIdsKey));
+  }
+
+  addQuickReview(product: ProductDto, rating: number) {
+    const dto: AddProductQuickReviewDto = {
+      rating
+    };
+
+    return this.http.post<ResponseDto<ProductDto>>(`${API_HOST}/api/v1/products/${product.id}/quick-reviews`, dto);
   }
 
 }

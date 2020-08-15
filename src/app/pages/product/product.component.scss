@@ -13,22 +13,44 @@
   &__rating-sku {
     margin: 20px 0 0;
     padding: 0 5px 0 0;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+
+    @include respond-to($media_medium) {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
   }
 
   &__rating {
-    width: 50%;
     position: relative;
     margin-right: auto;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
+
+    @include respond-to($media_medium) {
+      margin-bottom: auto;
+    }
   }
 
   &__rating-count {
     margin: 0 0 0 8px;
+    font-size: 20px;
     color: #666;
+
+    @include respond-to($media_medium) {
+      font-size: 16px;
+    }
+  }
+
+  &__rating-text {
+    margin-left: 12px;
+    font-size: 14px;
+    color: rgba($dark, 0.6);
+
+    @include respond-to($media_medium) {
+      font-size: 14px;
+    }
   }
 
   &__sku-container {
@@ -191,10 +213,16 @@
   &__buy {
     position: relative;
     display: flex;
+    justify-content: center;
     align-items: center;
-    padding: 14px 50px 13px;
-    font-size: 20px;
+    width: 100%;
+    padding: 17px 50px 16px;
+    font-size: 24px;
     border-radius: 3px;
+
+    @include respond-to($media_medium) {
+      font-size: 20px;
+    }
 
     &--loading {
       color: transparent;
