@@ -1,6 +1,7 @@
 import { ProductVariantGroupDto } from './product-variant.dto';
 
 export class ProductListItemDto {
+  id: string;
   productId: number;
   variantId: string;
   name: string;

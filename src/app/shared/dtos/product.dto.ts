@@ -18,6 +18,7 @@ export class ProductCategoryDto {
 }
 
 export class ProductDto {
+  id: string;
   productId: number;
   variantId: string;
   isInStock: boolean;

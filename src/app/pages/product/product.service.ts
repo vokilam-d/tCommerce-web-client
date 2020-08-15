@@ -59,7 +59,7 @@ export class ProductService {
       rating
     };
 
-    return this.http.post<ResponseDto<ProductDto>>(`${API_HOST}/api/v1/products/${product.productId}/quick-reviews`, dto);
+    return this.http.post<ResponseDto<ProductDto>>(`${API_HOST}/api/v1/products/${product.id}/quick-reviews`, dto);
   }
 
 }

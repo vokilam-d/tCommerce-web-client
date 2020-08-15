@@ -4,9 +4,10 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  OnInit,
+  OnChanges,
   Output,
   Renderer2,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
 
@@ -15,7 +16,7 @@ import {
   templateUrl: './rating-stars.component.html',
   styleUrls: ['./rating-stars.component.scss']
 })
-export class RatingStarsComponent implements OnInit, AfterViewInit {
+export class RatingStarsComponent implements OnChanges, AfterViewInit {
 
   ratingBarElParams: any;
   ratingOnHover: number;
@@ -35,10 +36,17 @@ export class RatingStarsComponent implements OnInit, AfterViewInit {
 
   constructor( private renderer: Renderer2 ) { }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes?.rating.firstChange === false) {
+      this.setFill();
+    }
   }
 
   ngAfterViewInit(): void {
+    this.setFill();
+  }
+
+  private setFill() {
     this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', `${this.rating / 5}`);
     this.renderer.setAttribute(this.pathElement.nativeElement, 'fill', `url(#${this.getFillId()})`);
 
