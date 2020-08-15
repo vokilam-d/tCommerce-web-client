@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -24,14 +25,14 @@ import { DeviceService } from '../services/device-detector/device.service';
   templateUrl: './products-preview.component.html',
   styleUrls: ['./products-preview.component.scss']
 })
-export class ProductsPreviewComponent extends NgUnsubscribe implements OnInit {
+export class ProductsPreviewComponent extends NgUnsubscribe implements AfterViewInit {
 
-  items: ProductListItemDto[] = [];
   isLoading: boolean = false;
   private itemWidth: number;
   private activeItemIdx: number = 0;
   private itemsToShow: number = this.device.isMobile() ? 2 : 4;
 
+  @Input() items: ProductListItemDto[] = [];
   @Input() ids: number[];
   @Input() type: string;
   @ViewChild('itemsContainerRef') itemsContainerRef: ElementRef;
@@ -44,8 +45,13 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements OnInit {
     super();
   }
 
-  ngOnInit(): void {
-    this.fetchItems();
+  ngAfterViewInit(): void {
+    if (this.ids) {
+      this.fetchItems();
+    } else if (this.items) {
+      console.log('input items', this.items);
+      this.handleResize();
+    }
   }
 
   private fetchItems() {
@@ -55,6 +61,7 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements OnInit {
     spf.id = this.ids;
 
     this.isLoading = true;
+    this.cdr.detectChanges();
     this.productService.fetchProductsByFilters(spf)
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
