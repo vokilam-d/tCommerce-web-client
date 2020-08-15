@@ -28,13 +28,19 @@
 
     <div class="product__rating-sku">
 
-      <div class="product__rating" *ngIf="product.reviewsAvgRating">
+      <div class="product__rating">
         <rating-stars class="product__rating-cmp"
                       [rating]="product.reviewsAvgRating"
-                      (click)="scrollToReviews()"
+                      [isDisabled]="addQuickReviewSuccess"
+                      (quickReview)="addQuickReview($event)"
         ></rating-stars>
 
-        <div class="product__rating-count">{{ product.reviewsCount }}</div>
+        <div class="product__rating-count">{{ product.allReviewsCount }}</div>
+
+        <div class="product__rating-text" *ngIf="!addQuickReviewError && !addQuickReviewSuccess">Выберите звёздочку</div>
+        <div class="product__rating-text" *ngIf="addQuickReviewError as error">{{ error }}</div>
+        <div class="product__rating-text" *ngIf="addQuickReviewSuccess as success">Спасибо! Ваш голос учтен</div>
+
       </div>
 
       <div class="product__sku-container" [class.product__sku-container--with-vendor]="product.vendorCode">

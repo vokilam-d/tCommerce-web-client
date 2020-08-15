@@ -12,6 +12,10 @@ export class ProductReviewCommentDto extends AddProductReviewCommentDto {
   createdAt: Date;
 }
 
+export class AddProductQuickReviewDto {
+  rating: number;
+}
+
 export class AddProductReviewDto {
   email: string;
   name: string;

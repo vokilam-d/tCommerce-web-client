@@ -23,6 +23,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   fetchError: string | null = null;
   addToCartError: string | null = null;
+  addQuickReviewError: string | null = null;
+  addQuickReviewSuccess: boolean = false;
   product: ProductDto;
   breadcrumbs: IBreadcrumb[] = [];
   isLoading: boolean = false;
@@ -86,6 +88,19 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   scrollToReviews(showSuccess: boolean = false) {
     this.detailsCmp.openReviewsTab(showSuccess);
+  }
+
+  addQuickReview(rating: number) {
+    this.addQuickReviewError = null;
+
+    this.productService.addQuickReview(this.product, rating).subscribe(
+      response => {
+        this.product.allReviewsCount = response.data.allReviewsCount;
+        this.product.reviewsAvgRating = response.data.reviewsAvgRating;
+        this.addQuickReviewSuccess = true;
+      },
+      error => this.addQuickReviewError = error.error?.message || DEFAULT_ERROR_TEXT
+    );
   }
 
   private setMeta() {

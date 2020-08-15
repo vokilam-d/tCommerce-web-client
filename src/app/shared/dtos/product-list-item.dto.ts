@@ -1,6 +1,7 @@
 import { ProductVariantGroupDto } from './product-variant.dto';
 
 export class ProductListItemDto {
+  id: string;
   productId: number;
   variantId: string;
   name: string;
@@ -14,5 +15,5 @@ export class ProductListItemDto {
   slug: string;
   variantGroups: ProductVariantGroupDto[];
   reviewsAvgRating: number;
-  reviewsCount: number;
+  allReviewsCount: number;
 }
