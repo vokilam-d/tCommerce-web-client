@@ -31,7 +31,8 @@
         </div>
 
         <a class="search-bar__result product"
-           *ngFor="let product of searchResults"
+           *ngFor="let product of searchResults; let indexOfProduct=index"
+           [ngClass]="{ 'search-bar__result--active': indexOfProduct === activeIndex}"
            [routerLink]="['/', product.slug]"
         >
           <img class="product__image" [src]="uploadedHost + product.mediaUrl">

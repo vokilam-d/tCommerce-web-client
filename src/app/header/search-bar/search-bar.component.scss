@@ -153,8 +153,13 @@ $inputBorderColor: #ddd;
     &:last-child {
       border-bottom: 0;
     }
+
+    &--active {
+      background: #eee;
+    }
   }
 }
+
 
 .product {
   display: flex;

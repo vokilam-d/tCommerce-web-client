@@ -5,7 +5,7 @@ import {
   Inject,
   OnInit,
   PLATFORM_ID,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
@@ -30,6 +30,7 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
   searchResults: ProductListItemDto[] = null;
   isSearchInProgress: boolean = false;
   searchError: string = null;
+  activeIndex: number = 0;
 
   @ViewChild('inputRef') inputRef: ElementRef;
 
@@ -111,6 +112,18 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
               break;
             case 'Enter':
               this.search();
+              break;
+            case 'ArrowDown':
+              if (this.activeIndex === this.searchResults.length  - 1) {
+                break;
+              }
+              this.activeIndex += 1;
+              break;
+            case 'ArrowUp':
+              if (this.activeIndex === 0) {
+                break;
+              }
+              this.activeIndex -= 1;
               break;
           }
         }

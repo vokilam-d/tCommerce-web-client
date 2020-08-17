@@ -49,7 +49,6 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements AfterView
     if (this.ids) {
       this.fetchItems();
     } else if (this.items) {
-      console.log('input items', this.items);
       this.handleResize();
     }
   }
