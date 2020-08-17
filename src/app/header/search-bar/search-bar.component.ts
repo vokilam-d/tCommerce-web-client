@@ -30,7 +30,7 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
   searchResults: ProductListItemDto[] = null;
   isSearchInProgress: boolean = false;
   searchError: string = null;
-  activeIndex: number = 0;
+  activeIndex: number = null;
 
   @ViewChild('inputRef') inputRef: ElementRef;
 
@@ -111,13 +111,21 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
               this.isInFocus = false;
               break;
             case 'Enter':
-              this.search();
+              if (this.activeIndex) {
+                this.router.navigate(['/', this.searchResults[this.activeIndex].slug]);
+              } else {
+                this.search();
+              }
               break;
             case 'ArrowDown':
               if (this.activeIndex === this.searchResults.length  - 1) {
                 break;
               }
-              this.activeIndex += 1;
+              if (this.activeIndex === null) {
+                this.activeIndex = 0;
+              } else {
+                this.activeIndex += 1;
+              }
               break;
             case 'ArrowUp':
               if (this.activeIndex === 0) {
