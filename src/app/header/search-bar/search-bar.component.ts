@@ -5,7 +5,7 @@ import {
   Inject,
   OnInit,
   PLATFORM_ID,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
@@ -30,6 +30,7 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
   searchResults: ProductListItemDto[] = null;
   isSearchInProgress: boolean = false;
   searchError: string = null;
+  activeIndex: number = null;
 
   @ViewChild('inputRef') inputRef: ElementRef;
 
@@ -93,6 +94,7 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
           this.searchResults = response.data;
           this.searchError = null;
           this.isSearchInProgress = false;
+          this.activeIndex = null;
         }
       );
   }
@@ -100,7 +102,7 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
   private handleHotkeys() {
     if (!isPlatformBrowser(this.platformId)) { return; }
 
-    fromEvent(this.inputRef.nativeElement, 'keyup')
+    fromEvent(this.inputRef.nativeElement, 'keydown')
       .pipe( takeUntil(this.ngUnsubscribe) )
       .subscribe(
         (event: KeyboardEvent) => {
@@ -110,7 +112,27 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
               this.isInFocus = false;
               break;
             case 'Enter':
-              this.search();
+              if (this.activeIndex >= 0) {
+                this.router.navigate(['/', this.searchResults[this.activeIndex].slug]);
+              } else {
+                this.search();
+              }
+              break;
+            case 'ArrowDown':
+              event.preventDefault();
+              if (this.activeIndex === this.searchResults.length  - 1 || this.activeIndex === null) {
+                this.activeIndex = 0;
+              } else {
+                this.activeIndex += 1;
+              }
+              break;
+            case 'ArrowUp':
+              event.preventDefault();
+              if (this.activeIndex === 0 || this.activeIndex === null) {
+                this.activeIndex = this.searchResults.length  - 1;
+              } else {
+                this.activeIndex -= 1;
+              }
               break;
           }
         }
