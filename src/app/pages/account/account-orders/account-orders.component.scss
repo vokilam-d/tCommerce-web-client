@@ -204,6 +204,16 @@
     }
   }
 
+  &__old-cost {
+    display: inline-block;
+    margin: 0 6px 0 0;
+    text-decoration: line-through;
+    color: rgba($dark, 0.6);
+  }
+  &__old-cost + &__cost {
+    color: $red;
+  }
+
   &__img {
     width: 80px;
     height: 80px;

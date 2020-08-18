@@ -171,6 +171,16 @@
     font-size: 18px;
   }
 
+  &__old-price {
+    display: inline-block;
+    margin: 0 6px 0 0;
+    text-decoration: line-through;
+    color: rgba($dark, 0.6);
+  }
+  &__old-price + &__price {
+    color: $red;
+  }
+
   &__delete {
     position: absolute;
     top: 0;

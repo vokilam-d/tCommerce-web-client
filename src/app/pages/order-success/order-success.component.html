@@ -113,8 +113,8 @@
             {{ item.qty }} шт.
           </div>
 
-          <div class="item__price">
-            {{ item.price }} грн
+          <div class="item__price-container">
+            <span *ngIf="item.discountValue">Цена: </span>{{ item.price }} грн<span *ngIf="item.discountValue as discount">. Скидка: {{ discount }}грн.</span>
           </div>
         </div>
       </div>
@@ -127,7 +127,7 @@
     </div>
 
     <div class="items__row" *ngIf="order.discountValue">
-      <div class="items__label">{{ order.discountLabel }}</div>
+      <div class="items__label">Скидка</div>
 
       <div class="items__value">{{ order.discountValue }} грн</div>
     </div>
