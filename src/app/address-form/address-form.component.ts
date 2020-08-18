@@ -17,7 +17,7 @@ import { ScrollToService } from '../services/scroll-to/scroll-to.service';
 export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnChanges {
 
   addressForm: FormGroup;
-  addressTypes = [{ data: AddressTypeEnum.WAREHOUSE, view: 'В отделение' }, { data: AddressTypeEnum.DOORS, view: 'Адресная курьером' }];
+  addressTypes = [{ data: AddressTypeEnum.WAREHOUSE, view: 'В отделение' }, { data: AddressTypeEnum.DOORS, view: 'Адресная Новой Почтой' }];
   addressTypeEnum = AddressTypeEnum;
   get settlementIdControl() {
     const settlementIdProp: keyof ShipmentAddressDto = 'settlementId';
