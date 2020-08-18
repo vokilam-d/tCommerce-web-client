@@ -67,7 +67,7 @@ export class OrderSuccessComponent implements OnInit {
   }
 
   pay() {
-    this.orderService.getPaymentDetails(this.order.id)
+    this.orderService.fetchPaymentDetails(this.order.id)
       .subscribe(
         response => {
           const wfpPayload = response.data;

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ShipmentAddressDto } from '../shared/dtos/shipment-address.dto';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddressTypeEnum } from '../shared/enums/address-type.enum';
@@ -26,6 +26,7 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
 
   @Input() address: ShipmentAddressDto = new ShipmentAddressDto();
   @Input() showIsDefault: boolean = true;
+  @Output() valueChanged = new EventEmitter<ShipmentAddressDto>();
 
   constructor(private formBuilder: FormBuilder,
               private scrollToService: ScrollToService,
@@ -62,23 +63,9 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
     }
 
     this.addressForm = this.formBuilder.group(controls);
+    this.addressForm.valueChanges.subscribe(address => this.valueChanged.emit(address));
 
-    const addressTypeProp: keyof ShipmentAddressDto = 'addressType';
-    const addressIdProp: keyof ShipmentAddressDto = 'addressId';
-    const addressProp: keyof ShipmentAddressDto = 'address';
-    this.addressForm.get(addressTypeProp).valueChanges
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((addressType: AddressTypeEnum) => {
-        this.addressForm.get(addressIdProp).reset('');
-        this.addressForm.get(addressProp).reset('');
-
-        if (addressType === AddressTypeEnum.WAREHOUSE) {
-          const buildingProp: keyof ShipmentAddressDto = 'buildingNumber';
-          const flantProp: keyof ShipmentAddressDto = 'flat';
-          this.addressForm.get(buildingProp).reset('');
-          this.addressForm.get(flantProp).reset('');
-        }
-      })
+    this.handleAutoResetFields();
   }
 
   private validateControls(form: FormGroup | FormArray) {
@@ -110,10 +97,10 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
 
     } else {
       isValid = false;
-      this.validateControls(this.addressForm);
     }
 
     if (!isValid) {
+      this.validateControls(this.addressForm);
       this.scrollToService.scrollTo({ target: this.elementRef, offset: -50 });
     }
     return isValid;
@@ -161,5 +148,25 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
   setAddressType(type: { view: string; data: AddressTypeEnum }) {
     const addressTypeProp: keyof ShipmentAddressDto = 'addressType';
     this.addressForm.get(addressTypeProp).setValue(type.data);
+  }
+
+  private handleAutoResetFields() {
+    const addressTypeProp: keyof ShipmentAddressDto = 'addressType';
+    const addressIdProp: keyof ShipmentAddressDto = 'addressId';
+    const addressProp: keyof ShipmentAddressDto = 'address';
+    const buildingProp: keyof ShipmentAddressDto = 'buildingNumber';
+    const flantProp: keyof ShipmentAddressDto = 'flat';
+
+    this.addressForm.get(addressTypeProp).valueChanges
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((addressType: AddressTypeEnum) => {
+        this.addressForm.get(addressIdProp).reset('');
+        this.addressForm.get(addressProp).reset('');
+
+        if (addressType === AddressTypeEnum.WAREHOUSE) {
+          this.addressForm.get(buildingProp).reset('');
+          this.addressForm.get(flantProp).reset('');
+        }
+      });
   }
 }

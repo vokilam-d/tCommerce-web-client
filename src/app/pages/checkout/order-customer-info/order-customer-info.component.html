@@ -28,8 +28,12 @@
            type="radio"
     >
 
-    <i class="mbi mbi-checkmark-outline checkout-control__radio-icon checkout-control__radio-icon-selected"></i>
-    <i class="mbi mbi-circle-outline checkout-control__radio-icon checkout-control__radio-icon-not-selected"></i>
+    <i class="mbi checkout-control__radio-icon"
+       [ngClass]="{
+         'mbi-checkmark-outline': addressOptionControl.value === address,
+         'mbi-circle-outline': addressOptionControl.value !== address
+       }"
+    ></i>
 
     {{ address.lastName }} {{ address.firstName }}, {{ address.phone }}, {{ address.settlement }}, {{ address.address }}<ng-container *ngIf="address.addressType === addressTypes.DOORS">, {{ address.buildingNumber }}, <ng-container *ngIf="address.flat as flat">{{ flat }}</ng-container></ng-container>
   </label>
@@ -42,8 +46,12 @@
            type="radio"
     >
 
-    <i class="mbi mbi-checkmark-outline checkout-control__radio-icon checkout-control__radio-icon-selected"></i>
-    <i class="mbi mbi-circle-outline checkout-control__radio-icon checkout-control__radio-icon-not-selected"></i>
+    <i class="mbi checkout-control__radio-icon"
+       [ngClass]="{
+         'mbi-checkmark-outline': addressOptionControl.value === null,
+         'mbi-circle-outline': addressOptionControl.value !== null
+       }"
+    ></i>
 
     Новый адрес
   </label>
@@ -54,4 +62,5 @@
 <address-form class="address-form form__control-container"
               *ngIf="!addressOptionControl?.value"
               [showIsDefault]="false"
+              (valueChanged)="onAddressChange($event)"
 ></address-form>

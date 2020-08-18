@@ -6,6 +6,8 @@ import { CustomerService } from '../../services/customer/customer.service';
 import { tap } from 'rxjs/operators';
 import { ResponseDto } from '../../shared/dtos/response.dto';
 import { API_HOST } from '../../shared/constants';
+import { AddressTypeEnum } from '../../shared/enums/address-type.enum';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,7 @@ export class OrderService {
   paymentMethod: PaymentMethodDto;
   isCallbackNeeded: boolean = false;
   clientNote: string = '';
+  addressType$ = new BehaviorSubject<AddressTypeEnum>(null);
 
   constructor(private http: HttpClient,
               private customerService: CustomerService) {
@@ -25,7 +28,7 @@ export class OrderService {
       .pipe( tap(_ => this.resetOrder()) );
   }
 
-  getPaymentDetails(orderId: string) {
+  fetchPaymentDetails(orderId: string) {
     return this.http.get<ResponseDto<any>>(`${API_HOST}/api/v1/order/${orderId}/payment`);
   }
 

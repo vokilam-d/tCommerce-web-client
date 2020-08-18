@@ -7,6 +7,8 @@ import { finalize, takeUntil } from 'rxjs/operators';
 import { API_HOST, DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { NgUnsubscribe } from '../../../shared/directives/ng-unsubscribe.directive';
 import { PaymentMethodDto } from '../../../shared/dtos/payment-method.dto';
+import { AddressTypeEnum } from '../../../shared/enums/address-type.enum';
+import { PaymentTypeEnum } from '../../../shared/enums/payment-type.enum';
 
 @Component({
   selector: 'payment-methods',
@@ -48,15 +50,25 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
   }
 
   private buildForm() {
-    this.methodControl = this.formBuilder.control('');
+    this.methodControl = this.formBuilder.control(null);
 
     this.methodControl.valueChanges
       .pipe( takeUntil(this.ngUnsubscribe) )
-      .subscribe(methodId => {
-        const selectedMethod = this.methods.find(method => method.id === methodId);
-        this.orderService.paymentMethod = selectedMethod;
+      .subscribe(method => {
+        this.orderService.paymentMethod = method;
       });
 
-    this.methodControl.setValue(this.methods[0].id);
+    this.methodControl.setValue(this.methods[0]); // setValue *must* be after subscription
+
+    /* handle method disabling */
+    const cashOnDeliveryMethod = this.methods.find(method => method.paymentType === PaymentTypeEnum.CASH_ON_DELIVERY);
+    this.orderService.addressType$
+      .pipe( takeUntil(this.ngUnsubscribe) )
+      .subscribe(addressType => {
+        cashOnDeliveryMethod.disabledState = addressType === AddressTypeEnum.DOORS ? true : null;
+        if (this.methodControl.value === cashOnDeliveryMethod) {
+          this.methodControl.setValue(null);
+        }
+      });
   }
 }

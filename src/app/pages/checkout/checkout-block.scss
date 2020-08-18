@@ -20,6 +20,8 @@
 }
 
 .checkout-control {
+  $control: &;
+
   display: block;
   margin: 15px 0 0;
 
@@ -34,9 +36,14 @@
     cursor: pointer;
     transition: color 0.2s ease;
 
-    &:hover {
+    &:not(#{$control}--disabled):hover {
       color: rgba($dark, 0.7);
     }
+  }
+
+  &--disabled {
+    color: rgba($dark, 0.4);
+    cursor: help;
   }
 
   &__label {
@@ -74,22 +81,14 @@
   }
 
   &__radio-icon {
-    display: none;
     flex-shrink: 0;
     margin: 0 10px 0 0;
     font-size: 20px;
   }
+
   &__radio-input {
     display: none;
   }
-  &__radio-input:checked ~ &__radio-icon-selected {
-    display: block;
-  }
-  &__radio-input:not(:checked) ~ &__radio-icon-not-selected {
-    display: block;
-  }
-
-
 
   &__checkbox-input {
     flex-shrink: 0;

@@ -146,7 +146,7 @@
         <div class="form__control">
           <input class="form__input" [formControl]="buildingNumber" type="text" id="addr-buildingNumber">
 
-          <div class="form__input-error" *ngIf="isControlInvalid(buildingNumber)">
+          <div class="form__input-error" *ngIf="isOptionalControlInvalid('buildingNumber')">
             Это обязательное поле
           </div>
         </div>

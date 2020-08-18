@@ -12,18 +12,30 @@
   </div>
 
   <ng-template #noErrorTmpl>
-    <label class="checkout-control checkout-control--radio" *ngFor="let method of methods">
+    <label class="checkout-control checkout-control--radio tooltip-container"
+           *ngFor="let method of methods"
+           [class.checkout-control--disabled]="method.disabledState"
+    >
       <input class="checkout-control__radio-input"
-             [value]="method.id"
+             [value]="method"
              [formControl]="methodControl"
+             [attr.disabled]="method.disabledState"
              name="payment-method"
              type="radio"
       >
 
-      <i class="mbi mbi-checkmark-outline checkout-control__radio-icon checkout-control__radio-icon-selected"></i>
-      <i class="mbi mbi-circle-outline checkout-control__radio-icon checkout-control__radio-icon-not-selected"></i>
+      <i class="mbi checkout-control__radio-icon"
+         [ngClass]="{
+           'mbi-checkmark-outline': methodControl.value === method,
+           'mbi-circle-outline': methodControl.value !== method
+         }"
+      ></i>
 
       {{ method.name }}
+
+      <span class="tooltip" *ngIf="method.disabledState">
+        Наложенный платёж не может быть выбран вместе с адресной доставкой
+      </span>
     </label>
   </ng-template>
 </div>
