@@ -94,6 +94,7 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
           this.searchResults = response.data;
           this.searchError = null;
           this.isSearchInProgress = false;
+          this.activeIndex = null;
         }
       );
   }
@@ -101,7 +102,7 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
   private handleHotkeys() {
     if (!isPlatformBrowser(this.platformId)) { return; }
 
-    fromEvent(this.inputRef.nativeElement, 'keyup')
+    fromEvent(this.inputRef.nativeElement, 'keydown')
       .pipe( takeUntil(this.ngUnsubscribe) )
       .subscribe(
         (event: KeyboardEvent) => {
@@ -111,27 +112,27 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
               this.isInFocus = false;
               break;
             case 'Enter':
-              if (this.activeIndex) {
+              if (this.activeIndex >= 0) {
                 this.router.navigate(['/', this.searchResults[this.activeIndex].slug]);
               } else {
                 this.search();
               }
               break;
             case 'ArrowDown':
-              if (this.activeIndex === this.searchResults.length  - 1) {
-                break;
-              }
-              if (this.activeIndex === null) {
+              event.preventDefault();
+              if (this.activeIndex === this.searchResults.length  - 1 || this.activeIndex === null) {
                 this.activeIndex = 0;
               } else {
                 this.activeIndex += 1;
               }
               break;
             case 'ArrowUp':
-              if (this.activeIndex === 0) {
-                break;
+              event.preventDefault();
+              if (this.activeIndex === 0 || this.activeIndex === null) {
+                this.activeIndex = this.searchResults.length  - 1;
+              } else {
+                this.activeIndex -= 1;
               }
-              this.activeIndex -= 1;
               break;
           }
         }
