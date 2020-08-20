@@ -50,7 +50,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.isReviewFromEmail = JSON.parse(this.route.snapshot.queryParamMap.get('review-from-email'));
     this.needToShowReviews = this.route.snapshot.fragment === 'reviews';
     this.fetchProduct();
-    this.toggleTooltip();
+    this.setSavedTooltipState();
   }
 
   ngAfterViewInit(): void {
@@ -110,7 +110,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     localStorage.setItem('isTooltipClosed', JSON.stringify(this.isClosed));
   }
 
-  toggleTooltip() {
+  setSavedTooltipState() {
     if (this.deviceService.isPlatformServer()) {
       return;
     }
