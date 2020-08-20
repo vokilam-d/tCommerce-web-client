@@ -31,6 +31,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   discountValue: number;
   isReviewFromEmail: boolean = null;
   needToShowReviews: boolean = false;
+  isClosed: boolean;
 
   @ViewChild(ProductDetailsComponent) detailsCmp: ProductDetailsComponent;
   @ViewChild(FlyToCartDirective) flyToCart: FlyToCartDirective;
@@ -49,6 +50,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.isReviewFromEmail = JSON.parse(this.route.snapshot.queryParamMap.get('review-from-email'));
     this.needToShowReviews = this.route.snapshot.fragment === 'reviews';
     this.fetchProduct();
+    this.setSavedTooltipState();
   }
 
   ngAfterViewInit(): void {
@@ -101,6 +103,19 @@ export class ProductComponent implements OnInit, AfterViewInit {
       },
       error => this.addQuickReviewError = error.error?.message || DEFAULT_ERROR_TEXT
     );
+  }
+
+  closeTooltip() {
+    this.isClosed = true;
+    localStorage.setItem('isTooltipClosed', JSON.stringify(this.isClosed));
+  }
+
+  setSavedTooltipState() {
+    if (this.deviceService.isPlatformServer()) {
+      return;
+    }
+
+    this.isClosed = !!localStorage.getItem('isTooltipClosed');
   }
 
   private setMeta() {
