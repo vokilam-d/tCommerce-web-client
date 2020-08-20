@@ -1,5 +1,6 @@
 import { MetaTagsDto } from './meta-tags.dto';
 import { BreadcrumbDto } from './breadcrumb.dto';
+import { MediaDto } from './media.dto';
 
 export class CategoryDto {
   description: string;
@@ -9,4 +10,5 @@ export class CategoryDto {
   parentId: number;
   slug: string;
   breadcrumbs: BreadcrumbDto[];
+  medias: MediaDto[];
 }
