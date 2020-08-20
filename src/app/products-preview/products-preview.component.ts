@@ -121,6 +121,8 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements AfterView
   }
 
   private handleResize() {
+    if (this.device.isPlatformServer()) { return; }
+
     this.cdr.detectChanges();
     this.setSizes();
 
