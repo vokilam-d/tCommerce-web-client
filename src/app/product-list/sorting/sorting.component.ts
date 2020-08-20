@@ -6,6 +6,7 @@ import { UrlService } from '../../services/url/url.service';
 
 enum ESort {
   Popularity = 'popularity',
+  New = 'new',
   Cheap = 'cheap',
   Expensive = 'expensive'
 }
@@ -21,6 +22,7 @@ export class SortingComponent extends NgUnsubscribe implements OnInit {
   sortControl: FormControl;
   sortOptions = [
     { value: ESort.Popularity, label: 'Популярные' },
+    { value: ESort.New, label: 'Сначала новые' },
     { value: ESort.Cheap, label: 'От дешёвых к дорогим' },
     { value: ESort.Expensive, label: 'От дорогих к дешёвым' }
   ];
