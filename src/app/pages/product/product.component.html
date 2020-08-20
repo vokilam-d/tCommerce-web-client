@@ -28,18 +28,24 @@
 
     <div class="product__rating-sku">
 
-      <div class="product__rating">
-        <rating-stars class="product__rating-cmp"
-                      [rating]="product.reviewsAvgRating"
+      <div class="product__rating rating">
+        <rating-stars [rating]="product.reviewsAvgRating"
                       [isDisabled]="addQuickReviewSuccess"
                       (quickReview)="addQuickReview($event)"
         ></rating-stars>
 
-        <div class="product__rating-count">{{ product.allReviewsCount }}</div>
+        <div class="rating__count">{{ product.allReviewsCount }}</div>
 
-        <div class="product__rating-text" *ngIf="!addQuickReviewError && !addQuickReviewSuccess">Выберите звёздочку</div>
-        <div class="product__rating-text" *ngIf="addQuickReviewError as error">{{ error }}</div>
-        <div class="product__rating-text" *ngIf="addQuickReviewSuccess as success">Спасибо! Ваш голос учтен</div>
+        <div class="rating__text" *ngIf="!addQuickReviewError && !addQuickReviewSuccess">оценили</div>
+        <div class="rating__text" *ngIf="addQuickReviewError as error">{{ error }}</div>
+        <div class="rating__text" *ngIf="addQuickReviewSuccess as success">Спасибо! Ваш голос учтен</div>
+
+        <div class="rating__tooltip tooltip tooltip--bottom">
+          Вы можете нажать на звёздочку для быстрой оценки товара
+          <span class="tooltip__close-btn">
+            <span class="tooltip__close-btn--cross"></span>
+          </span>
+        </div>
 
       </div>
 

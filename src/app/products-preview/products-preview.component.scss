@@ -1,3 +1,5 @@
+@import "variables";
+
 .container {
   padding-top: 50px;
 }
@@ -8,7 +10,7 @@
   &__title {
     padding: 10px 0;
     background: #f4f4f4;
-    border-bottom: 1px solid #e3e3e3;
+    border-radius: 2px;
     text-align: center;
     font-size: 18px;
     font-weight: 600;
@@ -42,11 +44,11 @@
       background: rgba(#fff, 0.8);
     }
     &--prev {
-      left: 0;
+      left: -12px;
     }
 
     &--next {
-      right: 0;
+      right: -12px;
     }
   }
 
@@ -59,5 +61,18 @@
     transform: translate3d(0, 0, 0);
     transition: transform 0.75s ease;
     backface-visibility: hidden;
+  }
+
+  &__item {
+    box-sizing: border-box;
+    padding: 15px 10px;
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: $borderColor;
+    border-radius: 2px;
+
+    &:first-of-type {
+      border-left: 1px solid $borderColor;
+    }
   }
 }
