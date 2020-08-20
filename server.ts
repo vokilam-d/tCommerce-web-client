@@ -18,7 +18,6 @@ let pages: PageRegistryDto[] = [];
 
 const thirtySeconds = 30 * 1000;
 async function updatePages(apiHost: string) {
-
   if (apiHost.indexOf('http') !== 0) {
     apiHost = 'http://' + apiHost;
   }
@@ -33,6 +32,46 @@ async function updatePages(apiHost: string) {
   }
 
   setTimeout(() => updatePages(apiHost), thirtySeconds);
+}
+
+let isPagesUpdateStarted: boolean = false;
+async function handleUpdatePages(req: express.Request) {
+  if (isPagesUpdateStarted) { return;}
+
+  const apiHost = environment.production ? req.get('host') : API_HOST;
+  await updatePages(apiHost);
+  isPagesUpdateStarted = true;
+}
+
+function handleResponse(req: express.Request, res: express.Response) {
+  const targetUrl = req.url.slice(1); // slice "/" preceding sign
+  const foundPage = pages.find(page => page.slug === targetUrl);
+
+  if (foundPage?.redirectSlug) {
+    res.redirect(301, foundPage.redirectSlug);
+
+  } else {
+    res.render(
+      'index',
+      {
+        req,
+        providers: [
+          {
+            provide: APP_BASE_HREF,
+            useValue: req.baseUrl
+          },
+          {
+            provide: RESPONSE,
+            useValue: res
+          },
+          {
+            provide: PAGES_TOKEN,
+            useValue: pages
+          }
+        ]
+      }
+    );
+  }
 }
 
 // The Express app is exported so that it can be used by serverless Functions.
@@ -61,34 +100,10 @@ export function app() {
   });
 
   // All regular routes use the Universal engine
-  let isPagesUpdateStarted: boolean = false;
-  server.get('*', async (req, res) => {
-    if (!isPagesUpdateStarted) {
-      const apiHost = environment.production ? req.get('host') : API_HOST;
-      await updatePages(apiHost);
-      isPagesUpdateStarted = true;
-    }
 
-    res.render(
-      'index',
-      {
-        req,
-        providers: [
-          {
-            provide: APP_BASE_HREF,
-            useValue: req.baseUrl
-          },
-          {
-            provide: RESPONSE,
-            useValue: res
-          },
-          {
-            provide: PAGES_TOKEN,
-            useValue: pages
-          }
-        ]
-      }
-    );
+  server.get('*', async (req: express.Request, res: express.Response) => {
+    await handleUpdatePages(req);
+    handleResponse(req, res);
   });
 
   return server;
