@@ -66,13 +66,9 @@
   &__item {
     box-sizing: border-box;
     padding: 15px 10px;
-    border-width: 0 0 1px 1px;
+    border-width: 0 1px 1px 0;
     border-style: solid;
     border-color: $borderColor;
     border-radius: 2px;
-
-    &:first-of-type {
-      border-left: 1px solid $borderColor;
-    }
   }
 }

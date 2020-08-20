@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from './product.service';
 import { ProductDto } from '../../shared/dtos/product.dto';
@@ -31,7 +31,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   discountValue: number;
   isReviewFromEmail: boolean = null;
   needToShowReviews: boolean = false;
-  isOpen: boolean = true;
+  isClosed: boolean;
 
   @ViewChild(ProductDetailsComponent) detailsCmp: ProductDetailsComponent;
   @ViewChild(FlyToCartDirective) flyToCart: FlyToCartDirective;
@@ -50,6 +50,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.isReviewFromEmail = JSON.parse(this.route.snapshot.queryParamMap.get('review-from-email'));
     this.needToShowReviews = this.route.snapshot.fragment === 'reviews';
     this.fetchProduct();
+    this.toggleTooltip();
   }
 
   ngAfterViewInit(): void {
@@ -105,7 +106,16 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   closeTooltip() {
-    this.isOpen = false;
+    this.isClosed = true;
+    localStorage.setItem('isTooltipClosed', JSON.stringify(this.isClosed));
+  }
+
+  toggleTooltip() {
+    if (this.deviceService.isPlatformServer()) {
+      return;
+    }
+
+    this.isClosed = !!localStorage.getItem('isTooltipClosed');
   }
 
   private setMeta() {

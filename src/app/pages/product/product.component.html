@@ -40,10 +40,10 @@
         <div class="rating__text" *ngIf="addQuickReviewError as error">{{ error }}</div>
         <div class="rating__text" *ngIf="addQuickReviewSuccess as success">Спасибо! Ваш голос учтен</div>
 
-        <div class="rating__tooltip tooltip tooltip--bottom" *ngIf="isOpen">
+        <div class="rating__tooltip tooltip tooltip--bottom" *ngIf="isClosed === false">
           Вы можете нажать на звёздочку для быстрой оценки товара
           <span class="tooltip__close-btn" (click)="closeTooltip()">
-            <span class="tooltip__close-btn--cross"></span>
+            <span class="tooltip__cross"></span>
           </span>
         </div>
 
