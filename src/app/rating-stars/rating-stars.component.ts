@@ -10,6 +10,7 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
+import { DeviceService } from '../services/device-detector/device.service';
 
 @Component({
   selector: 'rating-stars',
@@ -34,7 +35,9 @@ export class RatingStarsComponent implements OnChanges, AfterViewInit {
   @ViewChild('ratingBarElement') ratingBarElement: ElementRef;
 
 
-  constructor( private renderer: Renderer2 ) { }
+  constructor(private renderer: Renderer2,
+              private deviceService: DeviceService
+  ) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes?.rating.firstChange === false) {
@@ -44,22 +47,23 @@ export class RatingStarsComponent implements OnChanges, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.setFill();
+    this.setRatingBarParams();
   }
 
   private setFill() {
     this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', `${this.rating / 5}`);
     this.renderer.setAttribute(this.pathElement.nativeElement, 'fill', `url(#${this.getFillId()})`);
-
-    this.ratingBarElParams = this.getRatingBarParams();
   }
 
   getFillId() {
     return `rating-${this.rating}`;
   }
 
-  getRatingBarParams() {
+  setRatingBarParams() {
+    if (this.deviceService.isPlatformServer()) { return; }
+
     const ratingBarEl = this.ratingBarElement.nativeElement;
-    return {
+    this.ratingBarElParams =  {
       left: ratingBarEl.getBoundingClientRect().left,
       width: ratingBarEl.getBoundingClientRect().width,
     }
