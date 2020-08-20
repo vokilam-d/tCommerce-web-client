@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from './product.service';
 import { ProductDto } from '../../shared/dtos/product.dto';
@@ -31,6 +31,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   discountValue: number;
   isReviewFromEmail: boolean = null;
   needToShowReviews: boolean = false;
+  isOpen: boolean = true;
 
   @ViewChild(ProductDetailsComponent) detailsCmp: ProductDetailsComponent;
   @ViewChild(FlyToCartDirective) flyToCart: FlyToCartDirective;
@@ -101,6 +102,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
       },
       error => this.addQuickReviewError = error.error?.message || DEFAULT_ERROR_TEXT
     );
+  }
+
+  closeTooltip() {
+    this.isOpen = false;
   }
 
   private setMeta() {
