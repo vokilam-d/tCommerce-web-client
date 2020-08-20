@@ -22,7 +22,7 @@ export class SortingComponent extends NgUnsubscribe implements OnInit {
   sortControl: FormControl;
   sortOptions = [
     { value: ESort.Popularity, label: 'Популярные' },
-    { value: ESort.New, label: 'Сначала новые' },
+    { value: ESort.New, label: 'Новые в начале' },
     { value: ESort.Cheap, label: 'От дешёвых к дорогим' },
     { value: ESort.Expensive, label: 'От дорогих к дешёвым' }
   ];
