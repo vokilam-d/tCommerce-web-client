@@ -10,7 +10,7 @@ $inputBorderColor: #ddd;
   right: 0;
   bottom: 0;
   background: rgba(#000, 0.7);
-  z-index: 1;
+  z-index: 3;
   animation: fadeIn 0.2s ease;
 
   @include respond-to($media_large) {
@@ -37,7 +37,7 @@ $inputBorderColor: #ddd;
   transition: all 0.2s ease;
 
   &--in-focus {
-    z-index: 2;
+    z-index: 3;
 
     @include respond-to-less-than($media_large) {
       width: calc(100% + 80px);
