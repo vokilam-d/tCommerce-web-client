@@ -112,10 +112,10 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
               this.isInFocus = false;
               break;
             case 'Enter':
-              if (this.activeIndex >= 0) {
-                this.router.navigate(['/', this.searchResults[this.activeIndex].slug]);
-              } else {
+              if (this.activeIndex === null) {
                 this.search();
+              } else {
+                this.router.navigate(['/', this.searchResults[this.activeIndex].slug]);
               }
               break;
             case 'ArrowDown':

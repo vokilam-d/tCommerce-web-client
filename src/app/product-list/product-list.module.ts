@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from '../pagination/pagination.module';
 import { RangeSliderComponent } from './range-slider/range-slider.component';
 import { SharedModule } from '../shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
+    RouterModule
   ],
   exports: [ProductListComponent]
 })
