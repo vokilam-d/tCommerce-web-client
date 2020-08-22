@@ -170,3 +170,44 @@
     width: 60%;
   }
 }
+
+.categories {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-bottom: 20px;
+  padding: 0 0 4px 2px;
+  overflow: auto;
+
+  &__category {
+    margin: 0 5px;
+
+    @include respond-to($media_medium) {
+      margin: 0 10px;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 105px;
+  }
+
+  &__img {
+    margin: 3px 0;
+    border-radius: 50%;
+    object-fit: cover;
+    filter: drop-shadow(0 0 3px $borderColor);
+  }
+
+  &__name {
+    margin: 0 2px;
+    text-align: center;
+  }
+}
+

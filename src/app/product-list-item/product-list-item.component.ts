@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
 import { finalize } from 'rxjs/operators';
 import { CustomerService } from '../services/customer/customer.service';
