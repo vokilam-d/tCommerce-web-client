@@ -1,51 +1,35 @@
 <div [innerHTML]="jsonLd"></div>
 
 <div class="details">
-  <ng-container *ngFor="let entry of indices | keyvalue: keyValuePipeComparator" [ngSwitch]="entry.value">
 
-    <div class="details__title"
-         [class.details__title--active]="activeIdx === entry.value"
-         (click)="toggleContent(entry.value)"
-    >
-      <ng-container *ngSwitchCase="indices.description">Описание</ng-container>
-      <ng-container *ngSwitchCase="indices.chars">Характеристики</ng-container>
-      <ng-container *ngSwitchCase="indices.reviews">
-        Отзывы
-        <span class="details__reviews-count" *ngIf="product.textReviewsCount > 0">({{ product.textReviewsCount }})</span>
-      </ng-container>
-
-      <i class="mbi mbi-chevron-down details__title-icon"
-         [class.details__title-icon--active]="activeIdx === entry.value"
-      ></i>
-    </div>
-
-    <div class="details__content" [class.details__content--visible]="activeIdx === entry.value">
-
-      <ng-container *ngSwitchCase="indices.description" [ngTemplateOutlet]="descTmpl"></ng-container>
-      <ng-container *ngSwitchCase="indices.chars" [ngTemplateOutlet]="charsTmpl"></ng-container>
-      <ng-container *ngSwitchCase="indices.reviews" [ngTemplateOutlet]="reviewsTmpl"></ng-container>
-
-    </div>
-
-  </ng-container>
-</div>
-
-
-<ng-template #descTmpl>
-  <div class="description html-description" [innerHTML]="product.safeFullDescription"></div>
-</ng-template>
-
-<ng-template #charsTmpl>
-  <div class="chars">
-    <div class="chars__item" *ngFor="let char of product.characteristics, first as first">
-      <div class="chars__cell chars__label" [class.chars__cell--first]="first">{{ char.label }}</div>
-      <div class="chars__cell chars__value" [class.chars__cell--first]="first">{{ char.value }}</div>
+  <div class="details__item item">
+    <div class="item__container item__container-description html-description">
+      <h3 class="item__title">Описание</h3>
+      <div class="description html-description" [innerHTML]="product.safeFullDescription"></div>
     </div>
   </div>
-</ng-template>
 
-<ng-template #reviewsTmpl>
-  <div class="reviews">
+  <div class="details__item item__container item__container-chars">
+    <h3 class="item__title">Характеристики</h3>
+    <div class="chars">
+      <div class="chars__item" *ngFor="let char of product.characteristics, first as first">
+        <div class="chars__cell chars__label" [class.chars__cell--first]="first">{{ char.label }}</div>
+        <div class="chars__cell chars__value" [class.chars__cell--first]="first">{{ char.value }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="details__item item__container item__container-reviews reviews" #reviewsRef>
+    <div class="reviews__container">
+      <h3 class="item__title">Отзывы
+        <span class="reviews__count" *ngIf="product.textReviewsCount> 0">({{ product.textReviewsCount }})</span>
+      </h3>
+
+      <div class="reviews__add">
+        <button class="btn reviews__add-btn" (click)="openReviewModal()" type="button">Написать отзыв</button>
+        <add-review-modal [uploadUrl]="mediaUploadUrl" (addReview)="onReviewAdd($event)"></add-review-modal>
+      </div>
+    </div>
 
     <review class="reviews__review"
             *ngFor="let review of reviews"
@@ -55,12 +39,9 @@
             (addComment)="onAddComment(review, $event)"
     ></review>
 
-    <div class="reviews__add">
-      Оставьте свой отзыв об этом товаре
-
-      <button class="btn reviews__add-btn" (click)="openReviewModal()" type="button">Написать отзыв</button>
+    <div class="reviews__no-reviews-yet" *ngIf="!product.textReviewsCount">
+      Вы можете оставить отзыв здесь<br>Нажмите на кнопку "Написать отзыв"
     </div>
   </div>
-</ng-template>
 
-<add-review-modal [uploadUrl]="mediaUploadUrl" (addReview)="onReviewAdd($event)"></add-review-modal>
+</div>

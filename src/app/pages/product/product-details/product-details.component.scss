@@ -2,90 +2,64 @@
 @import "mixins";
 
 .details {
+  border-top: 1px solid $borderColor;
   font-size: 14px;
 
   @include respond-to($media_medium) {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-wrap: wrap;
+  }
+
+  &__item {
+    margin-top: 30px;
+  }
+}
+
+.item {
+
+  &__container {
+    @include respond-to-less-than($media_medium) {
+      display: flex;
+      flex-direction: column;
+      margin-top: 15px;
+    }
+
+    &-description {
+      width: 100%;
+    }
+
+    &-chars {
+      width: auto;
+
+      @include respond-to($media_medium) {
+        width: 40%;
+      }
+    }
+
+    &-reviews {
+      width: auto;
+
+      @include respond-to($media_medium) {
+        width: 60%;
+        padding-left: 25px;
+      }
+    }
   }
 
   &__title {
     position: relative;
     display: flex;
-    padding: 15px 0;
-    font-size: 16px;
+    width: 100%;
+    margin: 10px 5px 25px;
+    font-size: 18px;
     font-weight: 600;
-    cursor: pointer;
 
     @include respond-to($media_medium) {
-      margin: 0 5px;
-      padding-left: 20px;
-      padding-right: 20px;
-      font-weight: 400;
-      color: rgba($dark, 0.6);
+      width: auto;
+      margin: 8px 0 35px;
+      font-size: 22px;
     }
-
-    &::after {
-      @include respond-to($media_medium) {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -2px;
-        border-bottom: 3px solid transparent;
-        transition: border-bottom-color 0.2s ease;
-      }
-    }
-
-    &:not(&--active):hover::after {
-      border-bottom-color: rgba($primary, 0.4);
-    }
-
-    &--active {
-      @include respond-to($media_medium) {
-        color: $dark;
-      }
-
-      &::after {
-        @include respond-to($media_medium) {
-          border-bottom-color: $primary;
-        }
-      }
-    }
-  }
-
-  &__title-icon {
-    margin-left: auto;
-
-    @include respond-to($media_medium) {
-      display: none;
-    }
-
-    &--active {
-      transform: rotate(180deg);
-    }
-  }
-
-  &__content {
-    display: none;
-    padding: 10px 0;
-
-    @include respond-to($media_medium) {
-      order: 4;
-      width: 100%;
-      padding-top: 20px;
-      border-top: 1px solid #e9e9e9;
-    }
-
-    &--visible {
-      display: block;
-    }
-  }
-
-  &__reviews-count {
-    margin: 0 0 0 4px;
-    color: #7d7d7d;
   }
 }
 
@@ -98,98 +72,105 @@
 }
 
 .chars {
+  display: table;
   padding: 0 10px;
   font-size: 15px;
+  width: 100%;
 
   @include respond-to($media_medium) {
-    display: table;
-    width: auto;
-    margin: 0 auto;
+    padding: 0;
   }
 
   &__item {
-    margin: 10px 0 0;
-    display: flex;
-
-    @include respond-to($media_medium) {
-      margin-top: 0;
-      display: table-row;
-    }
+    display: table-row;
+    margin-top: 0;
 
     &:first-child {
       margin-top: 0;
       border-top: none;
     }
-  }
 
-  &__cell {
-    @include respond-to($media_medium) {
-      display: table-cell;
-      width: 50%;
-      padding: 10px 30px;
-      border-top: 1px solid rgba($dark, 0.2);
+    &:nth-of-type(odd) {
+      background-color: #eeeeee;
+    }
     }
 
+  &__cell {
+    display: table-cell;
+    width: 50%;
+    border-top: 1px solid rgba($dark, 0.2);
+
     &--first {
-      @include respond-to($media_medium) {
-        border-top: none;
-      }
+      border-top: none;
     }
   }
 
   &__label {
     font-weight: 600;
-
-    @include respond-to($media_medium) {
-      text-align: right;
-      border-right: 1px solid rgba($dark, 0.2);
-    }
-
-    &::after {
-      content: ':';
-
-      @include respond-to($media_medium) {
-        content: none;
-      }
-    }
+    padding: 10px 30px 10px 10px;
   }
 
   &__value {
-    margin: 0 0 0 11px;
-
-    @include respond-to($media_medium) {
-      margin-left: 0;
-    }
+    margin-left: 0;
+    padding: 10px 10px 10px 30px;
+    text-align: right;
   }
 }
 
 .reviews {
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
   &__add {
-    margin: 17px auto 20px;
-    padding: 17px 15px 20px;
-    background: #f2f2f2;
-    border: 1px solid #e9e9e9;
-    border-radius: 5px;
+    margin: 0 auto;
+    padding-bottom: 0;
     font-size: 18px;
     text-align: center;
 
     @include respond-to($media_medium) {
-      max-width: 450px;
-      padding: 25px 40px;
+      margin: 0;
     }
   }
 
   &__add-btn {
     display: block;
-    width: 100%;
-    margin: 25px 0 0;
+    width: 250px;
+    margin: 0 auto;
     padding: 10px 15px;
     border-radius: 3px;
     font-size: 16px;
   }
 
+  &__count {
+    margin: 0 0 0 4px;
+    color: #7d7d7d;
+  }
+
   &__review {
     display: block;
     margin: 15px 0 0;
+  }
+
+  &__no-reviews-yet {
+    margin-top: 20px;
+    padding: 40px;
+    border-radius: 3px;
+    background-color: #f1f1f1;
+    text-align: center;
+    color: #cccccc;
+
+    @include respond-to($media_medium) {
+      margin-top: 0;
+    }
+  }
+
+  &__img {
+    width: 20px;
+    padding-left: 5px;
+    opacity: 0.5;
   }
 }

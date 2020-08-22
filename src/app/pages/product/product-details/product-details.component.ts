@@ -20,40 +20,26 @@ import { DeviceService } from '../../../services/device-detector/device.service'
 export class ProductDetailsComponent implements OnInit {
 
   jsonLd: SafeHtml;
-  indices = { // Can't use enum because of pipe in template
-    description: 0,
-    chars: 1,
-    reviews: 2
-  };
-  activeIdx: number = 0;
   mediaUploadUrl: string = `${API_HOST}/api/v1/product-reviews/media`;
   reviews: ProductReviewDto[] = [];
 
   @Input() product: ProductDto;
   @ViewChild(AddReviewModalComponent) addReviewCmp: AddReviewModalComponent;
+  @ViewChild('reviewsRef') reviewsRef: ElementRef;
 
   constructor(private http: HttpClient,
               private deviceService: DeviceService,
               private scrollToService: ScrollToService,
               private jsonLdService: JsonLdService,
               private productReviewService: ProductReviewService,
-              private notyService: NotyService,
-              private elementRef: ElementRef) {
-  }
+              private notyService: NotyService
+  ) { }
 
   ngOnInit(): void {
     if (this.product.textReviewsCount > 0) {
       this.fetchReviews();
     } else {
       this.setJsonLd();
-    }
-  }
-
-  openReviewsTab(showSuccess: boolean = false) {
-    this.toggleContent(this.indices.reviews);
-
-    if (showSuccess) {
-      this.showReviewSuccess();
     }
   }
 
@@ -65,21 +51,6 @@ export class ProductDetailsComponent implements OnInit {
           this.setJsonLd();
         }
       );
-  }
-
-  toggleContent(idx: number, force: boolean = false) {
-    if (!force && this.activeIdx === idx) {
-      this.activeIdx = null;
-      return;
-    }
-
-    this.activeIdx = idx;
-    const offset = this.deviceService.isMobile() ? -20 : -200;
-    this.scrollToService.scrollTo({ target: this.elementRef, offset });
-  }
-
-  keyValuePipeComparator(a: KeyValue<string, number>, b: KeyValue<string, number>): number {
-    return a.value - b.value;
   }
 
   vote(review: ProductReviewDto) {
@@ -148,6 +119,15 @@ export class ProductDetailsComponent implements OnInit {
           console.warn(error);
         }
       );
+  }
+
+  scrollToReviews(showSuccess: boolean = false) {
+    const offset = this.deviceService.isMobile() ? -20 : -200;
+    this.scrollToService.scrollTo({ target: this.reviewsRef, offset });
+
+    if (showSuccess) {
+      this.showReviewSuccess();
+    }
   }
 
   private setJsonLd() {
