@@ -89,7 +89,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   scrollToReviews(showSuccess: boolean = false) {
-    this.detailsCmp.openReviewsTab(showSuccess);
+    this.detailsCmp.scrollToReviews(showSuccess);
   }
 
   addQuickReview(rating: number) {
