@@ -3,13 +3,13 @@
 <div class="details">
 
   <div class="details__item item">
-    <div class="item__container item__container-description html-description">
+    <div class="item__container item__container--description html-description">
       <h3 class="item__title">Описание</h3>
       <div class="description html-description" [innerHTML]="product.safeFullDescription"></div>
     </div>
   </div>
 
-  <div class="details__item item__container item__container-chars">
+  <div class="details__item item__container item__container--chars">
     <h3 class="item__title">Характеристики</h3>
     <div class="chars">
       <div class="chars__item" *ngFor="let char of product.characteristics, first as first">
@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div class="details__item item__container item__container-reviews reviews" #reviewsRef>
+  <div class="details__item item__container item__container--reviews reviews" #reviewsRef>
     <div class="reviews__container">
       <h3 class="item__title">Отзывы
         <span class="reviews__count" *ngIf="product.textReviewsCount> 0">({{ product.textReviewsCount }})</span>

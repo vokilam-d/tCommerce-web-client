@@ -29,11 +29,11 @@
       margin-top: 15px;
     }
 
-    &-description {
+    &--description {
       width: 100%;
     }
 
-    &-chars {
+    &--chars {
       width: auto;
 
       @include respond-to($media_medium) {
@@ -41,7 +41,7 @@
       }
     }
 
-    &-reviews {
+    &--reviews {
       width: auto;
 
       @include respond-to($media_medium) {
