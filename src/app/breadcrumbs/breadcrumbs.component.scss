@@ -10,17 +10,26 @@
 
   @include respond-to($media_large) {
     margin-top: 15px;
-    margin-left: 220px;
   }
 }
 
 .breadcrumbs__item {
   position: relative;
-  margin: 0 10px 0 0;
+  margin: 10px 10px 0 0;
 
   &:not(:last-child)::after {
     content: '/';
     margin: 0 0 0 10px;
     color: #aaa;
   }
+}
+
+.breadcrumbs__link {
+  &-big {
+    font-size: 20px;
+  }
+}
+
+.breadcrumbs__header {
+  font-size: 20px;
 }

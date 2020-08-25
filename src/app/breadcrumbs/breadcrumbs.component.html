@@ -2,7 +2,7 @@
 
 <ul class="breadcrumbs">
   <li class="breadcrumbs__item">
-    <a class="breadcrumbs__link" routerLink="/">
+    <a class="breadcrumbs__link" [class.breadcrumbs__link-big]="isBig" routerLink="/">
       Главная
     </a>
   </li>
@@ -12,12 +12,14 @@
       <a class="breadcrumbs__link"
          *ngIf="!last; else noLink"
          [routerLink]="'/' + breadcrumb.link"
+         [class.breadcrumbs__link-big]="isBig"
       >
         {{ breadcrumb.title }}
       </a>
 
       <ng-template #noLink>
-        {{ breadcrumb.title }}
+        <div *ngIf="!isBig">{{ breadcrumb.title }}</div>
+        <h1 class="breadcrumbs__header" *ngIf="isBig"> {{ breadcrumb.title }} </h1>
       </ng-template>
     </li>
   </ng-container>

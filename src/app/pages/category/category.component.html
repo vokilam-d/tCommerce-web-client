@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <div class="page container category">
-  <breadcrumbs class="category__breadcrumbs" [breadcrumbs]="breadcrumbs"></breadcrumbs>
+  <breadcrumbs class="category__breadcrumbs" [breadcrumbs]="breadcrumbs" [isBig]="true"></breadcrumbs>
 
   <div class="category__container">
 
@@ -14,9 +14,9 @@
     </div>
 
     <ng-container *ngIf="category">
-      <h1 class="category__title">
-        {{ category.name }}
-      </h1>
+<!--      <h1 class="category__title">-->
+<!--        {{ category.name }}-->
+<!--      </h1>-->
 
       <product-list class="category__products" [initialFilters]="productListFilters"></product-list>
 

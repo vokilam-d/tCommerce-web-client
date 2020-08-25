@@ -13,6 +13,7 @@ export class BreadcrumbsComponent implements OnInit, OnChanges {
   jsonLd: SafeHtml;
   @Input() breadcrumbs: IBreadcrumb[];
   @Input() showLastItem: boolean = true;
+  @Input() isBig: boolean;
 
   constructor(private jsonLdService: JsonLdService) { }
 
