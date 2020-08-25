@@ -5,4 +5,5 @@ export class LinkedCategoryDto {
   medias: MediaDto[];
   name: string;
   slug: string;
+  isSelected: boolean;
 }
