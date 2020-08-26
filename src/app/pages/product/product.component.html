@@ -47,6 +47,16 @@
           </span>
         </div>
 
+        <div class="rating__tooltip tooltip tooltip--bottom" *ngIf="isClosed === false">
+          Выбрать оценку 4
+          da
+          net
+
+          <span class="tooltip__close-btn" (click)="closeTooltip()">
+            <span class="tooltip__cross"></span>
+          </span>
+        </div>
+
       </div>
 
       <div class="product__sku-container" [class.product__sku-container--with-vendor]="product.vendorCode">
