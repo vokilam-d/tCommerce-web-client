@@ -7,7 +7,8 @@ import { ProductService } from '../product/product.service';
 import { ISelectedFilter } from '../../product-list/filter/selected-filter.interface';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HeadService } from '../../services/head/head.service';
-import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
+import { API_HOST, DEFAULT_ERROR_TEXT } from '../../shared/constants';
+import { LinkedCategoryDto } from '../../shared/dtos/linked-category.dto';
 
 @Component({
   selector: 'category',
@@ -17,10 +18,13 @@ import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
 export class CategoryComponent implements OnInit {
 
   category: CategoryDto;
+  siblingCategories: LinkedCategoryDto[];
+  childCategories: LinkedCategoryDto[];
   safeDescription: SafeHtml;
   breadcrumbs: IBreadcrumb[] = [];
   productListFilters: ISelectedFilter[];
   error: string;
+  uploadedHost = API_HOST;
 
   constructor(private route: ActivatedRoute,
               private sanitizer: DomSanitizer,
@@ -39,6 +43,8 @@ export class CategoryComponent implements OnInit {
       response => {
         this.category = response.data;
         this.safeDescription = this.sanitizer.bypassSecurityTrustHtml(this.category.description);
+        this.siblingCategories = response.data.siblingCategories;
+        this.childCategories = response.data.childCategories;
         this.setListFilters();
         this.setBreadcrumbs();
         this.setMeta();
@@ -62,5 +68,13 @@ export class CategoryComponent implements OnInit {
 
   private setMeta() {
     this.headService.setMeta(this.category.metaTags);
+  }
+
+  getCategoryImage(category) {
+    if (!category.medias[0]?.variantsUrls.small) {
+      return '/assets/images/no-img.png';
+    } else {
+      return this.uploadedHost + category.medias[0]?.variantsUrls.small;
+    }
   }
 }

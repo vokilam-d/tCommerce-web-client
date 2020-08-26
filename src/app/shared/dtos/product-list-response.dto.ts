@@ -5,5 +5,4 @@ import { FilterCategoryDto } from './filter-category.dto';
 
 export class ProductListResponseDto extends ResponseDto<ProductListItemDto[]> {
   filters: FilterDto[];
-  categories: FilterCategoryDto[];
 }
