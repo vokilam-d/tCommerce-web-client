@@ -144,7 +144,7 @@
     padding: 0 0 0 30px;
   }
 
-  &--on-index {
+  &--is-catalog {
     @include respond-to($media_medium) {
       width: 75%;
     }
@@ -218,14 +218,6 @@
     display: block;
   }
 
-  &__on-index-page {
-    position: absolute;
-    top: 100% !important;
-    left: 0;
-    width: 0;
-    border-top: 1px solid $borderColor !important;
-  }
-
   &::before {
     content: '';
     position: absolute;
@@ -240,11 +232,11 @@
     opacity: 1;
   }
 
-  &--fixed {
+  &--is-catalog {
     width: auto;
   }
 
-  &--fixed::before {
+  &--is-catalog::before {
     display: none;
   }
 
@@ -254,7 +246,7 @@
     padding: 10px 0;
     cursor: pointer;
   }
-  &--fixed &__btn {
+  &--is-catalog &__btn {
     display: none;
   }
 
@@ -280,15 +272,16 @@
     width: 300px;
     background: #fff;
     border: 1px solid #d3d3d3;
+
+    &--is-catalog {
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      border-top: 1px solid $borderColor;
+    }
   }
   &:hover &__menu {
     display: block;
-  }
-  &--fixed &__menu {
-    display: block;
-    top: 8px;
-    border-left: none;
-    border-top: none;
-    border-bottom: none;
   }
 }

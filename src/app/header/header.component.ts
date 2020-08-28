@@ -15,8 +15,7 @@ export class HeaderComponent implements OnInit {
 
   get categories(): CategoryTreeItem[] { return this.categoryService.categories; }
 
-  @Input() isCatalogFixed: boolean = false;
-  @Input() isOnIndexPage: boolean = false;
+  @Input() isSidebarCatalog: boolean = false;
   @ViewChild(SidebarMenuComponent) sidebarCmp: SidebarMenuComponent;
   @ViewChild('toolbarRef') toolbarRef: ElementRef;
 

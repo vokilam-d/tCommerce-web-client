@@ -23,7 +23,7 @@
         <img class="header__logo-img" src="../../assets/images/logo.png" alt="Klondike">
       </a>
 
-      <div class="catalog-toggle" [class.catalog-toggle--fixed]="isCatalogFixed">
+      <div class="catalog-toggle" [class.catalog-toggle--is-catalog]="isSidebarCatalog">
         <div class="catalog-toggle__btn">
           <i class="mbi mbi-menu catalog-toggle__btn-icon"></i>
           <div class="catalog-toggle__text">Каталог товаров</div>
@@ -31,12 +31,12 @@
         </div>
 
         <catalog-menu class="catalog-toggle__menu"
-                      [ngClass]=" { 'catalog-toggle__menu--opened': isCatalogFixed,  'catalog-toggle__on-index-page': isOnIndexPage }"
+                      [class.catalog-toggle__menu--is-catalog]="isSidebarCatalog"
                       [categories]="categories"
         ></catalog-menu>
       </div>
 
-      <div class="fixed-container" [class.fixed-container--on-index]="isOnIndexPage">
+      <div class="fixed-container" [class.fixed-container--is-catalog]="isSidebarCatalog">
         <div class="header__toolbar toolbar" [class.fixed]="isFixed" #toolbarRef>
           <div class="toolbar__menu" (click)="openMenu()">
             <i class="toolbar__menu-icon mbi mbi-menu"></i>

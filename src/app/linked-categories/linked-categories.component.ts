@@ -10,7 +10,7 @@ import { API_HOST } from '../shared/constants';
 export class LinkedCategoriesComponent implements OnInit {
 
   @Input() categories: LinkedCategoryDto[];
-  @Input() isLoading;
+  @Input() isLoading: boolean;
   uploadedHost = API_HOST;
 
   constructor( ) { }
