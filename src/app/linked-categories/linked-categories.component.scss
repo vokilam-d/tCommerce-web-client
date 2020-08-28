@@ -4,8 +4,8 @@
 .categories {
   display: flex;
   flex-wrap: nowrap;
-  padding: 0;
   overflow: auto;
+  font-size: 14px;
 
   @include respond-to($media_medium) {
     margin-top: 20px;
