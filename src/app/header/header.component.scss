@@ -278,6 +278,8 @@
       position: absolute;
       top: 100%;
       left: 0;
+      border: none;
+      border-right: 1px solid $borderColor;
       border-top: 1px solid $borderColor;
     }
   }
