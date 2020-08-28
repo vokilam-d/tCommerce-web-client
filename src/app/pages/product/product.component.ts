@@ -28,7 +28,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   addQuickReviewSuccess: boolean = false;
   product: ProductDto;
   breadcrumbs: IBreadcrumb[] = [];
-  categories: LinkedCategoryDto[];
+  categories: LinkedCategoryDto[] = [];
   isLoading: boolean = false;
   discountValue: number;
   isReviewFromEmail: boolean = null;

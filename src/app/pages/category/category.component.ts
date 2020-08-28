@@ -18,8 +18,8 @@ import { LinkedCategoryDto } from '../../shared/dtos/linked-category.dto';
 export class CategoryComponent implements OnInit {
 
   category: CategoryDto;
-  siblingCategories: LinkedCategoryDto[];
-  childCategories: LinkedCategoryDto[];
+  siblingCategories: LinkedCategoryDto[] = [];
+  childCategories: LinkedCategoryDto[] = [];
   safeDescription: SafeHtml;
   breadcrumbs: IBreadcrumb[] = [];
   productListFilters: ISelectedFilter[];
