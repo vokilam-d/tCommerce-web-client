@@ -20,14 +20,16 @@
 
   <breadcrumbs [breadcrumbs]="breadcrumbs" [isBig]="true"></breadcrumbs>
 
-  <ul class="child-categories">
-    <ng-container *ngIf="!category && !error">
+  <ng-container *ngIf="!category && !error">
+    <ul class="child-categories">
       <li class="child-categories__category placeholder" *ngFor="let i of [1,2,3,4]">
         <div class="placeholder__item child-categories__img"></div>
         <div class="placeholder__item child-categories__name placeholder__child-categories-name"></div>
       </li>
-    </ng-container>
+    </ul>
+  </ng-container>
 
+  <ul class="child-categories" *ngIf="childCategories.length">
     <li class="child-categories__category" *ngFor="let category of childCategories">
       <a class="child-categories__link" [routerLink]="'/' + category.slug">
         <div class="child-categories__name"> {{ category.name }} </div>
