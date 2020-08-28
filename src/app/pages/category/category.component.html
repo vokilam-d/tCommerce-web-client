@@ -1,7 +1,27 @@
 <app-header></app-header>
 
 <div class="page container category">
-  <breadcrumbs class="category__breadcrumbs" [breadcrumbs]="breadcrumbs"></breadcrumbs>
+
+  <linked-categories [categories]="siblingCategories" [isLoading]="!category && !error"></linked-categories>
+
+  <breadcrumbs [breadcrumbs]="breadcrumbs" [isBig]="true" [isLastItemHeading]="true"></breadcrumbs>
+
+  <ng-container *ngIf="!category && !error">
+    <ul class="child-categories">
+      <li class="child-categories__category placeholder" *ngFor="let i of [1,2,3,4]">
+        <div class="placeholder__item child-categories__img"></div>
+        <div class="placeholder__item child-categories__name placeholder__child-categories-name"></div>
+      </li>
+    </ul>
+  </ng-container>
+
+  <ul class="child-categories" *ngIf="childCategories.length">
+    <li class="child-categories__category" *ngFor="let category of childCategories">
+      <a class="child-categories__link" [routerLink]="'/' + category.slug">
+        <div class="child-categories__name"> {{ category.name }} </div>
+      </a>
+    </li>
+  </ul>
 
   <div class="category__container">
 
@@ -14,9 +34,9 @@
     </div>
 
     <ng-container *ngIf="category">
-      <h1 class="category__title">
-        {{ category.name }}
-      </h1>
+<!--      <h1 class="category__title">-->
+<!--        {{ category.name }}-->
+<!--      </h1>-->
 
       <product-list class="category__products" [initialFilters]="productListFilters"></product-list>
 

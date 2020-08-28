@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { ProductListModule } from '../../product-list/product-list.module';
 import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
+import { LinkedCategoriesModule } from '../../linked-categories/linked-categories.module';
 
 @NgModule({
   declarations: [CategoryComponent],
@@ -18,7 +19,8 @@ import { RecentlyViewedProductsModule } from '../../recently-viewed-products/rec
     CommonModule,
     BreadcrumbsModule,
     ProductListModule,
-    RecentlyViewedProductsModule
+    RecentlyViewedProductsModule,
+    LinkedCategoriesModule
   ]
 })
 export class CategoryModule { }

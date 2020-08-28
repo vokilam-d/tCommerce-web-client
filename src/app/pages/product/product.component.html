@@ -1,7 +1,15 @@
 <app-header></app-header>
 
 <div class="page container product">
-  <breadcrumbs class="product__breadcrumbs" [breadcrumbs]="breadcrumbs" [showLastItem]="false"></breadcrumbs>
+
+  <linked-categories [categories]="categories" [isLoading]="!product && !fetchError"></linked-categories>
+
+  <breadcrumbs class="product__breadcrumbs"
+               [breadcrumbs]="breadcrumbs"
+               [showLastItem]="false"
+               [isLastItemHeading]="false"
+               [isBig]="true"
+  ></breadcrumbs>
 
   <div class="product__fetch-error" *ngIf="fetchError as error">
     {{ error }}
