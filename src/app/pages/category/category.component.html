@@ -2,21 +2,7 @@
 
 <div class="page container category">
 
-  <ul class="categories">
-    <ng-container *ngIf="!category && !error">
-      <li class="categories__category placeholder" *ngFor="let i of [1,2,3,4]">
-        <div class="placeholder__item categories__img"></div>
-        <div class="placeholder__item categories__name placeholder__categories-name"></div>
-      </li>
-    </ng-container>
-
-    <li class="categories__category" *ngFor="let category of siblingCategories">
-      <a class="categories__link" [routerLink]="'/' + category.slug">
-        <img class="categories__img" [src]="getCategoryImage(category)" [alt]="category.name" [class.categories__img--selected]="category.isSelected">
-        <div class="categories__name"> {{ category.name }} </div>
-      </a>
-    </li>
-  </ul>
+  <linked-categories [categories]="siblingCategories" [isLoading]="!category && !error"></linked-categories>
 
   <breadcrumbs [breadcrumbs]="breadcrumbs" [isBig]="true" [isLastItemHeading]="true"></breadcrumbs>
 

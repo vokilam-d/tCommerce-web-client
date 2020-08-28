@@ -13,6 +13,7 @@ import { FlyToCartDirective } from '../../shared/directives/fly-to-cart.directiv
 import { QuantityControlComponent } from '../../shared/quantity-control/quantity-control.component';
 import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
 import { DeviceService } from '../../services/device-detector/device.service';
+import { LinkedCategoryDto } from '../../shared/dtos/linked-category.dto';
 
 @Component({
   selector: 'product',
@@ -27,6 +28,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   addQuickReviewSuccess: boolean = false;
   product: ProductDto;
   breadcrumbs: IBreadcrumb[] = [];
+  categories: LinkedCategoryDto[];
   isLoading: boolean = false;
   discountValue: number;
   isReviewFromEmail: boolean = null;
@@ -68,6 +70,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       response => {
         this.product = response.data;
         this.product.safeFullDescription = this.sanitizer.bypassSecurityTrustHtml(this.product.fullDescription);
+        this.categories = response.categories;
         this.setDiscountValue();
         this.setBreadcrumbs();
         this.setMeta();

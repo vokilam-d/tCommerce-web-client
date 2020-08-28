@@ -16,6 +16,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ProductsPreviewModule } from '../../products-preview/products-preview.module';
 import { ReviewModule } from '../../review/review.module';
 import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
+import { LinkedCategoriesModule } from '../../linked-categories/linked-categories.module';
 
 @NgModule({
   declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent],
@@ -32,7 +33,8 @@ import { RecentlyViewedProductsModule } from '../../recently-viewed-products/rec
     MediaGalleryModalModule,
     ProductsPreviewModule,
     ReviewModule,
-    RecentlyViewedProductsModule
+    RecentlyViewedProductsModule,
+    LinkedCategoriesModule
   ]
 })
 export class ProductModule { }
