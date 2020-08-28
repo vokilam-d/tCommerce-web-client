@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ResponseDto } from '../../shared/dtos/response.dto';
-import { ProductDto } from '../../shared/dtos/product.dto';
+import { ProductDto, ProductResponseDto } from '../../shared/dtos/product.dto';
 import { toHttpParams } from '../../shared/helpers/to-http-params.function';
 import { SortingPaginatingFilterDto } from '../../shared/dtos/spf.dto';
 import { API_HOST, SEARCH_QUERY_PARAM, viewedProductsIdsKey } from '../../shared/constants';
@@ -20,7 +20,7 @@ export class ProductService {
   }
 
   fetchProduct(slug: string) {
-    return this.http.get<ResponseDto<ProductDto>>(`${API_HOST}/api/v1/products/${slug}`);
+    return this.http.get<ProductResponseDto>(`${API_HOST}/api/v1/products/${slug}`);
   }
 
   fetchProductsByAutocomplete(query: string) {
