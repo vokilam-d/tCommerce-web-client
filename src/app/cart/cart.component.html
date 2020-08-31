@@ -12,10 +12,13 @@
         <span class="cart__price">{{ cartTotalCost }} грн</span>
       </div>
 
-      <a class="btn cart__checkout" (click)="checkout()" routerLink="/checkout">
+      <a class="btn cart__btn" (click)="checkout()" routerLink="/checkout">
         Оформить заказ
       </a>
 
+      <button class="btn btn--default cart__btn cart__btn--continue" (click)="continueShopping()">
+        Продолжить покупки
+      </button>
     </div>
 
     <div class="cart__items" [class.cart__items--loading]="isLoading">
