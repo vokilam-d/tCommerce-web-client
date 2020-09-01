@@ -70,4 +70,12 @@ export class CategoryComponent implements OnInit {
     this.headService.setMeta(this.category.metaTags);
   }
 
+  getCategoryImage(category) {
+    if (!category.medias[0]?.variantsUrls.small) {
+      return '/assets/images/no-img.png';
+    } else {
+      return this.uploadedHost + category.medias[0]?.variantsUrls.small;
+    }
+  }
+
 }
