@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 :host {
   display: block;
@@ -19,10 +20,14 @@
 
   &__img-container {
     position: relative;
-    height: 150px;
+    height: 110px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @include respond-to($media_medium) {
+      height: 150px;
+    }
 
     &--with-hover {
       &:hover {
