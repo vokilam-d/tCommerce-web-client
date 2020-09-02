@@ -19,7 +19,7 @@ import { API_HOST } from '../shared/constants';
 export class LinkedCategoriesComponent implements AfterViewInit, OnChanges {
 
   uploadedHost = API_HOST;
-  selectedCategoryName: string;
+  selectedCategoryIndex: number;
   @Input() categories: LinkedCategoryDto[];
   @Input() isLoading: boolean;
   @ViewChildren('itemRef') itemRefList: QueryList<ElementRef>;
@@ -28,10 +28,10 @@ export class LinkedCategoriesComponent implements AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['categories']) {
-      this.categories.find(category => {
+      this.categories.find((category, i) => {
         if (category.isSelected) {
-          this.selectedCategoryName = category.name;
-          return this.selectedCategoryName;
+          this.selectedCategoryIndex = i;
+          return this.selectedCategoryIndex;
         }
       });
     }
@@ -39,12 +39,12 @@ export class LinkedCategoriesComponent implements AfterViewInit, OnChanges {
 
   ngAfterViewInit () {
     this.itemRefList.changes.subscribe(list =>
-      list.find(category => this.scrollToSelectedCategory(category, this.selectedCategoryName))
+      list.find((category, i) => this.scrollToSelectedCategory(category, i, this.selectedCategoryIndex))
     );
   }
 
-  scrollToSelectedCategory(category:ElementRef, categoryName: string) {
-    if (category.nativeElement.textContent.trim() === categoryName) {
+  scrollToSelectedCategory(category:ElementRef, index:number, categoryIndex: number) {
+    if (index === categoryIndex) {
       category.nativeElement.scrollIntoView(true);
     }
   }
