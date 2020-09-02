@@ -6,7 +6,7 @@
     </li>
   </ng-container>
 
-  <li class="categories__category" *ngFor="let category of categories">
+  <li class="categories__category" *ngFor="let category of categories" #itemRef>
     <a class="categories__link" [routerLink]="'/' + category.slug">
       <img class="categories__img" [src]="getCategoryImage(category)" [alt]="category.name" [class.categories__img--selected]="category.isSelected">
       <div class="categories__name"> {{ category.name }} </div>
