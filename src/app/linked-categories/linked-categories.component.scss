@@ -1,14 +1,29 @@
 @import "variables";
 @import "mixins";
 
+.container {
+  overflow: auto;
+}
+
 .categories {
   display: flex;
   flex-wrap: nowrap;
-  overflow: auto;
   font-size: 14px;
+  animation: scroll 2.5s ease-in-out;
 
   @include respond-to($media_medium) {
     margin-top: 20px;
+  }
+
+  .finger {
+    position: absolute;
+    top: 10px;
+    left: auto;
+    right: auto;
+    width: 50px;
+    opacity: 0;
+    z-index: 2;
+    animation: swipe 2.5s ease-in-out;
   }
 
   &__category {
@@ -30,6 +45,7 @@
   }
 
   &__link {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -59,3 +75,35 @@
     white-space: nowrap;
   }
 }
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-30px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes swipe {
+  0% {
+    opacity: 1;
+    transform: translateX(-10px);
+  }
+  25% {
+    opacity: 1;
+    transform: translateX(-20px);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(10px);
+  }
+}
+

@@ -6,6 +6,7 @@ import {
   OnChanges,
   QueryList,
   SimpleChanges,
+  ViewChild,
   ViewChildren
 } from '@angular/core';
 import { LinkedCategoryDto } from '../shared/dtos/linked-category.dto';
@@ -22,9 +23,10 @@ export class LinkedCategoriesComponent implements AfterViewInit, OnChanges {
   selectedCategoryIndex: number;
   @Input() categories: LinkedCategoryDto[];
   @Input() isLoading: boolean;
+  @ViewChild('categoriesListRef') categoriesListRef:ElementRef;
   @ViewChildren('itemRef') itemRefList: QueryList<ElementRef>;
 
-  constructor( ) { }
+  constructor() { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['categories']) {
@@ -38,14 +40,19 @@ export class LinkedCategoriesComponent implements AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit () {
-    this.itemRefList.changes.subscribe(list =>
-      list.find((category, i) => this.scrollToSelectedCategory(category, i, this.selectedCategoryIndex))
+    this.itemRefList.changes.subscribe(list => {
+      list.find((category, i) => this.scrollToSelectedCategory(category, i, this.selectedCategoryIndex));
+      }
     );
   }
 
   scrollToSelectedCategory(category:ElementRef, index:number, categoryIndex: number) {
     if (index === categoryIndex) {
-      category.nativeElement.scrollIntoView(true);
+      category.nativeElement.scrollIntoView({
+        behavior: 'auto',
+        block: 'center',
+        inline: 'center'
+      });
     }
   }
 
