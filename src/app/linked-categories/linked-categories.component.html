@@ -10,9 +10,7 @@
     <li class="categories__category" *ngFor="let category of categories" [title]="category.name" #itemRef>
       <a class="categories__link" [routerLink]="'/' + category.slug">
 
-        <ng-container *ngIf="isDemonstrated">
-          <img *ngIf="category.isSelected" [class.categories__swipe]="isDemonstrated" src="/assets/images/swipe.svg" alt="">
-        </ng-container>
+        <img *ngIf="category.isSelected && isDemonstrated" class="categories__swipe" src="/assets/images/swipe.svg" alt="">
 
         <img class="categories__img" [src]="getCategoryImage(category)" [alt]="category.name" [class.categories__img--selected]="category.isSelected">
         <div class="categories__name"> {{ category.name }} </div>
