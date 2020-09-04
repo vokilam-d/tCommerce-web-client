@@ -3,47 +3,54 @@ import {
   Component,
   ElementRef,
   Input,
-  OnChanges,
+  OnChanges, OnInit,
   QueryList,
   SimpleChanges,
   ViewChild,
   ViewChildren
 } from '@angular/core';
 import { LinkedCategoryDto } from '../shared/dtos/linked-category.dto';
-import { API_HOST } from '../shared/constants';
+import { API_HOST, viewedProductsIdsKey } from '../shared/constants';
+import { DeviceService } from '../services/device-detector/device.service';
 
 @Component({
   selector: 'linked-categories',
   templateUrl: './linked-categories.component.html',
   styleUrls: ['./linked-categories.component.scss']
 })
-export class LinkedCategoriesComponent implements AfterViewInit, OnChanges {
+export class LinkedCategoriesComponent implements AfterViewInit, OnChanges, OnInit {
 
   uploadedHost = API_HOST;
   selectedCategoryIndex: number;
+  isDemonstrated: boolean;
   @Input() categories: LinkedCategoryDto[];
   @Input() isLoading: boolean;
   @ViewChild('categoriesListRef') categoriesListRef:ElementRef;
   @ViewChildren('itemRef') itemRefList: QueryList<ElementRef>;
 
-  constructor() { }
+  constructor(  private deviceService: DeviceService ) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['categories']) {
-      this.categories.find((category, i) => {
-        if (category.isSelected) {
-          this.selectedCategoryIndex = i;
-          return this.selectedCategoryIndex;
-        }
-      });
+      this.setSelectedCategoryIndex();
     }
   }
 
+  ngOnInit () {
+    this.setScrollDemonstration();
+  }
+
   ngAfterViewInit () {
-    this.itemRefList.changes.subscribe(list => {
-      list.find((category, i) => this.scrollToSelectedCategory(category, i, this.selectedCategoryIndex));
+    this.itemRefList.changes.subscribe(list => list.find((category, i) => this.scrollToSelectedCategory(category, i, this.selectedCategoryIndex)));
+  }
+
+  setSelectedCategoryIndex() {
+    this.categories.find((category, i) => {
+      if (category.isSelected) {
+        this.selectedCategoryIndex = i;
+        return this.selectedCategoryIndex;
       }
-    );
+    });
   }
 
   scrollToSelectedCategory(category:ElementRef, index:number, categoryIndex: number) {
@@ -63,4 +70,21 @@ export class LinkedCategoriesComponent implements AfterViewInit, OnChanges {
       return this.uploadedHost + category.medias[0]?.variantsUrls.small;
     }
   }
+
+  setScrollDemonstration() {
+    if (this.deviceService.isPlatformServer()) {
+      return;
+    }
+
+   let demonstration = localStorage.getItem('isDemonstrated')
+     ? JSON.parse(localStorage.getItem('isDemonstrated'))
+     : false;
+
+    if (!demonstration) {
+      demonstration = true;
+      this.isDemonstrated = demonstration;
+      localStorage.setItem('isDemonstrated', JSON.stringify(demonstration));
+    }
+  }
+
 }

@@ -9,22 +9,29 @@
   display: flex;
   flex-wrap: nowrap;
   font-size: 14px;
-  animation: scroll 2.5s ease-in-out;
 
   @include respond-to($media_medium) {
     margin-top: 20px;
   }
 
-  .finger {
-    position: absolute;
-    top: 10px;
-    left: auto;
-    right: auto;
-    width: 50px;
-    opacity: 0;
-    z-index: 2;
-    animation: swipe 2.5s ease-in-out;
+  &__swipe {
+    @include respond-to-less-than($media_medium) {
+      position: absolute;
+      top: 10px;
+      left: auto;
+      right: auto;
+      width: 50px;
+      opacity: 0;
+      z-index: 2;
+      animation: swipe 2.5s ease-in-out;
+    }
   }
+
+  &__scroll {
+    @include respond-to-less-than($media_medium) {
+      animation: scroll 2s ease-in-out;
+    }
+}
 
   &__category {
     width: 70px;
