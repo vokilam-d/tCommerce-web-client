@@ -139,7 +139,7 @@
 
   &__link {
     display: block;
-    padding: 15px 0px 15px 0px;
+    padding: 15px 0;
     border-width: 0 1px 0 1px;
     border-style: solid;
     border-color: $borderColor;
@@ -150,7 +150,7 @@
       padding: 11px 40px 11px 20px;
       border: none;
       text-align: left;
-      font-size: 14px;
+      font-size: 16px;
     }
 
     &:hover {
