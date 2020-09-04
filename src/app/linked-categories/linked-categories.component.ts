@@ -10,7 +10,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import { LinkedCategoryDto } from '../shared/dtos/linked-category.dto';
-import { API_HOST, viewedProductsIdsKey } from '../shared/constants';
+import { API_HOST } from '../shared/constants';
 import { DeviceService } from '../services/device-detector/device.service';
 
 @Component({
@@ -25,7 +25,6 @@ export class LinkedCategoriesComponent implements AfterViewInit, OnChanges, OnIn
   isDemonstrated: boolean;
   @Input() categories: LinkedCategoryDto[];
   @Input() isLoading: boolean;
-  @ViewChild('categoriesListRef') categoriesListRef:ElementRef;
   @ViewChildren('itemRef') itemRefList: QueryList<ElementRef>;
 
   constructor(  private deviceService: DeviceService ) { }

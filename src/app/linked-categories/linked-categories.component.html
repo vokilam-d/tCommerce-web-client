@@ -1,5 +1,5 @@
 <div class="container">
-  <ul class="categories" #categoriesListRef [class.categories__scroll]="isDemonstrated">
+  <ul class="categories" [class.categories__scroll]="isDemonstrated">
     <ng-container *ngIf="isLoading">
       <li class="categories__category placeholder" *ngFor="let i of [1,2,3,4]">
         <div class="placeholder__item categories__img"></div>
@@ -7,7 +7,7 @@
       </li>
     </ng-container>
 
-    <li class="categories__category" *ngFor="let category of categories" #itemRef>
+    <li class="categories__category" *ngFor="let category of categories" [title]="category.name" #itemRef>
       <a class="categories__link" [routerLink]="'/' + category.slug">
 
         <ng-container *ngIf="isDemonstrated">
