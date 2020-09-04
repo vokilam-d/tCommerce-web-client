@@ -15,7 +15,10 @@
   }
 
   &__swipe {
+    display: none;
+
     @include respond-to-less-than($media_medium) {
+      display: block;
       position: absolute;
       top: 10px;
       left: auto;
