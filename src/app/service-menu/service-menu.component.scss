@@ -14,9 +14,13 @@
   }
 
   &__link {
-    font-size: 13px;
+    font-size: 15px;
     transition: all 0.2s ease;
     cursor: pointer;
+
+    @include respond-to($media_medium) {
+      font-size: 13px;
+    }
 
     &:hover {
       color: $primary;

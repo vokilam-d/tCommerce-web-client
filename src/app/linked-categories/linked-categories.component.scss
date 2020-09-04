@@ -26,13 +26,13 @@
       width: 50px;
       opacity: 0;
       z-index: 2;
-      animation: swipe 2.5s ease-in-out;
+      animation: swipe 2.5s ease-in-out 1s;
     }
   }
 
   &__scroll {
     @include respond-to-less-than($media_medium) {
-      animation: scroll 2s ease-in-out;
+      animation: scroll 2s ease-in-out 1.5s;
     }
 }
 

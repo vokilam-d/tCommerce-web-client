@@ -48,16 +48,17 @@
 
   &__category {
     width: 100%;
+    margin: 3px 0;
 
     @include respond-to($media_medium) {
       width: 33.33%;
+      padding: 0 5px;
     }
   }
 
   &__link {
     display: flex;
     align-items: center;
-    margin: 3px 5px;
     padding: 5px 15px;
     border-radius: 5px;
     font-size: 18px;

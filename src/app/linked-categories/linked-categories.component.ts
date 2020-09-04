@@ -3,10 +3,10 @@ import {
   Component,
   ElementRef,
   Input,
-  OnChanges, OnInit,
+  OnChanges,
+  OnInit,
   QueryList,
   SimpleChanges,
-  ViewChild,
   ViewChildren
 } from '@angular/core';
 import { LinkedCategoryDto } from '../shared/dtos/linked-category.dto';
@@ -75,12 +75,12 @@ export class LinkedCategoriesComponent implements AfterViewInit, OnChanges, OnIn
       return;
     }
 
-    let clearDate = JSON.parse(localStorage.getItem('isDemonstrated'));
+    let clearDate = JSON.parse(localStorage.getItem('scrollDemonstrationClearDate'));
     let currentDate = Date.now();
 
     if (currentDate >= clearDate) {
       this.isDemonstrated = true;
-      localStorage.setItem('isDemonstrated', JSON.stringify(Date.now() + (1000 * 60 * 60 * 24 * 3)));
+      localStorage.setItem('scrollDemonstrationClearDate', JSON.stringify(Date.now() + (1000 * 60 * 60 * 24 * 3)));
     }
   }
 
