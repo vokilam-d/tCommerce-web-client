@@ -28,11 +28,12 @@
 
   &__link {
     display: block;
-    padding: 11px 40px 11px 10px;
-    font-size: 16px;
+    padding: 20px 40px 20px 10px;
+    font-size: 18px;
 
     @include respond-to($media_large) {
-      padding-left: 15px;
+      padding: 11px 40px 11px 20px;
+      font-size: 16px;
     }
 
     &:hover {
@@ -55,13 +56,19 @@
   }
 
   &__expand-arrow {
-    padding: 10px;
     position: absolute;
     top: 3px;
     right: 0;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid $borderColor;
+    border-radius: 50%;
+    font-size: 18px;
+    text-align: center;
+    line-height: 2;
     transform: rotate(0);
     transition: all 0.2s ease;
-    font-size: 14px;
 
     @include respond-to($media_large) {
       display: none;
@@ -75,8 +82,7 @@
   &__submenu {
     width: 100%;
     max-height: 0;
-    padding: 0 0 0 10px;
-    border-left: 1px solid $borderColor;
+    margin-bottom: 10px;
     transition: max-height 0.3s ease;
     overflow: hidden;
 
@@ -89,8 +95,9 @@
       left: 100%;
       top: 0;
       min-height: 100%;
-      margin-top: 30px;
+      margin: 30px 0 0;
       padding: 10px 0;
+      border-left: 1px solid $borderColor;
       background: #fff;
       visibility: hidden;
       opacity: 0;
@@ -106,5 +113,50 @@
     margin-top: 0;
     visibility: visible;
     opacity: 1;
+  }
+}
+
+.submenu {
+
+  &__item {
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      @include respond-to($media_large) {
+        background: $primary;
+      }
+    }
+  }
+
+  &__link-container {
+    position: relative;
+    border-bottom: 1px solid $borderColor;
+
+    @include respond-to($media_large) {
+      border-bottom: none;
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 15px 0px 15px 0px;
+    border-width: 0 1px 0 1px;
+    border-style: solid;
+    border-color: $borderColor;
+    text-align: center;
+    font-size: 17px;
+
+    @include respond-to($media_large) {
+      padding: 11px 40px 11px 20px;
+      border: none;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    &:hover {
+      @include respond-to($media_large) {
+        color: $dark;
+      }
+    }
   }
 }

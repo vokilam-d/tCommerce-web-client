@@ -23,9 +23,16 @@
       </ng-container>
     </div>
 
-    <ul class="menu__submenu" *ngIf="category.children.length" [class.menu__submenu--expanded]="category.isExpanded">
+    <ul class="menu__submenu submenu" *ngIf="category.children.length" [class.menu__submenu--expanded]="category.isExpanded">
       <ng-container *ngFor="let subCategory of category.children">
-        <ng-container *ngTemplateOutlet="categoryTmpl; context: { category: subCategory }"></ng-container>
+        <li class="submenu__item">
+          <div class="submenu__link-container">
+            <a class="submenu__link" [routerLink]="['/', subCategory.slug]">
+              {{ subCategory.name }}
+            </a>
+          </div>
+        </li>
+<!--        <ng-container *ngTemplateOutlet="categoryTmpl; context: { category: subCategory }"></ng-container>-->
       </ng-container>
     </ul>
   </li>
