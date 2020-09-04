@@ -75,15 +75,31 @@ export class LinkedCategoriesComponent implements AfterViewInit, OnChanges, OnIn
       return;
     }
 
-   let demonstration = localStorage.getItem('isDemonstrated')
+    let demonstrationObj = localStorage.getItem('isDemonstrated')
      ? JSON.parse(localStorage.getItem('isDemonstrated'))
-     : false;
+     : {
+       demonstration: false,
+       savedDate: Date.now()
+     };
 
-    if (!demonstration) {
-      demonstration = true;
-      this.isDemonstrated = demonstration;
-      localStorage.setItem('isDemonstrated', JSON.stringify(demonstration));
+    if (!demonstrationObj.demonstration) {
+      demonstrationObj.demonstration = true;
+
+      this.isDemonstrated = demonstrationObj.demonstration;
+      localStorage.setItem('isDemonstrated', JSON.stringify(demonstrationObj));
     }
+
+    const savedDate = demonstrationObj.savedDate;
+    const currentDate = Date.now();
+    const clearDate = savedDate + (1000 * 60 * 60 * 24 * 3);
+
+    console.log('currentDate', currentDate)
+    console.log('clearDate', clearDate)
+
+    if (currentDate >= clearDate) {
+      localStorage.removeItem('isDemonstrated');
+    }
+
   }
 
 }

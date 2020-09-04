@@ -83,8 +83,8 @@
     border-radius: 3px;
 
     @include respond-to($media_medium) {
-      width: 80px;
-      height: 80px;
+      width: 65px;
+      height: 65px;
     }
   }
 }

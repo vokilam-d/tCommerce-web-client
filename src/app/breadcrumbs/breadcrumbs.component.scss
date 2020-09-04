@@ -2,20 +2,16 @@
 @import "mixins";
 
 .breadcrumbs {
-  margin-top: 0;
   display: flex;
   flex-wrap: wrap;
+  margin-top: 5px;
   font-size: 14px;
   line-height: 1.375;
-
-  @include respond-to($media_large) {
-    margin-top: 5px;
-  }
 }
 
 .breadcrumbs__item {
   position: relative;
-  margin: 10px 17px 0 0;
+  margin: 4px 17px 0 0;
 
   &:not(:last-child)::after {
     content: '';
