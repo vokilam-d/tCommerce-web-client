@@ -20,39 +20,45 @@ import { DeviceService } from '../services/device-detector/device.service';
 })
 export class LinkedCategoriesComponent implements AfterViewInit, OnChanges, OnInit {
 
+  private isViewInit: boolean = false;
+  private needToScrollAfterViewInit: boolean = false;
+  needToDemonstrate: boolean;
+
   uploadedHost = API_HOST;
-  selectedCategoryIndex: number;
-  isDemonstrated: boolean;
+
   @Input() categories: LinkedCategoryDto[];
   @Input() isLoading: boolean;
   @ViewChildren('itemRef') itemRefList: QueryList<ElementRef>;
 
-  constructor(  private deviceService: DeviceService ) { }
+  constructor(private deviceService: DeviceService) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['categories']) {
-      this.setSelectedCategoryIndex();
+    if (changes['categories'].currentValue) {
+      if (this.isViewInit) {
+        this.scrollToSelectedCategory();
+      } else {
+        this.needToScrollAfterViewInit = true;
+      }
     }
   }
 
-  ngOnInit () {
-    this.setScrollDemonstration();
+  ngOnInit() {
+    this.setNeedToDemonstrate();
   }
 
-  ngAfterViewInit () {
-    this.itemRefList.changes.subscribe(list => list.forEach((category, i) => {
-      if (i === this.selectedCategoryIndex) {
-        this.scrollToSelectedCategory(category);
-      }
-    }));
+  ngAfterViewInit() {
+    this.isViewInit = true;
+
+    if (this.needToScrollAfterViewInit) {
+      this.scrollToSelectedCategory();
+    }
   }
 
-  setSelectedCategoryIndex() {
-    this.selectedCategoryIndex = this.categories.findIndex(category => category.isSelected);
-  }
+  scrollToSelectedCategory() {
+    const selectedCategoryIndex = this.categories.findIndex(category => category.isSelected);
+    const selectedCategoryEl = this.itemRefList.find((categoryRef, index) => index === selectedCategoryIndex);
 
-  scrollToSelectedCategory(category:ElementRef) {
-    category.nativeElement.scrollIntoView({
+    selectedCategoryEl.nativeElement.scrollIntoView({
       behavior: 'auto',
       block: 'center',
       inline: 'center'
@@ -67,16 +73,14 @@ export class LinkedCategoriesComponent implements AfterViewInit, OnChanges, OnIn
     }
   }
 
-  setScrollDemonstration() {
-    if (this.deviceService.isPlatformServer()) {
-      return;
-    }
+  setNeedToDemonstrate() {
+    if (this.deviceService.isPlatformServer()) { return; }
 
     let clearDate = JSON.parse(localStorage.getItem('scrollDemonstrationClearDate'));
     let currentDate = Date.now();
 
     if (currentDate >= clearDate) {
-      this.isDemonstrated = true;
+      this.needToDemonstrate = true;
       localStorage.setItem('scrollDemonstrationClearDate', JSON.stringify(Date.now() + (1000 * 60 * 60 * 24 * 3)));
     }
   }
