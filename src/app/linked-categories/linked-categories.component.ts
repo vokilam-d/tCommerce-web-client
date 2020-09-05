@@ -40,7 +40,7 @@ export class LinkedCategoriesComponent implements AfterViewInit, OnChanges, OnIn
   }
 
   ngAfterViewInit () {
-    this.itemRefList.changes.subscribe(list => list.find((category, i) => {
+    this.itemRefList.changes.subscribe(list => list.forEach((category, i) => {
       if (i === this.selectedCategoryIndex) {
         this.scrollToSelectedCategory(category);
       }
@@ -52,11 +52,11 @@ export class LinkedCategoriesComponent implements AfterViewInit, OnChanges, OnIn
   }
 
   scrollToSelectedCategory(category:ElementRef) {
-      category.nativeElement.scrollIntoView({
-        behavior: 'auto',
-        block: 'center',
-        inline: 'center'
-      });
+    category.nativeElement.scrollIntoView({
+      behavior: 'auto',
+      block: 'center',
+      inline: 'center'
+    });
   }
 
   getCategoryImage(category) {
