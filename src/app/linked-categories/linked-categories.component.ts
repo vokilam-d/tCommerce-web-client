@@ -40,26 +40,23 @@ export class LinkedCategoriesComponent implements AfterViewInit, OnChanges, OnIn
   }
 
   ngAfterViewInit () {
-    this.itemRefList.changes.subscribe(list => list.find((category, i) => this.scrollToSelectedCategory(category, i, this.selectedCategoryIndex)));
+    this.itemRefList.changes.subscribe(list => list.find((category, i) => {
+      if (i === this.selectedCategoryIndex) {
+        this.scrollToSelectedCategory(category);
+      }
+    }));
   }
 
   setSelectedCategoryIndex() {
-    this.categories.find((category, i) => {
-      if (category.isSelected) {
-        this.selectedCategoryIndex = i;
-        return this.selectedCategoryIndex;
-      }
-    });
+    this.selectedCategoryIndex = this.categories.findIndex(category => category.isSelected);
   }
 
-  scrollToSelectedCategory(category:ElementRef, index:number, categoryIndex: number) {
-    if (index === categoryIndex) {
+  scrollToSelectedCategory(category:ElementRef) {
       category.nativeElement.scrollIntoView({
         behavior: 'auto',
         block: 'center',
         inline: 'center'
       });
-    }
   }
 
   getCategoryImage(category) {
