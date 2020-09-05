@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterViewInit, ChangeDetectorRef,
   Component,
   ElementRef,
   Input,
@@ -18,10 +18,8 @@ import { DeviceService } from '../services/device-detector/device.service';
   templateUrl: './linked-categories.component.html',
   styleUrls: ['./linked-categories.component.scss']
 })
-export class LinkedCategoriesComponent implements AfterViewInit, OnChanges, OnInit {
+export class LinkedCategoriesComponent implements OnChanges, OnInit {
 
-  private isViewInit: boolean = false;
-  private needToScrollAfterViewInit: boolean = false;
   needToDemonstrate: boolean;
 
   uploadedHost = API_HOST;
@@ -30,15 +28,13 @@ export class LinkedCategoriesComponent implements AfterViewInit, OnChanges, OnIn
   @Input() isLoading: boolean;
   @ViewChildren('itemRef') itemRefList: QueryList<ElementRef>;
 
-  constructor(private deviceService: DeviceService) { }
+  constructor(private deviceService: DeviceService,
+              private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['categories']?.currentValue.length) {
-      if (this.isViewInit) {
-        this.scrollToSelectedCategory();
-      } else {
-        this.needToScrollAfterViewInit = true;
-      }
+      this.scrollToSelectedCategory();
     }
   }
 
@@ -46,15 +42,9 @@ export class LinkedCategoriesComponent implements AfterViewInit, OnChanges, OnIn
     this.setNeedToDemonstrate();
   }
 
-  ngAfterViewInit() {
-    this.isViewInit = true;
-
-    if (this.needToScrollAfterViewInit) {
-      this.scrollToSelectedCategory();
-    }
-  }
-
   scrollToSelectedCategory() {
+    this.cdr.detectChanges();
+
     const selectedCategoryIndex = this.categories.findIndex(category => category.isSelected);
     const selectedCategoryEl = this.itemRefList.find((categoryRef, index) => index === selectedCategoryIndex);
 

@@ -1,5 +1,5 @@
 <div class="container">
-  <ul class="categories" [class.categories__scroll]="needToDemonstrate">
+  <ul class="categories" [class.categories__scroll]="!isLoading && needToDemonstrate">
     <ng-container *ngIf="isLoading">
       <li class="categories__category placeholder" *ngFor="let i of [1,2,3,4]">
         <div class="placeholder__item categories__img"></div>
