@@ -11,8 +11,10 @@ a {
   transition: all 0.2s ease;
 
   &:hover {
-    color: $primary;
-    cursor: pointer;
+    @include respond-to($media_large) {
+      color: $primary;
+      cursor: pointer;
+    }
   }
 }
 

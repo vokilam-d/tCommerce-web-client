@@ -6,18 +6,10 @@
 
   <breadcrumbs [breadcrumbs]="breadcrumbs" [isBig]="true" [isLastItemHeading]="true"></breadcrumbs>
 
-  <ng-container *ngIf="!category && !error">
-    <ul class="child-categories">
-      <li class="child-categories__category placeholder" *ngFor="let i of [1,2,3,4]">
-        <div class="placeholder__item child-categories__img"></div>
-        <div class="placeholder__item child-categories__name placeholder__child-categories-name"></div>
-      </li>
-    </ul>
-  </ng-container>
-
   <ul class="child-categories" *ngIf="childCategories.length">
     <li class="child-categories__category" *ngFor="let category of childCategories">
       <a class="child-categories__link" [routerLink]="'/' + category.slug">
+        <img class="child-categories__img" [src]="getCategoryImage(category)" [alt]="category.name">
         <div class="child-categories__name"> {{ category.name }} </div>
       </a>
     </li>
@@ -25,18 +17,11 @@
 
   <div class="category__container">
 
-    <div class="placeholder" *ngIf="!category && !error">
-      <div class="placeholder__item placeholder__title"></div>
-    </div>
-
     <div class="category__error" *ngIf="error as error">
       {{ error }}
     </div>
 
     <ng-container *ngIf="category">
-<!--      <h1 class="category__title">-->
-<!--        {{ category.name }}-->
-<!--      </h1>-->
 
       <product-list class="category__products" [initialFilters]="productListFilters"></product-list>
 

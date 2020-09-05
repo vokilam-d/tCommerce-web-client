@@ -7,9 +7,13 @@ $arrowSize: 10px;
   font-size: 16px;
 
   &__title {
-    margin: 20px 0 0;
+    margin: 15px 0 0;
     font-size: 24px;
     line-height: 1.2;
+
+    @include respond-to($media_medium) {
+      margin: 20px 0 0;
+    }
   }
 
   &__rating-sku {

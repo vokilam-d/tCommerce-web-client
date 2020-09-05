@@ -61,16 +61,6 @@
     transform: translateX(0);
   }
 
-  &__header {
-    font-size: 24px;
-    font-weight: 600;
-
-    @include respond-to($media_large) {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-  }
-
   &__block {
     margin: 20px 0 0;
     padding: 0 0 20px;
@@ -79,6 +69,10 @@
     @include respond-to($media_large) {
       padding-left: 10px;
       padding-right: 10px;
+    }
+
+    &:first-child {
+      margin-top: 0;
     }
   }
 

@@ -135,7 +135,7 @@
 
 .fixed-container {
   height: 40px;
-  margin: 20px 0 0;
+  margin: 8px 0 0;
 
   @include respond-to($media_medium) {
     width: 60%;
