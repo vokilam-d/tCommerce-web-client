@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { CustomerService } from '../../services/customer/customer.service';
 import { HeadService } from '../../services/head/head.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cart-page',
@@ -14,8 +15,9 @@ export class CartPageComponent implements OnInit {
   get isCartEmpty(): boolean { return !this.customerService.cart || !this.customerService.cart.length; }
 
   constructor(private customerService: CustomerService,
-              private headService: HeadService) {
-  }
+              private router: Router,
+              private headService: HeadService
+  ) { }
 
   ngOnInit(): void {
     this.setMeta();
@@ -23,5 +25,9 @@ export class CartPageComponent implements OnInit {
 
   private setMeta() {
     this.headService.setMeta({ title: 'Корзина', description: 'Корзина' });
+  }
+
+  onContinueShopping() {
+    this.router.navigate(['/']);
   }
 }

@@ -19,11 +19,11 @@
   left: 0;
   right: 0;
   bottom: 0;
+  display: flex;
+  flex-direction: column;
   max-height: 100vh;
-  padding: 20px 20px 40px;
   background: #fff;
   z-index: 21;
-  overflow: auto;
   animation: fadeIn 0.3s ease, slideIn 0.4s ease;
 
   @include respond-to($media_large) {
@@ -35,14 +35,28 @@
     width: 70vw;
     max-width: 600px;
     max-height: 90vh;
-    padding: 40px 50px 50px;
     border-radius: 10px;
+    overflow: hidden;
     animation: fadeIn 0.3s ease, slideInCentered 0.4s ease;
   }
 
   &__header {
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: space-between;
+    padding: 15px 13px 10px;
+    background: #fff;
+    border-bottom: 1px solid rgba($dark, 0.1);
+
+    @include respond-to($media_medium) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    @include respond-to($media_large) {
+      padding: 23px 35px 15px;
+    }
   }
 
   &__title {
@@ -60,8 +74,8 @@
 
     @include respond-to($media_large) {
       position: absolute;
-      top: 5px;
-      right: 5px;
+      top: 11px;
+      right: 10px;
       padding: 10px;
       color: rgba($dark, 0.6);
       font-size: 24px;
@@ -73,7 +87,18 @@
   }
 
   &__content {
-    margin: 20px 0 0;
+    padding: 17px 13px 40px;
+    overflow: auto;
+
+    @include respond-to($media_medium) {
+      padding: 20px 20px 40px;
+    }
+
+    @include respond-to($media_large) {
+      padding-left: 35px;
+      padding-right: 35px;
+      padding-bottom: 50px;
+    }
   }
 }
 
