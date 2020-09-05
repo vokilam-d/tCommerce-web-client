@@ -28,8 +28,8 @@
 
   &__link {
     display: block;
-    padding: 20px 40px 20px 10px;
-    font-size: 18px;
+    padding: 15px 40px 15px 10px;
+    font-size: 19px;
 
     @include respond-to($media_large) {
       padding: 11px 40px 11px 20px;
@@ -57,16 +57,18 @@
 
   &__expand-arrow {
     position: absolute;
-    top: 3px;
+    top: 4px;
     right: 0;
-    width: 50px;
-    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
     padding: 10px;
     border: 1px solid $borderColor;
     border-radius: 50%;
     font-size: 18px;
     text-align: center;
-    line-height: 2;
     transform: rotate(0);
     transition: all 0.2s ease;
 
@@ -117,6 +119,7 @@
 }
 
 .submenu {
+  margin: 0;
 
   &__item {
     transition: background-color 0.15s ease;

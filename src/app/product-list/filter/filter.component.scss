@@ -70,6 +70,10 @@
       padding-left: 10px;
       padding-right: 10px;
     }
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
 
   &__title {
