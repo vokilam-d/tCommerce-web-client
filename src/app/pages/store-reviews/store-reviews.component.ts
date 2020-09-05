@@ -120,8 +120,8 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit {
       'name': 'Klondike',
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": `${this.reviews.reduce((acc, review) => acc + review.rating, 0) / this.reviews.length}}`,
-        "reviewCount": `${this.reviews.length}}`
+        "ratingValue": this.reviews.reduce((acc, review) => acc + review.rating, 0) / this.reviews.length,
+        "reviewCount": this.reviews.length
       },
       "review": this.reviews.map(review => ({
         "@type": "Review",
