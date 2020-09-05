@@ -33,7 +33,7 @@ export class LinkedCategoriesComponent implements AfterViewInit, OnChanges, OnIn
   constructor(private deviceService: DeviceService) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['categories'].currentValue) {
+    if (changes['categories']?.currentValue.length) {
       if (this.isViewInit) {
         this.scrollToSelectedCategory();
       } else {
