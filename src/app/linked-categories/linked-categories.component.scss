@@ -34,7 +34,7 @@
     @include respond-to-less-than($media_medium) {
       animation: scroll 2s ease-in-out 1.5s;
     }
-}
+  }
 
   &__category {
     width: 70px;
@@ -43,7 +43,7 @@
     flex-shrink: 0;
 
     @include respond-to($media_medium) {
-      width: 85px;
+      width: 88px;
       padding-top: 5px;
       margin: 0 10px 2px;
       justify-content: center;
