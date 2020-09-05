@@ -82,10 +82,5 @@
     object-fit: contain;
     margin-right: 10px;
     border-radius: 3px;
-
-    @include respond-to($media_medium) {
-      width: 65px;
-      height: 65px;
-    }
   }
 }
