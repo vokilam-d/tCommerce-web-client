@@ -80,6 +80,7 @@
   padding: 0 10px;
   font-size: 15px;
   width: 100%;
+  table-layout: fixed;
 
   @include respond-to($media_medium) {
     padding: 0;

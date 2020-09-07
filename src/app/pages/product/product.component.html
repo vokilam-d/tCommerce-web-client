@@ -144,6 +144,8 @@
 
     <product-details class="product__details" [product]="product"></product-details>
 
+    <aggregated-products [productId]="product.productId"></aggregated-products>
+
     <products-preview class="product__related" [ids]="getRelatedProductsIds()" [type]="'linkedProducts'"></products-preview>
 
   </ng-container>

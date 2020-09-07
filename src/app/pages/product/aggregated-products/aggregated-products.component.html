@@ -1,0 +1,16 @@
+<div class="table" *ngFor="let table of tables">
+  <div class="table__name">
+    {{ table.name }}
+  </div>
+
+  <div class="table__products">
+    <div class="table__product product" *ngFor="let product of table.products">
+      <img class="product__img" [src]="getProductThumbnail(product)" [alt]="product.name">
+
+      <a class="product__name" [routerLink]="['/', product.slug]">{{ product.name }}</a>
+
+      <button class="product__buy btn" (click)="addToCart(product)">Купить</button>
+
+    </div>
+  </div>
+</div>

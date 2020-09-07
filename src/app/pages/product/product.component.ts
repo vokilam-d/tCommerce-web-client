@@ -142,7 +142,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
     this.addToCartError = null;
     this.isLoading = true;
-    this.customerService.addToCart(this.product, qty)
+    this.customerService.addToCart(this.product.sku, qty)
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         _ => { },

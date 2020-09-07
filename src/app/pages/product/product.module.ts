@@ -17,9 +17,10 @@ import { ProductsPreviewModule } from '../../products-preview/products-preview.m
 import { ReviewModule } from '../../review/review.module';
 import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
 import { LinkedCategoriesModule } from '../../linked-categories/linked-categories.module';
+import { AggregatedProductsComponent } from './aggregated-products/aggregated-products.component';
 
 @NgModule({
-  declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent],
+  declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent, AggregatedProductsComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,

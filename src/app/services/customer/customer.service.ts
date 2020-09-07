@@ -153,11 +153,11 @@ export class CustomerService { // todo split to CartService
     this.cartInit$.next(true);
   }
 
-  addToCart(product: ProductDto | ProductListItemDto, qty: number) {
-    const alreadyAdded = this.cart.find(item => item.sku === product.sku);
+  addToCart(sku: string, qty: number) {
+    const alreadyAdded = this.cart.find(item => item.sku === sku);
     if (alreadyAdded) { qty += alreadyAdded.qty; }
 
-    const dto: CreateOrUpdateOrderItemDto = { sku: product.sku, qty };
+    const dto: CreateOrUpdateOrderItemDto = { sku, qty };
     return this.http.put<ResponseDto<OrderItemDto>>(`${API_HOST}/api/v1/cart`, dto)
       .pipe(
         tap(response => {

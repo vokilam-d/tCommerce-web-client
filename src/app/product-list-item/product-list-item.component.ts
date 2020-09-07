@@ -33,7 +33,7 @@ export class ProductListItemComponent implements OnInit, OnChanges {
     this.error = null;
     this.isLoading = true;
 
-    this.customerService.addToCart(this.item, 1)
+    this.customerService.addToCart(this.item.sku, 1)
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         _ => { },
