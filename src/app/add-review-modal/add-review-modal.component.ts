@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2 } 
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CustomerService } from '../services/customer/customer.service';
 import { HttpClient } from '@angular/common/http';
-import { API_HOST, INPUT_MEDIA_ACCEPT_TYPES } from '../shared/constants';
+import { INPUT_MEDIA_ACCEPT_TYPES, UPLOADED_HOST } from '../shared/constants';
 import { MediaDto } from '../shared/dtos/media.dto';
 
 enum EAddReviewFormControl {
@@ -27,7 +27,7 @@ export interface IAddReviewFormValue {
 })
 export class AddReviewModalComponent implements OnInit, OnDestroy {
 
-  uploadedHost = API_HOST;
+  uploadedHost = UPLOADED_HOST;
   isModalVisible: boolean = false;
   form: FormGroup;
   controlNames = EAddReviewFormControl;

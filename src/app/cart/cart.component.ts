@@ -3,7 +3,7 @@ import { CustomerService } from '../services/customer/customer.service';
 import { QuantityControlComponent } from '../shared/quantity-control/quantity-control.component';
 import { OrderItemDto } from '../shared/dtos/order-item.dto';
 import { finalize } from 'rxjs/operators';
-import { API_HOST, DEFAULT_ERROR_TEXT } from '../shared/constants';
+import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../shared/constants';
 
 @Component({
   selector: 'cart',
@@ -12,7 +12,7 @@ import { API_HOST, DEFAULT_ERROR_TEXT } from '../shared/constants';
 })
 export class CartComponent implements OnInit {
 
-  uploadedHost = API_HOST;
+  uploadedHost = UPLOADED_HOST;
   isLoading: boolean = false;
   cartError: string | null = null;
   private cartErrorTimeout: number | undefined;

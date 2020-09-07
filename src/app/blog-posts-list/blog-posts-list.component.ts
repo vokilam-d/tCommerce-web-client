@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { BlogPostListItemDto } from '../shared/dtos/blog-post-list-item.dto';
 import { BlogService } from '../services/blog/blog.service';
-import { API_HOST, DEFAULT_ERROR_TEXT } from '../shared/constants';
+import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../shared/constants';
 import { finalize } from 'rxjs/operators';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { ScrollToService } from '../services/scroll-to/scroll-to.service';
@@ -30,7 +30,7 @@ export class BlogPostsListComponent implements OnInit, AfterViewInit {
   pagesTotal: number;
   error: string;
   isLoading: boolean = false;
-  uploadedHost = API_HOST;
+  uploadedHost = UPLOADED_HOST;
 
   @Input() categoryId: number;
   @Input() query: string;

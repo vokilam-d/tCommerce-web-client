@@ -1,5 +1,5 @@
 import {
-  AfterViewInit, ChangeDetectorRef,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   Input,
@@ -10,7 +10,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import { LinkedCategoryDto } from '../shared/dtos/linked-category.dto';
-import { API_HOST } from '../shared/constants';
+import { UPLOADED_HOST } from '../shared/constants';
 import { DeviceService } from '../services/device-detector/device.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class LinkedCategoriesComponent implements OnChanges, OnInit {
 
   needToDemonstrate: boolean;
 
-  uploadedHost = API_HOST;
+  uploadedHost = UPLOADED_HOST;
 
   @Input() categories: LinkedCategoryDto[];
   @Input() isLoading: boolean;

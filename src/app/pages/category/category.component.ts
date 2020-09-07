@@ -7,7 +7,7 @@ import { ProductService } from '../product/product.service';
 import { ISelectedFilter } from '../../product-list/filter/selected-filter.interface';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HeadService } from '../../services/head/head.service';
-import { API_HOST, DEFAULT_ERROR_TEXT } from '../../shared/constants';
+import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../../shared/constants';
 import { LinkedCategoryDto } from '../../shared/dtos/linked-category.dto';
 
 @Component({
@@ -24,7 +24,7 @@ export class CategoryComponent implements OnInit {
   breadcrumbs: IBreadcrumb[] = [];
   productListFilters: ISelectedFilter[];
   error: string;
-  uploadedHost = API_HOST;
+  uploadedHost = UPLOADED_HOST;
 
   constructor(private route: ActivatedRoute,
               private sanitizer: DomSanitizer,

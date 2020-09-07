@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AggregatorService } from './aggregator.service';
 import { AggregatedProductsTableDto } from '../../../shared/dtos/aggregated-products-table.dto';
 import { DeviceService } from '../../../services/device-detector/device.service';
-import { API_HOST } from '../../../shared/constants';
+import { UPLOADED_HOST } from '../../../shared/constants';
 import { AggregatedProductDto } from '../../../shared/dtos/aggregated-product.dto';
 import { CustomerService } from '../../../services/customer/customer.service';
 
@@ -14,7 +14,7 @@ import { CustomerService } from '../../../services/customer/customer.service';
 export class AggregatedProductsComponent implements OnInit {
 
   tables: AggregatedProductsTableDto[] = [];
-  uploadedHost = API_HOST;
+  uploadedHost = UPLOADED_HOST;
 
   @Input() productId: number;
 

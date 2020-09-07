@@ -3,7 +3,7 @@ import { formatDate, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { OrderDto } from '../../shared/dtos/order.dto';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
-import { API_HOST, DEFAULT_ERROR_TEXT } from '../../shared/constants';
+import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../../shared/constants';
 import { HeadService } from '../../services/head/head.service';
 import { OrderService } from '../checkout/order.service';
 
@@ -16,7 +16,7 @@ declare const Wayforpay: any;
 })
 export class OrderSuccessComponent implements OnInit {
 
-  uploadedHost = API_HOST;
+  uploadedHost = UPLOADED_HOST;
   order: OrderDto;
   breadcrumbs: IBreadcrumb[] = SUCCESS_BREADCRUMBS;
   paymentError: string = null;

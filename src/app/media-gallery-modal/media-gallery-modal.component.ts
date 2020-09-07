@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { MediaDto } from '../shared/dtos/media.dto';
-import { API_HOST } from '../shared/constants';
+import { UPLOADED_HOST } from '../shared/constants';
 import { EMediaVariant } from '../shared/enums/media-variant.enum';
 
 @Component({
@@ -10,7 +10,7 @@ import { EMediaVariant } from '../shared/enums/media-variant.enum';
 })
 export class MediaGalleryModalComponent implements OnInit, OnDestroy {
 
-  uploadedHost = API_HOST;
+  uploadedHost = UPLOADED_HOST;
   isModalVisible: boolean = false;
   private unlisten: () => void;
 

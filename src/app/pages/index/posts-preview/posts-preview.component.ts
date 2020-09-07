@@ -1,7 +1,7 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BlogService } from '../../../services/blog/blog.service';
 import { BlogPostListItemDto } from '../../../shared/dtos/blog-post-list-item.dto';
-import { API_HOST } from '../../../shared/constants';
+import { UPLOADED_HOST } from '../../../shared/constants';
 import { onWindowLoad } from '../../../shared/helpers/on-window-load.function';
 
 @Component({
@@ -12,7 +12,7 @@ import { onWindowLoad } from '../../../shared/helpers/on-window-load.function';
 export class PostsPreviewComponent implements OnInit {
   @Input() category: string;
   posts: BlogPostListItemDto[];
-  uploadedHost = API_HOST;
+  uploadedHost = UPLOADED_HOST;
 
   constructor(private blogService: BlogService) { }
 
