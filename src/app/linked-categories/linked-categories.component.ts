@@ -47,21 +47,21 @@ export class LinkedCategoriesComponent implements OnChanges, OnInit {
 
     const selectedCategoryIndex = this.categories.findIndex(category => category.isSelected);
     this.itemRefList.forEach((categoryRef, index) => {
-      if (index === 0 && index === selectedCategoryIndex) {
-        return categoryRef.nativeElement.scrollIntoView({
-          behavior: 'auto',
-          block: 'center',
-          inline: 'start'
-        });
-      } else if (index > 0 && index === selectedCategoryIndex) {
-        return categoryRef.nativeElement.scrollIntoView({
-          behavior: 'auto',
-          block: 'center',
-          inline: 'center'
-        });
-      }
-    });
+      if (index === selectedCategoryIndex) { return; }
+      let inline;
 
+      if (index === 0) {
+        inline = 'start';
+      } else if (index > 0) {
+        inline = 'center';
+      }
+
+      return categoryRef.nativeElement.scrollIntoView({
+        behavior: 'auto',
+        block: 'center',
+        inline: inline
+      });
+    });
   }
 
   getCategoryImage(category) {
