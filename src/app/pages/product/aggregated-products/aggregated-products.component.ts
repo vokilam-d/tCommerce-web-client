@@ -46,6 +46,6 @@ export class AggregatedProductsComponent implements OnInit {
   }
 
   addToCart(product: AggregatedProductDto) {
-    this.customerService.addToCart(product.sku, 1);
+    this.customerService.addToCart(product.sku, 1).subscribe();
   }
 }
