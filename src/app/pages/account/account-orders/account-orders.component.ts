@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeadService } from '../../../services/head/head.service';
 import { CustomerService } from '../../../services/customer/customer.service';
 import { OrderDto } from '../../../shared/dtos/order.dto';
-import { API_HOST, DEFAULT_ERROR_TEXT } from '../../../shared/constants';
+import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../../../shared/constants';
 import { finalize } from 'rxjs/operators';
 
 @Component({
@@ -12,7 +12,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class AccountOrdersComponent implements OnInit {
 
-  uploadedHost = API_HOST;
+  uploadedHost = UPLOADED_HOST;
   orders: OrderDto[] = [];
   error: string;
   isLoading: boolean = false;

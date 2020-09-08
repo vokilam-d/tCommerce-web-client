@@ -7,7 +7,7 @@
     Корзина
   </h1>
 
-  <cart class="cart-page__cart"></cart>
+  <cart class="cart-page__cart" (continueShopping)="onContinueShopping()"></cart>
 
   <div class="cart-page__empty">
     <a class="btn cart-page__empty-btn" *ngIf="isCartEmpty" routerLink="/">Вперёд к покупкам!</a>

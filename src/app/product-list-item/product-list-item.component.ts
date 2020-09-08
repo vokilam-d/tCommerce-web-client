@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
 import { finalize } from 'rxjs/operators';
 import { CustomerService } from '../services/customer/customer.service';
-import { API_HOST, DEFAULT_ERROR_TEXT } from '../shared/constants';
+import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../shared/constants';
 
 @Component({
   selector: 'product-list-item',
@@ -11,7 +11,7 @@ import { API_HOST, DEFAULT_ERROR_TEXT } from '../shared/constants';
 })
 export class ProductListItemComponent implements OnInit, OnChanges {
 
-  uploadedHost = API_HOST;
+  uploadedHost = UPLOADED_HOST;
   error: string | null = null;
   isLoading: boolean = false;
   discountValue: number;
@@ -33,7 +33,7 @@ export class ProductListItemComponent implements OnInit, OnChanges {
     this.error = null;
     this.isLoading = true;
 
-    this.customerService.addToCart(this.item, 1)
+    this.customerService.addToCart(this.item.sku, 1)
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         _ => { },

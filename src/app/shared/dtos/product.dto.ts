@@ -4,6 +4,8 @@ import { ProductVariantGroupDto } from './product-variant.dto';
 import { BreadcrumbDto } from './breadcrumb.dto';
 import { SafeHtml } from '@angular/platform-browser';
 import { LinkedProductDto } from './linked-product.dto';
+import { ResponseDto } from './response.dto';
+import { LinkedCategoryDto } from './linked-category.dto';
 
 export class ProductCharacteristic {
   label: string;
@@ -43,4 +45,8 @@ export class ProductDto {
   relatedProducts: LinkedProductDto[];
 
   safeFullDescription: SafeHtml;
+}
+
+export class ProductResponseDto extends ResponseDto<ProductDto> {
+  categories: LinkedCategoryDto[];
 }

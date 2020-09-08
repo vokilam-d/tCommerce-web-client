@@ -80,6 +80,7 @@
   padding: 0 10px;
   font-size: 15px;
   width: 100%;
+  table-layout: fixed;
 
   @include respond-to($media_medium) {
     padding: 0;
@@ -95,14 +96,13 @@
     }
 
     &:nth-of-type(odd) {
-      background-color: #eeeeee;
+      background-color: #f3f3f3;
     }
   }
 
   &__cell {
     display: table-cell;
     width: 50%;
-    border-top: 1px solid rgba($dark, 0.2);
 
     &--first {
       border-top: none;
@@ -110,13 +110,14 @@
   }
 
   &__label {
-    font-weight: 600;
     padding: 10px 30px 10px 10px;
+    vertical-align: middle;
   }
 
   &__value {
     margin-left: 0;
     padding: 10px 10px 10px 30px;
+    vertical-align: middle;
     text-align: right;
   }
 }

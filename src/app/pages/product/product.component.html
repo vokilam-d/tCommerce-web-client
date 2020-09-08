@@ -1,7 +1,15 @@
 <app-header></app-header>
 
 <div class="page container product">
-  <breadcrumbs class="product__breadcrumbs" [breadcrumbs]="breadcrumbs" [showLastItem]="false"></breadcrumbs>
+
+  <linked-categories [categories]="categories" [isLoading]="!product && !fetchError" ></linked-categories>
+
+  <breadcrumbs class="product__breadcrumbs"
+               [breadcrumbs]="breadcrumbs"
+               [showLastItem]="false"
+               [isLastItemHeading]="false"
+               [isBig]="true"
+  ></breadcrumbs>
 
   <div class="product__fetch-error" *ngIf="fetchError as error">
     {{ error }}
@@ -145,6 +153,8 @@
     </div>
 
     <product-details class="product__details" [product]="product"></product-details>
+
+    <aggregated-products [productId]="product.productId"></aggregated-products>
 
     <products-preview class="product__related" [ids]="getRelatedProductsIds()" [type]="'linkedProducts'"></products-preview>
 

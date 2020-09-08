@@ -14,16 +14,30 @@
   }
 
   &__link {
-    font-size: 13px;
+    font-size: 15px;
     transition: all 0.2s ease;
     cursor: pointer;
+
+    @include respond-to($media_medium) {
+      font-size: 13px;
+    }
 
     &:hover {
       color: $primary;
     }
 
     #{$menu}--horizontal & {
-      padding: 12px 25px;
+      @include respond-to($media_large) {
+        padding: 12px 5px;
+      }
+
+      @include respond-to(1110px) {
+        padding: 12px 10px;
+      }
+
+      @include respond-to($media_x-large) {
+        padding: 12px 20px;
+      }
     }
     #{$menu}--vertical & {
       display: block;

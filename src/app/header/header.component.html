@@ -24,8 +24,21 @@
         <span class="header__logo-text">Клондайк - товары для творчества!</span>
       </a>
 
-      <div class="fixed-container">
-        <div class="header__toolbar toolbar" [ngClass]="{ fixed: isFixed }" #toolbarRef>
+      <div class="catalog-toggle" [class.catalog-toggle--is-catalog]="isSidebarCatalog">
+        <div class="catalog-toggle__btn">
+          <i class="mbi mbi-menu catalog-toggle__btn-icon"></i>
+          <div class="catalog-toggle__text">Каталог товаров</div>
+          <i class="mbi mbi-ios-arrow-down catalog-toggle__arrow"></i>
+        </div>
+
+        <catalog-menu class="catalog-toggle__menu"
+                      [class.catalog-toggle__menu--is-catalog]="isSidebarCatalog"
+                      [categories]="categories"
+        ></catalog-menu>
+      </div>
+
+      <div class="fixed-container" [class.fixed-container--is-catalog]="isSidebarCatalog">
+        <div class="header__toolbar toolbar" [class.fixed]="isFixed" #toolbarRef>
           <div class="toolbar__menu" (click)="openMenu()">
             <i class="toolbar__menu-icon mbi mbi-menu"></i>
           </div>
@@ -38,19 +51,6 @@
           <mini-cart class="toolbar__item toolbar__cart"></mini-cart>
           <mini-account class="toolbar__item toolbar__account"></mini-account>
         </div>
-      </div>
-
-      <div class="catalog-toggle" [class.catalog-toggle--fixed]="isCatalogFixed">
-        <div class="catalog-toggle__btn">
-          <i class="mbi mbi-menu catalog-toggle__btn-icon"></i>
-          <div class="catalog-toggle__text">Каталог товаров</div>
-          <i class="mbi mbi-ios-arrow-down catalog-toggle__arrow"></i>
-        </div>
-
-        <catalog-menu class="catalog-toggle__menu"
-                      [class.catalog-toggle__menu--opened]="isCatalogFixed"
-                      [categories]="categories"
-        ></catalog-menu>
       </div>
 
     </div>

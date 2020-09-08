@@ -17,9 +17,8 @@ import { SortingComponent } from './sorting/sorting.component';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { ScrollToService } from '../services/scroll-to/scroll-to.service';
 import { FilterDto } from '../shared/dtos/filter.dto';
-import { API_HOST, DEFAULT_ERROR_TEXT } from '../shared/constants';
+import { DEFAULT_ERROR_TEXT } from '../shared/constants';
 import { Subscription } from 'rxjs';
-import { FilterCategoryDto } from '../shared/dtos/filter-category.dto';
 
 @Component({
   selector: 'product-list',
@@ -29,7 +28,6 @@ import { FilterCategoryDto } from '../shared/dtos/filter-category.dto';
 export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
 
   items: ProductListItemDto[];
-  categories: FilterCategoryDto[];
   itemsTotal: number;
   filteredCount: number;
   pagesTotal: number;
@@ -38,7 +36,6 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   error: string;
   isFixed: boolean;
   headerPosition: number;
-  uploadedHost = API_HOST;
   private fetchSub: Subscription;
   get isLoading() { return this.fetchSub?.closed === false; }
 
@@ -120,7 +117,6 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
           this.pagesTotal = response.pagesTotal;
           this.page = response.page;
           this.filters = response.filters;
-          this.categories = response.categories;
         },
         error => this.error = error.error?.message || DEFAULT_ERROR_TEXT
       );
@@ -161,14 +157,6 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
       this.renderer.setStyle(productListHeaderEl, 'top', '0px');
     } else {
       this.renderer.setStyle(productListHeaderEl, 'top', `${fixedMobileSearchBarHeight}px`);
-    }
-  }
-
-  getCategoryImage(category) {
-    if (!category.medias[0]?.variantsUrls.small) {
-      return '/assets/images/no-img.png';
-    } else {
-      return this.uploadedHost + category.medias[0]?.variantsUrls.small;
     }
   }
 

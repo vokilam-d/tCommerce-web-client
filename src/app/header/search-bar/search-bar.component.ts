@@ -1,18 +1,10 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Inject,
-  OnInit,
-  PLATFORM_ID,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { catchError, debounceTime, distinctUntilChanged, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { fromEvent, of } from 'rxjs';
 import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
-import { API_HOST, DEFAULT_ERROR_TEXT, SEARCH_QUERY_PARAM } from '../../shared/constants';
+import { DEFAULT_ERROR_TEXT, SEARCH_QUERY_PARAM, UPLOADED_HOST } from '../../shared/constants';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { isPlatformBrowser } from '@angular/common';
 import { ProductService } from '../../pages/product/product.service';
@@ -24,7 +16,7 @@ import { ProductService } from '../../pages/product/product.service';
 })
 export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterViewInit {
 
-  uploadedHost = API_HOST;
+  uploadedHost = UPLOADED_HOST;
   isInFocus: boolean = false;
   searchControl: FormControl;
   searchResults: ProductListItemDto[] = null;

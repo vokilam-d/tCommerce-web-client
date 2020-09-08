@@ -1,8 +1,9 @@
 import { MediaDto } from './media.dto';
 
-export class FilterCategoryDto {
+export class LinkedCategoryDto {
   id: number;
   medias: MediaDto[];
   name: string;
   slug: string;
+  isSelected: boolean;
 }
