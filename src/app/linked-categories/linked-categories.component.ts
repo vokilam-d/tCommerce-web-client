@@ -46,12 +46,15 @@ export class LinkedCategoriesComponent implements OnChanges, OnInit {
     this.cdr.detectChanges();
 
     const selectedCategoryIndex = this.categories.findIndex(category => category.isSelected);
-    const selectedCategoryEl = this.itemRefList.find((categoryRef, index) => index === selectedCategoryIndex);
+    this.itemRefList.forEach((categoryRef, index) => {
+      if (index !== selectedCategoryIndex) { return; }
+      const inline: 'start' | 'center' = index === 0 ? 'start' : 'center';
 
-    selectedCategoryEl.nativeElement.scrollIntoView({
-      behavior: 'auto',
-      block: 'center',
-      inline: 'center'
+      return categoryRef.nativeElement.scrollIntoView({
+        behavior: 'auto',
+        block: 'center',
+        inline
+      });
     });
   }
 
