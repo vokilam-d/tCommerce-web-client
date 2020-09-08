@@ -30,46 +30,48 @@
 }
 
 .product {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 0 5px;
+  border-bottom: 1px solid rgba($dark, 0.15);
+
   @include respond-to($media_medium) {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0 10px 5px;
-    border-bottom: 1px solid rgba($dark, 0.15);
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   &__img {
     display: block;
-    margin: 0 auto;
-    max-height: 80px;
-
-    @include respond-to($media_medium) {
-      margin: 0;
-      max-height: 60px;
-    }
+    max-height: 60px;
+    max-width: 60px;
   }
 
   &__name {
     display: block;
-    margin: 10px 0 0;
+    margin: 0 10px 0 10px;
     font-size: 14px;
 
     @include respond-to($media_medium) {
-      margin: 0 0 0 20px;
       font-size: 15px;
     }
   }
 
   &__buy {
-    margin: 8px 0 0;
-    width: 100%;
+    position: relative;
+    margin: 0 0 0 auto;
     font-size: 14px;
 
     @include respond-to($media_medium) {
-      width: auto;
-      margin: 0 0 0 auto;
       font-size: inherit;
     }
+  }
+
+  &__preloader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(calc(-50% + 2px), -6px);
   }
 }
 

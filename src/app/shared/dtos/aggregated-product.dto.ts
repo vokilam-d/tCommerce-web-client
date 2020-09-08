@@ -3,4 +3,7 @@ export class AggregatedProductDto {
   slug: string;
   name: string;
   sku: string;
+
+  // custom transforms
+  isLoading: boolean;
 }

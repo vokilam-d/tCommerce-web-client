@@ -9,7 +9,11 @@
 
       <a class="product__name" [routerLink]="['/', product.slug]">{{ product.name }}</a>
 
-      <button class="product__buy btn" (click)="addToCart(product)">Купить</button>
+      <button class="product__buy btn" (click)="addToCart(product)">
+        Купить
+
+        <preloader class="product__preloader" *ngIf="product.isLoading"></preloader>
+      </button>
 
     </div>
   </div>

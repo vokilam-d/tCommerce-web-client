@@ -2,9 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AggregatorService } from './aggregator.service';
 import { AggregatedProductsTableDto } from '../../../shared/dtos/aggregated-products-table.dto';
 import { DeviceService } from '../../../services/device-detector/device.service';
-import { UPLOADED_HOST } from '../../../shared/constants';
+import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../../../shared/constants';
 import { AggregatedProductDto } from '../../../shared/dtos/aggregated-product.dto';
 import { CustomerService } from '../../../services/customer/customer.service';
+import { NotyService } from '../../../noty/noty.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'aggregated-products',
@@ -20,6 +22,7 @@ export class AggregatedProductsComponent implements OnInit {
 
   constructor(private aggregatorService: AggregatorService,
               private deviceService: DeviceService,
+              private notyService: NotyService,
               private customerService: CustomerService
   ) { }
 
@@ -46,6 +49,13 @@ export class AggregatedProductsComponent implements OnInit {
   }
 
   addToCart(product: AggregatedProductDto) {
-    this.customerService.addToCart(product.sku, 1).subscribe();
+    product.isLoading = true;
+
+    this.customerService.addToCart(product.sku, 1)
+      .pipe( finalize(() => product.isLoading = false) )
+      .subscribe(
+        () => {},
+        error => this.notyService.error(error.error?.message || DEFAULT_ERROR_TEXT)
+      );
   }
 }
