@@ -47,7 +47,7 @@ export class LinkedCategoriesComponent implements OnChanges, OnInit {
 
     const selectedCategoryIndex = this.categories.findIndex(category => category.isSelected);
     this.itemRefList.forEach((categoryRef, index) => {
-      if (index === selectedCategoryIndex) { return; }
+      if (index !== selectedCategoryIndex) { return; }
       let inline;
 
       if (index === 0) {
