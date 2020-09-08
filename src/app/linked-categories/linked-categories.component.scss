@@ -53,16 +53,22 @@
   }
 
   &__link {
-    width: 87px;
+    width: 80px;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    font-size: 13px;
+
+    @include respond-to($media_medium) {
+      width: 87px;
+      font-size: 14px;
+    }
   }
 
   &__img {
-    width: 80px;
-    height: 80px;
+    width: 78px;
+    height: 78px;
     margin: 0 auto;
     object-fit: cover;
     border-radius: 50%;
@@ -86,6 +92,7 @@
     -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1.2;
   }
 }
 
