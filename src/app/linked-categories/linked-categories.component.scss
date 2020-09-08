@@ -43,7 +43,7 @@
 
     @include respond-to($media_medium) {
       padding-top: 5px;
-      margin: 0 10px 2px;
+      margin: 0 8px 2px;
       justify-content: center;
     }
 
@@ -60,7 +60,7 @@
     justify-content: space-between;
 
     @include respond-to($media_medium) {
-      width: 87px;
+      width: 92px;
     }
   }
 
@@ -73,8 +73,8 @@
     box-shadow: 0 0 10px 0 #e7e7e7;
 
     @include respond-to($media_medium) {
-      width: 85px;
-      height: 85px;
+      width: 87px;
+      height: 87px;
     }
 
     &--selected {
