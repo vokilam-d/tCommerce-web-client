@@ -39,7 +39,7 @@
       <div class="product__rating rating">
         <rating-stars [rating]="product.reviewsAvgRating"
                       [isDisabled]="addQuickReviewSuccess"
-                      (quickReview)="addQuickReview($event)"
+                      (quickReview)="setQuickReview($event)"
         ></rating-stars>
 
         <div class="rating__count">{{ product.allReviewsCount }}</div>
@@ -53,6 +53,12 @@
           <span class="tooltip__close-btn" (click)="closeTooltip()">
             <span class="tooltip__cross"></span>
           </span>
+        </div>
+
+        <div class="rating__tooltip tooltip tooltip--bottom" *ngIf="quickReview && quickReview !== null">
+          Выбрать оценку <span class="tooltip__rating">{{ quickReview }}</span> ?
+          <button class="tooltip__confirmation-btn" (click)="addQuickReview(quickReview)">Да</button>
+          <button  class="tooltip__confirmation-btn" (click)="quickReview = null">Нет</button>
         </div>
 
       </div>

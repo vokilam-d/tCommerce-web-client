@@ -34,6 +34,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   isReviewFromEmail: boolean = null;
   needToShowReviews: boolean = false;
   isClosed: boolean;
+  quickReview: number;
 
   @ViewChild(ProductDetailsComponent) detailsCmp: ProductDetailsComponent;
   @ViewChild(FlyToCartDirective) flyToCart: FlyToCartDirective;
@@ -95,6 +96,11 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.detailsCmp.scrollToReviews(showSuccess);
   }
 
+  setQuickReview(rating: number) {
+    this.isClosed = true;
+    this.quickReview = rating;
+  }
+
   addQuickReview(rating: number) {
     this.addQuickReviewError = null;
 
@@ -106,6 +112,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
       },
       error => this.addQuickReviewError = error.error?.message || DEFAULT_ERROR_TEXT
     );
+
+    this.quickReview = null;
   }
 
   closeTooltip() {
