@@ -353,7 +353,7 @@ $arrowSize: 10px;
   }
 
   @include respond-to($media_medium) {
-    min-width: 240px;
+    min-width: 247px;
     left: calc(100% + 12px);
     right: auto;
     bottom: auto;
@@ -384,7 +384,6 @@ $arrowSize: 10px;
       transform: translate(0, -50%) rotate(45deg);
     }
   }
-
 
   &__close-btn {
     position: absolute;
@@ -433,6 +432,27 @@ $arrowSize: 10px;
       margin-top: -1px;
       background: #0842a7;
       transform: rotate(-45deg);
+    }
+  }
+
+  &__rating {
+    font-size: 15px;
+    font-weight: bolder;
+  }
+
+  &__confirmation-btn {
+    width: 39px;
+    padding: 5px 0;
+    background-color: #f0f0f0;
+    border: 1px solid $borderColor;
+    border-radius: 5px;
+
+    &:first-of-type {
+      margin-right: 4px;
+    }
+
+    &:hover {
+      background-color: #e7e7e7;
     }
   }
 }

@@ -130,4 +130,12 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
         }
       );
   }
+
+  getResultImage(product) {
+    if (!product.mediaUrl) {
+      return '/assets/images/no-img.png';
+    } else {
+      return this.uploadedHost + product.mediaUrl;
+    }
+  }
 }

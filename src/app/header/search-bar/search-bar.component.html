@@ -35,7 +35,7 @@
            [ngClass]="{ 'search-bar__result--active': indexOfProduct === activeIndex}"
            [routerLink]="['/', product.slug]"
         >
-          <img class="product__image" [src]="uploadedHost + product.mediaUrl">
+          <img class="product__image" [src]="getResultImage(product)">
 
           <div class="product__name">{{ product.name }}</div>
         </a>
