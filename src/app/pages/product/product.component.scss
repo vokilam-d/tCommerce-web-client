@@ -443,8 +443,8 @@ $arrowSize: 10px;
   &__confirmation-btn {
     width: 39px;
     padding: 5px 0;
-    background-color: #f0f0f0;
-    border: 1px solid $borderColor;
+    background-color: #e5e5e5;
+    border: 1px solid #dedede;
     border-radius: 5px;
 
     &:first-of-type {
@@ -452,7 +452,7 @@ $arrowSize: 10px;
     }
 
     &:hover {
-      background-color: #e7e7e7;
+      background-color: #eaeaea;
     }
   }
 }
