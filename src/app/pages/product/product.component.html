@@ -142,7 +142,7 @@
              *ngFor="let category of product.categories, last as last"
              [routerLink]="'/' + category.slug"
           >
-            {{ category.name }}<ng-container *ngIf="!last">, </ng-container>
+            {{ category.name }}
           </a>
         </div>
       </div>
