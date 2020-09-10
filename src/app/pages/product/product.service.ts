@@ -23,15 +23,6 @@ export class ProductService {
     return this.http.get<ProductResponseDto>(`${API_HOST}/api/v1/products/${slug}`);
   }
 
-  fetchProductsByAutocomplete(query: string) {
-    const params = {
-      [SEARCH_QUERY_PARAM]: query,
-      autocomplete: 'true'
-    };
-
-    return this.http.get<ProductListResponseDto>(`${API_HOST}/api/v1/products`, { params });
-  }
-
   fetchProductsByFilters(spf: SortingPaginatingFilterDto) {
     return this.http.get<ProductListResponseDto>(`${API_HOST}/api/v1/products`, { params: toHttpParams(spf) });
   }

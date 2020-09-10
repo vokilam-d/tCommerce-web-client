@@ -30,14 +30,25 @@
           По Вашему запросу ничего не найдено
         </div>
 
-        <a class="search-bar__result product"
-           *ngFor="let product of searchResults; let indexOfProduct=index"
-           [ngClass]="{ 'search-bar__result--active': indexOfProduct === activeIndex}"
-           [routerLink]="['/', product.slug]"
+        <a class="search-bar__result item"
+           *ngFor="let item of searchResults; let indexOfProduct=index"
+           [ngClass]="{
+             'search-bar__result--active': indexOfProduct === activeIndex
+           }"
+           [routerLink]="['/', item.slug]"
         >
-          <img class="product__image" [src]="getResultImage(product)">
+          <img *ngIf="item.type !== autocompleteItemTypes.Category"
+               class="item__image"
+               [src]="getResultImage(item)"
+          >
 
-          <div class="product__name">{{ product.name }}</div>
+          <div class="item__name" [class.item__name--category]="item.type === autocompleteItemTypes.Category">
+
+            <span class="item__pretext"
+                  *ngIf="item.type === autocompleteItemTypes.Category"
+            >Перейти в категорию: </span>{{ item.name }}
+
+          </div>
         </a>
       </ng-container>
     </ng-template>

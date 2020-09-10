@@ -3,11 +3,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { catchError, debounceTime, distinctUntilChanged, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { fromEvent, of } from 'rxjs';
-import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
-import { DEFAULT_ERROR_TEXT, SEARCH_QUERY_PARAM, UPLOADED_HOST } from '../../shared/constants';
+import { API_HOST, DEFAULT_ERROR_TEXT, SEARCH_QUERY_PARAM, UPLOADED_HOST } from '../../shared/constants';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { isPlatformBrowser } from '@angular/common';
 import { ProductService } from '../../pages/product/product.service';
+import { AutocompleteItemDto } from '../../shared/dtos/autocomplete-item.dto';
+import { HttpClient } from '@angular/common/http';
+import { ResponseDto } from '../../shared/dtos/response.dto';
+import { AutocompleteItemType } from '../../shared/enums/autocomplete-item-type.enum';
 
 @Component({
   selector: 'search-bar',
@@ -19,16 +22,18 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
   uploadedHost = UPLOADED_HOST;
   isInFocus: boolean = false;
   searchControl: FormControl;
-  searchResults: ProductListItemDto[] = null;
+  searchResults: AutocompleteItemDto[] = null;
   isSearchInProgress: boolean = false;
   searchError: string = null;
   activeIndex: number = null;
+  autocompleteItemTypes = AutocompleteItemType;
 
   @ViewChild('inputRef') inputRef: ElementRef;
 
   constructor(@Inject(PLATFORM_ID) private platformId: any,
               private productService: ProductService,
               private route: ActivatedRoute,
+              private http: HttpClient,
               private router: Router) {
     super();
   }
@@ -73,7 +78,7 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
         map(value => value.trim()),
         map(value => value.replace(/,/g, '')), // ',' sign is reserved as array delimiter
         tap(() => this.isSearchInProgress = true),
-        switchMap(query => query ? this.productService.fetchProductsByAutocomplete(query) : of({ data: null })),
+        switchMap(query => query ? this.fetchAutocompleteItems(query) : of({ data: null })),
         catchError((err, caught) => {
           this.searchResults = null;
           this.searchError = (err.error && err.error.message) || DEFAULT_ERROR_TEXT;
@@ -137,5 +142,9 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
     } else {
       return this.uploadedHost + product.mediaUrl;
     }
+  }
+
+  private fetchAutocompleteItems(query: string) {
+    return this.http.get<ResponseDto<AutocompleteItemDto[]>>(`${API_HOST}/api/v1/autocomplete/${query}`);
   }
 }
