@@ -2,8 +2,8 @@
 
 .btn {
   padding: 10px 15px 9px;
-  background: $primary;
-  border: 1px solid $primary;
+  background: $action;
+  border: 1px solid $action;
   border-radius: 5px;
   font-size: 16px;
   transition: background-color 0.2s ease;
@@ -11,10 +11,10 @@
   &:hover,
   &:active {
     color: $dark;
-    background: darken($primary, 3%);
+    background: darken($action, 3%);
   }
   &:active {
-    background: darken($primary, 5%);
+    background: darken($action, 5%);
   }
 
   &--transparent {

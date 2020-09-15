@@ -64,12 +64,17 @@
   }
 
   &__info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 10px;
   }
 
   &__rating {
     display: flex;
     align-items: center;
+    width: 100%;
     margin: 0 0 7px;
   }
 
@@ -77,6 +82,14 @@
     margin: 0 0 0 5px;
     font-size: 13px;
     color: #666;
+  }
+
+  &__price-container {
+    width: 100%;
+
+    @include respond-to($media_medium) {
+      width: 50%;
+    }
   }
 
   &__price {
@@ -112,9 +125,15 @@
   }
 
   &__actions {
-    margin: 15px 0 0;
     display: flex;
     justify-content: space-between;
+    margin-top: 15px;
+
+    @include respond-to($media_medium) {
+      width: 50%;
+      justify-content: flex-end;
+      margin-top: 0;
+    }
   }
 
   &__error {
@@ -137,6 +156,11 @@
     align-items: center;
     font-size: 14px;
     border-radius: 3px;
+    background-color: initial;
+
+    &:hover {
+      background: darken($action, 3%);
+    }
 
     &--loading {
       color: transparent;
@@ -145,8 +169,9 @@
   }
 
   &__out-of-stock {
-    display: inline-block;
+    display: flex;
     min-height: 35px;
+    align-items: center;
   }
 
   &__preloader {
