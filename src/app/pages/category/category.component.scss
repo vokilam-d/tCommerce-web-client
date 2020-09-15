@@ -83,4 +83,11 @@
     margin-right: 10px;
     border-radius: 3px;
   }
+
+  &__name {
+    @include respond-to($media_medium) {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }
