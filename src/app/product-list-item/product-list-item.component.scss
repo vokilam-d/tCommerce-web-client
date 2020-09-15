@@ -160,7 +160,7 @@
     background-color: initial;
 
     &:hover {
-      background: darken($button, 3%);
+      background: darken($action, 3%);
     }
 
     &--loading {
@@ -170,8 +170,9 @@
   }
 
   &__out-of-stock {
-    display: inline-block;
+    display: flex;
     min-height: 35px;
+    align-items: center
   }
 
   &__preloader {
