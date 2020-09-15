@@ -15,6 +15,7 @@
   &__content {
     @include respond-to($brk_point) {
       display: flex;
+      height: 365px;
     }
 
     @include respond-to($media_large) {
