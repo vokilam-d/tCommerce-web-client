@@ -108,4 +108,17 @@ export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit 
   onAddressChange(address: ShipmentAddressDto) {
     this.saveAddressType(address.addressType);
   }
+
+  getCustomerAddress(): ShipmentAddressDto {
+    const customer = this.customerService.customer;
+    const customerAddress = new ShipmentAddressDto();
+
+    if (customer) {
+      customerAddress.phone = customer.phoneNumber;
+      customerAddress.firstName = customer.firstName;
+      customerAddress.lastName = customer.lastName;
+    }
+
+    return customerAddress;
+  }
 }

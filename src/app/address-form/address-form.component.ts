@@ -30,7 +30,8 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
 
   constructor(private formBuilder: FormBuilder,
               private scrollToService: ScrollToService,
-              private elementRef: ElementRef) {
+              private elementRef: ElementRef
+  ) {
     super();
   }
 
@@ -38,6 +39,8 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
     if (changes.address?.currentValue) {
       this.buildAddressForm(changes.address.currentValue);
     }
+
+    console.log(this.address);
   }
 
   ngOnInit() {
