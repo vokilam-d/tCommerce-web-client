@@ -85,8 +85,6 @@
   }
 
   &__price-container {
-    width: 100%;
-
     @include respond-to($media_medium) {
       width: 50%;
     }
@@ -127,12 +125,13 @@
   &__actions {
     display: flex;
     justify-content: space-between;
+    width: 100%;
     margin-top: 15px;
 
-    @include respond-to($media_medium) {
-      width: 50%;
+    @include respond-to(375px) {
       justify-content: flex-end;
       margin-top: 0;
+      width: 50%;
     }
   }
 
@@ -154,9 +153,13 @@
     padding-right: 10px;
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 13px;
     border-radius: 3px;
     background-color: initial;
+
+    @include respond-to(400px)  {
+      font-size: 14px;
+    }
 
     &:hover {
       background: darken($action, 3%);
@@ -172,6 +175,12 @@
     display: flex;
     min-height: 35px;
     align-items: center;
+    font-size: 14px;
+    text-align: center;
+
+    @include respond-to($media_large) {
+      font-size: 16px;
+    }
   }
 
   &__preloader {
