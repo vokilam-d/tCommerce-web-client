@@ -43,6 +43,8 @@ export class LinkedCategoriesComponent implements OnChanges, OnInit {
   }
 
   scrollToSelectedCategory() {
+    if (this.deviceService.isPlatformServer()) { return; }
+
     this.cdr.detectChanges();
 
     const selectedCategoryIndex = this.categories.findIndex(category => category.isSelected);
