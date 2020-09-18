@@ -58,8 +58,6 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
         this.orderService.paymentMethod = method;
       });
 
-    this.methodControl.setValue(this.methods[0]); // setValue *must* be after subscription
-
     /* handle method disabling */
     const cashOnDeliveryMethod = this.methods.find(method => method.paymentType === PaymentTypeEnum.CASH_ON_DELIVERY);
     this.orderService.addressType$
