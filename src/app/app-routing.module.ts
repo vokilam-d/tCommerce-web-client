@@ -80,7 +80,12 @@ const routes: Routes = [
   },
   {
     path: 'blog',
-    loadChildren: () => import('./pages/blog-pages/blog/blog.module').then(m => m.BlogModule)
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/blog-pages/blog/blog.module').then(m => m.BlogModule)
+      }
+    ]
   },
   {
     path: DUMMY_PATH,

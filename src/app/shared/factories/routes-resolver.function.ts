@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { API_HOST, DUMMY_PATH } from '../constants';
-import { Router, Routes } from '@angular/router';
+import { Route, Router, Routes } from '@angular/router';
 import { InjectionToken, Injector } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { PageRegistryDto } from '../dtos/page-registry.dto';
@@ -18,20 +18,28 @@ function updateConfig(router: Router, pages: PageRegistryDto[]) {
   const dummyRoute = staticRoutes[dummyRouteIdx];
   staticRoutes.splice(dummyRouteIdx, 1);
 
-  const routesFromPages: Routes = pages.map(page => {
+  const blogRouteIdx = staticRoutes.findIndex(route => route.path === 'blog');
+
+  const routesFromPages: Routes = [];
+  pages.forEach(page => {
     const isBlogPage = page.type === PageTypeEnum.BlogPost || page.type === PageTypeEnum.BlogCategory;
-    const path = `${isBlogPage ? 'blog/' : ''}${page.slug}`;
+    const path = page.slug;
     const loadChildren = dummyRoute.children.find(route => route.path === page.type).loadChildren;
 
-    return {
+    const route: Route = {
       path,
       loadChildren,
       data: {
         slug: page.slug
       }
     };
-  });
 
+    if (isBlogPage) {
+      staticRoutes[blogRouteIdx].children.push(route);
+    } else {
+      routesFromPages.push(route);
+    }
+  });
 
   router.resetConfig([...staticRoutes.slice(0, -1), ...routesFromPages, staticRoutes[staticRoutes.length - 1]]);
 }
