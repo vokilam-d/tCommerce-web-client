@@ -40,7 +40,7 @@ export class RatingStarsComponent implements OnChanges, AfterViewInit {
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes?.rating.firstChange === false) {
+    if (changes?.rating?.firstChange === false) {
       this.setFill();
     }
   }
