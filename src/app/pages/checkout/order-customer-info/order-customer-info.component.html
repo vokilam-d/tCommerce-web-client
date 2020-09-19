@@ -62,6 +62,6 @@
 <address-form class="address-form form__control-container"
               *ngIf="!addressOptionControl?.value"
               [showIsDefault]="false"
-              [address]="getCustomerAddress()"
+              [address]="customerAddress"
               (valueChanged)="onAddressChange($event)"
 ></address-form>

@@ -9,6 +9,7 @@ import { NgUnsubscribe } from '../../../shared/directives/ng-unsubscribe.directi
 import { AddressFormComponent } from '../../../address-form/address-form.component';
 import { AddressTypeEnum } from '../../../shared/enums/address-type.enum';
 import { ShipmentAddressDto } from '../../../shared/dtos/shipment-address.dto';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'order-customer-info',
@@ -20,6 +21,7 @@ export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit 
   emailControl: FormControl;
   addressOptionControl: FormControl | null;
   addressTypes = AddressTypeEnum;
+  customerAddress: ShipmentAddressDto;
 
   get customer$() { return this.customerService.customer$; }
 
@@ -37,6 +39,7 @@ export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit 
   ngOnInit(): void {
     this.handleEmail();
     this.buildAddressOptionControl();
+    this.setCustomerAddress();
   }
 
   private handleEmail() {
@@ -109,16 +112,17 @@ export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit 
     this.saveAddressType(address.addressType);
   }
 
-  getCustomerAddress(): ShipmentAddressDto {
-    const customer = this.customerService.customer;
-    const customerAddress = new ShipmentAddressDto();
+  setCustomerAddress(): void {
+    this.customerService.customer$
+      .pipe( takeUntil(this.ngUnsubscribe) )
+      .subscribe(customer => {
+      this.customerAddress = new ShipmentAddressDto();
 
-    if (customer) {
-      customerAddress.phone = customer.phoneNumber;
-      customerAddress.firstName = customer.firstName;
-      customerAddress.lastName = customer.lastName;
-    }
+      if (!customer) { return; }
 
-    return customerAddress;
+      this.customerAddress.phone = customer.phoneNumber;
+      this.customerAddress.firstName = customer.firstName;
+      this.customerAddress.lastName = customer.lastName;
+    });
   }
 }
