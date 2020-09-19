@@ -20,6 +20,7 @@ export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit 
   emailControl: FormControl;
   addressOptionControl: FormControl | null;
   addressTypes = AddressTypeEnum;
+  customerAddress: ShipmentAddressDto;
 
   get customer$() { return this.customerService.customer$; }
 
@@ -37,6 +38,7 @@ export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit 
   ngOnInit(): void {
     this.handleEmail();
     this.buildAddressOptionControl();
+    this.setCustomerAddress();
   }
 
   private handleEmail() {
@@ -107,5 +109,19 @@ export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit 
 
   onAddressChange(address: ShipmentAddressDto) {
     this.saveAddressType(address.addressType);
+  }
+
+  setCustomerAddress(): void {
+    this.customerService.customer$
+      .pipe( takeUntil(this.ngUnsubscribe) )
+      .subscribe(customer => {
+        this.customerAddress = new ShipmentAddressDto();
+
+        if (!customer) { return; }
+
+        this.customerAddress.phone = customer.phoneNumber;
+        this.customerAddress.firstName = customer.firstName;
+        this.customerAddress.lastName = customer.lastName;
+      });
   }
 }

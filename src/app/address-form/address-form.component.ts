@@ -30,7 +30,8 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
 
   constructor(private formBuilder: FormBuilder,
               private scrollToService: ScrollToService,
-              private elementRef: ElementRef) {
+              private elementRef: ElementRef
+  ) {
     super();
   }
 
