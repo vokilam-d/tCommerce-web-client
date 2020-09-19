@@ -165,8 +165,8 @@
 
   &__img {
     flex-shrink: 0;
-    width: 60px;
-    max-height: 60px;
+    width: 65px;
+    max-height: 65px;
     object-fit: contain;
   }
 
@@ -177,13 +177,14 @@
   }
 
   &__name {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   &__qty-price {
     margin: 8px 0 0;
     display: flex;
     justify-content: space-between;
+    font-size: 14px;
   }
 }
 

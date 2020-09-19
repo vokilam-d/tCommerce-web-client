@@ -114,6 +114,10 @@
   border: 1px solid rgba($dark, 0.15);
   border-radius: 3px;
 
+  @include respond-to($media_medium) {
+    align-items: center;
+  }
+
   @include respond-to($media_large) {
     padding-top: 15px;
     padding-bottom: 15px;
@@ -127,8 +131,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 70px;
-    max-height: 100px;
+    width: 90px;
     flex-shrink: 0;
 
     @include respond-to($media_medium) {
@@ -142,9 +145,23 @@
     object-fit: contain;
   }
 
+  &__buy-info {
+    display: flex;
+    align-items: center;
+
+    @include respond-to(375px) {
+      justify-content: space-between;
+    }
+
+    @include respond-to($media_medium) {
+      justify-content: left;
+      margin-top: 10px;
+    }
+  }
+
   &__info {
     flex-grow: 2;
-    margin-left: 20px;
+    margin-left: 10px;
   }
 
   &__name {
@@ -154,16 +171,18 @@
     font-size: 14px;
     line-height: 1.2;
 
+    @include respond-to($media_medium) {
+      margin: 0;
+    }
+
     @include respond-to($media_large) {
-      margin-top: 0;
       font-size: 15px;
       line-height: 1;
     }
   }
 
   &__qty-container {
-    margin: 10px 0 0;
-    text-align: center;
+    margin: 10px 10px 0 0;
 
     @include respond-to($media_large) {
       margin-top: 15px;
@@ -175,9 +194,12 @@
   }
 
   &__row {
-    display: flex;
-    justify-content: space-between;
+    flex-shrink: 0;
     margin: 10px 0 0;
+
+    @include respond-to(425px) {
+      margin-left: 12px;
+    }
   }
 
   &__label {
@@ -185,7 +207,24 @@
   }
 
   &__value {
+    display: flex;
     font-size: 18px;
+
+    @include respond-to(375px) {
+      flex-direction: column;
+    }
+
+    @include respond-to($media_medium) {
+      flex-direction: row;
+    }
+
+    @include respond-to($media_large) {
+      flex-direction: column;
+    }
+
+    @include respond-to($media_max-content-width) {
+      flex-direction: row;
+    }
   }
 
   &__old-price {

@@ -23,6 +23,10 @@
     transition: background-color 0.2s ease;
     cursor: pointer;
 
+    @include respond-to($media_medium) {
+      width: 45px;
+    }
+
     &:hover {
       @include respond-to($media_large) {
         background: rgba($dark, 0.05);
@@ -49,11 +53,17 @@
   }
 
   &__input {
-    width: 140px;
-    height: 52px;
+    width: 125px;
+    height: 40px;
     padding: 0 40px;
     text-align: center;
     font-size: 16px;
+
+    @include respond-to($media_medium) {
+      width: 152px;
+      height: 42px;
+      padding: 0 45px;
+    }
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
