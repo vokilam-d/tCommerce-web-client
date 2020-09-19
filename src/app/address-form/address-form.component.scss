@@ -17,16 +17,16 @@
 
 .tab {
   padding: 13px 20px;
-  border: 1px solid $primary;
+  border: 1px solid $action;
   transition: background-color 0.2s ease;
   cursor: pointer;
 
   &:not(&--active):hover {
-    background: rgba($primary, 0.06);
+    background: rgba($action, 0.06);
   }
 
   &:not(&--active):active {
-    background: rgba($primary, 0.12);
+    background: rgba($action, 0.12);
   }
 
   &:first-child {
@@ -41,6 +41,6 @@
   }
 
   &--active {
-    background: $primary;
+    background: $action;
   }
 }
