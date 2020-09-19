@@ -195,10 +195,10 @@
 
   &__row {
     flex-shrink: 0;
-    margin: 10px 0 0 0;
+    margin: 10px 0 0;
 
     @include respond-to(425px) {
-      margin: 10px 0 0 12px;
+      margin-left: 12px;
     }
   }
 
