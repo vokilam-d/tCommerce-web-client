@@ -146,10 +146,9 @@
   }
 
   &__buy-info {
-    display: flex;
-    align-items: center;
-
     @include respond-to(375px) {
+      display: flex;
+      align-items: center;
       justify-content: space-between;
     }
 
