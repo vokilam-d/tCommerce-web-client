@@ -115,13 +115,13 @@ export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit 
     this.customerService.customer$
       .pipe( takeUntil(this.ngUnsubscribe) )
       .subscribe(customer => {
-      this.customerAddress = new ShipmentAddressDto();
+        this.customerAddress = new ShipmentAddressDto();
 
-      if (!customer) { return; }
+        if (!customer) { return; }
 
-      this.customerAddress.phone = customer.phoneNumber;
-      this.customerAddress.firstName = customer.firstName;
-      this.customerAddress.lastName = customer.lastName;
-    });
+        this.customerAddress.phone = customer.phoneNumber;
+        this.customerAddress.firstName = customer.firstName;
+        this.customerAddress.lastName = customer.lastName;
+      });
   }
 }
