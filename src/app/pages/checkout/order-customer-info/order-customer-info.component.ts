@@ -9,7 +9,6 @@ import { NgUnsubscribe } from '../../../shared/directives/ng-unsubscribe.directi
 import { AddressFormComponent } from '../../../address-form/address-form.component';
 import { AddressTypeEnum } from '../../../shared/enums/address-type.enum';
 import { ShipmentAddressDto } from '../../../shared/dtos/shipment-address.dto';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'order-customer-info',
