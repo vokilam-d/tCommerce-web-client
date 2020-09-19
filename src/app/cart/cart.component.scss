@@ -109,14 +109,11 @@
 .item {
   position: relative;
   display: flex;
+  align-items: center;
   margin: 20px 0 0;
-  padding: 5px 15px 10px;
+  padding: 10px 15px;
   border: 1px solid rgba($dark, 0.15);
   border-radius: 3px;
-
-  @include respond-to($media_medium) {
-    align-items: center;
-  }
 
   @include respond-to($media_large) {
     padding-top: 15px;
@@ -129,14 +126,13 @@
 
   &__img-container {
     display: flex;
-    align-items: center;
     justify-content: center;
     width: 90px;
+    max-height: 120px;
     flex-shrink: 0;
 
     @include respond-to($media_medium) {
       width: 120px;
-      max-height: 140px;
     }
   }
 
