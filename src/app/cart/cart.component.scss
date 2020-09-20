@@ -116,8 +116,8 @@
   border-radius: 3px;
 
   @include respond-to($media_large) {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   &:first-child {
@@ -161,7 +161,6 @@
 
   &__name {
     display: block;
-    margin: 10px 0 0;
     padding: 0 20px 0 0;
     font-size: 14px;
     line-height: 1.2;
