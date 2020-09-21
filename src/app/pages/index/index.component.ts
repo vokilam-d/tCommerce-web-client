@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../category/category.service';
 import { CategoryTreeItem } from '../../shared/dtos/category-tree.dto';
 import { HeadService } from '../../services/head/head.service';
+import { UPLOADED_HOST } from '../../shared/constants';
 
 @Component({
   selector: 'index',
@@ -9,6 +10,8 @@ import { HeadService } from '../../services/head/head.service';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit {
+
+  uploadedHost = UPLOADED_HOST;
 
   get categories(): CategoryTreeItem[] { return this.categoryService.categories; }
 
@@ -18,6 +21,14 @@ export class IndexComponent implements OnInit {
 
   ngOnInit() {
     this.setMeta();
+  }
+
+  getCategoryImage(category: CategoryTreeItem): string {
+    if (!category.medias[0]?.variantsUrls.small) {
+      return '/assets/images/no-img.png';
+    } else {
+      return this.uploadedHost + category.medias[0]?.variantsUrls.small;
+    }
   }
 
   private setMeta() {

@@ -60,7 +60,7 @@ export class LinkedCategoriesComponent implements OnChanges, OnInit {
     });
   }
 
-  getCategoryImage(category) {
+  getCategoryImage(category: LinkedCategoryDto): string {
     if (!category.medias[0]?.variantsUrls.small) {
       return '/assets/images/no-img.png';
     } else {
