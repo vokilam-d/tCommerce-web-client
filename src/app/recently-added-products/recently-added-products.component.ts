@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../pages/product/product.service';
 import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
+import { onWindowLoad } from '../shared/helpers/on-window-load.function';
 
 @Component({
   selector: 'recently-added-products',
@@ -14,7 +15,7 @@ export class RecentlyAddedProductsComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.fetchRecentlyAddedProducts();
+    onWindowLoad(this, this.fetchRecentlyAddedProducts);
   }
 
   private fetchRecentlyAddedProducts() {
