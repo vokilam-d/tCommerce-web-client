@@ -31,7 +31,7 @@
     bottom: auto;
     top: 50%;
     left: 50%;
-    transform: translate3d(-50%, -50%, 0);
+    transform: translate(-50%, -50%);
     width: 70vw;
     max-width: 600px;
     max-height: 90vh;
@@ -113,9 +113,9 @@
 
 @keyframes slideInCentered {
   from {
-    transform: translate3d(-50%, -40%, 0)
+    transform: translate(-50%, -40%);
   }
   to {
-    transform: translate3d(-50%, -50%, 0)
+    transform: translate(-50%, -50%);
   }
 }

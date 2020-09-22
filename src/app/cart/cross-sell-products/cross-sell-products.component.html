@@ -1,14 +1,17 @@
-<div class="cross-sell" *ngIf="products.length">
+<div class="cross-sell" *ngIf="productsIds.length">
 
   <div class="cross-sell__title-container">
     <span class="cross-sell__title">
       Вместе покупают:
     </span>
   </div>
+          <!--  desktop-->
+  <products-preview *ngIf="productsIds" [ids]="productsIds"></products-preview>
 
-  <div class="cross-sell__items">
-    <div class="cross-sell__item" *ngFor="let product of products | slice:0:4">
-      <product-list-item [item]="product"></product-list-item>
-    </div>
-  </div>
+          <!--  mobile-->
+<!--  <div class="cross-sell__items">-->
+<!--    <div class="cross-sell__item" *ngFor="let product of productsIds">-->
+<!--      <product-list-item [item]="product"></product-list-item>-->
+<!--    </div>-->
+<!--  </div>-->
 </div>

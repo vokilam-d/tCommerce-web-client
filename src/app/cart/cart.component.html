@@ -12,13 +12,14 @@
         <span class="cart__price">{{ cartTotalCost }} грн</span>
       </div>
 
+      <button class="cart__btn cart__btn--continue btn" (click)="continueShopping()">
+        Продолжить покупки
+      </button>
+
       <a class="cart__btn btn btn--default" (click)="checkout()" routerLink="/checkout">
         Оформить заказ <i class="cart__btn-icon mbi mbi-arrow-right"></i>
       </a>
 
-      <button class="cart__btn cart__btn--continue btn" (click)="continueShopping()">
-        Продолжить покупки
-      </button>
     </div>
 
     <div class="cart__items" [class.cart__items--loading]="isLoading">
@@ -60,9 +61,11 @@
 
         </div>
 
+
+<!--        [products]="item.crossSellProducts"-->
         <cross-sell-products class="cross-sell"
                              *ngIf="isCrossSellVisible && i === 0"
-                             [products]="item.crossSellProducts"
+                             [productsIds]="getCrossSellProductsIds(item)"
         ></cross-sell-products>
       </ng-container>
     </div>

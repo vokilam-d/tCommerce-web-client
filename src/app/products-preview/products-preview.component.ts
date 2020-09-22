@@ -30,8 +30,8 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements AfterView
   isLoading: boolean = false;
   private itemWidth: number;
   private activeItemIdx: number = 0;
-  private itemsToShow: number = this.device.isMobile() ? 2 : 4;
 
+  @Input() itemsToShow: number;
   @Input() items: ProductListItemDto[] = [];
   @Input() ids: number[];
   @Input() type: string;
@@ -51,6 +51,8 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements AfterView
     } else if (this.items) {
       this.handleResize();
     }
+
+    this.setItemsToShow(this.type);
   }
 
   private fetchItems() {
@@ -72,7 +74,9 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements AfterView
   }
 
   isArrowVisible() {
-    if (this.items.length > 2) {
+    if (this.items.length > 2 && this.device.isMobile()) {
+      return true;
+    } else if (this.items.length > 4 && this.device.isDesktop()) {
       return true;
     } else {
       return false;
@@ -143,5 +147,14 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements AfterView
     const x = this.activeItemIdx * this.itemWidth;
     this.itemsContainerRef.nativeElement.style.transform = `translate3d(-${x}px, 0, 0)`;
     this.cdr.detectChanges();
+  }
+
+  setItemsToShow(type: any) {
+    if (!type) {
+      this.itemsToShow = this.device.isMobile() ? 2 : 4;
+    } else {
+      this.itemsToShow = this.device.isDesktop() ? 5 : 2;
+    }
+
   }
 }
