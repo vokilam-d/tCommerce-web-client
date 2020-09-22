@@ -74,13 +74,7 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements AfterView
   }
 
   isArrowVisible() {
-    if (this.items.length > 2 && this.device.isMobile()) {
-      return true;
-    } else if (this.items.length > 4 && this.device.isDesktop()) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.items.length > this.itemsToShow;
   }
 
   prev() {
