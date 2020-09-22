@@ -1,4 +1,4 @@
-<div class="cross-sell" *ngIf="productsIds.length">
+<div class="cross-sell" *ngIf="products.length">
 
   <div class="cross-sell__title-container">
     <span class="cross-sell__title">
@@ -6,7 +6,7 @@
     </span>
   </div>
           <!--  desktop-->
-  <products-preview *ngIf="productsIds" [ids]="productsIds"></products-preview>
+  <products-preview [items]="products"></products-preview>
 
           <!--  mobile-->
 <!--  <div class="cross-sell__items">-->

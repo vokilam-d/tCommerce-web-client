@@ -25,9 +25,10 @@ import { DeviceService } from '../services/device-detector/device.service';
   templateUrl: './products-preview.component.html',
   styleUrls: ['./products-preview.component.scss']
 })
-export class ProductsPreviewComponent extends NgUnsubscribe implements AfterViewInit {
+export class ProductsPreviewComponent extends NgUnsubscribe implements OnInit, AfterViewInit {
 
   isLoading: boolean = false;
+  isArrowVisible: boolean;
   private itemWidth: number;
   private activeItemIdx: number = 0;
 
@@ -45,14 +46,17 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements AfterView
     super();
   }
 
+  ngOnInit(): void {
+    this.setItemsToShow(this.type);
+    this.setIsArrowVisible();
+  }
+
   ngAfterViewInit(): void {
     if (this.ids) {
       this.fetchItems();
     } else if (this.items) {
       this.handleResize();
     }
-
-    this.setItemsToShow(this.type);
   }
 
   private fetchItems() {
@@ -69,12 +73,9 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements AfterView
         response => {
           this.setItems(response.data);
           this.handleResize();
+          this.setIsArrowVisible();
         }
       );
-  }
-
-  isArrowVisible() {
-    return this.items.length > this.itemsToShow;
   }
 
   prev() {
@@ -149,6 +150,9 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements AfterView
     } else {
       this.itemsToShow = this.device.isDesktop() ? 5 : 2;
     }
+  }
 
+  setIsArrowVisible() {
+    this.isArrowVisible = this.items.length > this.itemsToShow;
   }
 }

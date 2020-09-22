@@ -77,8 +77,4 @@ export class CartComponent implements OnInit {
     }
   }
 
-  getCrossSellProductsIds(item: OrderItemDto): number[] {
-    return item.crossSellProducts.map(item => item.productId);
-  }
-
 }

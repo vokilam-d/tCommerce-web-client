@@ -7,7 +7,7 @@
   <div class="related">
 
     <div class="related__carousel carousel">
-    <button *ngIf="isArrowVisible()" (click)="prev()">
+    <button *ngIf="isArrowVisible" (click)="prev()">
       <svg class="carousel__arrow carousel__arrow--prev"
            version="1.1" id="Layer_1"
            xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <button *ngIf="isArrowVisible()" (click)="next()">
+    <button *ngIf="isArrowVisible" (click)="next()">
       <svg class="carousel__arrow carousel__arrow--next"
            version="1.1" id="Layer_1"
            xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"

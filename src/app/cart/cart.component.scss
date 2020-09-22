@@ -23,6 +23,7 @@
     @include respond-to($media_large) {
       display: flex;
       flex-wrap: wrap;
+      flex-direction: row-reverse;
       position: sticky;
       bottom: -50px;
       margin-top: 15px;
