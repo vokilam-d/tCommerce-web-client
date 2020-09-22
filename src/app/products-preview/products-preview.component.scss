@@ -2,7 +2,7 @@
 @import "mixins";
 
 .container {
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 .related {
@@ -34,22 +34,23 @@
 
   &__arrow {
     position: absolute;
-    top: 50%;
+    top: 30%;
     padding: 10px 0;
-    background: rgba(#fff, 0.4);
-    transition: background 0.2s ease;
+    filter: drop-shadow(5px 5px 10px #e5e5e5);
     font-size: 20px;
     z-index: 1;
 
     &:hover {
-      background: rgba(#fff, 0.8);
+      filter: drop-shadow(5px 5px 10px #cacaca);
     }
     &--prev {
-      left: -8px;
+      width: 50px;
+      left: -10px;
     }
 
     &--next {
-      right: -8px;
+      width: 50px;
+      right: -10px;
     }
   }
 

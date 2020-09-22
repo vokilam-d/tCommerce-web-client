@@ -8,11 +8,10 @@ import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
 })
 export class CrossSellProductsComponent implements OnInit {
 
-  @Input() products: ProductListItemDto[];
+  @Input() products:  ProductListItemDto[];
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit() { }
 
 }

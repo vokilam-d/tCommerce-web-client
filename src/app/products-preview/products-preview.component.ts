@@ -25,13 +25,14 @@ import { DeviceService } from '../services/device-detector/device.service';
   templateUrl: './products-preview.component.html',
   styleUrls: ['./products-preview.component.scss']
 })
-export class ProductsPreviewComponent extends NgUnsubscribe implements AfterViewInit {
+export class ProductsPreviewComponent extends NgUnsubscribe implements OnInit, AfterViewInit {
 
   isLoading: boolean = false;
+  isArrowVisible: boolean;
   private itemWidth: number;
   private activeItemIdx: number = 0;
-  private itemsToShow: number = this.device.isMobile() ? 2 : 4;
 
+  @Input() itemsToShow: number;
   @Input() items: ProductListItemDto[] = [];
   @Input() ids: number[];
   @Input() type: string;
@@ -43,6 +44,11 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements AfterView
               private device: DeviceService,
               @Inject(PLATFORM_ID) private platformId: any) {
     super();
+  }
+
+  ngOnInit(): void {
+    this.setItemsToShow(this.type);
+    this.setIsArrowVisible();
   }
 
   ngAfterViewInit(): void {
@@ -67,16 +73,9 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements AfterView
         response => {
           this.setItems(response.data);
           this.handleResize();
+          this.setIsArrowVisible();
         }
       );
-  }
-
-  isArrowVisible() {
-    if (this.items.length > 2) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   prev() {
@@ -143,5 +142,17 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements AfterView
     const x = this.activeItemIdx * this.itemWidth;
     this.itemsContainerRef.nativeElement.style.transform = `translate3d(-${x}px, 0, 0)`;
     this.cdr.detectChanges();
+  }
+
+  setItemsToShow(type: any) {
+    if (!type) {
+      this.itemsToShow = this.device.isMobile() ? 2 : 4;
+    } else {
+      this.itemsToShow = this.device.isDesktop() ? 5 : 2;
+    }
+  }
+
+  setIsArrowVisible() {
+    this.isArrowVisible = this.items.length > this.itemsToShow;
   }
 }

@@ -4,8 +4,7 @@
 .cart {
   @include respond-to($media_large) {
     display: flex;
-    align-items: flex-start;
-    flex-direction: row-reverse;
+    flex-direction: column-reverse;
   }
 
   &__error {
@@ -22,24 +21,39 @@
 
   &__info {
     @include respond-to($media_large) {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row-reverse;
       position: sticky;
-      top: 4px;
-      flex-shrink: 0;
-      width: 27%;
-      margin-left: 30px;
+      bottom: -50px;
+      margin-top: 15px;
+      padding: 20px;
+      border-top: 2px solid $borderColor;
+      background-color: #fff;
+      z-index: 5;
     }
   }
 
   &__total {
     display: flex;
     align-items: baseline;
-    font-size: 18px;
+    width: 100%;
+    font-size: 20px;
+
+    @include respond-to($media_large) {
+      display: inline-block;
+      text-align: right;
+    }
   }
 
   &__price {
     margin: 0 0 0 auto;
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 600;
+
+    @include respond-to($media_large) {
+      margin-left: 10px;
+    }
   }
 
   &__btn {
@@ -58,8 +72,17 @@
       padding-bottom: 13px;
     }
 
+    @include respond-to($media_large) {
+      width: 40%;
+    }
+
     &--continue {
       font-size: 16px;
+
+      @include respond-to($media_large) {
+        width: 40%;
+        margin-right: auto;
+      }
     }
   }
 
@@ -78,7 +101,6 @@
 
     @include respond-to($media_large) {
       margin-top: 0;
-      flex-grow: 2;
     }
 
     &--loading {
@@ -116,8 +138,8 @@
   border-radius: 3px;
 
   @include respond-to($media_large) {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   &:first-child {
@@ -150,7 +172,6 @@
 
     @include respond-to($media_medium) {
       justify-content: left;
-      margin-top: 10px;
     }
   }
 
@@ -161,7 +182,6 @@
 
   &__name {
     display: block;
-    margin: 10px 0 0;
     padding: 0 20px 0 0;
     font-size: 14px;
     line-height: 1.2;

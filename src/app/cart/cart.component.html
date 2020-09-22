@@ -19,6 +19,7 @@
       <button class="cart__btn cart__btn--continue btn" (click)="continueShopping()">
         Продолжить покупки
       </button>
+
     </div>
 
     <div class="cart__items" [class.cart__items--loading]="isLoading">
@@ -59,6 +60,7 @@
           </div>
 
         </div>
+
 
         <cross-sell-products class="cross-sell"
                              *ngIf="isCrossSellVisible && i === 0"
