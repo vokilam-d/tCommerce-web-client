@@ -31,7 +31,11 @@
 
   &__link {
     &--big {
-      font-size: 20px;
+      font-size: 17px;
+
+      @include respond-to($media_medium) {
+        font-size: 20px;
+      }
     }
   }
 
@@ -42,7 +46,11 @@
   &__home {
     position: relative;
     top: 2px;
-    width: 25px;
+    width: 22px;
+
+    @include respond-to($media_medium) {
+      width: 25px;
+    }
 
     &:hover {
       @include respond-to($media_large) {
