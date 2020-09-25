@@ -47,12 +47,10 @@ export class StoreReviewService {
 
   countAverageRating(): Observable<number> {
     return this.fetchAllReviews().pipe(
-      map(response => response.data.map(review => {
-         return review.rating;
-      })),
+      map(response => response.data.map(review => review.rating)),
       switchMap(ratings => {
         const average = ratings.reduce((value, acc) => value + acc) / ratings.length;
-        return of(Math.ceil(average));
+        return of(+average.toFixed(1));
       })
     );
   }

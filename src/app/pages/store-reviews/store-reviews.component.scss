@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 .store-reviews {
   margin: 25px 0 0;
@@ -36,4 +37,52 @@
     margin: 10px 0 0;
     width: 160px;
   }
+}
+
+.reviews-summary {
+  &__container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+
+    @include respond-to($media_medium) {
+      margin-bottom: 15px;
+    };
+  }
+
+  &__link {
+    width: 100%;
+    margin-bottom: 5px;
+    color: #0099cc;
+
+    @include respond-to(375px) {
+      width: auto;
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  &__text {
+    margin-right: 5px;
+    font-size: 16px;
+  }
+
+  &__count {
+    margin-left: 5px;
+    color: rgba($dark, 0.6);
+  }
+
+  &__average {
+    color: $primary;
+  }
+
+  &__stars {
+    display: flex;
+    margin-left: 5px;
+  }
+
 }

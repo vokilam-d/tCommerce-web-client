@@ -5,6 +5,19 @@
 
   <h1 class="page__title">Отзывы об интернет-магазине "Klondike", предложения</h1>
 
+  <div class="reviews-summary__container">
+
+    <a class="reviews-summary reviews-summary__link" routerLink="/otzyvy">
+      <p class="reviews-summary__text">Отзывы о нашем магазине</p>
+    </a> <span class="reviews-summary__average">{{ averageReviewsRating }}</span>
+
+    <div class="reviews-summary__stars">
+      <rating-stars [size]="'default'" [isDisabled]="true" [rating]="averageReviewsRating"></rating-stars>
+
+      <a routerLink="/otzyvy" class="reviews-summary__count" *ngIf="storeReviewsCount"> ({{ storeReviewsCount }})</a>
+    </div>
+  </div>
+
   <div class="page__content">
     <p class="info-page">
       Тут Вы можете оставить отзыв о магазине “Клондайк” (например, оценить скорость доставки, качество консультации).<br>

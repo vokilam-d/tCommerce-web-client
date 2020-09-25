@@ -21,19 +21,21 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit {
   reviews: StoreReviewDto[];
   mediaUploadUrl: string = `${API_HOST}/api/v1/store-reviews/media`;
   error: string;
+  averageReviewsRating: number;
+  get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
   @ViewChild(AddReviewModalComponent) addReviewCmp: AddReviewModalComponent;
 
   constructor(private headService: HeadService,
               private notyService: NotyService,
               private jsonLdService: JsonLdService,
-              private storeReviewService: StoreReviewService) {
-    super();
-  }
+              private storeReviewService: StoreReviewService
+  ) { super(); }
 
   ngOnInit(): void {
     this.fetchReviews();
     this.setMeta();
+    this.setAverageReviewsRating();
   }
 
   fetchReviews() {
@@ -138,5 +140,11 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit {
     };
 
     this.jsonLd = this.jsonLdService.getSafeJsonLd(jsonLd);
+  }
+
+  setAverageReviewsRating() {
+    return this.storeReviewService.countAverageRating().subscribe(average => {
+      this.averageReviewsRating = average;
+    });
   }
 }
