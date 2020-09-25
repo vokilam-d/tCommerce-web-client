@@ -85,6 +85,18 @@
 
       <div class="product__info">
 
+        <a class="store-reviews store-reviews__link" routerLink="/otzyvy">
+          <div class="store-reviews__container">
+            <p class="store-reviews__text">Отзывы об интернет-магазине "Klondike" {{ averageReviewsRating }}</p>
+            <rating-stars
+              [isSmall]="true"
+              [isDisabled]="true"
+              [rating]="averageReviewsRating"
+            ></rating-stars>
+            <span class="store-reviews__count" *ngIf="storeReviewsCount"> ({{ storeReviewsCount }})</span>
+          </div>
+        </a>
+
         <div class="product__short-description">
           {{ product.shortDescription }}
         </div>

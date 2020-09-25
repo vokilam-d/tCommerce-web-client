@@ -460,3 +460,18 @@ $arrowSize: 10px;
     }
   }
 }
+
+.store-reviews {
+  &__container {
+    display: inline-flex;
+  }
+
+  &__text {
+    margin-right: 5px;
+  }
+
+  &__count {
+    margin-left: 10px;
+    color: rgba($dark, 0.6);
+  }
+}

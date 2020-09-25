@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@
 import { CategoryService } from '../pages/category/category.service';
 import { CategoryTreeItem } from '../shared/dtos/category-tree.dto';
 import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
+import { StoreReviewService } from '../services/store-review/store-review.service';
 
 @Component({
   selector: 'app-header',
@@ -14,13 +15,16 @@ export class HeaderComponent implements OnInit {
   toolbarPosition: number;
 
   get categories(): CategoryTreeItem[] { return this.categoryService.categories; }
+  get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
   @Input() isSidebarCatalog: boolean = false;
   @ViewChild(SidebarMenuComponent) sidebarCmp: SidebarMenuComponent;
   @ViewChild('toolbarRef') toolbarRef: ElementRef;
 
-  constructor(private categoryService: CategoryService) {
-  }
+  constructor(private categoryService: CategoryService,
+              private storeReviewService: StoreReviewService
+
+  ) { }
 
   ngOnInit() { }
 

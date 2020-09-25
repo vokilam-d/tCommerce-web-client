@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { ResponseDto } from '../../shared/dtos/response.dto';
 import { API_HOST } from '../../shared/constants';
 import { AddStoreReviewDto, StoreReviewDto } from '../../shared/dtos/store-review.dto';
+import { Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +43,17 @@ export class StoreReviewService {
 
   downvote(reviewId: number) {
     return this.http.post<ResponseDto<StoreReviewDto>>(`${API_HOST}/api/v1/store-reviews/${reviewId}/downvote`, {});
+  }
+
+  countAverageRating(): Observable<number> {
+    return this.fetchAllReviews().pipe(
+      map(response => response.data.map(review => {
+         return review.rating;
+      })),
+      switchMap(ratings => {
+        const average = ratings.reduce((value, acc) => value + acc) / ratings.length;
+        return of(Math.ceil(average));
+      })
+    );
   }
 }
