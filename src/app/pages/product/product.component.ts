@@ -59,9 +59,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.needToShowReviews = this.route.snapshot.fragment === 'reviews';
     this.fetchProduct();
     this.setSavedTooltipState();
-    this.storeReviewService.countAverageRating().subscribe(average => {
-      this.averageReviewsRating = average;
-    });
+    this.setAverageReviewsRating();
   }
 
   ngAfterViewInit(): void {
@@ -198,6 +196,12 @@ export class ProductComponent implements OnInit, AfterViewInit {
     if (this.deviceService.isPlatformBrowser()) {
       this.productService.addViewedProductIdToLocalStorage(this.product.productId);
     }
+  }
+
+  setAverageReviewsRating() {
+    return this.storeReviewService.countAverageRating().subscribe(average => {
+      this.averageReviewsRating = average;
+    });
   }
 
 }
