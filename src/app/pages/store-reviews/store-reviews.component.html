@@ -5,7 +5,7 @@
 
   <h1 class="page__title">Отзывы об интернет-магазине "Klondike", предложения</h1>
 
-  <div class="reviews-summary__container" (click)="scrollToReviews(0)">
+  <div class="reviews-summary__container" (click)="scrollToReviews()">
     <p class="reviews-summary__text">Отзывы о нашем магазине</p>
 
     <div class="reviews-summary__rating">
@@ -22,6 +22,8 @@
       Тут Вы можете оставить отзыв о магазине “Клондайк” (например, оценить скорость доставки, качество консультации).<br>
       Мы очень благодарны за обратную связь, каждый Ваш отзыв вдохновляет нас!
     </p>
+
+    <sorting class="store-reviews__sorting" (valueChanged)="fetchReviews()"></sorting>
 
     <div class="store-reviews">
       <button class="btn store-reviews__btn" (click)="openReviewModal()" type="button">Оставить отзыв</button>
@@ -41,14 +43,13 @@
         </div>
       </ng-container>
 
-      <div class="store-reviews__list" #reviewsRef>
+      <div class="store-reviews__list" #reviewsContainerRef>
         <review class="store-reviews__review"
                 *ngFor="let review of reviews"
                 [review]="review"
                 [canLeaveComment]="false"
                 (vote)="vote(review)"
                 (downvote)="downvote(review)"
-                #reviewRef
         ></review>
       </div>
     </div>
