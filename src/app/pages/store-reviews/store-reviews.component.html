@@ -41,16 +41,22 @@
         </div>
       </ng-container>
 
-      <div class="store-reviews__list" #reviewRef>
+      <div class="store-reviews__list" #reviewsRef>
         <review class="store-reviews__review"
                 *ngFor="let review of reviews"
                 [review]="review"
                 [canLeaveComment]="false"
                 (vote)="vote(review)"
                 (downvote)="downvote(review)"
+                #reviewRef
         ></review>
       </div>
     </div>
+
+    <pagination class="product-list__pagination"
+                [pagesTotal]="pagesTotal"
+                (pagination)="onPagination()"
+    ></pagination>
   </div>
 
   <recently-viewed-products></recently-viewed-products>

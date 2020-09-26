@@ -10,6 +10,7 @@ import { AddReviewModalModule } from '../../add-review-modal/add-review-modal.mo
 import { ReviewModule } from '../../review/review.module';
 import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
 import { RatingStarsModule } from '../../rating-stars/rating-stars.module';
+import { PaginationModule } from '../../pagination/pagination.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { RatingStarsModule } from '../../rating-stars/rating-stars.module';
     AddReviewModalModule,
     ReviewModule,
     RecentlyViewedProductsModule,
-    RatingStarsModule
+    RatingStarsModule,
+    PaginationModule
   ]
 })
 export class StoreReviewsModule { }

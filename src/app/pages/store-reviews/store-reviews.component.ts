@@ -25,11 +25,13 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit {
   mediaUploadUrl: string = `${API_HOST}/api/v1/store-reviews/media`;
   error: string;
   averageReviewsRating: number;
+  pagesTotal: number;
   get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
   @ViewChild(AddReviewModalComponent) addReviewCmp: AddReviewModalComponent;
   @ViewChild(ReviewComponent) reviewCmp: ReviewComponent;
-  @ViewChildren('reviewRef') reviewsRefList: QueryList<ElementRef>;
+  @ViewChild('reviewRef') reviewRef: ElementRef;
+  @ViewChildren('reviewsRef') reviewsRefList: QueryList<ElementRef>;
 
 
   constructor(private headService: HeadService,
@@ -52,6 +54,7 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit {
       .subscribe(
         response => {
           this.reviews = response.data;
+          this.pagesTotal = response.pagesTotal;
           this.setJsonLd();
         },
         error => this.error = error.error?.message || DEFAULT_ERROR_TEXT
@@ -159,5 +162,10 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit {
   scrollToReviews(reviewIndex: number) {
     const firstAddedItem = this.reviewsRefList.find((reference, index) => index === reviewIndex);
     this.scrollToService.scrollTo({ target: firstAddedItem, offset: -15, duration: 700 });
+  }
+
+  onPagination() {
+    this.scrollToService.scrollTo({ target: this.reviewRef, offset: -100, duration: 700 });
+    this.fetchReviews();
   }
 }
