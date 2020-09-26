@@ -5,16 +5,15 @@
 
   <h1 class="page__title">Отзывы об интернет-магазине "Klondike", предложения</h1>
 
-  <div class="reviews-summary__container">
+  <div class="reviews-summary__container" (click)="scrollToReviews(0)">
+    <p class="reviews-summary__text">Отзывы о нашем магазине</p>
 
-    <a class="reviews-summary reviews-summary__link" routerLink="/otzyvy">
-      <p class="reviews-summary__text">Отзывы о нашем магазине</p>
-    </a> <span class="reviews-summary__average">{{ averageReviewsRating }}</span>
+    <div class="reviews-summary__rating">
+      <span class="reviews-summary__average">{{ averageReviewsRating }}</span>
 
-    <div class="reviews-summary__stars">
-      <rating-stars [size]="'default'" [isDisabled]="true" [rating]="averageReviewsRating"></rating-stars>
+      <rating-stars [isMiddle]="true" [isDisabled]="true" [rating]="averageReviewsRating"></rating-stars>
 
-      <a routerLink="/otzyvy" class="reviews-summary__count" *ngIf="storeReviewsCount"> ({{ storeReviewsCount }})</a>
+      <div class="reviews-summary__count" *ngIf="storeReviewsCount"> ({{ storeReviewsCount }})</div>
     </div>
   </div>
 
@@ -42,7 +41,7 @@
         </div>
       </ng-container>
 
-      <div class="store-reviews__list">
+      <div class="store-reviews__list" #reviewRef>
         <review class="store-reviews__review"
                 *ngFor="let review of reviews"
                 [review]="review"

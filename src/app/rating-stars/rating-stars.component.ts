@@ -26,6 +26,7 @@ export class RatingStarsComponent implements OnChanges, AfterViewInit {
   @Input() size: 'default' | 'small' = 'default';
   @Input() isDisabled: boolean = false;
   @Input() isSmall: boolean = false;
+  @Input() isMiddle: boolean = false;
 
   @Output() quickReview = new EventEmitter<number>();
 

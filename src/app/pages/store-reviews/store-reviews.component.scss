@@ -43,32 +43,38 @@
   &__container {
     display: flex;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
     flex-wrap: wrap;
 
     @include respond-to($media_medium) {
       margin-bottom: 15px;
     };
-  }
-
-  &__link {
-    width: 100%;
-    margin-bottom: 5px;
-    color: #0099cc;
-
-    @include respond-to(375px) {
-      width: auto;
-      margin-bottom: 0;
-    }
 
     &:hover {
-      color: $primary;
+      @include respond-to($media_medium) {
+        cursor: pointer;
+      }
     }
   }
 
   &__text {
     margin-right: 5px;
     font-size: 16px;
+    color: #0099cc;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  &__rating {
+    display: flex;
+    align-items: center;
+    margin: 5px 0 0 5px;
+
+    @include respond-to(375px) {
+      margin: 0;
+    }
   }
 
   &__count {
@@ -77,12 +83,9 @@
   }
 
   &__average {
+    margin-right: 5px;
+    font-size: 16px;
+    font-weight: 600;
     color: $primary;
   }
-
-  &__stars {
-    display: flex;
-    margin-left: 5px;
-  }
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { HeadService } from '../../services/head/head.service';
 import { AddReviewModalComponent, IAddReviewFormValue } from '../../add-review-modal/add-review-modal.component';
 import { API_HOST, DEFAULT_ERROR_TEXT } from '../../shared/constants';
@@ -9,6 +9,9 @@ import { JsonLdService } from '../../services/json-ld/json-ld.service';
 import { SafeHtml } from '@angular/platform-browser';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { takeUntil } from 'rxjs/operators';
+import { ReviewComponent } from '../../review/review.component';
+import { DeviceService } from '../../services/device-detector/device.service';
+import { ScrollToService } from '../../services/scroll-to/scroll-to.service';
 
 @Component({
   selector: 'store-reviews',
@@ -25,11 +28,16 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit {
   get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
   @ViewChild(AddReviewModalComponent) addReviewCmp: AddReviewModalComponent;
+  @ViewChild(ReviewComponent) reviewCmp: ReviewComponent;
+  @ViewChildren('reviewRef') reviewsRefList: QueryList<ElementRef>;
+
 
   constructor(private headService: HeadService,
               private notyService: NotyService,
               private jsonLdService: JsonLdService,
-              private storeReviewService: StoreReviewService
+              private storeReviewService: StoreReviewService,
+              private deviceService: DeviceService,
+              private scrollToService: ScrollToService,
   ) { super(); }
 
   ngOnInit(): void {
@@ -146,5 +154,10 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit {
     return this.storeReviewService.countAverageRating().subscribe(average => {
       this.averageReviewsRating = average;
     });
+  }
+
+  scrollToReviews(reviewIndex: number) {
+    const firstAddedItem = this.reviewsRefList.find((reference, index) => index === reviewIndex);
+    this.scrollToService.scrollTo({ target: firstAddedItem, offset: -15, duration: 700 });
   }
 }
