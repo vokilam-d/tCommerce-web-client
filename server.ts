@@ -36,7 +36,7 @@ async function updatePages(apiHost: string) {
 
 let isPagesUpdateStarted: boolean = false;
 async function handleUpdatePages(req: express.Request) {
-  if (isPagesUpdateStarted) { return;}
+  if (isPagesUpdateStarted) { return; }
 
   const apiHost = environment.production ? req.get('host') : API_HOST;
   await updatePages(apiHost);

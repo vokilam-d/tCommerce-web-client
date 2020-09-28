@@ -9,6 +9,7 @@ import { NgUnsubscribe } from '../../../shared/directives/ng-unsubscribe.directi
 import { PaymentMethodDto } from '../../../shared/dtos/payment-method.dto';
 import { AddressTypeEnum } from '../../../shared/enums/address-type.enum';
 import { PaymentTypeEnum } from '../../../shared/enums/payment-type.enum';
+import { CustomerService } from '../../../services/customer/customer.service';
 
 @Component({
   selector: 'payment-methods',
@@ -24,6 +25,7 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
 
   constructor(private http: HttpClient,
               private orderService: OrderService,
+              private customerService: CustomerService,
               private formBuilder: FormBuilder) {
     super();
   }
@@ -58,15 +60,41 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
         this.orderService.paymentMethod = method;
       });
 
-    /* handle method disabling */
+    this.handleMethodsState();
+  }
+
+  private handleMethodsState() { // todo wow so ugly, much refactor
     const cashOnDeliveryMethod = this.methods.find(method => method.paymentType === PaymentTypeEnum.CASH_ON_DELIVERY);
+    if (!cashOnDeliveryMethod) { return; }
+    cashOnDeliveryMethod.disabledReasons = [];
+
     this.orderService.addressType$
       .pipe( takeUntil(this.ngUnsubscribe) )
       .subscribe(addressType => {
-        cashOnDeliveryMethod.disabledState = addressType === AddressTypeEnum.DOORS ? true : null;
+        const disableReason = 'Наложенный платёж недоступен при адресной доставке';
+        if (addressType === AddressTypeEnum.DOORS) {
+          cashOnDeliveryMethod.disabledReasons.push(disableReason);
+        } else {
+          const reasonIdx = cashOnDeliveryMethod.disabledReasons.indexOf(disableReason);
+          if (reasonIdx > -1) { cashOnDeliveryMethod.disabledReasons.splice(reasonIdx, 1); }
+        }
+
+        cashOnDeliveryMethod.disabledState = cashOnDeliveryMethod.disabledReasons.length ? true : null;
+
         if (this.methodControl.value === cashOnDeliveryMethod) {
           this.methodControl.setValue(null);
         }
       });
+
+    if (this.customerService.cartTotalCost < 100) {
+      cashOnDeliveryMethod.disabledState = true;
+      cashOnDeliveryMethod.disabledReasons.push('Наложенный платёж недоступен для заказов на сумму менее 100 грн');
+    }
+
+    const disallowedItem = this.customerService.cart.find(item => item.name.match(/сусаль([ ,])/g));
+    if (disallowedItem) {
+      cashOnDeliveryMethod.disabledState = true;
+      cashOnDeliveryMethod.disabledReasons.push('Наложенный платёж недоступен для сусального золота');
+    }
   }
 }

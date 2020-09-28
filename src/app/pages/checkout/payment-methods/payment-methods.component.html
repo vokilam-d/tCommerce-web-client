@@ -34,7 +34,9 @@
       {{ method.name }}
 
       <span class="tooltip" *ngIf="method.disabledState">
-        Наложенный платёж не может быть выбран вместе с адресной доставкой
+        <ng-container *ngFor="let reason of method.disabledReasons">
+          {{ reason }}<br>
+        </ng-container>
       </span>
     </label>
   </ng-template>

@@ -66,6 +66,7 @@ export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit 
           this.saveAddressType(defaultAddress.addressType);
         } else {
           this.addressOptionControl = null;
+          this.saveAddressType(null);
         }
 
         this.cdr.markForCheck();

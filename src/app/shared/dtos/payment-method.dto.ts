@@ -8,4 +8,5 @@ export class PaymentMethodDto {
 
   // custom transforms
   disabledState: null | true;
+  disabledReasons: string[];
 }
