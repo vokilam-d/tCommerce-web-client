@@ -64,7 +64,9 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
     }
 
     this.addressForm = this.formBuilder.group(controls);
-    this.addressForm.valueChanges.subscribe(address => this.valueChanged.emit(address));
+    this.addressForm.valueChanges.subscribe(address => {
+      this.valueChanged.emit(address)
+    });
 
     this.handleAutoResetFields();
   }
@@ -161,12 +163,12 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
     this.addressForm.get(addressTypeProp).valueChanges
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((addressType: AddressTypeEnum) => {
-        this.addressForm.get(addressIdProp).reset('');
-        this.addressForm.get(addressProp).reset('');
+        this.addressForm.get(addressIdProp).reset('', { emitEvent: false });
+        this.addressForm.get(addressProp).reset('', { emitEvent: false });
 
         if (addressType === AddressTypeEnum.WAREHOUSE) {
-          this.addressForm.get(buildingProp).reset('');
-          this.addressForm.get(flantProp).reset('');
+          this.addressForm.get(buildingProp).reset('', { emitEvent: false });
+          this.addressForm.get(flantProp).reset('', { emitEvent: false });
         }
       });
   }
