@@ -9,7 +9,7 @@
   cursor: pointer;
 
   @include respond-to($media_medium) {
-    width: 80px;
+    width: 100px;
   }
 
   &--small {

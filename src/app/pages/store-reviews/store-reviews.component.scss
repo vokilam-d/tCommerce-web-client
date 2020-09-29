@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 .store-reviews {
   margin: 25px 0 0;
@@ -12,6 +13,23 @@
     display: block;
     margin: 25px 0 0;
     max-width: 800px;
+  }
+
+  &__actions {
+    @include respond-to($media_medium) {
+      display: flex;
+      justify-content: space-between;
+      max-width: 800px;
+    }
+  }
+
+  &__btn {
+    width: 100%;
+    font-size: 18px;
+
+    @include respond-to($media_medium) {
+      width: 200px;
+    }
   }
 }
 
@@ -35,5 +53,65 @@
     height: 12px;
     margin: 10px 0 0;
     width: 160px;
+  }
+}
+
+.reviews-summary {
+  &__container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
+
+    @include respond-to($media_medium) {
+      margin-bottom: 15px;
+    };
+
+    &:hover {
+      @include respond-to($media_medium) {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__text {
+    margin-right: 5px;
+    font-size: 16px;
+    color: #0099cc;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  &__rating {
+    display: flex;
+    align-items: center;
+    margin: 5px 0 0 5px;
+
+    @include respond-to(375px) {
+      margin: 0;
+    }
+  }
+
+  &__count {
+    margin-left: 5px;
+    color: rgba($dark, 0.6);
+  }
+
+  &__average {
+    margin-right: 5px;
+    font-size: 17px;
+    font-weight: 600;
+    color: $primary;
+  }
+}
+
+.sorting {
+  width: 100%;
+  margin-top: 15px;
+
+  @include respond-to($media_medium) {
+    width: 250px;
   }
 }

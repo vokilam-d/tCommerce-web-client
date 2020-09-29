@@ -5,6 +5,14 @@
 
   <h1 class="page__title">Отзывы об интернет-магазине "Klondike", предложения</h1>
 
+  <div class="reviews-summary__container" (click)="scrollToReviews()">
+      <span class="reviews-summary__average">{{ averageReviewsRating }}</span>
+
+      <rating-stars [isDisabled]="true" [rating]="averageReviewsRating"></rating-stars>
+
+      <div class="reviews-summary__count" *ngIf="storeReviewsCount"> ({{ storeReviewsCount }})</div>
+  </div>
+
   <div class="page__content">
     <p class="info-page">
       Тут Вы можете оставить отзыв о магазине “Клондайк” (например, оценить скорость доставки, качество консультации).<br>
@@ -12,7 +20,17 @@
     </p>
 
     <div class="store-reviews">
-      <button class="btn store-reviews__btn" (click)="openReviewModal()" type="button">Оставить отзыв</button>
+
+      <div class="store-reviews__actions">
+        <button class="btn store-reviews__btn" (click)="openReviewModal()" type="button">Оставить отзыв</button>
+
+        <div class="sorting">
+          <sorting [sortOptions]="sortOptions"
+                   [defaultOption]="sortOptions[0]"
+                   (valueChanged)="fetchReviews()"
+          ></sorting>
+        </div>
+      </div>
 
       <div class="store-reviews__error" *ngIf="error as error">
         {{ error }}
@@ -29,7 +47,7 @@
         </div>
       </ng-container>
 
-      <div class="store-reviews__list">
+      <div class="store-reviews__list" #reviewsContainerRef>
         <review class="store-reviews__review"
                 *ngFor="let review of reviews"
                 [review]="review"
@@ -39,6 +57,11 @@
         ></review>
       </div>
     </div>
+
+    <pagination class="product-list__pagination"
+                [pagesTotal]="pagesTotal"
+                (pagination)="onPagination()"
+    ></pagination>
   </div>
 
   <recently-viewed-products></recently-viewed-products>

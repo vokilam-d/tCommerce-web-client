@@ -14,6 +14,8 @@ import { QuantityControlComponent } from '../../shared/quantity-control/quantity
 import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
 import { DeviceService } from '../../services/device-detector/device.service';
 import { LinkedCategoryDto } from '../../shared/dtos/linked-category.dto';
+import { StoreReviewService } from '../../services/store-review/store-review.service';
+import { StoreReviewDto } from '../../shared/dtos/store-review.dto';
 
 @Component({
   selector: 'product',
@@ -35,6 +37,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
   needToShowReviews: boolean = false;
   isClosed: boolean;
   quickReview: number;
+  get averageReviewsRating(): number { return this.storeReviewService.averageRating; }
+  get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
   @ViewChild(ProductDetailsComponent) detailsCmp: ProductDetailsComponent;
   @ViewChild(FlyToCartDirective) flyToCart: FlyToCartDirective;
@@ -46,7 +50,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
               private sanitizer: DomSanitizer,
               private wishlistService: WishlistService,
               private productService: ProductService,
-              private deviceService: DeviceService
+              private deviceService: DeviceService,
+              private storeReviewService: StoreReviewService
   ) { }
 
   ngOnInit() {

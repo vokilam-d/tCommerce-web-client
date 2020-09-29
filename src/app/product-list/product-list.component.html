@@ -19,7 +19,11 @@
 
         <div class="product-list__selected-filters"></div>
 
-        <sorting class="product-list__sorting" (valueChanged)="fetchProducts()"></sorting>
+        <sorting class="product-list__sorting"
+                 [sortOptions]="sortOptions"
+                 [defaultOption]="sortOptions[0]"
+                 (valueChanged)="fetchProducts()"
+        ></sorting>
       </div>
 
     </div>

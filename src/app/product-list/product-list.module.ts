@@ -29,6 +29,6 @@ import { BreadcrumbsModule } from '../breadcrumbs/breadcrumbs.module';
     RouterModule,
     BreadcrumbsModule
   ],
-  exports: [ProductListComponent]
+  exports: [ProductListComponent, SortingComponent]
 })
 export class ProductListModule { }

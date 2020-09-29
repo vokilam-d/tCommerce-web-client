@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { ResponseDto } from '../../shared/dtos/response.dto';
 import { API_HOST } from '../../shared/constants';
 import { AddStoreReviewDto, StoreReviewDto } from '../../shared/dtos/store-review.dto';
+import { SortingPaginatingFilterDto } from '../../shared/dtos/spf.dto';
+import { toHttpParams } from '../../shared/helpers/to-http-params.function';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +12,11 @@ import { AddStoreReviewDto, StoreReviewDto } from '../../shared/dtos/store-revie
 export class StoreReviewService {
 
   storeReviewsCount: number;
+  averageRating: number;
 
   constructor(private http: HttpClient) {
     this.setReviewsCount();
+    this.setAverageRating();
   }
 
   setReviewsCount() {
@@ -27,8 +31,8 @@ export class StoreReviewService {
       );
   }
 
-  fetchAllReviews() {
-    return this.http.get<ResponseDto<StoreReviewDto[]>>(`${API_HOST}/api/v1/store-reviews`);
+  fetchAllReviews(spf: SortingPaginatingFilterDto) {
+    return this.http.get<ResponseDto<StoreReviewDto[]>>(`${API_HOST}/api/v1/store-reviews/temp`, { params: toHttpParams(spf) });
   }
 
   addReview(reviewDto: AddStoreReviewDto) {
@@ -41,5 +45,12 @@ export class StoreReviewService {
 
   downvote(reviewId: number) {
     return this.http.post<ResponseDto<StoreReviewDto>>(`${API_HOST}/api/v1/store-reviews/${reviewId}/downvote`, {});
+  }
+
+  setAverageRating(): void {
+    this.http.get<ResponseDto<number>>(`${API_HOST}/api/v1/store-reviews/avg-rating`)
+      .subscribe(response => {
+        this.averageRating = response.data;
+      });
   }
 }

@@ -19,8 +19,7 @@ export class HeaderComponent implements OnInit {
   @ViewChild(SidebarMenuComponent) sidebarCmp: SidebarMenuComponent;
   @ViewChild('toolbarRef') toolbarRef: ElementRef;
 
-  constructor(private categoryService: CategoryService) {
-  }
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit() { }
 

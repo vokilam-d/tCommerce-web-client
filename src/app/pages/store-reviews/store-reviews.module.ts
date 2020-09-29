@@ -9,6 +9,9 @@ import { FooterModule } from '../../footer/footer.module';
 import { AddReviewModalModule } from '../../add-review-modal/add-review-modal.module';
 import { ReviewModule } from '../../review/review.module';
 import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
+import { RatingStarsModule } from '../../rating-stars/rating-stars.module';
+import { PaginationModule } from '../../pagination/pagination.module';
+import { ProductListModule } from '../../product-list/product-list.module';
 
 
 @NgModule({
@@ -21,7 +24,10 @@ import { RecentlyViewedProductsModule } from '../../recently-viewed-products/rec
     FooterModule,
     AddReviewModalModule,
     ReviewModule,
-    RecentlyViewedProductsModule
+    RecentlyViewedProductsModule,
+    RatingStarsModule,
+    PaginationModule,
+    ProductListModule
   ]
 })
 export class StoreReviewsModule { }

@@ -460,3 +460,42 @@ $arrowSize: 10px;
     }
   }
 }
+
+.store-reviews {
+  display: flex;
+  width: 100%;
+  margin: 20px 0 5px;
+  color: #0099cc;
+
+  @include respond-to(375px) {
+    width: auto;
+    margin-bottom: 0;
+  }
+
+  @include respond-to($media_medium) {
+    margin-bottom: 15px;
+  }
+
+  &:hover {
+    color: $primary;
+  }
+
+  &__text {
+    margin-right: 5px;
+  }
+
+  &__count {
+    margin-left: 5px;
+    color: rgba($dark, 0.6);
+  }
+
+  &__average {
+    color: $primary;
+  }
+
+  &__stars {
+    display: flex;
+    margin-left: 5px;
+  }
+
+}

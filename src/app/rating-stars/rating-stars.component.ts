@@ -51,6 +51,8 @@ export class RatingStarsComponent implements OnChanges, AfterViewInit {
   }
 
   private setFill() {
+    if (this.rating === undefined) { return; }
+
     this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', `${this.rating / 5}`);
     this.renderer.setAttribute(this.pathElement.nativeElement, 'fill', `url(#${this.getFillId()})`);
   }

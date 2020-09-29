@@ -84,6 +84,12 @@
       </div>
 
       <div class="product__info">
+        <a class="store-reviews" routerLink="/otzyvy" target="_blank">
+          <p class="store-reviews__text">Отзывы о нас</p>
+          <span class="store-reviews__average">{{ averageReviewsRating }}</span>
+          <rating-stars class="store-reviews__stars" [isSmall]="true" [isDisabled]="true" [rating]="averageReviewsRating"></rating-stars>
+          <span class="store-reviews__count">({{ storeReviewsCount }})</span>
+        </a>
 
         <div class="product__short-description">
           {{ product.shortDescription }}
