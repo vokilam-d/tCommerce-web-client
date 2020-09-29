@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HeadService } from '../../services/head/head.service';
 import { AddReviewModalComponent, IAddReviewFormValue } from '../../add-review-modal/add-review-modal.component';
 import { API_HOST, DEFAULT_ERROR_TEXT } from '../../shared/constants';
@@ -9,16 +9,19 @@ import { JsonLdService } from '../../services/json-ld/json-ld.service';
 import { SafeHtml } from '@angular/platform-browser';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { takeUntil } from 'rxjs/operators';
-import { ReviewComponent } from '../../review/review.component';
 import { DeviceService } from '../../services/device-detector/device.service';
 import { ScrollToService } from '../../services/scroll-to/scroll-to.service';
+import { ESort } from '../../shared/enums/sort.enum';
+import { SortingComponent } from '../../product-list/sorting/sorting.component';
+import { PaginationComponent } from '../../pagination/pagination.component';
+import { SortingPaginatingFilterDto } from '../../shared/dtos/spf.dto';
 
 @Component({
   selector: 'store-reviews',
   templateUrl: './store-reviews.component.html',
   styleUrls: ['./store-reviews.component.scss']
 })
-export class StoreReviewsComponent extends NgUnsubscribe implements OnInit {
+export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, AfterViewInit {
 
   jsonLd: SafeHtml;
   reviews: StoreReviewDto[];
@@ -28,11 +31,13 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit {
   pagesTotal: number;
   reviewsTotal: number;
   page: number;
+  sortOptions: ESort[] = [ESort.New, ESort.Old, ESort.Popularity,ESort.HighRating, ESort.LowRating];
   get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
-  @ViewChild(AddReviewModalComponent) addReviewCmp: AddReviewModalComponent;
-  @ViewChild(ReviewComponent) reviewCmp: ReviewComponent;
   @ViewChild('reviewsContainerRef') reviewsContainerRef: ElementRef;
+  @ViewChild(AddReviewModalComponent) addReviewCmp: AddReviewModalComponent;
+  @ViewChild(SortingComponent) sortingCmp: SortingComponent;
+  @ViewChild(PaginationComponent) paginationCmp: PaginationComponent;
 
 
   constructor(private headService: HeadService,
@@ -44,13 +49,23 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit {
   ) { super(); }
 
   ngOnInit(): void {
-    this.fetchReviews();
     this.setMeta();
     this.setAverageReviewsRating();
   }
 
+  ngAfterViewInit() {
+    this.fetchReviews();
+  }
+
   fetchReviews() {
-    this.storeReviewService.fetchAllReviews()
+    const sortingValue = this.sortingCmp.getValue();
+    const paginationValue = this.paginationCmp.getValue();
+    const spf = new SortingPaginatingFilterDto();
+
+    spf.sort = sortingValue;
+    spf.page = paginationValue;
+
+    this.storeReviewService.fetchAllReviews(spf)
       .pipe( takeUntil(this.ngUnsubscribe) )
       .subscribe(
         response => {

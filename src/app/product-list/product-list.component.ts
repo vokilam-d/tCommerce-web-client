@@ -1,12 +1,17 @@
 import {
-  AfterViewInit, ChangeDetectorRef,
+  AfterViewInit,
+  ChangeDetectorRef,
   Component,
-  ElementRef, HostListener,
+  ElementRef,
+  HostListener,
   Input,
   OnChanges,
-  OnInit, QueryList, Renderer2,
+  OnInit,
+  QueryList,
+  Renderer2,
   SimpleChanges,
-  ViewChild, ViewChildren
+  ViewChild,
+  ViewChildren
 } from '@angular/core';
 import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
 import { ISelectedFilter } from './filter/selected-filter.interface';
@@ -19,6 +24,7 @@ import { ScrollToService } from '../services/scroll-to/scroll-to.service';
 import { FilterDto } from '../shared/dtos/filter.dto';
 import { DEFAULT_ERROR_TEXT } from '../shared/constants';
 import { Subscription } from 'rxjs';
+import { ESort } from '../shared/enums/sort.enum';
 
 @Component({
   selector: 'product-list',
@@ -36,6 +42,7 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   error: string;
   isFixed: boolean;
   headerPosition: number;
+  sortOptions: ESort[] = [ESort.Popularity, ESort.New, ESort.Cheap, ESort.Expensive];
   private fetchSub: Subscription;
   get isLoading() { return this.fetchSub?.closed === false; }
 

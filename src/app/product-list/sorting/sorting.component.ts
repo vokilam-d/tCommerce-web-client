@@ -1,16 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { takeUntil } from 'rxjs/operators';
 import { UrlService } from '../../services/url/url.service';
-
-enum ESort {
-  Popularity = 'popularity',
-  New = 'new',
-  Cheap = 'cheap',
-  Expensive = 'expensive'
-}
-const DEFAULT_SORT: ESort = ESort.Popularity;
+import { ESort } from '../../shared/enums/sort.enum';
 
 @Component({
   selector: 'sorting',
@@ -20,12 +13,10 @@ const DEFAULT_SORT: ESort = ESort.Popularity;
 export class SortingComponent extends NgUnsubscribe implements OnInit {
 
   sortControl: FormControl;
-  sortOptions = [
-    { value: ESort.Popularity, label: 'Популярные' },
-    { value: ESort.New, label: 'Новые в начале' },
-    { value: ESort.Cheap, label: 'От дешёвых к дорогим' },
-    { value: ESort.Expensive, label: 'От дорогих к дешёвым' }
-  ];
+  sortEnum = ESort;
+
+  @Input() sortOptions: ESort[];
+  @Input() defaultOption: ESort;
   @Output() valueChanged = new EventEmitter();
 
   constructor(private urlService: UrlService) {
@@ -42,7 +33,7 @@ export class SortingComponent extends NgUnsubscribe implements OnInit {
   }
 
   private buildControl() {
-    const initialValue = this.urlService.getQueryParam('sort') || ESort.Popularity;
+    const initialValue = this.urlService.getQueryParam('sort') || this.defaultOption;
     this.sortControl = new FormControl(initialValue);
   }
 
@@ -50,7 +41,7 @@ export class SortingComponent extends NgUnsubscribe implements OnInit {
     this.sortControl.valueChanges
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(value => {
-        if (value === DEFAULT_SORT) {
+        if (value === this.defaultOption) {
           this.urlService.deleteQueryParam('sort');
         } else {
           this.urlService.setQueryParam('sort', value);

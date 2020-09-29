@@ -6,15 +6,11 @@
   <h1 class="page__title">Отзывы об интернет-магазине "Klondike", предложения</h1>
 
   <div class="reviews-summary__container" (click)="scrollToReviews()">
-    <p class="reviews-summary__text">Отзывы о нашем магазине</p>
-
-    <div class="reviews-summary__rating">
       <span class="reviews-summary__average">{{ averageReviewsRating }}</span>
 
-      <rating-stars [isMiddle]="true" [isDisabled]="true" [rating]="averageReviewsRating"></rating-stars>
+      <rating-stars [isDisabled]="true" [rating]="averageReviewsRating"></rating-stars>
 
       <div class="reviews-summary__count" *ngIf="storeReviewsCount"> ({{ storeReviewsCount }})</div>
-    </div>
   </div>
 
   <div class="page__content">
@@ -23,10 +19,18 @@
       Мы очень благодарны за обратную связь, каждый Ваш отзыв вдохновляет нас!
     </p>
 
-    <sorting class="store-reviews__sorting" (valueChanged)="fetchReviews()"></sorting>
-
     <div class="store-reviews">
-      <button class="btn store-reviews__btn" (click)="openReviewModal()" type="button">Оставить отзыв</button>
+
+      <div class="store-reviews__actions">
+        <button class="btn store-reviews__btn" (click)="openReviewModal()" type="button">Оставить отзыв</button>
+
+        <div class="sorting">
+          <sorting [sortOptions]="sortOptions"
+                   [defaultOption]="sortOptions[0]"
+                   (valueChanged)="fetchReviews()"
+          ></sorting>
+        </div>
+      </div>
 
       <div class="store-reviews__error" *ngIf="error as error">
         {{ error }}

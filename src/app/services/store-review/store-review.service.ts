@@ -5,6 +5,9 @@ import { API_HOST } from '../../shared/constants';
 import { AddStoreReviewDto, StoreReviewDto } from '../../shared/dtos/store-review.dto';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { SortingPaginatingFilterDto } from '../../shared/dtos/spf.dto';
+import { ProductListResponseDto } from '../../shared/dtos/product-list-response.dto';
+import { toHttpParams } from '../../shared/helpers/to-http-params.function';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +32,8 @@ export class StoreReviewService {
       );
   }
 
-  fetchAllReviews() {
-    return this.http.get<ResponseDto<StoreReviewDto[]>>(`${API_HOST}/api/v1/store-reviews`);
+  fetchAllReviews(spf: SortingPaginatingFilterDto) {
+    return this.http.get<ResponseDto<StoreReviewDto[]>>(`${API_HOST}/api/v1/store-reviews/temp`, { params: toHttpParams(spf) });
   }
 
   addReview(reviewDto: AddStoreReviewDto) {
@@ -46,12 +49,8 @@ export class StoreReviewService {
   }
 
   countAverageRating(): Observable<number> {
-    return this.fetchAllReviews().pipe(
-      map(response => response.data.map(review => review.rating)),
-      switchMap(ratings => {
-        const average = ratings.reduce((value, acc) => value + acc) / ratings.length;
-        return of(+average.toFixed(1));
-      })
+    return this.http.get<ResponseDto<number>>(`${API_HOST}/api/v1/store-reviews/avg-rating`).pipe(
+      map(response => response.data)
     );
   }
 }

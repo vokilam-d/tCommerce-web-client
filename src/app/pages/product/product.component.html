@@ -84,23 +84,12 @@
       </div>
 
       <div class="product__info">
-        <div class="store-reviews__container">
-
-          <a class="store-reviews store-reviews__link" routerLink="/otzyvy">
-            <p class="store-reviews__text">Отзывы о нашем магазине</p>
-          </a> <span class="store-reviews__average">{{ averageReviewsRating }}</span>
-
-          <div class="store-reviews__stars">
-            <rating-stars
-              [isSmall]="true"
-              [isDisabled]="true"
-              [rating]="averageReviewsRating"
-            ></rating-stars>
-
-            <a routerLink="/otzyvy" class="store-reviews__count" *ngIf="storeReviewsCount"> ({{ storeReviewsCount }})</a>
-          </div>
-        </div>
-
+        <a class="store-reviews" routerLink="/otzyvy" target="_blank">
+          <p class="store-reviews__text">Отзывы о нас</p>
+          <span class="store-reviews__average">{{ averageReviewsRating }}</span>
+          <rating-stars class="store-reviews__stars" [isSmall]="true" [isDisabled]="true" [rating]="averageReviewsRating"></rating-stars>
+          <span class="store-reviews__count">({{ storeReviewsCount }})</span>
+        </a>
 
         <div class="product__short-description">
           {{ product.shortDescription }}

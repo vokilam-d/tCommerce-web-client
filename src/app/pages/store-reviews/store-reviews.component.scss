@@ -14,6 +14,23 @@
     margin: 25px 0 0;
     max-width: 800px;
   }
+
+  &__actions {
+    @include respond-to($media_medium) {
+      display: flex;
+      justify-content: space-between;
+      max-width: 800px;
+    }
+  }
+
+  &__btn {
+    width: 100%;
+    font-size: 18px;
+
+    @include respond-to($media_medium) {
+      width: 200px;
+    }
+  }
 }
 
 .placeholder {
@@ -84,8 +101,17 @@
 
   &__average {
     margin-right: 5px;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
     color: $primary;
+  }
+}
+
+.sorting {
+  width: 100%;
+  margin-top: 15px;
+
+  @include respond-to($media_medium) {
+    width: 250px;
   }
 }

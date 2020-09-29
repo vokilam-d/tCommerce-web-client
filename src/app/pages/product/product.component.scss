@@ -462,29 +462,22 @@ $arrowSize: 10px;
 }
 
 .store-reviews {
-  &__container {
-    display: flex;
-    margin-top: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  width: 100%;
+  margin: 20px 0 5px;
+  color: #0099cc;
 
-    @include respond-to($media_medium) {
-      margin-bottom: 15px;
-    };
+  @include respond-to(375px) {
+    width: auto;
+    margin-bottom: 0;
   }
 
-  &__link {
-    width: 100%;
-    margin-bottom: 5px;
-    color: #0099cc;
+  @include respond-to($media_medium) {
+    margin-bottom: 15px;
+  }
 
-    @include respond-to(375px) {
-      width: auto;
-      margin-bottom: 0;
-    }
-
-    &:hover {
-      color: $primary;
-    }
+  &:hover {
+    color: $primary;
   }
 
   &__text {
