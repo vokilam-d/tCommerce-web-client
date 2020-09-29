@@ -3,10 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ResponseDto } from '../../shared/dtos/response.dto';
 import { API_HOST } from '../../shared/constants';
 import { AddStoreReviewDto, StoreReviewDto } from '../../shared/dtos/store-review.dto';
-import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
 import { SortingPaginatingFilterDto } from '../../shared/dtos/spf.dto';
-import { ProductListResponseDto } from '../../shared/dtos/product-list-response.dto';
 import { toHttpParams } from '../../shared/helpers/to-http-params.function';
 
 @Injectable({
