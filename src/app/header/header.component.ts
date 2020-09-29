@@ -15,16 +15,12 @@ export class HeaderComponent implements OnInit {
   toolbarPosition: number;
 
   get categories(): CategoryTreeItem[] { return this.categoryService.categories; }
-  get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
   @Input() isSidebarCatalog: boolean = false;
   @ViewChild(SidebarMenuComponent) sidebarCmp: SidebarMenuComponent;
   @ViewChild('toolbarRef') toolbarRef: ElementRef;
 
-  constructor(private categoryService: CategoryService,
-              private storeReviewService: StoreReviewService
-
-  ) { }
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit() { }
 
