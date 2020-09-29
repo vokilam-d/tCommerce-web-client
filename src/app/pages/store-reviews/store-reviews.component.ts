@@ -27,11 +27,11 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   reviews: StoreReviewDto[];
   mediaUploadUrl: string = `${API_HOST}/api/v1/store-reviews/media`;
   error: string;
-  averageReviewsRating: number;
   pagesTotal: number;
   reviewsTotal: number;
   page: number;
   sortOptions: ESort[] = [ESort.New, ESort.Old, ESort.Popularity,ESort.HighRating, ESort.LowRating];
+  get averageReviewsRating(): number { return this.storeReviewService.averageRating; }
   get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
   @ViewChild('reviewsContainerRef') reviewsContainerRef: ElementRef;
@@ -50,7 +50,6 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
 
   ngOnInit(): void {
     this.setMeta();
-    this.setAverageReviewsRating();
   }
 
   ngAfterViewInit() {
@@ -170,12 +169,6 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
     };
 
     this.jsonLd = this.jsonLdService.getSafeJsonLd(jsonLd);
-  }
-
-  setAverageReviewsRating() {
-    return this.storeReviewService.countAverageRating().subscribe(average => {
-      this.averageReviewsRating = average;
-    });
   }
 
   scrollToReviews() {

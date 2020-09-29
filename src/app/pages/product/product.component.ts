@@ -37,7 +37,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   needToShowReviews: boolean = false;
   isClosed: boolean;
   quickReview: number;
-  averageReviewsRating: number;
+  get averageReviewsRating(): number { return this.storeReviewService.averageRating; }
   get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
   @ViewChild(ProductDetailsComponent) detailsCmp: ProductDetailsComponent;
@@ -59,7 +59,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.needToShowReviews = this.route.snapshot.fragment === 'reviews';
     this.fetchProduct();
     this.setSavedTooltipState();
-    this.setAverageReviewsRating();
   }
 
   ngAfterViewInit(): void {
@@ -196,12 +195,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
     if (this.deviceService.isPlatformBrowser()) {
       this.productService.addViewedProductIdToLocalStorage(this.product.productId);
     }
-  }
-
-  setAverageReviewsRating() {
-    return this.storeReviewService.countAverageRating().subscribe(average => {
-      this.averageReviewsRating = average;
-    });
   }
 
 }

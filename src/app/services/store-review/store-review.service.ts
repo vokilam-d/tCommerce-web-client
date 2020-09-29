@@ -15,9 +15,11 @@ import { toHttpParams } from '../../shared/helpers/to-http-params.function';
 export class StoreReviewService {
 
   storeReviewsCount: number;
+  averageRating: number;
 
   constructor(private http: HttpClient) {
     this.setReviewsCount();
+    this.setAverageRating();
   }
 
   setReviewsCount() {
@@ -48,9 +50,10 @@ export class StoreReviewService {
     return this.http.post<ResponseDto<StoreReviewDto>>(`${API_HOST}/api/v1/store-reviews/${reviewId}/downvote`, {});
   }
 
-  countAverageRating(): Observable<number> {
-    return this.http.get<ResponseDto<number>>(`${API_HOST}/api/v1/store-reviews/avg-rating`).pipe(
-      map(response => response.data)
-    );
+  setAverageRating(): void {
+    this.http.get<ResponseDto<number>>(`${API_HOST}/api/v1/store-reviews/avg-rating`)
+      .subscribe(response => {
+        this.averageRating = response.data;
+      });
   }
 }
