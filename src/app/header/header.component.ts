@@ -2,7 +2,6 @@ import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@
 import { CategoryService } from '../pages/category/category.service';
 import { CategoryTreeItem } from '../shared/dtos/category-tree.dto';
 import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
-import { StoreReviewService } from '../services/store-review/store-review.service';
 
 @Component({
   selector: 'app-header',
