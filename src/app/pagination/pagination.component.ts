@@ -79,27 +79,26 @@ export class PaginationComponent implements OnInit, OnChanges {
   private setPages() {
     let start = 2;
     let current = this.activePage;
-    let ptd = this.pagesToDisplay;
-    let end = ptd;
+    let end = this.pagesToDisplay;
 
-    if (current <= ptd + 1) {
-      end = 4;
+    if (current <= this.pagesToDisplay + 1) {
+      end = this.pagesToDisplay + 1;
     }
 
-    if (current > ptd + 1) {
-      start = current - 1;
+    if (current > this.pagesToDisplay + 1) {
+      start = current - Math.floor(this.pagesToDisplay / 2);
 
-      if (current >= this.pagesTotal - ptd) {
-        start = this.pagesTotal - ptd - 1;
-        end = 4;
+      if (current >= this.pagesTotal - this.pagesToDisplay) {
+        start = this.pagesTotal - this.pagesToDisplay - 1;
+        end = this.pagesToDisplay + 1;
       }
     }
 
-    if (this.pagesTotal <= ptd + 4) {
+    if (this.pagesTotal <= this.pagesToDisplay + this.pagesToDisplay + 1) {
       start = 2;
-      end = ptd + 2;
+      end = this.pagesToDisplay + 2;
 
-      if (this.pagesTotal <= ptd + 2) {
+      if (this.pagesTotal <= this.pagesToDisplay + 2) {
         end = this.pagesTotal - 2;
       }
     }
@@ -108,10 +107,10 @@ export class PaginationComponent implements OnInit, OnChanges {
   }
 
   isPrevSpreadShown() {
-    return this.pagesTotal > this.pagesToDisplay + 4 && this.activePage > this.pagesToDisplay + 1;
+    return this.pagesTotal > this.pagesToDisplay + this.pagesToDisplay + 1 && this.activePage > this.pagesToDisplay + 1;
   }
 
   isNextSpreadShown() {
-    return this.pagesTotal > this.pagesToDisplay + 4 && this.activePage < this.pagesTotal - this.pagesToDisplay;
+    return this.pagesTotal > this.pagesToDisplay + this.pagesToDisplay + 1 && this.activePage < this.pagesTotal - this.pagesToDisplay;
   }
 }
