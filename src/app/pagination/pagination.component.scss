@@ -10,9 +10,15 @@
   }
 
   &__arrow-btn {
-    padding: 15px;
-    font-size: 22px;
-    border: 1px solid $borderColor;
+    padding: 5px;
+    font-size: 20px;
+
+    @include respond-to(425px) {
+      padding: 15px;
+      font-size: 22px;
+      border: 1px solid $borderColor;
+    }
+
 
     &[disabled] {
       opacity: 0.2;
@@ -27,20 +33,28 @@
     display: flex;
     align-items: baseline;
     font-size: 16px;
-
-    @include respond-to-less-than($media_medium) {
-      display: none;
-    }
   }
 
   &__page {
-    min-width: 40px;
+    min-width: 32px;
     padding: 10px;
     margin-right: 5px;
     border: 1px solid $borderColor;
+    border-radius: 50%;
+    font-size: 12px;
     transition: color 0.2s ease;
     cursor: pointer;
     text-align: center;
+
+    @include respond-to(320px) {
+      min-width: 40px;
+      font-size: 14px;
+    }
+
+    @include respond-to($media_medium) {
+      border-radius: initial;
+      font-size: initial;
+    }
 
     &:not(&--active):hover {
       color: rgba($primary, 0.6);
@@ -53,11 +67,15 @@
   }
 
   &__spread {
-    min-width: 40px;
-    padding: 10px;
-    margin-right: 5px;
-    border: 1px solid $borderColor;
+    margin-right: 10px;
     text-align: center;
+
+    @include respond-to(425px) {
+      min-width: 40px;
+      padding: 10px;
+      margin-right: 5px;
+      border: 1px solid $borderColor;
+    }
   }
 }
 
