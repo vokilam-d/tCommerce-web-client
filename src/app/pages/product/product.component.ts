@@ -15,7 +15,6 @@ import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
 import { DeviceService } from '../../services/device-detector/device.service';
 import { LinkedCategoryDto } from '../../shared/dtos/linked-category.dto';
 import { StoreReviewService } from '../../services/store-review/store-review.service';
-import { StoreReviewDto } from '../../shared/dtos/store-review.dto';
 
 @Component({
   selector: 'product',
