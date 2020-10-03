@@ -37,19 +37,12 @@
 
   &__page {
     min-width: 32px;
-    padding: 10px;
+    padding: 5px;
     margin-right: 5px;
-    border: 1px solid $borderColor;
-    border-radius: 50%;
-    font-size: 12px;
+    font-size: 14px;
     transition: color 0.2s ease;
     cursor: pointer;
     text-align: center;
-
-    @include respond-to(320px) {
-      min-width: 40px;
-      font-size: 14px;
-    }
 
     @include respond-to($media_medium) {
       border-radius: initial;
