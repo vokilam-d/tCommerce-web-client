@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { UrlService } from '../services/url/url.service';
-import { DeviceService } from '../services/device-detector/device.service';
 
 @Component({
   selector: 'pagination',
@@ -11,7 +10,7 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   activePage: number;
   pages: number[];
-  private pagesToDisplay: number = this.device.isMobile() ? 3 : 2;
+  private pagesToDisplay: number = 3;
 
   @Input() displayedOnPage: string;
   @Input() pagesTotal: number;
@@ -21,9 +20,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   get isPrevBtnDisabled() { return this.activePage <= 1; }
   get isNextBtnDisabled() { return this.pagesTotal === 1 || this.activePage >= this.pagesTotal; }
 
-  constructor(private urlService: UrlService,
-              private device: DeviceService
-  ) { }
+  constructor(private urlService: UrlService) { }
 
   ngOnInit(): void {
     this.setInitialValue();
