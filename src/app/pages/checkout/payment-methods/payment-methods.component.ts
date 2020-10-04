@@ -91,7 +91,7 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
       cashOnDeliveryMethod.disabledReasons.push('Наложенный платёж недоступен для заказов на сумму менее 100 грн');
     }
 
-    const disallowedItem = this.customerService.cart.find(item => item.name.match(/сусаль([ ,])/g));
+    const disallowedItem = this.customerService.cart.find(item => item.name.toLowerCase().match(/сусаль([ ,])/g));
     if (disallowedItem) {
       cashOnDeliveryMethod.disabledState = true;
       cashOnDeliveryMethod.disabledReasons.push('Наложенный платёж недоступен для сусального золота');
