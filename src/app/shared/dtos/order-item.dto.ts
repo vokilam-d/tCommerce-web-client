@@ -10,7 +10,6 @@ export class OrderItemDto {
   productId: number;
   variantId: string;
   sku: string;
-  originalPrice: number;
   price: number;
   qty: number;
   cost: number;
