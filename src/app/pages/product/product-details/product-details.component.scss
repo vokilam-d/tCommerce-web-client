@@ -167,11 +167,7 @@
     border-radius: 3px;
     background-color: #f1f1f1;
     text-align: center;
-    color: #cccccc;
-
-    @include respond-to($media_medium) {
-      margin-top: 0;
-    }
+    color: #ccc;
   }
 
   &__img {
