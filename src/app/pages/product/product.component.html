@@ -98,7 +98,7 @@
           <p class="store-info__tip">
             (не суммируется с <a class="store-info__link" routerLink="/skidki">накопительными скидками</a> и акциями)
           </p>
-          <p class="">
+          <p>
             Заказы обрабатываются 1 день!
             <a class="store-info__reviews store-reviews" routerLink="/otzyvy">
               <span class="store-reviews__text">Отзывы о нас</span>
@@ -115,23 +115,25 @@
 
         <div class="product__buy-info">
 
-          <div class="product__price-container">
-            <div class="product__stock" [class.product__stock--available]="product.isInStock">
-              <ng-container *ngIf="product.isInStock">В наличии</ng-container>
-              <ng-container *ngIf="!product.isInStock">Нет в наличии</ng-container>
+          <div class="product__price-qty">
+            <div class="product__price-container">
+              <div class="product__stock" [class.product__stock--available]="product.isInStock">
+                <ng-container *ngIf="product.isInStock">В наличии</ng-container>
+                <ng-container *ngIf="!product.isInStock">Нет в наличии</ng-container>
+              </div>
+
+              <div class="product__price" [class.product__price--special]="product.oldPrice">
+                {{ product.price }} <span class="product__currency">грн</span>
+              </div>
+
+              <div class="product__old-price" *ngIf="product.oldPrice as oldPrice">
+                {{ oldPrice }} <span class="product__currency">грн</span>
+              </div>
             </div>
 
-            <div class="product__price" [class.product__price--special]="product.oldPrice">
-              {{ product.price }} <span class="product__currency">грн</span>
+            <div class="product__qty" *ngIf="product.isInStock">
+              <quantity-control></quantity-control>
             </div>
-
-            <div class="product__old-price" *ngIf="product.oldPrice as oldPrice">
-              {{ oldPrice }} <span class="product__currency">грн</span>
-            </div>
-          </div>
-
-          <div class="product__qty" *ngIf="product.isInStock">
-            <quantity-control></quantity-control>
           </div>
 
           <div class="product__actions">

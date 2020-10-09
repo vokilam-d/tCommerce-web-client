@@ -112,7 +112,9 @@ $arrowSize: 10px;
     }
   }
 
-  &__price-container {
+  &__price-qty {
+    display: flex;
+    align-items: center;
   }
 
   &__stock {
@@ -125,7 +127,7 @@ $arrowSize: 10px;
   }
 
   &__price {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 600;
 
     &--special {
@@ -137,7 +139,7 @@ $arrowSize: 10px;
     position: relative;
     display: inline-block;
     margin: 4px 0 0;
-    font-size: 16px;
+    font-size: 18px;
     color: rgba($dark, 0.6);
 
     &::after {
@@ -158,15 +160,15 @@ $arrowSize: 10px;
   }
 
   &__qty {
-    margin: 15px 0 0;
+    margin: 0 0 0 35px;
 
     @include respond-to($media_large) {
-      margin: 0 0 0 20px;
+      margin-left: 20px;
     }
   }
 
   &__actions {
-    margin: 10px 0 0;
+    margin: 20px 0 0;
     display: flex;
     justify-content: space-between;
 
