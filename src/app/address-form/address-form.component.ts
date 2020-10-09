@@ -8,6 +8,7 @@ import { StreetDto } from '../shared/dtos/street.dto';
 import { takeUntil } from 'rxjs/operators';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
 import { ScrollToService } from '../services/scroll-to/scroll-to.service';
+import { merge } from 'rxjs';
 
 @Component({
   selector: 'address-form',
@@ -157,15 +158,23 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
     const addressTypeProp: keyof ShipmentAddressDto = 'addressType';
     const addressIdProp: keyof ShipmentAddressDto = 'addressId';
     const addressProp: keyof ShipmentAddressDto = 'address';
+    const settlementProp: keyof ShipmentAddressDto = 'settlement';
     const buildingProp: keyof ShipmentAddressDto = 'buildingNumber';
     const flantProp: keyof ShipmentAddressDto = 'flat';
+
+    merge(
+      this.addressForm.get(addressTypeProp).valueChanges,
+      this.addressForm.get(settlementProp).valueChanges
+    )
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.addressForm.get(addressIdProp).reset('', { emitEvent: false });
+        this.addressForm.get(addressProp).reset('', { emitEvent: false });
+      });
 
     this.addressForm.get(addressTypeProp).valueChanges
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((addressType: AddressTypeEnum) => {
-        this.addressForm.get(addressIdProp).reset('', { emitEvent: false });
-        this.addressForm.get(addressProp).reset('', { emitEvent: false });
-
         if (addressType === AddressTypeEnum.WAREHOUSE) {
           this.addressForm.get(buildingProp).reset('', { emitEvent: false });
           this.addressForm.get(flantProp).reset('', { emitEvent: false });
