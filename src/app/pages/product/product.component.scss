@@ -486,15 +486,6 @@ $arrowSize: 10px;
   display: inline-flex;
   color: $blue;
 
-  @include respond-to(375px) {
-    width: auto;
-    margin-bottom: 0;
-  }
-
-  @include respond-to($media_medium) {
-    margin-bottom: 15px;
-  }
-
   &:hover {
     color: $primary;
   }

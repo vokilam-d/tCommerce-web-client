@@ -86,18 +86,16 @@
       <div class="product__info">
 
         <div class="product__store-info store-info">
-          <p>
-            <a class="store-info__link" routerLink="/dostavka-i-oplata">Бесплатная доставка</a> Новой почтой для заказов от 1000 грн <span class="store-info__tip">(кроме габаритных)</span>
+          <p><a class="store-info__link" routerLink="/dostavka-i-oplata">Бесплатная доставка</a> Новой почтой для заказов от 1000 грн <span class="store-info__tip">(кроме габаритных)</span>
           </p>
-          <p>
-            <span class="store-info__discount">-5%</span> для заказов от 500 грн
-          </p>
-          <p>
-            <span class="store-info__discount">-10%</span> для заказов от 1500 грн
-          </p>
-          <p class="store-info__tip">
-            (не суммируется с <a class="store-info__link" routerLink="/skidki">накопительными скидками</a> и акциями)
-          </p>
+
+          <ng-container *ngIf="product.isDiscountApplicable">
+            <p><span class="store-info__discount">-5%</span> для заказов от 500 грн</p>
+            <p><span class="store-info__discount">-10%</span> для заказов от 1500 грн</p>
+
+            <p class="store-info__tip">(не суммируется с <a class="store-info__link" routerLink="/skidki">накопительными скидками</a> и акциями)</p>
+          </ng-container>
+
           <p>
             Заказы обрабатываются 1 день!
             <a class="store-info__reviews store-reviews" routerLink="/otzyvy">

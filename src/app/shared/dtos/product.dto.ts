@@ -43,6 +43,7 @@ export class ProductDto {
   vendorCode: string;
   gtin: string;
   relatedProducts: LinkedProductDto[];
+  isDiscountApplicable: boolean;
 
   safeFullDescription: SafeHtml;
 }
