@@ -127,7 +127,7 @@
     </div>
 
     <div class="items__row" *ngIf="order.prices.discountValue as discountValue">
-      <div class="items__label">Скидка ({{ order.prices.discountLabel }} - {{ order.prices.discountPercent }}%)</div>
+      <div class="items__label">Скидка ({{ order.prices.discountLabel }}, {{ order.prices.discountPercent }}%)</div>
 
       <div class="items__value">{{ discountValue }} грн</div>
     </div>
