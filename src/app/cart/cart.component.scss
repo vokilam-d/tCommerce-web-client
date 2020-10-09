@@ -21,9 +21,6 @@
 
   &__info {
     @include respond-to($media_large) {
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: row-reverse;
       position: sticky;
       bottom: -50px;
       margin-top: 15px;
@@ -34,25 +31,69 @@
     }
   }
 
-  &__total {
-    display: flex;
-    align-items: baseline;
-    width: 100%;
-    font-size: 20px;
-
+  &__btns {
     @include respond-to($media_large) {
-      display: inline-block;
-      text-align: right;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row-reverse;
     }
   }
 
   &__price {
-    margin: 0 0 0 auto;
-    font-size: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    margin: 0 0 5px;
+    font-size: 15px;
+
+    @include respond-to($media_large) {
+      justify-content: flex-end;
+      font-size: 16px;
+    }
+
+    &--total {
+      font-size: 20px;
+    }
+  }
+
+  &__price-label {
+    @include respond-to($media_large) {
+      text-align: right;
+    }
+  }
+
+  &__price-value {
+    margin: 0 0 0 5px;
+    flex-shrink: 0;
     font-weight: 600;
 
     @include respond-to($media_large) {
       margin-left: 10px;
+    }
+
+    &--discount {
+      color: darken($red, 20%);
+    }
+
+    &--total {
+      font-size: 26px;
+
+      @include respond-to($media_large) {
+        font-size: 32px;
+      }
+    }
+  }
+
+  &__discount-description {
+    margin: 3px 0 0;
+    font-size: 13px;
+    color: rgba($dark, 0.6);
+
+    @include respond-to($media_large) {
+      margin-top: 0;
+      display: inline;
+      font-size: inherit;
     }
   }
 
@@ -240,16 +281,6 @@
     @include respond-to($media_max-content-width) {
       flex-direction: row;
     }
-  }
-
-  &__old-price {
-    display: inline-block;
-    margin: 0 6px 0 0;
-    text-decoration: line-through;
-    color: rgba($dark, 0.6);
-  }
-  &__old-price + &__price {
-    color: $red;
   }
 
   &__delete {

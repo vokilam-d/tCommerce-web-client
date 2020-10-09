@@ -10,12 +10,12 @@ import { InitResetPasswordDto } from '../../shared/dtos/init-reset-password.dto'
 import { ShipmentAddressDto } from '../../shared/dtos/shipment-address.dto';
 import { map, tap } from 'rxjs/operators';
 import { CreateOrUpdateOrderItemDto, OrderItemDto } from '../../shared/dtos/order-item.dto';
-import { ProductDto } from '../../shared/dtos/product.dto';
-import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
 import { isPlatformBrowser } from '@angular/common';
 import { API_HOST } from '../../shared/constants';
 import { ResetPasswordDto } from '../../shared/dtos/reset-password.dto';
 import { OrderDto } from '../../shared/dtos/order.dto';
+import { OrderPricesDto } from '../../shared/dtos/order-prices.dto';
+import { CalculatePricesDto } from '../../shared/dtos/calculate-prices.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +30,10 @@ export class CustomerService { // todo split to CartService
   showLoginModal$ = this._showLoginModal$.asObservable();
   showCartModal$ = this._showCartModal$.asObservable();
   cartInit$ = new BehaviorSubject(false);
+  prices: OrderPricesDto = new OrderPricesDto();
 
   get customer() { return this._customer.getValue(); }
   get cart() { return this._cart; }
-  get cartTotalCost() { return this._cart && this._cart.reduce((acc, item) => acc + item.totalCost, 0); }
   get isLoggedIn(): boolean { return !!this.customer; }
   get customerName(): string { return this.customer ? `${this.customer.firstName} ${this.customer.lastName}` : ''; }
   get customerEmail(): string { return this.customer ? this.customer.email : ''; }
@@ -52,7 +52,7 @@ export class CustomerService { // todo split to CartService
       .pipe(
         tap(
           response => {
-            if (!this.customer) { // guard if 'fetchCustomerDetails' got response faster
+            if (!this.customer) { // guard for if 'fetchCustomerDetails' got response faster
               this.setCustomer(response.data);
             }
           }
@@ -151,6 +151,7 @@ export class CustomerService { // todo split to CartService
     const savedCart = this.customer ? this.customer.cart : JSON.parse(localStorage.getItem('cart'));
     this._cart = savedCart || [];
     this.cartInit$.next(true);
+    this.updatePrices();
   }
 
   addToCart(sku: string, qty: number) {
@@ -163,6 +164,7 @@ export class CustomerService { // todo split to CartService
         tap(response => {
           this.saveToCart(response.data);
           this._showCartModal$.next(true);
+          this.updatePrices();
         })
       );
   }
@@ -174,6 +176,7 @@ export class CustomerService { // todo split to CartService
       .pipe(
         tap(response => {
           this.saveToCart(response.data);
+          this.updatePrices();
         })
       );
   }
@@ -186,6 +189,7 @@ export class CustomerService { // todo split to CartService
 
     this._cart.splice(foundIdx, 1);
     this.saveCartToStorage();
+    this.updatePrices();
 
     if (this.isLoggedIn) {
       this.http.delete<ResponseDto<boolean>>(`${API_HOST}/api/v1/cart/${cartItemToDelete.sku}`)
@@ -217,6 +221,15 @@ export class CustomerService { // todo split to CartService
   resetCart() {
     this._cart = [];
     localStorage.removeItem('cart');
+  }
+
+  private updatePrices() {
+    const payload: CalculatePricesDto = {
+      items: this.cart
+    };
+
+    this.http.post<ResponseDto<OrderPricesDto>>(`${API_HOST}/api/v1/cart/prices`, payload)
+      .subscribe(response => this.prices = response.data);
   }
 
   isEmailAvailable(email: string): Observable<boolean> {

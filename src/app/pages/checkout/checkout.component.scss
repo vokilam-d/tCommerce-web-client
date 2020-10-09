@@ -135,15 +135,41 @@
     }
   }
 
-  &__total {
+  &__prices {
     margin: 15px 0 0;
-    display: flex;
-    justify-content: space-between;
-    font-size: 18px;
   }
 
-  &__total-price {
+  &__price {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    margin: 0 0 5px;
+    font-size: 15px;
+
+    &--total {
+      font-size: 20px;
+    }
+  }
+
+  &__price-value {
+    margin: 0 0 0 5px;
+    flex-shrink: 0;
     font-weight: 600;
+
+    &--discount {
+      color: darken($red, 20%);
+    }
+
+    &--total {
+      font-size: 26px;
+    }
+  }
+
+  &__discount-description {
+    margin: 3px 0 0;
+    font-size: 13px;
+    color: rgba($dark, 0.6);
   }
 
   &__submit {

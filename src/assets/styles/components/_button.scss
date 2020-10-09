@@ -6,15 +6,15 @@
   border: 1px solid $action;
   border-radius: 5px;
   font-size: 16px;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.15s ease;
 
   &:hover,
   &:active {
     color: $dark;
-    background: darken($action, 3%);
+    background: darken($action, 5%);
   }
   &:active {
-    background: darken($action, 5%);
+    background: darken($action, 10%);
   }
 
   &--transparent {

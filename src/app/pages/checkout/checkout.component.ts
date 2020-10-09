@@ -24,7 +24,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   orderError: string | null = null;
 
   get cart() { return this.customerService.cart; }
-  get cartTotalCost() { return this.customerService.cartTotalCost; }
+  get prices() { return this.customerService.prices; }
   get isLoggedIn() { return this.customerService.isLoggedIn; }
 
   @ViewChild(OrderCustomerInfoComponent) infoCmp: OrderCustomerInfoComponent;
@@ -77,7 +77,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
       .subscribe(
         response => {
           const order = response.data;
-          this.analytics.placeOrder(order.id, order.totalCost);
+          this.analytics.placeOrder(order.id, order.prices.totalCost);
 
           this.router.navigate(['/', 'order-success'], { state: { order } });
         },

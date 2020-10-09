@@ -61,7 +61,7 @@
               </div>
 
               <div class="cart-item__price">
-                {{ item.totalCost }} грн
+                {{ item.cost }} грн
               </div>
             </div>
           </div>
@@ -73,8 +73,28 @@
         <button class="checkout__edit-btn" (click)="editCart()" type="button">Редактировать заказ</button>
       </div>
 
-      <div class="checkout__total">
-        <span>Итого</span> <span class="checkout__total-price">{{ cartTotalCost }} грн</span>
+      <div class="checkout__prices">
+        <ng-container *ngIf="prices.discountValue as discountValue">
+          <div class="checkout__price">
+            <div class="checkout__price-label">Стоимость товаров:</div>
+            <div class="checkout__price-value">{{ prices.itemsCost }} грн</div>
+          </div>
+
+          <div class="checkout__price">
+            <div class="checkout__price-label">
+              Скидка
+              <div class="checkout__discount-description">
+                ({{ prices.discountLabel }} - {{ prices.discountPercent }}%):
+              </div>
+            </div>
+            <div class="checkout__price-value checkout__price-value--discount">-{{ discountValue }} грн</div>
+          </div>
+        </ng-container>
+
+        <div class="checkout__price checkout__price--total">
+          <div class="checkout__price-label">Итого:</div>
+          <div class="checkout__price-value checkout__price-value--total">{{ prices.totalCost }} грн</div>
+        </div>
       </div>
 
       <button class="btn checkout__submit" (click)="placeOrder()" type="button">Оформить заказ</button>

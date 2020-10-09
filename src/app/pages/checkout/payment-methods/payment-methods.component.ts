@@ -86,7 +86,7 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
         }
       });
 
-    if (this.customerService.cartTotalCost < 100) {
+    if (this.customerService.prices.totalCost < 100) {
       cashOnDeliveryMethod.disabledState = true;
       cashOnDeliveryMethod.disabledReasons.push('Наложенный платёж недоступен для заказов на сумму менее 100 грн');
     }

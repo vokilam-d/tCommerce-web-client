@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
   @ViewChild(QuantityControlComponent) qtyCmp: QuantityControlComponent;
 
   get items() { return this.customerService.cart; }
-  get cartTotalCost() { return this.customerService.cartTotalCost; }
+  get prices() { return this.customerService.prices; }
 
   constructor(private customerService: CustomerService) {
   }

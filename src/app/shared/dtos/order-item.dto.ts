@@ -13,8 +13,6 @@ export class OrderItemDto {
   price: number;
   qty: number;
   cost: number;
-  discountValue?: number;
-  totalCost: number;
   imageUrl: string;
   slug: string;
   crossSellProducts: ProductListItemDto[];

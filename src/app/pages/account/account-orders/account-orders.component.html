@@ -43,8 +43,7 @@
         <div class="item__price-container">
           <div class="item__price">{{ item.price }} грн</div>
           <div class="item__qty">{{ item.qty }} шт.</div>
-          <div class="item__cost-container">
-            <span class="item__old-cost" *ngIf="item.cost > item.totalCost">{{ item.cost }} грн</span> <span class="item__cost">{{ item.totalCost }} грн</span>
+          <div class="item__cost">{{ item.cost }} грн
           </div>
         </div>
       </div>
@@ -117,8 +116,8 @@
       </div>
     </div>
 
-    <div class="order__info order__discount" *ngIf="order.discountValue">
-      Скидка: {{ order.discountValue }} грн
+    <div class="order__info order__discount" *ngIf="order.prices.discountValue as discountValue">
+      Скидка ({{ order.prices.discountLabel }} - {{ order.prices.discountPercent }}%): {{ discountValue }} грн
     </div>
   </div>
 
@@ -128,7 +127,7 @@
     </div>
 
     <div class="order__price">
-      Итого: {{ order.totalCost }} грн
+      Итого: {{ order.prices.totalCost }} грн
     </div>
   </div>
 
