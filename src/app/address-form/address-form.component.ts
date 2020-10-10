@@ -54,7 +54,7 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
       firstName: [address.firstName, Validators.required],
       lastName: [address.lastName, Validators.required],
       middleName: [address.middleName],
-      phone: [address.phone, Validators.required],
+      phone: [address.phone || '+38', Validators.required],
       addressType: [address.addressType, Validators.required],
       settlement: [address.settlement, Validators.required],
       settlementId: [address.settlementId, Validators.required],
