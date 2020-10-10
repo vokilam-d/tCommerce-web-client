@@ -14,6 +14,8 @@
 
     <div class="blog-page__content">
       <blog-posts-list [categoryId]="category.id"></blog-posts-list>
+
+      <div class="html-description" [innerHTML]="category.content"></div>
     </div>
   </div>
 
