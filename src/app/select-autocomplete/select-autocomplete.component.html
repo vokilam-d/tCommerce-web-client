@@ -23,7 +23,13 @@
       >
     </div>
 
-    <div class="autocomplete__no-options" *ngIf="!options.length && !isSearchInProgress">Не найдено ни одного варианта</div>
+    <div class="autocomplete__no-options"
+         *ngIf="!options.length && !isSearchInProgress"
+         [ngSwitch]="!!input.value"
+    >
+      <ng-container *ngSwitchCase="true">Не найдено ни одного варианта</ng-container>
+      <ng-container *ngSwitchCase="false">Введите в поле поисковый запрос</ng-container>
+    </div>
 
     <preloader class="autocomplete__preloader" *ngIf="isSearchInProgress"></preloader>
 

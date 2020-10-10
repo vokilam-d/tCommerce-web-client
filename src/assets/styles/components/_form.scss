@@ -11,8 +11,8 @@
   }
 
   &__label {
-    font-size: 13px;
-    color: rgba($dark, 0.6);
+    font-size: 14px;
+    color: rgba($dark, 0.9);
   }
 
   &__control {
@@ -30,7 +30,7 @@
     transition: border-color 0.2s ease;
 
     @include respond-to($media_large) {
-      font-size: 14px;
+      font-size: 15px;
     }
 
     &:focus {
@@ -62,8 +62,7 @@
   &__input-error {
     display: block;
     margin: 4px 0 0;
-    font-size: 13px;
-    //color: rgba($dark, 0.6);
+    font-size: 14px;
     color: $red;
   }
 
@@ -75,7 +74,7 @@
     border: 1px solid rgba($red, 0.4);
     color: red;
     border-radius: 3px;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.3;
   }
 
