@@ -3,6 +3,7 @@ export class AggregatedProductDto {
   slug: string;
   name: string;
   sku: string;
+  price: number;
 
   // custom transforms
   isLoading: boolean;
