@@ -14,7 +14,7 @@ export class AnalyticsService {
     this.trackEvent('Add to cart', action, productName, productPrice);
   }
 
-  removeFromoCart(productName: string, productPrice: number) {
+  removeFromCart(productName: string, productPrice: number) {
     this.trackEvent('Remove from cart', 'Remove from cart', productName, productPrice);
   }
 
