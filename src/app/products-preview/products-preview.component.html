@@ -27,7 +27,7 @@
     <div class="carousel__items-container">
       <div class="carousel__items" #itemsContainerRef>
         <div class="carousel__item" *ngFor="let item of items" #itemRef>
-          <product-list-item [item]="item"></product-list-item>
+          <product-list-item [item]="item" [parentNameForAnalytics]="parentNameForAnalytics"></product-list-item>
         </div>
       </div>
     </div>

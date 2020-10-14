@@ -171,7 +171,11 @@
 
     <aggregated-products [productId]="product.productId"></aggregated-products>
 
-    <products-preview class="product__related" [ids]="getRelatedProductsIds()" [type]="'linkedProducts'"></products-preview>
+    <products-preview class="product__related"
+                      [ids]="getRelatedProductsIds()"
+                      [type]="'linkedProducts'"
+                      parentNameForAnalytics="Related products"
+    ></products-preview>
 
   </ng-container>
 

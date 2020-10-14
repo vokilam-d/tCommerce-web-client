@@ -7,6 +7,7 @@ import { AggregatedProductDto } from '../../../shared/dtos/aggregated-product.dt
 import { CustomerService } from '../../../services/customer/customer.service';
 import { NotyService } from '../../../noty/noty.service';
 import { finalize } from 'rxjs/operators';
+import { AnalyticsService } from '../../../services/analytics/analytics.service';
 
 @Component({
   selector: 'aggregated-products',
@@ -23,7 +24,8 @@ export class AggregatedProductsComponent implements OnInit {
   constructor(private aggregatorService: AggregatorService,
               private deviceService: DeviceService,
               private notyService: NotyService,
-              private customerService: CustomerService
+              private customerService: CustomerService,
+              private analyticsService: AnalyticsService
   ) { }
 
   ngOnInit(): void {
@@ -57,5 +59,7 @@ export class AggregatedProductsComponent implements OnInit {
         () => {},
         error => this.notyService.error(error.error?.message || DEFAULT_ERROR_TEXT)
       );
+
+    this.analyticsService.addToCart(product.name, product.price, `Aggregated products`);
   }
 }

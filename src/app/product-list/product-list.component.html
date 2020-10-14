@@ -31,7 +31,7 @@
     <ol class="product-list__items" #itemsRef>
 
       <li class="product-list__item" *ngFor="let item of items" #itemRef>
-        <product-list-item [item]="item"></product-list-item>
+        <product-list-item [item]="item" [parentNameForAnalytics]="parentNameForAnalytics"></product-list-item>
       </li>
 
       <li class="product-list__preloader-container"

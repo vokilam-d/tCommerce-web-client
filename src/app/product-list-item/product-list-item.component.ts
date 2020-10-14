@@ -3,6 +3,7 @@ import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
 import { finalize } from 'rxjs/operators';
 import { CustomerService } from '../services/customer/customer.service';
 import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../shared/constants';
+import { AnalyticsService } from '../services/analytics/analytics.service';
 
 @Component({
   selector: 'product-list-item',
@@ -16,8 +17,11 @@ export class ProductListItemComponent implements OnInit, OnChanges {
   isLoading: boolean = false;
   discountValue: number;
   @Input() item: ProductListItemDto;
+  @Input() parentNameForAnalytics: string;
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService,
+              private analyticsService: AnalyticsService,
+  ) { }
 
   ngOnInit() {
   }
@@ -41,6 +45,8 @@ export class ProductListItemComponent implements OnInit, OnChanges {
           this.error = error.error?.message || DEFAULT_ERROR_TEXT;
         }
       );
+
+    this.analyticsService.addToCart(this.item.name, this.item.price, this.parentNameForAnalytics);
   }
 
   addToWishlist() {

@@ -47,6 +47,7 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   get isLoading() { return this.fetchSub?.closed === false; }
 
   @Input() initialFilters: ISelectedFilter[] = [];
+  @Input() parentNameForAnalytics: string;
 
   @ViewChildren('itemRef') itemRefList: QueryList<ElementRef>;
   @ViewChild('itemsRef') itemsRef: ElementRef;

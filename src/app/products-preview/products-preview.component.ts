@@ -36,6 +36,7 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements OnInit, A
   @Input() items: ProductListItemDto[] = [];
   @Input() ids: number[];
   @Input() type: string;
+  @Input() parentNameForAnalytics: string;
   @ViewChild('itemsContainerRef') itemsContainerRef: ElementRef;
   @ViewChildren('itemRef') itemRef: QueryList<ElementRef>;
 

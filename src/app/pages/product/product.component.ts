@@ -15,6 +15,7 @@ import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
 import { DeviceService } from '../../services/device-detector/device.service';
 import { LinkedCategoryDto } from '../../shared/dtos/linked-category.dto';
 import { StoreReviewService } from '../../services/store-review/store-review.service';
+import { AnalyticsService } from '../../services/analytics/analytics.service';
 
 @Component({
   selector: 'product',
@@ -50,7 +51,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
               private wishlistService: WishlistService,
               private productService: ProductService,
               private deviceService: DeviceService,
-              private storeReviewService: StoreReviewService
+              private storeReviewService: StoreReviewService,
+              private analyticsService: AnalyticsService
   ) { }
 
   ngOnInit() {
@@ -162,6 +164,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
           this.addToCartError = error.error?.message || DEFAULT_ERROR_TEXT;
         }
       );
+
+    this.analyticsService.addToCart(this.product.name, this.product.price, `Product page`);
   }
 
   addToWishlist() {

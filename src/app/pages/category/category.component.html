@@ -23,7 +23,10 @@
 
     <ng-container *ngIf="category">
 
-      <product-list class="category__products" [initialFilters]="productListFilters"></product-list>
+      <product-list class="category__products"
+                    [initialFilters]="productListFilters"
+                    [parentNameForAnalytics]="nameForAnalytics"
+      ></product-list>
 
       <div class="category__description html-description" [innerHTML]="safeDescription"></div>
     </ng-container>

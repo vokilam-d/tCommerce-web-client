@@ -25,6 +25,7 @@ export class CategoryComponent implements OnInit {
   productListFilters: ISelectedFilter[];
   error: string;
   uploadedHost = UPLOADED_HOST;
+  nameForAnalytics: string;
 
   constructor(private route: ActivatedRoute,
               private sanitizer: DomSanitizer,
@@ -48,6 +49,7 @@ export class CategoryComponent implements OnInit {
         this.setListFilters();
         this.setBreadcrumbs();
         this.setMeta();
+        this.setNameForAnalytics();
       },
       error => this.error = error.error?.message || DEFAULT_ERROR_TEXT
     );
@@ -78,4 +80,7 @@ export class CategoryComponent implements OnInit {
     }
   }
 
+  private setNameForAnalytics() {
+    this.nameForAnalytics = `Category - ${this.category.name}`;
+  }
 }
