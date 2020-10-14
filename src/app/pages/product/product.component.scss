@@ -71,6 +71,14 @@ $arrowSize: 10px;
     }
   }
 
+  &__store-info {
+    margin: 15px 0 0;
+
+    @include respond-to($media_medium) {
+      margin-top: 0;
+    }
+  }
+
   &__sale-label {
     position: absolute;
     top: 3px;
@@ -450,7 +458,12 @@ $arrowSize: 10px;
   font-size: 15px;
 
   p {
-    margin: 7px 0 0;
+    margin: 12px 0 0;
+    line-height: 1.1;
+
+    @include respond-to($media_large) {
+      margin-top: 10px;
+    }
 
     &:first-child {
       margin-top: 0;
