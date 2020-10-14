@@ -77,16 +77,19 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
       .subscribe(
         response => {
           const order = response.data;
-          this.analytics.placeOrder(order.id, order.prices.totalCost);
+          this.analytics.orderSuccess(order.id, order.prices.totalCost);
 
           this.router.navigate(['/', 'order-success'], { state: { order } });
         },
         error => this.setError(error.error?.message || DEFAULT_ERROR_TEXT)
       );
+
+    this.analytics.confirmOrder(this.prices.totalCost);
   }
 
   editCart() {
     this.customerService.showCartModal();
+    this.analytics.editOrder();
   }
 
   private setError(error) {

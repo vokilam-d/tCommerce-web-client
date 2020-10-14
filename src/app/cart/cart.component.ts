@@ -4,6 +4,7 @@ import { QuantityControlComponent } from '../shared/quantity-control/quantity-co
 import { OrderItemDto } from '../shared/dtos/order-item.dto';
 import { finalize } from 'rxjs/operators';
 import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../shared/constants';
+import { AnalyticsService } from '../services/analytics/analytics.service';
 
 @Component({
   selector: 'cart',
@@ -24,8 +25,9 @@ export class CartComponent implements OnInit {
   get items() { return this.customerService.cart; }
   get prices() { return this.customerService.prices; }
 
-  constructor(private customerService: CustomerService) {
-  }
+  constructor(private customerService: CustomerService,
+              private analyticsService: AnalyticsService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -47,6 +49,7 @@ export class CartComponent implements OnInit {
   deleteFromCart(item: OrderItemDto) {
     this.customerService.deleteFromCart(item);
     this.resetCartError();
+    this.analyticsService.removeFromoCart(item.name, item.price);
   }
 
   checkout() {

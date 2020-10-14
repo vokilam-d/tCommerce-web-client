@@ -9,17 +9,35 @@ export class AnalyticsService {
 
   constructor() { }
 
-  addToCart(productName: string, productCost: number, source: string) {
-    const label = `From: ${source}`;
-    this.trackEvent('Add to cart', 'Add to cart', label, productCost);
+  addToCart(productName: string, productPrice: number, source: string) {
+    const action = `Add to cart from ${source}`
+    this.trackEvent('Add to cart', action, productName, productPrice);
   }
 
-  placeOrder(id: string, total: number) {
+  removeFromoCart(productName: string, productPrice: number) {
+    this.trackEvent('Remove from cart', 'Remove from cart', productName, productPrice);
+  }
+
+  showCart() {
+    this.trackEvent('Show cart', 'Show cart', 'Show cart');
+  }
+
+  editOrder() {
+    this.trackEvent('Edit order', 'Edit order', 'Edit order');
+  }
+
+  confirmOrder(totalCost: number) {
+    this.trackEvent('Confirm order', 'Confirm order', 'Confirm order', totalCost);
+  }
+
+  orderSuccess(orderId: string, totalCost: number) {
+    this.trackEvent('Order success', 'Order success', 'Order success', totalCost);
+
     gtag('event', 'conversion', {
       'send_to': 'AW-930099759/az7OCJeAt8QBEK_kwLsD',
-      'value': total,
+      'value': totalCost,
       'currency': 'UAH',
-      'transaction_id': id
+      'transaction_id': orderId
     });
   }
 
