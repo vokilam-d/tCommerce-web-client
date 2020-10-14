@@ -29,5 +29,7 @@ COPY --from=builder /app/dist ./dist
 RUN npm install -g pm2
 
 EXPOSE 3002
+#EXPOSE 9229
 
 CMD ["pm2-runtime", "dist/pm2-main.json"]
+#CMD ["node", "--inspect=0.0.0.0:9229", "dist/server/main.js"]
