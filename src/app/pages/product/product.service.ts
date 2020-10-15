@@ -58,4 +58,7 @@ export class ProductService {
     return this.http.post<ResponseDto<ProductDto>>(`${API_HOST}/api/v1/products/${product.id}/quick-reviews`, dto);
   }
 
+  incrementViewsCount(id: string) {
+    return this.http.post<ResponseDto<null>>(`${API_HOST}/api/v1/products/${id}/views-count`, { });
+  }
 }
