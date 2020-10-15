@@ -9,6 +9,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HeadService } from '../../services/head/head.service';
 import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../../shared/constants';
 import { LinkedCategoryDto } from '../../shared/dtos/linked-category.dto';
+import { ESort } from '../../shared/enums/sort.enum';
 
 @Component({
   selector: 'category',
@@ -26,6 +27,7 @@ export class CategoryComponent implements OnInit {
   error: string;
   uploadedHost = UPLOADED_HOST;
   nameForAnalytics: string;
+  defaultSortOption: ESort;
 
   constructor(private route: ActivatedRoute,
               private sanitizer: DomSanitizer,
@@ -50,6 +52,7 @@ export class CategoryComponent implements OnInit {
         this.setBreadcrumbs();
         this.setMeta();
         this.setNameForAnalytics();
+        this.setDefaultSortOption();
       },
       error => this.error = error.error?.message || DEFAULT_ERROR_TEXT
     );
@@ -82,5 +85,9 @@ export class CategoryComponent implements OnInit {
 
   private setNameForAnalytics() {
     this.nameForAnalytics = `Category - ${this.category.name}`;
+  }
+
+  private setDefaultSortOption() {
+    this.defaultSortOption = this.category.defaultItemsSort;
   }
 }

@@ -2,6 +2,7 @@ import { MetaTagsDto } from './meta-tags.dto';
 import { BreadcrumbDto } from './breadcrumb.dto';
 import { MediaDto } from './media.dto';
 import { LinkedCategoryDto } from './linked-category.dto';
+import { ESort } from '../enums/sort.enum';
 
 export class CategoryDto {
   description: string;
@@ -14,4 +15,5 @@ export class CategoryDto {
   medias: MediaDto[];
   siblingCategories: LinkedCategoryDto[];
   childCategories: LinkedCategoryDto[];
+  defaultItemsSort: ESort;
 }

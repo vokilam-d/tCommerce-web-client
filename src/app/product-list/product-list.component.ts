@@ -46,6 +46,7 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   private fetchSub: Subscription;
   get isLoading() { return this.fetchSub?.closed === false; }
 
+  @Input() defaultSortOption: ESort = this.sortOptions[0];
   @Input() initialFilters: ISelectedFilter[] = [];
   @Input() parentNameForAnalytics: string;
 
