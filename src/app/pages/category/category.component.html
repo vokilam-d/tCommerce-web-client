@@ -4,7 +4,7 @@
 
   <linked-categories [categories]="siblingCategories" [isLoading]="!category && !error"></linked-categories>
 
-  <breadcrumbs [breadcrumbs]="breadcrumbs" [isBig]="true" [isLastItemHeading]="true"></breadcrumbs>
+  <breadcrumbs [breadcrumbs]="breadcrumbs" [isBig]="true"></breadcrumbs>
 
   <ul class="child-categories" *ngIf="childCategories.length">
     <li class="child-categories__category" *ngFor="let category of childCategories">
@@ -28,6 +28,10 @@
                     [parentNameForAnalytics]="nameForAnalytics"
                     [defaultSortOption]="defaultSortOption"
       ></product-list>
+
+      <h1 class="category__heading">
+        {{ heading }}
+      </h1>
 
       <div class="category__description html-description" [innerHTML]="safeDescription"></div>
     </ng-container>

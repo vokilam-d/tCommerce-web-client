@@ -29,6 +29,10 @@ export class CategoryComponent implements OnInit {
   nameForAnalytics: string;
   defaultSortOption: ESort;
 
+  get heading(): string {
+    return this.category?.breadcrumbs.map(breadcrumb => breadcrumb.name).join(' ');
+  }
+
   constructor(private route: ActivatedRoute,
               private sanitizer: DomSanitizer,
               private headService: HeadService,
