@@ -1,4 +1,8 @@
 <div class="table" *ngFor="let table of tables">
+  <div class="table__name">
+    {{ table.name }}
+  </div>
+
   <div class="table__products">
     <div class="table__product product" *ngFor="let product of table.products">
       <img class="product__img" [src]="getProductThumbnail(product)" [alt]="product.name">
