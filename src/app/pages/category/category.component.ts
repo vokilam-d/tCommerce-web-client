@@ -30,7 +30,7 @@ export class CategoryComponent implements OnInit {
   defaultSortOption: ESort;
 
   get heading(): string {
-    return this.category?.breadcrumbs.map(breadcrumb => breadcrumb.name).join(' ');
+    return this.breadcrumbs.map(breadcrumb => breadcrumb.title).join(' ');
   }
 
   constructor(private route: ActivatedRoute,
