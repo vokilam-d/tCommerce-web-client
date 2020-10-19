@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomerService } from '../../services/customer/customer.service';
-import { DEFAULT_ERROR_TEXT, validPasswordRegex } from '../../shared/constants';
+import { DEFAULT_ERROR_TEXT, VALID_PASSWORD_REGEX } from '../../shared/constants';
 import { CustomValidators } from '../../shared/classes/validators';
 import { finalize } from 'rxjs/operators';
 import { ResetPasswordDto } from '../../shared/dtos/reset-password.dto';
@@ -49,7 +49,7 @@ export class ResetPasswordComponent implements OnInit {
 
   private buildForm() {
     const controls: Record<keyof Omit<ResetPasswordDto, 'token'>, any> = {
-      password: ['', Validators.pattern(validPasswordRegex)]
+      password: ['', Validators.pattern(VALID_PASSWORD_REGEX)]
     };
     (controls as any).passwordConfirm = [''];
 

@@ -11,40 +11,10 @@
   }
 }
 
-.tabs {
-  display: flex;
-}
-
-.tab {
-  padding: 13px 20px;
-  border: 1px solid $action;
-  transition: background-color 0.2s ease;
-  cursor: pointer;
-
-  &:not(&--active):hover {
-    background: rgba($action, 0.06);
-  }
-
-  &:not(&--active):active {
-    background: rgba($action, 0.12);
-  }
-
-  &:first-child {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-  }
-
-  &:last-child {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    border-left: none;
-  }
-
-  &--active {
-    background: $action;
-  }
-}
-
 .address-type {
   font-weight: 700;
+}
+
+.shipment-payer {
+  margin: 0 0 0 4px;
 }

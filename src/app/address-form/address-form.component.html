@@ -54,7 +54,7 @@
     <div class="form__control">
       <input class="form__input"
              [formControl]="phone"
-             mask="+00 (000) 000-00-00"
+             mask="+00 (000) 000-00-00-00000000000"
              inputmode="tel"
              type="text"
              id="addr-phone"
@@ -67,21 +67,35 @@
   </div>
 
   <div class="form__control-container"
-       *ngIf="addressForm.get('addressType') as addressType"
-       [class.field--invalid]="isControlInvalid(addressType)"
+       *ngIf="addressForm.get('addressType') as addressTypeControl"
+       [class.field--invalid]="isControlInvalid(addressTypeControl)"
   >
     <label class="form__label">Тип доставки <span class="address-type">Новой Почтой</span></label>
-    <div class="form__control">
-      <div class="tabs">
-        <button class="tab"
-                *ngFor="let type of addressTypes"
-                [class.tab--active]="type.data === addressType.value"
-                (click)="setAddressType(type)"
-        >
-          {{ type.view }}
-        </button>
-      </div>
-    </div>
+    <label class="form__control form__control--radio" *ngFor="let addressType of addressTypes">
+      <input class="form__radio-input"
+             [value]="addressType"
+             [formControl]="addressTypeControl"
+             name="address-type"
+             type="radio"
+      >
+
+      <i class="mbi form__radio-icon"
+         [ngClass]="{
+           'mbi-checkmark-outline': addressTypeControl.value === addressType,
+           'mbi-circle-outline': addressTypeControl.value !== addressType
+         }"
+      ></i>
+
+      <span [ngSwitch]="addressType">
+        <ng-container *ngSwitchCase="addressTypeEnum.WAREHOUSE">В отделение</ng-container>
+        <ng-container *ngSwitchCase="addressTypeEnum.DOORS">Адресная</ng-container>
+
+        <span class="shipment-payer" *ngIf="shipmentPayerMap" [ngSwitch]="shipmentPayerMap.get(addressType)">
+          <ng-container *ngSwitchCase="shipmentPayerEnum.RECIPIENT">(оплачивается получателем)</ng-container>
+          <ng-container *ngSwitchCase="shipmentPayerEnum.SENDER">(бесплатно)</ng-container>
+        </span>
+      </span>
+    </label>
   </div>
 
   <div class="form__control-container" *ngIf="addressForm.get('settlement') as settlementControl">

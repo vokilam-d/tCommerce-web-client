@@ -4,9 +4,10 @@ export const SEARCH_QUERY_PARAM = 'q';
 export const DUMMY_PATH = 'dummy';
 export const INPUT_MEDIA_ACCEPT_TYPES = '.jpg,.jpeg,.png,.webp,.svg,.tiff,.gif';
 export const DEFAULT_ERROR_TEXT = 'Что-то пошло не так. Пожалуйста, попробуйте позже';
-export const isEmailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
-export const validPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
-export const viewedProductsIdsKey = 'recentlyViewedProducts';
+export const IS_EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+export const VALID_PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+export const VIEWED_PRODUCT_IDS_KEY = 'recentlyViewedProducts';
+export const DEFAULT_PHONE_NUMBER_VALUE = '+38';
 
 // export const API_HOST = environment.production ? '' : 'http://localhost:3000';
 export const API_HOST = environment.production ? '' : 'http://173.249.23.253:3080';

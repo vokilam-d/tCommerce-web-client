@@ -4,7 +4,7 @@ import { CustomerDto } from '../shared/dtos/customer.dto';
 import { CustomerService } from '../services/customer/customer.service';
 import { RegisterDto } from '../shared/dtos/registration.dto';
 import { CustomValidators } from '../shared/classes/validators';
-import { DEFAULT_ERROR_TEXT, isEmailRegex, validPasswordRegex } from '../shared/constants';
+import { DEFAULT_ERROR_TEXT, IS_EMAIL_REGEX, VALID_PASSWORD_REGEX } from '../shared/constants';
 import { finalize } from 'rxjs/operators';
 
 @Component({
@@ -34,8 +34,8 @@ export class RegistrationFormComponent implements OnInit {
     const controls: Record<keyof RegisterDto, any> = {
       firstName: [''],
       lastName: [''],
-      email: ['', Validators.pattern(isEmailRegex)],
-      password: ['', Validators.pattern(validPasswordRegex)]
+      email: ['', Validators.pattern(IS_EMAIL_REGEX)],
+      password: ['', Validators.pattern(VALID_PASSWORD_REGEX)]
     };
     (controls as any).passwordConfirm = [''];
 

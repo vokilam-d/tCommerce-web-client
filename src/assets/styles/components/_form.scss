@@ -11,13 +11,36 @@
   }
 
   &__label {
+    display: block;
     font-size: 14px;
     color: rgba($dark, 0.9);
   }
 
   &__control {
-    display: block;
+    $control: &;
+
     margin: 6px 0 0;
+    display: block;
+
+    &--radio,
+    &--checkbox {
+      display: flex;
+      align-items: center;
+      line-height: 1.25;
+      cursor: pointer;
+      transition: color 0.2s ease;
+
+      &:not(#{$control}--disabled):hover {
+        @include respond-to($media_large) {
+          color: rgba($dark, 0.7);
+        }
+      }
+    }
+
+    &--disabled {
+      color: rgba($dark, 0.4);
+      cursor: help;
+    }
   }
 
   &__input,
@@ -132,5 +155,22 @@
     padding: 4px 7px;
     background: #fff;
     color: rgba($dark, 0.4);
+  }
+
+  &__radio-icon {
+    flex-shrink: 0;
+    margin: 0 10px 0 0;
+    font-size: 20px;
+  }
+
+  &__radio-input {
+    display: none;
+  }
+
+  &__checkbox-input {
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    margin: 2px 10px 0 0;
   }
 }

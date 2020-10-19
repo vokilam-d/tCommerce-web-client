@@ -4,7 +4,7 @@ import { ResponseDto } from '../../shared/dtos/response.dto';
 import { ProductDto, ProductResponseDto } from '../../shared/dtos/product.dto';
 import { toHttpParams } from '../../shared/helpers/to-http-params.function';
 import { SortingPaginatingFilterDto } from '../../shared/dtos/spf.dto';
-import { API_HOST, SEARCH_QUERY_PARAM, viewedProductsIdsKey } from '../../shared/constants';
+import { API_HOST, SEARCH_QUERY_PARAM, VIEWED_PRODUCT_IDS_KEY } from '../../shared/constants';
 import { ProductListResponseDto } from '../../shared/dtos/product-list-response.dto';
 import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
 import { AddProductQuickReviewDto } from '../../shared/dtos/product-review.dto';
@@ -32,8 +32,8 @@ export class ProductService {
   }
 
   addViewedProductIdToLocalStorage(productId: number) {
-    let recentlyViewedProducts: any[] = localStorage.getItem(viewedProductsIdsKey)
-      ? JSON.parse(localStorage.getItem(viewedProductsIdsKey))
+    let recentlyViewedProducts: any[] = localStorage.getItem(VIEWED_PRODUCT_IDS_KEY)
+      ? JSON.parse(localStorage.getItem(VIEWED_PRODUCT_IDS_KEY))
       : [];
 
     if (recentlyViewedProducts.length >= this.maxViewedProductsArrLength) {
@@ -43,11 +43,11 @@ export class ProductService {
     recentlyViewedProducts.unshift(productId);
 
     recentlyViewedProducts = [...new Set(recentlyViewedProducts)];
-    localStorage.setItem(viewedProductsIdsKey, JSON.stringify(recentlyViewedProducts));
+    localStorage.setItem(VIEWED_PRODUCT_IDS_KEY, JSON.stringify(recentlyViewedProducts));
   }
 
   getViewedProductsFromLocalStorage() {
-    return JSON.parse(localStorage.getItem(viewedProductsIdsKey));
+    return JSON.parse(localStorage.getItem(VIEWED_PRODUCT_IDS_KEY));
   }
 
   addQuickReview(product: ProductDto, rating: number) {

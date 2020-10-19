@@ -14,7 +14,7 @@ import { NgxMaskModule } from 'ngx-mask';
     ReactiveFormsModule,
     SharedModule,
     SelectAutocompleteModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot({ validation: false })
   ],
   exports: [AddressFormComponent]
 })

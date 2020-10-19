@@ -12,11 +12,11 @@
   </div>
 
   <ng-template #noErrorTmpl>
-    <label class="checkout-control checkout-control--radio tooltip-container"
+    <label class="form__control form__control--radio tooltip-container"
            *ngFor="let method of methods"
-           [class.checkout-control--disabled]="method.disabledState"
+           [class.form__control--disabled]="method.disabledState"
     >
-      <input class="checkout-control__radio-input"
+      <input class="form__radio-input"
              [value]="method"
              [formControl]="methodControl"
              [attr.disabled]="method.disabledState"
@@ -24,7 +24,7 @@
              type="radio"
       >
 
-      <i class="mbi checkout-control__radio-icon"
+      <i class="mbi form__radio-icon"
          [ngClass]="{
            'mbi-checkmark-outline': methodControl.value === method,
            'mbi-circle-outline': methodControl.value !== method

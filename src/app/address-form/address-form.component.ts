@@ -9,6 +9,11 @@ import { takeUntil } from 'rxjs/operators';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
 import { ScrollToService } from '../services/scroll-to/scroll-to.service';
 import { merge } from 'rxjs';
+import { DEFAULT_PHONE_NUMBER_VALUE } from '../shared/constants';
+import { CustomValidators } from '../shared/classes/validators';
+import { ShipmentPayerEnum } from '../shared/enums/shipment-payer.enum';
+
+export type ShipmentPayerMap = Map<AddressTypeEnum, ShipmentPayerEnum>;
 
 @Component({
   selector: 'address-form',
@@ -18,8 +23,11 @@ import { merge } from 'rxjs';
 export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnChanges {
 
   addressForm: FormGroup;
-  addressTypes = [{ data: AddressTypeEnum.WAREHOUSE, view: 'В отделение' }, { data: AddressTypeEnum.DOORS, view: 'Адресная' }];
+  addressTypes: AddressTypeEnum[] = [AddressTypeEnum.WAREHOUSE, AddressTypeEnum.DOORS];
+
   addressTypeEnum = AddressTypeEnum;
+  shipmentPayerEnum = ShipmentPayerEnum;
+
   get settlementIdControl() {
     const settlementIdProp: keyof ShipmentAddressDto = 'settlementId';
     return this.addressForm.get(settlementIdProp);
@@ -27,6 +35,7 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
 
   @Input() address: ShipmentAddressDto = new ShipmentAddressDto();
   @Input() showIsDefault: boolean = true;
+  @Input() shipmentPayerMap: ShipmentPayerMap;
   @Output() valueChanged = new EventEmitter<ShipmentAddressDto>();
 
   constructor(private formBuilder: FormBuilder,
@@ -54,7 +63,7 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
       firstName: [address.firstName, Validators.required],
       lastName: [address.lastName, Validators.required],
       middleName: [address.middleName],
-      phone: [address.phone || '+38', Validators.required],
+      phone: [address.phone || DEFAULT_PHONE_NUMBER_VALUE, CustomValidators.phoneNumber],
       addressType: [address.addressType, Validators.required],
       settlement: [address.settlement, Validators.required],
       settlementId: [address.settlementId, Validators.required],

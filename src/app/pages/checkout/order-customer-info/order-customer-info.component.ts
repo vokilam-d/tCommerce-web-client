@@ -1,14 +1,15 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CustomerService } from '../../../services/customer/customer.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { isEmailRegex } from '../../../shared/constants';
+import { IS_EMAIL_REGEX } from '../../../shared/constants';
 import { catchError, debounceTime, switchMap, takeUntil } from 'rxjs/operators';
 import { OrderService } from '../order.service';
 import { ScrollToService } from '../../../services/scroll-to/scroll-to.service';
 import { NgUnsubscribe } from '../../../shared/directives/ng-unsubscribe.directive';
-import { AddressFormComponent } from '../../../address-form/address-form.component';
+import { AddressFormComponent, ShipmentPayerMap } from '../../../address-form/address-form.component';
 import { AddressTypeEnum } from '../../../shared/enums/address-type.enum';
 import { ShipmentAddressDto } from '../../../shared/dtos/shipment-address.dto';
+import { ShipmentPayerEnum } from '../../../shared/enums/shipment-payer.enum';
 
 @Component({
   selector: 'order-customer-info',
@@ -19,8 +20,9 @@ export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit 
 
   emailControl: FormControl;
   addressOptionControl: FormControl | null;
-  addressTypes = AddressTypeEnum;
   customerAddress: ShipmentAddressDto;
+
+  addressTypeEnum = AddressTypeEnum;
 
   get customer$() { return this.customerService.customer$; }
 
@@ -42,7 +44,7 @@ export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit 
   }
 
   private handleEmail() {
-    this.emailControl = this.formBuilder.control('', [Validators.pattern(isEmailRegex), Validators.required]);
+    this.emailControl = this.formBuilder.control('', [Validators.pattern(IS_EMAIL_REGEX), Validators.required]);
 
     this.emailControl.valueChanges
       .pipe(
@@ -124,5 +126,13 @@ export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit 
         this.customerAddress.firstName = customer.firstName;
         this.customerAddress.lastName = customer.lastName;
       });
+  }
+
+  getShipmentPayerMap(): ShipmentPayerMap {
+    const totalCost = this.customerService.prices.totalCost;
+    return new Map([
+      [ AddressTypeEnum.WAREHOUSE, totalCost < 1000 ? ShipmentPayerEnum.RECIPIENT : ShipmentPayerEnum.SENDER ],
+      [ AddressTypeEnum.DOORS, ShipmentPayerEnum.RECIPIENT ]
+    ]);
   }
 }

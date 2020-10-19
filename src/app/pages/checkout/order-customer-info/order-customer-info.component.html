@@ -20,33 +20,33 @@
     Адрес доставки
   </div>
 
-  <label class="checkout-control checkout-control--radio" *ngFor="let address of (customer$ | async).addresses">
-    <input class="checkout-control__radio-input"
+  <label class="form__control-container form__control-container--radio" *ngFor="let address of (customer$ | async).addresses">
+    <input class="form__radio-input"
            [value]="address"
            [formControl]="addressOptionControl"
            name="address-option"
            type="radio"
     >
 
-    <i class="mbi checkout-control__radio-icon"
+    <i class="mbi form__radio-icon"
        [ngClass]="{
          'mbi-checkmark-outline': addressOptionControl.value === address,
          'mbi-circle-outline': addressOptionControl.value !== address
        }"
     ></i>
 
-    {{ address.lastName }} {{ address.firstName }}, {{ address.phone }}, {{ address.settlement }}, {{ address.address }}<ng-container *ngIf="address.addressType === addressTypes.DOORS">, {{ address.buildingNumber }}, <ng-container *ngIf="address.flat as flat">{{ flat }}</ng-container></ng-container>
+    {{ address.lastName }} {{ address.firstName }}, {{ address.phone }}, {{ address.settlement }}, {{ address.address }}<ng-container *ngIf="address.addressType === addressTypeEnum.DOORS">, {{ address.buildingNumber }}, <ng-container *ngIf="address.flat as flat">{{ flat }}</ng-container></ng-container>
   </label>
 
-  <label class="checkout-control checkout-control--radio">
-    <input class="checkout-control__radio-input"
+  <label class="form__control-container form__control-container--radio">
+    <input class="form__radio-input"
            [value]="null"
            [formControl]="addressOptionControl"
            name="address-option"
            type="radio"
     >
 
-    <i class="mbi checkout-control__radio-icon"
+    <i class="mbi form__radio-icon"
        [ngClass]="{
          'mbi-checkmark-outline': addressOptionControl.value === null,
          'mbi-circle-outline': addressOptionControl.value !== null
@@ -63,5 +63,6 @@
               *ngIf="!addressOptionControl?.value"
               [showIsDefault]="false"
               [address]="customerAddress"
+              [shipmentPayerMap]="getShipmentPayerMap()"
               (valueChanged)="onAddressChange($event)"
 ></address-form>
