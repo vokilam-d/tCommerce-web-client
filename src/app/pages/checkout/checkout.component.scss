@@ -206,11 +206,35 @@
     font-size: 14px;
   }
 
-  &__qty-price {
+  &__qty-cost {
     margin: 8px 0 0;
     display: flex;
     justify-content: space-between;
     font-size: 14px;
+  }
+
+  &__cost {
+    &--special {
+      color: $red;
+    }
+  }
+
+  &__old-cost {
+    position: relative;
+    display: inline-block;
+    margin: 3px 0 0;
+    font-size: 12px;
+    color: rgba($dark, 0.6);
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      border-bottom: 1px solid;
+    }
   }
 }
 

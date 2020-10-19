@@ -55,13 +55,20 @@
               {{ item.name }}
             </a>
 
-            <div class="cart-item__qty-price">
+            <div class="cart-item__qty-cost">
               <div class="cart-item__qty">
                 {{ item.qty }} шт.
               </div>
 
-              <div class="cart-item__price">
-                {{ item.cost }} грн
+              <div class="cart-item__cost-container">
+                <span class="cart-item__cost"
+                      [class.cart-item__cost--special]="item.oldCost"
+                >
+                  {{ item.cost }} грн
+                </span>
+                <span class="cart-item__old-cost" *ngIf="item.oldCost">
+                  {{ item.oldCost }} грн
+                </span>
               </div>
             </div>
           </div>

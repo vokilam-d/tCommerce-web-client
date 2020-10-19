@@ -108,13 +108,18 @@
           {{ item.name }}
         </a>
 
-        <div class="item__qty-price">
+        <div class="item__qty-cost">
           <div class="item__qty">
-            {{ item.qty }} шт.
+            {{ item.qty }} шт. на сумму
           </div>
 
-          <div class="item__price-container">
-            {{ item.price }} грн
+          <div class="item__cost-container">
+            <span class="item__cost" [class.item__cost--special]="item.oldCost">
+              {{ item.cost }} грн
+            </span>
+            <span class="item__old-cost" *ngIf="item.oldCost">
+              {{ item.oldCost }} грн
+            </span>
           </div>
         </div>
       </div>

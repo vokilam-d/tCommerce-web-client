@@ -67,9 +67,12 @@
               </div>
 
               <div class="item__row">
-                <div class="item__value">
+                <span class="item__cost" [class.item__cost--special]="item.oldCost">
                   {{ item.cost }} грн
-                </div>
+                </span>
+                <span class="item__old-cost" *ngIf="item.oldCost">
+                  {{ item.oldCost }} грн
+                </span>
               </div>
             </div>
 

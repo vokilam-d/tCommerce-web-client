@@ -11,8 +11,10 @@ export class OrderItemDto {
   variantId: string;
   sku: string;
   price: number;
+  oldPrice: number;
   qty: number;
   cost: number;
+  oldCost: number;
   imageUrl: string;
   slug: string;
   crossSellProducts: ProductListItemDto[];

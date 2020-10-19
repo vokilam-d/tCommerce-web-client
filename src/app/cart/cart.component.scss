@@ -262,24 +262,29 @@
     color: rgba($dark, 0.6);
   }
 
-  &__value {
-    display: flex;
+  &__cost {
     font-size: 18px;
 
-    @include respond-to(375px) {
-      flex-direction: column;
+    &--special {
+      color: $red;
     }
+  }
 
-    @include respond-to($media_medium) {
-      flex-direction: row;
-    }
+  &__old-cost {
+    position: relative;
+    display: inline-block;
+    margin: 3px 0 0;
+    font-size: 14px;
+    color: rgba($dark, 0.6);
 
-    @include respond-to($media_large) {
-      flex-direction: column;
-    }
-
-    @include respond-to($media_max-content-width) {
-      flex-direction: row;
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      border-bottom: 1px solid;
     }
   }
 
