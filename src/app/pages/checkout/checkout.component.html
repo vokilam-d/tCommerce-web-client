@@ -4,15 +4,23 @@
       <img class="header__logo-img" src="../../assets/images/logo.png" alt="Klondike">
     </a>
 
-    <h1 class="header__title">
-      Оформление заказа
-    </h1>
+    <div class="header__phones header-phones">
+      <div class="header-phones__text">
+        Консультации по телефону
+      </div>
+      <div class="header-phones__content">
+        <a class="header-phones__phone" href="tel:+380502627214">+38 (050) 26-27-214</a>
+        <a class="header-phones__phone" href="tel:+380678811962">+38 (067) 88-11-962</a>
+        <a class="header-phones__phone" href="tel:+380933444342">+38 (093) 34-44-342</a>
+        <i class="mbi mbi-ios-arrow-down header-phones__arrow"></i>
+      </div>
+    </div>
   </header>
 
   <div class="subheader">
-    <div class="subheader__subtitle">
-      Пожалуйста, введите свои данные ниже, чтобы завершить покупку
-    </div>
+    <h1 class="subheader__title">
+      Оформление заказа
+    </h1>
 
     <div class="subheader__login-container" *ngIf="!isLoggedIn">
       <button class="btn btn--small btn--transparent subheader__login" (click)="login()">
@@ -109,7 +117,25 @@
   </div>
 
   <div class="footer">
-    2015-2020 Интернет-магазин "Клондайк" - товары для творчества
+    <div class="footer__contacts footer-phones">
+      <div class="footer-phones__title">Консультации по телефонам</div>
+
+      <ul class="footer-phones__phones">
+        <li class="footer-phones__phone-container">
+          <a class="footer-phones__phone" href="tel:+380502627214">+38 (050) 26-27-214</a>
+        </li>
+        <li class="footer-phones__phone-container">
+          <a class="footer-phones__phone" href="tel:+380678811962">+38 (067) 88-11-962</a>
+        </li>
+        <li class="footer-phones__phone-container">
+          <a class="footer-phones__phone" href="tel:+380933444342">+38 (093) 34-44-342</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer__copyright">
+      2015-{{ currentYear }} Интернет-магазин "Клондайк" - товары для творчества
+    </div>
   </div>
 
 </div>

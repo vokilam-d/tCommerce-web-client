@@ -1,8 +1,19 @@
 @import "variables";
 @import "mixins";
 
+.container {
+  max-width: $media_large;
+}
+
 .header {
-  padding: 13px 0 0;
+  margin: 13px auto 0;
+
+  @include respond-to($media_large) {
+    padding: 0 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   &__logo {
     display: block;
@@ -12,27 +23,35 @@
   &__logo-img {
     width: 190px;
   }
-
-  &__logo-text {
-    display: block;
-    margin: 4px 0 0;
-    text-align: center;
-    font-size: 12px;
-  }
-
-  &__title {
-    margin: 15px 0 0;
-    font-size: 28px;
-    text-align: center;
-  }
 }
 
 .subheader {
-  margin: 20px 0 0;
+  max-width: $media_large;
+
+  @include respond-to($media_medium) {
+    margin-top: 15px;
+    padding: 0 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 18px;
+    text-align: center;
+
+    @include respond-to($media_large) {
+      font-size: 22px;
+    }
+  }
 
   &__login-container {
     margin: 13px 0 0;
     text-align: right;
+
+    @include respond-to($media_large) {
+      margin-top: 0;
+    }
   }
 
   &__login-text {
@@ -44,9 +63,10 @@
 
 .checkout {
   position: relative;
-  margin: 20px 0 0;
+  margin: 15px 0 0;
 
   @include respond-to($media_large) {
+    margin-top: 20px;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -106,8 +126,8 @@
 
     @include respond-to($media_large) {
       margin-top: 0;
-      margin-left: 50px;
-      width: 400px;
+      margin-left: 5%;
+      width: 35%;
       flex-shrink: 0;
     }
   }
@@ -115,7 +135,7 @@
   &__form {
     @include respond-to($media_large) {
       flex-grow: 2;
-      max-width: 600px;
+      max-width: 60%;
     }
   }
 
@@ -240,7 +260,86 @@
 
 .footer {
   margin: 40px 0 0;
-  padding: 40px 0 60px;
+  padding: 40px 10px 60px;
   border-top: 1px solid rgba($dark, 0.1);
-  color: rgba($dark, 0.6);
+
+  &__copyright {
+    margin: 20px 0 0;
+    color: rgba($dark, 0.6);
+  }
+}
+
+.header-phones {
+  display: none;
+  overflow: hidden;
+  max-height: 17px;
+
+  @include respond-to($media_large) {
+    display: flex;
+  }
+
+  &:hover {
+    overflow: initial;
+  }
+
+  &__text {
+    margin: 2px 5px 0 0;
+  }
+
+  &__content {
+    position: relative;
+    top: -7px;
+    height: fit-content;
+    padding: 4px 23px 8px 13px;
+    background: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.7;
+    z-index: 1;
+  }
+
+  &__phone {
+    display: block;
+    transition: all 0.2s ease;
+
+    & + & {
+      opacity: 0;
+    }
+  }
+
+  &:hover &__content {
+    box-shadow: 0 0 6px rgba($dark, 0.4);
+  }
+  &:hover &__phone {
+    opacity: 1;
+  }
+
+  &__arrow {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    font-size: 18px;
+  }
+}
+
+.footer-phones {
+  font-size: 16px;
+
+  @include respond-to($media_large) {
+    display: none;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &__phones {
+    margin: 10px 0 0;
+  }
+
+  &__phone {
+    display: block;
+    padding: 5px 0;
+  }
 }

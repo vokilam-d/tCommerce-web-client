@@ -19,6 +19,7 @@ import { AnalyticsService } from '../../services/analytics/analytics.service';
 })
 export class CheckoutComponent extends NgUnsubscribe implements OnInit {
 
+  currentYear = new Date().getFullYear();
   uploadedHost = UPLOADED_HOST;
   isOrderLoading: boolean = false;
   orderError: string | null = null;
