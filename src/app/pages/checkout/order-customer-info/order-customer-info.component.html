@@ -20,41 +20,44 @@
     Адрес доставки
   </div>
 
-  <label class="form__control-container form__control-container--radio" *ngFor="let address of (customer$ | async).addresses">
-    <input class="form__radio-input"
-           [value]="address"
-           [formControl]="addressOptionControl"
-           name="address-option"
-           type="radio"
-    >
+  <div class="form__control-container">
 
-    <i class="mbi form__radio-icon"
-       [ngClass]="{
-         'mbi-checkmark-outline': addressOptionControl.value === address,
-         'mbi-circle-outline': addressOptionControl.value !== address
-       }"
-    ></i>
+    <label class="form__control form__control--radio" *ngFor="let address of (customer$ | async).addresses">
+      <input class="form__radio-input"
+             [value]="address"
+             [formControl]="addressOptionControl"
+             name="address-option"
+             type="radio"
+      >
 
-    {{ address.lastName }} {{ address.firstName }}, {{ address.phone }}, {{ address.settlement }}, {{ address.address }}<ng-container *ngIf="address.addressType === addressTypeEnum.DOORS">, {{ address.buildingNumber }}, <ng-container *ngIf="address.flat as flat">{{ flat }}</ng-container></ng-container>
-  </label>
+      <i class="mbi form__radio-icon"
+         [ngClass]="{
+           'mbi-checkmark-outline': addressOptionControl.value === address,
+           'mbi-circle-outline': addressOptionControl.value !== address
+         }"
+      ></i>
 
-  <label class="form__control-container form__control-container--radio">
-    <input class="form__radio-input"
-           [value]="null"
-           [formControl]="addressOptionControl"
-           name="address-option"
-           type="radio"
-    >
+      {{ address.lastName }} {{ address.firstName }}, {{ address.phone }}, {{ address.settlement }}, {{ address.address }}<ng-container *ngIf="address.addressType === addressTypeEnum.DOORS">, {{ address.buildingNumber }}, <ng-container *ngIf="address.flat as flat">{{ flat }}</ng-container></ng-container>
+    </label>
 
-    <i class="mbi form__radio-icon"
-       [ngClass]="{
-         'mbi-checkmark-outline': addressOptionControl.value === null,
-         'mbi-circle-outline': addressOptionControl.value !== null
-       }"
-    ></i>
+    <label class="form__control form__control--radio">
+      <input class="form__radio-input"
+             [value]="null"
+             [formControl]="addressOptionControl"
+             name="address-option"
+             type="radio"
+      >
 
-    Новый адрес
-  </label>
+      <i class="mbi form__radio-icon"
+         [ngClass]="{
+           'mbi-checkmark-outline': addressOptionControl.value === null,
+           'mbi-circle-outline': addressOptionControl.value !== null
+         }"
+      ></i>
+
+      Новый адрес
+    </label>
+  </div>
 
 </div>
 
