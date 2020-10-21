@@ -15,6 +15,7 @@ import { ESort } from '../../shared/enums/sort.enum';
 import { SortingComponent } from '../../product-list/sorting/sorting.component';
 import { PaginationComponent } from '../../pagination/pagination.component';
 import { SortingPaginatingFilterDto } from '../../shared/dtos/spf.dto';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'store-reviews',
@@ -46,10 +47,12 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
               private storeReviewService: StoreReviewService,
               private deviceService: DeviceService,
               private scrollToService: ScrollToService,
+              private route: ActivatedRoute
   ) { super(); }
 
   ngOnInit(): void {
     this.setMeta();
+    this.notifyOfNewReviewFromEmail();
   }
 
   ngAfterViewInit() {
@@ -178,5 +181,14 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   onPagination() {
     this.scrollToReviews();
     this.fetchReviews();
+  }
+
+  notifyOfNewReviewFromEmail() {
+    const isReviewFromEmail = JSON.parse(this.route.snapshot.queryParamMap.get('review-from-email'));
+
+    if (isReviewFromEmail) {
+      this.scrollToReviews();
+      this.showReviewSuccess();
+    }
   }
 }
