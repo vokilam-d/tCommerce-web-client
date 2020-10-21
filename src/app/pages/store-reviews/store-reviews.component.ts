@@ -26,7 +26,6 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
 
   jsonLd: SafeHtml;
   reviews: StoreReviewDto[];
-  isReviewFromEmail: boolean = null;
   mediaUploadUrl: string = `${API_HOST}/api/v1/store-reviews/media`;
   error: string;
   pagesTotal: number;
@@ -185,9 +184,9 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   }
 
   notifyOfNewReviewFromEmail() {
-    this.isReviewFromEmail = JSON.parse(this.route.snapshot.queryParamMap.get('review-from-email'));
+    const isReviewFromEmail = JSON.parse(this.route.snapshot.queryParamMap.get('review-from-email'));
 
-    if (this.isReviewFromEmail) {
+    if (isReviewFromEmail) {
       this.scrollToReviews();
       this.showReviewSuccess();
     }
