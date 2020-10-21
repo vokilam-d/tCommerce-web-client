@@ -16,7 +16,7 @@ export class DiscountsComponent implements OnInit {
 
   setMeta() {
     this.headService.setMeta({
-      title: 'Накопительные скидки в магазине "Клондайк"',
+      title: 'Скидки в магазине "Клондайк"',
       description: 'Описание дисконтной программы в интернет-магазине "Клондайк"',
       keywords: ''
     });
