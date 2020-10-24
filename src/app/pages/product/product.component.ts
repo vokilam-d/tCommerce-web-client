@@ -60,7 +60,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.needToShowReviews = this.route.snapshot.fragment === 'reviews';
     this.fetchProduct();
     this.setSavedTooltipState();
-    this.handleProductView();
   }
 
   ngAfterViewInit(): void {
@@ -85,6 +84,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.handleReviewFromEmail();
         this.handleUrlReviewsFragment();
         this.handleRecentlyViewedProducts();
+        this.handleProductView();
       },
       error => this.fetchError = error.error?.message || DEFAULT_ERROR_TEXT
     );
