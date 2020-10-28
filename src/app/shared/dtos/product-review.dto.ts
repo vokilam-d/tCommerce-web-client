@@ -42,6 +42,7 @@ export class ProductReviewDto extends AddProductReviewDto {
   rating: number = 5;
   sortOrder: number = 0;
   medias: MediaDto[] = [];
+  managerComment: string = '';
   comments: ProductReviewCommentDto[] = [];
   createdAt: Date = new Date();
 
