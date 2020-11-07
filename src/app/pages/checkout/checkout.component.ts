@@ -93,7 +93,11 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
     this.analytics.editOrder();
   }
 
-  private setError(error) {
+  private setError(error: string | string[]) {
+    if (Array.isArray(error)) {
+      error = error.join('\n');
+    }
+    
     this.orderError = error;
     this.scrollToService.scrollTo({ target: this.checkoutRef, offset: -60 });
   }
