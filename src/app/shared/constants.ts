@@ -4,7 +4,7 @@ export const SEARCH_QUERY_PARAM = 'q';
 export const DUMMY_PATH = 'dummy';
 export const INPUT_MEDIA_ACCEPT_TYPES = '.jpg,.jpeg,.png,.webp,.svg,.tiff,.gif';
 export const DEFAULT_ERROR_TEXT = 'Что-то пошло не так. Пожалуйста, попробуйте позже';
-export const IS_EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+export const IS_EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
 export const VALID_PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
 export const VIEWED_PRODUCT_IDS_KEY = 'recentlyViewedProducts';
 export const DEFAULT_PHONE_NUMBER_VALUE = '+38';
