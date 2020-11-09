@@ -111,13 +111,13 @@
 
   &__selected-filter {
     margin: 5px 0 0;
-    padding: 5px 0 0;
-    border-top: 1px solid rgba($dark, 0.1);
+
+    border: 1px solid $primary;
+    padding: 5px 15px;
+    border-radius: 7px;
 
     &:first-child {
-      margin-top: 0;
-      padding-top: 0;
-      border-top: none;
+
     }
   }
 
