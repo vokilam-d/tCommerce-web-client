@@ -101,7 +101,7 @@
   }
 
   &__selected-filters {
-    margin: 20px 0 0;
+    margin: 0 0;
 
     @include respond-to($media_large) {
       padding-left: 10px;
@@ -111,10 +111,15 @@
 
   &__selected-filter {
     margin: 5px 0 0;
-
-    border: 1px solid $primary;
-    padding: 5px 15px;
-    border-radius: 7px;
+    display: flex;
+    border: 1px solid #d2d2d2;
+    padding: 5px 13px;
+    border-radius: 50px;
+    white-space: nowrap;
+    color: #333;
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
 
     &:first-child {
 
@@ -122,14 +127,24 @@
   }
 
   &__clear-all {
+    display: flex;
     margin: 10px 0;
     padding: 7px 11px;
-    font-size: 13px;
+    border-radius: 50px;
+    border: 1px solid #ff8989;
+    font-size: 14px;
+    white-space: nowrap;
+    height: 32px;
+    line-height: 32px;
+    align-items: center;
   }
 
   &__selected-count {
     margin: 15px 0 0;
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 32px;
+    white-space: nowrap;
   }
 
   &__product-count {
@@ -140,9 +155,9 @@
 }
 
 .selected {
-  display: flex;
-  justify-content: space-between;
+  display: inline-flex;
   align-items: center;
+
 
   &__reset {
     padding: 3px;
@@ -155,6 +170,7 @@
   }
 
   &__label {
+    margin-right: 10px;
   }
 }
 
