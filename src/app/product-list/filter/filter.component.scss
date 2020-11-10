@@ -121,8 +121,8 @@
     height: 32px;
     line-height: 32px;
 
-    &:first-child {
-
+    &:hover {
+      background-color: #eeeeee;
     }
   }
 
@@ -137,6 +137,11 @@
     height: 32px;
     line-height: 32px;
     align-items: center;
+
+    &:hover {
+      background-color: #ff8989;
+      color: #fff;
+    }
   }
 
   &__selected-count {
@@ -163,9 +168,12 @@
     padding: 3px;
     font-size: 15px;
     transition: color 0.2s ease;
+    align-items: center;
+    display: flex;
+    color: #ff8989;
 
     &:hover {
-      color: rgba($dark, 0.6);
+      color: #ff8989;
     }
   }
 
