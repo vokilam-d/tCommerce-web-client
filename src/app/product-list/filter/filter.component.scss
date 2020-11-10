@@ -2,10 +2,10 @@
 @import "mixins";
 
 .overlay {
+  z-index: 20;
   background: rgba(#000, 0);
   transition: background-color 0.5s ease;
-  z-index: 20;
-
+  
   &--visible {
     position: fixed;
     top: 0;
@@ -16,14 +16,14 @@
   }
 
   &__close {
+    z-index: 21;
     display: none;
     position: absolute;
     top: 10px;
     right: 0;
     padding: 10px;
     font-size: 25px;
-    color: #fff;
-    z-index: 21;
+    color: $white;    
 
     @include respond-to($media_large) {
       display: none;
@@ -40,21 +40,21 @@
   top: 0;
   left: 0;
   bottom: 0;
-  min-width: 290px;
+  z-index: 22;
   width: 70%;
+  min-width: 290px;
+  padding: 20px 15px 60px;
+  background: $white;
   transform: translateX(-100%);
   transition: transform 0.5s ease;
-  padding: 20px 15px 60px;
-  background: #fff;
-  z-index: 22;
   overflow-y: auto;
 
   @include respond-to($media_large) {
     position: static;
-    min-width: auto;
     width: auto;
-    transform: none;
     padding: 0 5px;
+    min-width: auto;
+    transform: none;    
   }
 
   &--opened {
@@ -101,7 +101,7 @@
   }
 
   &__selected-filters {
-    margin: 0 0;
+    margin: 0;
 
     @include respond-to($media_large) {
       padding-left: 10px;
@@ -110,19 +110,19 @@
   }
 
   &__selected-filter {
-    margin: 5px 0 0;
     display: flex;
-    border: 1px solid #d2d2d2;
+    margin: 5px 0 0;
     padding: 5px 13px;
-    border-radius: 50px;
-    white-space: nowrap;
-    color: #333;
-    font-size: 14px;
     height: 32px;
     line-height: 32px;
-
+    border: 1px solid rgba($grey, 0.3);
+    border-radius: 50px;
+    font-size: 14px;
+    color: rgba($dark, 0.9);
+    white-space: nowrap;
+    
     &:hover {
-      background-color: #eeeeee;
+      background-color: rgba($grey, 0.05);
     }
   }
 
@@ -130,17 +130,17 @@
     display: flex;
     margin: 10px 0;
     padding: 7px 11px;
-    border-radius: 50px;
-    border: 1px solid #ff8989;
-    font-size: 14px;
-    white-space: nowrap;
     height: 32px;
+    font-size: 14px;
     line-height: 32px;
     align-items: center;
-
+    border: 1px solid rgba($red, 0.8);
+    border-radius: 50px;
+    white-space: nowrap;
+    
     &:hover {
-      background-color: #ff8989;
-      color: #fff;
+      background-color: rgba($red, 0.8);
+      color: $white;
     }
   }
 
@@ -165,34 +165,34 @@
 
 
   &__reset {
+    display: flex;
     padding: 3px;
     font-size: 15px;
-    transition: color 0.2s ease;
+    color: rgba($red, 0.8);
     align-items: center;
-    display: flex;
-    color: #ff8989;
-
+    transition: color 0.2s ease;
+    
     &:hover {
-      color: #ff8989;
+      color: rgba($red, 0.8);
     }
   }
 
   &__label {
-    margin-right: 10px;
+    margin-right: 10px 0 0;
   }
 }
 
 .placeholder {
   &__block {
-    margin: 25px 0 0;
-    padding: 0 10px;
     width: 210px;
+    margin: 25px 0 0;
+    padding: 0 10px;    
   }
 
-  &__title {
-    margin: 10px 0 5px;
+  &__title {    
     width: 70px;
     height: 16px;
+    margin: 10px 0 5px;
   }
 
   &__item {
