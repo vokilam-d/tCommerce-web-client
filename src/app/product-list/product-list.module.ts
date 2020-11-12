@@ -10,6 +10,7 @@ import { RangeSliderComponent } from './range-slider/range-slider.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { BreadcrumbsModule } from '../breadcrumbs/breadcrumbs.module';
+import { FilterBarComponent } from './filter-bar/filter-bar.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { BreadcrumbsModule } from '../breadcrumbs/breadcrumbs.module';
     ProductListComponent,
     SortingComponent,
     FilterComponent,
-    RangeSliderComponent
+    RangeSliderComponent,
+    FilterBarComponent
   ],
   imports: [
     CommonModule,

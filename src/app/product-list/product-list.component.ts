@@ -1,3 +1,4 @@
+import { FilterBarComponent } from './filter-bar/filter-bar.component';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -23,8 +24,9 @@ import { PaginationComponent } from '../pagination/pagination.component';
 import { ScrollToService } from '../services/scroll-to/scroll-to.service';
 import { FilterDto } from '../shared/dtos/filter.dto';
 import { DEFAULT_ERROR_TEXT } from '../shared/constants';
-import { Subscription } from 'rxjs';
+import { Subscription, of, Observable } from 'rxjs';
 import { ESort } from '../shared/enums/sort.enum';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'product-list',
@@ -55,6 +57,7 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('paginationRef', { read: ElementRef }) paginationRef: ElementRef;
   @ViewChild('headerRef') productListHeaderRef: ElementRef;
   @ViewChild(FilterComponent) filterCmp: FilterComponent;
+  @ViewChild(FilterBarComponent) filterBarCmp: FilterBarComponent;
   @ViewChild(SortingComponent) sortingCmp: SortingComponent;
   @ViewChild(PaginationComponent) paginationCmp: PaginationComponent;
 

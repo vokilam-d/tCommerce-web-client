@@ -2,7 +2,8 @@
 @import "mixins";
 
 .fixed-container {
-  height: 35px;
+  height: auto;
+  min-height: 35px;
 }
 
 .fixed {
@@ -62,13 +63,14 @@
   }
 
   &__selected-filters {
-    display: none;
+    display: inline-flex;
+    align-items: center;
   }
 
   &__items {
     position: relative;
-    margin: 15px 0 0;
     display: flex;
+    margin: 15px 0 0;
     flex-wrap: wrap;
     border-top: 1px solid $borderColor;
   }
@@ -139,12 +141,12 @@
   border-radius: 3px;
 
   &__icon {
-    margin: 0 0 0 5px;
     display: inline-block;
-    vertical-align: bottom;
-    transform: rotate(45deg);
+    margin: 0 0 0 5px;
     font-size: 12px;
     font-weight: 600;
+    vertical-align: bottom;
+    transform: rotate(45deg);
   }
 }
 

@@ -1,6 +1,13 @@
 @import "variables";
 @import "mixins";
 
+.its-desktop {
+  
+  @include respond-to($media_large) {
+    display: none;
+  }
+}
+
 .overlay {
   background: rgba(#000, 0);
   transition: background-color 0.5s ease;
@@ -16,15 +23,15 @@
   }
 
   &__close {
+    z-index: 21;
     display: none;
     position: absolute;
     top: 10px;
     right: 0;
     padding: 10px;
     font-size: 25px;
-    color: #fff;
-    z-index: 21;
-
+    color: $white;
+    
     @include respond-to($media_large) {
       display: none;
     }
@@ -40,21 +47,22 @@
   top: 0;
   left: 0;
   bottom: 0;
-  min-width: 290px;
+  z-index: 22;
   width: 70%;
+  min-width: 290px;
+  padding: 20px 15px 60px;
+  background: $white;
   transform: translateX(-100%);
   transition: transform 0.5s ease;
-  padding: 20px 15px 60px;
-  background: #fff;
-  z-index: 22;
   overflow-y: auto;
 
   @include respond-to($media_large) {
     position: static;
     min-width: auto;
     width: auto;
+    padding: 0 5px;    
     transform: none;
-    padding: 0 5px;
+    
   }
 
   &--opened {
@@ -101,7 +109,7 @@
   }
 
   &__selected-filters {
-    margin: 20px 0 0;
+    margin: 0;
 
     @include respond-to($media_large) {
       padding-left: 10px;
@@ -110,26 +118,51 @@
   }
 
   &__selected-filter {
-    margin: 5px 0 0;
+    display: flex;
+    margin: 5px 5px 10px 0;
+    padding: 5px 13px;
+    height: 32px;
+    line-height: 32px;
+    border: 1px solid rgba($grey, 0.3);
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba($dark, 1.1);
+    white-space: nowrap;
 
-    border: 1px solid $primary;
-    padding: 5px 15px;
-    border-radius: 7px;
-
-    &:first-child {
-
+    &:hover {
+      background-color: rgba($grey, 0.05);
     }
   }
 
   &__clear-all {
-    margin: 10px 0;
+    display: flex;
+    margin: 0 0 0 10px;
     padding: 7px 11px;
-    font-size: 13px;
+    height: 32px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 32px;
+    align-items: center;
+    border: 1px solid rgba($red, 0.8);
+    border-radius: 50px;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: rgba($red, 0.8);
+      color: $white;
+    }
   }
 
   &__selected-count {
-    margin: 15px 0 0;
+    display: inline-flex;
+    align-items: center;
+    margin: 0 0 20px 0;
     font-weight: 600;
+    font-size: 14px;
+    color: rgba($dark, 1.1);
+    line-height: 32px;
+    white-space: nowrap;
   }
 
   &__product-count {
@@ -140,35 +173,46 @@
 }
 
 .selected {
-  display: flex;
-  justify-content: space-between;
+  display: inline-flex;
   align-items: center;
 
   &__reset {
+    display: flex;
     padding: 3px;
     font-size: 15px;
+    color: rgba($red, 0.8);
+    align-items: center;
     transition: color 0.2s ease;
 
     &:hover {
-      color: rgba($dark, 0.6);
+      color: rgba($red, 1);
+    }
+
+    &:active {
+      color: rgba($red, 1);
+    }
+
+    &:focus {
+      color: rgba($red, 1);
     }
   }
 
   &__label {
+    margin-right: 10px 0 0;
   }
 }
 
 .placeholder {
   &__block {
+    width: 210px;
     margin: 25px 0 0;
     padding: 0 10px;
-    width: 210px;
   }
 
   &__title {
-    margin: 10px 0 5px;
     width: 70px;
     height: 16px;
+    margin: 10px 0 5px;
   }
 
   &__item {
