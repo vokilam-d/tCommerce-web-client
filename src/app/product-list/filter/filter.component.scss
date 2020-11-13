@@ -1,13 +1,6 @@
 @import "variables";
 @import "mixins";
 
-.its-desktop {
-  
-  @include respond-to($media_large) {
-    display: none;
-  }
-}
-
 .overlay {
   background: rgba(#000, 0);
   transition: background-color 0.5s ease;
@@ -62,7 +55,6 @@
     width: auto;
     padding: 0 5px;    
     transform: none;
-    
   }
 
   &--opened {
@@ -112,8 +104,7 @@
     margin: 0;
 
     @include respond-to($media_large) {
-      padding-left: 10px;
-      padding-right: 30px;
+      display: none;
     }
   }
 
@@ -122,7 +113,6 @@
     margin: 5px 5px 10px 0;
     padding: 5px 13px;
     height: 32px;
-    line-height: 32px;
     border: 1px solid rgba($grey, 0.3);
     border-radius: 50px;
     font-size: 14px;
@@ -142,7 +132,6 @@
     height: 32px;
     font-size: 14px;
     font-weight: 600;
-    line-height: 32px;
     align-items: center;
     border: 1px solid rgba($red, 0.8);
     border-radius: 50px;
@@ -161,7 +150,6 @@
     font-weight: 600;
     font-size: 14px;
     color: rgba($dark, 1.1);
-    line-height: 32px;
     white-space: nowrap;
   }
 
@@ -179,20 +167,12 @@
   &__reset {
     display: flex;
     padding: 3px;
+    align-items: center;
     font-size: 15px;
     color: rgba($red, 0.8);
-    align-items: center;
     transition: color 0.2s ease;
 
     &:hover {
-      color: rgba($red, 1);
-    }
-
-    &:active {
-      color: rgba($red, 1);
-    }
-
-    &:focus {
       color: rgba($red, 1);
     }
   }

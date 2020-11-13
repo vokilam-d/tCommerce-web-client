@@ -1,15 +1,6 @@
 <div class="product-list">
-  <aside class="product-list__sidebar">
-    <app-filter class="product-list__filter"
-                [filters]="filters"
-                [filteredCount]="filteredCount"
-                (valueChanged)="onFiltersChange()"
-    ></app-filter>
-  </aside>
 
-  <main class="product-list__content">
-
-    <div class="fixed-container">
+  <div class="fixed-container">
 
       <div class="product-list__header" [ngClass]="{ fixed: isFixed }" #headerRef>
         <button class="product-list__filter-toggle filter-toggle" (click)="openFilters()">
@@ -19,7 +10,7 @@
 
         <div class="product-list__selected-filters">
           <filter-bar
-          class="product-list__active-filter"
+                  class="product-list__filters-bar"
                   [filters]="filters"
                   [filteredCount]="filteredCount"
                   (refresh)="onFiltersChange()"
@@ -35,44 +26,59 @@
 
     </div>
 
-    <ol class="product-list__items" #itemsRef>
+  <div class="product-list__container">
+    <aside class="product-list__sidebar">
+      <app-filter class="product-list__filter"
+                  [filters]="filters"
+                  [filteredCount]="filteredCount"
+                  (valueChanged)="onFiltersChange()"
+      ></app-filter>
+    </aside>
 
-      <li class="product-list__item" *ngFor="let item of items" #itemRef>
-        <product-list-item [item]="item" [parentNameForAnalytics]="parentNameForAnalytics"></product-list-item>
-      </li>
+    <main class="product-list__content">
 
-      <li class="product-list__preloader-container"
-          *ngIf="isLoading"
-          [class.product-list__preloader-container--overlay]="items"
-      >
-        <preloader class="product-list__preloader"></preloader>
-      </li>
+      
 
-      <ng-container *ngIf="!items && !error">
-        <li class="product-list__item placeholder" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
-          <div class="placeholder__item placeholder__image"></div>
-          <div class="placeholder__item placeholder__name"></div>
-          <div class="placeholder__item placeholder__text placeholder__text--last placeholder__name"></div>
-          <div class="placeholder__item placeholder__price"></div>
-          <div class="placeholder__item placeholder__btn"></div>
+      <ol class="product-list__items" #itemsRef>
+
+        <li class="product-list__item" *ngFor="let item of items" #itemRef>
+          <product-list-item [item]="item" [parentNameForAnalytics]="parentNameForAnalytics"></product-list-item>
         </li>
-      </ng-container>
 
-      <li class="product-list__no-items" *ngIf="items?.length === 0">
-        По заданным параметрам не найдено ни одного товара
-      </li>
+        <li class="product-list__preloader-container"
+            *ngIf="isLoading"
+            [class.product-list__preloader-container--overlay]="items"
+        >
+          <preloader class="product-list__preloader"></preloader>
+        </li>
 
-      <li class="product-list__error" *ngIf="error as error">
-        {{ error }}
-      </li>
-    </ol>
+        <ng-container *ngIf="!items && !error">
+          <li class="product-list__item placeholder" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+            <div class="placeholder__item placeholder__image"></div>
+            <div class="placeholder__item placeholder__name"></div>
+            <div class="placeholder__item placeholder__text placeholder__text--last placeholder__name"></div>
+            <div class="placeholder__item placeholder__price"></div>
+            <div class="placeholder__item placeholder__btn"></div>
+          </li>
+        </ng-container>
 
-    <pagination class="product-list__pagination"
-                [pagesTotal]="pagesTotal"
-                [displayedOnPage]="'products-list'"
-                (pagination)="onPagination()"
-                (paginationWithLoadMoreBtn)="onPaginationWithLoadMoreBtn()"
-                #paginationRef
-    ></pagination>
-  </main>
+        <li class="product-list__no-items" *ngIf="items?.length === 0">
+          По заданным параметрам не найдено ни одного товара
+        </li>
+
+        <li class="product-list__error" *ngIf="error as error">
+          {{ error }}
+        </li>
+      </ol>
+
+      <pagination class="product-list__pagination"
+                  [pagesTotal]="pagesTotal"
+                  [displayedOnPage]="'products-list'"
+                  (pagination)="onPagination()"
+                  (paginationWithLoadMoreBtn)="onPaginationWithLoadMoreBtn()"
+                  #paginationRef
+      ></pagination>
+    </main>
+  </div>
+  
 </div>

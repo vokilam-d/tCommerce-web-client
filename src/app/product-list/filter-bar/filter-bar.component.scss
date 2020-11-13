@@ -1,70 +1,87 @@
 @import "variables";
 @import "mixins";
 
-.hidden-for-desktop {
-  display: none;
-}
+.filters-bar  {
 
-.its-mobile {
-  
-  @include respond-to-less-than($media_large) {
-    display: none;
-  }
-}
-
-.filters-bar {
-
-  &__selected-filters {
+  &__filters_box {
     display: inline-flex;
-    box-sizing: border-box;
+    align-items: center;
     flex-wrap: wrap;
-    
-  
-    & .selected {
-      display: inline-flex;
-      margin: 0 5px 5px 0;
-      padding: 7px 7px 7px 12px;
-      height: 32px;
-      line-height: 32px;
-      align-items: center;
-      border: 1px solid rgba($grey, 0.3);
-      border-radius: 50px;
-      font-size: 14px;
-      font-weight: 600;
-      color: rgba($dark, 1.1);
-      white-space: nowrap;  
-      
-      &__reset {
-        align-items: center;
-        font-size: 15px;
-        color: rgba($red, 0.8);
-        transition: color 0.2s ease;
-
-        &:hover {
-          font-weight: 800;
-          color: rgba($red, 1);          
-        }
-      }
-    
-      & .selected__label{
-        margin: 0 10px 0 0;
-        align-items: center;
-      }
-
-      &:hover {
-        background-color: rgba($grey, 0.09);
-      }
-    }
   }
 
-  .mbi-cross::before {
-    content: "";
-    font-size: 16px;
-    color: rgba($red, 0.8);
+  &__selected-count {
+    align-self: flex-start;
+    margin: 8px 8px 0 0;
+    font-size: 14px;
+    line-height: 32px;
+    white-space: nowrap;
+  }
+
+  &__container {
+    @include respond-to($media_large) {
+      display: inline-flex;
+    }
+
+    display: none;
+    align-items: center;
+    height: auto;
+  }
+
+  &__clear-all {
+    display: inline-flex;
+    margin: 8px 8px 0 0;
+    align-items: center;
+  }
+
+  &__item {
+    display: inline-flex;
+    height: 32px;
+    margin: 8px 8px 0 0;
+    padding: 7px 7px 7px 12px;
+    align-items: center;
+    border: 1px solid rgba($grey, 0.4);
+    border-radius: 50px;
+    font-size: 14px;
+    white-space: nowrap;
 
     &:hover {
-      font-weight: 600;
-      color: rgba($red, 1);
+      background-color: rgba($grey, 0.05);
     }
+
+    &.clear-all {
+      padding: 10px;
+      border-color: rgba($red, 0.8)
+    }
+
+    &.clear-all:hover {
+      background-color: rgba($red, 0.8);
+      color: $white;
+    }
+  }
+
+  &__selected-filter {
+    display: inline-flex;
+    align-items: center;
+
+  }
+
+  @include respond-to($media_large) {
+    display: block;
+  }
+}
+  
+.selected {
+
+  &__label {
+    padding: 0 5px 0 0;
+  }
+
+  &__reset {
+    color: rgba($red, 0.8);
+    font-weight: 900;
+  }
+
+  &__reset:hover {
+    color: rgba($red, 1.1);
   }
 }

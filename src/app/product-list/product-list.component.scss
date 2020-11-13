@@ -1,9 +1,11 @@
 @import "variables";
 @import "mixins";
 
-.fixed-container {
-  height: auto;
+.fixed-container {  
+  display: block;
   min-height: 35px;
+  padding: 0 0 15px 0;
+  height: auto;  
 }
 
 .fixed {
@@ -12,18 +14,23 @@
     top: 0;
     left: 0;
     right: 0;
+    z-index: 2;
     padding: 2px 8px 5px 8px;
     border-bottom: 1px solid $borderColor;
-    background-color: #ffffff;
-    z-index: 2;
+    background-color: $white;
+    
   }
 }
 
 .product-list {
   @include respond-to($media_large) {
-    display: flex;
+    display: block;
   }
 
+  &__container {
+    display: flex;
+  }
+  
   &__sidebar {
     @include respond-to($media_large) {
       width: 280px;
@@ -57,8 +64,8 @@
     width: 50%;
 
     @include respond-to($media_large) {
-      margin-left: auto;
       width: auto;
+      margin-left: auto;      
     }
   }
 

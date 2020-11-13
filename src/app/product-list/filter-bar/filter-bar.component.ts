@@ -1,19 +1,13 @@
 import { 
   ChangeDetectionStrategy,
-  ChangeDetectorRef, 
   Component, 
   Input, 
   OnInit,
   OnChanges, 
   Output,
-  EventEmitter,
-  SimpleChanges} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+  EventEmitter} from '@angular/core';
 import { UrlService } from 'src/app/services/url/url.service';
-import { SEARCH_QUERY_PARAM } from 'src/app/shared/constants';
-import { FilterDto, FilterValueDto, Range } from 'src/app/shared/dtos/filter.dto';
-import { ISelectedFilter } from '../filter/selected-filter.interface';
-
+import { FilterDto, FilterValueDto} from 'src/app/shared/dtos/filter.dto';
 
 @Component({
   selector: 'filter-bar',
@@ -22,6 +16,8 @@ import { ISelectedFilter } from '../filter/selected-filter.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FilterBarComponent implements OnInit, OnChanges  {
+
+  selectedFiltersInBar = [];
 
   get activeFilters(): FilterDto[] {
     const active: FilterDto[] = [];
@@ -51,47 +47,22 @@ export class FilterBarComponent implements OnInit, OnChanges  {
   @Input() filters: FilterDto[];
   @Input() filteredCount: number;
   @Output() refresh = new EventEmitter();
-  selectedFiltersInBar = [];
+    
+  constructor (private urlService: UrlService) {
+  }
   
-  constructor(private route: ActivatedRoute,
-    private urlService: UrlService,
-    private cdr: ChangeDetectorRef
-    ) {}
-
   ngOnInit(): void {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if(this.filters){
-      this.getSelectedFilters()
+  ngOnChanges() {
+    if (this.filters) {
+      this.setSelectedFilters();
     }
-  }
-
-   private getSelectedFilters(): any {
-    const selectedFiltersInBar: FilterDto[] = []
-  
-      if(this.filters){
-        this.filters.map(filter => {
-          if(filter.type === 'range'){
-            if(filter.rangeValues.range.min !== filter.rangeValues.selected.min 
-              || filter.rangeValues.range.max !== filter.rangeValues.selected.max ){
-                selectedFiltersInBar.push(filter)
-              }
-            } else {
-              const selectedValues =  filter.values.filter(i => i.isSelected)
-              if(selectedValues.length){
-              selectedFiltersInBar.push({ ...filter, values: selectedValues })
-              } 
-            }
-        })
-      }
-      this.selectedFiltersInBar = selectedFiltersInBar
-      return selectedFiltersInBar
   }
 
   unselect(activeFilter: FilterDto, value?: FilterValueDto){
     switch (activeFilter.type) {
-        case 'checkbox':
+      case 'checkbox':
         value.isSelected = false;
         this.updateQuery(activeFilter, value);
         break;
@@ -102,8 +73,57 @@ export class FilterBarComponent implements OnInit, OnChanges  {
         break;
     }
     this.refresh.emit();
-    this.cdr.markForCheck();
-    this.getSelectedFilters();
+    this.setSelectedFilters();
+  }
+
+  unselectAll() {
+    let isChanged: boolean = false;
+
+    this.filters.forEach(filter => {
+      switch (filter.type) {
+        case 'checkbox':
+          filter.values.forEach(value => {
+            if (value.isSelected) {
+              value.isSelected = false;
+              this.urlService.deleteQueryParam(filter.id);
+              isChanged = true;
+            }
+          });
+          break;
+        case 'range':
+          filter.rangeValues.selected.min = filter.rangeValues.range.min;
+          filter.rangeValues.selected.max = filter.rangeValues.range.max;
+          this.urlService.deleteQueryParam(filter.id);
+          isChanged = true;
+          break;
+      }
+    });
+
+    if (isChanged) {
+      this.refresh.emit();
+    }
+  }
+
+  private setSelectedFilters(): any {
+    const selectedFiltersInBar: FilterDto[] = [];
+  
+      if (this.filters) {
+        this.filters.map(filter => {
+          if (filter.type === 'range') {
+            if (filter.rangeValues.range.min !== filter.rangeValues.selected.min 
+              || filter.rangeValues.range.max !== filter.rangeValues.selected.max ){
+              selectedFiltersInBar.push(filter);
+            }
+          } else {
+            const selectedValues =  filter.values.filter(i => i.isSelected);
+            if (selectedValues.length) {
+              selectedFiltersInBar.push({ ...filter, values: selectedValues });
+              } 
+          }
+        })
+      }
+    this.selectedFiltersInBar = selectedFiltersInBar;
+    return selectedFiltersInBar;
   }
 
   private updateQuery(filter: FilterDto, value: FilterValueDto) {
