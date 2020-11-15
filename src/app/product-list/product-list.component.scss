@@ -77,8 +77,8 @@
   &__items {
     position: relative;
     display: flex;
-    margin: 15px 0 0;
     flex-wrap: wrap;
+    margin: 15px 0 0;    
     border-top: 1px solid $borderColor;
   }
 
@@ -149,10 +149,10 @@
 
   &__icon {
     display: inline-block;
+    vertical-align: bottom;
     margin: 0 0 0 5px;
     font-size: 12px;
-    font-weight: 600;
-    vertical-align: bottom;
+    font-weight: 600;    
     transform: rotate(45deg);
   }
 }
