@@ -132,10 +132,10 @@
     margin: 0 0 0 10px;
     padding: 7px 11px;
     border: 1px solid rgba($red, 0.8);
+    border-radius: 50px;
     font-size: 14px;
     font-weight: 600;
-    white-space: nowrap;
-    border-radius: 50px;    
+    white-space: nowrap;        
 
     &:hover {
       background-color: rgba($red, 0.8);
