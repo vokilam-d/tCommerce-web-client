@@ -173,12 +173,12 @@
     transition: color 0.2s ease;
 
     &:hover {
-      color: rgba($red, 1);
+      color: $red;
     }
   }
 
   &__label {
-    margin-right: 10px 0 0;
+    margin: 10px 0 0;
   }
 }
 
