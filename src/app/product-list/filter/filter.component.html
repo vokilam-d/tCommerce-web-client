@@ -17,41 +17,39 @@
     </div>
   </div>
 
-  <div class="its-desktop">
-    <div class="filters__selected-filters" *ngIf="activeFilters?.length">
-      <ng-container *ngFor="let activeFilter of activeFilters" [ngSwitch]="activeFilter.type">
+  <div class="filters__selected-filters" *ngIf="activeFilters?.length">
+    <ng-container *ngFor="let activeFilter of activeFilters" [ngSwitch]="activeFilter.type">
 
-        <ng-container *ngSwitchCase="'checkbox'">
-          <div class="filters__selected-filter selected" *ngFor="let value of activeFilter.values">
-            <div class="selected__label">
-              {{ value.label }}
-            </div>
-            <button class="selected__reset" (click)="unselect(activeFilter, value)" type="button">
-              <i class="mbi mbi-cross"></i>
-            </button>
+      <ng-container *ngSwitchCase="'checkbox'">
+        <div class="filters__selected-filter selected" *ngFor="let value of activeFilter.values">
+          <div class="selected__label">
+            {{ value.label }}
           </div>
-        </ng-container>
-
-        <ng-container *ngSwitchCase="'range'">
-          <div class="filters__selected-filter selected">
-            <div class="selected__label">
-              {{ activeFilter.label }}: {{ activeFilter.rangeValues.selected.min }}-{{ activeFilter.rangeValues.selected.max }}
-            </div>
-            <button class="selected__reset" (click)="unselect(activeFilter)" type="button">
-              <i class="mbi mbi-cross"></i>
-            </button>
-          </div>
-        </ng-container>
-
-        </ng-container>
-
-        <div class="filters__selected-count" *ngIf="filteredCount">
-          Выбрано товаров: {{ filteredCount }}
-          <button class="btn btn--transparent filters__clear-all" (click)="unselectAll()">
-            Сбросить все
+          <button class="selected__reset" (click)="unselect(activeFilter, value)" type="button">
+            <i class="mbi mbi-cross"></i>
           </button>
         </div>
-     </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'range'">
+        <div class="filters__selected-filter selected">
+          <div class="selected__label">
+            {{ activeFilter.label }}: {{ activeFilter.rangeValues.selected.min }}-{{ activeFilter.rangeValues.selected.max }}
+          </div>
+          <button class="selected__reset" (click)="unselect(activeFilter)" type="button">
+            <i class="mbi mbi-cross"></i>
+          </button>
+        </div>
+      </ng-container>
+
+    </ng-container>
+
+    <div class="filters__selected-count" *ngIf="filteredCount">
+      Выбрано товаров: {{ filteredCount }}
+      <button class="btn btn--transparent filters__clear-all" (click)="unselectAll()">
+        Сбросить все
+      </button>
+    </div>
   </div>
 
   <dl class="filters__options">
@@ -67,7 +65,6 @@
                    (ngModelChange)="checkboxToggle(filter, value)"
                    type="checkbox"
             >
-
             {{ value.label }} <span class="filters__product-count">({{ value.productsCount }})</span>
           </label>
 
