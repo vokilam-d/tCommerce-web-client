@@ -26,7 +26,6 @@ import { FilterDto } from '../shared/dtos/filter.dto';
 import { DEFAULT_ERROR_TEXT } from '../shared/constants';
 import { Subscription } from 'rxjs';
 import { ESort } from '../shared/enums/sort.enum';
-import { __values } from 'tslib';
 
 @Component({
   selector: 'product-list',

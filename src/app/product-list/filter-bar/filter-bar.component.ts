@@ -60,7 +60,7 @@ export class FilterBarComponent implements OnInit, OnChanges  {
     }
   }
 
-  unselect(activeFilter: FilterDto, value?: FilterValueDto){
+  unselect(activeFilter: FilterDto, value?: FilterValueDto) {
     switch (activeFilter.type) {
       case 'checkbox':
         value.isSelected = false;
