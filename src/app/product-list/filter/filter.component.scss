@@ -117,7 +117,7 @@
     border-radius: 50px;
     font-size: 14px;
     font-weight: 600;
-    color: rgba($dark, 1);
+    color: $dark;
     white-space: nowrap;
 
     &:hover {
@@ -149,7 +149,7 @@
     margin: 0 0 20px 0;
     font-weight: 600;
     font-size: 14px;
-    color: rgba($dark, 1.1);
+    color: $dark;
     white-space: nowrap;
   }
 
@@ -164,10 +164,11 @@
   display: inline-flex;
   align-items: center;
 
+
   &__reset {
     display: flex;
     align-items: center;
-    padding: 3px;    
+    padding: 0 0 0 10px;    
     font-size: 15px;
     color: rgba($red, 0.8);
     transition: color 0.2s ease;
@@ -178,7 +179,7 @@
   }
 
   &__label {
-    margin: 10px 0 0;
+    margin: 0;
   }
 }
 

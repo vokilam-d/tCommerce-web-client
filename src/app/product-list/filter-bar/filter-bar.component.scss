@@ -1,9 +1,16 @@
 @import "variables";
 @import "mixins";
 
-.filters-bar  {
+.filters-bar {
+  display: none;
 
-  &__filters_box {
+  @include respond-to($media_large) {
+    display: inline-flex;
+    align-items: center;
+    height: auto;
+  }
+
+  &__filters-box {
     display: inline-flex;
     align-items: center;
     flex-wrap: wrap;
@@ -17,56 +24,41 @@
     white-space: nowrap;
   }
 
-  &__container {
-    @include respond-to($media_large) {
-      display: inline-flex;
-    }
-
-    display: none;
-    align-items: center;
-    height: auto;
-  }
-
   &__clear-all {
     display: inline-flex;
-    margin: 8px 8px 0 0;
     align-items: center;
+    margin: 8px 8px 0 0;
   }
 
   &__item {
     display: inline-flex;
+    align-items: center;
     height: 32px;
     margin: 8px 8px 0 0;
     padding: 7px 7px 7px 12px;
-    align-items: center;
     border: 1px solid rgba($grey, 0.4);
     border-radius: 50px;
     font-size: 14px;
     white-space: nowrap;
 
-    &:hover {
-      background-color: rgba($grey, 0.05);
-    }
+      &:hover {
+        background-color: rgba($grey, 0.05);
+      }
 
-    &.clear-all {
-      padding: 10px;
-      border-color: rgba($red, 0.8)
-    }
+      &--clear-all {
+        padding: 10px;
+        border-color: rgba($red, 0.8)
+      }
 
-    &.clear-all:hover {
-      background-color: rgba($red, 0.8);
-      color: $white;
-    }
+      &--clear-all:hover {
+        background-color: rgba($red, 0.8);
+        color: $white;
+      }
   }
 
   &__selected-filter {
     display: inline-flex;
     align-items: center;
-
-  }
-
-  @include respond-to($media_large) {
-    display: block;
   }
 }
   
@@ -82,6 +74,6 @@
   }
 
   &__reset:hover {
-    color: rgba($red, 1.1);
+    color: rgba($red, 1);
   }
 }

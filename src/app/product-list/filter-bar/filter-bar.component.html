@@ -1,43 +1,42 @@
-<div class="filters-bar__container" *ngIf="selectedFiltersInBar?.length">
+<div class="filters-bar" *ngIf="selectedFiltersInBar?.length">
         
-    <p class="filters-bar__selected-count" *ngIf="filteredCount">
-      Выбрано товаров: {{ filteredCount }}
-    </p>   
+  <p class="filters-bar__selected-count" *ngIf="filteredCount">
+    Выбрано товаров: {{ filteredCount }}
+  </p>   
         
-    <ul class="filters-bar__filters_box">
-      <li class="filters-bar__item clear-all">
-        <button class="clear-all_button" (click)="unselectAll()">
-          Сбросить все
-        </button>
-      </li>
+  <ul class="filters-bar__filters-box">
+    <li class="filters-bar__item filters-bar__item--clear-all">
+      <button class="filters-bar__item--btn" (click)="unselectAll()">
+         Сбросить все
+      </button>
+    </li>
         
-      <ng-container *ngFor="let activeFilter of selectedFiltersInBar" [ngSwitch]="activeFilter.type">
+    <ng-container *ngFor="let activeFilter of selectedFiltersInBar" [ngSwitch]="activeFilter.type">
             
-        <ng-container *ngSwitchCase="'checkbox'">
-          <li class="filters-bar__item selected" *ngFor="let value of activeFilter.values">
-            <div class="selected__label">
-              {{ value.label }}
-            </div>
-              <button class="selected__reset" (click)="unselect(activeFilter, value)" type="button">
-                <i class="mbi mbi-cross"></i>
-              </button>
-          </li>
-        </ng-container>
-                          
-        <ng-container *ngSwitchCase="'range'">
-          <li class="filters-bar__item selected">
-            <div class="selected__label">
-              {{ activeFilter.label }}: {{ activeFilter.rangeValues.selected.min }}-{{ activeFilter.rangeValues.selected.max }}
-            </div>
-              <button class="selected__reset" (click)="unselect(activeFilter)" type="button">
-                <i class="mbi mbi-cross"></i>
-              </button>
-          </li>
-        </ng-container>
-        
+      <ng-container *ngSwitchCase="'checkbox'">
+        <li class="filters-bar__item selected" *ngFor="let value of activeFilter.values">
+          <div class="selected__label">
+            {{ value.label }}
+          </div>
+          <button class="selected__reset" (click)="unselect(activeFilter, value)" type="button">
+            <i class="mbi mbi-cross"></i>
+          </button>
+        </li>
       </ng-container>
+                          
+      <ng-container *ngSwitchCase="'range'">
+        <li class="filters-bar__item selected">
+          <div class="selected__label">
+            {{ activeFilter.label }}: {{ activeFilter.rangeValues.selected.min }}-{{ activeFilter.rangeValues.selected.max }}
+          </div>
+          <button class="selected__reset" (click)="unselect(activeFilter)" type="button">
+            <i class="mbi mbi-cross"></i>
+          </button>
+        </li>
+      </ng-container>
+        
+    </ng-container>
           
-    </ul> 
-
-       
+  </ul> 
+  
 </div>

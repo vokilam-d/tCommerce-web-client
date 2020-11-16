@@ -19,6 +19,10 @@ export class FilterBarComponent implements OnInit, OnChanges  {
 
   selectedFiltersInBar = [];
 
+  @Input() filters: FilterDto[];
+  @Input() filteredCount: number;
+  @Output() refresh = new EventEmitter();
+
   get activeFilters(): FilterDto[] {
     const active: FilterDto[] = [];
 
@@ -43,21 +47,17 @@ export class FilterBarComponent implements OnInit, OnChanges  {
 
     return active;
   }
-  
-  @Input() filters: FilterDto[];
-  @Input() filteredCount: number;
-  @Output() refresh = new EventEmitter();
-    
+      
   constructor (private urlService: UrlService) {
-  }
-  
-  ngOnInit(): void {
   }
 
   ngOnChanges() {
     if (this.filters) {
       this.setSelectedFilters();
     }
+  } 
+  
+  ngOnInit(): void {
   }
 
   unselect(activeFilter: FilterDto, value?: FilterValueDto) {
@@ -107,21 +107,21 @@ export class FilterBarComponent implements OnInit, OnChanges  {
   private setSelectedFilters(): any {
     const selectedFiltersInBar: FilterDto[] = [];
   
-      if (this.filters) {
-        this.filters.map(filter => {
-          if (filter.type === 'range') {
-            if (filter.rangeValues.range.min !== filter.rangeValues.selected.min 
-              || filter.rangeValues.range.max !== filter.rangeValues.selected.max ){
-              selectedFiltersInBar.push(filter);
-            }
-          } else {
-            const selectedValues =  filter.values.filter(i => i.isSelected);
-            if (selectedValues.length) {
-              selectedFiltersInBar.push({ ...filter, values: selectedValues });
-              } 
+    if (this.filters) {
+      this.filters.map(filter => {
+        if (filter.type === 'range') {
+          if (filter.rangeValues.range.min !== filter.rangeValues.selected.min 
+            || filter.rangeValues.range.max !== filter.rangeValues.selected.max ){
+            selectedFiltersInBar.push(filter);
           }
-        })
-      }
+        } else {
+          const selectedValues =  filter.values.filter(i => i.isSelected);
+          if (selectedValues.length) {
+            selectedFiltersInBar.push({ ...filter, values: selectedValues });
+          } 
+        }
+      });
+    }
     this.selectedFiltersInBar = selectedFiltersInBar;
     return selectedFiltersInBar;
   }
