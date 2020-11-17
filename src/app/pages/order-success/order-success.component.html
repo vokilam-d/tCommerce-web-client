@@ -108,6 +108,12 @@
           {{ item.name }}
         </a>
 
+        <div class="item__additional-services" *ngIf="item.additionalServices?.length">
+          <div class="item__additional-service" *ngFor="let service of item.additionalServices">
+            {{ service.name }} (+{{ service.price }}грн)
+          </div>
+        </div>
+
         <div class="item__qty-cost">
           <div class="item__qty">
             {{ item.qty }} шт. на сумму

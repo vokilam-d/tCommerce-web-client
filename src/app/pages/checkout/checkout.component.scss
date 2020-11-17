@@ -227,6 +227,19 @@
     font-size: 14px;
   }
 
+  &__additional-services {
+    margin: 8px 0 0;
+  }
+
+  &__additional-service {
+    margin: 4px 0 0;
+    font-size: 12px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
   &__qty-cost {
     margin: 8px 0 0;
     display: flex;

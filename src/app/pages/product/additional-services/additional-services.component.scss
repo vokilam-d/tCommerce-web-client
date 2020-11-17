@@ -1,0 +1,30 @@
+@import "variables";
+
+.services {
+  margin: 15px 0 0;
+
+  &__placeholder {
+    height: 16px;
+  }
+
+  &__error {
+    color: $red;
+  }
+
+  &__service {
+    display: block;
+    margin: 15px 0 0;
+  }
+
+  &__checkbox {
+    width: 16px;
+    height: 16px;
+    vertical-align: bottom;
+  }
+
+  &__name {
+    margin: 0 0 0 8px;
+    font-size: 16px;
+  }
+}
+

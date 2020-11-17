@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from './category.service';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { CategoryDto } from '../../shared/dtos/category.dto';
-import { ProductService } from '../product/product.service';
+import { ProductService } from '../product/services/product.service';
 import { ISelectedFilter } from '../../product-list/filter/selected-filter.interface';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HeadService } from '../../services/head/head.service';

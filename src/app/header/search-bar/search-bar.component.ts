@@ -6,7 +6,7 @@ import { fromEvent, of } from 'rxjs';
 import { API_HOST, DEFAULT_ERROR_TEXT, SEARCH_QUERY_PARAM, UPLOADED_HOST } from '../../shared/constants';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { isPlatformBrowser } from '@angular/common';
-import { ProductService } from '../../pages/product/product.service';
+import { ProductService } from '../../pages/product/services/product.service';
 import { AutocompleteItemDto } from '../../shared/dtos/autocomplete-item.dto';
 import { HttpClient } from '@angular/common/http';
 import { ResponseDto } from '../../shared/dtos/response.dto';

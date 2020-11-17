@@ -154,11 +154,11 @@ export class CustomerService { // todo split to CartService
     this.updatePrices();
   }
 
-  addToCart(sku: string, qty: number) {
+  addToCart(sku: string, qty: number, additionalServiceIds: number[] = []) {
     const alreadyAdded = this.cart.find(item => item.sku === sku);
     if (alreadyAdded) { qty += alreadyAdded.qty; }
 
-    const dto: CreateOrUpdateOrderItemDto = { sku, qty };
+    const dto: CreateOrUpdateOrderItemDto = { sku, qty, additionalServiceIds };
     return this.http.put<ResponseDto<OrderItemDto>>(`${API_HOST}/api/v1/cart`, dto)
       .pipe(
         tap(response => {
@@ -170,7 +170,8 @@ export class CustomerService { // todo split to CartService
   }
 
   updateQtyInCart(orderItemDto: OrderItemDto, qty: number) {
-    const dto: CreateOrUpdateOrderItemDto = { sku: orderItemDto.sku, qty };
+    const additionalServiceIds: number[] = orderItemDto.additionalServices.map(service => service.id);
+    const dto: CreateOrUpdateOrderItemDto = { sku: orderItemDto.sku, qty, additionalServiceIds };
 
     return this.http.put<ResponseDto<OrderItemDto>>(`${API_HOST}/api/v1/cart`, dto)
       .pipe(

@@ -116,6 +116,7 @@ $arrowSize: 10px;
   &__price-qty {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
   }
 
   &__stock {
@@ -166,6 +167,10 @@ $arrowSize: 10px;
     @include respond-to($media_large) {
       margin-left: 20px;
     }
+  }
+
+  &__additional-services {
+    width: 100%;
   }
 
   &__actions {

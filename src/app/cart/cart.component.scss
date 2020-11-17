@@ -262,6 +262,15 @@
     color: rgba($dark, 0.6);
   }
 
+  &__additional-service {
+    margin: 4px 0 0;
+    font-size: 12px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
   &__cost {
     font-size: 18px;
 

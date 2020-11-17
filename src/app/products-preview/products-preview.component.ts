@@ -12,7 +12,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
-import { ProductService } from '../pages/product/product.service';
+import { ProductService } from '../pages/product/services/product.service';
 import { SortingPaginatingFilterDto } from '../shared/dtos/spf.dto';
 import { debounceTime, finalize, takeUntil } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';

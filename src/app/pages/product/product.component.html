@@ -130,6 +130,10 @@
             <div class="product__qty" *ngIf="product.isInStock">
               <quantity-control></quantity-control>
             </div>
+
+            <additional-services class="product__additional-services"
+                                 [ids]="product.additionalServiceIds"
+            ></additional-services>
           </div>
 
           <div class="product__actions">

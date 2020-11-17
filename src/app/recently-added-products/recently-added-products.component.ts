@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../pages/product/product.service';
+import { ProductService } from '../pages/product/services/product.service';
 import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
 import { onWindowLoad } from '../shared/helpers/on-window-load.function';
 

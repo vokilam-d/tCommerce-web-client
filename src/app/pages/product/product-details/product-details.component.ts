@@ -1,9 +1,8 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ProductDto } from '../../../shared/dtos/product.dto';
 import { HttpClient } from '@angular/common/http';
-import { KeyValue } from '@angular/common';
 import { ScrollToService } from '../../../services/scroll-to/scroll-to.service';
-import { ProductReviewService } from '../product-review.service';
+import { ProductReviewService } from '../services/product-review.service';
 import { AddProductReviewDto, ProductReviewDto } from '../../../shared/dtos/product-review.dto';
 import { JsonLdService } from '../../../services/json-ld/json-ld.service';
 import { SafeHtml } from '@angular/platform-browser';

@@ -194,6 +194,19 @@
     }
   }
 
+  &__additional-services {
+    margin: 6px 0 0;
+  }
+
+  &__additional-service {
+    margin: 4px 0 0;
+    font-size: 12px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
   &__price-container {
     margin: 5px 0 0;
     display: flex;

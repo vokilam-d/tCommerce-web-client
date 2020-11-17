@@ -66,6 +66,12 @@
                 ></quantity-control>
               </div>
 
+              <div class="item__row" *ngIf="item.additionalServices?.length">
+                <div class="item__additional-service" *ngFor="let service of item.additionalServices">
+                  {{ service.name }} (+{{ service.price }}грн)
+                </div>
+              </div>
+
               <div class="item__row">
                 <span class="item__cost" [class.item__cost--special]="item.oldCost">
                   {{ item.cost }} грн

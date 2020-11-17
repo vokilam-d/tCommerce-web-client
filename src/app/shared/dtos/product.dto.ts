@@ -44,6 +44,7 @@ export class ProductDto {
   gtin: string;
   relatedProducts: LinkedProductDto[];
   isDiscountApplicable: boolean;
+  additionalServiceIds: number[];
 
   safeFullDescription: SafeHtml;
 }

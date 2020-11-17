@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductService } from './product.service';
+import { ProductService } from './services/product.service';
 import { ProductDto } from '../../shared/dtos/product.dto';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { ProductDetailsComponent } from './product-details/product-details.component';
@@ -16,6 +16,7 @@ import { DeviceService } from '../../services/device-detector/device.service';
 import { LinkedCategoryDto } from '../../shared/dtos/linked-category.dto';
 import { StoreReviewService } from '../../services/store-review/store-review.service';
 import { AnalyticsService } from '../../services/analytics/analytics.service';
+import { AdditionalServicesComponent } from './additional-services/additional-services.component';
 
 @Component({
   selector: 'product',
@@ -43,6 +44,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   @ViewChild(ProductDetailsComponent) detailsCmp: ProductDetailsComponent;
   @ViewChild(FlyToCartDirective) flyToCart: FlyToCartDirective;
   @ViewChild(QuantityControlComponent) qtyCmp: QuantityControlComponent;
+  @ViewChild(AdditionalServicesComponent) additionalServicesCmp: AdditionalServicesComponent;
 
   constructor(private route: ActivatedRoute,
               private headService: HeadService,
@@ -154,10 +156,11 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.flyToCart.start();
 
     const qty = this.qtyCmp.getValue();
+    const additionalServiceIds = this.additionalServicesCmp.getSelectedIds();
 
     this.addToCartError = null;
     this.isLoading = true;
-    this.customerService.addToCart(this.product.sku, qty)
+    this.customerService.addToCart(this.product.sku, qty, additionalServiceIds)
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         _ => { },

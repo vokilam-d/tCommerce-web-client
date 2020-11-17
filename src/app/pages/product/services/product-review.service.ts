@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { toHttpParams } from '../../shared/helpers/to-http-params.function';
-import { ResponseDto } from '../../shared/dtos/response.dto';
+import { toHttpParams } from '../../../shared/helpers/to-http-params.function';
+import { ResponseDto } from '../../../shared/dtos/response.dto';
 import {
   AddProductReviewCommentDto,
   AddProductReviewDto,
   ProductReviewDto
-} from '../../shared/dtos/product-review.dto';
-import { API_HOST } from '../../shared/constants';
+} from '../../../shared/dtos/product-review.dto';
+import { API_HOST } from '../../../shared/constants';
 
 @Injectable({
   providedIn: 'root'

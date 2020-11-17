@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ResponseDto } from '../../shared/dtos/response.dto';
-import { ProductDto, ProductResponseDto } from '../../shared/dtos/product.dto';
-import { toHttpParams } from '../../shared/helpers/to-http-params.function';
-import { SortingPaginatingFilterDto } from '../../shared/dtos/spf.dto';
-import { API_HOST, SEARCH_QUERY_PARAM, VIEWED_PRODUCT_IDS_KEY } from '../../shared/constants';
-import { ProductListResponseDto } from '../../shared/dtos/product-list-response.dto';
-import { ProductListItemDto } from '../../shared/dtos/product-list-item.dto';
-import { AddProductQuickReviewDto } from '../../shared/dtos/product-review.dto';
+import { ResponseDto } from '../../../shared/dtos/response.dto';
+import { ProductDto, ProductResponseDto } from '../../../shared/dtos/product.dto';
+import { toHttpParams } from '../../../shared/helpers/to-http-params.function';
+import { SortingPaginatingFilterDto } from '../../../shared/dtos/spf.dto';
+import { API_HOST, VIEWED_PRODUCT_IDS_KEY } from '../../../shared/constants';
+import { ProductListResponseDto } from '../../../shared/dtos/product-list-response.dto';
+import { ProductListItemDto } from '../../../shared/dtos/product-list-item.dto';
+import { AddProductQuickReviewDto } from '../../../shared/dtos/product-review.dto';
 
 @Injectable({
   providedIn: 'root'

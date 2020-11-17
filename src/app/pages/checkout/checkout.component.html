@@ -63,6 +63,12 @@
               {{ item.name }}
             </a>
 
+            <div class="cart-item__additional-services" *ngIf="item.additionalServices?.length">
+              <div class="cart-item__additional-service" *ngFor="let service of item.additionalServices">
+                {{ service.name }} (+{{ service.price }}грн)
+              </div>
+            </div>
+
             <div class="cart-item__qty-cost">
               <div class="cart-item__qty">
                 {{ item.qty }} шт.

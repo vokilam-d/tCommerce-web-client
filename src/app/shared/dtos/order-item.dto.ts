@@ -1,8 +1,10 @@
 import { ProductListItemDto } from './product-list-item.dto';
+import { AdditionalServiceDto } from './additional-service.dto';
 
 export class CreateOrUpdateOrderItemDto {
   sku: string;
   qty: number;
+  additionalServiceIds: number[];
 }
 
 export class OrderItemDto {
@@ -18,4 +20,5 @@ export class OrderItemDto {
   imageUrl: string;
   slug: string;
   crossSellProducts: ProductListItemDto[];
+  additionalServices: AdditionalServiceDto[];
 }

@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
 import { ISelectedFilter } from './filter/selected-filter.interface';
-import { ProductService } from '../pages/product/product.service';
+import { ProductService } from '../pages/product/services/product.service';
 import { SortingPaginatingFilterDto } from '../shared/dtos/spf.dto';
 import { FilterComponent } from './filter/filter.component';
 import { SortingComponent } from './sorting/sorting.component';

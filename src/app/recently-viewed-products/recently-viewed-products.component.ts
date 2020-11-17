@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../pages/product/product.service';
+import { ProductService } from '../pages/product/services/product.service';
 import { onWindowLoad } from '../shared/helpers/on-window-load.function';
 
 @Component({

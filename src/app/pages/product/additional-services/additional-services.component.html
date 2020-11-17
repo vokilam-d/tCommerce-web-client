@@ -1,0 +1,14 @@
+<div class="services" *ngIf="ids?.length">
+  <div class="placeholder" *ngIf="isLoading">
+    <div class="placeholder__item services__placeholder"></div>
+  </div>
+
+  <div class="services__error" *ngIf="fetchError as error">
+    {{ error }}
+  </div>
+
+  <label class="services__service" *ngFor="let service of additionalServices">
+    <input class="services__checkbox" [(ngModel)]="service.isSelected" type="checkbox" name="">
+    <span class="services__name">{{ service.name }} (+{{ service.price }}грн)</span>
+  </label>
+</div>
