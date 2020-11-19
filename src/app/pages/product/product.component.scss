@@ -90,6 +90,10 @@ $arrowSize: 10px;
     font-size: 14px;
   }
 
+  &__variants {
+    margin: 15px 0 0;
+  }
+
   &__error {
     display: block;
     margin: 20px 0 0;
@@ -460,7 +464,7 @@ $arrowSize: 10px;
 }
 
 .store-info {
-  font-size: 15px;
+  font-size: 14px;
 
   p {
     margin: 12px 0 0;
@@ -516,5 +520,78 @@ $arrowSize: 10px;
 
   &__stars {
     margin-left: 5px;
+  }
+}
+
+.variants-group {
+  margin: 10px 0 0;
+  font-size: 17px;
+
+  @include respond-to($media_large) {
+    margin-top: 15px;
+  }
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &__label-container {
+    margin: 4px 0 0;
+  }
+
+  &__label {
+    color: rgba($dark, 0.8);
+  }
+
+  &__variants {
+  }
+
+  &__variant {
+    display: inline-flex;
+    margin: 7px 7px 0 0;
+    padding: 10px 17px 9px;
+    border: 1px solid $primary;
+    border-radius: 5px;
+
+    &:hover {
+      background: rgba($primary, 0.4);
+      color: $dark;
+    }
+
+    &--out-of-stock {
+      position: relative;
+      border-color: rgba($dark, 0.4);
+      color: rgba($dark, 0.4);
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 2;
+        display: block;
+        width: 36px;
+        height: 1px;
+        background-color: rgba($dark, 0.4);
+        transform: rotate(45deg) translate(-50%, -50%);
+        transform-origin: 0;
+        transition: all 0.2s ease-in-out;
+      }
+
+      &:hover {
+        background-color: rgba($dark, 0.1);
+        color: rgba($dark, 0.8);
+      }
+    }
+
+    &--selected {
+      background: rgba($primary, 0.4);
+      border-color: $primary;
+
+      &:hover {
+        background: rgba($primary, 0.4);
+        border-color: $primary;
+      }
+    }
   }
 }

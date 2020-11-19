@@ -24,6 +24,24 @@
     </h2>
   </header>
 
+  <div class="item__variants" *ngIf="item.variantGroups?.length">
+    <div class="variants-group" *ngFor="let group of item.variantGroups">
+      <div class="variants-group__label">
+        {{ group.label }}
+      </div>
+
+      <div class="variants-group__variants">
+        <a class="variants-group__variant"
+           *ngFor="let variant of group.variants"
+           [class.variants-group__variant--selected]="variant.isSelected"
+           [routerLink]="['/', variant.slug]"
+        >
+          {{ variant.label }}
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div class="item__info">
     <a class="item__rating" *ngIf="item.allReviewsCount > 0" [routerLink]="'/' + item.slug" fragment="reviews">
       <rating-stars class="item__rating-cmp"
@@ -35,6 +53,10 @@
       <span class="item__rating-count">{{ item.allReviewsCount }}</span>
     </a>
 
+    <div class="item__error" *ngIf="error as error">
+      {{ error }}
+    </div>
+
     <div class="item__price-container">
       <div class="item__price" [class.item__price--special]="item.oldPrice">
         {{ item.price }} <span class="item__currency">грн</span>
@@ -43,10 +65,6 @@
       <div class="item__old-price" *ngIf="item.oldPrice as oldPrice">
         {{ oldPrice }} <span class="item__currency">грн</span>
       </div>
-    </div>
-
-    <div class="item__error" *ngIf="error as error">
-      {{ error }}
     </div>
 
     <div class="item__actions">
