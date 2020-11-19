@@ -26,7 +26,6 @@ export class CategoryComponent implements OnInit {
   productListFilters: ISelectedFilter[];
   error: string;
   uploadedHost = UPLOADED_HOST;
-  nameForAnalytics: string;
   defaultSortOption: ESort;
 
   get heading(): string {
@@ -55,7 +54,6 @@ export class CategoryComponent implements OnInit {
         this.setListFilters();
         this.setBreadcrumbs();
         this.setMeta();
-        this.setNameForAnalytics();
         this.setDefaultSortOption();
       },
       error => this.error = error.error?.message || DEFAULT_ERROR_TEXT
@@ -85,10 +83,6 @@ export class CategoryComponent implements OnInit {
     } else {
       return this.uploadedHost + category.medias[0]?.variantsUrls.small;
     }
-  }
-
-  private setNameForAnalytics() {
-    this.nameForAnalytics = `Category - ${this.category.name}`;
   }
 
   private setDefaultSortOption() {
