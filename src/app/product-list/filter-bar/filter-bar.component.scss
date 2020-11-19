@@ -2,7 +2,12 @@
 @import "mixins";
 
 .filters-bar {
-  display: none;
+  display: flex;
+  flex-wrap: wrap;
+
+  @include respond-to($media_large) {
+    flex-wrap: nowrap;
+  }
 
   @include respond-to($media_large) {
     display: inline-flex;
@@ -14,20 +19,43 @@
     display: inline-flex;
     align-items: center;
     flex-wrap: wrap;
+
+    &--desktop {
+      width: 100%;
+
+      @include respond-to($media_large) {
+        width: auto;
+      }
+    }
   }
 
   &__selected-count {
-    align-self: flex-start;
-    margin: 8px 8px 0 0;
-    font-size: 14px;
-    line-height: 32px;
-    white-space: nowrap;
-  }
 
-  &__clear-all {
-    display: inline-flex;
-    align-items: center;
-    margin: 8px 8px 0 0;
+    &--desktop {
+      display: none;
+
+      @include respond-to($media_large) {
+        display: block;
+        align-self: flex-start;
+        margin: 8px 8px 0 0;
+        font-size: 14px;
+        line-height: 32px;
+        white-space: nowrap;
+      }
+    }
+    
+    &--mobile {      
+      display: block;
+      align-self: flex-start;
+      margin: 8px 8px 0 0;
+      font-size: 14px;
+      line-height: 32px;
+      white-space: nowrap;
+      
+      @include respond-to($media_large) {
+        display: none;
+      }
+    }  
   }
 
   &__item {
@@ -41,19 +69,35 @@
     font-size: 14px;
     white-space: nowrap;
 
-      &:hover {
-        background-color: rgba($grey, 0.05);
-      }
+    &:hover {
+      background-color: rgba($grey, 0.05);
+    }
 
-      &--clear-all {
+    &--clear-all {
+      display: none;
+
+      @include respond-to($media_large) {
+        display: inline-flex;
         padding: 10px;
-        border-color: rgba($red, 0.8)
+        border-color: rgba($red, 0.8);
       }
+        
+    }
 
-      &--clear-all:hover {
-        background-color: rgba($red, 0.8);
-        color: $white;
+    &--clear-all-mobile {
+      display: block;
+      padding: 8px 10px;
+      border-color: rgba($red, 0.8);
+    
+      @include respond-to($media_large) {
+        display: none;
       }
+    }
+
+    &--clear-all:hover {
+      background-color: rgba($red, 0.8);
+      color: $white;
+    }
   }
 
   &__selected-filter {
@@ -69,6 +113,7 @@
   }
 
   &__reset {
+    padding: 2px 0 0 0;
     color: rgba($red, 0.8);
     font-weight: 900;
   }

@@ -1,65 +1,7 @@
 @import "variables";
 @import "mixins";
 
-.overlay {
-  background: rgba(#000, 0);
-  transition: background-color 0.5s ease;
-  z-index: 20;
-
-  &--visible {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(#000, 0.7);
-  }
-
-  &__close {
-    z-index: 21;
-    display: none;
-    position: absolute;
-    top: 10px;
-    right: 0;
-    padding: 10px;
-    font-size: 25px;
-    color: $white;
-    
-    @include respond-to($media_large) {
-      display: none;
-    }
-  }
-
-  &--visible &__close {
-    display: block;
-  }
-}
-
 .filters {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 22;
-  width: 70%;
-  min-width: 290px;
-  padding: 20px 15px 60px;
-  background: $white;
-  transform: translateX(-100%);
-  transition: transform 0.5s ease;
-  overflow-y: auto;
-
-  @include respond-to($media_large) {
-    position: static;
-    min-width: auto;
-    width: auto;
-    padding: 0 5px;    
-    transform: none;
-  }
-
-  &--opened {
-    transform: translateX(0);
-  }
 
   &__block {
     margin: 20px 0 0;
@@ -100,103 +42,9 @@
     }
   }
 
-  &__selected-filters {
-    margin: 0;
-
-    @include respond-to($media_large) {
-      display: none;
-    }
-  }
-
-  &__selected-filter {
-    display: flex;
-    height: 32px;
-    margin: 5px 5px 10px 0;
-    padding: 5px 13px;
-    border: 1px solid rgba($grey, 0.3);
-    border-radius: 50px;
-    font-size: 14px;
-    font-weight: 600;
-    color: $dark;
-    white-space: nowrap;
-
-    &:hover {
-      background-color: rgba($grey, 0.05);
-    }
-  }
-
-  &__clear-all {
-    display: flex;
-    align-items: center;
-    height: 32px;
-    margin: 0 0 0 10px;
-    padding: 7px 11px;
-    border: 1px solid rgba($red, 0.8);
-    border-radius: 50px;
-    font-size: 14px;
-    font-weight: 600;
-    white-space: nowrap;        
-
-    &:hover {
-      background-color: rgba($red, 0.8);
-      color: $white;
-    }
-  }
-
-  &__selected-count {
-    display: inline-flex;
-    align-items: center;
-    margin: 0 0 20px 0;
-    font-weight: 600;
-    font-size: 14px;
-    color: $dark;
-    white-space: nowrap;
-  }
-
   &__product-count {
     margin: 0 0 0 5px;
     font-size: 12px;
     color: rgba($dark, 0.4);
-  }
-}
-
-.selected {
-  display: inline-flex;
-  align-items: center;
-
-
-  &__reset {
-    display: flex;
-    align-items: center;
-    padding: 0 0 0 10px;    
-    font-size: 15px;
-    color: rgba($red, 0.8);
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: $red;
-    }
-  }
-
-  &__label {
-    margin: 0;
-  }
-}
-
-.placeholder {
-  &__block {
-    width: 210px;
-    margin: 25px 0 0;
-    padding: 0 10px;
-  }
-
-  &__title {
-    width: 70px;
-    height: 16px;
-    margin: 10px 0 5px;
-  }
-
-  &__item {
-    height: 14px;
   }
 }

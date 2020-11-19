@@ -11,5 +11,5 @@ export const DEFAULT_PHONE_NUMBER_VALUE = '+38';
 
 export const API_HOST = environment.production ? '' : 'http://localhost:3000';
 // export const API_HOST = environment.production ? '' : 'http://173.249.23.253:3080';
-export const UPLOADED_HOST = API_HOST;
-//export const UPLOADED_HOST = 'http://173.249.23.253:3080';
+//export const UPLOADED_HOST = API_HOST;
+export const UPLOADED_HOST = 'http://173.249.23.253:3080';

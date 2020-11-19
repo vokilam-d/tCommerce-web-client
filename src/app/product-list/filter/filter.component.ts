@@ -46,7 +46,6 @@ export class FilterComponent implements OnInit {
     return active;
   }
 
-  isOpened: boolean = false;
   @Input() filters: FilterDto[];
   @Input() filteredCount: number;
   @Output() valueChanged = new EventEmitter();
@@ -66,16 +65,6 @@ export class FilterComponent implements OnInit {
     } else {
       return this.getFiltersByQueryParams();
     }
-  }
-
-  openFilters() {
-    this.isOpened = true;
-    this.cdr.markForCheck();
-  }
-
-  closeFilters() {
-    this.isOpened = false;
-    this.cdr.markForCheck();
   }
 
   unselect(filter: FilterDto, value?: FilterValueDto) {

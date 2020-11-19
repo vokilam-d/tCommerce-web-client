@@ -31,6 +31,9 @@
   }
   
   &__sidebar {
+    display: flex;
+    flex-wrap: wrap;
+
     @include respond-to($media_large) {
       width: 280px;
       flex-shrink: 0;
@@ -40,6 +43,40 @@
   &__content {
     @include respond-to($media_large) {
       flex-grow: 2;
+    }
+  }
+
+  &__active-filters {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 22;
+    width: 70%;
+    min-width: 290px;
+    padding: 20px 15px 60px;
+    background: $white;
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+    overflow-y: auto;
+
+    @include respond-to($media_large) {
+      position: static;
+      width: auto;
+      padding: 0 5px;    
+      transform: none;
+    }
+
+    &--mobile {
+      display: flex;
+      
+      @include respond-to($media_large) {
+        display: none;
+      }
+    }
+    
+    &--opened {
+      transform: translateX(0);
     }
   }
 
@@ -71,6 +108,14 @@
   &__selected-filters {
     display: inline-flex;
     align-items: center;
+
+    &--desktop {
+      display: none;
+
+      @include respond-to($media_large) {
+      display: block;     
+      }
+    }
   }
 
   &__items {
@@ -140,6 +185,23 @@
   }
 }
 
+.sidebar {
+
+  &__active-filters {
+    display: block;
+    padding: 0 0 15px 0;
+
+    @include respond-to($media_medium) {
+      display: none;
+    }
+  }
+
+  &__filters {
+    display: block;
+    width: 100%;
+  }
+}
+
 .filter-toggle {
   display: inline-block;
   padding: 9px 15px 10px;
@@ -167,15 +229,15 @@
   }
 
   &__price {
-    margin: 10px 0 0;
     height: 16px;
     width: 40%;
+    margin: 10px 0 0;
   }
 
   &__btn {
-    margin: 15px 0 0;
     height: 35px;
     width: 60%;
+    margin: 15px 0 0;
   }
 
   &__categories-name {
@@ -183,3 +245,36 @@
   }
 }
 
+.overlay {
+  background: rgba(#000, 0);
+  transition: background-color 0.5s ease;
+  z-index: 20;
+
+  &--visible {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(#000, 0.7);
+  }
+
+  &__close {
+    z-index: 21;
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 0;
+    padding: 10px;
+    font-size: 25px;
+    color: $white;
+    
+    @include respond-to($media_large) {
+      display: none;
+    }
+  }
+
+  &--visible &__close {
+    display: block;
+  }
+}

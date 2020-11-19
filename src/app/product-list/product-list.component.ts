@@ -1,4 +1,3 @@
-import { FilterBarComponent } from './filter-bar/filter-bar.component';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -42,6 +41,7 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   filters: FilterDto[];
   error: string;
   isFixed: boolean;
+  isOpened: boolean;
   headerPosition: number;
   sortOptions: ESort[] = [ESort.Popularity, ESort.New, ESort.Cheap, ESort.Expensive];
   private fetchSub: Subscription;
@@ -133,7 +133,11 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   openFilters() {
-    this.filterCmp.openFilters();
+    this.isOpened = true;
+  }
+
+  closeFilters() {
+    this.isOpened = false;
   }
 
   onFiltersChange() {
