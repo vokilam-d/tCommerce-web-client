@@ -41,7 +41,7 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   filters: FilterDto[];
   error: string;
   isFixed: boolean;
-  isOpened: boolean;
+  isFiltersOpened: boolean;
   headerPosition: number;
   sortOptions: ESort[] = [ESort.Popularity, ESort.New, ESort.Cheap, ESort.Expensive];
   private fetchSub: Subscription;
@@ -133,11 +133,11 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   openFilters() {
-    this.isOpened = true;
+    this.isFiltersOpened = true;
   }
 
   closeFilters() {
-    this.isOpened = false;
+    this.isFiltersOpened = false;
   }
 
   onFiltersChange() {

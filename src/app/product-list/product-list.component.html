@@ -27,13 +27,13 @@
     </div>
   </div>
 
-  <div class="overlay" [class.overlay--visible]="isOpened" (click)="closeFilters()">
+  <div class="overlay" [class.overlay--visible]="isFiltersOpened" (click)="closeFilters()">
     <span class="overlay__close" (click)="closeFilters()">
       <i class="mbi mbi-arrow-left"></i>
     </span>
   </div>
   <div class="product-list__container">
-    <div class="product-list__active-filters" [class.product-list__active-filters--opened]="isOpened">
+    <div class="product-list__active-filters" [class.product-list__active-filters--opened]="isFiltersOpened">
       
       <aside class="product-list__sidebar">
         <filter-bar class="sidebar__active-filters"
