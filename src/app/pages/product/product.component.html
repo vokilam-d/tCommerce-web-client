@@ -47,17 +47,17 @@
         <div class="rating__text" *ngIf="addQuickReviewError as error">{{ error }}</div>
         <div class="rating__text" *ngIf="addQuickReviewSuccess as success">Спасибо! Ваш голос учтен</div>
 
-        <div class="rating__tooltip tooltip tooltip--bottom" *ngIf="isClosed === false">
+        <div class="rating-tooltip rating-tooltip--bottom tooltip tooltip--bottom" *ngIf="isClosed === false">
           Вы можете нажать на звёздочку для быстрой оценки товара
-          <span class="tooltip__close-btn" (click)="closeTooltip()">
-            <span class="tooltip__cross"></span>
+          <span class="rating-tooltip__close-btn" (click)="closeTooltip()">
+            <span class="rating-tooltip__cross"></span>
           </span>
         </div>
 
-        <div class="rating__tooltip tooltip tooltip--bottom" *ngIf="quickReview && quickReview !== null">
-          Выбрать оценку <span class="tooltip__rating">{{ quickReview }}</span> ?
-          <button class="tooltip__confirmation-btn" (click)="addQuickReview(quickReview)">Да</button>
-          <button  class="tooltip__confirmation-btn" (click)="quickReview = null">Нет</button>
+        <div class="rating-tooltip rating-tooltip--bottom tooltip tooltip--bottom" *ngIf="quickReview && quickReview !== null">
+          Выбрать оценку <span class="rating-tooltip__rating">{{ quickReview }}</span> ?
+          <button class="rating-tooltip__confirmation-btn" (click)="addQuickReview(quickReview)">Да</button>
+          <button  class="rating-tooltip__confirmation-btn" (click)="quickReview = null">Нет</button>
         </div>
 
       </div>
@@ -105,24 +105,11 @@
           </p>
         </div>
 
-        <div class="product__variants" *ngIf="product.variantGroups?.length">
-          <div class="variants-group" *ngFor="let group of product.variantGroups">
-            <div class="variants-group__label-container">
-              <span class="variants-group__label">{{ group.label }}</span>: {{ group.selectedVariantLabel }}
-            </div>
-
-            <div class="variants-group__variants">
-              <a class="variants-group__variant"
-                 *ngFor="let variant of group.variants"
-                 [class.variants-group__variant--selected]="variant.isSelected"
-                 [class.variants-group__variant--out-of-stock]="!variant.isInStock"
-                 [routerLink]="['/', variant.slug]"
-              >
-                {{ variant.label }}
-              </a>
-            </div>
-          </div>
-        </div>
+        <product-variants class="product__variants"
+                          *ngIf="product.variantGroups?.length"
+                          [variantGroups]="product.variantGroups"
+                          [isBigSize]="true"
+        ></product-variants>
 
         <div class="product__error" *ngIf="addToCartError as error">
           {{ error }}

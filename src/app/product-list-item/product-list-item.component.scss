@@ -64,6 +64,7 @@
   }
 
   &__variants {
+    display: block;
     margin: 10px 0 0;
   }
 
@@ -200,39 +201,5 @@
 
   &__wishlist-icon {
     font-size: 18px;
-  }
-}
-
-.variants-group {
-  margin: 8px 0 0;
-  font-size: 13px;
-
-  &:first-child {
-    margin-top: 0;
-  }
-
-  &__label {
-    margin: 4px 0 0;
-    font-size: 12px;
-  }
-
-  &__variants {
-  }
-
-  &__variant {
-    display: inline-flex;
-    margin: 3px 5px 0 0;
-    padding: 4px 6px 3px;
-    border: 1px solid $primary;
-    border-radius: 4px;
-
-    &:hover {
-      background: rgba($primary, 0.4);
-      color: $dark;
-    }
-
-    &--selected {
-      background: rgba($primary, 0.4);
-    }
   }
 }

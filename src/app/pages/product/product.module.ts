@@ -19,6 +19,7 @@ import { RecentlyViewedProductsModule } from '../../recently-viewed-products/rec
 import { LinkedCategoriesModule } from '../../linked-categories/linked-categories.module';
 import { AggregatedProductsComponent } from './aggregated-products/aggregated-products.component';
 import { AdditionalServicesComponent } from './additional-services/additional-services.component';
+import { ProductVariantsModule } from '../../product-variants/product-variants.module';
 
 @NgModule({
   declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent, AggregatedProductsComponent, AdditionalServicesComponent],
@@ -36,7 +37,8 @@ import { AdditionalServicesComponent } from './additional-services/additional-se
     ProductsPreviewModule,
     ReviewModule,
     RecentlyViewedProductsModule,
-    LinkedCategoriesModule
+    LinkedCategoriesModule,
+    ProductVariantsModule
   ]
 })
 export class ProductModule { }

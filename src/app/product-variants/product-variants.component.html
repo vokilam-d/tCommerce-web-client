@@ -1,0 +1,44 @@
+<div class="variants-group"
+     *ngFor="let group of variantGroups"
+     [class.variants-group--big]="isBigSize"
+>
+  <div class="variants-group__label-container" [class.variants-group__label-container--big]="isBigSize">
+    <span class="variants-group__label" [class.variants-group__label--big]="isBigSize">
+      {{ group.label }}
+    </span>
+
+    <ng-container *ngIf="isBigSize">: {{ group.selectedVariantLabel }}</ng-container>
+  </div>
+
+  <div class="variants-group__variants">
+    <a class="variants-group__variant"
+       *ngFor="let variant of group.variants"
+       [class.variants-group__variant--big]="isBigSize"
+       [routerLink]="['/', variant.slug]"
+    >
+      <span class="variants-group__color-container tooltip-container"
+            *ngIf="group.hasColor; else variantLabelTmpl"
+            [class.variants-group__color-container--big]="isBigSize"
+            [class.variants-group__color-container--selected]="variant.isSelected"
+            [class.variants-group__color-container--out-of-stock]="!variant.isInStock"
+      >
+        <span class="variants-group__color"
+              [class.variants-group__color--big]="isBigSize"
+              [style.background]="variant.color"
+        ></span>
+
+        <span class="tooltip variants-group__tooltip">{{ variant.label }}</span>
+      </span>
+
+      <ng-template #variantLabelTmpl>
+        <span class="variants-group__variant-label"
+              [class.variants-group__variant-label--big]="isBigSize"
+              [class.variants-group__variant-label--selected]="variant.isSelected"
+              [class.variants-group__variant-label--out-of-stock]="!variant.isInStock"
+        >
+          {{ variant.label }}
+        </span>
+      </ng-template>
+    </a>
+  </div>
+</div>
