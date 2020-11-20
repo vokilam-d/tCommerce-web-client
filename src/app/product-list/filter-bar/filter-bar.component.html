@@ -1,16 +1,15 @@
 <div class="filters-bar" *ngIf="selectedFiltersInBar?.length">
         
-  <p class="filters-bar__selected-count--desktop" *ngIf="filteredCount">
+  <p class="filters-bar__selected-count" *ngIf="filteredCount">
     Выбрано товаров: {{ filteredCount }}
   </p>   
-        
-  <ul class="filters-bar__filters-box--desktop">
-    <li class="filters-bar__item filters-bar__item--clear-all">
-      <button class="filters-bar__item--btn" (click)="unselectAll()">
-         Сбросить все
-      </button>
-    </li>
-        
+
+  <div class="filters-bar__item filters-bar__item--clear-all">
+    <button class="filters-bar__item--btn" (click)="unselectAll()">
+      Сбросить все
+    </button>
+  </div>
+  <ul class="filters-bar__filters-box">
     <ng-container *ngFor="let activeFilter of selectedFiltersInBar" [ngSwitch]="activeFilter.type">
             
       <ng-container *ngSwitchCase="'checkbox'">
@@ -38,15 +37,5 @@
     </ng-container>
           
   </ul> 
-
-  <p class="filters-bar__selected-count--mobile" *ngIf="filteredCount">
-    Выбрано товаров: {{ filteredCount }}
-  </p>
-
-  <div class="filters-bar__item filters-bar__item--clear-all-mobile">
-    <button class="filters-bar__item--btn" (click)="unselectAll()">
-       Сбросить все
-    </button>
-  </div>
   
 </div>
