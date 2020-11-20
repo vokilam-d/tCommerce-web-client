@@ -66,14 +66,6 @@
       padding: 0 5px;    
       transform: none;
     }
-
-    &--mobile {
-      display: flex;
-      
-      @include respond-to($media_large) {
-        display: none;
-      }
-    }
     
     &--opened {
       transform: translateX(0);
@@ -113,7 +105,7 @@
       display: none;
 
       @include respond-to($media_large) {
-      display: block;     
+        display: block;     
       }
     }
   }

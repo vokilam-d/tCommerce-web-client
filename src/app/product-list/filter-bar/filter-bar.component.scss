@@ -66,12 +66,12 @@
       @include respond-to($media_large) {
         order: 2;
       }
-    }
 
-    &--clear-all:hover {
-      background-color: rgba($red, 0.8);
-      color: $white;
-    }        
+      &:hover {
+        background-color: rgba($red, 0.8);
+        color: $white;
+      }
+    }            
   }
 }
   
@@ -84,10 +84,10 @@
   &__reset {
     padding: 2px 0 0 0;
     color: rgba($red, 0.8);
-    font-weight: 900;
-  }
+    font-weight: 700;
 
-  &__reset:hover {
-    color: rgba($red, 1);
-  }
+    &:hover {
+      color: rgba($red, 1);
+    }
+  }  
 }
