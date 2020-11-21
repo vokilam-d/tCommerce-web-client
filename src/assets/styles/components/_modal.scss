@@ -9,7 +9,7 @@
   bottom: 0;
   background: rgba(#000, 0.5);
   cursor: pointer;
-  z-index: 20;
+  z-index: 22;
   animation: fadeIn 0.3s ease;
 }
 
@@ -23,7 +23,7 @@
   flex-direction: column;
   max-height: 100vh;
   background: #fff;
-  z-index: 21;
+  z-index: 23;
   animation: fadeIn 0.3s ease, slideIn 0.4s ease;
 
   @include respond-to($media_large) {
