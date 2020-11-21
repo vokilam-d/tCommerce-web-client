@@ -1,0 +1,96 @@
+@import "variables";
+@import "mixins";
+
+.filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+
+  @include respond-to($media_large) {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    min-height: 37px;
+  }
+
+  &__filters-box {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    order: 1;
+
+    @include respond-to($media_large) {
+      width: auto;
+      order: 3;
+    }
+  }
+
+  &__selected-count {
+    display: block;
+    align-self: flex-start;
+    margin: 5px;
+    font-size: 14px;
+    line-height: 32px;
+    white-space: nowrap;
+    order: 2;
+
+    @include respond-to($media_large) {
+      margin: 0 5px 5px 5px;
+      order: 1;
+    }
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    margin: 5px;
+    padding: 7px 7px 7px 12px;
+    border: 1px solid rgba($grey, 0.4);
+    border-radius: 50px;
+    font-size: 14px;
+    white-space: nowrap;
+
+    @include respond-to($media_large) {
+      margin: 0 5px 5px 5px;
+    }
+
+    &:hover {
+      background-color: rgba($grey, 0.05);
+    }
+
+    &--clear-all {
+      display: inline-flex;
+      padding: 10px;
+      border-color: rgba($red, 0.8);
+      order: 3;
+
+      @include respond-to($media_large) {
+        order: 2;
+        align-self: flex-start;
+      }
+
+      &:hover {
+        background-color: rgba($red, 0.8);
+        color: $white;
+      }
+    }            
+  }
+}
+  
+.selected {
+
+  &__label {
+    padding: 0 5px 0 0;
+  }
+
+  &__reset {
+    padding: 2px 0 0 0;
+    color: rgba($red, 0.8);
+    font-weight: 700;
+
+    &:hover {
+      color: rgba($red, 1);
+    }
+  }  
+}

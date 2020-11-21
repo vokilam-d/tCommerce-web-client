@@ -21,32 +21,6 @@ import { SEARCH_QUERY_PARAM } from '../../shared/constants';
 })
 export class FilterComponent implements OnInit {
 
-  get activeFilters(): FilterDto[] {
-    const active: FilterDto[] = [];
-
-    this.filters?.forEach(filter => {
-      switch (filter.type) {
-        case 'checkbox':
-          const selectedValues = filter.values.filter(v => v.isSelected);
-          if (selectedValues.length) {
-            active.push({ ...filter, values: selectedValues });
-          }
-          break;
-        case 'range':
-          if (
-            filter.rangeValues.range.min !== filter.rangeValues.selected.min
-            || filter.rangeValues.range.max !== filter.rangeValues.selected.max
-          ) {
-            active.push(filter);
-          }
-          break;
-      }
-    });
-
-    return active;
-  }
-
-  isOpened: boolean = false;
   @Input() filters: FilterDto[];
   @Input() filteredCount: number;
   @Output() valueChanged = new EventEmitter();
@@ -64,61 +38,6 @@ export class FilterComponent implements OnInit {
       return this.buildSelectedFilters();
     } else {
       return this.getFiltersByQueryParams();
-    }
-  }
-
-  openFilters() {
-    this.isOpened = true;
-    this.cdr.markForCheck();
-  }
-
-  closeFilters() {
-    this.isOpened = false;
-    this.cdr.markForCheck();
-  }
-
-  unselect(filter: FilterDto, value?: FilterValueDto) {
-    switch (filter.type) {
-      case 'checkbox':
-        value.isSelected = false;
-        this.updateQuery(filter, value);
-        break;
-      case 'range':
-        filter.rangeValues.selected.min = filter.rangeValues.range.min;
-        filter.rangeValues.selected.max = filter.rangeValues.range.max;
-        this.urlService.deleteQueryParam(filter.id);
-        break;
-    }
-    this.valueChanged.emit();
-    this.cdr.markForCheck();
-  }
-
-  unselectAll() {
-    let isChanged: boolean = false;
-
-    this.filters.forEach(filter => {
-      switch (filter.type) {
-        case 'checkbox':
-          filter.values.forEach(value => {
-            if (value.isSelected) {
-              value.isSelected = false;
-              this.urlService.deleteQueryParam(filter.id);
-              isChanged = true;
-            }
-          });
-          break;
-
-        case 'range':
-          filter.rangeValues.selected.min = filter.rangeValues.range.min;
-          filter.rangeValues.selected.max = filter.rangeValues.range.max;
-          this.urlService.deleteQueryParam(filter.id);
-          isChanged = true;
-          break;
-      }
-    });
-
-    if (isChanged) {
-      this.valueChanged.emit();
     }
   }
 

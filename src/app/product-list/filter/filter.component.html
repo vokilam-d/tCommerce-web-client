@@ -1,11 +1,3 @@
-<div class="overlay" [class.overlay--visible]="isOpened" (click)="closeFilters()">
-  <span class="overlay__close" (click)="closeFilters()">
-    <i class="mbi mbi-arrow-left"></i>
-  </span>
-</div>
-
-<div class="filters" [class.filters--opened]="isOpened">
-
   <div class="placeholder" *ngIf="!filters">
     <div class="placeholder__block" *ngFor="let i of [1,2,3,4]">
       <div class="placeholder__item placeholder__title"></div>
@@ -16,43 +8,7 @@
       </ng-container>
     </div>
   </div>
-
-  <div class="filters__selected-filters" *ngIf="activeFilters?.length">
-    <ng-container *ngFor="let activeFilter of activeFilters" [ngSwitch]="activeFilter.type">
-
-      <ng-container *ngSwitchCase="'checkbox'">
-        <div class="filters__selected-filter selected" *ngFor="let value of activeFilter.values">
-          <div class="selected__label">
-            {{ value.label }}
-          </div>
-          <button class="selected__reset" (click)="unselect(activeFilter, value)" type="button">
-            <i class="mbi mbi-cross"></i>
-          </button>
-        </div>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'range'">
-        <div class="filters__selected-filter selected">
-          <div class="selected__label">
-            {{ activeFilter.label }}: {{ activeFilter.rangeValues.selected.min }}-{{ activeFilter.rangeValues.selected.max }}
-          </div>
-          <button class="selected__reset" (click)="unselect(activeFilter)" type="button">
-            <i class="mbi mbi-cross"></i>
-          </button>
-        </div>
-      </ng-container>
-
-    </ng-container>
-
-    <div class="filters__selected-count" *ngIf="filteredCount">
-      Выбрано товаров: {{ filteredCount }}
-    </div>
-
-    <button class="btn btn--transparent filters__clear-all" (click)="unselectAll()">
-      Сбросить все
-    </button>
-  </div>
-
+  
   <dl class="filters__options">
     <div class="filters__block" *ngFor="let filter of filters">
       <dt class="filters__title">{{ filter.label }}</dt>
@@ -66,7 +22,6 @@
                    (ngModelChange)="checkboxToggle(filter, value)"
                    type="checkbox"
             >
-
             {{ value.label }} <span class="filters__product-count">({{ value.productsCount }})</span>
           </label>
 
@@ -81,4 +36,3 @@
       </ng-container>
     </div>
   </dl>
-</div>

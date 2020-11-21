@@ -1,65 +1,7 @@
 @import "variables";
 @import "mixins";
 
-.overlay {
-  background: rgba(#000, 0);
-  transition: background-color 0.5s ease;
-  z-index: 20;
-
-  &--visible {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(#000, 0.7);
-  }
-
-  &__close {
-    display: none;
-    position: absolute;
-    top: 10px;
-    right: 0;
-    padding: 10px;
-    font-size: 25px;
-    color: #fff;
-    z-index: 21;
-
-    @include respond-to($media_large) {
-      display: none;
-    }
-  }
-
-  &--visible &__close {
-    display: block;
-  }
-}
-
 .filters {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  min-width: 290px;
-  width: 70%;
-  transform: translateX(-100%);
-  transition: transform 0.5s ease;
-  padding: 20px 15px 60px;
-  background: #fff;
-  z-index: 22;
-  overflow-y: auto;
-
-  @include respond-to($media_large) {
-    position: static;
-    min-width: auto;
-    width: auto;
-    transform: none;
-    padding: 0 5px;
-  }
-
-  &--opened {
-    transform: translateX(0);
-  }
 
   &__block {
     margin: 20px 0 0;
@@ -100,61 +42,10 @@
     }
   }
 
-  &__selected-filters {
-    margin: 20px 0 0;
-
-    @include respond-to($media_large) {
-      padding-left: 10px;
-      padding-right: 30px;
-    }
-  }
-
-  &__selected-filter {
-    margin: 5px 0 0;
-
-    border: 1px solid $primary;
-    padding: 5px 15px;
-    border-radius: 7px;
-
-    &:first-child {
-
-    }
-  }
-
-  &__clear-all {
-    margin: 10px 0;
-    padding: 7px 11px;
-    font-size: 13px;
-  }
-
-  &__selected-count {
-    margin: 15px 0 0;
-    font-weight: 600;
-  }
-
   &__product-count {
     margin: 0 0 0 5px;
     font-size: 12px;
     color: rgba($dark, 0.4);
-  }
-}
-
-.selected {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  &__reset {
-    padding: 3px;
-    font-size: 15px;
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: rgba($dark, 0.6);
-    }
-  }
-
-  &__label {
   }
 }
 
