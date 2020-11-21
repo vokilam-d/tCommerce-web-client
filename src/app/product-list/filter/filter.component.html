@@ -1,3 +1,14 @@
+  <div class="placeholder" *ngIf="!filters">
+    <div class="placeholder__block" *ngFor="let i of [1,2,3,4]">
+      <div class="placeholder__item placeholder__title"></div>
+      <div class="placeholder__item"></div>
+      <ng-container *ngFor="let k of [1,2,3]">
+        <div class="placeholder__item placeholder__text"></div>
+        <div class="placeholder__item placeholder__text placeholder__text--last"></div>
+      </ng-container>
+    </div>
+  </div>
+  
   <dl class="filters__options">
     <div class="filters__block" *ngFor="let filter of filters">
       <dt class="filters__title">{{ filter.label }}</dt>

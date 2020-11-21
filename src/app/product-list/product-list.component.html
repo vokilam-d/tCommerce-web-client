@@ -7,17 +7,11 @@
         <i class="mbi mbi-cross filter-toggle__icon"></i>
       </button>
 
-      <div class="product-list__selected-filters">
-        <div class="product-list__selected-filters--desktop">
-          <filter-bar
-                class="product-list__filters-bar"
-                [filters]="filters"
-                [filteredCount]="filteredCount"
-                (refresh)="onFiltersChange()"
-          ></filter-bar>
-        </div>
-          
-      </div>
+      <filter-bar class="product-list__selected-filters"
+                  [filters]="filters"
+                  [filteredCount]="filteredCount"
+                  (refresh)="onFiltersChange()"
+      ></filter-bar>
 
       <sorting class="product-list__sorting"
                [sortOptions]="sortOptions"

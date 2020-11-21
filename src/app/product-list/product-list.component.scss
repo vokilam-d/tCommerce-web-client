@@ -75,6 +75,7 @@
   &__header {
     display: flex;
     justify-content: space-between;
+    min-height: 40px;
   }
 
   &__filter-toggle {
@@ -98,15 +99,11 @@
   }
 
   &__selected-filters {
-    display: inline-flex;
     align-items: center;
+    display: none;
 
-    &--desktop {
-      display: none;
-
-      @include respond-to($media_large) {
-        display: block;     
-      }
+    @include respond-to($media_large) {
+      display: block;     
     }
   }
 
@@ -183,7 +180,7 @@
     display: block;
     padding: 0 0 15px 0;
 
-    @include respond-to($media_medium) {
+    @include respond-to($media_large) {
       display: none;
     }
   }
