@@ -28,6 +28,10 @@
 
   &__container {
     display: block;
+
+    @include respond-to($media_large) {
+      display: flex;
+    }
   }
   
   &__sidebar {
