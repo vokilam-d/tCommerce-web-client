@@ -27,7 +27,7 @@
   }
 
   &__container {
-    display: flex;
+    display: block;
   }
   
   &__sidebar {
@@ -80,6 +80,7 @@
 
   &__filter-toggle {
     width: 50%;
+    height: 35px;
     margin: 0 16px 0 0;
     font-size: 16px;
 
