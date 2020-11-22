@@ -23,7 +23,7 @@
       </div>
 
       <div class="info__row" *ngIf="customer.phoneNumber as phone">
-        {{ phone }}
+        {{ phone | mask: '+00 (000) 000-00-00-00000000000' }}
       </div>
 
       <div class="info__btn-container">
@@ -58,6 +58,18 @@
                formControlName="lastName"
                id="lastName"
                type="text"
+               required
+        >
+      </div>
+
+      <div class="form__control-container">
+        <label for="phoneNumber" class="form__label">Номер телефона</label>
+        <input class="form__input"
+               formControlName="phoneNumber"
+               mask="+00 (000) 000-00-00-00000000000"
+               inputmode="tel"
+               type="text"
+               id="phoneNumber"
                required
         >
       </div>
