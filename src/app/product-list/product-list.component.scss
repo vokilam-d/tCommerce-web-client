@@ -5,7 +5,12 @@
   display: block;
   height: auto;
   min-height: 35px;
-  padding: 0 0 15px 0;
+  padding: 0;
+
+  @include respond-to($media_large) {
+    padding: 0 0 15px 0;
+  }
+  
 }
 
 .fixed {
@@ -28,30 +33,20 @@
 
   &__container {
     display: block;
+
+    @include respond-to($media_large) {
+      display: flex;
+    }
   }
   
   &__sidebar {
-    display: flex;
-    flex-wrap: wrap;
-
-    @include respond-to($media_large) {
-      width: 280px;
-      flex-shrink: 0;
-    }
-  }
-
-  &__content {
-    @include respond-to($media_large) {
-      flex-grow: 2;
-    }
-  }
-
-  &__active-filters {
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     z-index: 22;
+    display: flex;
+    flex-wrap: wrap;    
     width: 70%;
     min-width: 290px;
     padding: 20px 15px 60px;
@@ -62,20 +57,31 @@
 
     @include respond-to($media_large) {
       position: static;
-      width: auto;
+      flex-shrink: 0;
+      width: 290px;     
       padding: 0 5px;    
       transform: none;
     }
-    
+
     &--opened {
       transform: translateX(0);
+    }
+  }
+
+  &__content {
+    @include respond-to($media_large) {
+      flex-grow: 2;
     }
   }
 
   &__header {
     display: flex;
     justify-content: space-between;
-    min-height: 42px;
+
+    @include respond-to($media_large) {
+      min-height: 42px;
+    }
+    
   }
 
   &__filter-toggle {
