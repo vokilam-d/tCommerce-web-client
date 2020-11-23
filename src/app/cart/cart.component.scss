@@ -205,7 +205,7 @@
   }
 
   &__buy-info {
-    @include respond-to(375px) {
+    @include respond-to(460px) {
       display: flex;
       align-items: center;
       justify-content: space-between;

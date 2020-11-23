@@ -15,6 +15,7 @@ import { AccountOrdersComponent } from './account-orders/account-orders.componen
 import { SharedModule } from '../../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddressFormModule } from '../../address-form/address-form.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { AddressFormModule } from '../../address-form/address-form.module';
     FooterModule,
     SharedModule,
     ReactiveFormsModule,
-    AddressFormModule
+    AddressFormModule,
+    NgxMaskModule
   ]
 })
 export class AccountModule { }
