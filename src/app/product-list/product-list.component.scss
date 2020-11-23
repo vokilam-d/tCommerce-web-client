@@ -41,12 +41,12 @@
   
   &__sidebar {
     position: fixed;
-    display: flex;
-    flex-wrap: wrap;    
     top: 0;
     left: 0;
     bottom: 0;
     z-index: 22;
+    display: flex;
+    flex-wrap: wrap;    
     width: 70%;
     min-width: 290px;
     padding: 20px 15px 60px;
@@ -59,7 +59,6 @@
       width: 280px;
       flex-shrink: 0;
       position: static;
-      width: auto;
       padding: 0 5px;    
       transform: none;
     }
