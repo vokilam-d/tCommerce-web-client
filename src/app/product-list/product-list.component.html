@@ -27,9 +27,9 @@
     </span>
   </div>
   <div class="product-list__container">
-    <div class="product-list__active-filters" [class.product-list__active-filters--opened]="isFiltersOpened">
+    <!-- <div class="product-list__active-filters" [class.product-list__active-filters--opened]="isFiltersOpened"> -->
       
-      <aside class="product-list__sidebar">
+      <aside class="product-list__sidebar"  [class.product-list__sidebar--opened]="isFiltersOpened">
         <filter-bar class="sidebar__active-filters"
                     [filters]="filters"
                     [filteredCount]="filteredCount"
@@ -42,7 +42,7 @@
                     (valueChanged)="onFiltersChange()"
         ></app-filter>
       </aside>
-    </div>
+    <!-- </div> -->
   
     <main class="product-list__content">
       <ol class="product-list__items" #itemsRef>
