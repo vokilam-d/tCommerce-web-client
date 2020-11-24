@@ -9,12 +9,6 @@
 
   &__item {
     transition: background-color 0.15s ease;
-
-    &:hover {
-      @include respond-to($media_large) {
-        //background: $primary;
-      }
-    }
   }
 
   &__link-container {
