@@ -55,6 +55,11 @@
     font-size: 15px;
     font-weight: 600;
     line-height: 1.2;
+
+    &:hover {
+      color: $linkMainHover;
+      text-decoration: underline;
+    }
   }
 
   &__content {
@@ -78,7 +83,12 @@
   }
 
   &__category-link {
-    color: $blue;
+    color: $linkMain;
+
+    &:hover {
+      color: $linkMainHover;
+      text-decoration: underline;
+    }
   }
 
   &__publish-date {

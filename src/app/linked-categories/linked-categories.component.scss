@@ -40,6 +40,13 @@
     margin: 5px 1px 0 0;
     padding-top: 8px;
     flex-shrink: 0;
+    color: $linkMain;
+    
+    & > :hover {
+        color: $linkMainHover;
+        text-decoration: underline;
+      }
+
 
     @include respond-to($media_medium) {
       padding-top: 5px;

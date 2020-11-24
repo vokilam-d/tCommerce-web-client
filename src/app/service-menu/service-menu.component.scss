@@ -15,6 +15,7 @@
 
   &__link {
     font-size: 15px;
+    color: $linkMain;
     transition: all 0.2s ease;
     cursor: pointer;
 
@@ -23,7 +24,8 @@
     }
 
     &:hover {
-      color: $primary;
+      color: $linkMainHover;
+      text-decoration: underline;
     }
 
     #{$menu}--horizontal & {

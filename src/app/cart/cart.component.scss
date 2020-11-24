@@ -226,6 +226,7 @@
     padding: 0 20px 0 0;
     font-size: 14px;
     line-height: 1.2;
+    color: $linkMain;
 
     @include respond-to($media_medium) {
       margin: 0;
@@ -234,6 +235,11 @@
     @include respond-to($media_large) {
       font-size: 15px;
       line-height: 1;
+    }
+
+    &:hover {
+      color: $linkMainHover;
+      text-decoration: underline;
     }
   }
 

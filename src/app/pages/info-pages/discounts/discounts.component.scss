@@ -1,0 +1,12 @@
+@import "variables";
+
+.info-page {
+  & a {
+    color: $linkMain;
+
+    &:hover {
+      color: $linkMainHover;
+      text-decoration: underline;
+    }
+  }
+}

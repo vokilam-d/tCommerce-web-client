@@ -54,6 +54,12 @@
   &__category {
     width: 100%;
     margin: 3px 0;
+  /*     color: $linkMain;
+
+    & > :hover {
+      color: $linkMainHover;
+      text-decoration: underline;
+    } */
 
     @include respond-to($media_medium) {
       width: 33.33%;
@@ -73,7 +79,7 @@
       padding: 10px 15px;
 
       &:hover {
-        background-color: #f3f3f3;
+        background-color: rgba($grey, 0.1);
         box-shadow: 1px 1px 6px 0 #cccccc;
         transition: all 0.2s ease-in-out;
         color: $dark;

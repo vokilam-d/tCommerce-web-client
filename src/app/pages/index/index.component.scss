@@ -148,11 +148,20 @@
     margin: 0 0 15px;
     font-size: 23px;
     font-weight: 600;
+    
+    & a {
+      color: $linkMain;
+
+      &:hover {
+        color: $linkMainHover;
+        text-decoration: underline;
+      }
+    }
 
     @include respond-to($media_medium) {
       margin: 0;
       font-size: 18px;
-    }
+    }    
   }
 
   &__subcategories {
@@ -163,9 +172,18 @@
     padding: 5px 0;
     font-size: 17px;
 
+    & a {
+      color: $linkMain;
+
+      &:hover {
+        color: $linkMainHover;
+        text-decoration: underline;
+      }
+    }
+
     @include respond-to($media_medium) {
       font-size: 14px;
-    }
+    }    
   }
 }
 

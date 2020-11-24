@@ -45,6 +45,12 @@
   align-items: center;
   padding: 7px 0 7px 10px;
   font-size: 16px;
+  color: $linkMain;
+
+  &:hover {
+    color: $linkMainHover;
+    text-decoration: underline;
+  }
 
   &__icon {
     margin: 0 5px 0 0;
@@ -56,10 +62,15 @@
   display: block;
   padding: 6px 0 6px 10px;
   font-size: 16px;
-  color: $blue;
+  color: $linkMain;
   transition: color 0.2s ease;
 
   &:hover {
-    color: darken($blue, 8%);
+    color: $linkMainHover;
+    text-decoration: underline;
   }
+}
+
+.mbi-ios-arrow-right {
+  display: none;
 }

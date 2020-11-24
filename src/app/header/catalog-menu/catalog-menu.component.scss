@@ -12,7 +12,7 @@
 
     &:hover {
       @include respond-to($media_large) {
-        background: $primary;
+        //background: $primary;
       }
     }
   }
@@ -30,6 +30,7 @@
     display: block;
     padding: 15px 40px 15px 10px;
     font-size: 19px;
+    color: $linkMain;
 
     @include respond-to($media_large) {
       padding: 11px 40px 11px 20px;
@@ -38,7 +39,8 @@
 
     &:hover {
       @include respond-to($media_large) {
-        color: $dark;
+        color: $linkMainHover;
+        text-decoration: underline;
       }
     }
   }
@@ -126,7 +128,6 @@
 
     &:hover {
       @include respond-to($media_large) {
-        background: $primary;
       }
     }
   }
@@ -148,6 +149,8 @@
     border-color: $borderColor;
     text-align: center;
     font-size: 17px;
+    color: $linkMain;
+
 
     @include respond-to($media_large) {
       padding: 11px 40px 11px 20px;
@@ -158,7 +161,8 @@
 
     &:hover {
       @include respond-to($media_large) {
-        color: $dark;
+        color: $linkMainHover;
+        text-decoration: underline;
       }
     }
   }
