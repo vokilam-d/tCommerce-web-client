@@ -1,7 +1,7 @@
 <ul class="menu">
   <li class="menu__item" *ngFor="let category of categories">
     <div class="menu__link-container">
-      <a class="menu__link" [routerLink]="['/', category.slug]">
+      <a class="menu__link main-link" [routerLink]="['/', category.slug]">
         {{ category.name }}
       </a>
 
@@ -20,7 +20,7 @@
     <ul class="menu__submenu submenu" *ngIf="category.children.length" [class.menu__submenu--expanded]="category.isExpanded">
       <li class="submenu__item" *ngFor="let subCategory of category.children">
         <div class="submenu__link-container">
-          <a class="submenu__link" [routerLink]="['/', subCategory.slug]">
+          <a class="submenu__link main-link" [routerLink]="['/', subCategory.slug]">
             {{ subCategory.name }}
           </a>
         </div>

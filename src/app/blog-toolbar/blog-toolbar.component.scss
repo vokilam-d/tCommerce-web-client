@@ -3,10 +3,10 @@
 
 .toolbar {
   &__title {
-    margin: 10px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 10px 0 0;    
     font-size: 18px;
     font-weight: 600;
 
@@ -45,12 +45,6 @@
   align-items: center;
   padding: 7px 0 7px 10px;
   font-size: 16px;
-  color: $linkMain;
-
-  &:hover {
-    color: $linkMainHover;
-    text-decoration: underline;
-  }
 
   &__icon {
     margin: 0 5px 0 0;
@@ -62,15 +56,9 @@
   display: block;
   padding: 6px 0 6px 10px;
   font-size: 16px;
-  color: $linkMain;
   transition: color 0.2s ease;
-
-  &:hover {
-    color: $linkMainHover;
-    text-decoration: underline;
-  }
 }
 
-.mbi-ios-arrow-right {
+.hidden {
   display: none;
 }

@@ -33,11 +33,11 @@
 
   &__slider {
     @include respond-to($brk_point) {
-      width: 60%;
-      flex-shrink: 0;
       display: flex;
+      flex-shrink: 0;
       align-content: center;
       justify-content: center;
+      width: 60%;  
     }
   }
 
@@ -100,9 +100,9 @@
 
   &__img-wrapper {
     display: flex;
-    width: 40%;
     justify-content: center;
     align-items: center;
+    width: 40%;    
     padding-right: 35px;
     text-align: center;
 
@@ -148,15 +148,6 @@
     margin: 0 0 15px;
     font-size: 23px;
     font-weight: 600;
-    
-    & a {
-      color: $linkMain;
-
-      &:hover {
-        color: $linkMainHover;
-        text-decoration: underline;
-      }
-    }
 
     @include respond-to($media_medium) {
       margin: 0;
@@ -171,15 +162,6 @@
   &__subcategory {
     padding: 5px 0;
     font-size: 17px;
-
-    & a {
-      color: $linkMain;
-
-      &:hover {
-        color: $linkMainHover;
-        text-decoration: underline;
-      }
-    }
 
     @include respond-to($media_medium) {
       font-size: 14px;

@@ -85,19 +85,19 @@
       <div class="product__info">
 
         <div class="product__store-info store-info">
-          <p><a class="store-info__link" routerLink="/dostavka-i-oplata">Бесплатная доставка</a> для заказов от 1000 грн <span class="store-info__tip">(кроме габаритных)</span>
+          <p><a class="store-info__link main-link" routerLink="/dostavka-i-oplata">Бесплатная доставка</a> для заказов от 1000 грн <span class="store-info__tip">(кроме габаритных)</span>
           </p>
 
           <p *ngIf="product.isDiscountApplicable">
             <span class="store-info__discount">-5%</span> для заказов от 500 грн<br>
             <span class="store-info__discount">-10%</span> для заказов от 1500 грн<br>
-            <span class="store-info__tip">(не суммируется с <a class="store-info__link" routerLink="/skidki">накопительными скидками</a> и акциями)</span>
+            <span class="store-info__tip">(не суммируется с <a class="store-info__link main-link" routerLink="/skidki">накопительными скидками</a> и акциями)</span>
           </p>
 
           <p>
             Заказы обрабатываются за 1 день!
             <a class="store-info__reviews store-reviews" routerLink="/otzyvy">
-              <span class="store-reviews__text">Отзывы о нас</span>
+              <span class="store-reviews__text main-link">Отзывы о нас</span>
               <span class="store-reviews__average">{{ averageReviewsRating }}</span>
               <rating-stars class="store-reviews__stars" [isSmall]="true" [isDisabled]="true" [rating]="averageReviewsRating"></rating-stars>
               <span class="store-reviews__count">({{ storeReviewsCount }})</span>
@@ -166,7 +166,7 @@
         <div class="product__categories">
           Категории:&nbsp;
 
-          <a class="product__category"
+          <a class="product__category main-link"
              *ngFor="let category of product.categories, last as last"
              [routerLink]="'/' + category.slug"
           >

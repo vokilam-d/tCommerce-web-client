@@ -15,17 +15,11 @@
 
   &__link {
     font-size: 15px;
-    color: $linkMain;
     transition: all 0.2s ease;
     cursor: pointer;
 
     @include respond-to($media_medium) {
       font-size: 13px;
-    }
-
-    &:hover {
-      color: $linkMainHover;
-      text-decoration: underline;
     }
 
     #{$menu}--horizontal & {

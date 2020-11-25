@@ -55,13 +55,7 @@
   &__phone {
     display: block;
     padding: 5px 0;
-    color: $linkMain;
-
-    &:hover {
-      color: $linkMainHover;
-      text-decoration: underline;
-    }
-  }
+  } 
 
   &__work-hours {
     margin: 10px 0 0;
@@ -70,12 +64,6 @@
   &__email {
     display: block;
     margin: 10px 0 0;
-    color: $linkMain;
-    
-    &:hover {
-      color: $linkMainHover;
-      text-decoration: underline;
-    }
   }
 }
 

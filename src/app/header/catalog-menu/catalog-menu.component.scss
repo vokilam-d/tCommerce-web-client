@@ -9,12 +9,6 @@
 
   &__item {
     transition: background-color 0.15s ease;
-
-    &:hover {
-      @include respond-to($media_large) {
-        //background: $primary;
-      }
-    }
   }
 
   &__link-container {
@@ -30,18 +24,10 @@
     display: block;
     padding: 15px 40px 15px 10px;
     font-size: 19px;
-    color: $linkMain;
 
     @include respond-to($media_large) {
       padding: 11px 40px 11px 20px;
       font-size: 16px;
-    }
-
-    &:hover {
-      @include respond-to($media_large) {
-        color: $linkMainHover;
-        text-decoration: underline;
-      }
     }
   }
 
@@ -91,22 +77,21 @@
     overflow: hidden;
 
     @include respond-to($media_large) {
-      overflow: initial;
-      max-height: initial;
-      width: 270px;
-
       position: absolute;
       left: 100%;
       top: 0;
+      visibility: hidden;
+      width: 270px;
       min-height: 100%;
+      max-height: initial;
       margin: 30px 0 0;
       padding: 10px 0;
       border-left: 1px solid $borderColor;
       background: #fff;
-      visibility: hidden;
-      opacity: 0;
-      transition: visibility 0.18s ease, opacity 0.18s ease, margin 0.18s ease;
       box-shadow: 0 1px 3px rgba($dark, 0.12), 0 1px 4px rgba($dark, 0.24);
+      overflow: initial;
+      transition: visibility 0.18s ease, opacity 0.18s ease, margin 0.18s ease;
+      opacity: 0;
     }
 
     &--expanded {
@@ -149,21 +134,12 @@
     border-color: $borderColor;
     text-align: center;
     font-size: 17px;
-    color: $linkMain;
-
 
     @include respond-to($media_large) {
       padding: 11px 40px 11px 20px;
       border: none;
       text-align: left;
       font-size: 16px;
-    }
-
-    &:hover {
-      @include respond-to($media_large) {
-        color: $linkMainHover;
-        text-decoration: underline;
-      }
     }
   }
 }
