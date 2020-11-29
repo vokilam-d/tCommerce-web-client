@@ -32,6 +32,15 @@ img {
       list-style-type: inherit;
     }
   }
+
+  a {
+    color: $blue;
+    cursor: pointer;
+
+    &:hover {
+      color: darken($blue, 10%);
+    }
+  }
 }
 
 .yt-video-wrapper {
@@ -73,27 +82,19 @@ img {
 }
 
 .main-link {
-  color: $linkMain !important;
+  color: $linkMain;
+  cursor: pointer;
 
-  &:hover, &__hover:hover {
-    color: $linkMainHover !important;
-    text-decoration: underline;
+  &:visited, &:active {
+    color: $linkMain;
   }
-}
-
-.black-link {
-  color: $dark;
-
-  &:hover, &__hover:hover {
-    color: $linkMainHover !important;
-    text-decoration: underline;
-  }
-}
-
-.primary-link {
-  transition: all 0.2s ease;
 
   &:hover {
-    color: $primary
+    color: $linkMainHover;
+    text-decoration: underline;
+  }
+
+  &--black {
+    color: $dark;
   }
 }

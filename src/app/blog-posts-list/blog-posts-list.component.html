@@ -27,7 +27,7 @@
       <img class="item__img" [src]="uploadedHost + item.featuredMedia.variantsUrls.original" [alt]="item.name">
     </a>
 
-    <a class="item__name black-link" [routerLink]="['/', 'blog', item.slug]">
+    <a class="item__name main-link  main-link--black" [routerLink]="['/', 'blog', item.slug]">
       {{ item.name }}
     </a>
 

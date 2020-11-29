@@ -59,6 +59,10 @@
     @include respond-to($media_large) {
       width: 25%;
     }
+
+    &:hover {
+      color: $primary;
+    }
   }
 
   &__logo-img {
@@ -205,6 +209,10 @@
   &__phone {
     display: block;
     transition: all 0.2s ease;
+
+    &:hover {
+      color: $primary;
+    }
 
     & + & {
       opacity: 0;
