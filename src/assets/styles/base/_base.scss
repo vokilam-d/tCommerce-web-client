@@ -34,11 +34,11 @@ img {
   }
 
   a {
-    color: $blue;
+    color: $linkMain;
     cursor: pointer;
 
     &:hover {
-      color: darken($blue, 10%);
+      color: $linkMainHover;
     }
   }
 }
@@ -85,7 +85,8 @@ img {
   color: $linkMain;
   cursor: pointer;
 
-  &:visited, &:active {
+  &:visited, 
+  &:active {
     color: $linkMain;
   }
 
@@ -96,5 +97,11 @@ img {
 
   &--black {
     color: $dark;
+  
+    &:visited, 
+    &:active {
+      color: $dark;
+    }
+    
   }
 }
