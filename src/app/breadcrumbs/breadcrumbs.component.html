@@ -23,7 +23,7 @@
         *ngIf="!last || showLastItem"
         [class.breadcrumbs__item--big]="isBig"
     >
-      <a *ngIf="!last; else noLink" [routerLink]="'/' + breadcrumb.link">
+      <a class="main-link" *ngIf="!last; else noLink" [routerLink]="'/' + breadcrumb.link">
         {{ breadcrumb.title }}
       </a>
 

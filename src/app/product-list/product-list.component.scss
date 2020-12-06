@@ -10,7 +10,6 @@
   @include respond-to($media_large) {
     padding: 0 0 15px 0;
   }
-  
 }
 
 .fixed {
@@ -58,7 +57,7 @@
     @include respond-to($media_large) {
       position: static;
       flex-shrink: 0;
-      width: 290px;     
+      width: 290px;      
       padding: 0 5px;    
       transform: none;
     }
@@ -81,7 +80,6 @@
     @include respond-to($media_large) {
       min-height: 42px;
     }
-    
   }
 
   &__filter-toggle {

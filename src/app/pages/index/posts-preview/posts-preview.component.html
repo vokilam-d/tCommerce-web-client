@@ -18,12 +18,12 @@
 
           <div class="post__info">
             <div class="post__category">
-              <a  class="post__ref link" [routerLink]="['/', 'blog', post.category.slug + '.html']" [title]="post.category.name">
+              <a class="post__ref link main-link" [routerLink]="['/', 'blog', post.category.slug + '.html']" [title]="post.category.name">
                 {{ post.category.name }}
               </a>
             </div>
             <h3 class="post__title">
-              <a class="link" [routerLink]="['/', 'blog', post.slug]" [title]="post.name">{{ post.name }}</a>
+              <a class="link main-link" [routerLink]="['/', 'blog', post.slug]" [title]="post.name">{{ post.name }}</a>
             </h3>
             <div class="post__date">
               Добавлено: {{ post.publishedAt | date: 'd MMMM, y' }}

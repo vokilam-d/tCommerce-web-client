@@ -3,10 +3,10 @@
 
 .toolbar {
   &__title {
-    margin: 10px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 10px 0 0;    
     font-size: 18px;
     font-weight: 600;
 
@@ -56,10 +56,5 @@
   display: block;
   padding: 6px 0 6px 10px;
   font-size: 16px;
-  color: $blue;
   transition: color 0.2s ease;
-
-  &:hover {
-    color: darken($blue, 8%);
-  }
 }

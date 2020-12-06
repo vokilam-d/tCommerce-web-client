@@ -8,7 +8,7 @@
     </ng-container>
 
     <li class="categories__category" *ngFor="let category of categories" [title]="category.name" #itemRef>
-      <a class="categories__link" [routerLink]="'/' + category.slug">
+      <a class="categories__link main-link" [routerLink]="'/' + category.slug">
 
         <img *ngIf="category.isSelected && needToDemonstrate" class="categories__swipe" src="/assets/images/swipe.svg" alt="">
 

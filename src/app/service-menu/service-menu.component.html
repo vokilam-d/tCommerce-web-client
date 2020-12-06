@@ -15,20 +15,20 @@
       </a>
 
       <ng-template #notLoggedTmpl>
-        <button class="service-menu__link" (click)="onLoginClick()">
+        <button class="service-menu__link main-link" (click)="onLoginClick()">
           Войти в кабинет
         </button>
       </ng-template>
-      <a class="service-menu__link" *ngIf="false" [routerLink]="['/', 'account', 'wishlist']">Мои желания</a>
+      <a class="service-menu__link main-link" *ngIf="false" [routerLink]="['/', 'account', 'wishlist']">Мои желания</a>
     </ng-container>
 
-    <a class="service-menu__link" routerLink="/skidki">Скидки</a>
-    <a class="service-menu__link" routerLink="/dostavka-i-oplata">Доставка и оплата</a>
-    <a class="service-menu__link" routerLink="/vozvrat-tovara">Возврат и обмен</a>
-    <a class="service-menu__link" *ngIf="isInFooter" routerLink="/politika-konfidencialnosti">Политика конфиденциальности</a>
-    <a class="service-menu__link" routerLink="/contacts">Контакты</a>
-    <a class="service-menu__link" routerLink="/blog">Блог</a>
-    <a class="service-menu__link" routerLink="/otzyvy">
+    <a class="service-menu__link main-link" routerLink="/skidki">Скидки</a>
+    <a class="service-menu__link main-link" routerLink="/dostavka-i-oplata">Доставка и оплата</a>
+    <a class="service-menu__link main-link" routerLink="/vozvrat-tovara">Возврат и обмен</a>
+    <a class="service-menu__link main-link" *ngIf="isInFooter" routerLink="/politika-konfidencialnosti">Политика конфиденциальности</a>
+    <a class="service-menu__link main-link" routerLink="/contacts">Контакты</a>
+    <a class="service-menu__link main-link" routerLink="/blog">Блог</a>
+    <a class="service-menu__link main-link" routerLink="/otzyvy">
       Отзывы о нас
       <span class="service-menu__count" *ngIf="storeReviewsCount"> ({{ storeReviewsCount }})</span>
     </a>

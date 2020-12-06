@@ -34,13 +34,13 @@
 
       <div class="category__info">
         <h2 class="category__title">
-          <a [routerLink]="'/' + category.slug">{{ category.name }}</a>
+          <a class="main-link" [routerLink]="'/' + category.slug">{{ category.name }}</a>
         </h2>
 
         <ul class="category__subcategories" *ngIf="category.children.length">
           <li *ngFor="let subcategory of category.children">
             <h3 class="category__subcategory">
-              <a [routerLink]="'/' + subcategory.slug">{{ subcategory.name }}</a>
+              <a class="main-link" [routerLink]="'/' + subcategory.slug">{{ subcategory.name }}</a>
             </h3>
           </li>
         </ul>
