@@ -363,7 +363,9 @@ $arrowSize: 10px;
     bottom: auto;
     top: 50%;
     box-shadow: 5px 5px 20px rgba($dark, 0.3);
-    font-size: 14px;transform: translate(0, -50%);
+    font-size: 14px;
+    transform: translate(0, -50%);
+
     @include appear('tooltip-right', $translateX: 20px, $translateY: -50%, $translateToY: -50%);
   }
 
