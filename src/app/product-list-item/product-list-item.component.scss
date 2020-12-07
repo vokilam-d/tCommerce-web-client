@@ -20,10 +20,10 @@
 
   &__img-container {
     position: relative;
-    height: 110px;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 110px;    
 
     @include respond-to($media_medium) {
       height: 150px;
@@ -49,12 +49,12 @@
     position: absolute;
     top: -5px;
     right: -5px;
+    z-index: 1;
     padding: 4px 5px;
     background: saturate($red, 8%);
     border-radius: 2px;
     color: #fff;
-    font-size: 13px;
-    z-index: 1;
+    font-size: 13px;    
   }
 
   &__name {
@@ -117,12 +117,12 @@
     color: rgba($dark, 0.6);
 
     &::after {
-      content: '';
-      display: block;
       position: absolute;
       top: 50%;
       left: 0;
       right: 0;
+      display: block;
+      content: '';  
       border-bottom: 1px solid;
     }
   }
@@ -146,21 +146,21 @@
     padding: 12px 17px 11px;
     background: rgba($red, 0.15);
     border: 1px solid rgba($red, 0.4);
-    color: red;
     border-radius: 3px;
+    color: red;
     font-size: 14px;
     line-height: 1.3;
   }
 
   &__buy {
     position: relative;
-    padding-left: 10px;
-    padding-right: 10px;
     display: flex;
     align-items: center;
-    font-size: 13px;
-    border-radius: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
     background-color: initial;
+    border-radius: 3px;
+    font-size: 13px;  
 
     @include respond-to(400px)  {
       font-size: 14px;
@@ -178,8 +178,8 @@
 
   &__out-of-stock {
     display: flex;
-    min-height: 35px;
     align-items: center;
+    min-height: 35px;    
     font-size: 14px;
     text-align: center;
 

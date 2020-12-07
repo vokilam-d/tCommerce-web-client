@@ -22,10 +22,6 @@
       font-size: 13px;
     }
 
-    &:hover {
-      color: $primary;
-    }
-
     #{$menu}--horizontal & {
       @include respond-to($media_large) {
         padding: 12px 5px;

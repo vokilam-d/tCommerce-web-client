@@ -27,7 +27,7 @@
       <img class="item__img" [src]="uploadedHost + item.featuredMedia.variantsUrls.original" [alt]="item.name">
     </a>
 
-    <a class="item__name" [routerLink]="['/', 'blog', item.slug]">
+    <a class="item__name main-link  main-link--black" [routerLink]="['/', 'blog', item.slug]">
       {{ item.name }}
     </a>
 
@@ -37,7 +37,7 @@
       </div>
 
       <div class="item__category">
-        Категория: <a class="item__category-link" *ngIf="item.category" [routerLink]="['/', 'blog', item.category.slug + '.html']">{{ item.category.name }}</a>
+        Категория: <a class="item__category-link main-link" *ngIf="item.category" [routerLink]="['/', 'blog', item.category.slug + '.html']">{{ item.category.name }}</a>
       </div>
 
       <div class="item__publish-date">

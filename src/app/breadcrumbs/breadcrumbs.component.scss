@@ -14,13 +14,13 @@
     margin: 4px 17px 0 0;
 
     &:not(:last-child)::after {
-      content: '';
       display: inline-block;
-      vertical-align: top;
-      padding: 3px;
       margin: 10px 0 2px 10px;
+      padding: 3px;
       border: solid #aaa;
       border-width: 0 1px 1px 0;
+      content: '';      
+      vertical-align: top;  
       transform: rotate(-45deg);
     }
 
@@ -41,6 +41,7 @@
     position: relative;
     top: 2px;
     width: 22px;
+    fill: $linkMain;
 
     @include respond-to($media_medium) {
       width: 25px;
@@ -48,10 +49,9 @@
 
     &:hover {
       @include respond-to($media_large) {
-        fill: $primary;
+        fill: $linkMainHover;
         transition: 0.2s ease-in;
       }
     }
   }
-
 }
