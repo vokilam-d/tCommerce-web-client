@@ -55,7 +55,7 @@
     overflow-y: auto;
 
     @include respond-to($media_large) {
-      width: 290px;
+      position: static;
       flex-shrink: 0;
       width: 290px;      
       padding: 0 5px;    

@@ -7,7 +7,7 @@ export const DEFAULT_ERROR_TEXT = 'Что-то пошло не так. Пожа�
 export const IS_EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
 export const VALID_PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
 export const VIEWED_PRODUCT_IDS_KEY = 'recentlyViewedProducts';
-export const DEFAULT_PHONE_NUMBER_VALUE = '+380';
+export const DEFAULT_PHONE_NUMBER_VALUE = '+38';
 
 export const API_HOST = environment.production ? '' : 'http://localhost:3000';
 // export const API_HOST = environment.production ? '' : 'http://173.249.23.253:3080';
