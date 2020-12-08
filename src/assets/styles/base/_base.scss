@@ -82,29 +82,36 @@ img {
 }
 
 .main-link {
-  color: $linkMain;
-  cursor: pointer;
+  color: $dark;
 
-  &:visited, 
-  &:active {
+  @include respond-to($media_large) {
     color: $linkMain;
-  }
+    cursor: pointer;
 
-  &:hover {
-    color: $linkMainHover;
-    text-decoration: underline;
+    &:visited, 
+    &:active {
+      color: $linkMain;
+    }
+    
+    &:hover {
+      color: $linkMainHover;
+      text-decoration: underline;
+    }
   }
 
   &--black {
     color: $dark;
-  
-    &:visited, 
-    &:active {
-      color: $dark;
-    }
 
-    &:hover {
-      color: $linkMainHover;
+    @include respond-to($media_large) {
+    
+      &:visited, 
+      &:active {
+        color: $dark;
+      }
+
+      &:hover {
+        color: $linkMainHover;
+      }
     }
   }
 }
