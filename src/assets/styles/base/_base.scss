@@ -90,6 +90,11 @@ img {
     color: $linkMain;
   }
 
+  &:hover {
+    color: $linkMainHover;
+    text-decoration: underline;
+  }
+
   &--black {
     color: $dark;
   
@@ -97,10 +102,9 @@ img {
     &:active {
       color: $dark;
     }
-  }
 
-  &:hover {
-    color: $linkMainHover;
-    text-decoration: underline;
-  }  
+    &:hover {
+      color: $linkMainHover;
+    }
+  }
 }
