@@ -8,7 +8,7 @@
 
       <div class="posts__item post" *ngFor="let post of posts | slice:0:3">
         <div class="post__container">
-          <a class="post__img-container link" [routerLink]="['/', 'blog', post.slug]" [title]="post.name">
+          <a class="post__img-container main-link" [routerLink]="['/', 'blog', post.slug]" [title]="post.name">
             <img class="post__img"
                  [src]="uploadedHost + post.featuredMedia.variantsUrls.original"
                  [alt]="post.featuredMedia.altText"
@@ -18,12 +18,12 @@
 
           <div class="post__info">
             <div class="post__category">
-              <a class="post__ref link main-link" [routerLink]="['/', 'blog', post.category.slug + '.html']" [title]="post.category.name">
+              <a class="post__ref main-link" [routerLink]="['/', 'blog', post.category.slug + '.html']" [title]="post.category.name">
                 {{ post.category.name }}
               </a>
             </div>
             <h3 class="post__title">
-              <a class="link main-link" [routerLink]="['/', 'blog', post.slug]" [title]="post.name">{{ post.name }}</a>
+              <a class="main-link main-link--black" [routerLink]="['/', 'blog', post.slug]" [title]="post.name">{{ post.name }}</a>
             </h3>
             <div class="post__date">
               Добавлено: {{ post.publishedAt | date: 'd MMMM, y' }}

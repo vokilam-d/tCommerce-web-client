@@ -102,6 +102,9 @@ img {
     &:active {
       color: $dark;
     }
-    
+
+    &:hover {
+      color: $linkMainHover;
+    }
   }
 }
