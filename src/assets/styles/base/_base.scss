@@ -82,18 +82,18 @@ img {
 }
 
 .main-link {
-  color: $dark;
-
-  @include respond-to($media_large) {
-    color: $linkMain;
-    cursor: pointer;
-
-    &:visited, 
-    &:active {
+  color: $linkMain;
+  cursor: pointer;
+    
+  &:visited, 
+  &:active {
+    @include respond-to($media_large) {
       color: $linkMain;
     }
-    
-    &:hover {
+  }
+
+  &:hover {
+    @include respond-to($media_large) {
       color: $linkMainHover;
       text-decoration: underline;
     }
@@ -102,14 +102,15 @@ img {
   &--black {
     color: $dark;
 
-    @include respond-to($media_large) {
-    
-      &:visited, 
-      &:active {
+    &:visited, 
+    &:active {
+      @include respond-to($media_large) {
         color: $dark;
-      }
+      } 
+    }
 
-      &:hover {
+    &:hover {
+      @include respond-to($media_large) {
         color: $linkMainHover;
       }
     }
