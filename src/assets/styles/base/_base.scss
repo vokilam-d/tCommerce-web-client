@@ -87,9 +87,7 @@ img {
     
   &:visited, 
   &:active {
-    @include respond-to($media_large) {
       color: $linkMain;
-    }
   }
 
   &:hover {
@@ -104,9 +102,7 @@ img {
 
     &:visited, 
     &:active {
-      @include respond-to($media_large) {
         color: $dark;
-      } 
     }
 
     &:hover {
