@@ -84,27 +84,31 @@ img {
 .main-link {
   color: $linkMain;
   cursor: pointer;
-
+    
   &:visited, 
   &:active {
     color: $linkMain;
   }
 
   &:hover {
-    color: $linkMainHover;
-    text-decoration: underline;
+    @include respond-to($media_large) {
+      color: $linkMainHover;
+      text-decoration: underline;
+    }
   }
 
   &--black {
     color: $dark;
-  
+
     &:visited, 
     &:active {
       color: $dark;
     }
 
     &:hover {
-      color: $linkMainHover;
+      @include respond-to($media_large) {
+        color: $linkMainHover;
+      }
     }
   }
 }
