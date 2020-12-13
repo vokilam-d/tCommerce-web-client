@@ -23,10 +23,12 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   uploadedHost = UPLOADED_HOST;
   isOrderLoading: boolean = false;
   orderError: string | null = null;
+  minimalOrderCost = 150;
 
   get cart() { return this.customerService.cart; }
   get prices() { return this.customerService.prices; }
   get isLoggedIn() { return this.customerService.isLoggedIn; }
+  get canPlaceOrder() { return this.prices.totalCost >= this.minimalOrderCost; }
 
   @ViewChild(OrderCustomerInfoComponent) infoCmp: OrderCustomerInfoComponent;
   @ViewChild('checkoutRef') checkoutRef: ElementRef;
@@ -56,9 +58,14 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   }
 
   placeOrder() {
-    if (!this.infoCmp.checkInfoValidity()) { return; }
+    if (!this.infoCmp.checkInfoValidity()) {
+      return;
+    }
     if (!this.orderService.paymentMethod) {
       this.setError(`Не выбран способ оплаты`);
+      return;
+    }
+    if (!this.canPlaceOrder) {
       return;
     }
 
@@ -97,7 +104,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
     if (Array.isArray(error)) {
       error = error.join('\n');
     }
-    
+
     this.orderError = error;
     this.scrollToService.scrollTo({ target: this.checkoutRef, offset: -60 });
   }

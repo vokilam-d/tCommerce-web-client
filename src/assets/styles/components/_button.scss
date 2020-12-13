@@ -6,24 +6,32 @@
   border: 1px solid $action;
   border-radius: 5px;
   font-size: 16px;
+  color: $dark;
   transition: background-color 0.15s ease;
 
-  &:hover,
-  &:active {
+  &[disabled] {
+    background: $disabledBackground;
+    border-color: $disabledBackground;
+    color: $disabledTextColor;
+    cursor: not-allowed;
+  }
+
+  &:not([disabled]):hover,
+  &:not([disabled]):active {
     color: $dark;
     background: darken($action, 5%);
   }
-  &:active {
+  &:not([disabled]):active {
     background: darken($action, 10%);
   }
 
   &--transparent {
     background: transparent;
 
-    &:hover {
+    &:not([disabled]):hover {
       background: $primary;
     }
-    &:active {
+    &:not([disabled]):active {
       background: $primary;
     }
   }
@@ -33,10 +41,10 @@
     border: 1px solid #e5e5e5;
     border-radius: 3px;
 
-    &:hover {
+    &:not([disabled]):hover {
       background: rgba($dark, 0.08);
     }
-    &:active {
+    &:not([disabled]):active {
       background: rgba($dark, 0.12);
     }
   }

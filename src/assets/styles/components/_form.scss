@@ -38,7 +38,7 @@
     }
 
     &--disabled {
-      color: rgba($dark, 0.4);
+      color: $disabledTextColor;
       cursor: help;
     }
   }
@@ -61,7 +61,7 @@
     }
 
     &[disabled] {
-      background: rgba($dark, 0.1);
+      background: $disabledBackground;
     }
 
     &--invalid {

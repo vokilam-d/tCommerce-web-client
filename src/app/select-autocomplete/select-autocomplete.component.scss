@@ -3,7 +3,7 @@
 
 .autocomplete {
   &__empty-active {
-    color: rgba($dark, 0.6);
+    color: $disabledTextColor;
   }
 
   &__input-container {

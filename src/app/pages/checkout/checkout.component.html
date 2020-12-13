@@ -39,7 +39,7 @@
     <preloader class="checkout__preloader" *ngIf="isOrderLoading"></preloader>
 
     <main class="checkout__form">
-      <div class="checkout__error" *ngIf="orderError as error">
+      <div class="checkout__info-error" *ngIf="orderError as error">
         {{ error }}
       </div>
 
@@ -118,7 +118,17 @@
         </div>
       </div>
 
-      <button class="btn checkout__submit" (click)="placeOrder()" type="button">Заказ подтверждаю</button>
+      <div class="checkout__cost-error checkout-error" *ngIf="!canPlaceOrder">
+        Минимальная сумма заказа: {{ minimalOrderCost }} грн.
+      </div>
+
+      <button class="btn checkout__submit"
+              [disabled]="!canPlaceOrder"
+              (click)="placeOrder()"
+              type="button"
+      >
+        Заказ подтверждаю
+      </button>
     </aside>
   </div>
 
