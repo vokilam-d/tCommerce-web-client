@@ -34,11 +34,11 @@ img {
   }
 
   a {
-    color: $linkMain;
+    color: $link;
     cursor: pointer;
 
     &:hover {
-      color: $linkMainHover;
+      color: $linkHover;
     }
   }
 }
@@ -82,17 +82,17 @@ img {
 }
 
 .main-link {
-  color: $linkMain;
+  color: $link;
   cursor: pointer;
-    
-  &:visited, 
+
+  &:visited,
   &:active {
-    color: $linkMain;
+    color: $link;
   }
 
   &:hover {
     @include respond-to($media_large) {
-      color: $linkMainHover;
+      color: $linkHover;
       text-decoration: underline;
     }
   }
@@ -100,14 +100,14 @@ img {
   &--black {
     color: $dark;
 
-    &:visited, 
+    &:visited,
     &:active {
       color: $dark;
     }
 
     &:hover {
       @include respond-to($media_large) {
-        color: $linkMainHover;
+        color: $linkHover;
       }
     }
   }

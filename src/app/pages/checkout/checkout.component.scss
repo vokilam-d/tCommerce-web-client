@@ -147,12 +147,12 @@
 
   &__edit-btn {
     padding: 0 0 2px;
-    color: $blue;
+    color: $link;
     border-bottom: 1px dashed;
     transition: color 0.2s ease;
 
     &:hover {
-      color: darken($blue, 12%);
+      color: darken($link, 12%);
     }
   }
 
