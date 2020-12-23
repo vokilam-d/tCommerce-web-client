@@ -3,7 +3,7 @@ import { CustomerService } from '../services/customer/customer.service';
 import { QuantityControlComponent } from '../shared/quantity-control/quantity-control.component';
 import { OrderItemDto } from '../shared/dtos/order-item.dto';
 import { finalize } from 'rxjs/operators';
-import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../shared/constants';
+import { DEFAULT_ERROR_TEXT, MINIMAL_ORDER_COST, UPLOADED_HOST } from '../shared/constants';
 import { AnalyticsService } from '../services/analytics/analytics.service';
 
 @Component({
@@ -16,14 +16,16 @@ export class CartComponent implements OnInit {
   uploadedHost = UPLOADED_HOST;
   isLoading: boolean = false;
   cartError: string | null = null;
+  minimalOrderCost = MINIMAL_ORDER_COST;
   private cartErrorTimeout: number | undefined;
+
+  get items() { return this.customerService.cart; }
+  get prices() { return this.customerService.prices; }
+  get canPlaceOrder() { return this.prices.totalCost >= this.minimalOrderCost; }
 
   @Input() isCrossSellVisible: boolean = false;
   @Output('continueShopping') continueShoppingEvt = new EventEmitter();
   @ViewChild(QuantityControlComponent) qtyCmp: QuantityControlComponent;
-
-  get items() { return this.customerService.cart; }
-  get prices() { return this.customerService.prices; }
 
   constructor(private customerService: CustomerService,
               private analyticsService: AnalyticsService

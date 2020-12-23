@@ -30,8 +30,15 @@
         </div>
       </div>
 
+      <div class="cart__cost-error" *ngIf="!canPlaceOrder">
+        Минимальная сумма заказа: {{ minimalOrderCost }} грн.
+      </div>
+
       <div class="cart__btns">
-        <a class="cart__btn btn btn--default" (click)="checkout()" routerLink="/checkout">
+        <a class="cart__btn btn btn--default" *ngIf="canPlaceOrder" (click)="checkout()" routerLink="/checkout">
+          Оформить заказ <i class="cart__btn-icon mbi mbi-arrow-right"></i>
+        </a>
+        <a class="cart__btn btn btn--default" *ngIf="!canPlaceOrder" disabled>
           Оформить заказ <i class="cart__btn-icon mbi mbi-arrow-right"></i>
         </a>
 

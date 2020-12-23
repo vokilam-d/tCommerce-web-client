@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { OrderCustomerInfoComponent } from './order-customer-info/order-customer-info.component';
 import { AddOrderDto } from '../../shared/dtos/order.dto';
 import { OrderService } from './order.service';
-import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../../shared/constants';
+import { DEFAULT_ERROR_TEXT, MINIMAL_ORDER_COST, UPLOADED_HOST } from '../../shared/constants';
 import { normalizePhoneNumber } from '../../shared/helpers/normalize-phone-number.function';
 import { ScrollToService } from '../../services/scroll-to/scroll-to.service';
 import { HeadService } from '../../services/head/head.service';
@@ -23,7 +23,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   uploadedHost = UPLOADED_HOST;
   isOrderLoading: boolean = false;
   orderError: string | null = null;
-  minimalOrderCost = 150;
+  minimalOrderCost = MINIMAL_ORDER_COST;
 
   get cart() { return this.customerService.cart; }
   get prices() { return this.customerService.prices; }
