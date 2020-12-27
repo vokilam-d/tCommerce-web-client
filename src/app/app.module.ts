@@ -14,6 +14,7 @@ import { CommonRequestInterceptor } from './shared/interceptors/common-request.i
 import { routesResolver } from './shared/factories/routes-resolver.function';
 import { Router } from '@angular/router';
 import { ButtonUpModule } from './button-up/button-up.module';
+import { AnnouncementModule } from './announcement/announcement.module';
 
 registerLocaleData(localeRu);
 
@@ -32,7 +33,8 @@ registerLocaleData(localeRu);
     CustomerModalModule,
     NotyModule,
     CartModalModule,
-    ButtonUpModule
+    ButtonUpModule,
+    AnnouncementModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'ru' },
