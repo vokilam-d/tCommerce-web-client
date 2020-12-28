@@ -1,3 +1,5 @@
+@import "mixins";
+
 .announcement {
   width: 100%;
   padding: 5px 0;
@@ -8,10 +10,15 @@
 
   &__text {
     margin: 0;
-    padding: 10px 0;
+    padding: 10px 5px;
     font-size: 15px;
     text-align: center;
     color: #f0f0f0;
+
+    @include respond-to($media_medium) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
   }
 }
 
