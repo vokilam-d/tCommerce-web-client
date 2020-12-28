@@ -68,7 +68,8 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
     if (!value) { return; }
 
     this.searchResults = null;
-    this.isInFocus = false;
+    this.handleSearchBarInFocus(false);
+
     this.router.navigate(['/', 'search'], { queryParams: { [SEARCH_QUERY_PARAM]: value } });
   }
 
@@ -122,7 +123,7 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
           switch (event.key) {
             case 'Escape':
               this.inputRef.nativeElement.blur();
-              this.isInFocus = false;
+              this.handleSearchBarInFocus(false);
               break;
             case 'Enter':
               if (this.activeIndex === null) {

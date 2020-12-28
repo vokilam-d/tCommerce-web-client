@@ -185,6 +185,12 @@
     background-color: #ffffff;
     z-index: 3;
   }
+
+  &--opened-search-bar {
+    @include respond-to-less-than($media_medium) {
+      z-index: 25;
+    }
+  }
 }
 
 .phones {

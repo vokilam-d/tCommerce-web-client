@@ -38,12 +38,12 @@
       </div>
 
       <div class="fixed-container" [class.fixed-container--is-catalog]="isSidebarCatalog">
-        <div class="header__toolbar toolbar" [class.fixed]="isFixed" #toolbarRef>
+        <div class="header__toolbar toolbar" [class.fixed]="isFixed" [class.fixed--opened-search-bar]="isSearchBarInFocus" #toolbarRef>
           <div class="toolbar__menu" (click)="openMenu()">
             <i class="toolbar__menu-icon mbi mbi-menu"></i>
           </div>
 
-         <search-bar class="toolbar__search-bar" (isSearchBarInFocus)="setZindex($event)" #searchBarRef></search-bar>
+         <search-bar class="toolbar__search-bar" (isSearchBarInFocus)="setIsSearchBarInFocus($event)" #searchBarRef></search-bar>
 
           <!--        <div class="toolbar__item">-->
           <!--          <i class="toolbar__item-icon mbi mbi-heart"></i>-->

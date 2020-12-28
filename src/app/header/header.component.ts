@@ -11,6 +11,7 @@ import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 export class HeaderComponent implements OnInit {
 
   isFixed: boolean;
+  isSearchBarInFocus: boolean;
   toolbarPosition: number;
 
   get categories(): CategoryTreeItem[] { return this.categoryService.categories; }
@@ -18,7 +19,7 @@ export class HeaderComponent implements OnInit {
   @Input() isSidebarCatalog: boolean = false;
   @ViewChild(SidebarMenuComponent) sidebarCmp: SidebarMenuComponent;
   @ViewChild('searchBarRef', { read: ElementRef }) searchBarRef: ElementRef;
-  @ViewChild('toolbarRef') toolbarRef: ElementRef;
+  @ViewChild('toolbarRef',  { read: ElementRef }) toolbarRef: ElementRef;
 
   constructor(private categoryService: CategoryService) { }
 
@@ -38,7 +39,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  public setZindex(isSearchBarInFocus: boolean) {
-    this.searchBarRef.nativeElement.style.zIndex = isSearchBarInFocus ? 25 : 3;
+  public setIsSearchBarInFocus(isSearchBarInFocus: boolean) {
+    this.isSearchBarInFocus = isSearchBarInFocus;
   }
 }
