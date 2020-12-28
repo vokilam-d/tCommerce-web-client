@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit {
 
   @Input() isSidebarCatalog: boolean = false;
   @ViewChild(SidebarMenuComponent) sidebarCmp: SidebarMenuComponent;
-  @ViewChild('searchBarRef', { read: ElementRef }) searchBarRef: ElementRef;
   @ViewChild('toolbarRef',  { read: ElementRef }) toolbarRef: ElementRef;
 
   constructor(private categoryService: CategoryService) { }
