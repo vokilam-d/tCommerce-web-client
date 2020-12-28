@@ -1,7 +1,7 @@
 @import "variables";
 @import "mixins";
 
-.fixed-container {  
+.fixed-container {
   display: block;
   height: auto;
   min-height: 35px;
@@ -37,7 +37,7 @@
       display: flex;
     }
   }
-  
+
   &__sidebar {
     position: fixed;
     top: 0;
@@ -45,7 +45,7 @@
     bottom: 0;
     z-index: 22;
     display: flex;
-    flex-wrap: wrap;    
+    flex-wrap: wrap;
     width: 70%;
     min-width: 290px;
     padding: 20px 15px 60px;
@@ -57,9 +57,10 @@
     @include respond-to($media_large) {
       position: static;
       flex-shrink: 0;
-      width: 290px;      
-      padding: 0 5px;    
+      width: 290px;
+      padding: 0 5px;
       transform: none;
+      z-index: auto;
     }
 
     &--opened {
@@ -99,7 +100,7 @@
 
     @include respond-to($media_large) {
       width: auto;
-      margin-left: auto;      
+      margin-left: auto;
     }
   }
 
@@ -108,7 +109,7 @@
     display: none;
 
     @include respond-to($media_large) {
-      display: block;     
+      display: block;
     }
   }
 
@@ -116,7 +117,7 @@
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    margin: 15px 0 0;    
+    margin: 15px 0 0;
     border-top: 1px solid $borderColor;
   }
 
@@ -207,7 +208,7 @@
     vertical-align: bottom;
     margin: 0 0 0 5px;
     font-size: 12px;
-    font-weight: 600;    
+    font-weight: 600;
     transform: rotate(45deg);
   }
 }
@@ -262,7 +263,7 @@
     padding: 10px;
     font-size: 25px;
     color: $white;
-    
+
     @include respond-to($media_large) {
       display: none;
     }
