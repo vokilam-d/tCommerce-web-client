@@ -5,7 +5,8 @@
 <div class="search-bar" [class.search-bar--in-focus]="isInFocus">
   <input class="search-bar__input"
          [formControl]="searchControl"
-         (focus)="isInFocus = true"
+         (focus)="handleSearchBarInFocus(true)"
+         (blur)="handleSearchBarInFocus(false)"
          type="text"
          title="Поиск"
          placeholder="Поиск"

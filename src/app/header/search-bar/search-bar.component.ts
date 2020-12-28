@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  OnInit, Output,
+  PLATFORM_ID,
+  ViewChild
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { catchError, debounceTime, distinctUntilChanged, map, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -30,6 +39,8 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
 
   @ViewChild('inputRef') inputRef: ElementRef;
 
+  @Output() isSearchBarInFocus = new EventEmitter();
+
   constructor(@Inject(PLATFORM_ID) private platformId: any,
               private productService: ProductService,
               private route: ActivatedRoute,
@@ -59,6 +70,11 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
     this.searchResults = null;
     this.isInFocus = false;
     this.router.navigate(['/', 'search'], { queryParams: { [SEARCH_QUERY_PARAM]: value } });
+  }
+
+  handleSearchBarInFocus(isSearchBarInFocus: boolean) {
+    this.isInFocus = isSearchBarInFocus;
+    this.isSearchBarInFocus.emit(isSearchBarInFocus);
   }
 
   clearInput() {

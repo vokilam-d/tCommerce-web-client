@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
 
   @Input() isSidebarCatalog: boolean = false;
   @ViewChild(SidebarMenuComponent) sidebarCmp: SidebarMenuComponent;
+  @ViewChild('searchBarRef', { read: ElementRef }) searchBarRef: ElementRef;
   @ViewChild('toolbarRef') toolbarRef: ElementRef;
 
   constructor(private categoryService: CategoryService) { }
@@ -35,5 +36,9 @@ export class HeaderComponent implements OnInit {
       const toolbarEl = this.toolbarRef.nativeElement;
       this.toolbarPosition = toolbarEl.getBoundingClientRect().top + document.documentElement.scrollTop;
     }
+  }
+
+  public setZindex(isSearchBarInFocus: boolean) {
+    this.searchBarRef.nativeElement.style.zIndex = isSearchBarInFocus ? 25 : 3;
   }
 }
