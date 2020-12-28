@@ -11,13 +11,14 @@ import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 export class HeaderComponent implements OnInit {
 
   isFixed: boolean;
+  isSearchBarInFocus: boolean;
   toolbarPosition: number;
 
   get categories(): CategoryTreeItem[] { return this.categoryService.categories; }
 
   @Input() isSidebarCatalog: boolean = false;
   @ViewChild(SidebarMenuComponent) sidebarCmp: SidebarMenuComponent;
-  @ViewChild('toolbarRef') toolbarRef: ElementRef;
+  @ViewChild('toolbarRef',  { read: ElementRef }) toolbarRef: ElementRef;
 
   constructor(private categoryService: CategoryService) { }
 
@@ -35,5 +36,9 @@ export class HeaderComponent implements OnInit {
       const toolbarEl = this.toolbarRef.nativeElement;
       this.toolbarPosition = toolbarEl.getBoundingClientRect().top + document.documentElement.scrollTop;
     }
+  }
+
+  public setIsSearchBarInFocus(isSearchBarInFocus: boolean) {
+    this.isSearchBarInFocus = isSearchBarInFocus;
   }
 }

@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@an
 import { AnnouncementService } from '../services/announcement/announcement.service';
 import { AnnouncementDto } from '../shared/dtos/announcement.dto';
 import { DEFAULT_ERROR_TEXT } from '../shared/constants';
+import { DeviceService } from '../services/device-detector/device.service';
 
 @Component({
   selector: 'announcement',
@@ -19,7 +20,8 @@ export class AnnouncementComponent implements OnInit {
 
   constructor(
     private announcementService: AnnouncementService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private deviceService: DeviceService
   ) { }
 
   ngOnInit(): void {
@@ -33,8 +35,11 @@ export class AnnouncementComponent implements OnInit {
         this.announcement = response.data;
 
         this.changeDetectorRef.detectChanges();
-        this.announcementHeight = this.announcementEl.nativeElement.getBoundingClientRect().height;
-        document.body.style.marginTop = `${this.announcementHeight}px`;
+
+        if (this.deviceService.isPlatformBrowser()) {
+          this.announcementHeight = this.announcementEl.nativeElement.getBoundingClientRect().height;
+          document.body.style.marginTop = `${this.announcementHeight}px`;
+        }
       },
       error => this.fetchError = error.error?.message || DEFAULT_ERROR_TEXT
     );
