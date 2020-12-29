@@ -18,3 +18,11 @@ $media_medium: 600px;
 $media_large: 1024px;
 $media_max-content-width: 1300px;
 $media_x-large: 1441px;
+
+$zIndexFixedToolbar: 3;
+$zIndexAnnouncement: 10;
+$zIndexToolbarFixedWithOpenedSearchbar: 20;
+$zIndexSidebarOverlay: 30;
+$zIndexSidebarMenu: 31;
+$zIndexModalOverlay: 30;
+$zIndexModal: 31;
