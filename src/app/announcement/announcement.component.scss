@@ -6,7 +6,7 @@
   position: fixed;
   top: 0;
   background-color: #259B9A;
-  z-index: 20;
+  z-index: $zIndexAnnouncement;
 
   &__text {
     margin: 0;

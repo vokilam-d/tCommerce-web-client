@@ -183,12 +183,12 @@
     margin: 0;
     border-bottom: 1px solid rgba(233, 233, 233, 0.5);
     background-color: #ffffff;
-    z-index: 3;
+    z-index: $zIndexFixedToolbar;
   }
 
   &--opened-search-bar {
     @include respond-to-less-than($media_medium) {
-      z-index: 25;
+      z-index: $zIndexToolbarFixedWithOpenedSearchbar;
     }
   }
 }

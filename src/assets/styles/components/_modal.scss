@@ -23,7 +23,7 @@
   flex-direction: column;
   max-height: 100vh;
   background: #fff;
-  z-index: 23;
+  z-index: $zIndexModal;
   animation: fadeIn 0.3s ease, slideIn 0.4s ease;
 
   @include respond-to($media_large) {
