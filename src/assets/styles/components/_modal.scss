@@ -9,7 +9,7 @@
   bottom: 0;
   background: rgba(#000, 0.5);
   cursor: pointer;
-  z-index: 22;
+  z-index: $zIndexModalOverlay;
   animation: fadeIn 0.3s ease;
 }
 
