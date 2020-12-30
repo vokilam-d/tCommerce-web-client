@@ -3,10 +3,13 @@
 .announcement {
   width: 100%;
   padding: 5px 0;
-  position: fixed;
-  top: 0;
   background-color: #259B9A;
-  z-index: $zIndexAnnouncement;
+
+  &--is-fixed {
+    position: fixed;
+    top: 0;
+    z-index: $zIndexAnnouncement;
+  }
 
   &__text {
     margin: 0;

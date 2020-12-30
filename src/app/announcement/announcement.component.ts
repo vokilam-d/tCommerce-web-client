@@ -10,6 +10,7 @@ import { DeviceService } from '../services/device-detector/device.service';
   styleUrls: ['./announcement.component.scss']
 })
 export class AnnouncementComponent implements OnInit {
+
   public announcementHeight: number;
   public announcement: AnnouncementDto;
   public fetchError: string | null = null;
