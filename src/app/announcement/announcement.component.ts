@@ -37,7 +37,7 @@ export class AnnouncementComponent implements OnInit {
 
         this.changeDetectorRef.detectChanges();
 
-        if (this.deviceService.isPlatformBrowser()) {
+        if (this.deviceService.isPlatformBrowser() && this.announcement.isFixed) {
           this.announcementHeight = this.announcementEl.nativeElement.getBoundingClientRect().height;
           document.body.style.marginTop = `${this.announcementHeight}px`;
         }
