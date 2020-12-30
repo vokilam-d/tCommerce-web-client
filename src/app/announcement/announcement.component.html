@@ -1,4 +1,9 @@
-<div class="announcement" *ngIf="announcement" #announcementRef>
+<div
+  class="announcement"
+  [class.announcement--is-fixed]="announcement?.isFixed"
+  *ngIf="announcement"
+  #announcementRef
+>
   <ng-container *ngIf="type === 'winterHolidays'">
     <div class="snowflakes">
       <div class="snowflake">
@@ -33,5 +38,6 @@
       </div>
     </div>
   </ng-container>
+
   <p class="announcement__text">{{ announcement.announcement }}</p>
 </div>

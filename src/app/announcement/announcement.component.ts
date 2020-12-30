@@ -10,6 +10,7 @@ import { DeviceService } from '../services/device-detector/device.service';
   styleUrls: ['./announcement.component.scss']
 })
 export class AnnouncementComponent implements OnInit {
+
   public announcementHeight: number;
   public announcement: AnnouncementDto;
   public fetchError: string | null = null;
@@ -36,7 +37,7 @@ export class AnnouncementComponent implements OnInit {
 
         this.changeDetectorRef.detectChanges();
 
-        if (this.deviceService.isPlatformBrowser()) {
+        if (this.deviceService.isPlatformBrowser() && this.announcement.isFixed) {
           this.announcementHeight = this.announcementEl.nativeElement.getBoundingClientRect().height;
           document.body.style.marginTop = `${this.announcementHeight}px`;
         }
