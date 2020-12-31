@@ -20,7 +20,6 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
 
   methods: PaymentMethodDto[];
   methodControl: FormControl;
-  disabledReasons: string[];
   isLoading: boolean = false;
   error: string | null = null;
 
