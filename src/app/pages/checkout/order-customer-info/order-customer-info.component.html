@@ -32,8 +32,8 @@
 
       <i class="mbi form__radio-icon"
          [ngClass]="{
-           'mbi-checkmark-outline': addressOptionControl.value === address,
-           'mbi-circle-outline': addressOptionControl.value !== address
+           'form__radio-icon--checked form__radio-icon--checked:before': addressOptionControl.value === address,
+           'form__radio-icon--unchecked': addressOptionControl.value !== address
          }"
       ></i>
 
@@ -50,8 +50,8 @@
 
       <i class="mbi form__radio-icon"
          [ngClass]="{
-           'mbi-checkmark-outline': addressOptionControl.value === null,
-           'mbi-circle-outline': addressOptionControl.value !== null
+           'form__radio-icon--checked form__radio-icon--checked:before': addressOptionControl.value === null,
+           'form__radio-icon--unchecked': addressOptionControl.value !== null
          }"
       ></i>
 

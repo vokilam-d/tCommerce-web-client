@@ -81,8 +81,8 @@
 
       <i class="mbi form__radio-icon"
          [ngClass]="{
-           'mbi-checkmark-outline': addressTypeControl.value === addressType,
-           'mbi-circle-outline': addressTypeControl.value !== addressType
+           'form__radio-icon--checked form__radio-icon--checked:before': addressTypeControl.value === addressType,
+           'form__radio-icon--unchecked': addressTypeControl.value !== addressType
          }"
       ></i>
 

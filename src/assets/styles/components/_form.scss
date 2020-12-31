@@ -161,6 +161,34 @@
     flex-shrink: 0;
     margin: 0 10px 0 0;
     font-size: 20px;
+
+    &--checked {
+      position: relative;
+      width: 18px;
+      height: 18px;
+      border: 1px solid #259B9A;
+      border-radius: 50%;
+
+        &:before {
+          content: '';
+          position: absolute;
+          left: 4px;
+          top: 5px;
+          width: 9px;
+          height: 5px;
+          border-radius: 1px;
+          border-left: 2px solid #259B9A;
+          border-bottom: 2px solid #259B9A;
+          transform: rotate(-45deg);
+        }
+    }
+
+    &--unchecked {
+      width: 18px;
+      height: 18px;
+      border: 1px solid #b7b7b7;
+      border-radius: 50%;
+    }
   }
 
   &__radio-input {
