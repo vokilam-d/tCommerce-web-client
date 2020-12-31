@@ -31,7 +31,7 @@
          }"
       ></div>
 
-      {{ method.name }}
+      <div class="checkout-block__method">{{ method.name }}</div>
 
       <div class="checkout-block__tooltip" *ngIf="method.disabledState">
         <ng-container *ngFor="let reason of method.disabledReasons">
