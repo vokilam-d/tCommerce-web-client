@@ -73,7 +73,9 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
       .subscribe(addressType => {
         const disableReason = 'Наложенный платёж недоступен при адресной доставке';
         if (addressType === AddressTypeEnum.DOORS) {
-          cashOnDeliveryMethod.disabledReasons.push(disableReason);
+          if (!cashOnDeliveryMethod.disabledReasons.includes(disableReason)) {
+            cashOnDeliveryMethod.disabledReasons.push(disableReason);
+          }
         } else {
           const reasonIdx = cashOnDeliveryMethod.disabledReasons.indexOf(disableReason);
           if (reasonIdx > -1) { cashOnDeliveryMethod.disabledReasons.splice(reasonIdx, 1); }

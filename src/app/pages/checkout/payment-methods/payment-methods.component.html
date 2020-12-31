@@ -12,7 +12,7 @@
   </div>
 
   <ng-template #noErrorTmpl>
-    <label class="form__control form__control--radio tooltip-container"
+    <label class="form__control form__control--radio checkout-block__tooltip-container"
            *ngFor="let method of methods"
            [class.form__control--disabled]="method.disabledState"
     >
@@ -24,20 +24,20 @@
              type="radio"
       >
 
-      <i class="mbi form__radio-icon"
+      <div class="form__radio-icon"
          [ngClass]="{
-           'mbi-checkmark-outline': methodControl.value === method,
-           'mbi-circle-outline': methodControl.value !== method
+           'form__radio-icon--checked form__radio-icon--checked:before': methodControl.value === method,
+           'form__radio-icon--unchecked': methodControl.value !== method
          }"
-      ></i>
+      ></div>
 
       {{ method.name }}
 
-      <span class="tooltip" *ngIf="method.disabledState">
+      <div class="checkout-block__tooltip" *ngIf="method.disabledState">
         <ng-container *ngFor="let reason of method.disabledReasons">
           {{ reason }}<br>
         </ng-container>
-      </span>
+      </div>
     </label>
   </ng-template>
 </div>
