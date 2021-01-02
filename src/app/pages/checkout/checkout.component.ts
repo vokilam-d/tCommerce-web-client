@@ -11,6 +11,7 @@ import { normalizePhoneNumber } from '../../shared/helpers/normalize-phone-numbe
 import { ScrollToService } from '../../services/scroll-to/scroll-to.service';
 import { HeadService } from '../../services/head/head.service';
 import { AnalyticsService } from '../../services/analytics/analytics.service';
+import { DeviceService } from '../../services/device-detector/device.service';
 
 @Component({
   selector: 'checkout',
@@ -38,7 +39,9 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
               private analytics: AnalyticsService,
               private orderService: OrderService,
               private scrollToService: ScrollToService,
-              private router: Router) {
+              private router: Router,
+              private deviceService: DeviceService
+  ) {
     super();
   }
 
@@ -87,6 +90,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
           const order = response.data;
           this.analytics.orderSuccess(order.id, order.prices.totalCost);
 
+          this.vibrateOnClick();
           this.router.navigate(['/', 'order-success'], { state: { order } });
         },
         error => this.setError(error.error?.message || DEFAULT_ERROR_TEXT)
@@ -121,4 +125,9 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
     }
   }
 
+  vibrateOnClick () {
+    if (!this.deviceService.isPlatformBrowser() || !window.navigator || !window.navigator.vibrate) { return; }
+
+    window.navigator.vibrate(100);
+  }
 }
