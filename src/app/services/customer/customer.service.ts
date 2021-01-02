@@ -250,7 +250,7 @@ export class CustomerService { // todo split to CartService
   }
 
   vibrateOnClick () {
-    if (this.deviceService.isPlatformBrowser() || !window.navigator || !window.navigator.vibrate) { return; }
+    if (!this.deviceService.isPlatformBrowser() || !window.navigator || !window.navigator.vibrate) { return; }
 
     window.navigator.vibrate(100);
   }
