@@ -16,6 +16,7 @@ import { ResetPasswordDto } from '../../shared/dtos/reset-password.dto';
 import { OrderDto } from '../../shared/dtos/order.dto';
 import { OrderPricesDto } from '../../shared/dtos/order-prices.dto';
 import { CalculatePricesDto } from '../../shared/dtos/calculate-prices.dto';
+import { DeviceService } from '../device-detector/device.service';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,9 @@ export class CustomerService { // todo split to CartService
 
   constructor(@Inject(PLATFORM_ID) private platformId: any,
               private router: Router,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private deviceService: DeviceService
+  ) {
 
     this.fetchCustomer().subscribe({
       error(err) { console.log(`${new Date().toISOString()} - Could not fetch customer`, err.message); }
@@ -163,6 +166,7 @@ export class CustomerService { // todo split to CartService
       .pipe(
         tap(response => {
           this.saveToCart(response.data);
+          this.vibrateOnClick();
           this._showCartModal$.next(true);
           this.updatePrices();
         })
@@ -189,6 +193,7 @@ export class CustomerService { // todo split to CartService
     }
 
     this._cart.splice(foundIdx, 1);
+    this.vibrateOnClick();
     this.saveCartToStorage();
     this.updatePrices();
 
@@ -242,5 +247,11 @@ export class CustomerService { // todo split to CartService
 
   fetchOrders() {
     return this.http.get<ResponseDto<OrderDto[]>>(`${API_HOST}/api/v1/customer/order`);
+  }
+
+  vibrateOnClick () {
+    if (this.deviceService.isPlatformBrowser() || !window.navigator || !window.navigator.vibrate) { return; }
+
+    window.navigator.vibrate(100);
   }
 }
