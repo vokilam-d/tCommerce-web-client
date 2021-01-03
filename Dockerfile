@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package.json ./
 COPY package-lock.json ./
 
-RUN npm install
+RUN npm ci
 # Convert dependencies to Ivy-compatible
 RUN ./node_modules/.bin/ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points
 
