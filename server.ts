@@ -14,9 +14,10 @@ import { environment } from './src/environments/environment';
 import { API_HOST } from './src/app/shared/constants';
 import { RESPONSE } from '@nguniversal/express-engine/tokens';
 
+let isPagesUpdateStarted: boolean = false;
 let pages: PageRegistryDto[] = [];
-
 const thirtySeconds = 30 * 1000;
+
 async function updatePages(apiHost: string) {
   if (apiHost.indexOf('http') !== 0) {
     apiHost = 'http://' + apiHost;
@@ -25,7 +26,6 @@ async function updatePages(apiHost: string) {
   try {
     const { data: response } = await axios.get<ResponseDto<PageRegistryDto[]>>(`${apiHost}/api/v1/pages`);
     pages = response.data;
-    console.log(`${new Date().toISOString()} - [updatePages]: fetched ${pages.length} pages`);
   } catch (ex) {
     console.error(`${new Date().toISOString()} - Could not update pages:`);
     console.error(ex.response ? ex.response.data : ex.toString());
@@ -34,7 +34,6 @@ async function updatePages(apiHost: string) {
   setTimeout(() => updatePages(apiHost), thirtySeconds);
 }
 
-let isPagesUpdateStarted: boolean = false;
 async function handleUpdatePages(req: express.Request) {
   if (isPagesUpdateStarted) { return; }
 
@@ -74,12 +73,10 @@ function handleResponse(req: express.Request, res: express.Response) {
   }
 }
 
-// The Express app is exported so that it can be used by serverless Functions.
 export function app() {
   const server = express();
   const distFolder = join(process.cwd(), 'dist/browser');
 
-  // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,
   }));
@@ -87,7 +84,6 @@ export function app() {
   server.set('view engine', 'html');
   server.set('views', distFolder);
 
-  // Serve static files from /browser
   server.get('*.*', express.static(distFolder, {
     maxAge: '1y'
   }));
@@ -98,8 +94,6 @@ export function app() {
     console.log(`${new Date().toISOString()} - Got api request: ${req.url}`)
     res.send(`API is not supported`);
   });
-
-  // All regular routes use the Universal engine
 
   server.get('*', async (req: express.Request, res: express.Response) => {
     await handleUpdatePages(req);
@@ -112,7 +106,6 @@ export function app() {
 function run() {
   const port = +process.env.PORT || 3002;
 
-  // Start up the Node server
   const server = app();
   server.listen(port, '0.0.0.0', () => {
     // setInterval(() => Object.entries(process.memoryUsage()).forEach(item => console.log(`${item[0]}: ${(item[1] / 1024 / 1024).toFixed(4)} MB`)), 20000);
