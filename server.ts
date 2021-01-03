@@ -115,14 +115,14 @@ function run() {
   // Start up the Node server
   const server = app();
   server.listen(port, '0.0.0.0', () => {
-    setInterval(() => Object.entries(process.memoryUsage()).forEach(item => console.log(`${item[0]}: ${(item[1] / 1024 / 1024).toFixed(4)} MB`)), 20000);
+    // setInterval(() => Object.entries(process.memoryUsage()).forEach(item => console.log(`${item[0]}: ${(item[1] / 1024 / 1024).toFixed(4)} MB`)), 20000);
     console.log(`Node Express server listening on http://localhost:${port}`);
 
-    const log = () => {
-      Object.entries(process.memoryUsage()).forEach(item => console.log(`${item[0]}: ${(item[1] / 1024 / 1024).toFixed(4)} MB`));
-      setTimeout(() => log(), 60 * 60 * 1000);
-    }
-    log();
+    // const log = () => {
+    //   Object.entries(process.memoryUsage()).forEach(item => console.log(`${item[0]}: ${(item[1] / 1024 / 1024).toFixed(4)} MB`));
+    //   setTimeout(() => log(), 60 * 60 * 1000);
+    // }
+    // log();
   });
 }
 
