@@ -99,7 +99,7 @@
 
     @include respond-to($media_medium) {
       margin-top: 5px;
-      width: 60%;
+      width: 59%;
     }
 
     @include respond-to($media_large) {
@@ -246,7 +246,7 @@
   z-index: 3;
 
   @include respond-to($media_large) {
-    width: 15%;
+    width: 16%;
     display: block;
   }
 

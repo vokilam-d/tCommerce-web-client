@@ -84,6 +84,7 @@ img {
 .main-link {
   color: $link;
   cursor: pointer;
+  transition: color;
 
   &:visited,
   &:active {
