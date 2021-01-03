@@ -1,5 +1,5 @@
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, EMPTY, Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { CustomerDto, UpdateCustomerDto, UpdatePasswordDto } from '../../shared/dtos/customer.dto';
 import { HttpClient } from '@angular/common/http';
@@ -10,13 +10,13 @@ import { InitResetPasswordDto } from '../../shared/dtos/init-reset-password.dto'
 import { ShipmentAddressDto } from '../../shared/dtos/shipment-address.dto';
 import { map, tap } from 'rxjs/operators';
 import { CreateOrUpdateOrderItemDto, OrderItemDto } from '../../shared/dtos/order-item.dto';
-import { isPlatformBrowser } from '@angular/common';
 import { API_HOST } from '../../shared/constants';
 import { ResetPasswordDto } from '../../shared/dtos/reset-password.dto';
 import { OrderDto } from '../../shared/dtos/order.dto';
 import { OrderPricesDto } from '../../shared/dtos/order-prices.dto';
 import { CalculatePricesDto } from '../../shared/dtos/calculate-prices.dto';
 import { vibrate } from '../../shared/helpers/vibrate.function';
+import { DeviceService } from '../device-detector/device.service';
 
 @Injectable({
   providedIn: 'root'
@@ -39,9 +39,10 @@ export class CustomerService { // todo split to CartService
   get customerName(): string { return this.customer ? `${this.customer.firstName} ${this.customer.lastName}` : ''; }
   get customerEmail(): string { return this.customer ? this.customer.email : ''; }
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any,
-              private router: Router,
-              private http: HttpClient
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private deviceService: DeviceService
   ) {
 
     this.fetchCustomer().subscribe({
@@ -50,6 +51,10 @@ export class CustomerService { // todo split to CartService
   }
 
   fetchCustomer(): Observable<ResponseDto<CustomerDto>> {
+    if (!this.deviceService.isPlatformBrowser()) {
+      return EMPTY;
+    }
+
     return this.http.get<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer`)
       .pipe(
         tap(
@@ -107,11 +112,8 @@ export class CustomerService { // todo split to CartService
   }
 
   logout(): void {
-    this.http.post(`${API_HOST}/api/v1/customer/logout`, { }).subscribe(
-      _ => {
-        this.setCustomer(null);
-      }
-    );
+    this.http.post(`${API_HOST}/api/v1/customer/logout`, { })
+      .subscribe(_ => this.setCustomer(null));
   }
 
   sendEmailConfirm() {
@@ -148,7 +150,7 @@ export class CustomerService { // todo split to CartService
   }
 
   private initCart() {
-    if (this.cartInit$.getValue() || !isPlatformBrowser(this.platformId)) { return; }
+    if (this.cartInit$.getValue() || !this.deviceService.isPlatformBrowser()) { return; }
 
     const savedCart = this.customer ? this.customer.cart : JSON.parse(localStorage.getItem('cart'));
     this._cart = savedCart || [];
