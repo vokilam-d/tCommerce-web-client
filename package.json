@@ -23,7 +23,7 @@
     "@angular/router": "~9.1.0",
     "@nguniversal/common": "^9.1.0",
     "@nguniversal/express-engine": "^9.0.2",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "express": "^4.15.2",
     "ngx-mask": "^10.0.4",
     "normalize.css": "^8.0.1",
