@@ -32,7 +32,7 @@ export class StoreReviewService {
   }
 
   fetchAllReviews(spf: SortingPaginatingFilterDto) {
-    return this.http.get<ResponseDto<StoreReviewDto[]>>(`${API_HOST}/api/v1/store-reviews/temp`, { params: toHttpParams(spf) });
+    return this.http.get<ResponseDto<StoreReviewDto[]>>(`${API_HOST}/api/v1/store-reviews`, { params: toHttpParams(spf) });
   }
 
   addReview(reviewDto: AddStoreReviewDto) {
