@@ -3,10 +3,8 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  Inject,
   Input,
   OnInit,
-  PLATFORM_ID,
   QueryList,
   ViewChild,
   ViewChildren
@@ -15,10 +13,10 @@ import { ProductListItemDto } from '../shared/dtos/product-list-item.dto';
 import { ProductService } from '../pages/product/services/product.service';
 import { SortingPaginatingFilterDto } from '../shared/dtos/spf.dto';
 import { debounceTime, finalize, takeUntil } from 'rxjs/operators';
-import { isPlatformBrowser } from '@angular/common';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
 import { fromEvent } from 'rxjs';
 import { DeviceService } from '../services/device-detector/device.service';
+import { onWindowLoad } from '../shared/helpers/on-window-load.function';
 
 @Component({
   selector: 'products-preview',
@@ -40,10 +38,11 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements OnInit, A
   @ViewChild('itemsContainerRef') itemsContainerRef: ElementRef;
   @ViewChildren('itemRef') itemRef: QueryList<ElementRef>;
 
-  constructor(private productService: ProductService,
-              private cdr: ChangeDetectorRef,
-              private device: DeviceService,
-              @Inject(PLATFORM_ID) private platformId: any) {
+  constructor(
+    private productService: ProductService,
+    private cdr: ChangeDetectorRef,
+    private device: DeviceService
+  ) {
     super();
   }
 
@@ -54,14 +53,14 @@ export class ProductsPreviewComponent extends NgUnsubscribe implements OnInit, A
 
   ngAfterViewInit(): void {
     if (this.ids) {
-      this.fetchItems();
+      onWindowLoad(this, this.fetchItems);
     } else if (this.items) {
       this.handleResize();
     }
   }
 
   private fetchItems() {
-    if (!this.ids?.length || !isPlatformBrowser(this.platformId)) { return; }
+    if (!this.ids?.length || !this.device.isPlatformBrowser()) { return; }
 
     const spf = new SortingPaginatingFilterDto();
     spf.id = this.ids;

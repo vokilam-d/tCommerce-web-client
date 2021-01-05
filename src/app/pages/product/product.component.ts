@@ -17,6 +17,7 @@ import { LinkedCategoryDto } from '../../shared/dtos/linked-category.dto';
 import { StoreReviewService } from '../../services/store-review/store-review.service';
 import { AnalyticsService } from '../../services/analytics/analytics.service';
 import { AdditionalServicesComponent } from './additional-services/additional-services.component';
+import { onWindowLoad } from '../../shared/helpers/on-window-load.function';
 
 @Component({
   selector: 'product',
@@ -205,7 +206,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   private handleProductView() {
-    this.productService.incrementViewsCount(this.product.id).subscribe();
+    onWindowLoad(this, () => {
+      this.productService.incrementViewsCount(this.product.id).subscribe();
+    });
   }
 }
 
