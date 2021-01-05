@@ -100,7 +100,7 @@
 
     <div class="item" *ngFor="let item of order.items">
       <div class="item__img-container">
-        <img class="item__img" [src]="uploadedHost + item.imageUrl">
+        <img class="item__img" [src]="uploadedHost + item.imageUrl" loading="lazy">
       </div>
 
       <div class="item__info">

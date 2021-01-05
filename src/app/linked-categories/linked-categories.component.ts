@@ -62,7 +62,7 @@ export class LinkedCategoriesComponent implements OnChanges, OnInit {
 
   getCategoryImage(category: LinkedCategoryDto): string {
     if (!category.medias[0]?.variantsUrls.small) {
-      return '/assets/images/no-img.png';
+      return '/assets/images/no-img.jpg';
     } else {
       return this.uploadedHost + category.medias[0]?.variantsUrls.small;
     }

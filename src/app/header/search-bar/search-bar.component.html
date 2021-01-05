@@ -40,6 +40,7 @@
           <img *ngIf="item.type !== autocompleteItemTypes.Category"
                class="item__image"
                [src]="getResultImage(item)"
+               loading="lazy"
           >
 
           <div class="item__name" [class.item__name--category]="item.type === autocompleteItemTypes.Category">

@@ -76,7 +76,7 @@ export class CartComponent implements OnInit {
 
   setItemImg(item) {
     if (!item.imageUrl) {
-      return '/assets/images/no-img.png';
+      return '/assets/images/no-img.jpg';
     } else {
       return this.uploadedHost + item.imageUrl;
     }

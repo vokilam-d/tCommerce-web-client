@@ -32,7 +32,7 @@
         <button class="media__remove" (click)="removeMedia(i)">
           <i class="mbi mbi-cross media__remove-icon"></i>
         </button>
-        <img class="media__img" [src]="uploadedHost + media.variantsUrls.original" alt="">
+        <img class="media__img" [src]="uploadedHost + media.variantsUrls.original" alt="" loading="lazy">
       </div>
     </div>
 

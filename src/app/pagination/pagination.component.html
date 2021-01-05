@@ -1,11 +1,11 @@
 <div [ngSwitch]="displayedOnPage" *ngIf="pagesTotal > 1 && activePage !== pagesTotal">
   <button *ngSwitchCase="'products-list'" class="load-more-btn" (click)="loadMoreItems()">
-    <img class="load-more-btn__img" src="/assets/images/refresh.svg" alt="load more button">
+    <img class="load-more-btn__img" src="/assets/images/refresh.svg" alt="load more button" loading="lazy">
     Загрузить еще 36 товаров
   </button>
 
   <button *ngSwitchCase="'blog'" class="load-more-btn" (click)="loadMoreItems()">
-    <img class="load-more-btn__img" src="/assets/images/refresh.svg" alt="load more button">
+    <img class="load-more-btn__img" src="/assets/images/refresh.svg" alt="load more button" loading="lazy">
     Загрузить еще
   </button>
 </div>

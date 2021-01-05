@@ -45,7 +45,7 @@ export class AggregatedProductsComponent implements OnInit {
 
   getProductThumbnail(product: AggregatedProductDto) {
     if (!product.mediaUrl) {
-      return '/assets/images/no-img.png';
+      return '/assets/images/no-img.jpg';
     } else {
       return this.uploadedHost + product.mediaUrl;
     }

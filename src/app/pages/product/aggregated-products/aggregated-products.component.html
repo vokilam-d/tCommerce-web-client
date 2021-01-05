@@ -5,7 +5,7 @@
 
   <div class="table__products">
     <div class="table__product product" *ngFor="let product of table.products">
-      <img class="product__img" [src]="getProductThumbnail(product)" [alt]="product.name">
+      <img class="product__img" [src]="getProductThumbnail(product)" [alt]="product.name" loading="lazy">
 
       <a class="product__name main-link" [routerLink]="['/', product.slug]">{{ product.name }}</a>
 

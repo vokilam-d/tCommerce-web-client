@@ -5,6 +5,7 @@
        *ngIf="medias[activeMediaIdx] as media"
        [src]="uploadedHost + media.variantsUrls[imageForModalProp]"
        [alt]="media.altText"
+       loading="lazy"
   >
 
   <button class="gallery__btn gallery__close" (click)="closeModal()">
