@@ -31,13 +31,19 @@
     text-align: center;
   }
 
+  &__img {
+    &--small {
+      width: 172px;
+    }
+  }
+
   &__slider {
     @include respond-to($brk_point) {
       display: flex;
       flex-shrink: 0;
       align-content: center;
       justify-content: center;
-      width: 60%;  
+      width: 60%;
     }
   }
 
@@ -102,7 +108,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40%;    
+    width: 40%;
     padding-right: 35px;
     text-align: center;
 
@@ -152,7 +158,7 @@
     @include respond-to($media_medium) {
       margin: 0;
       font-size: 18px;
-    }    
+    }
   }
 
   &__subcategories {
@@ -165,7 +171,7 @@
 
     @include respond-to($media_medium) {
       font-size: 14px;
-    }    
+    }
   }
 }
 

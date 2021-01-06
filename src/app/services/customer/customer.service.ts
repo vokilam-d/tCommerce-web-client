@@ -17,6 +17,7 @@ import { OrderPricesDto } from '../../shared/dtos/order-prices.dto';
 import { CalculatePricesDto } from '../../shared/dtos/calculate-prices.dto';
 import { vibrate } from '../../shared/helpers/vibrate.function';
 import { DeviceService } from '../device-detector/device.service';
+import { onWindowLoad } from '../../shared/helpers/on-window-load.function';
 
 @Injectable({
   providedIn: 'root'
@@ -51,10 +52,6 @@ export class CustomerService { // todo split to CartService
   }
 
   fetchCustomer(): Observable<ResponseDto<CustomerDto>> {
-    if (!this.deviceService.isPlatformBrowser()) {
-      return EMPTY;
-    }
-
     return this.http.get<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer`)
       .pipe(
         tap(
@@ -155,7 +152,7 @@ export class CustomerService { // todo split to CartService
     const savedCart = this.customer ? this.customer.cart : JSON.parse(localStorage.getItem('cart'));
     this._cart = savedCart || [];
     this.cartInit$.next(true);
-    this.updatePrices();
+    onWindowLoad(this, this.updatePrices);
   }
 
   addToCart(sku: string, qty: number, additionalServiceIds: number[] = []) {

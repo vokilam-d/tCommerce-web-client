@@ -79,7 +79,7 @@ export class CategoryComponent implements OnInit {
 
   getCategoryImage(category) {
     if (!category.medias[0]?.variantsUrls.small) {
-      return '/assets/images/no-img.png';
+      return '/assets/images/no-img.jpg';
     } else {
       return this.uploadedHost + category.medias[0]?.variantsUrls.small;
     }

@@ -28,12 +28,13 @@
          *ngFor="let item of order.items"
          [src]="uploadedHost + item.imageUrl"
          [alt]="item.name"
+         loading="lazy"
     >
   </div>
 
   <div class="order__content" *ngIf="order.isExpanded">
     <div class="order__item item" *ngFor="let item of order.items">
-      <img class="order__img item__img" [src]="uploadedHost + item.imageUrl" [alt]="item.name">
+      <img class="order__img item__img" [src]="uploadedHost + item.imageUrl" [alt]="item.name" loading="lazy">
 
       <div class="item__description">
         <a class="item__name main-link" [routerLink]="['/', item.slug]" target="_blank">

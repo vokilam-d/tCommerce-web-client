@@ -9,7 +9,7 @@
   <ul class="child-categories" *ngIf="childCategories.length">
     <li class="child-categories__category" *ngFor="let category of childCategories">
       <a class="child-categories__link" [routerLink]="'/' + category.slug">
-        <img class="child-categories__img" [src]="getCategoryImage(category)" [alt]="category.name">
+        <img class="child-categories__img" [src]="getCategoryImage(category)" [alt]="category.name" loading="lazy">
         <div class="child-categories__name"> {{ category.name }} </div>
       </a>
     </li>

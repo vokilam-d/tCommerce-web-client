@@ -1,7 +1,7 @@
 <div class="container">
   <header class="header">
     <a class="header__logo" routerLink="/">
-      <img class="header__logo-img" src="../../assets/images/logo.png" alt="Klondike">
+      <img class="header__logo-img" src="../../assets/images/logo.png" alt="Klondike" loading="lazy">
     </a>
 
     <div class="header__phones header-phones">
@@ -56,7 +56,7 @@
       <div class="checkout__cart">
 
         <div class="cart-item" *ngFor="let item of cart">
-          <img class="cart-item__img" [src]="setItemImg(item)" alt="">
+          <img class="cart-item__img" [src]="setItemImg(item)" alt="" loading="lazy">
 
           <div class="cart-item__info">
             <a class="cart-item__name main-link" [routerLink]="['/', item.slug]" target="_blank">

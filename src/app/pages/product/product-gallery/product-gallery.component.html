@@ -7,6 +7,7 @@
          [alt]="media.altText"
          (mouseenter)="setActiveIndex(i)"
          (click)="onMediaClick(i)"
+         loading="lazy"
     >
   </div>
 
@@ -16,9 +17,10 @@
              [src]="uploadedHost + media.variantsUrls.medium"
              [alt]="media.altText"
              (click)="onMediaClick(activeMediaIdx)"
+             loading="lazy"
       >
       <ng-template #noImage>
-        <img class="gallery__img" [src]="'/assets/images/no-img.png'" [alt]="">
+        <img class="gallery__img" [src]="'/assets/images/no-img.jpg'" [alt]="" loading="lazy">
       </ng-template>
     </div>
   </div>

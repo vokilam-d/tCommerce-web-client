@@ -8,6 +8,7 @@ import { CustomerService } from '../../../services/customer/customer.service';
 import { NotyService } from '../../../noty/noty.service';
 import { finalize } from 'rxjs/operators';
 import { AnalyticsService } from '../../../services/analytics/analytics.service';
+import { onWindowLoad } from '../../../shared/helpers/on-window-load.function';
 
 @Component({
   selector: 'aggregated-products',
@@ -29,7 +30,7 @@ export class AggregatedProductsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.fetchAggregators();
+    onWindowLoad(this, this.fetchAggregators);
   }
 
   private fetchAggregators() {
@@ -44,7 +45,7 @@ export class AggregatedProductsComponent implements OnInit {
 
   getProductThumbnail(product: AggregatedProductDto) {
     if (!product.mediaUrl) {
-      return '/assets/images/no-img.png';
+      return '/assets/images/no-img.jpg';
     } else {
       return this.uploadedHost + product.mediaUrl;
     }

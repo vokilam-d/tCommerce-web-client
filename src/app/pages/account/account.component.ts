@@ -1,12 +1,13 @@
-import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, QueryList, Renderer2, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren } from '@angular/core';
 import { CustomerService } from '../../services/customer/customer.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { finalize, takeUntil } from 'rxjs/operators';
-import { isPlatformBrowser } from '@angular/common';
 import { HeadService } from '../../services/head/head.service';
 import { CustomerDto } from '../../shared/dtos/customer.dto';
+import { DeviceService } from '../../services/device-detector/device.service';
+import { onWindowLoad } from '../../shared/helpers/on-window-load.function';
 
 type ChildRoute = { link: string; label: string };
 
@@ -27,18 +28,20 @@ export class AccountComponent extends NgUnsubscribe implements OnInit {
 
   get customer(): CustomerDto { return this.customerService.customer; }
 
-  constructor(private customerService: CustomerService,
-              @Inject(PLATFORM_ID) private platformId: any,
-              private route: ActivatedRoute,
-              private renderer: Renderer2,
-              private headService: HeadService,
-              private router: Router) {
+  constructor(
+    private customerService: CustomerService,
+    private route: ActivatedRoute,
+    private renderer: Renderer2,
+    private headService: HeadService,
+    private router: Router,
+    private deviceService: DeviceService
+  ) {
     super();
   }
 
   ngOnInit(): void {
     this.setChildRoutes();
-    if (!isPlatformBrowser(this.platformId)) { return; }
+    if (!this.deviceService.isPlatformBrowser()) { return; }
 
     this.fetchAccount();
     this.handleBreadrumbsUpdate();
@@ -103,11 +106,13 @@ export class AccountComponent extends NgUnsubscribe implements OnInit {
   }
 
   onActivate() {
-    if (this.isFirstRouteActivated || !isPlatformBrowser(this.platformId)) { return; }
+    if (this.isFirstRouteActivated || !this.deviceService.isPlatformBrowser()) { return; }
     this.isFirstRouteActivated = true;
 
-    const { nativeElement: activeEl } = this.routerLinksRefs.find(elRef => elRef.nativeElement.className.includes('--active'));
-    activeEl.offsetParent.scrollLeft = activeEl.offsetLeft + activeEl.offsetWidth - activeEl.offsetParent.offsetWidth + 40;
+    onWindowLoad(this, () => {
+      const { nativeElement: activeEl } = this.routerLinksRefs.find(elRef => elRef.nativeElement.className.includes('--active'));
+      activeEl.offsetParent.scrollLeft = activeEl.offsetLeft + activeEl.offsetWidth - activeEl.offsetParent.offsetWidth + 40;
+    });
   }
 
   private handleLogout() {
