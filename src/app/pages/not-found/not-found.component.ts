@@ -27,7 +27,11 @@ export class NotFoundComponent implements OnInit {
   ngOnInit() {
     const autoReloadField = 'isAutoReload';
     if (this.deviceService.isPlatformBrowser() && !window.history.state[autoReloadField]) {
-      this.router.navigate(this.route.snapshot.url, { state: { [autoReloadField]: true } }); // workaround for route matching before router reset on APP_INIT
+      this.router.navigate(this.route.snapshot.url, {
+        state: { [autoReloadField]: true },
+        preserveFragment: true,
+        queryParamsHandling: 'preserve'
+      }); // workaround for route matching before router reset on APP_INIT
       return;
     }
 

@@ -126,26 +126,24 @@
 .reviews {
   &__container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    flex-direction: column;
   }
 
   &__add {
-    margin: 0 auto;
+    margin: 10px;
     padding-bottom: 0;
     font-size: 18px;
     text-align: center;
 
     @include respond-to($media_medium) {
-      margin: 0;
+      margin: 10px 0 0;
     }
   }
 
   &__add-btn {
     display: block;
-    width: 250px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 10px 0 0;
     padding: 10px 15px;
     border-radius: 3px;
     font-size: 16px;

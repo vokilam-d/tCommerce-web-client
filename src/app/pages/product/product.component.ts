@@ -35,7 +35,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   categories: LinkedCategoryDto[] = [];
   isLoading: boolean = false;
   discountValue: number;
-  isReviewFromEmail: boolean = null;
+  needToShowReviewForm: boolean = null;
   needToShowReviews: boolean = false;
   isClosed: boolean;
   quickReview: number;
@@ -59,7 +59,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this.isReviewFromEmail = JSON.parse(this.route.snapshot.queryParamMap.get('review-from-email'));
+    this.needToShowReviewForm = JSON.parse(this.route.snapshot.queryParamMap.get('leave-review'));
     this.needToShowReviews = this.route.snapshot.fragment === 'reviews';
     this.fetchProduct();
     this.setSavedTooltipState();
@@ -100,10 +100,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
     }));
 
     this.breadcrumbs.push({ title: this.product.name, link: this.product.slug });
-  }
-
-  scrollToReviews(showSuccess: boolean = false) {
-    this.detailsCmp.scrollToReviews(showSuccess);
   }
 
   setQuickReview(rating: number) {
@@ -182,17 +178,17 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   private handleReviewFromEmail() {
-    if (!this.isReviewFromEmail || !this.detailsCmp) { return; }
-    this.isReviewFromEmail = null;
+    if (!this.needToShowReviewForm || !this.detailsCmp) { return; }
+    this.needToShowReviewForm = null;
 
-    this.scrollToReviews(true);
+    this.detailsCmp.scrollToReviewsAndSetFocus();
   }
 
   private handleUrlReviewsFragment() {
     if (!this.needToShowReviews || !this.detailsCmp) { return; }
     this.needToShowReviews = false;
 
-    this.scrollToReviews();
+    this.detailsCmp.scrollToReviews();
   }
 
   getRelatedProductsIds(): number[] {

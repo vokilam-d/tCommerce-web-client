@@ -1,8 +1,13 @@
 @import "variables";
 
 .add-review {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   &__control {
-    margin: 15px 0 0;
+    margin: 5px 0 0;
+    text-align: left;
   }
 
   &__label {
@@ -31,19 +36,19 @@
 
   &__textarea {
     height: auto;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding: 8px 45px 8px 8px;
     resize: vertical;
   }
 
   &__btns {
-    margin: 40px 0 0;
+    margin: 10px;
   }
 
   &__btn {
     position: relative;
     display: block;
     width: 100%;
+    margin: 10px 0 0;
     padding: 13px 20px;
     border-radius: 3px;
     font-size: 14px;
@@ -66,7 +71,8 @@
   }
 
   &__medias {
-    margin: 40px 0 0;
+    width: 100%;
+    margin: 10px 0 0;
     display: flex;
     flex-wrap: wrap;
   }

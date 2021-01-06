@@ -6,7 +6,7 @@ import { ProductReviewService } from '../services/product-review.service';
 import { AddProductReviewDto, ProductReviewDto } from '../../../shared/dtos/product-review.dto';
 import { JsonLdService } from '../../../services/json-ld/json-ld.service';
 import { SafeHtml } from '@angular/platform-browser';
-import { AddReviewModalComponent, IAddReviewFormValue } from '../../../add-review-modal/add-review-modal.component';
+import { AddReviewComponent, IAddReviewFormValue } from '../../../add-review/add-review.component';
 import { API_HOST, DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { NotyService } from '../../../noty/noty.service';
 import { DeviceService } from '../../../services/device-detector/device.service';
@@ -23,7 +23,7 @@ export class ProductDetailsComponent implements OnInit {
   reviews: ProductReviewDto[] = [];
 
   @Input() product: ProductDto;
-  @ViewChild(AddReviewModalComponent) addReviewCmp: AddReviewModalComponent;
+  @ViewChild(AddReviewComponent) addReviewCmp: AddReviewComponent;
   @ViewChild('reviewsRef') reviewsRef: ElementRef;
 
   constructor(private http: HttpClient,
@@ -120,13 +120,16 @@ export class ProductDetailsComponent implements OnInit {
       );
   }
 
-  scrollToReviews(showSuccess: boolean = false) {
+  scrollToReviews() {
     const offset = this.deviceService.isMobile() ? -20 : -200;
     this.scrollToService.scrollTo({ target: this.reviewsRef, offset });
+  }
 
-    if (showSuccess) {
-      this.showReviewSuccess();
-    }
+  scrollToReviewsAndSetFocus() {
+    if (!this.deviceService.isPlatformBrowser()) { return; }
+
+    this.scrollToReviews();
+    setTimeout(this.addReviewCmp.reviewTextareaRef.nativeElement.focus(), 450);
   }
 
   private setJsonLd() {

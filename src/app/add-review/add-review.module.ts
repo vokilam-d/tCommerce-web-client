@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddReviewModalComponent } from './add-review-modal.component';
+import { AddReviewComponent } from './add-review.component';
 import { RatingSelectorComponent } from './rating-selector/rating-selector.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [AddReviewModalComponent, RatingSelectorComponent],
+  declarations: [AddReviewComponent, RatingSelectorComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule
   ],
-  exports: [AddReviewModalComponent]
+  exports: [AddReviewComponent]
 })
-export class AddReviewModalModule { }
+export class AddReviewModule { }
