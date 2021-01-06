@@ -6,7 +6,7 @@ import { StoreReviewsComponent } from './store-reviews.component';
 import { HeaderModule } from '../../header/header.module';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { FooterModule } from '../../footer/footer.module';
-import { AddReviewModalModule } from '../../add-review-modal/add-review-modal.module';
+import { AddReviewModule } from '../../add-review/add-review.module';
 import { ReviewModule } from '../../review/review.module';
 import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
 import { RatingStarsModule } from '../../rating-stars/rating-stars.module';
@@ -22,7 +22,7 @@ import { ProductListModule } from '../../product-list/product-list.module';
     HeaderModule,
     BreadcrumbsModule,
     FooterModule,
-    AddReviewModalModule,
+    AddReviewModule,
     ReviewModule,
     RecentlyViewedProductsModule,
     RatingStarsModule,

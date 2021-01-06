@@ -24,8 +24,8 @@
       </h3>
 
       <div class="reviews__add">
+        <add-review [uploadUrl]="mediaUploadUrl" (addReview)="onReviewAdd($event)"></add-review>
         <button class="btn reviews__add-btn" (click)="openReviewModal()" type="button">Написать отзыв</button>
-        <add-review-modal [uploadUrl]="mediaUploadUrl" (addReview)="onReviewAdd($event)"></add-review-modal>
       </div>
     </div>
 
@@ -37,9 +37,9 @@
             (addComment)="onAddComment(review, $event)"
     ></review>
 
-    <div class="reviews__no-reviews-yet" *ngIf="!product.textReviewsCount">
-      Вы можете оставить отзыв здесь<br>Нажмите на кнопку "Написать отзыв"
-    </div>
+<!--    <div class="reviews__no-reviews-yet" *ngIf="!product.textReviewsCount">-->
+<!--      Вы можете оставить отзыв здесь<br>Нажмите на кнопку "Написать отзыв"-->
+<!--    </div>-->
   </div>
 
 </div>

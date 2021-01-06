@@ -10,7 +10,7 @@ import { RatingStarsModule } from '../../rating-stars/rating-stars.module';
 import { ProductGalleryComponent } from './product-gallery/product-gallery.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { FormsModule } from '@angular/forms';
-import { AddReviewModalModule } from '../../add-review-modal/add-review-modal.module';
+import { AddReviewModule } from '../../add-review/add-review.module';
 import { MediaGalleryModalModule } from '../../media-gallery-modal/media-gallery-modal.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ProductsPreviewModule } from '../../products-preview/products-preview.module';
@@ -32,7 +32,7 @@ import { ProductVariantsModule } from '../../product-variants/product-variants.m
     BreadcrumbsModule,
     RatingStarsModule,
     FormsModule,
-    AddReviewModalModule,
+    AddReviewModule,
     MediaGalleryModalModule,
     ProductsPreviewModule,
     ReviewModule,

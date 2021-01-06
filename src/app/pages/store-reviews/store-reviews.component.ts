@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HeadService } from '../../services/head/head.service';
-import { AddReviewModalComponent, IAddReviewFormValue } from '../../add-review-modal/add-review-modal.component';
+import { AddReviewComponent, IAddReviewFormValue } from '../../add-review/add-review.component';
 import { API_HOST, DEFAULT_ERROR_TEXT } from '../../shared/constants';
 import { AddStoreReviewDto, StoreReviewDto } from '../../shared/dtos/store-review.dto';
 import { StoreReviewService } from '../../services/store-review/store-review.service';
@@ -36,7 +36,7 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
   @ViewChild('reviewsContainerRef') reviewsContainerRef: ElementRef;
-  @ViewChild(AddReviewModalComponent) addReviewCmp: AddReviewModalComponent;
+  @ViewChild(AddReviewComponent) addReviewCmp: AddReviewComponent;
   @ViewChild(SortingComponent) sortingCmp: SortingComponent;
   @ViewChild(PaginationComponent) paginationCmp: PaginationComponent;
 

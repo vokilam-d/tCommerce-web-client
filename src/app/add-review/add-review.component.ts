@@ -1,4 +1,14 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CustomerService } from '../services/customer/customer.service';
 import { HttpClient } from '@angular/common/http';
@@ -21,11 +31,11 @@ export interface IAddReviewFormValue {
 }
 
 @Component({
-  selector: 'add-review-modal',
-  templateUrl: './add-review-modal.component.html',
-  styleUrls: ['./add-review-modal.component.scss']
+  selector: 'add-review',
+  templateUrl: './add-review.component.html',
+  styleUrls: ['./add-review.component.scss']
 })
-export class AddReviewModalComponent implements OnInit, OnDestroy {
+export class AddReviewComponent implements OnInit, OnDestroy {
 
   uploadedHost = UPLOADED_HOST;
   isModalVisible: boolean = false;
@@ -33,6 +43,8 @@ export class AddReviewModalComponent implements OnInit, OnDestroy {
   controlNames = EAddReviewFormControl;
   medias: MediaDto[] = [];
   private unlisten: () => void;
+
+  @ViewChild('reviewTextareaRef') reviewTextareaRef: ElementRef;
 
   @Input() uploadUrl: string;
   @Output() addReview = new EventEmitter<IAddReviewFormValue>();
