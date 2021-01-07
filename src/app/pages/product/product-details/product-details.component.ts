@@ -90,10 +90,6 @@ export class ProductDetailsComponent implements OnInit {
       );
   }
 
-  openReviewModal() {
-    this.addReviewCmp.openModal();
-  }
-
   onReviewAdd(formValue: IAddReviewFormValue) {
     const reviewDto = new AddProductReviewDto();
     reviewDto.name = formValue.name;

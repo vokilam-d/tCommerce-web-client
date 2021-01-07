@@ -1,13 +1,63 @@
 @import "variables";
+@import "mixins";
+
+.review-container {
+  background-color: #f8f8f8;
+  border: 1px solid #f3f3f3;
+  border-radius: 5px;
+
+  @include respond-to($media_large) {
+    display: flex;
+    width: fit-content;
+    align-items: flex-start;
+  }
+
+  &--column {
+    display: block;
+  }
+}
 
 .add-review {
+  padding: 10px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
+
+  @include respond-to($media_large) {
+    width: 600px;
+    padding: 20px;
+    flex-shrink: 0;
+  }
+
+  &--column {
+    width: auto;
+  }
 
   &__control {
-    margin: 5px 0 0;
     text-align: left;
+
+    &--name {
+      width: 100%;
+
+      @include respond-to($media_large) {
+        width: 40%;
+      }
+    }
+
+    &--review {
+      width: 100%;
+      margin: 5px 0 0;
+    }
+  }
+
+  &__rating {
+    width: 100%;
+    margin: 10px 0 0;
+
+    @include respond-to($media_large) {
+      width: 58%;
+    }
   }
 
   &__label {
@@ -52,10 +102,15 @@
     padding: 13px 20px;
     border-radius: 3px;
     font-size: 14px;
+
+    @include respond-to($media_large) {
+      width: 49%;
+    }
   }
 
   &__submit {
     margin: 25px 0 0;
+    width: 100%;
   }
 
   &__upload-icon {
@@ -73,12 +128,29 @@
   &__medias {
     width: 100%;
     margin: 10px 0 0;
+    padding: 0 0 0 10px;
     display: flex;
     flex-wrap: wrap;
+
+    @include respond-to($media_large) {
+      max-width: 160px;
+      width: fit-content;
+      padding-left: 0;
+    }
+
+    &--wide {
+      max-width: 100%;
+      margin-top: 0;
+
+      @include respond-to($media_large) {
+        padding-bottom: 10px;
+        padding-left: 20px;
+      }
+    }
   }
 
   &__media {
-    margin: 0 15px 15px 0;
+    margin: 0 10px 10px 0;
   }
 }
 
@@ -105,8 +177,9 @@
   }
 
   &__img {
-    object-fit: cover;
     width: 70px;
     height: 70px;
+    display: block;
+    object-fit: cover;
   }
 }

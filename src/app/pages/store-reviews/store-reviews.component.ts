@@ -90,10 +90,6 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
     });
   }
 
-  openReviewModal() {
-    this.addReviewCmp.openModal();
-  }
-
   onReviewAdd(formValue: IAddReviewFormValue) {
     const reviewDto = new AddStoreReviewDto();
     reviewDto.name = formValue.name;

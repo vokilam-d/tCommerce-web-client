@@ -112,4 +112,9 @@
 .sorting {
   width: 100%;
   margin: 10px 0;
+
+  @include respond-to($media_medium) {
+    width: 250px;
+    margin: 30px 0 0;
+  }
 }
