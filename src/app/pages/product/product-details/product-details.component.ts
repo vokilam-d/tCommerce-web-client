@@ -125,7 +125,7 @@ export class ProductDetailsComponent implements OnInit {
     if (!this.deviceService.isPlatformBrowser()) { return; }
 
     this.scrollToReviews();
-    setTimeout(this.addReviewCmp.reviewTextareaRef.nativeElement.focus(), 450);
+    setTimeout(() => this.addReviewCmp.focusTextInput(), 450);
   }
 
   private setJsonLd() {
