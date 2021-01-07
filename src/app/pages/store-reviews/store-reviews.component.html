@@ -22,18 +22,16 @@
     <div class="store-reviews">
 
       <div class="store-reviews__actions">
+        <div class="store-reviews__add-review">
+          <add-review [uploadUrl]="mediaUploadUrl" (addReview)="onReviewAdd($event)"></add-review>
+        </div>
+
         <div class="sorting">
           <sorting [sortOptions]="sortOptions"
                    [defaultOption]="sortOptions[0]"
                    (valueChanged)="fetchReviews()"
           ></sorting>
         </div>
-
-        <div class="store-reviews__add-review">
-          <add-review [uploadUrl]="mediaUploadUrl" (addReview)="onReviewAdd($event)"></add-review>
-        </div>
-
-        <button class="btn store-reviews__btn" (click)="openReviewModal()" type="button">Написать отзыв</button>
       </div>
 
       <div class="store-reviews__error" *ngIf="error as error">

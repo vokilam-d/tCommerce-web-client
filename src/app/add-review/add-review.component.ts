@@ -46,6 +46,7 @@ export class AddReviewComponent implements OnInit, OnDestroy {
 
   @ViewChild('reviewTextareaRef') reviewTextareaRef: ElementRef;
 
+  @Input() isColumnLayout: boolean;
   @Input() uploadUrl: string;
   @Output() addReview = new EventEmitter<IAddReviewFormValue>();
 
@@ -127,5 +128,9 @@ export class AddReviewComponent implements OnInit, OnDestroy {
 
   removeMedia(idx: number) {
     this.medias.splice(idx, 1);
+  }
+
+  focusTextInput() {
+    this.reviewTextareaRef.nativeElement.focus();
   }
 }

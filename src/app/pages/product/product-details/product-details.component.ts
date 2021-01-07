@@ -90,10 +90,6 @@ export class ProductDetailsComponent implements OnInit {
       );
   }
 
-  openReviewModal() {
-    this.addReviewCmp.openModal();
-  }
-
   onReviewAdd(formValue: IAddReviewFormValue) {
     const reviewDto = new AddProductReviewDto();
     reviewDto.name = formValue.name;
@@ -129,7 +125,7 @@ export class ProductDetailsComponent implements OnInit {
     if (!this.deviceService.isPlatformBrowser()) { return; }
 
     this.scrollToReviews();
-    setTimeout(this.addReviewCmp.reviewTextareaRef.nativeElement.focus(), 450);
+    setTimeout(() => this.addReviewCmp.focusTextInput(), 450);
   }
 
   private setJsonLd() {
