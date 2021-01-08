@@ -83,6 +83,19 @@
     &:focus {
       border-color: #a6a5a5;
     }
+
+    &::placeholder {
+      color: rgba($dark, 0.3) !important;
+    }
+    &::-webkit-input-placeholder {
+      color: rgba($dark, 0.3) !important;
+    }
+    &::-moz-placeholder {
+      color: rgba($dark, 0.3) !important;
+    }
+    &:-ms-input-placeholder {
+      color: rgba($dark, 0.3) !important;
+    }
   }
 
   &__textarea {
