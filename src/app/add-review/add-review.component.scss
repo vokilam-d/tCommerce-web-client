@@ -57,6 +57,7 @@
 
     @include respond-to($media_large) {
       width: 58%;
+      padding: 0 0 0 10px;
     }
   }
 
@@ -74,13 +75,26 @@
     background: #fff;
     border: 1px solid #d2d2d2;
     border-radius: 3px;
-    font-size: 16px;
+    font-size: 14px;
     height: 32px;
     transition: border-color 0.2s ease;
 
     &:hover,
     &:focus {
       border-color: #a6a5a5;
+    }
+
+    &::placeholder {
+      color: rgba($dark, 0.3) !important;
+    }
+    &::-webkit-input-placeholder {
+      color: rgba($dark, 0.3) !important;
+    }
+    &::-moz-placeholder {
+      color: rgba($dark, 0.3) !important;
+    }
+    &:-ms-input-placeholder {
+      color: rgba($dark, 0.3) !important;
     }
   }
 

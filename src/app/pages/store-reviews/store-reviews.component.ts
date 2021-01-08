@@ -32,6 +32,7 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   reviewsTotal: number;
   page: number;
   sortOptions: ESort[] = [ESort.New, ESort.Old, ESort.Popularity,ESort.HighRating, ESort.LowRating];
+  inputPlaceholder: string;
   get averageReviewsRating(): number { return this.storeReviewService.averageRating; }
   get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
@@ -53,6 +54,7 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   ngOnInit(): void {
     this.setMeta();
     this.notifyOfNewReviewFromEmail();
+    this.setInputPlaceholder();
   }
 
   ngAfterViewInit() {
@@ -186,5 +188,10 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
       this.scrollToReviews();
       this.showReviewSuccess();
     }
+  }
+
+  setInputPlaceholder() {
+    this.inputPlaceholder = `Тут Вы можете оставить отзыв о магазине “Клондайк” (например, оценить скорость доставки, качество консультации).
+Мы очень благодарны за обратную связь, каждый Ваш отзыв вдохновляет нас!`;
   }
 }

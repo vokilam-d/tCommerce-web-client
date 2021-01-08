@@ -14,16 +14,16 @@
   </div>
 
   <div class="page__content">
-    <p class="info-page">
-      Тут Вы можете оставить отзыв о магазине “Клондайк” (например, оценить скорость доставки, качество консультации).<br>
-      Мы очень благодарны за обратную связь, каждый Ваш отзыв вдохновляет нас!
-    </p>
+<!--    <p class="info-page">-->
+<!--      Тут Вы можете оставить отзыв о магазине “Клондайк” (например, оценить скорость доставки, качество консультации).<br>-->
+<!--      Мы очень благодарны за обратную связь, каждый Ваш отзыв вдохновляет нас!-->
+<!--    </p>-->
 
     <div class="store-reviews">
 
       <div class="store-reviews__actions">
         <div class="store-reviews__add-review">
-          <add-review [uploadUrl]="mediaUploadUrl" (addReview)="onReviewAdd($event)"></add-review>
+          <add-review [uploadUrl]="mediaUploadUrl" [inputPlaceholder]="inputPlaceholder" (addReview)="onReviewAdd($event)"></add-review>
         </div>
 
         <div class="sorting">
