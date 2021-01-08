@@ -85,16 +85,16 @@
     }
 
     &::placeholder {
-      color: rgba($dark, 0.3) !important;
+      color: rgba($dark, 0.4) !important;
     }
     &::-webkit-input-placeholder {
-      color: rgba($dark, 0.3) !important;
+      color: rgba($dark, 0.4) !important;
     }
     &::-moz-placeholder {
-      color: rgba($dark, 0.3) !important;
+      color: rgba($dark, 0.4) !important;
     }
     &:-ms-input-placeholder {
-      color: rgba($dark, 0.3) !important;
+      color: rgba($dark, 0.4) !important;
     }
   }
 
