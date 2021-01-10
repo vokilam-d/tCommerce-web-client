@@ -7,8 +7,7 @@
     "build:prod": "ng run web-client:build:production && ng run web-client:server:production",
     "build:stg": "ng run web-client:build:staging && ng run web-client:server:staging",
     "build:dev": "ng run web-client:build:development && ng run web-client:server:development",
-    "start": "node dist/server/main.js",
-    "postinstall": "ngcc"
+    "start": "node dist/server/main.js"
   },
   "private": true,
   "dependencies": {
