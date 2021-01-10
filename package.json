@@ -24,6 +24,8 @@
     "@angular/router": "~11.0.7",
     "@nguniversal/common": "^11.0.1",
     "@nguniversal/express-engine": "^11.0.1",
+    "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/http-loader": "^6.0.0",
     "axios": "^0.21.1",
     "express": "^4.15.2",
     "ngx-mask": "^10.0.4",

@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { JsonLdService } from './services/json-ld/json-ld.service';
+import { TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { Language } from './shared/enums/language.enum';
+import { DEFAULT_LANG } from './shared/constants';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +17,31 @@ export class AppComponent implements OnInit {
   localBusinessJsonLd: SafeHtml;
   webSiteJsonLd: SafeHtml;
 
-  constructor(private jsonLdService: JsonLdService) {
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private jsonLdService: JsonLdService,
+    private translateService: TranslateService
+  ) { }
 
   ngOnInit() {
+    this.setLang();
     this.setJsonLd();
+  }
+
+  private setLang() {
+    const langArg = this.location.path().slice(1, 3);
+    let lang: Language;
+    switch (langArg) {
+      case 'ua':
+        lang = Language.UK;
+        break;
+      default:
+        lang = DEFAULT_LANG;
+        break;
+    }
+
+    this.translateService.use(lang);
   }
 
   private setJsonLd() {

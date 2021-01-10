@@ -15,15 +15,28 @@ import { routesResolver } from './shared/factories/routes-resolver.function';
 import { Router } from '@angular/router';
 import { ButtonUpModule } from './button-up/button-up.module';
 import { AnnouncementModule } from './announcement/announcement.module';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 registerLocaleData(localeRu);
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/translations/', '.json');
+}
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      defaultLanguage: 'ru'
+    }),
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     TransferHttpCacheModule,
     BrowserTransferStateModule,
