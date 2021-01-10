@@ -83,6 +83,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        pathMatch: 'full',
         loadChildren: () => import('./pages/blog-pages/blog/blog.module').then(m => m.BlogModule)
       }
     ]
