@@ -22,11 +22,14 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
   methodControl: FormControl;
   isLoading: boolean = false;
   error: string | null = null;
+  private maxCashOnDeliveryTotalCost: number = 3000;
 
-  constructor(private http: HttpClient,
-              private orderService: OrderService,
-              private customerService: CustomerService,
-              private formBuilder: FormBuilder) {
+  constructor(
+    private http: HttpClient,
+    private orderService: OrderService,
+    private customerService: CustomerService,
+    private formBuilder: FormBuilder
+  ) {
     super();
   }
 
@@ -92,6 +95,12 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
     if (disallowedItem) {
       cashOnDeliveryMethod.disabledState = true;
       cashOnDeliveryMethod.disabledReasons.push('Наложенный платёж недоступен для сусального золота');
+    }
+
+    const isMaxCost = this.customerService.prices.totalCost > this.maxCashOnDeliveryTotalCost;
+    if (isMaxCost) {
+      cashOnDeliveryMethod.disabledState = true;
+      cashOnDeliveryMethod.disabledReasons.push(`Наложенный платёж недоступен для заказов свыше ${this.maxCashOnDeliveryTotalCost}грн`);
     }
   }
 }

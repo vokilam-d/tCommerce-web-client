@@ -34,12 +34,13 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   @ViewChild(OrderCustomerInfoComponent) infoCmp: OrderCustomerInfoComponent;
   @ViewChild('checkoutRef') checkoutRef: ElementRef;
 
-  constructor(private customerService: CustomerService,
-              private headService: HeadService,
-              private analytics: AnalyticsService,
-              private orderService: OrderService,
-              private scrollToService: ScrollToService,
-              private router: Router
+  constructor(
+    private customerService: CustomerService,
+    private headService: HeadService,
+    private analytics: AnalyticsService,
+    private orderService: OrderService,
+    private scrollToService: ScrollToService,
+    private router: Router
   ) {
     super();
   }
