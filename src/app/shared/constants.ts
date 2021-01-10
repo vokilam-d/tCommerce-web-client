@@ -12,5 +12,5 @@ export const MINIMAL_ORDER_COST: number = 150;
 
 // export const API_HOST = environment.production ? '' : 'http://localhost:3000';
 export const API_HOST = environment.production ? '' : 'https://klondike.com.ua';
-// export const UPLOADED_HOST = API_HOST;
-export const UPLOADED_HOST = 'https://klondike.com.ua';
+export const UPLOADED_HOST = API_HOST;
+// export const UPLOADED_HOST = 'https://klondike.com.ua';
