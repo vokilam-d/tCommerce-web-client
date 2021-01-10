@@ -48,7 +48,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -69,7 +68,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -94,7 +92,6 @@
             "browserTarget": "web-client:build",
             "open": true,
             "port": 4002,
-            "aot": true,
             "disableHostCheck": true,
             "liveReload": true,
             "host": "0.0.0.0"
