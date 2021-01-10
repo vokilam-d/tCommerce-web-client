@@ -8,7 +8,7 @@ COPY package-lock.json ./
 
 RUN npm ci
 # Convert dependencies to Ivy-compatible
-RUN ./node_modules/.bin/ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points
+#RUN ./node_modules/.bin/ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points
 
 COPY . .
 
