@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { ServerModule, ServerTransferStateModule } from '@angular/platform-server';
 
 import { AppModule } from './app.module';
@@ -8,6 +8,7 @@ import { UniversalInterceptor } from './shared/interceptors/universal.intercepto
 import * as xhr2 from 'xhr2';
 
 // activate cookie for server-side rendering
+@Injectable()
 export class ServerXhr implements XhrFactory {
   build(): XMLHttpRequest {
     xhr2.prototype._restrictedHeaders.cookie = false;
