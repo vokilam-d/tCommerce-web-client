@@ -59,11 +59,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
     private storeReviewService: StoreReviewService,
     private analyticsService: AnalyticsService
   ) {
-    logDebug(`[ProductComponent] constructor`);
   }
 
   ngOnInit() {
-    logDebug(`[ProductComponent] ngOnInit`);
+    logDebug(`[ProductComponent] "${this.route.snapshot.data.slug}" ngOnInit`);
     this.needToShowReviewForm = JSON.parse(this.route.snapshot.queryParamMap.get('leave-review'));
     this.needToShowReviews = this.route.snapshot.fragment === 'reviews';
     this.fetchProduct();
@@ -83,7 +82,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.fetchError = null;
     this.productService.fetchProduct(slug).subscribe(
       response => {
-        logDebug(`[ProductComponent] fetchProduct response subscribe start`);
+        logDebug(`[ProductComponent] "${slug}" fetchProduct response subscribe start`);
         this.product = response.data;
         this.product.safeFullDescription = this.sanitizer.bypassSecurityTrustHtml(this.product.fullDescription);
         this.categories = response.categories;
@@ -94,7 +93,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.handleUrlReviewsFragment();
         this.handleRecentlyViewedProducts();
         this.handleProductView();
-        logDebug(`[ProductComponent] fetchProduct response subscribe ned`);
+        logDebug(`[ProductComponent] "${slug}" fetchProduct response subscribe end`);
       },
       error => this.fetchError = error.error?.message || DEFAULT_ERROR_TEXT
     );

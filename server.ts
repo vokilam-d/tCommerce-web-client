@@ -44,7 +44,7 @@ async function handleUpdatePages(req: express.Request) {
 }
 
 function handleResponse(req: express.Request, res: express.Response) {
-  logDebug(`[handleResponse] Start ${req.url}`);
+  logDebug(`[handleResponse] "${req.url}" Start`);
   const targetUrl = req.url.slice(1); // slice "/" preceding sign
   const foundPage = pages.find(page => page.slug === targetUrl);
 
@@ -52,7 +52,7 @@ function handleResponse(req: express.Request, res: express.Response) {
     res.redirect(301, foundPage.redirectSlug);
 
   } else {
-    logDebug(`[handleResponse] Before render ${req.url}`);
+    logDebug(`[handleResponse] "${req.url}" Before render`);
     res.render(
       'index',
       {
@@ -73,7 +73,7 @@ function handleResponse(req: express.Request, res: express.Response) {
         ]
       },
       (err, html) => {
-        logDebug(`[handleResponse] Render callback ${req.url}`);
+        logDebug(`[handleResponse] "${req.url}" Render callback`);
         res.status(200).send(html);
       }
     );
@@ -103,9 +103,9 @@ export function app() {
   });
 
   server.get('*', async (req: express.Request, res: express.Response) => {
-    logDebug(`Init req ${req.url}`);
+    logDebug(`Init req "${req.url}"`);
     await handleUpdatePages(req);
-    logDebug(`[handleResponse] Before ${req.url}`);
+    logDebug(`[handleResponse] "${req.url}" Before`);
     handleResponse(req, res);
   });
 
