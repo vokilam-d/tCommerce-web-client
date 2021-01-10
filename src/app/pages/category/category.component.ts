@@ -10,6 +10,7 @@ import { HeadService } from '../../services/head/head.service';
 import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../../shared/constants';
 import { LinkedCategoryDto } from '../../shared/dtos/linked-category.dto';
 import { ESort } from '../../shared/enums/sort.enum';
+import { logDebug } from '../../shared/helpers/debug.function';
 
 @Component({
   selector: 'category',
@@ -32,11 +33,14 @@ export class CategoryComponent implements OnInit {
     return this.breadcrumbs.map(breadcrumb => breadcrumb.title).join(' ');
   }
 
-  constructor(private route: ActivatedRoute,
-              private sanitizer: DomSanitizer,
-              private headService: HeadService,
-              private productService: ProductService,
-              private categoryService: CategoryService) {
+  constructor(
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer,
+    private headService: HeadService,
+    private productService: ProductService,
+    private categoryService: CategoryService
+  ) {
+    logDebug(`[CategoryComponent] constructor`);
   }
 
   ngOnInit() {
@@ -47,6 +51,7 @@ export class CategoryComponent implements OnInit {
     const slug = this.route.snapshot.data.slug;
     this.categoryService.fetchCategory(slug).subscribe(
       response => {
+        logDebug(`[CategoryComponent] fetchCategory response start`);
         this.category = response.data;
         this.safeDescription = this.sanitizer.bypassSecurityTrustHtml(this.category.description);
         this.siblingCategories = response.data.siblingCategories;
@@ -55,6 +60,7 @@ export class CategoryComponent implements OnInit {
         this.setBreadcrumbs();
         this.setMeta();
         this.setDefaultSortOption();
+        logDebug(`[CategoryComponent] fetchCategory response end`);
       },
       error => this.error = error.error?.message || DEFAULT_ERROR_TEXT
     );

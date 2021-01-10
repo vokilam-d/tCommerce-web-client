@@ -18,6 +18,7 @@ import { StoreReviewService } from '../../services/store-review/store-review.ser
 import { AnalyticsService } from '../../services/analytics/analytics.service';
 import { AdditionalServicesComponent } from './additional-services/additional-services.component';
 import { onWindowLoad } from '../../shared/helpers/on-window-load.function';
+import { logDebug } from '../../shared/helpers/debug.function';
 
 @Component({
   selector: 'product',
@@ -47,18 +48,22 @@ export class ProductComponent implements OnInit, AfterViewInit {
   @ViewChild(QuantityControlComponent) qtyCmp: QuantityControlComponent;
   @ViewChild(AdditionalServicesComponent) additionalServicesCmp: AdditionalServicesComponent;
 
-  constructor(private route: ActivatedRoute,
-              private headService: HeadService,
-              private customerService: CustomerService,
-              private sanitizer: DomSanitizer,
-              private wishlistService: WishlistService,
-              private productService: ProductService,
-              private deviceService: DeviceService,
-              private storeReviewService: StoreReviewService,
-              private analyticsService: AnalyticsService
-  ) { }
+  constructor(
+    private route: ActivatedRoute,
+    private headService: HeadService,
+    private customerService: CustomerService,
+    private sanitizer: DomSanitizer,
+    private wishlistService: WishlistService,
+    private productService: ProductService,
+    private deviceService: DeviceService,
+    private storeReviewService: StoreReviewService,
+    private analyticsService: AnalyticsService
+  ) {
+    logDebug(`[ProductComponent] constructor`);
+  }
 
   ngOnInit() {
+    logDebug(`[ProductComponent] ngOnInit`);
     this.needToShowReviewForm = JSON.parse(this.route.snapshot.queryParamMap.get('leave-review'));
     this.needToShowReviews = this.route.snapshot.fragment === 'reviews';
     this.fetchProduct();
@@ -78,6 +83,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.fetchError = null;
     this.productService.fetchProduct(slug).subscribe(
       response => {
+        logDebug(`[ProductComponent] fetchProduct response subscribe start`);
         this.product = response.data;
         this.product.safeFullDescription = this.sanitizer.bypassSecurityTrustHtml(this.product.fullDescription);
         this.categories = response.categories;
@@ -88,6 +94,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.handleUrlReviewsFragment();
         this.handleRecentlyViewedProducts();
         this.handleProductView();
+        logDebug(`[ProductComponent] fetchProduct response subscribe ned`);
       },
       error => this.fetchError = error.error?.message || DEFAULT_ERROR_TEXT
     );

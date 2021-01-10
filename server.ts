@@ -13,6 +13,7 @@ import { ResponseDto } from './src/app/shared/dtos/response.dto';
 import { environment } from './src/environments/environment';
 import { API_HOST } from './src/app/shared/constants';
 import { RESPONSE } from '@nguniversal/express-engine/tokens';
+import { logDebug } from './src/app/shared/helpers/debug.function';
 
 let isPagesUpdateStarted: boolean = false;
 let pages: PageRegistryDto[] = [];
@@ -43,6 +44,7 @@ async function handleUpdatePages(req: express.Request) {
 }
 
 function handleResponse(req: express.Request, res: express.Response) {
+  logDebug(`[handleResponse] Start ${req.url}`);
   const targetUrl = req.url.slice(1); // slice "/" preceding sign
   const foundPage = pages.find(page => page.slug === targetUrl);
 
@@ -50,6 +52,7 @@ function handleResponse(req: express.Request, res: express.Response) {
     res.redirect(301, foundPage.redirectSlug);
 
   } else {
+    logDebug(`[handleResponse] Before render ${req.url}`);
     res.render(
       'index',
       {
@@ -68,6 +71,10 @@ function handleResponse(req: express.Request, res: express.Response) {
             useValue: pages
           }
         ]
+      },
+      (err, html) => {
+        logDebug(`[handleResponse] Render callback ${req.url}`);
+        res.status(200).send(html);
       }
     );
   }
@@ -96,7 +103,9 @@ export function app() {
   });
 
   server.get('*', async (req: express.Request, res: express.Response) => {
+    logDebug(`Init req ${req.url}`);
     await handleUpdatePages(req);
+    logDebug(`[handleResponse] Before ${req.url}`);
     handleResponse(req, res);
   });
 
