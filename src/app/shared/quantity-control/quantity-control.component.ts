@@ -8,7 +8,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './quantity-control.component.html',
   styleUrls: ['./quantity-control.component.scss']
 })
-export class QuantityControlComponent extends NgUnsubscribe implements OnInit {
+export class QuantityControlComponent extends NgUnsubscribe implements OnInit { // TODO extract from Shared to its own module
 
   qtyControl: FormControl;
   @Input() initialValue: number = 1;
