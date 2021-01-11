@@ -1,33 +1,21 @@
 import { Directive, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLinkWithHref } from '@angular/router';
 import { LocationStrategy } from '@angular/common';
-import { LanguageService } from '../../services/language/language.service';
+import { LanguageService } from '../services/language/language.service';
 
 @Directive({
-  selector: '[langRouterLink]'
+  selector: 'a[langRouterLink]'
 })
-export class LangRouterLinkDirective extends RouterLinkWithHref implements OnInit {
+export class LangRouterLinkDirective extends RouterLinkWithHref {
 
   private readonly _router: Router;
   private readonly _route: ActivatedRoute;
 
-  @Input() langRouterLink: any[] | string | null | undefined;
-
-  constructor(
-    router: Router,
-    route: ActivatedRoute,
-    locationStrategy: LocationStrategy,
-    private languageService: LanguageService
-  ) {
-    super(router, route, locationStrategy);
-    this._router = router;
-    this._route = route;
-  }
-
-  ngOnInit() {
+  @Input()
+  set langRouterLink(data: any[] | string | null | undefined) {
     let commands: any[] = [];
-    if (this.langRouterLink !== null && this.langRouterLink !== undefined) {
-      commands = Array.isArray(this.langRouterLink) ? this.langRouterLink : [this.langRouterLink];
+    if (data !== null && data !== undefined) {
+      commands = Array.isArray(data) ? data : [data];
     }
 
     const tree = this._router.createUrlTree(commands, {
@@ -55,5 +43,16 @@ export class LangRouterLinkDirective extends RouterLinkWithHref implements OnIni
 
     this.routerLink = commandsWithLang;
     this.href = this.urlTree.toString();
+  }
+
+  constructor(
+    router: Router,
+    route: ActivatedRoute,
+    locationStrategy: LocationStrategy,
+    private languageService: LanguageService
+  ) {
+    super(router, route, locationStrategy);
+    this._router = router;
+    this._route = route;
   }
 }
