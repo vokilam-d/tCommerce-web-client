@@ -14,7 +14,7 @@
     <a class="variants-group__variant"
        *ngFor="let variant of group.variants"
        [class.variants-group__variant--big]="isBigSize"
-       [routerLink]="['/', variant.slug]"
+       [langRouterLink]="['/', variant.slug]"
     >
       <span class="variants-group__color-container tooltip-container"
             *ngIf="group.hasColor; else variantLabelTmpl"

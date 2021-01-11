@@ -1,6 +1,6 @@
 <div class="container">
   <header class="header">
-    <a class="header__logo" routerLink="/">
+    <a class="header__logo" langRouterLink="/">
       <img class="header__logo-img" src="../../assets/images/logo.png" alt="Klondike" loading="lazy">
     </a>
 
@@ -59,7 +59,7 @@
           <img class="cart-item__img" [src]="setItemImg(item)" alt="" loading="lazy">
 
           <div class="cart-item__info">
-            <a class="cart-item__name main-link" [routerLink]="['/', item.slug]" target="_blank">
+            <a class="cart-item__name main-link" [langRouterLink]="['/', item.slug]" target="_blank">
               {{ item.name }}
             </a>
 

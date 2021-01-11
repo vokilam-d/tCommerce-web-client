@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { RatingStarsModule } from '../rating-stars/rating-stars.module';
 import { ProductVariantsModule } from '../product-variants/product-variants.module';
+import { LangRouterLinkModule } from '../lang-router-link/lang-router-link.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ProductVariantsModule } from '../product-variants/product-variants.modu
     RouterModule,
     SharedModule,
     RatingStarsModule,
-    ProductVariantsModule
+    ProductVariantsModule,
+    LangRouterLinkModule
   ],
   exports: [
     ProductListItemComponent

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LinkedCategoriesComponent } from './linked-categories.component';
 import { RouterModule } from '@angular/router';
+import { LangRouterLinkModule } from '../lang-router-link/lang-router-link.module';
 
 
 
@@ -12,7 +13,8 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    LangRouterLinkModule
   ]
 })
 export class LinkedCategoriesModule { }

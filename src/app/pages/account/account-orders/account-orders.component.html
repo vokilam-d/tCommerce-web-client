@@ -37,7 +37,7 @@
       <img class="order__img item__img" [src]="uploadedHost + item.imageUrl" [alt]="item.name" loading="lazy">
 
       <div class="item__description">
-        <a class="item__name main-link" [routerLink]="['/', item.slug]" target="_blank">
+        <a class="item__name main-link" [langRouterLink]="['/', item.slug]" target="_blank">
           {{ item.name }}
         </a>
 

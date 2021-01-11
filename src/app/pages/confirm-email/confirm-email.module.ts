@@ -7,6 +7,7 @@ import { FooterModule } from '../../footer/footer.module';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { HeaderModule } from '../../header/header.module';
 import { SharedModule } from '../../shared/shared.module';
+import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SharedModule } from '../../shared/shared.module';
     FooterModule,
     BreadcrumbsModule,
     HeaderModule,
-    SharedModule
+    SharedModule,
+    LangRouterLinkModule
   ]
 })
 export class ConfirmEmailModule { }

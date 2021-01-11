@@ -23,11 +23,11 @@
   </div>
 
   <div class="items__item item" *ngFor="let item of items" #itemRef>
-    <a class="item__img-container" *ngIf="item.featuredMedia" [routerLink]="['/', 'blog', item.slug]">
+    <a class="item__img-container" *ngIf="item.featuredMedia" [langRouterLink]="['/', 'blog', item.slug]">
       <img class="item__img" [src]="uploadedHost + item.featuredMedia.variantsUrls.original" [alt]="item.name" loading="lazy">
     </a>
 
-    <a class="item__name main-link  main-link--black" [routerLink]="['/', 'blog', item.slug]">
+    <a class="item__name main-link  main-link--black" [langRouterLink]="['/', 'blog', item.slug]">
       {{ item.name }}
     </a>
 
@@ -37,7 +37,7 @@
       </div>
 
       <div class="item__category">
-        Категория: <a class="item__category-link main-link" *ngIf="item.category" [routerLink]="['/', 'blog', item.category.slug + '.html']">{{ item.category.name }}</a>
+        Категория: <a class="item__category-link main-link" *ngIf="item.category" [langRouterLink]="['/', 'blog', item.category.slug + '.html']">{{ item.category.name }}</a>
       </div>
 
       <div class="item__publish-date">

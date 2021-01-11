@@ -32,9 +32,9 @@
       <ul class="tabs__inner-container">
         <li class="tabs__tab" *ngFor="let route of childRoutes">
           <a class="tabs__link"
-             [routerLink]="route.link"
+             [langRouterLink]="route.link"
              [routerLinkActiveOptions]="{ exact: true }"
-             routerLinkActive="tabs__link--active"
+             langRouterLinkActive="tabs__link--active"
              #routerLink
           >
             {{ route.label }}

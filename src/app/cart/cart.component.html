@@ -35,7 +35,7 @@
       </div>
 
       <div class="cart__btns">
-        <a class="cart__btn btn btn--default" *ngIf="canPlaceOrder" (click)="checkout()" routerLink="/checkout">
+        <a class="cart__btn btn btn--default" *ngIf="canPlaceOrder" (click)="checkout()" langRouterLink="/checkout">
           Оформить заказ <i class="cart__btn-icon mbi mbi-arrow-right"></i>
         </a>
         <a class="cart__btn btn btn--default" *ngIf="!canPlaceOrder" disabled>
@@ -61,7 +61,7 @@
           </div>
 
           <div class="item__info">
-            <a class="item__name main-link" [routerLink]="['/', item.slug]">
+            <a class="item__name main-link" [langRouterLink]="['/', item.slug]">
               {{ item.name }}
             </a>
 

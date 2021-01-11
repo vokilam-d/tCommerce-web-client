@@ -6,6 +6,7 @@ import { OrderSuccessComponent } from './order-success.component';
 import { HeaderModule } from '../../header/header.module';
 import { FooterModule } from '../../footer/footer.module';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
+import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
     OrderSuccessRoutingModule,
     HeaderModule,
     FooterModule,
-    BreadcrumbsModule
+    BreadcrumbsModule,
+    LangRouterLinkModule
   ]
 })
 export class OrderSuccessModule { }

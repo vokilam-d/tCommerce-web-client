@@ -9,7 +9,7 @@
     <ng-container *ngIf="layout === 'vertical'">
       <a class="service-menu__link"
          *ngIf="isLoggedIn; else notLoggedTmpl"
-         [routerLink]="['/', 'account']"
+         [langRouterLink]="['/', 'account']"
       >
         Мой кабинет
       </a>
@@ -19,16 +19,16 @@
           Войти в кабинет
         </button>
       </ng-template>
-      <a class="service-menu__link main-link" *ngIf="false" [routerLink]="['/', 'account', 'wishlist']">Мои желания</a>
+      <a class="service-menu__link main-link" *ngIf="false" [langRouterLink]="['/', 'account', 'wishlist']">Мои желания</a>
     </ng-container>
 
-    <a class="service-menu__link main-link" routerLink="/skidki">Скидки</a>
-    <a class="service-menu__link main-link" routerLink="/dostavka-i-oplata">Доставка и оплата</a>
-    <a class="service-menu__link main-link" routerLink="/vozvrat-tovara">Возврат и обмен</a>
-    <a class="service-menu__link main-link" *ngIf="isInFooter" routerLink="/politika-konfidencialnosti">Политика конфиденциальности</a>
-    <a class="service-menu__link main-link" routerLink="/contacts">Контакты</a>
-    <a class="service-menu__link main-link" routerLink="/blog">Блог</a>
-    <a class="service-menu__link main-link" routerLink="/otzyvy">
+    <a class="service-menu__link main-link" langRouterLink="/skidki">Скидки</a>
+    <a class="service-menu__link main-link" langRouterLink="/dostavka-i-oplata">Доставка и оплата</a>
+    <a class="service-menu__link main-link" langRouterLink="/vozvrat-tovara">Возврат и обмен</a>
+    <a class="service-menu__link main-link" *ngIf="isInFooter" langRouterLink="/politika-konfidencialnosti">Политика конфиденциальности</a>
+    <a class="service-menu__link main-link" langRouterLink="/contacts">Контакты</a>
+    <a class="service-menu__link main-link" langRouterLink="/blog">Блог</a>
+    <a class="service-menu__link main-link" langRouterLink="/otzyvy">
       Отзывы о нас
       <span class="service-menu__count" *ngIf="storeReviewsCount"> ({{ storeReviewsCount }})</span>
     </a>

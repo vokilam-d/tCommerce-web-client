@@ -10,6 +10,7 @@ import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 import { ServiceMenuModule } from '../service-menu/service-menu.module';
 import { MiniCartComponent } from './mini-cart/mini-cart.component';
 import { MiniAccountComponent } from './mini-account/mini-account.component';
+import { LangRouterLinkModule } from '../lang-router-link/lang-router-link.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MiniAccountComponent } from './mini-account/mini-account.component';
     RouterModule,
     SharedModule,
     ServiceMenuModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LangRouterLinkModule
   ],
   exports: [
     HeaderComponent

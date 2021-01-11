@@ -16,6 +16,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddressFormModule } from '../../address-form/address-form.module';
 import { NgxMaskModule } from 'ngx-mask';
+import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { NgxMaskModule } from 'ngx-mask';
     SharedModule,
     ReactiveFormsModule,
     AddressFormModule,
-    NgxMaskModule
+    NgxMaskModule,
+    LangRouterLinkModule
   ]
 })
 export class AccountModule { }

@@ -42,7 +42,7 @@
             <span class="post__footer-title">Добавлено: </span><time>{{ post.publishedAt | date }}</time>
           </div>
           <div class="post__category" *ngIf="post.category">
-            <span class="post__footer-title">Категория: </span> <a class="post__category-link" [routerLink]="['/', 'blog', post.category.slug + '.html']">{{ post.category.name }}</a>
+            <span class="post__footer-title">Категория: </span> <a class="post__category-link" [langRouterLink]="['/', 'blog', post.category.slug + '.html']">{{ post.category.name }}</a>
           </div>
         </div>
       </ng-container>

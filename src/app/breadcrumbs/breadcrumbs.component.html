@@ -2,7 +2,7 @@
 
 <ul class="breadcrumbs">
   <li class="breadcrumbs__item">
-    <a class="breadcrumbs__link" [class.breadcrumbs__link--big]="isBig" routerLink="/">
+    <a class="breadcrumbs__link" [class.breadcrumbs__link--big]="isBig" langRouterLink="/">
       <svg class="breadcrumbs__home" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
            viewBox="0 0 254.182 254.182" style="enable-background:new 0 0 254.182 254.182;" xml:space="preserve">
 <g>
@@ -23,7 +23,7 @@
         *ngIf="!last || showLastItem"
         [class.breadcrumbs__item--big]="isBig"
     >
-      <a class="main-link" *ngIf="!last; else noLink" [routerLink]="'/' + breadcrumb.link">
+      <a class="main-link" *ngIf="!last; else noLink" [langRouterLink]="'/' + breadcrumb.link">
         {{ breadcrumb.title }}
       </a>
 

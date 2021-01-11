@@ -8,7 +8,7 @@
       [class.toolbar__content--visible]="isVisible[content.Categories]"
   >
     <li *ngFor="let category of categories">
-      <a class="category main-link" [routerLink]="['/', 'blog', category.slug]">
+      <a class="category main-link" [langRouterLink]="['/', 'blog', category.slug]">
         {{ category.name }} ({{ category.postsCount }})
       </a>
     </li>
@@ -23,7 +23,7 @@
       [class.toolbar__content--visible]="isVisible[content.LastPosts]"
   >
     <li *ngFor="let lastPost of lastPosts">
-      <a class="last-post main-link" [routerLink]="['/', 'blog', lastPost.slug]">
+      <a class="last-post main-link" [langRouterLink]="['/', 'blog', lastPost.slug]">
         {{ lastPost.name }}
       </a>
     </li>

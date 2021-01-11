@@ -35,7 +35,7 @@
            [ngClass]="{
              'search-bar__result--active': indexOfProduct === activeIndex
            }"
-           [routerLink]="['/', item.slug]"
+           [langRouterLink]="['/', item.slug]"
         >
           <img *ngIf="item.type !== autocompleteItemTypes.Category"
                class="item__image"

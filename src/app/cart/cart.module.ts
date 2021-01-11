@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { CrossSellProductsComponent } from './cross-sell-products/cross-sell-products.component';
 import { ProductListItemModule } from '../product-list-item/product-list-item.module';
 import { ProductsPreviewModule } from '../products-preview/products-preview.module';
+import { LangRouterLinkModule } from '../lang-router-link/lang-router-link.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ProductsPreviewModule } from '../products-preview/products-preview.modu
     SharedModule,
     RouterModule,
     ProductListItemModule,
-    ProductsPreviewModule
+    ProductsPreviewModule,
+    LangRouterLinkModule
   ],
   exports: [CartComponent]
 })

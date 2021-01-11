@@ -5,21 +5,21 @@
   <section class="banner">
     <div class="banner__content">
       <div class="banner__slider">
-        <a class="banner__img-wrapper" routerLink="/rulon-potali-150-mm-zoloto-2-5.html">
+        <a class="banner__img-wrapper" langRouterLink="/rulon-potali-150-mm-zoloto-2-5.html">
           <img class="banner__img banner__main-img" src="../../../assets/images/transfernaya-potal-15-sm-zoloto-600-600.jpg" loading="lazy" alt="">
         </a>
       </div>
       <div class="banner__imgs">
         <div class="banner__imgs-row">
-          <a class="banner__img-wrapper" routerLink="/vodnyj-klej-dlya-potali-ferrario-la-doratura-ad-acqua-250.html">
+          <a class="banner__img-wrapper" langRouterLink="/vodnyj-klej-dlya-potali-ferrario-la-doratura-ad-acqua-250.html">
             <img class="banner__img banner__img--small" src="../../../assets/images/ferrario-vodniy-250-steklo-600-600.jpg" loading="lazy" alt="">
           </a>
-          <a class="banner__img-wrapper" routerLink="/la-doratura-ferrario-maslyanyj-kley-dlya-potali-75-ml-3-h.html">
+          <a class="banner__img-wrapper" langRouterLink="/la-doratura-ferrario-maslyanyj-kley-dlya-potali-75-ml-3-h.html">
             <img class="banner__img banner__img--small" src="../../../assets/images/ferrario-kley-3-h-600-600.jpg" loading="lazy" alt="">
           </a>
         </div>
 
-        <a class="banner__img-wrapper" routerLink="/ferrario-metallicheskiy-pigment-03-blednoe-bogatoe-zoloto-25-ml.html">
+        <a class="banner__img-wrapper" langRouterLink="/ferrario-metallicheskiy-pigment-03-blednoe-bogatoe-zoloto-25-ml.html">
           <img class="banner__img banner__img--medium" src="../../../assets/images/3-pigmenta.jpg" loading="lazy" alt="">
         </a>
       </div>
@@ -28,19 +28,19 @@
 
   <ul class="categories">
     <li class="category" *ngFor="let category of categories">
-      <a class="category__img-wrapper" [routerLink]="'/' + category.slug" [ngSwitch]="category.name">
+      <a class="category__img-wrapper" [langRouterLink]="'/' + category.slug" [ngSwitch]="category.name">
         <img class="category__img" [src]="getCategoryImage(category)" [alt]="category.name" loading="lazy">
       </a>
 
       <div class="category__info">
         <h2 class="category__title">
-          <a class="main-link" [routerLink]="'/' + category.slug">{{ category.name }}</a>
+          <a class="main-link" [langRouterLink]="'/' + category.slug">{{ category.name }}</a>
         </h2>
 
         <ul class="category__subcategories" *ngIf="category.children.length">
           <li *ngFor="let subcategory of category.children">
             <h3 class="category__subcategory">
-              <a class="main-link" [routerLink]="'/' + subcategory.slug">{{ subcategory.name }}</a>
+              <a class="main-link" [langRouterLink]="'/' + subcategory.slug">{{ subcategory.name }}</a>
             </h3>
           </li>
         </ul>

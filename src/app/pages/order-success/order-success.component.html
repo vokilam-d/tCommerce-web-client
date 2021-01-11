@@ -104,7 +104,7 @@
       </div>
 
       <div class="item__info">
-        <a class="item__name main-link" [routerLink]="['/', item.slug]">
+        <a class="item__name main-link" [langRouterLink]="['/', item.slug]">
           {{ item.name }}
         </a>
 
@@ -151,7 +151,7 @@
   </div>
 
   <div class="continue-shopping">
-    <a class="btn continue-shopping__btn" routerLink="/">
+    <a class="btn continue-shopping__btn" langRouterLink="/">
       Продолжить покупки
     </a>
   </div>
