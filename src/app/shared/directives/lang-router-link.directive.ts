@@ -1,8 +1,8 @@
 import { Directive, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLinkWithHref } from '@angular/router';
 import { LocationStrategy } from '@angular/common';
-import { TranslateService } from '@ngx-translate/core';
 import { Language } from '../enums/language.enum';
+import { LanguageService } from '../../services/language/language.service';
 
 @Directive({
   selector: '[langRouterLink]'
@@ -15,7 +15,7 @@ export class LangRouterLinkDirective extends RouterLinkWithHref implements OnIni
     router: Router,
     route: ActivatedRoute,
     locationStrategy: LocationStrategy,
-    private translateService: TranslateService
+    private languageService: LanguageService
   ) {
     super(router, route, locationStrategy);
   }
@@ -47,17 +47,8 @@ export class LangRouterLinkDirective extends RouterLinkWithHref implements OnIni
     }
 
     // Second is language
-    const currentLang = this.translateService.currentLang;
-    switch (currentLang) {
-      case Language.UK:
-        commands.push('ua');
-        break;
-      case Language.EN:
-        commands.push('en');
-        break;
-      default:
-        break;
-    }
+    const currentLang = this.languageService.getCurrentRouteLang();
+    commands.push(currentLang);
 
     // Third - rest of the route
     if (isArray) {
