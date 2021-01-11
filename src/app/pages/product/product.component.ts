@@ -9,7 +9,6 @@ import { WishlistService } from '../../services/wishlist/wishlist.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CustomerService } from '../../services/customer/customer.service';
 import { finalize } from 'rxjs/operators';
-import { FlyToCartDirective } from '../../shared/directives/fly-to-cart.directive';
 import { QuantityControlComponent } from '../../shared/quantity-control/quantity-control.component';
 import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
 import { DeviceService } from '../../services/device-detector/device.service';
@@ -44,7 +43,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
   get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
   @ViewChild(ProductDetailsComponent) detailsCmp: ProductDetailsComponent;
-  @ViewChild(FlyToCartDirective) flyToCart: FlyToCartDirective;
   @ViewChild(QuantityControlComponent) qtyCmp: QuantityControlComponent;
   @ViewChild(AdditionalServicesComponent) additionalServicesCmp: AdditionalServicesComponent;
 
@@ -156,8 +154,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   addToCart() {
-    this.flyToCart.start();
-
     const qty = this.qtyCmp.getValue();
     const additionalServiceIds = this.additionalServicesCmp.getSelectedIds();
 

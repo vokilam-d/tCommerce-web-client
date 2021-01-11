@@ -147,7 +147,6 @@
                     *ngIf="product.isInStock"
                     [class.product__buy--loading]="isLoading"
                     [disabled]="isLoading"
-                    [flyToCart]="product.medias[0]"
                     (click)="addToCart()"
                     type="button"
             >
