@@ -1,13 +1,15 @@
 import { Directive, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLinkWithHref } from '@angular/router';
 import { LocationStrategy } from '@angular/common';
-import { Language } from '../enums/language.enum';
 import { LanguageService } from '../../services/language/language.service';
 
 @Directive({
   selector: '[langRouterLink]'
 })
 export class LangRouterLinkDirective extends RouterLinkWithHref implements OnInit {
+
+  private readonly _router: Router;
+  private readonly _route: ActivatedRoute;
 
   @Input() langRouterLink: any[] | string | null | undefined;
 
@@ -18,50 +20,40 @@ export class LangRouterLinkDirective extends RouterLinkWithHref implements OnIni
     private languageService: LanguageService
   ) {
     super(router, route, locationStrategy);
+    this._router = router;
+    this._route = route;
   }
 
   ngOnInit() {
-    const commands: any[] = [];
-
-    if (this.langRouterLink === null || this.langRouterLink === undefined) {
-      this.initByCommands(commands);
-      return;
+    let commands: any[] = [];
+    if (this.langRouterLink !== null && this.langRouterLink !== undefined) {
+      commands = Array.isArray(this.langRouterLink) ? this.langRouterLink : [this.langRouterLink];
     }
 
-    const handlePrecedingSlash = (segment: any): any => {
-      if (typeof segment === 'string' && segment.startsWith('/')) {
-        segment = segment.slice(1);
-        commands.push('/');
-      }
+    const tree = this._router.createUrlTree(commands, {
+      relativeTo: this._route,
+      queryParams: this.queryParams,
+      fragment: this.fragment,
+      queryParamsHandling: this.queryParamsHandling,
+      preserveFragment: this.preserveFragment
+    });
 
-      return segment;
+    let href = tree.toString();
+    const commandsWithLang: any[] = [];
+
+    if (href.startsWith('/')) {
+      commandsWithLang.push('/');
+      href = href.slice(1);
     }
 
-    const isArray: boolean = Array.isArray(this.langRouterLink);
-
-    // First must go slash, if it exists
-    if (isArray) {
-      (this.langRouterLink[0] as any[]) = handlePrecedingSlash(this.langRouterLink[0]);
-    } else {
-      this.langRouterLink = handlePrecedingSlash(this.langRouterLink);
+    const routeLang = this.languageService.getCurrentRouteLang();
+    if (routeLang) {
+      commandsWithLang.push(routeLang);
     }
 
-    // Second is language
-    const currentLang = this.languageService.getCurrentRouteLang();
-    commands.push(currentLang);
+    commandsWithLang.push(...href.split('/'));
 
-    // Third - rest of the route
-    if (isArray) {
-      commands.push(...this.langRouterLink);
-    } else {
-      commands.push(this.langRouterLink);
-    }
-
-    this.initByCommands(commands);
-  }
-
-  private initByCommands(commands: any[]): void {
-    this.routerLink = commands;
+    this.routerLink = commandsWithLang;
     this.href = this.urlTree.toString();
   }
 }
