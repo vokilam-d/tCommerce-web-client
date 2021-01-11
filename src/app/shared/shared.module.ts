@@ -5,16 +5,15 @@ import { NgUnsubscribe } from './directives/ng-unsubscribe.directive';
 import { QuantityControlComponent } from './quantity-control/quantity-control.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
-import { LangRouterLinkDirective } from './directives/lang-router-link.directive';
 
 
 @NgModule({
-  declarations: [PreloaderComponent, NgUnsubscribe, QuantityControlComponent, ClickOutsideDirective, LangRouterLinkDirective],
+  declarations: [PreloaderComponent, NgUnsubscribe, QuantityControlComponent, ClickOutsideDirective],
   imports: [
     CommonModule,
     ReactiveFormsModule
   ],
-  exports: [PreloaderComponent, NgUnsubscribe, QuantityControlComponent, ClickOutsideDirective, LangRouterLinkDirective]
+  exports: [PreloaderComponent, NgUnsubscribe, QuantityControlComponent, ClickOutsideDirective]
 })
 export class SharedModule {
 }
