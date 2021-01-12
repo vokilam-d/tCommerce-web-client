@@ -41,7 +41,7 @@
     >
 
       <div class="form__control-container">
-        <label for="firstName" class="form__label">Имя</label>
+        <label for="firstName" class="form__label">{{ 'global_name' | translate }}</label>
         <input class="form__input"
                [class.form__input--invalid]="isControlInvalid(infoForm, 'firstName')"
                formControlName="firstName"
@@ -52,7 +52,7 @@
       </div>
 
       <div class="form__control-container">
-        <label for="lastName" class="form__label">Фамилия</label>
+        <label for="lastName" class="form__label">{{ 'global.last_name' | translate }}</label>
         <input class="form__input"
                [class.form__input--invalid]="isControlInvalid(infoForm, 'lastName')"
                formControlName="lastName"

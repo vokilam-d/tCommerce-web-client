@@ -65,7 +65,7 @@
 
             <div class="cart-item__additional-services" *ngIf="item.additionalServices?.length">
               <div class="cart-item__additional-service" *ngFor="let service of item.additionalServices">
-                {{ service.name }} (+{{ service.price }}грн)
+                {{ service.name }} (+{{ service.price }}{{ 'global.uah' | translate }})
               </div>
             </div>
 
@@ -78,10 +78,10 @@
                 <span class="cart-item__cost"
                       [class.cart-item__cost--special]="item.oldCost"
                 >
-                  {{ item.cost }} грн
+                  {{ item.cost }} {{ 'global.uah' | translate }}
                 </span>
                 <span class="cart-item__old-cost" *ngIf="item.oldCost">
-                  {{ item.oldCost }} грн
+                  {{ item.oldCost }} {{ 'global.uah' | translate }}
                 </span>
               </div>
             </div>
@@ -98,28 +98,28 @@
         <ng-container *ngIf="prices.discountValue as discountValue">
           <div class="checkout__price">
             <div class="checkout__price-label">Стоимость товаров:</div>
-            <div class="checkout__price-value">{{ prices.itemsCost }} грн</div>
+            <div class="checkout__price-value">{{ prices.itemsCost }} {{ 'global.uah' | translate }}</div>
           </div>
 
           <div class="checkout__price">
             <div class="checkout__price-label">
-              Скидка
+              {{ 'global.discount' | translate }}
               <div class="checkout__discount-description">
                 ({{ prices.discountLabel }}, {{ prices.discountPercent }}%):
               </div>
             </div>
-            <div class="checkout__price-value checkout__price-value--discount">-{{ discountValue }} грн</div>
+            <div class="checkout__price-value checkout__price-value--discount">-{{ discountValue }} {{ 'global.uah' | translate }}</div>
           </div>
         </ng-container>
 
         <div class="checkout__price checkout__price--total">
-          <div class="checkout__price-label">Итого:</div>
-          <div class="checkout__price-value checkout__price-value--total">{{ prices.totalCost }} грн</div>
+          <div class="checkout__price-label">{{ 'global.total_cost' | translate }}:</div>
+          <div class="checkout__price-value checkout__price-value--total">{{ prices.totalCost }} {{ 'global.uah' | translate }}</div>
         </div>
       </div>
 
       <div class="checkout__cost-error checkout-error" *ngIf="!canPlaceOrder">
-        Минимальная сумма заказа: {{ minimalOrderCost }} грн.
+        {{ 'global.minimal_order_cost' | translate }}: {{ minimalOrderCost }} {{ 'global.uah' | translate }}.
       </div>
 
       <button class="btn checkout__submit"

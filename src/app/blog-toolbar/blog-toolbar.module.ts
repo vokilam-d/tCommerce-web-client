@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BlogToolbarComponent } from './blog-toolbar.component';
 import { RouterModule } from '@angular/router';
 import { LangRouterLinkModule } from '../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { LangRouterLinkModule } from '../lang-router-link/lang-router-link.modul
   imports: [
     CommonModule,
     RouterModule,
-    LangRouterLinkModule
+    LangRouterLinkModule,
+    TranslateModule
   ],
   exports: [BlogToolbarComponent]
 })

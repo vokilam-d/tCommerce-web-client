@@ -10,7 +10,7 @@
       <a class="product__name main-link" [langRouterLink]="['/', product.slug]">{{ product.name }}</a>
 
       <span class="product__price">
-        {{ product.price }}<span class="product__currency"> грн</span>
+        {{ product.price }}<span class="product__currency"> {{ 'global.uah' | translate }}</span>
       </span>
 
       <button class="product__buy btn" (click)="addToCart(product)">

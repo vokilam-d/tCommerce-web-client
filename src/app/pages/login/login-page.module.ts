@@ -7,6 +7,7 @@ import { HeaderModule } from '../../header/header.module';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { FooterModule } from '../../footer/footer.module';
 import { LoginFormModule } from '../../login-form/login-form.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { LoginFormModule } from '../../login-form/login-form.module';
     HeaderModule,
     BreadcrumbsModule,
     FooterModule,
-    LoginFormModule
+    LoginFormModule,
+    TranslateModule
   ]
 })
 export class LoginPageModule { }

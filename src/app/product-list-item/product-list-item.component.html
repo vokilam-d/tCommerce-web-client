@@ -46,11 +46,11 @@
 
     <div class="item__price-container">
       <div class="item__price" [class.item__price--special]="item.oldPrice">
-        {{ item.price }} <span class="item__currency">грн</span>
+        {{ item.price }} <span class="item__currency">{{ 'global.uah' | translate }}</span>
       </div>
 
       <div class="item__old-price" *ngIf="item.oldPrice as oldPrice">
-        {{ oldPrice }} <span class="item__currency">грн</span>
+        {{ oldPrice }} <span class="item__currency">{{ 'global.uah' | translate }}</span>
       </div>
     </div>
 

@@ -1,17 +1,9 @@
 <div class="cross-sell" *ngIf="products.length">
-
   <div class="cross-sell__title-container">
     <span class="cross-sell__title">
-      Вместе покупают:
+      {{ 'cross_sell_products.together_bought' | translate }}:
     </span>
   </div>
-          <!--  desktop-->
-  <products-preview [items]="products" parentNameForAnalytics="Cross sell products"></products-preview>
 
-          <!--  mobile-->
-<!--  <div class="cross-sell__items">-->
-<!--    <div class="cross-sell__item" *ngFor="let product of productsIds">-->
-<!--      <product-list-item [item]="product"></product-list-item>-->
-<!--    </div>-->
-<!--  </div>-->
+  <products-preview [items]="products" parentNameForAnalytics="Cross sell products"></products-preview>
 </div>

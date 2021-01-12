@@ -70,7 +70,7 @@
     </div>
 
     <div class="comment-form__control">
-      <label class="comment-form__label" [for]="'name' + review.id">Имя</label>
+      <label class="comment-form__label" [for]="'name' + review.id">{{ 'global_name' | translate }}</label>
       <input class="comment-form__input" [id]="'name' + review.id" ngModel name="name" type="text" required />
     </div>
 
@@ -80,7 +80,7 @@
     </div>
 
     <div class="comment-form__control">
-      <label class="comment-form__label" [for]="'email' + review.id">Электронная почта</label>
+      <label class="comment-form__label" [for]="'email' + review.id">{{ 'global.email' | translate }}</label>
       <input class="comment-form__input" [id]="'email' + review.id" ngModel name="email" type="email" required />
     </div>
 

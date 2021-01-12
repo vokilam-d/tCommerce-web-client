@@ -7,6 +7,7 @@ import { RegistrationFormModule } from '../../registration-form/registration-for
 import { FooterModule } from '../../footer/footer.module';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { HeaderModule } from '../../header/header.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { HeaderModule } from '../../header/header.module';
     RegistrationFormModule,
     FooterModule,
     BreadcrumbsModule,
-    HeaderModule
+    HeaderModule,
+    TranslateModule
   ]
 })
 export class RegistrationPageModule { }

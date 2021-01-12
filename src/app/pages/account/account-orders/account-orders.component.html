@@ -43,14 +43,14 @@
 
         <div class="item__additional-services" *ngIf="item.additionalServices?.length">
           <div class="item__additional-service" *ngFor="let service of item.additionalServices">
-            {{ service.name }} (+{{ service.price }}грн)
+            {{ service.name }} (+{{ service.price }}{{ 'global.uah' | translate }})
           </div>
         </div>
 
         <div class="item__price-container">
-          <div class="item__price">{{ item.price }} грн</div>
+          <div class="item__price">{{ item.price }} {{ 'global.uah' | translate }}</div>
           <div class="item__qty">{{ item.qty }} шт.</div>
-          <div class="item__cost">{{ item.cost }} грн
+          <div class="item__cost">{{ item.cost }} {{ 'global.uah' | translate }}
           </div>
         </div>
       </div>
@@ -124,7 +124,7 @@
     </div>
 
     <div class="order__info order__discount" *ngIf="order.prices.discountValue as discountValue">
-      Скидка ({{ order.prices.discountLabel }}, {{ order.prices.discountPercent }}%): {{ discountValue }} грн
+      {{ 'global.discount' | translate }} ({{ order.prices.discountLabel }}, {{ order.prices.discountPercent }}%): {{ discountValue }} {{ 'global.uah' | translate }}
     </div>
   </div>
 
@@ -134,7 +134,7 @@
     </div>
 
     <div class="order__price">
-      Итого: {{ order.prices.totalCost }} грн
+      {{ 'global.total_cost' | translate }}: {{ order.prices.totalCost }} {{ 'global.uah' | translate }}
     </div>
   </div>
 

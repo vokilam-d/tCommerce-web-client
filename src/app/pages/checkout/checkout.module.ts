@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { AddressFormModule } from '../../address-form/address-form.module';
 import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.mo
     ReactiveFormsModule,
     SharedModule,
     AddressFormModule,
-    LangRouterLinkModule
+    LangRouterLinkModule,
+    TranslateModule
   ],
   providers: []
 })

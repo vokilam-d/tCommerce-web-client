@@ -9,6 +9,7 @@ import { FooterModule } from '../../footer/footer.module';
 import { CartModule } from '../../cart/cart.module';
 import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
 import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.mo
     FooterModule,
     CartModule,
     RecentlyViewedProductsModule,
-    LangRouterLinkModule
+    LangRouterLinkModule,
+    TranslateModule
   ]
 })
 export class CartPageModule { }

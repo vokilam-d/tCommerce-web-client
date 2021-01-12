@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddressFormModule } from '../../address-form/address-form.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.mo
     ReactiveFormsModule,
     AddressFormModule,
     NgxMaskModule,
-    LangRouterLinkModule
+    LangRouterLinkModule,
+    TranslateModule
   ]
 })
 export class AccountModule { }

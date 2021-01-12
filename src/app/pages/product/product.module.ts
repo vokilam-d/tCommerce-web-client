@@ -21,6 +21,7 @@ import { AggregatedProductsComponent } from './aggregated-products/aggregated-pr
 import { AdditionalServicesComponent } from './additional-services/additional-services.component';
 import { ProductVariantsModule } from '../../product-variants/product-variants.module';
 import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent, AggregatedProductsComponent, AdditionalServicesComponent],
@@ -40,7 +41,8 @@ import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.mo
     RecentlyViewedProductsModule,
     LinkedCategoriesModule,
     ProductVariantsModule,
-    LangRouterLinkModule
+    LangRouterLinkModule,
+    TranslateModule
   ]
 })
 export class ProductModule { }

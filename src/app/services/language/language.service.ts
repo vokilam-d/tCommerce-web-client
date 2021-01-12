@@ -58,4 +58,8 @@ export class LanguageService {
     const currentLang = this.translateService.currentLang;
     return this.getRouteLangFromLang(currentLang as Language);
   }
+
+  getTranslation(key: string | string[], interpolateParams?: { [param: string]: any }): Observable<string | any> {
+    return this.translateService.get(key, interpolateParams);
+  }
 }

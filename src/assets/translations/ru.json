@@ -1,7 +1,78 @@
 {
-  "rating_bad": "Плохо",
-  "rating_so-so": "Так себе",
-  "rating_fine": "Нормально",
-  "rating_okay": "Хорошо",
-  "rating_excellent": "Отлично"
+  "global": {
+    "name": "Имя",
+    "last_name": "Фамилия",
+    "parent_name": "Отчество",
+    "email": "Электронная почта",
+    "category": "Категория",
+    "categories": "Категории",
+    "discount": "Скидка",
+    "uah": "грн",
+    "total_cost": "Итого",
+    "minimal_order_cost": "Минимальная сумма заказа",
+    "cart": "Корзина",
+    "login": "Вход",
+    "register": "Регистрация",
+    "contacts": "Контакты"
+  },
+
+  "rating": {
+    "bad": "Плохо",
+    "so_so": "Так себе",
+    "fine": "Нормально",
+    "okay": "Хорошо",
+    "excellent": "Отлично"
+  },
+
+  "add_review": {
+    "review": "Отзыв",
+    "leave_review": "Оставить отзыв",
+    "upload": "Добавить фото",
+    "enter_email": "Введите email, чтобы оставить отзыв"
+  },
+
+  "address_form": {
+    "required_field": "Это обязательное поле",
+    "phone": "Телефон",
+    "shipment_type": "Тип доставки",
+    "by_nova_poshta": "Новой Почтой",
+    "to_warehouse": "В отделение",
+    "to_address": "Адресная",
+    "recipient_payer": "(оплачивается получателем)",
+    "sender_payer": "(бесплатно)",
+    "settlement": "Город",
+    "warehouse": "Отделение",
+    "street": "Улица",
+    "building_number": "Номер дома",
+    "flat": "Квартира",
+    "set_default": "Установить по умолчанию?"
+  },
+
+  "auth_social": {
+    "by_facebook": "Войти с помощью Facebook",
+    "by_google": "Войти с помощью Google"
+  },
+
+  "blog_post_list": {
+    "added": "Добавлено"
+  },
+
+  "blog_toolbar": {
+    "last_posts": "Последние статьи"
+  },
+
+  "cross_sell_products": {
+    "together_bought": "Вместе покупают"
+  },
+
+  "cart": {
+    "empty": "Ваша корзина пуста :(",
+    "products_cost": "Стоимость товаров",
+    "checkout": "Оформить заказ",
+    "resume_shopping": "Продолжить покупки"
+  },
+
+  "store_reviews": {
+    "text_placeholder": "Тут Вы можете оставить отзыв о магазине “Клондайк” (например, оценить скорость доставки, качество консультации).\nМы очень благодарны за обратную связь, каждый Ваш отзыв вдохновляет нас!"
+  }
 }

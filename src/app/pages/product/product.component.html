@@ -125,11 +125,11 @@
               </div>
 
               <div class="product__price" [class.product__price--special]="product.oldPrice">
-                {{ product.price }} <span class="product__currency">грн</span>
+                {{ product.price }} <span class="product__currency">{{ 'global.uah' | translate }}</span>
               </div>
 
               <div class="product__old-price" *ngIf="product.oldPrice as oldPrice">
-                {{ oldPrice }} <span class="product__currency">грн</span>
+                {{ oldPrice }} <span class="product__currency">{{ 'global.uah' | translate }}</span>
               </div>
             </div>
 
@@ -163,7 +163,7 @@
         </div>
 
         <div class="product__categories">
-          Категории:&nbsp;
+          {{ 'global.categories' | translate }}:&nbsp;
 
           <a class="product__category main-link"
              *ngFor="let category of product.categories, last as last"

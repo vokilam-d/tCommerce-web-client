@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { SelectAutocompleteModule } from '../select-autocomplete/select-autocomplete.module';
 import { NgxMaskModule } from 'ngx-mask';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { NgxMaskModule } from 'ngx-mask';
     ReactiveFormsModule,
     SharedModule,
     SelectAutocompleteModule,
-    NgxMaskModule.forRoot({ validation: false })
+    NgxMaskModule.forRoot({ validation: false }),
+    TranslateModule
   ],
   exports: [AddressFormComponent]
 })

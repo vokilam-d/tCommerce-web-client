@@ -7,6 +7,7 @@ import { CrossSellProductsComponent } from './cross-sell-products/cross-sell-pro
 import { ProductListItemModule } from '../product-list-item/product-list-item.module';
 import { ProductsPreviewModule } from '../products-preview/products-preview.module';
 import { LangRouterLinkModule } from '../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { LangRouterLinkModule } from '../lang-router-link/lang-router-link.modul
     RouterModule,
     ProductListItemModule,
     ProductsPreviewModule,
-    LangRouterLinkModule
+    LangRouterLinkModule,
+    TranslateModule
   ],
   exports: [CartComponent]
 })

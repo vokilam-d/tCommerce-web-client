@@ -8,6 +8,7 @@ import { HeadService } from '../../services/head/head.service';
 import { CustomerDto } from '../../shared/dtos/customer.dto';
 import { DeviceService } from '../../services/device-detector/device.service';
 import { onWindowLoad } from '../../shared/helpers/on-window-load.function';
+import { LanguageService } from '../../services/language/language.service';
 
 type ChildRoute = { link: string; label: string };
 
@@ -19,7 +20,7 @@ type ChildRoute = { link: string; label: string };
 export class AccountComponent extends NgUnsubscribe implements OnInit {
 
   childRoutes: ChildRoute[];
-  breadcrumbs: IBreadcrumb[] = [{ title: 'Контакты' }];
+  breadcrumbs: IBreadcrumb[] = [];
   emailConfirmationSent: boolean;
   isLoading: boolean;
   private isFirstRouteActivated: boolean = false;
@@ -34,7 +35,8 @@ export class AccountComponent extends NgUnsubscribe implements OnInit {
     private renderer: Renderer2,
     private headService: HeadService,
     private router: Router,
-    private deviceService: DeviceService
+    private deviceService: DeviceService,
+    private languageService: LanguageService
   ) {
     super();
   }
@@ -44,7 +46,7 @@ export class AccountComponent extends NgUnsubscribe implements OnInit {
     if (!this.deviceService.isPlatformBrowser()) { return; }
 
     this.fetchAccount();
-    this.handleBreadrumbsUpdate();
+    this.handleBreadcrumbs();
     this.handleLogout();
     this.setMeta();
   }
@@ -76,7 +78,11 @@ export class AccountComponent extends NgUnsubscribe implements OnInit {
       });
   }
 
-  private handleBreadrumbsUpdate() {
+  private handleBreadcrumbs() {
+    this.languageService.getTranslation('global.contacts').subscribe(text => {
+      this.breadcrumbs = [{ title: text }];
+    });
+
     const setBreadcrumbs = () => {
       const snapshot = this.route.firstChild.snapshot;
       const link = snapshot.url[0] && snapshot.url[0].path;

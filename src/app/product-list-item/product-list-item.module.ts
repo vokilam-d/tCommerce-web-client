@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RatingStarsModule } from '../rating-stars/rating-stars.module';
 import { ProductVariantsModule } from '../product-variants/product-variants.module';
 import { LangRouterLinkModule } from '../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { LangRouterLinkModule } from '../lang-router-link/lang-router-link.modul
     SharedModule,
     RatingStarsModule,
     ProductVariantsModule,
-    LangRouterLinkModule
+    LangRouterLinkModule,
+    TranslateModule
   ],
   exports: [
     ProductListItemComponent

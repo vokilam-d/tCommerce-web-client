@@ -1,6 +1,6 @@
 <div class="toolbar">
   <div class="toolbar__title" (click)="toggleContent(content.Categories)">
-    Категории
+    {{ 'global.categories' | translate }}
     <i class="mbi mbi-io-add toolbar__title-icon"></i>
   </div>
 
@@ -15,7 +15,7 @@
   </ul>
 
   <div class="toolbar__title" (click)="toggleContent(content.LastPosts)">
-    Последние статьи
+    {{ 'blog_toolbar.last_posts' | translate }}
     <i class="mbi mbi-io-add toolbar__title-icon"></i>
   </div>
 

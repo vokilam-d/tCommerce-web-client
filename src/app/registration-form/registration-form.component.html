@@ -1,7 +1,7 @@
 <form class="form" [formGroup]="form" ngNativeValidate>
 
   <div class="form__control-container">
-    <label class="form__label" for="firstName">Имя</label>
+    <label class="form__label" for="firstName">{{ 'global_name' | translate }}</label>
     <div class="form__control">
       <input class="form__input"
              [class.form__input--invalid]="isControlInvalid('firstName')"
@@ -14,7 +14,7 @@
   </div>
 
   <div class="form__control-container">
-    <label class="form__label" for="lastName">Фамилия</label>
+    <label class="form__label" for="lastName">{{ 'global.last_name' | translate }}</label>
     <div class="form__control">
       <input class="form__input"
              [class.form__input--invalid]="isControlInvalid('lastName')"

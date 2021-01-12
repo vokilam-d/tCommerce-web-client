@@ -3,8 +3,8 @@
 <div class="modal" *ngIf="isModalVisible">
   <div class="modal__header">
     <div class="modal__title">
-      <ng-container *ngIf="state === 'login'">Вход</ng-container>
-      <ng-container *ngIf="state === 'registration'">Регистрация</ng-container>
+      <ng-container *ngIf="state === 'login'">{{ 'global.login' | translate }}</ng-container>
+      <ng-container *ngIf="state === 'registration'">{{ 'global.register' | translate }}</ng-container>
     </div>
 
     <button class="modal__close" (click)="closeModal()">

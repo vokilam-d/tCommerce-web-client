@@ -16,6 +16,7 @@ import { SortingComponent } from '../../product-list/sorting/sorting.component';
 import { PaginationComponent } from '../../pagination/pagination.component';
 import { SortingPaginatingFilterDto } from '../../shared/dtos/spf.dto';
 import { ActivatedRoute } from '@angular/router';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'store-reviews',
@@ -42,14 +43,18 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   @ViewChild(PaginationComponent) paginationCmp: PaginationComponent;
 
 
-  constructor(private headService: HeadService,
-              private notyService: NotyService,
-              private jsonLdService: JsonLdService,
-              private storeReviewService: StoreReviewService,
-              private deviceService: DeviceService,
-              private scrollToService: ScrollToService,
-              private route: ActivatedRoute
-  ) { super(); }
+  constructor(
+    private headService: HeadService,
+    private notyService: NotyService,
+    private jsonLdService: JsonLdService,
+    private storeReviewService: StoreReviewService,
+    private deviceService: DeviceService,
+    private scrollToService: ScrollToService,
+    private route: ActivatedRoute,
+    private languageService: LanguageService
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.setMeta();
@@ -191,7 +196,7 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   }
 
   setInputPlaceholder() {
-    this.inputPlaceholder = `Тут Вы можете оставить отзыв о магазине “Клондайк” (например, оценить скорость доставки, качество консультации).
-Мы очень благодарны за обратную связь, каждый Ваш отзыв вдохновляет нас!`;
+    this.languageService.getTranslation('store_reviews.text_placeholder')
+      .subscribe(text => this.inputPlaceholder = text);
   }
 }

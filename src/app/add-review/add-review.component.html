@@ -1,14 +1,14 @@
 <div class="review-container" [class.review-container--column]="isColumnLayout">
   <form class="add-review" [class.add-review--column]="isColumnLayout" [formGroup]="form" (ngSubmit)="onSubmit()" ngNativeValidate>
     <div class="add-review__control add-review__control--name">
-      <label class="add-review__label" [for]="controlNames.Name">Имя</label>
+      <label class="add-review__label" [for]="controlNames.Name">{{ 'global_name' | translate }}</label>
       <input class="add-review__input" [formControlName]="controlNames.Name" [id]="controlNames.Name" type="text" required>
     </div>
 
     <rating-selector class="add-review__rating" [formControlName]="controlNames.Rating"></rating-selector>
 
     <div class="add-review__control add-review__control--review">
-      <label class="add-review__label" [for]="controlNames.Text">Отзыв</label>
+      <label class="add-review__label" [for]="controlNames.Text">{{ 'add_review.review' | translate }}</label>
       <textarea
         class="add-review__input add-review__textarea"
         [formControlName]="controlNames.Text"
@@ -20,7 +20,7 @@
       ></textarea>
     </div>
 
-    <button class="btn add-review__btn" (click)="openModal()" type="button">Оставить отзыв</button>
+    <button class="btn add-review__btn" (click)="openModal()" type="button">{{ 'add_review.leave_review' | translate }}</button>
 
     <button class="btn btn--default add-review__btn add-review__upload" type="button" (click)="uploadPhotos()">
       <svg class="add-review__upload-icon" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -29,14 +29,14 @@
         <path d="M0 0h24v24H0z" fill="none"></path>
       </svg>
 
-      Добавить фото
+      {{ 'add_review.upload' | translate }}
     </button>
 
     <div class="modal-overlay" *ngIf="isModalVisible" (click)="closeModal()"></div>
 
     <div class="modal" *ngIf="isModalVisible">
       <div class="modal__header">
-        <div class="modal__title">Введите email, чтобы оставить отзыв</div>
+        <div class="modal__title">{{ 'add_review.enter_email' | translate }}</div>
 
         <button class="modal__close" (click)="closeModal()">
           <i class="mbi mbi-cross modal__close-icon"></i>
@@ -45,11 +45,11 @@
 
       <div class="modal__content">
         <div class="add-review__control">
-          <label class="add-review__label" [for]="controlNames.Email">Электронная почта</label>
+          <label class="add-review__label" [for]="controlNames.Email">{{ 'global.email' | translate }}</label>
           <input class="add-review__input" [formControlName]="controlNames.Email" [id]="controlNames.Email" type="email" required>
         </div>
 
-        <button class="btn add-review__btn add-review__submit" type="submit">Оставить отзыв</button>
+        <button class="btn add-review__btn add-review__submit" type="submit">{{ 'add_review.leave_review' | translate }}</button>
       </div>
     </div>
   </form>

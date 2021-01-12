@@ -1,7 +1,7 @@
 <div class="cart">
 
   <div class="cart__no-items" *ngIf="!items || !items.length; else itemsTmpl">
-    Ваша корзина пуста :(
+    {{ 'cart.empty' | translate }}
   </div>
 
   <ng-template #itemsTmpl>
@@ -9,41 +9,41 @@
       <div class="cart__prices">
         <ng-container *ngIf="prices.discountValue as discountValue">
           <div class="cart__price">
-            <div class="cart__price-label">Стоимость товаров:</div>
-            <div class="cart__price-value">{{ prices.itemsCost }} грн</div>
+            <div class="cart__price-label">{{ 'cart.products_cost' | translate }}:</div>
+            <div class="cart__price-value">{{ prices.itemsCost }} {{ 'global.uah' | translate }}</div>
           </div>
 
           <div class="cart__price">
             <div class="cart__price-label">
-              Скидка
+              {{ 'global.discount' | translate }}
               <div class="cart__discount-description">
                 ({{ prices.discountLabel }}, {{ prices.discountPercent }}%):
               </div>
             </div>
-            <div class="cart__price-value cart__price-value--discount">-{{ discountValue }} грн</div>
+            <div class="cart__price-value cart__price-value--discount">-{{ discountValue }} {{ prices.itemsCost }} {{ 'global.uah' | translate }}</div>
           </div>
         </ng-container>
 
         <div class="cart__price cart__price--total">
-          <div class="cart__price-label">Итого:</div>
-          <div class="cart__price-value cart__price-value--total">{{ prices.totalCost }} грн</div>
+          <div class="cart__price-label">{{ 'global.total_cost' | translate }}:</div>
+          <div class="cart__price-value cart__price-value--total">{{ prices.totalCost }} {{ prices.itemsCost }} {{ 'global.uah' | translate }}</div>
         </div>
       </div>
 
       <div class="cart__cost-error" *ngIf="!canPlaceOrder">
-        Минимальная сумма заказа: {{ minimalOrderCost }} грн.
+        {{ 'global.minimal_order_cost' | translate }}: {{ minimalOrderCost }} {{ prices.itemsCost }} {{ 'global.uah' | translate }}.
       </div>
 
       <div class="cart__btns">
         <a class="cart__btn btn btn--default" *ngIf="canPlaceOrder" (click)="checkout()" langRouterLink="/checkout">
-          Оформить заказ <i class="cart__btn-icon mbi mbi-arrow-right"></i>
+          {{ 'cart.checkout' | translate }} <i class="cart__btn-icon mbi mbi-arrow-right"></i>
         </a>
         <a class="cart__btn btn btn--default" *ngIf="!canPlaceOrder" disabled>
-          Оформить заказ <i class="cart__btn-icon mbi mbi-arrow-right"></i>
+          {{ 'cart.checkout' | translate }} <i class="cart__btn-icon mbi mbi-arrow-right"></i>
         </a>
 
         <button class="cart__btn cart__btn--continue btn" (click)="continueShopping()">
-          Продолжить покупки
+          {{ 'cart.resume_shopping' | translate }}
         </button>
       </div>
     </div>
@@ -75,16 +75,16 @@
 
               <div class="item__row" *ngIf="item.additionalServices?.length">
                 <div class="item__additional-service" *ngFor="let service of item.additionalServices">
-                  {{ service.name }} (+{{ service.price }}грн)
+                  {{ service.name }} (+{{ service.price }}{{ prices.itemsCost }} {{ 'global.uah' | translate }})
                 </div>
               </div>
 
               <div class="item__row">
                 <span class="item__cost" [class.item__cost--special]="item.oldCost">
-                  {{ item.cost }} грн
+                  {{ item.cost }} {{ prices.itemsCost }} {{ 'global.uah' | translate }}
                 </span>
                 <span class="item__old-cost" *ngIf="item.oldCost">
-                  {{ item.oldCost }} грн
+                  {{ item.oldCost }} {{ prices.itemsCost }} {{ 'global.uah' | translate }}
                 </span>
               </div>
             </div>

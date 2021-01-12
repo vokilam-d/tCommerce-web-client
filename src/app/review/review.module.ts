@@ -4,6 +4,7 @@ import { ReviewComponent } from './review.component';
 import { RatingStarsModule } from '../rating-stars/rating-stars.module';
 import { MediaGalleryModule } from '../media-gallery/media-gallery.module';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     RatingStarsModule,
     MediaGalleryModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ],
   exports: [ReviewComponent]
 })
