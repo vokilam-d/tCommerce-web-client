@@ -47,8 +47,6 @@ export class LanguageService {
       case Language.EN:
         routeLang = 'en'
         break;
-      default:
-        break;
     }
 
     return routeLang;
