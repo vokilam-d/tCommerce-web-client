@@ -97,7 +97,7 @@
           <p>
             Заказы обрабатываются за 1 день!
             <a class="store-info__reviews store-reviews" langRouterLink="/otzyvy">
-              <span class="store-reviews__text main-link">Отзывы о нас</span>
+              <span class="store-reviews__text main-link">{{ 'global.store_reviews' | translate }}</span>
               <span class="store-reviews__average">{{ averageReviewsRating }}</span>
               <rating-stars class="store-reviews__stars" [isSmall]="true" [isDisabled]="true" [rating]="averageReviewsRating"></rating-stars>
               <span class="store-reviews__count">({{ storeReviewsCount }})</span>

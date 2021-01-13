@@ -26,14 +26,14 @@
       </a>
     </ng-container>
 
-    <a class="service-menu__link main-link" langRouterLink="/skidki">Скидки</a>
-    <a class="service-menu__link main-link" langRouterLink="/dostavka-i-oplata">Доставка и оплата</a>
-    <a class="service-menu__link main-link" langRouterLink="/vozvrat-tovara">Возврат и обмен</a>
-    <a class="service-menu__link main-link" *ngIf="isInFooter" langRouterLink="/politika-konfidencialnosti">Политика конфиденциальности</a>
+    <a class="service-menu__link main-link" langRouterLink="/skidki">{{ 'global.discounts' | translate }}</a>
+    <a class="service-menu__link main-link" langRouterLink="/dostavka-i-oplata">{{ 'global.shipment_and_payment' | translate }}</a>
+    <a class="service-menu__link main-link" langRouterLink="/vozvrat-tovara">{{ 'global.repayments' | translate }}</a>
+    <a class="service-menu__link main-link" *ngIf="isInFooter" langRouterLink="/politika-konfidencialnosti">{{ 'global.privacy_policy' | translate }}</a>
     <a class="service-menu__link main-link" langRouterLink="/contacts">{{ 'global.contacts' | translate }}</a>
-    <a class="service-menu__link main-link" langRouterLink="/blog">Блог</a>
+    <a class="service-menu__link main-link" langRouterLink="/blog">{{ 'global.blog' | translate }}</a>
     <a class="service-menu__link main-link" langRouterLink="/otzyvy">
-      Отзывы о нас
+      {{ 'global.store_reviews' | translate }}
       <span class="service-menu__count" *ngIf="storeReviewsCount"> ({{ storeReviewsCount }})</span>
     </a>
   </div>

@@ -7,6 +7,7 @@
     "category": "Категория",
     "categories": "Категории",
     "discount": "Скидка",
+    "discounts": "Скидки",
     "uah": "грн",
     "total_cost": "Итого",
     "minimal_order_cost": "Минимальная сумма заказа",
@@ -32,7 +33,12 @@
     "password_should_consist_of": "Пароль должен быть не менее 6 символов, состоять из цифр и латинских букв, в том числе заглавных",
     "passwords_dont_match": "Пароли не совпадают",
     "password": "Пароль",
-    "my_wishes": "Мои желания"
+    "my_wishes": "Мои желания",
+    "shipment_and_payment": "Доставка и оплата",
+    "repayments": "Возврат и обмен",
+    "privacy_policy": "Политика конфиденциальности",
+    "blog": "Блог",
+    "store_reviews": "Отзывы о нас"
   },
 
   "rating": {
@@ -161,7 +167,6 @@
   },
 
   "service_menu": {
-    "login_to_account": "Войти в кабинет",
-
+    "login_to_account": "Войти в кабинет"
   }
 }
