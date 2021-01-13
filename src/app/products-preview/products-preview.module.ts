@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductsPreviewComponent } from './products-preview.component';
 import { ProductListItemModule } from '../product-list-item/product-list-item.module';
 import { SharedModule } from '../shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     ProductListItemModule,
-    SharedModule
+    SharedModule,
+    TranslateModule
   ],
   exports: [ProductsPreviewComponent]
 })

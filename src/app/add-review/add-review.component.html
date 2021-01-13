@@ -1,7 +1,7 @@
 <div class="review-container" [class.review-container--column]="isColumnLayout">
   <form class="add-review" [class.add-review--column]="isColumnLayout" [formGroup]="form" (ngSubmit)="onSubmit()" ngNativeValidate>
     <div class="add-review__control add-review__control--name">
-      <label class="add-review__label" [for]="controlNames.Name">{{ 'global_name' | translate }}</label>
+      <label class="add-review__label" [for]="controlNames.Name">{{ 'global.name' | translate }}</label>
       <input class="add-review__input" [formControlName]="controlNames.Name" [id]="controlNames.Name" type="text" required>
     </div>
 
