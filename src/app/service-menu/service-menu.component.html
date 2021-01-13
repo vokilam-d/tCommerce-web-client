@@ -16,10 +16,14 @@
 
       <ng-template #notLoggedTmpl>
         <button class="service-menu__link main-link" (click)="onLoginClick()">
-          Войти в кабинет
+          {{ 'service_menu.login_to_account' | translate }}
         </button>
       </ng-template>
-      <a class="service-menu__link main-link" *ngIf="false" [langRouterLink]="['/', 'account', 'wishlist']">Мои желания</a>
+      <a class="service-menu__link main-link"
+         *ngIf="false" [langRouterLink]="['/', 'account', 'wishlist']"
+      >
+        {{ 'global.my_wishes' | translate }}
+      </a>
     </ng-container>
 
     <a class="service-menu__link main-link" langRouterLink="/skidki">Скидки</a>
