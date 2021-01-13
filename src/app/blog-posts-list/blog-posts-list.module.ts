@@ -16,7 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
     PaginationModule,
     SharedModule,
     LangRouterLinkModule,
-    TranslateModule
+    TranslateModule.forChild()
   ],
   exports: [BlogPostsListComponent]
 })

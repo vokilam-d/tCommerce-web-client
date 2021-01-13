@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
   declarations: [AuthSocialComponent],
   imports: [
     CommonModule,
-    TranslateModule
+    TranslateModule.forChild()
   ],
   exports: [AuthSocialComponent]
 })

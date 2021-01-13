@@ -10,7 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     CartModule,
-    TranslateModule
+    TranslateModule.forChild()
   ],
   exports: [CartModalComponent]
 })

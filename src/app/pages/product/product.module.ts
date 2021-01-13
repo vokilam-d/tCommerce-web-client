@@ -42,7 +42,7 @@ import { TranslateModule } from '@ngx-translate/core';
     LinkedCategoriesModule,
     ProductVariantsModule,
     LangRouterLinkModule,
-    TranslateModule
+    TranslateModule.forChild()
   ]
 })
 export class ProductModule { }

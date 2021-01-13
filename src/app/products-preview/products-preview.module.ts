@@ -12,7 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     ProductListItemModule,
     SharedModule,
-    TranslateModule
+    TranslateModule.forChild()
   ],
   exports: [ProductsPreviewComponent]
 })

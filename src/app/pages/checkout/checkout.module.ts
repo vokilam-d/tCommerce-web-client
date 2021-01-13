@@ -29,7 +29,7 @@ import { TranslateModule } from '@ngx-translate/core';
     SharedModule,
     AddressFormModule,
     LangRouterLinkModule,
-    TranslateModule
+    TranslateModule.forChild()
   ],
   providers: []
 })

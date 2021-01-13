@@ -19,7 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
     BreadcrumbsModule,
     FooterModule,
     RecentlyViewedProductsModule,
-    TranslateModule
+    TranslateModule.forChild()
   ]
 })
 export class ShipmentPaymentPageModule { }

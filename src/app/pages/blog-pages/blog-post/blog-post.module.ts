@@ -25,7 +25,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MediaGalleryModule,
     RecentlyViewedProductsModule,
     LangRouterLinkModule,
-    TranslateModule
+    TranslateModule.forChild()
   ]
 })
 export class BlogPostModule { }

@@ -23,7 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
     BlogToolbarModule,
     BlogPostsListModule,
     RecentlyViewedProductsModule,
-    TranslateModule
+    TranslateModule.forChild()
   ]
 })
 export class BlogModule { }

@@ -14,7 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
     RatingStarsModule,
     MediaGalleryModule,
     FormsModule,
-    TranslateModule
+    TranslateModule.forChild()
   ],
   exports: [ReviewComponent]
 })

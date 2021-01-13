@@ -16,7 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
     SharedModule,
     SelectAutocompleteModule,
     NgxMaskModule.forRoot({ validation: false }),
-    TranslateModule
+    TranslateModule.forChild()
   ],
   exports: [AddressFormComponent]
 })

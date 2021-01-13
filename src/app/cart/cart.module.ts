@@ -19,7 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ProductListItemModule,
     ProductsPreviewModule,
     LangRouterLinkModule,
-    TranslateModule
+    TranslateModule.forChild()
   ],
   exports: [CartComponent]
 })

@@ -18,7 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
     RatingStarsModule,
     ProductVariantsModule,
     LangRouterLinkModule,
-    TranslateModule
+    TranslateModule.forChild()
   ],
   exports: [
     ProductListItemComponent

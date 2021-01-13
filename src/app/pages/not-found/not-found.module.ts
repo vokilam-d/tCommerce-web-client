@@ -20,7 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
     BreadcrumbsModule,
     RecentlyViewedProductsModule,
     LangRouterLinkModule,
-    TranslateModule
+    TranslateModule.forChild()
   ]
 })
 export class NotFoundModule { }

@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     RouterModule,
     ServiceMenuModule,
-    TranslateModule
+    TranslateModule.forChild()
   ],
   exports: [
     FooterComponent

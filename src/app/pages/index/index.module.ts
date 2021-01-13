@@ -21,7 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
     RecentlyViewedProductsModule,
     RecentlyAddedProductsModule,
     LangRouterLinkModule,
-    TranslateModule
+    TranslateModule.forChild()
   ]
 })
 export class IndexModule { }

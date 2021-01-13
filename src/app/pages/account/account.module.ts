@@ -41,7 +41,7 @@ import { TranslateModule } from '@ngx-translate/core';
     AddressFormModule,
     NgxMaskModule,
     LangRouterLinkModule,
-    TranslateModule
+    TranslateModule.forChild()
   ]
 })
 export class AccountModule { }

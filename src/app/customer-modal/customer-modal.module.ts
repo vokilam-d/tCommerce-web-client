@@ -12,7 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     LoginFormModule,
     RegistrationFormModule,
-    TranslateModule
+    TranslateModule.forChild()
   ],
   exports: [CustomerModalComponent]
 })

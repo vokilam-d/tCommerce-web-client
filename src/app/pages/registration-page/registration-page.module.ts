@@ -19,7 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
     FooterModule,
     BreadcrumbsModule,
     HeaderModule,
-    TranslateModule
+    TranslateModule.forChild()
   ]
 })
 export class RegistrationPageModule { }

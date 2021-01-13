@@ -14,7 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ReactiveFormsModule,
     SharedModule,
     AuthSocialModule,
-    TranslateModule
+    TranslateModule.forChild()
   ],
   exports: [RegistrationFormComponent]
 })

@@ -21,7 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
     HeaderModule,
     SharedModule,
     LangRouterLinkModule,
-    TranslateModule
+    TranslateModule.forChild()
   ]
 })
 export class ConfirmEmailModule { }

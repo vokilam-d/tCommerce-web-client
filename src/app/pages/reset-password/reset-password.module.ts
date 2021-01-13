@@ -23,7 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
     SharedModule,
     ReactiveFormsModule,
     LangRouterLinkModule,
-    TranslateModule
+    TranslateModule.forChild()
   ]
 })
 export class ResetPasswordModule { }

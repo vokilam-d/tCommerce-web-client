@@ -31,7 +31,7 @@ import { TranslateModule } from '@ngx-translate/core';
     SharedModule,
     RouterModule,
     BreadcrumbsModule,
-    TranslateModule
+    TranslateModule.forChild()
   ],
   exports: [ProductListComponent, SortingComponent]
 })

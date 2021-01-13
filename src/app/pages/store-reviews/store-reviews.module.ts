@@ -29,7 +29,7 @@ import { TranslateModule } from '@ngx-translate/core';
     RatingStarsModule,
     PaginationModule,
     ProductListModule,
-    TranslateModule
+    TranslateModule.forChild()
   ]
 })
 export class StoreReviewsModule { }

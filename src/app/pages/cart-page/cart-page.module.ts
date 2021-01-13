@@ -23,7 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CartModule,
     RecentlyViewedProductsModule,
     LangRouterLinkModule,
-    TranslateModule
+    TranslateModule.forChild()
   ]
 })
 export class CartPageModule { }

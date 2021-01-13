@@ -12,7 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     RouterModule,
     LangRouterLinkModule,
-    TranslateModule
+    TranslateModule.forChild()
   ],
   exports: [BlogToolbarComponent]
 })
