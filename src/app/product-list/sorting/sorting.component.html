@@ -1,13 +1,13 @@
 <div class="sort">
   <select class="sort__control" [formControl]="sortControl">
     <option *ngFor="let option of sortOptions" [value]="option" [ngSwitch]="option">
-      <ng-container *ngSwitchCase="sortEnum.Expensive">От дорогих к дешёвым</ng-container>
-      <ng-container *ngSwitchCase="sortEnum.Cheap">От дешёвых к дорогим</ng-container>
-      <ng-container *ngSwitchCase="sortEnum.Popularity">Популярные</ng-container>
-      <ng-container *ngSwitchCase="sortEnum.New">Новые в начале</ng-container>
-      <ng-container *ngSwitchCase="sortEnum.Old">Новые в конце</ng-container>
-      <ng-container *ngSwitchCase="sortEnum.HighRating">От высоких оценок к низким</ng-container>
-      <ng-container *ngSwitchCase="sortEnum.LowRating">От низких оценок к высоким</ng-container>
+      <ng-container *ngSwitchCase="sortEnum.Expensive">{{ 'sorting.expensive' | translate }}</ng-container>
+      <ng-container *ngSwitchCase="sortEnum.Cheap">{{ 'sorting.cheap' | translate }}</ng-container>
+      <ng-container *ngSwitchCase="sortEnum.Popularity">{{ 'sorting.popularity' | translate }}</ng-container>
+      <ng-container *ngSwitchCase="sortEnum.New">{{ 'sorting.new' | translate }}</ng-container>
+      <ng-container *ngSwitchCase="sortEnum.Old">{{ 'sorting.old' | translate }}</ng-container>
+      <ng-container *ngSwitchCase="sortEnum.HighRating">{{ 'sorting.high_rating' | translate }}</ng-container>
+      <ng-container *ngSwitchCase="sortEnum.LowRating">{{ 'sorting.low_rating' | translate }}</ng-container>
     </option>
   </select>
 

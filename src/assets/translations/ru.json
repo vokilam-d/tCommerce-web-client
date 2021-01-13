@@ -39,7 +39,8 @@
     "privacy_policy": "Политика конфиденциальности",
     "blog": "Блог",
     "store_reviews": "Отзывы о нас",
-    "to_buy": "Купить"
+    "to_buy": "Купить",
+    "oops_something_went_wrong": "Что-то пошло не так. Пожалуйста, попробуйте позже"
   },
 
   "rating": {
@@ -206,5 +207,30 @@
 
   "product_list_item": {
     "out_of_stock": "Нет в наличии"
+  },
+
+  "product_list": {
+    "filters": "Фильтры",
+    "no_items_found": "По заданным параметрам не найдено ни одного товара"
+  },
+
+  "filter_bar": {
+    "filtered_count": "Выбрано товаров",
+    "to_clear_all": "Сбросить все"
+  },
+
+  "sorting": {
+    "expensive": "От дорогих к дешёвым",
+    "cheap": "От дешёвых к дорогим",
+    "popularity": "Популярные",
+    "new": "Новые в начале",
+    "old": "Новые в конце",
+    "high_rating": "От высоких оценок к низким",
+    "low_rating": "От низких оценок к высоким"
+  },
+
+  "pagination": {
+    "load_more_36_items": "Загрузить еще 36 товаров",
+    "load_more": "Загрузить еще"
   }
 }

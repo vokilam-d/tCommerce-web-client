@@ -3,7 +3,7 @@
   <div class="fixed-container">
     <div class="product-list__header" [ngClass]="{ fixed: isFixed }" #headerRef>
       <button class="product-list__filter-toggle filter-toggle" (click)="openFilters()">
-        Фильтры
+        {{ 'product_list.filters' | translate }}
         <i class="mbi mbi-cross filter-toggle__icon"></i>
       </button>
 
@@ -27,21 +27,21 @@
     </span>
   </div>
   <div class="product-list__container">
-      
+
     <aside class="product-list__sidebar"  [class.product-list__sidebar--opened]="isFiltersOpened">
       <filter-bar class="sidebar__active-filters"
                   [filters]="filters"
                   [filteredCount]="filteredCount"
                   (refresh)="onFiltersChange()"
-      ></filter-bar> 
-          
+      ></filter-bar>
+
       <app-filter class="sidebar__filters"
                   [filters]="filters"
                   [filteredCount]="filteredCount"
                   (valueChanged)="onFiltersChange()"
       ></app-filter>
     </aside>
-  
+
     <main class="product-list__content">
       <ol class="product-list__items" #itemsRef>
         <li class="product-list__item" *ngFor="let item of items" #itemRef>
@@ -66,7 +66,7 @@
         </ng-container>
 
         <li class="product-list__no-items" *ngIf="items?.length === 0">
-          По заданным параметрам не найдено ни одного товара
+          {{ 'product_list.no_items_found' | translate }}
         </li>
 
         <li class="product-list__error" *ngIf="error as error">
@@ -83,5 +83,5 @@
       ></pagination>
     </main>
   </div>
-  
+
 </div>
