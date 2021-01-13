@@ -173,6 +173,9 @@
   "select_autocomplete": {
     "not_selected": "Не выбрано",
     "no_matches": "Не найдено ни одного варианта",
-    "enter_search_query": "Введите в поле поисковый запрос"
+    "enter_search_query": "Введите в поле поисковый запрос",
+    "settlement": "Название города",
+    "warehouse": "Улица или номер отделения",
+    "street": "Название улицы"
   }
 }

@@ -20,18 +20,18 @@
                 ({{ prices.discountLabel }}, {{ prices.discountPercent }}%):
               </div>
             </div>
-            <div class="cart__price-value cart__price-value--discount">-{{ discountValue }} {{ prices.itemsCost }} {{ 'global.uah' | translate }}</div>
+            <div class="cart__price-value cart__price-value--discount">-{{ discountValue }} {{ 'global.uah' | translate }}</div>
           </div>
         </ng-container>
 
         <div class="cart__price cart__price--total">
           <div class="cart__price-label">{{ 'global.total_cost' | translate }}:</div>
-          <div class="cart__price-value cart__price-value--total">{{ prices.totalCost }} {{ prices.itemsCost }} {{ 'global.uah' | translate }}</div>
+          <div class="cart__price-value cart__price-value--total">{{ prices.totalCost }} {{ 'global.uah' | translate }}</div>
         </div>
       </div>
 
       <div class="cart__cost-error" *ngIf="!canPlaceOrder">
-        {{ 'global.minimal_order_cost' | translate }}: {{ minimalOrderCost }} {{ prices.itemsCost }} {{ 'global.uah' | translate }}.
+        {{ 'global.minimal_order_cost' | translate }}: {{ minimalOrderCost }} {{ 'global.uah' | translate }}.
       </div>
 
       <div class="cart__btns">
@@ -81,10 +81,10 @@
 
               <div class="item__row">
                 <span class="item__cost" [class.item__cost--special]="item.oldCost">
-                  {{ item.cost }} {{ prices.itemsCost }} {{ 'global.uah' | translate }}
+                  {{ item.cost }} {{ 'global.uah' | translate }}
                 </span>
                 <span class="item__old-cost" *ngIf="item.oldCost">
-                  {{ item.oldCost }} {{ prices.itemsCost }} {{ 'global.uah' | translate }}
+                  {{ item.oldCost }} {{ 'global.uah' | translate }}
                 </span>
               </div>
             </div>
