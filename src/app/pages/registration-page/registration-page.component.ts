@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomerService } from '../../services/customer/customer.service';
 import { HeadService } from '../../services/head/head.service';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'registration-page',
@@ -12,8 +13,9 @@ export class RegistrationPageComponent implements OnInit {
 
   constructor(private router: Router,
               private headService: HeadService,
-              private customerService: CustomerService) {
-  }
+              private customerService: CustomerService,
+              private languageService: LanguageService
+  ) { }
 
   ngOnInit(): void {
     this.setMeta();
@@ -31,6 +33,8 @@ export class RegistrationPageComponent implements OnInit {
   }
 
   private setMeta() {
-    this.headService.setMeta({ title: 'Регистрация в интернет-магазине Клондайк', description: 'Регистрация в интернет-магазине Клондайк' });
+    this.languageService.getTranslation('registration_page.registration').subscribe(text => {
+      this.headService.setMeta({ title: text, description: text });
+    });
   }
 }

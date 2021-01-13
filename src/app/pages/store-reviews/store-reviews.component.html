@@ -1,9 +1,9 @@
 <app-header></app-header>
 
 <div class="page container">
-  <breadcrumbs [breadcrumbs]="[{ title: 'Отзывы об интернет-магазине Klondike, предложения' }]"></breadcrumbs>
+  <breadcrumbs [breadcrumbs]="[{ title: 'store_reviews.reviews_suggestions' | translate }]"></breadcrumbs>
 
-  <h1 class="page__title">Отзывы об интернет-магазине "Klondike", предложения</h1>
+  <h1 class="page__title">{{ 'store_reviews.reviews_suggestions' | translate }}</h1>
 
   <div class="reviews-summary__container" (click)="scrollToReviews()">
       <span class="reviews-summary__average">{{ averageReviewsRating }}</span>
@@ -14,11 +14,6 @@
   </div>
 
   <div class="page__content">
-<!--    <p class="info-page">-->
-<!--      Тут Вы можете оставить отзыв о магазине “Клондайк” (например, оценить скорость доставки, качество консультации).<br>-->
-<!--      Мы очень благодарны за обратную связь, каждый Ваш отзыв вдохновляет нас!-->
-<!--    </p>-->
-
     <div class="store-reviews">
 
       <div class="store-reviews__actions">

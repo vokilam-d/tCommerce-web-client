@@ -10,6 +10,7 @@ import { AddReviewComponent, IAddReviewFormValue } from '../../../add-review/add
 import { API_HOST, DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { NotyService } from '../../../noty/noty.service';
 import { DeviceService } from '../../../services/device-detector/device.service';
+import { LanguageService } from '../../../services/language/language.service';
 
 @Component({
   selector: 'product-details',
@@ -31,7 +32,8 @@ export class ProductDetailsComponent implements OnInit {
               private scrollToService: ScrollToService,
               private jsonLdService: JsonLdService,
               private productReviewService: ProductReviewService,
-              private notyService: NotyService
+              private notyService: NotyService,
+              private languageService: LanguageService
   ) { }
 
   ngOnInit(): void {
@@ -193,6 +195,8 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   private showReviewSuccess() {
-    this.notyService.success(`Ваш отзыв успешно оставлен`);
+    this.languageService.getTranslation('global.review_successfully_added').subscribe(text => {
+      this.notyService.success(text);
+    });
   }
 }

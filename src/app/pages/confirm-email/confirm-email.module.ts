@@ -8,6 +8,7 @@ import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { HeaderModule } from '../../header/header.module';
 import { SharedModule } from '../../shared/shared.module';
 import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.mo
     BreadcrumbsModule,
     HeaderModule,
     SharedModule,
-    LangRouterLinkModule
+    LangRouterLinkModule,
+    TranslateModule
   ]
 })
 export class ConfirmEmailModule { }

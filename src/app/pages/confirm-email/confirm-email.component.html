@@ -17,7 +17,7 @@
 
       <ng-template #successTmpl>
         <div class="confirm__success">
-          Ваш пароль успешно изменён - теперь Вы можете <a class="reset__success-link" langRouterLink="/login">войти в личный кабинет</a>
+          {{ 'global.password_successfully_updated' | translate }} <a class="reset__success-link" langRouterLink="/login">{{ 'global.login_to_personal_account' | translate }}</a>
         </div>
       </ng-template>
     </ng-template>

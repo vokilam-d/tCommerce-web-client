@@ -12,6 +12,7 @@ import { RecentlyViewedProductsModule } from '../../recently-viewed-products/rec
 import { RatingStarsModule } from '../../rating-stars/rating-stars.module';
 import { PaginationModule } from '../../pagination/pagination.module';
 import { ProductListModule } from '../../product-list/product-list.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ProductListModule } from '../../product-list/product-list.module';
     RecentlyViewedProductsModule,
     RatingStarsModule,
     PaginationModule,
-    ProductListModule
+    ProductListModule,
+    TranslateModule
   ]
 })
 export class StoreReviewsModule { }

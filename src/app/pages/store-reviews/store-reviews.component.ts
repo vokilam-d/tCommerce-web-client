@@ -90,10 +90,12 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   }
 
   private setMeta() {
-    this.headService.setMeta({
-      title: 'Отзывы Интернет магазина klondike',
-      description: 'Отзывы Интернет магазина klondike',
-      keywords: ''
+    this.languageService.getTranslation('store_reviews.klondike_reviews').subscribe(text => {
+      this.headService.setMeta({
+        title: text,
+        description: text,
+        keywords: ''
+      });
     });
   }
 
@@ -147,7 +149,9 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   }
 
   private showReviewSuccess() {
-    this.notyService.success(`Ваш отзыв успешно оставлен`);
+    this.languageService.getTranslation('global.review_successfully_added').subscribe(text => {
+      this.notyService.success(text);
+    });
   }
 
   private setJsonLd() {
