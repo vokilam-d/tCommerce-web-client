@@ -1,6 +1,10 @@
 <div class="review">
-  <div class="review__votes-count" *ngIf="review.votesCount > 0">
-    Этот отзыв поддержали {{ review.votesCount }} раз
+  <div class="review__votes-count" *ngIf="review.votesCount === 1 || review.votesCount > 4">
+    {{ 'review.supported' | translate }} {{ review.votesCount }} {{ 'review.time' | translate }}
+  </div>
+
+  <div class="review__votes-count" *ngIf="review.votesCount > 1 && review.votesCount <= 4">
+    {{ 'review.supported' | translate }} {{ review.votesCount }} {{ 'review.times' | translate }}
   </div>
 
   <rating-stars class="review__rating" [rating]="review.rating" [isDisabled]="true" [isSmall]="true"></rating-stars>
@@ -17,12 +21,12 @@
 
   <div class="review__actions">
     <button class="review__add-comment" *ngIf="canLeaveComment" (click)="toggleCommentForm()" type="button">
-      Ответить
+      {{ 'review.to_respond' | translate }}
     </button>
 
     <div class="review__vote" *ngIf="!review.hasClientVoted">
       <ng-container *ngIf="review.voteSuccess; else notVoted">
-        Спасибо за Ваше мнение
+        {{ 'review.thank_for_opinion' | translate }}
       </ng-container>
 
       <ng-template #notVoted>
@@ -32,7 +36,7 @@
       </ng-template>
 
       <ng-template #voteBtns>
-        Поддержать?
+        {{ 'review.to_support' | translate }}?
         <button class="review__vote-btn" (click)="vote()" type="button">{{ 'global.yes' | translate }}</button>
         <button class="review__vote-btn" (click)="downvote()" type="button">{{ 'global.no' | translate }}</button>
       </ng-template>
@@ -66,7 +70,7 @@
         #form="ngForm"
   >
     <div class="comment-form__title">
-      Оставить комментарий
+      {{ 'review.to_leave_comment' | translate }}
     </div>
 
     <div class="comment-form__control">
@@ -75,7 +79,7 @@
     </div>
 
     <div class="comment-form__control">
-      <label class="comment-form__label" [for]="'text' + review.id">Текст</label>
+      <label class="comment-form__label" [for]="'text' + review.id">{{ 'review.text' | translate }}</label>
       <textarea class="comment-form__input" [id]="'text' + review.id" ngModel name="text" rows="3" required></textarea>
     </div>
 
@@ -84,7 +88,7 @@
       <input class="comment-form__input" [id]="'email' + review.id" ngModel name="email" type="email" required />
     </div>
 
-    <button class="comment-form__submit" type="submit">Оставить комментарий</button>
+    <button class="comment-form__submit" type="submit">{{ 'review.to_leave_comment' | translate }}</button>
     <br>
     <button class="comment-form__cancel" type="button" (click)="toggleCommentForm(false)">{{ 'global.cancel' | translate }}</button>
   </form>
