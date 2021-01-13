@@ -58,7 +58,7 @@
 
     <div class="order__info">
       <div class="order__info-label">
-        Адрес доставки:
+        {{ 'global.shipment_address' | translate }}:
       </div>
       <div class="order__info-value">
         {{ order.shipment.recipient.settlement }}, {{ order.shipment.recipient.address }}
@@ -69,7 +69,7 @@
 
     <div class="order__info">
       <div class="order__info-label">
-        Способ доставки:
+        {{ 'global.shipment_method' | translate }}:
       </div>
       <div class="order__info-value">
         {{ order.shippingMethodName }}
@@ -78,7 +78,7 @@
 
     <div class="order__info">
       <div class="order__info-label">
-        Способ оплаты:
+        {{ 'global.payment_method' | translate }}:
       </div>
       <div class="order__info-value">
         {{ order.paymentMethodName }}
@@ -87,7 +87,7 @@
 
     <div class="order__info" *ngIf="order.clientNote as note">
       <div class="order__info-label">
-        Комментарий:
+        {{ 'account_orders.comment' | translate }}:
       </div>
       <div class="order__info-value">
         {{ note }}
@@ -96,18 +96,18 @@
 
     <div class="order__info">
       <div class="order__info-label">
-        Перезванивать ли Вам для уточнения заказа?
+        {{ 'global.is_callback_needed' | translate }}
       </div>
 
       <div class="order__info-value" [ngSwitch]="order.isCallbackNeeded">
-        <ng-container *ngSwitchCase="true">Да</ng-container>
-        <ng-container *ngSwitchCase="false">Нет</ng-container>
+        <ng-container *ngSwitchCase="true">{{ 'global.yes' | translate }}</ng-container>
+        <ng-container *ngSwitchCase="false">{{ 'global.no' | translate }}</ng-container>
       </div>
     </div>
 
     <div class="order__info" *ngIf="order.shipment.trackingNumber">
       <div class="order__info-label">
-        Номер ТТН Новой почты:
+        {{ 'account_orders.tracking_number' | translate }}:
       </div>
       <div class="order__info-value">
         {{ order.shipment.trackingNumber }}
@@ -116,7 +116,7 @@
 
     <div class="order__info" *ngIf="order.shipment.statusDescription">
       <div class="order__info-label">
-        Статус посылки:
+        {{ 'account_orders.tracking_status' | translate }}:
       </div>
       <div class="order__info-value">
         {{ order.shipment.statusDescription }}

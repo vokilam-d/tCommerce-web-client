@@ -41,7 +41,7 @@
 
     <div class="order-info__row">
       <div class="order-info__label">
-        Адрес доставки
+        {{ 'global.shipment_address' | translate }}
       </div>
 
       <div class="order-info__value">
@@ -53,7 +53,7 @@
 
     <div class="order-info__row">
       <div class="order-info__label">
-        Способ доставки
+        {{ 'global.shipment_method' | translate }}
       </div>
 
       <div class="order-info__value">
@@ -63,7 +63,7 @@
 
     <div class="order-info__row">
       <div class="order-info__label">
-        Способ оплаты
+        {{ 'global.payment_method' | translate }}
       </div>
 
       <div class="order-info__value">
@@ -83,12 +83,12 @@
 
     <div class="order-info__row">
       <div class="order-info__label">
-        Перезванивать ли Вам для уточнения заказа?
+        {{ 'global.is_callback_needed' | translate }}
       </div>
 
       <div class="order-info__value" [ngSwitch]="order.isCallbackNeeded">
-        <ng-container *ngSwitchCase="true">Да</ng-container>
-        <ng-container *ngSwitchCase="false">Нет</ng-container>
+        <ng-container *ngSwitchCase="true">{{ 'global.yes' | translate }}</ng-container>
+        <ng-container *ngSwitchCase="false">{{ 'global.no' | translate }}</ng-container>
       </div>
     </div>
   </div>

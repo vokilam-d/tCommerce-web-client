@@ -1,5 +1,5 @@
 <div class="addresses">
-  <h3 class="addresses__title">Адреса доставок</h3>
+  <h3 class="addresses__title">{{ 'addresses.addresses' | translate }}</h3>
 
   <div class="addresses__form-message addresses__form-message--success" *ngIf="formSuccess as successMessage">
     {{ successMessage }}
@@ -11,7 +11,7 @@
 
   <ng-container *ngIf="!activeAddress">
     <div class="addresses__empty" *ngIf="!addresses?.length">
-      У вас пока ещё нет сохранённых адресов
+      {{ 'addresses.no_saved' | translate }}
     </div>
 
     <ul class="addresses__list">
@@ -23,14 +23,14 @@
         <br>
 
         <ng-container *ngIf="address.isDefault">
-          <span class="addresses__default"><i class="mbi mbi-checkmark"></i></span> выбран по умолчанию <br>
+          <span class="addresses__default"><i class="mbi mbi-checkmark"></i></span> {{ 'addresses.is_by_default' | translate }} <br>
         </ng-container>
 
-        <button class="addresses__edit" (click)="openAddressForm(address)" type="button">Изменить</button>
+        <button class="addresses__edit" (click)="openAddressForm(address)" type="button">{{ 'addresses.edit' | translate }}</button>
       </li>
     </ul>
 
-    <button class="btn addresses__add" (click)="openAddressForm()" type="button">Добавить новый адрес</button>
+    <button class="btn addresses__add" (click)="openAddressForm()" type="button">{{ 'addresses.add_address' | translate }}</button>
   </ng-container>
 
   <div class="addresses__form" *ngIf="activeAddress">
@@ -39,12 +39,12 @@
     ></address-form>
 
     <button class="btn form__submit" [class.form__submit--loading]="isLoading" (click)="submitForm()" type="submit">
-      Сохранить
+      {{ 'global.save' | translate }}
       <preloader class="form__submit-preloader" *ngIf="isLoading"></preloader>
     </button>
 
     <button class="btn btn--default addresses__form-cancel" (click)="closeForm()" type="button">
-      Отменить
+      {{ 'global.cancel' | translate }}
     </button>
   </div>
 </div>

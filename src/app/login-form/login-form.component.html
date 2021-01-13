@@ -40,15 +40,15 @@
 
   <button class="btn form__submit" [class.form__submit--loading]="isLoading" (click)="submit()" type="submit">
     <ng-container *ngIf="state === 'login'">{{ 'global.to_login' | translate }}</ng-container>
-    <ng-container *ngIf="state === 'reset'">Восстановить пароль</ng-container>
+    <ng-container *ngIf="state === 'reset'">{{ 'login_form.reset_password' | translate }}</ng-container>
 
     <preloader class="form__submit-preloader" *ngIf="isLoading"></preloader>
   </button>
 
-  <button class="form__switch-auth" (click)="switchToRegister()" type="button">Создать новый аккаунт</button>
+  <button class="form__switch-auth" (click)="switchToRegister()" type="button">{{ 'login_form.create_account' | translate }}</button>
 
   <div class="form__delimiter">
-    <div class="form__delimiter-text">или</div>
+    <div class="form__delimiter-text">{{ 'login_form.or' | translate }}</div>
   </div>
 
   <auth-social class="form__social" (authSuccess)="socialAuthFinish()"></auth-social>

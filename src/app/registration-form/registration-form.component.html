@@ -50,7 +50,7 @@
              required
       >
       <div class="form__input-error" *ngIf="isControlInvalid('password')">
-        Пароль должен быть не менее 6 символов, состоять из цифр и латинских букв, в том числе заглавных
+        {{ 'global.password_should_consist_of' | translate }}
       </div>
     </div>
   </div>
@@ -65,7 +65,7 @@
              type="password"
       >
       <div class="form__input-error" *ngIf="isControlInvalid('passwordConfirm')">
-        Пароли не совпадают
+        {{ 'global.passwords_dont_match' | translate }}
       </div>
     </div>
   </div>

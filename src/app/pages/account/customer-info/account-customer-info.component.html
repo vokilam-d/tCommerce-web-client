@@ -1,6 +1,6 @@
 <div class="info">
   <h3 class="info__title">
-    Контактная информация
+    {{ 'account_customer_info.contacts' | translate }}
   </h3>
 
   <div class="info__content">
@@ -27,10 +27,10 @@
       </div>
 
       <div class="info__btn-container">
-        <button class="btn btn--small btn--default info__btn" (click)="openInfoForm()" type="button">Редактировать</button>
+        <button class="btn btn--small btn--default info__btn" (click)="openInfoForm()" type="button">{{ 'account_customer_info.edit' | translate }}</button>
       </div>
       <div class="info__btn-container">
-        <button class="btn btn--small btn--default info__btn" (click)="openPasswordForm()" type="button">Сменить пароль</button>
+        <button class="btn btn--small btn--default info__btn" (click)="openPasswordForm()" type="button">{{ 'global.change_password' | translate }}</button>
       </div>
     </ng-container>
 
@@ -63,7 +63,7 @@
       </div>
 
       <div class="form__control-container">
-        <label for="phoneNumber" class="form__label">Номер телефона</label>
+        <label for="phoneNumber" class="form__label">{{ 'account_customer_info.phone_number' | translate }}</label>
         <input class="form__input"
                formControlName="phoneNumber"
                mask="+00 (000) 000-00-00-00000000000"
@@ -86,12 +86,12 @@
       </div>
 
       <button class="btn form__submit" [class.form__submit--loading]="isLoading" type="submit">
-        Сохранить
+        {{ 'global.save' | translate }}
 
         <preloader class="form__submit-preloader" *ngIf="isLoading"></preloader>
       </button>
 
-      <button class="btn btn--default info-form__cancel" (click)="closeForms()" type="button">Отменить</button>
+      <button class="btn btn--default info-form__cancel" (click)="closeForms()" type="button">{{ 'global.cancel' | translate }}</button>
     </form>
 
     <form class="form info-form"
@@ -102,7 +102,7 @@
     >
 
       <div class="form__control-container">
-        <label class="form__label" for="currentPassword">Старый пароль</label>
+        <label class="form__label" for="currentPassword">{{ 'account_customer_info.old_password' | translate }}</label>
         <input class="form__input"
                [class.form__input--invalid]="isControlInvalid(passwordForm, 'currentPassword')"
                formControlName="currentPassword"
@@ -113,7 +113,7 @@
       </div>
 
       <div class="form__control-container">
-        <label class="form__label" for="newPassword">Новый пароль</label>
+        <label class="form__label" for="newPassword">{{ 'global.new_password' | translate }}</label>
         <input class="form__input"
                [class.form__input--invalid]="isControlInvalid(passwordForm, 'newPassword')"
                formControlName="newPassword"
@@ -122,12 +122,12 @@
                required
         >
         <div class="form__input-error" *ngIf="isControlInvalid(passwordForm, 'newPassword')">
-          Пароль должен быть не менее 6 символов, состоять из цифр и латинских букв, в том числе заглавных
+          {{ 'global.password_should_consist_of' | translate }}
         </div>
       </div>
 
       <div class="form__control-container">
-        <label class="form__label" for="newPasswordConfirm">Повторите новый пароль</label>
+        <label class="form__label" for="newPasswordConfirm">{{ 'global.repeat_new_password' | translate }}</label>
         <input class="form__input"
                [class.form__input--invalid]="isControlInvalid(passwordForm, 'newPasswordConfirm')"
                formControlName="newPasswordConfirm"
@@ -135,17 +135,17 @@
                type="password"
         >
         <div class="form__input-error" *ngIf="isControlInvalid(passwordForm, 'newPasswordConfirm')">
-          Пароли не совпадают
+          {{ 'global.passwords_dont_match' | translate }}
         </div>
       </div>
 
       <button class="btn form__submit" [class.form__submit--loading]="isLoading" type="submit">
-        Сохранить
+        {{ 'global.save' | translate }}
 
         <preloader class="form__submit-preloader" *ngIf="isLoading"></preloader>
       </button>
 
-      <button class="btn btn--default info-form__cancel" (click)="closeForms()" type="button">Отменить</button>
+      <button class="btn btn--default info-form__cancel" (click)="closeForms()" type="button">{{ 'global.cancel' | translate }}</button>
     </form>
   </div>
 

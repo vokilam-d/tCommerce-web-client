@@ -9,6 +9,7 @@ import { FooterModule } from '../../footer/footer.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.mo
     FooterModule,
     SharedModule,
     ReactiveFormsModule,
-    LangRouterLinkModule
+    LangRouterLinkModule,
+    TranslateModule
   ]
 })
 export class ResetPasswordModule { }

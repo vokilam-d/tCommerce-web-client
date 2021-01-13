@@ -56,8 +56,8 @@
 
         <div class="rating-tooltip rating-tooltip--bottom tooltip tooltip--bottom" *ngIf="quickReview && quickReview !== null">
           Выбрать оценку <span class="rating-tooltip__rating">{{ quickReview }}</span> ?
-          <button class="rating-tooltip__confirmation-btn" (click)="addQuickReview(quickReview)">Да</button>
-          <button  class="rating-tooltip__confirmation-btn" (click)="quickReview = null">Нет</button>
+          <button class="rating-tooltip__confirmation-btn" (click)="addQuickReview(quickReview)">{{ 'global.yes' | translate }}</button>
+          <button  class="rating-tooltip__confirmation-btn" (click)="quickReview = null">{{ 'global.no' | translate }}</button>
         </div>
 
       </div>
