@@ -11,7 +11,7 @@
          *ngIf="isLoggedIn; else notLoggedTmpl"
          [langRouterLink]="['/', 'account']"
       >
-        Мой кабинет
+        {{ 'global.my_account' | translate }}
       </a>
 
       <ng-template #notLoggedTmpl>

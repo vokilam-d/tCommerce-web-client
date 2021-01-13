@@ -5,7 +5,7 @@
 
   <div class="search__container">
     <h1 class="search__title" *ngIf="searchQuery">
-      Поиск: "{{ searchQuery }}"
+      {{ 'global.search' | translate }}: "{{ searchQuery }}"
     </h1>
 
     <div class="search__no-query" *ngIf="!searchQuery">

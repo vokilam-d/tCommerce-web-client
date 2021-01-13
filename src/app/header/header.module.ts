@@ -11,6 +11,7 @@ import { ServiceMenuModule } from '../service-menu/service-menu.module';
 import { MiniCartComponent } from './mini-cart/mini-cart.component';
 import { MiniAccountComponent } from './mini-account/mini-account.component';
 import { LangRouterLinkModule } from '../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LangRouterLinkModule } from '../lang-router-link/lang-router-link.modul
     SharedModule,
     ServiceMenuModule,
     ReactiveFormsModule,
-    LangRouterLinkModule
+    LangRouterLinkModule,
+    TranslateModule
   ],
   exports: [
     HeaderComponent

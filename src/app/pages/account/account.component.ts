@@ -86,9 +86,11 @@ export class AccountComponent extends NgUnsubscribe implements OnInit {
     const setBreadcrumbs = () => {
       const snapshot = this.route.firstChild.snapshot;
       const link = snapshot.url[0] && snapshot.url[0].path;
-      const title = snapshot.data.label;
+      const titleKey = snapshot.data.label;
 
-      this.breadcrumbs = [{ link, title }];
+      this.languageService.getTranslation(titleKey).subscribe(title => {
+        this.breadcrumbs = [{ link, title }];
+      });
     };
 
     setBreadcrumbs();

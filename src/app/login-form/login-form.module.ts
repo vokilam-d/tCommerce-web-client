@@ -4,6 +4,7 @@ import { LoginFormComponent } from './login-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthSocialModule } from '../auth-social/auth-social.module';
 import { SharedModule } from '../shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
-    AuthSocialModule
+    AuthSocialModule,
+    TranslateModule
   ],
   exports: [LoginFormComponent]
 })

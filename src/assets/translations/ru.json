@@ -12,8 +12,13 @@
     "minimal_order_cost": "Минимальная сумма заказа",
     "cart": "Корзина",
     "login": "Вход",
+    "to_login": "Войти",
     "register": "Регистрация",
-    "contacts": "Контакты"
+    "contacts": "Контакты",
+    "my_account": "Мой кабинет",
+    "my_orders": "Мои заказы",
+    "search": "Поиск",
+    "password": "Пароль"
   },
 
   "rating": {
@@ -70,6 +75,37 @@
     "products_cost": "Стоимость товаров",
     "checkout": "Оформить заказ",
     "resume_shopping": "Продолжить покупки"
+  },
+
+  "footer": {
+    "fr-st": "пн-сб"
+  },
+
+  "mini_account": {
+    "my_cart": "Моя корзина",
+    "logout": "Выход"
+  },
+
+  "search_bar": {
+    "find": "Найти",
+    "nothing_found": "По Вашему запросу ничего не найдено",
+    "go_to_category": "Перейти в категорию"
+  },
+
+  "sidebar_menu": {
+    "catalog": "Каталог",
+    "menu": "Меню"
+  },
+
+  "header": {
+    "slogan": "Клондайк - товары для творчества!",
+    "catalog": "Каталог товаров"
+  },
+
+  "login_form": {
+    "email_or_phone": "Email или номер телефона",
+    "reset_email_sent": "На указанный email было отправлено письмо с инструкцией для восстановления пароля",
+    "forgot_password": "Забыли пароль?"
   },
 
   "store_reviews": {

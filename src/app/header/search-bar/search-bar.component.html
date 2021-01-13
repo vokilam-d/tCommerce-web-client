@@ -7,8 +7,8 @@
          [formControl]="searchControl"
          (focus)="handleSearchBarInFocus(true)"
          type="text"
-         title="Поиск"
-         placeholder="Поиск"
+         [title]="'global.search' | translate"
+         [placeholder]="'global.search' | translate"
          #inputRef
   >
 
@@ -16,7 +16,7 @@
     <i class="mbi mbi-cross search-bar__clear-icon"></i>
   </button>
 
-  <button class="btn search-bar__btn" (click)="search()" type="button">Найти</button>
+  <button class="btn search-bar__btn" (click)="search()" type="button">{{ 'search_bar.find' | translate }}</button>
 
   <div class="search-bar__results" *ngIf="isInFocus && (searchResults || searchError || isSearchInProgress)">
 
@@ -27,7 +27,7 @@
 
       <ng-container *ngIf="searchResults">
         <div class="search-bar__no-result" *ngIf="!searchResults.length">
-          По Вашему запросу ничего не найдено
+          {{ 'search_bar.nothing_found' | translate }}
         </div>
 
         <a class="search-bar__result item"
@@ -47,7 +47,7 @@
 
             <span class="item__pretext"
                   *ngIf="item.type === autocompleteItemTypes.Category"
-            >Перейти в категорию: </span>{{ item.name }}
+            >{{ 'search_bar.go_to_category' | translate }}: </span>{{ item.name }}
 
           </div>
         </a>
