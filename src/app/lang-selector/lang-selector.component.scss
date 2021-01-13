@@ -1,0 +1,36 @@
+@import "variables";
+
+.languages {
+  display: flex;
+
+  &__item {
+    position: relative;
+
+    &:not(:first-child)::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      border-left: 1px solid rgba($dark, 0.2);
+    }
+  }
+
+  &__link {
+    position: relative;
+    top: 1px;
+    display: block;
+    padding: 0 6px;
+    font-size: 13px;
+
+    &--active {
+      color: rgba($dark, 0.4);
+    }
+
+    &--big {
+      font-size: 16px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}

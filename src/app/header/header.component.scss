@@ -18,6 +18,10 @@
     flex-grow: 2;
   }
 
+  &__lang {
+    margin: 0 10px 0 0;
+  }
+
   &__phones {
     flex-shrink: 0;
     min-width: 0;

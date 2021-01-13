@@ -10,7 +10,11 @@
 <div class="menu" [class.menu--visible]="isMenuOpened">
   <div class="menu__content">
 
-    <div class="menu__title">{{ 'sidebar_menu.catalog' | translate }}:</div>
+    <div class="menu__lang-container">
+      <lang-selector size="big"></lang-selector>
+    </div>
+
+    <div class="menu__title menu__title--catalog">{{ 'sidebar_menu.catalog' | translate }}:</div>
 
     <catalog-menu class="menu__catalog-menu" [categories]="categories"></catalog-menu>
 

@@ -3,6 +3,8 @@
     <div class="top-menu__content">
       <service-menu class="top-menu__menu"></service-menu>
 
+      <lang-selector class="top-menu__lang"></lang-selector>
+
       <div class="top-menu__phones phones">
         <div class="phones__content">
           <a class="phones__phone" href="tel:+380502627214">+38 (050) 26-27-214</a>
@@ -21,7 +23,7 @@
 
       <a class="header__logo" langRouterLink="/">
         <img class="header__logo-img" src="../../assets/images/logo.png" alt="Klondike" loading="lazy">
-        <span class="header__logo-text">{{ 'header.slogan' | translate }}:</span>
+        <span class="header__logo-text">{{ 'header.slogan' | translate }}</span>
       </a>
 
       <div class="catalog-toggle" [class.catalog-toggle--is-catalog]="isSidebarCatalog">
