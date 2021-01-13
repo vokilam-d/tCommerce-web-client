@@ -188,5 +188,12 @@
     "thank_for_opinion": "Спасибо за Ваше мнение",
     "to_leave_comment": "Оставить комментарий",
     "text": "Текст"
+  },
+
+  "registration_form": {
+    "confirm_password": "Повторите пароль",
+    "to_sign_up": "Зарегистрироваться",
+    "have_account": "У меня уже есть аккаунт",
+    "or": "или"
   }
 }
