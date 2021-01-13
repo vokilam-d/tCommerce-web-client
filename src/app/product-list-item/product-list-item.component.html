@@ -62,14 +62,14 @@
               (click)="addToCart()"
       >
         <i class="mbi mbi-cart item__buy-icon"></i>
-        Купить
+        {{ 'global.to_buy' | translate }}
 
         <preloader class="item__preloader" *ngIf="isLoading"></preloader>
       </button>
 
       <ng-template #outOfStockTmpl>
         <span class="item__out-of-stock">
-           Нет в наличии
+           {{ 'product_list_item.out_of_stock' | translate }}
         </span>
       </ng-template>
 

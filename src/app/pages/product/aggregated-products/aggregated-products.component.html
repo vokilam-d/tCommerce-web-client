@@ -14,7 +14,7 @@
       </span>
 
       <button class="product__buy btn" (click)="addToCart(product)">
-        Купить
+        {{ 'global.to_buy' | translate }}
 
         <preloader class="product__preloader" *ngIf="product.isLoading"></preloader>
       </button>

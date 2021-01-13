@@ -38,7 +38,8 @@
     "repayments": "Возврат и обмен",
     "privacy_policy": "Политика конфиденциальности",
     "blog": "Блог",
-    "store_reviews": "Отзывы о нас"
+    "store_reviews": "Отзывы о нас",
+    "to_buy": "Купить"
   },
 
   "rating": {
@@ -201,5 +202,9 @@
     "linked_products": "Сопутствующие товары",
     "recently_viewed_products": "Просмотренные товары",
     "recently_added_products": "Недавно добавленные товары"
+  },
+
+  "product_list_item": {
+    "out_of_stock": "Нет в наличии"
   }
 }
