@@ -3,17 +3,17 @@
   <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
 
   <h1 class="page__title success__title">
-    Спасибо за покупку!
+    {{ 'order_success.thank_for_purchase' | translate }}!
   </h1>
 
-  <h2 class="success__subtitle">Ваш заказ №{{ order.id }}</h2>
+  <h2 class="success__subtitle">{{ 'order_success.your_order' | translate }} №{{ order.id }}</h2>
 
   <div class="success__pay-error" *ngIf="paymentError as error">
     {{ error | json }}
   </div>
 
   <div class="success__pay-success" *ngIf="paymentSuccess">
-    Ваш заказ успешно оплачен
+    {{ 'order_success.order_payment_success' | translate }}
   </div>
 
   <button class="success__pay-btn"
@@ -21,17 +21,17 @@
           (click)="initOnlinePayment()"
           type="button"
   >
-    Оплатить
+    {{ 'order_success.to_pay' | translate }}
   </button>
 
   <div class="order-info">
     <div class="order-info__title">
-      Информация о заказе
+      {{ 'order_success.order_info' | translate }}
     </div>
 
     <div class="order-info__row">
       <div class="order-info__label">
-        Получатель
+        {{ 'order_success.receiver' | translate }}
       </div>
 
       <div class="order-info__value">
@@ -73,7 +73,7 @@
 
     <div class="order-info__row" *ngIf="order.clientNote as note">
       <div class="order-info__label">
-        Ваш комментарий
+        {{ 'order_success.comment' | translate }}
       </div>
 
       <div class="order-info__value">
@@ -95,7 +95,7 @@
 
   <div class="items">
     <div class="items__title">
-      Товары в заказе
+      {{ 'order_success.order_items' | translate }}
     </div>
 
     <div class="item" *ngFor="let item of order.items">
@@ -116,7 +116,7 @@
 
         <div class="item__qty-cost">
           <div class="item__qty">
-            {{ item.qty }} шт. на сумму
+            {{ item.qty }} {{ 'global.qty' | translate }}. {{ 'order_success.in_amount_of' | translate }}
           </div>
 
           <div class="item__cost-container">
@@ -132,7 +132,7 @@
     </div>
 
     <div class="items__row">
-      <div class="items__label">Стоимость товаров</div>
+      <div class="items__label">{{ 'global.items_cost' | translate }}</div>
 
       <div class="items__value">{{ order.prices.itemsCost }} {{ 'global.uah' | translate }}</div>
     </div>
@@ -152,7 +152,7 @@
 
   <div class="continue-shopping">
     <a class="btn continue-shopping__btn" langRouterLink="/">
-      Продолжить покупки
+      {{ 'order_success.continue_shopping' | translate }}
     </a>
   </div>
 

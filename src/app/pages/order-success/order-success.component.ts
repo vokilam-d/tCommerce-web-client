@@ -88,7 +88,9 @@ export class OrderSuccessComponent implements OnInit {
 
 
   private setMeta() {
-    this.headService.setMeta({ title: `Заказ №${this.order.id}`, description: `Заказ №${this.order.id}` });
+    this.languageService.getTranslation('order_success.order').subscribe(text => {
+      this.headService.setMeta({ title: `${text} №${this.order.id}`, description: `${text} №${this.order.id}` });
+    });
   }
 
   private showGoogleCustomerReview() {
@@ -120,8 +122,8 @@ export class OrderSuccessComponent implements OnInit {
   }
 
   private setBreadcrumbs() {
-    this.languageService.getTranslation(['global.my_account', 'global.my_orders'])
-      .subscribe(([myAccount, myOrders]) => {
+    this.languageService.getTranslation(['global.my_account', 'global.my_orders', 'order_success.order'])
+      .subscribe(([myAccount, myOrders, myOrder]) => {
         this.breadcrumbs = [
           {
             title: myAccount,
@@ -132,7 +134,7 @@ export class OrderSuccessComponent implements OnInit {
             link: 'account/orders'
           },
           {
-            title: `Заказ №${this.order.id}`
+            title: `${myOrder} №${this.order.id}`
           }
         ];
       });

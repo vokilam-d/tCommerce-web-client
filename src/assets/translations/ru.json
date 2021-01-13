@@ -43,7 +43,9 @@
     "oops_something_went_wrong": "Что-то пошло не так. Пожалуйста, попробуйте позже",
     "review_successfully_added": "Ваш отзыв успешно оставлен",
     "password_successfully_updated": "Ваш пароль успешно изменён - теперь Вы можете",
-    "login_to_personal_account": "войти в личный кабинет"
+    "login_to_personal_account": "войти в личный кабинет",
+    "qty": "шт",
+    "items_cost": "Стоимость товаров"
   },
 
   "rating": {
@@ -272,5 +274,19 @@
 
   "product_details": {
     "reviews": "Отзывы"
+  },
+
+  "order_success": {
+    "thank_for_purchase": "Спасибо за покупку",
+    "your_order": "Ваш заказ",
+    "order": "Заказ",
+    "order_payment_success": "Ваш заказ успешно оплачен",
+    "to_pay": "Оплатить",
+    "order_info": "Информация о заказе",
+    "receiver": "Получатель",
+    "comment": "Ваш комментарий",
+    "order_items": "Товары в заказе",
+    "in_amount_of": "на сумму",
+    "continue_shopping": "Продолжить покупки"
   }
 }

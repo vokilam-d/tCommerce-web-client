@@ -71,7 +71,7 @@
 
             <div class="cart-item__qty-cost">
               <div class="cart-item__qty">
-                {{ item.qty }} шт.
+                {{ item.qty }} {{ 'global.qty' | translate }}.
               </div>
 
               <div class="cart-item__cost-container">
@@ -97,7 +97,7 @@
       <div class="checkout__prices">
         <ng-container *ngIf="prices.discountValue as discountValue">
           <div class="checkout__price">
-            <div class="checkout__price-label">Стоимость товаров:</div>
+            <div class="checkout__price-label">{{ 'global.items_cost' | translate }}:</div>
             <div class="checkout__price-value">{{ prices.itemsCost }} {{ 'global.uah' | translate }}</div>
           </div>
 
