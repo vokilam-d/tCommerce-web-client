@@ -250,5 +250,27 @@
 
   "registration_page": {
     "registration": "Регистрация в интернет-магазине Клондайк"
+  },
+
+  "product": {
+    "set_rating": "оценили",
+    "thank_for_rating": "Спасибо! Ваш голос учтен",
+    "to_leave_quick_review": "Вы можете нажать на звёздочку для быстрой оценки товара",
+    "to_choose_rating": "Выбрать оценку",
+    "sku": "Код",
+    "vendor_code": "Артикул",
+    "free_shipment": "Бесплатная доставка",
+    "for_orders_from": "для заказов от",
+    "except_overall": "кроме габаритных",
+    "not_sum_up_with": "не суммируется с",
+    "discounts": "накопительными скидками",
+    "sales": "и акциями",
+    "order_processing_in_a_day": "Заказы обрабатываются за 1 день",
+    "in_stock": "В наличии",
+    "out_of_stock": "Нет в наличии"
+  },
+
+  "product_details": {
+    "reviews": "Отзывы"
   }
 }

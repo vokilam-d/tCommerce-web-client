@@ -43,19 +43,19 @@
 
         <div class="rating__count">{{ product.allReviewsCount }}</div>
 
-        <div class="rating__text" *ngIf="!addQuickReviewError && !addQuickReviewSuccess">оценили</div>
+        <div class="rating__text" *ngIf="!addQuickReviewError && !addQuickReviewSuccess">{{ 'product.set_rating' | translate }}</div>
         <div class="rating__text" *ngIf="addQuickReviewError as error">{{ error }}</div>
-        <div class="rating__text" *ngIf="addQuickReviewSuccess as success">Спасибо! Ваш голос учтен</div>
+        <div class="rating__text" *ngIf="addQuickReviewSuccess as success">{{ 'product.thank_for_rating' | translate }}</div>
 
         <div class="rating-tooltip rating-tooltip--bottom tooltip tooltip--bottom" *ngIf="isClosed === false">
-          Вы можете нажать на звёздочку для быстрой оценки товара
+          {{ 'product.to_leave_quick_review' | translate }}
           <span class="rating-tooltip__close-btn" (click)="closeTooltip()">
             <span class="rating-tooltip__cross"></span>
           </span>
         </div>
 
         <div class="rating-tooltip rating-tooltip--bottom tooltip tooltip--bottom" *ngIf="quickReview && quickReview !== null">
-          Выбрать оценку <span class="rating-tooltip__rating">{{ quickReview }}</span> ?
+          {{ 'product.to_choose_rating' | translate }} <span class="rating-tooltip__rating">{{ quickReview }}</span> ?
           <button class="rating-tooltip__confirmation-btn" (click)="addQuickReview(quickReview)">{{ 'global.yes' | translate }}</button>
           <button  class="rating-tooltip__confirmation-btn" (click)="quickReview = null">{{ 'global.no' | translate }}</button>
         </div>
@@ -64,11 +64,11 @@
 
       <div class="product__sku-container">
         <div class="product__sku">
-          Код: <span class="product__sku-value">{{ product.sku }}</span>
+          {{ 'product.sku' | translate }}: <span class="product__sku-value">{{ product.sku }}</span>
         </div>
 
         <div class="product__sku product__vendor-code" *ngIf="product.vendorCode">
-          Артикул: <span class="product__sku-value">{{ product.vendorCode }}</span>
+          {{ 'product.vendor_code' | translate }}: <span class="product__sku-value">{{ product.vendorCode }}</span>
         </div>
       </div>
     </div>
@@ -85,17 +85,17 @@
       <div class="product__info">
 
         <div class="product__store-info store-info">
-          <p><a class="store-info__link main-link" langRouterLink="/dostavka-i-oplata">Бесплатная доставка</a> для заказов от 1000 грн <span class="store-info__tip">(кроме габаритных)</span>
+          <p><a class="store-info__link main-link" langRouterLink="/dostavka-i-oplata">{{ 'product.free_shipment' | translate }}</a> {{ 'product.for_orders_from' | translate }} 1000 {{ 'global.uah' | translate }} <span class="store-info__tip">({{ 'product.except_overall' | translate }})</span>
           </p>
 
           <p *ngIf="product.isDiscountApplicable">
-            <span class="store-info__discount">-5%</span> для заказов от 500 грн<br>
-            <span class="store-info__discount">-10%</span> для заказов от 1500 грн<br>
-            <span class="store-info__tip">(не суммируется с <a class="store-info__link main-link" langRouterLink="/skidki">накопительными скидками</a> и акциями)</span>
+            <span class="store-info__discount">-5%</span> {{ 'product.for_orders_from' | translate }} 500 {{ 'global.uah' | translate }}<br>
+            <span class="store-info__discount">-10%</span> {{ 'product.for_orders_from' | translate }} 1500 {{ 'global.uah' | translate }}<br>
+            <span class="store-info__tip">({{ 'product.not_sum_up_with' | translate }} <a class="store-info__link main-link" langRouterLink="/skidki">{{ 'product.discounts' | translate }}</a> {{ 'product.sales' | translate }})</span>
           </p>
 
           <p>
-            Заказы обрабатываются за 1 день!
+            {{ 'product.order_processing_in_a_day' | translate }}!
             <a class="store-info__reviews store-reviews" langRouterLink="/otzyvy">
               <span class="store-reviews__text main-link">{{ 'global.store_reviews' | translate }}</span>
               <span class="store-reviews__average">{{ averageReviewsRating }}</span>
@@ -120,8 +120,8 @@
           <div class="product__price-qty">
             <div class="product__price-container">
               <div class="product__stock" [class.product__stock--available]="product.isInStock">
-                <ng-container *ngIf="product.isInStock">В наличии</ng-container>
-                <ng-container *ngIf="!product.isInStock">Нет в наличии</ng-container>
+                <ng-container *ngIf="product.isInStock">{{ 'product.in_stock' | translate }}</ng-container>
+                <ng-container *ngIf="!product.isInStock">{{ 'product.out_of_stock' | translate }}</ng-container>
               </div>
 
               <div class="product__price" [class.product__price--special]="product.oldPrice">

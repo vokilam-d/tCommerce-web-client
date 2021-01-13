@@ -19,7 +19,7 @@
 
   <div class="details__item item__container item__container--reviews reviews" #reviewsRef>
     <div class="reviews__container">
-      <h3 class="item__title">Отзывы
+      <h3 class="item__title">{{ 'product_details.reviews' | translate }}
         <span class="reviews__count" *ngIf="product.textReviewsCount> 0">({{ product.textReviewsCount }})</span>
       </h3>
 
@@ -33,10 +33,6 @@
             (downvote)="downvote(review)"
             (addComment)="onAddComment(review, $event)"
     ></review>
-
-<!--    <div class="reviews__no-reviews-yet" *ngIf="!product.textReviewsCount">-->
-<!--      Вы можете оставить отзыв здесь<br>Нажмите на кнопку "Написать отзыв"-->
-<!--    </div>-->
   </div>
 
 </div>

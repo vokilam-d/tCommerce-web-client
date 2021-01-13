@@ -56,8 +56,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     private deviceService: DeviceService,
     private storeReviewService: StoreReviewService,
     private analyticsService: AnalyticsService
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     logDebug(`[ProductComponent] "${this.route.snapshot.data.slug}" ngOnInit`);
