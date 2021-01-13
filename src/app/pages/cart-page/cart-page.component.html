@@ -10,7 +10,7 @@
   <cart class="cart-page__cart" (continueShopping)="onContinueShopping()"></cart>
 
   <div class="cart-page__empty">
-    <a class="btn cart-page__empty-btn" *ngIf="isCartEmpty" langRouterLink="/">Вперёд к покупкам!</a>
+    <a class="btn cart-page__empty-btn" *ngIf="isCartEmpty" langRouterLink="/">{{ 'cart_page.go_shopping' | translate }}</a>
   </div>
 
   <recently-viewed-products></recently-viewed-products>

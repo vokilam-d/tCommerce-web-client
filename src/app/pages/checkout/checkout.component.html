@@ -6,7 +6,7 @@
 
     <div class="header__phones header-phones">
       <div class="header-phones__text">
-        Консультации по телефону
+        {{ 'checkout.phone_consulting' | translate }}
       </div>
       <div class="header-phones__content">
         <a class="header-phones__phone" href="tel:+380502627214">+38 (050) 26-27-214</a>
@@ -19,17 +19,17 @@
 
   <div class="subheader">
     <h1 class="subheader__title">
-      Оформление заказа
+      {{ 'checkout.checkout' | translate }}
     </h1>
 
     <div class="subheader__login-container" *ngIf="!isLoggedIn">
       <button class="btn btn--small btn--transparent subheader__login" (click)="login()">
         <i class="mbi mbi-user subheader__login-icon"></i>
-        Войти в личный кабинет
+        {{ 'checkout.login' | translate }}
       </button>
 
       <div class="subheader__login-text">
-        Или вы можете создать учетную запись после оформления заказа
+        {{ 'checkout.or_register' | translate }}
       </div>
     </div>
   </div>
@@ -71,7 +71,7 @@
 
             <div class="cart-item__qty-cost">
               <div class="cart-item__qty">
-                {{ item.qty }} {{ 'global.qty' | translate }}.
+                {{ item.qty }} {{ 'global.pcs' | translate }}
               </div>
 
               <div class="cart-item__cost-container">
@@ -91,7 +91,9 @@
       </div>
 
       <div class="checkout__edit">
-        <button class="checkout__edit-btn" (click)="editCart()" type="button">Редактировать заказ</button>
+        <button class="checkout__edit-btn" (click)="editCart()" type="button">
+          {{ 'checkout.edit_order' | translate }}
+        </button>
       </div>
 
       <div class="checkout__prices">
@@ -127,14 +129,14 @@
               (click)="placeOrder()"
               type="button"
       >
-        Заказ подтверждаю
+        {{ 'checkout.order_confirm' | translate }}
       </button>
     </aside>
   </div>
 
   <div class="footer">
     <div class="footer__contacts footer-phones">
-      <div class="footer-phones__title">Консультации по телефонам</div>
+      <div class="footer-phones__title">{{ 'checkout.phones_consulting' | translate }}</div>
 
       <ul class="footer-phones__phones">
         <li class="footer-phones__phone-container">
@@ -150,7 +152,7 @@
     </div>
 
     <div class="footer__copyright">
-      2015-{{ currentYear }} Интернет-магазин "Клондайк" - товары для творчества
+      2015-{{ currentYear }} {{ 'checkout.store' | translate }}
     </div>
   </div>
 

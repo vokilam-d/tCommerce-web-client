@@ -12,6 +12,7 @@ import { ScrollToService } from '../../services/scroll-to/scroll-to.service';
 import { HeadService } from '../../services/head/head.service';
 import { AnalyticsService } from '../../services/analytics/analytics.service';
 import { vibrate } from '../../shared/helpers/vibrate.function';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'checkout',
@@ -40,7 +41,8 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
     private analytics: AnalyticsService,
     private orderService: OrderService,
     private scrollToService: ScrollToService,
-    private router: Router
+    private router: Router,
+    private languageService: LanguageService
   ) {
     super();
   }
@@ -65,7 +67,9 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
       return;
     }
     if (!this.orderService.paymentMethod) {
-      this.setError(`Не выбран способ оплаты`);
+      this.languageService.getTranslation('checkout.payment_not_selected').subscribe(text => {
+        this.setError(text);
+      })
       return;
     }
     if (!this.canPlaceOrder) {
@@ -114,7 +118,9 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   }
 
   private setMeta() {
-    this.headService.setMeta({ title: 'Klondike | Оформление заказа', description: 'Оформление заказа' });
+    this.languageService.getTranslation('checkout.checkout').subscribe(text => {
+      this.headService.setMeta({ title: `Klondike | ${text}`, description: text });
+    })
   }
 
   setItemImg(item) {

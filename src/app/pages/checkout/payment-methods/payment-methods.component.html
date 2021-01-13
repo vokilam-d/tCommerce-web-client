@@ -1,4 +1,4 @@
-<div class="checkout-block__title">Способы оплаты</div>
+<div class="checkout-block__title">{{ 'payment_methods.payment_methods' | translate }}</div>
 
 <div class="checkout-block__content">
 
@@ -7,8 +7,8 @@
   </div>
 
   <div class="checkout-block__error" *ngIf="error; else noErrorTmpl" (click)="fetchMethods()">
-    При загрузке способов оплаты произошла ошибка<br>
-    Пожалуйста, нажмите сюда, чтобы попробовать ещё раз
+    {{ 'payment_methods.error_1' | translate }}<br>
+    {{ 'payment_methods.error_2' | translate }}
   </div>
 
   <ng-template #noErrorTmpl>

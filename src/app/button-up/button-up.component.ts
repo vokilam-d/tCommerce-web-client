@@ -10,7 +10,7 @@ export class ButtonUpComponent implements OnInit {
 
   windowScrolled: boolean;
 
-  constructor( private scrollToService: ScrollToService ) { }
+  constructor(private scrollToService: ScrollToService) { }
 
   ngOnInit(): void { }
 

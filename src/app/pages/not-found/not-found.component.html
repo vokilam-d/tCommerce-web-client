@@ -3,10 +3,10 @@
 <div class="page container not-found">
   <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
 
-  <h1 class="not-found__title">Страница не найдена</h1>
+  <h1 class="not-found__title">{{ 'not_found_page.not_found_page' | translate }}</h1>
 
   <h3 class="not-found__sub-title">
-    По данному адресу ничего не найдено. Пожалуйста, попробуйте <a class="not-found__index-link" langRouterLink="/">начать с главной</a>.
+    {{ 'not_found_page.content_1' | translate }} <a class="not-found__index-link" langRouterLink="/">{{ 'not_found_page.content_2' | translate }}</a>.
   </h3>
 
   <recently-viewed-products></recently-viewed-products>

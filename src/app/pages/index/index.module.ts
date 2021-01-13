@@ -9,6 +9,7 @@ import { PostsPreviewComponent } from './posts-preview/posts-preview.component';
 import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
 import { RecentlyAddedProductsModule } from '../../recently-added-products/recently-added-products.module';
 import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [IndexComponent, PostsPreviewComponent],
@@ -19,7 +20,8 @@ import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.mo
     FooterModule,
     RecentlyViewedProductsModule,
     RecentlyAddedProductsModule,
-    LangRouterLinkModule
+    LangRouterLinkModule,
+    TranslateModule
   ]
 })
 export class IndexModule { }

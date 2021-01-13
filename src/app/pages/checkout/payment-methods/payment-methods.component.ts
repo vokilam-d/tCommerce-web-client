@@ -10,6 +10,7 @@ import { PaymentMethodDto } from '../../../shared/dtos/payment-method.dto';
 import { AddressTypeEnum } from '../../../shared/enums/address-type.enum';
 import { PaymentTypeEnum } from '../../../shared/enums/payment-type.enum';
 import { CustomerService } from '../../../services/customer/customer.service';
+import { LanguageService } from '../../../services/language/language.service';
 
 @Component({
   selector: 'payment-methods',
@@ -28,7 +29,8 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
     private http: HttpClient,
     private orderService: OrderService,
     private customerService: CustomerService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private languageService: LanguageService
   ) {
     super();
   }
@@ -67,40 +69,57 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
   }
 
   private handleMethodsState() { // todo wow so ugly, much refactor
-    const cashOnDeliveryMethod = this.methods.find(method => method.paymentType === PaymentTypeEnum.CASH_ON_DELIVERY);
-    if (!cashOnDeliveryMethod) { return; }
-    cashOnDeliveryMethod.disabledReasons = [];
+    const keys = [
+      'payment_methods.no_cash_on_delivery_with_address',
+      'payment_methods.no_cash_on_delivery_with_gold',
+      'payment_methods.no_cash_on_delivery_with_cost',
+      'global.uah'
+    ];
 
-    this.orderService.addressType$
-      .pipe( takeUntil(this.ngUnsubscribe) )
-      .subscribe(addressType => {
-        const disableReason = 'Наложенный платёж недоступен при адресной доставке';
-        if (addressType === AddressTypeEnum.DOORS) {
-          if (!cashOnDeliveryMethod.disabledReasons.includes(disableReason)) {
-            cashOnDeliveryMethod.disabledReasons.push(disableReason);
+    this.languageService.getTranslation(keys).subscribe(texts => {
+      const cashOnDeliveryMethod = this.methods.find(method => method.paymentType === PaymentTypeEnum.CASH_ON_DELIVERY);
+      if (!cashOnDeliveryMethod) {
+        return;
+      }
+      cashOnDeliveryMethod.disabledReasons = [];
+
+      this.orderService.addressType$
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(addressType => {
+          const disableReason = texts['payment_methods.no_cash_on_delivery_with_address'];
+          if (addressType === AddressTypeEnum.DOORS) {
+            if (!cashOnDeliveryMethod.disabledReasons.includes(disableReason)) {
+              cashOnDeliveryMethod.disabledReasons.push(disableReason);
+            }
+          } else {
+            const reasonIdx = cashOnDeliveryMethod.disabledReasons.indexOf(disableReason);
+            if (reasonIdx > -1) {
+              cashOnDeliveryMethod.disabledReasons.splice(reasonIdx, 1);
+            }
           }
-        } else {
-          const reasonIdx = cashOnDeliveryMethod.disabledReasons.indexOf(disableReason);
-          if (reasonIdx > -1) { cashOnDeliveryMethod.disabledReasons.splice(reasonIdx, 1); }
-        }
 
-        cashOnDeliveryMethod.disabledState = cashOnDeliveryMethod.disabledReasons.length ? true : null;
+          cashOnDeliveryMethod.disabledState = cashOnDeliveryMethod.disabledReasons.length ? true : null;
 
-        if (this.methodControl.value === cashOnDeliveryMethod) {
-          this.methodControl.setValue(null);
-        }
-      });
+          if (this.methodControl.value === cashOnDeliveryMethod) {
+            this.methodControl.setValue(null);
+          }
+        });
 
-    const disallowedItem = this.customerService.cart.find(item => item.name.toLowerCase().match(/сусаль([ ,])/g));
-    if (disallowedItem) {
-      cashOnDeliveryMethod.disabledState = true;
-      cashOnDeliveryMethod.disabledReasons.push('Наложенный платёж недоступен для сусального золота');
-    }
+      const disallowedItem = this.customerService.cart.find(item => item.name.toLowerCase().match(/сусаль([ ,])/g));
+      if (disallowedItem) {
+        cashOnDeliveryMethod.disabledState = true;
+        const reason = texts['payment_methods.no_cash_on_delivery_with_gold'];
+        cashOnDeliveryMethod.disabledReasons.push(reason);
+      }
 
-    const isMaxCost = this.customerService.prices.totalCost > this.maxCashOnDeliveryTotalCost;
-    if (isMaxCost) {
-      cashOnDeliveryMethod.disabledState = true;
-      cashOnDeliveryMethod.disabledReasons.push(`Наложенный платёж недоступен для заказов свыше ${this.maxCashOnDeliveryTotalCost}грн`);
-    }
+      const isMaxCost = this.customerService.prices.totalCost > this.maxCashOnDeliveryTotalCost;
+      if (isMaxCost) {
+        cashOnDeliveryMethod.disabledState = true;
+        const reason = texts['payment_methods.no_cash_on_delivery_with_cost'];
+        const uah = texts['global.uah'];
+        cashOnDeliveryMethod.disabledReasons.push(`${reason} ${this.maxCashOnDeliveryTotalCost}${uah}`);
+      }
+
+    });
   }
 }

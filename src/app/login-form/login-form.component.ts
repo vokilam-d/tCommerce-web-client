@@ -23,9 +23,10 @@ export class LoginFormComponent implements OnInit {
   @Output() loggedIn = new EventEmitter<CustomerDto>();
   @Output('switchToRegister') switchToRegisterEmitter = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder,
-              private customerService: CustomerService) {
-  }
+  constructor(
+    private formBuilder: FormBuilder,
+    private customerService: CustomerService
+  ) { }
 
   ngOnInit(): void {
     this.buildForm();

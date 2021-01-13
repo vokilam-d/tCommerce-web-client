@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { ActivatedRoute, Router, RouterLinkWithHref } from '@angular/router';
 import { LocationStrategy } from '@angular/common';
 import { LanguageService } from '../services/language/language.service';
@@ -13,6 +13,21 @@ export class LangRouterLinkDirective extends RouterLinkWithHref {
 
   @Input()
   set langRouterLink(data: any[] | string | null | undefined) {
+    this.onRouterLinkInput(data);
+  }
+
+  constructor(
+    router: Router,
+    route: ActivatedRoute,
+    locationStrategy: LocationStrategy,
+    private languageService: LanguageService
+  ) {
+    super(router, route, locationStrategy);
+    this._router = router;
+    this._route = route;
+  }
+
+  private onRouterLinkInput(data: any[] | string | null | undefined) {
     let commands: any[] = [];
     if (data !== null && data !== undefined) {
       commands = Array.isArray(data) ? data : [data];
@@ -43,16 +58,5 @@ export class LangRouterLinkDirective extends RouterLinkWithHref {
 
     this.routerLink = commandsWithLang;
     this.href = this.urlTree.toString();
-  }
-
-  constructor(
-    router: Router,
-    route: ActivatedRoute,
-    locationStrategy: LocationStrategy,
-    private languageService: LanguageService
-  ) {
-    super(router, route, locationStrategy);
-    this._router = router;
-    this._route = route;
   }
 }

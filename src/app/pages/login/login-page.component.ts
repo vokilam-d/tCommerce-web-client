@@ -3,6 +3,7 @@ import { CustomerDto } from '../../shared/dtos/customer.dto';
 import { Router } from '@angular/router';
 import { CustomerService } from '../../services/customer/customer.service';
 import { HeadService } from '../../services/head/head.service';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'login-page',
@@ -11,10 +12,12 @@ import { HeadService } from '../../services/head/head.service';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(private router: Router,
-              private headService: HeadService,
-              private customerService: CustomerService) {
-  }
+  constructor(
+    private router: Router,
+    private headService: HeadService,
+    private customerService: CustomerService,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit(): void {
     this.setMeta();
@@ -32,6 +35,8 @@ export class LoginPageComponent implements OnInit {
   }
 
   private setMeta() {
-    this.headService.setMeta({ title: 'Войти в интернет-магазин Клондайк', description: 'Войти в интернет-магазин Клондайк' });
+    this.languageService.getTranslation('login_page.meta_title').subscribe(text => {
+      this.headService.setMeta({ title: text, description: text });
+    });
   }
 }

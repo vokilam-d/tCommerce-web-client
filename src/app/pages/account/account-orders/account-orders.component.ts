@@ -4,6 +4,7 @@ import { CustomerService } from '../../../services/customer/customer.service';
 import { OrderDto } from '../../../shared/dtos/order.dto';
 import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../../../shared/constants';
 import { finalize } from 'rxjs/operators';
+import { LanguageService } from '../../../services/language/language.service';
 
 @Component({
   selector: 'account-orders',
@@ -17,9 +18,11 @@ export class AccountOrdersComponent implements OnInit {
   error: string;
   isLoading: boolean = false;
 
-  constructor(private headService: HeadService,
-              private customerService: CustomerService) {
-  }
+  constructor(
+    private headService: HeadService,
+    private customerService: CustomerService,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit(): void {
     this.fetchOrders();
@@ -40,6 +43,8 @@ export class AccountOrdersComponent implements OnInit {
   }
 
   private setMeta() {
-    this.headService.setMeta({ title: 'Мои заказы', description: 'Мои заказы' });
+    this.languageService.getTranslation('global.my_orders').subscribe(text => {
+      this.headService.setMeta({ title: text, description: text });
+    });
   }
 }

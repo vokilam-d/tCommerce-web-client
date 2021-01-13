@@ -5,7 +5,7 @@ import { Response } from 'express';
 import { RESPONSE } from '@nguniversal/express-engine/tokens';
 import { DeviceService } from '../../services/device-detector/device.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UrlService } from '../../services/url/url.service';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'not-found',
@@ -16,13 +16,14 @@ export class NotFoundComponent implements OnInit {
 
   breadcrumbs: IBreadcrumb[] = [{ title: '404' }];
 
-  constructor(private headService: HeadService,
-              private deviceService: DeviceService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private urlService: UrlService,
-              @Optional() @Inject(RESPONSE) private res: Response) {
-  }
+  constructor(
+    @Optional() @Inject(RESPONSE) private res: Response,
+    private headService: HeadService,
+    private deviceService: DeviceService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit() {
     const autoReloadField = 'isAutoReload';
@@ -42,9 +43,8 @@ export class NotFoundComponent implements OnInit {
   }
 
   private setMeta() {
-    this.headService.setMeta({
-      title: 'Страница не найдена',
-      description: 'Страница не найдена'
+    this.languageService.getTranslation('not_found_page.not_found_page').subscribe(text => {
+      this.headService.setMeta({ title: text, description: text });
     });
   }
 }

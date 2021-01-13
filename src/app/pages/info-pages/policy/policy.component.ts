@@ -19,10 +19,12 @@ export class PolicyComponent implements OnInit {
   }
 
   setMeta() {
-    this.languageService.getTranslation(['global.privacy_policy']).subscribe(text => {
+    const title = 'policy_page.meta_title';
+    const description = 'policy_page.meta_description';
+    this.languageService.getTranslation([title, description]).subscribe(texts => {
       this.headService.setMeta({
-        title: text['global.privacy_policy'],
-        description: 'Политика конфиденциальности интернет-магазина Клондайк',
+        title: texts[title],
+        description: texts[description],
         keywords: ''
       });
     });

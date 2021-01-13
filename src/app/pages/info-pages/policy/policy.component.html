@@ -1,13 +1,14 @@
 <app-header></app-header>
 
 <div class="page container not-found">
-  <breadcrumbs [breadcrumbs]="[{ title: 'global.privacy_policy' | translate }]"></breadcrumbs>
+  <breadcrumbs [breadcrumbs]="[{ title: 'policy_page.policy' | translate }]"></breadcrumbs>
 
-  <h1 class="page__title">{{ 'global.privacy_policy' | translate }}</h1>
+  <h1 class="page__title">{{ 'policy_page.policy' | translate }}</h1>
 
   <div class="page__content info-page">
-    <p>Сбор личных данных не является целью магазина Клондайк. Вы можете вводить свои данные в кабинете для удобства. Например, добавить свой адрес доставки и таким образом ускорить оформление будущих заказов. Все введённые данные передаются по защищённому соединению SSL. При онлайн-оплате магазин Клондайк не имеет доступа к данным Вашей платёжной карты, обработка онлайн-платежей происходит на стороне <a target="_blank" href="https://wayforpay.com/uk">WayForPay</a> (данные передаются по защищённому соединению)</p>
-    <p>Мы не продаём Вашу личную информацию. Мы не используем Вашу личную информацию без Вашего согласия.</p>
+    <p [innerHTML]="'policy_page.content_1' | translate"></p>
+
+    <p>{{ 'policy_page.content_2' | translate }}</p>
   </div>
 
   <recently-viewed-products></recently-viewed-products>

@@ -5,6 +5,7 @@ import { CustomerService } from '../../services/customer/customer.service';
 import { finalize } from 'rxjs/operators';
 import { DEFAULT_ERROR_TEXT } from '../../shared/constants';
 import { DeviceService } from '../../services/device-detector/device.service';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'confirm-email',
@@ -17,12 +18,14 @@ export class ConfirmEmailComponent implements OnInit {
   isLoading: boolean = true;
   private token: string;
 
-  constructor(private headService: HeadService,
-              private deviceService: DeviceService,
-              private customerService: CustomerService,
-              private router: Router,
-              private route: ActivatedRoute) {
-  }
+  constructor(
+    private headService: HeadService,
+    private deviceService: DeviceService,
+    private customerService: CustomerService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit(): void {
     this.setMeta();
@@ -51,7 +54,7 @@ export class ConfirmEmailComponent implements OnInit {
     this.customerService.confirmEmail(this.token)
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
-        response => {},
+        _ => {},
         error => {
           this.error = error.error?.message || DEFAULT_ERROR_TEXT;
           console.warn(error.error || error);
@@ -60,6 +63,8 @@ export class ConfirmEmailComponent implements OnInit {
   }
 
   private setMeta() {
-    this.headService.setMeta({ title: 'Подтверджение email', description: 'Подтверджение email' });
+    this.languageService.getTranslation('confirm_email.confirmation').subscribe(text => {
+      this.headService.setMeta({ title: text, description: text });
+    });
   }
 }

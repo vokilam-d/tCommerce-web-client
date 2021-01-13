@@ -29,11 +29,13 @@ export class OrderCustomerInfoComponent extends NgUnsubscribe implements OnInit 
   @ViewChild('emailRef') emailRef: ElementRef;
   @ViewChild(AddressFormComponent) addressFormCmp: AddressFormComponent;
 
-  constructor(private customerService: CustomerService,
-              private orderService: OrderService,
-              private cdr: ChangeDetectorRef,
-              private scrollToService: ScrollToService,
-              private formBuilder: FormBuilder) {
+  constructor(
+    private customerService: CustomerService,
+    private orderService: OrderService,
+    private cdr: ChangeDetectorRef,
+    private scrollToService: ScrollToService,
+    private formBuilder: FormBuilder
+  ) {
     super();
   }
 

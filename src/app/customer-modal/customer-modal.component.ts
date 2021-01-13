@@ -3,6 +3,7 @@ import { CustomerService } from '../services/customer/customer.service';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
 import { takeUntil } from 'rxjs/operators';
 import { NotyService } from '../noty/noty.service';
+import { LanguageService } from '../services/language/language.service';
 
 @Component({
   selector: 'customer-modal',
@@ -15,9 +16,12 @@ export class CustomerModalComponent extends NgUnsubscribe implements OnInit {
   state: 'login' | 'registration' = 'login';
   private unlisten: () => void;
 
-  constructor(private renderer: Renderer2,
-              private notyService: NotyService,
-              private customerService: CustomerService) {
+  constructor(
+    private renderer: Renderer2,
+    private notyService: NotyService,
+    private customerService: CustomerService,
+    private languageService: LanguageService
+  ) {
     super();
   }
 
@@ -60,7 +64,9 @@ export class CustomerModalComponent extends NgUnsubscribe implements OnInit {
 
   onRegister(isEmailConfirmed: boolean = false) {
     if (!isEmailConfirmed) {
-      this.notyService.success(`Пожалуйста, подтвердите почту - на указанный email было отправлено письмо с инструкцией.`);
+      this.languageService.getTranslation('customer_modal.verify_email').subscribe(text => {
+        this.notyService.success(text);
+      })
     }
     this.closeModal();
   }

@@ -123,18 +123,18 @@ export class OrderSuccessComponent implements OnInit {
 
   private setBreadcrumbs() {
     this.languageService.getTranslation(['global.my_account', 'global.my_orders', 'order_success.order'])
-      .subscribe(([myAccount, myOrders, myOrder]) => {
+      .subscribe(texts => {
         this.breadcrumbs = [
           {
-            title: myAccount,
+            title: texts['global.my_account'],
             link: 'account'
           },
           {
-            title: myOrders,
+            title: texts['global.my_orders'],
             link: 'account/orders'
           },
           {
-            title: `${myOrder} №${this.order.id}`
+            title: `${texts['order_success.order']} №${this.order.id}`
           }
         ];
       });

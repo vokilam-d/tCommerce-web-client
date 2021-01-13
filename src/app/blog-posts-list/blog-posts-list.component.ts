@@ -39,10 +39,11 @@ export class BlogPostsListComponent implements OnInit, AfterViewInit {
   @ViewChild('paginationRef', { read: ElementRef }) paginationRef: ElementRef;
   @ViewChild(PaginationComponent) paginationCmp: PaginationComponent;
 
-  constructor(private blogService: BlogService,
-              private jsonLdService: JsonLdService,
-              private scrollToService: ScrollToService,
-              private changeDetectorRef: ChangeDetectorRef
+  constructor(
+    private blogService: BlogService,
+    private jsonLdService: JsonLdService,
+    private scrollToService: ScrollToService,
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {

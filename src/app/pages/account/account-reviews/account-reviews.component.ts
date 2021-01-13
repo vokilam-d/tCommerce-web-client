@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HeadService } from '../../../services/head/head.service';
+import { LanguageService } from '../../../services/language/language.service';
 
 @Component({
   selector: 'account-reviews',
@@ -8,13 +9,18 @@ import { HeadService } from '../../../services/head/head.service';
 })
 export class AccountReviewsComponent implements OnInit {
 
-  constructor(private headService: HeadService) { }
+  constructor(
+    private headService: HeadService,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit(): void {
     this.setMeta();
   }
 
   private setMeta() {
-    this.headService.setMeta({ title: 'Мои отзывы', description: 'Мои отзывы' });
+    this.languageService.getTranslation('account_reviews.my_reviews').subscribe(text => {
+      this.headService.setMeta({ title: text, description: text });
+    });
   }
 }

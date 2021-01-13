@@ -16,8 +16,8 @@ export class PgComponent implements OnInit {
 
   setMeta() {
     this.headService.setMeta({
-      title: 'Buy profession gilding tools, PG Group',
-      description: 'Buy profession gilding tools, PG Group'
+      title: 'Buy professional gilding tools, PG Group',
+      description: 'Buy professional gilding tools, PG Group'
     });
   }
 }

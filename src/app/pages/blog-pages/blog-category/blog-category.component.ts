@@ -16,10 +16,11 @@ export class BlogCategoryComponent implements OnInit {
   breadcrumbs: IBreadcrumb[];
   category: BlogCategoryDto;
 
-  constructor(private blogService: BlogService,
-              private route: ActivatedRoute,
-              private headService: HeadService,
-              private languageService: LanguageService
+  constructor(
+    private blogService: BlogService,
+    private route: ActivatedRoute,
+    private headService: HeadService,
+    private languageService: LanguageService
   ) { }
 
   ngOnInit(): void {

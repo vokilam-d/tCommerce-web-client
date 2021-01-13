@@ -1,37 +1,45 @@
 <app-header></app-header>
 
 <div class="page container not-found">
-  <breadcrumbs [breadcrumbs]="[{ title: 'Скидочная программа' }]"></breadcrumbs>
+  <breadcrumbs [breadcrumbs]="[{ title: 'discounts_page.discounts_title' | translate }]"></breadcrumbs>
 
-  <h1 class="page__title">Скидочная программа в магазине "Клондайк"</h1>
+  <h1 class="page__title">{{ 'discounts_page.discounts_in_store_title' | translate }}</h1>
 
   <div class="page__content info-page">
-    <p><em>Накопительные скидки</em></p>
-    <p>Скидка рассчитывается автоматически для заказов через корзину.</p>
-    <p>Для правильного расчёта скидки и учёта завершённых заказов оформляйте заказ после входа в <a class="main-link" langRouterLink="/account">Мой кабинет</a> (авторизации на сайте). Скидки начисляются только зарегистрированным на сайте клиентам. При оформении без входа на сайт заказ не учитывается при расчёте накопительной скидки на последующие заказы.</p>
-    <p>Размер накопительной скидки рассчитывается на основе суммы всех Ваших предыдущих <strong>завершённых</strong> заказов.</p>
-    <p>Проверить завершён ли Ваш заказ можно после входа в Мой кабинет на странице <a class="main-link" langRouterLink="/account/orders">Мои заказы</a>. Проверить сумму всех Ваших завершённых заказов можно после входа в Мой кабинет на странице <a class="main-link" langRouterLink="/account/discount">Мои скидки</a>.</p>
-    <p><strong>Заказы переводятся в завершённые (статус "Отправлен: Завершён") через 14 дней после получения посылки.</strong></p>
-    <p>Накопительная скидка распространяется на все товары кроме акционных и товаров из категории "Сусаль" (на сусальное золото скидок нет).</p>
+    <p><em>{{ 'discounts_page.orders_discounts' | translate }}</em></p>
+
+    <p>{{ 'discounts_page.content_1' | translate }}</p>
+
+    <p>{{ 'discounts_page.content_2_1' | translate }} <a class="main-link" langRouterLink="/account">{{ 'global.my_account' | translate }}</a> {{ 'discounts_page.content_2_2' | translate }} </p>
+
+    <p [innerHTML]="'discounts_page.content_3' | translate"></p>
+
     <p>
-      Завершённых заказов на сумму от <strong>500</strong> до <strong>1499</strong> грн скидка    <strong>3%</strong><br>
-      Завершённых заказов на сумму от <strong>1500</strong> до <strong>2999</strong> грн скидка    <strong>5%</strong><br>
-      Завершённых заказов на сумму от <strong>3000</strong> до <strong>4999</strong> грн скидка    <strong>7%</strong><br>
-      Завершённых заказов на сумму от <strong>5000</strong> грн скидка <strong>10%</strong>
+      {{ 'discounts_page.content_4_1' | translate }} <a class="main-link" langRouterLink="/account/orders">{{ 'global.my_orders' | translate }}</a>. {{ 'discounts_page.content_4_2' | translate }} <a class="main-link" langRouterLink="/account/discount">{{ 'global.my_discounts' | translate }}</a>.</p>
+
+    <p><strong>{{ 'discounts_page.content_5' | translate }}</strong></p>
+
+    <p>{{ 'discounts_page.content_6' | translate }}</p>
+    <p>
+      <span [innerHTML]="'discounts_page.orders_percent_map' | translate:{ from: 500, to: 1499, percent: 3 }"></span><br>
+      <span [innerHTML]="'discounts_page.orders_percent_map' | translate:{ from: 1500, to: 2999, percent: 5 }"></span><br>
+      <span [innerHTML]="'discounts_page.orders_percent_map' | translate:{ from: 3000, to: 4999, percent: 7 }"></span><br>
+      <span [innerHTML]="'discounts_page.orders_percent_map_last' | translate:{ from: 5000, percent: 10 }"></span>
     </p>
 
-    <p><em>Скидки в зависимости от размера корзины</em></p>
+    <p><em>{{ 'discounts_page.cost_discounts' | translate }}</em></p>
     <p>
-      В корзине товаров на сумму от 500 грн скидка <strong>5%</strong><br>
-      В корзине товаров на сумму от 1500 грн скидка <strong>10%</strong><br>
-      Товары категории Сусаль не участвуют в скидочных программах.
-      Не применяется к акционным товарам.
-      Не суммируется с накопительными скидками (автоматически выбирается большая)
+      <span [innerHTML]="'discounts_page.cost_percent_map' | translate:{ from: 500, percent: 5 }"></span><br>
+      <span [innerHTML]="'discounts_page.cost_percent_map' | translate:{ from: 1500, percent: 10 }"></span><br>
+      {{ 'discounts_page.content_7' | translate }}
+      {{ 'discounts_page.content_8' | translate }}
+      {{ 'discounts_page.content_9' | translate }}
     </p>
 
-    <p><em>Бесплатная доставка в отделение Новой почты при оформлении заказа от 1000 грн</em></p>
 
-    <p>Администрация магазина оставляет за собой право изменять условия дисконтной программы.</p>
+    <p><em>{{ 'discounts_page.content_10' | translate }}</em></p>
+
+    <p>{{ 'discounts_page.content_11' | translate }}</p>
   </div>
 
   <recently-viewed-products></recently-viewed-products>

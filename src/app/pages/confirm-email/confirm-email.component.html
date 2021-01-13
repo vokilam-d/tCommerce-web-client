@@ -1,9 +1,9 @@
 <app-header></app-header>
 
 <div class="page container confirm">
-  <breadcrumbs [breadcrumbs]="[{ title: 'Подтверджение email' }]"></breadcrumbs>
+  <breadcrumbs [breadcrumbs]="[{ title: 'confirm_email.confirmation' | translate }]"></breadcrumbs>
 
-  <h1 class="page__title">Подтверджение email</h1>
+  <h1 class="page__title">{{ 'confirm_email.confirmation' | translate }}</h1>
 
   <div class="page__content">
 
@@ -17,7 +17,7 @@
 
       <ng-template #successTmpl>
         <div class="confirm__success">
-          {{ 'global.password_successfully_updated' | translate }} <a class="reset__success-link" langRouterLink="/login">{{ 'global.login_to_personal_account' | translate }}</a>
+          {{ 'confirm_email.success_1' | translate }} <a class="reset__success-link" langRouterLink="/login">{{ 'confirm_email.success_2' | translate }}</a>
         </div>
       </ng-template>
     </ng-template>

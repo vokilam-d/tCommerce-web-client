@@ -1,5 +1,5 @@
 <div class="form__control-container" *ngIf="!(customer$ | async)" #emailRef>
-  <label class="form__label" for="email">Адрес электронной почты</label>
+  <label class="form__label" for="email">{{ 'order_customer_info.email' | translate }}</label>
 
   <div class="form__control">
     <input class="form__input"
@@ -10,7 +10,7 @@
     >
 
     <div class="form__input-error" *ngIf="isEmailInvalid()">
-      Некорректный адрес электронной почты
+      {{ 'order_customer_info.invalid_email' | translate }}
     </div>
   </div>
 </div>
@@ -55,7 +55,7 @@
          }"
       ></i>
 
-      Новый адрес
+      {{ 'order_customer_info.new_address' | translate }}
     </label>
   </div>
 

@@ -6,6 +6,7 @@ import { finalize } from 'rxjs/operators';
 import { HeadService } from '../../../services/head/head.service';
 import { AddressTypeEnum } from '../../../shared/enums/address-type.enum';
 import { AddressFormComponent } from '../../../address-form/address-form.component';
+import { LanguageService } from '../../../services/language/language.service';
 
 @Component({
   selector: 'addresses',
@@ -25,9 +26,11 @@ export class AddressesComponent implements OnInit {
 
   @ViewChild(AddressFormComponent) addressFormCmp: AddressFormComponent;
 
-  constructor(private customerService: CustomerService,
-              private headService: HeadService) {
-  }
+  constructor(
+    private customerService: CustomerService,
+    private headService: HeadService,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit(): void {
     this.setMeta();
@@ -55,7 +58,7 @@ export class AddressesComponent implements OnInit {
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         _ => {
-          this.showSuccessMessage(`Адрес успешно добавлен`);
+          this.showSuccessMessage(`addresses.address_added`);
           this.closeForm();
         },
         error => {
@@ -70,7 +73,7 @@ export class AddressesComponent implements OnInit {
       .pipe( finalize(() => this.isLoading = false) )
       .subscribe(
         _ => {
-          this.showSuccessMessage(`Адрес успешно изменён`);
+          this.showSuccessMessage(`addresses.address_edit`);
           this.closeForm();
         },
         error => {
@@ -84,9 +87,11 @@ export class AddressesComponent implements OnInit {
     this.formError = null;
   }
 
-  private showSuccessMessage(msg: string) {
-    this.formSuccess = msg;
-    setTimeout(() => this.formSuccess = null, 5000);
+  private showSuccessMessage(msgKey: string) {
+    this.languageService.getTranslation(msgKey).subscribe(text => {
+      this.formSuccess = text;
+      setTimeout(() => this.formSuccess = null, 5000);
+    });
   }
 
   private showErrorMessage(error: any) {
@@ -95,6 +100,8 @@ export class AddressesComponent implements OnInit {
   }
 
   private setMeta() {
-    this.headService.setMeta({ title: 'Мои адреса', description: 'Мои адреса' });
+    this.languageService.getTranslation('addresses.my_addresses').subscribe(text => {
+      this.headService.setMeta({ title: text, description: text });
+    });
   }
 }

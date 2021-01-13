@@ -38,9 +38,10 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
   @Input() shipmentPayerMap: ShipmentPayerMap;
   @Output() valueChanged = new EventEmitter<ShipmentAddressDto>();
 
-  constructor(private formBuilder: FormBuilder,
-              private scrollToService: ScrollToService,
-              private elementRef: ElementRef
+  constructor(
+    private formBuilder: FormBuilder,
+    private scrollToService: ScrollToService,
+    private elementRef: ElementRef
   ) {
     super();
   }
@@ -156,11 +157,6 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
       case 'buildingNumber':
         return addressType === AddressTypeEnum.DOORS && !control.value && control.touched;
     }
-  }
-
-  setAddressType(type: { view: string; data: AddressTypeEnum }) {
-    const addressTypeProp: keyof ShipmentAddressDto = 'addressType';
-    this.addressForm.get(addressTypeProp).setValue(type.data);
   }
 
   private handleAutoResetFields() {

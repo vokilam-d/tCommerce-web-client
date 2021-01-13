@@ -26,12 +26,13 @@ export class BlogPostComponent implements OnInit {
   mediaVariants = EMediaVariant;
   contentHtml: SafeHtml;
 
-  constructor(private jsonLdService: JsonLdService,
-              private route: ActivatedRoute,
-              private headService: HeadService,
-              private domSanitizer: DomSanitizer,
-              private blogService: BlogService,
-              private languageService: LanguageService
+  constructor(
+    private jsonLdService: JsonLdService,
+    private route: ActivatedRoute,
+    private headService: HeadService,
+    private domSanitizer: DomSanitizer,
+    private blogService: BlogService,
+    private languageService: LanguageService
   ) { }
 
   ngOnInit(): void {

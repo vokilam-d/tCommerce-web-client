@@ -14,10 +14,10 @@ const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', component: AccountCustomerInfoComponent, data: { label: 'global.contacts' } },
       { path: 'orders', component: AccountOrdersComponent, data: { label: 'global.my_orders' } },
-      // { path: 'wishlist', component: WishlistComponent, data: { label: 'Список желаний' } },
-      { path: 'addresses', component: AddressesComponent, data: { label: 'Адреса доставки' } },
-      // { path: 'reviews', component: AccountReviewsComponent, data: { label: 'Мои отзывы' } },
-      { path: 'discount', component: AccountDiscountComponent, data: { label: 'global.discounts' } }
+      // { path: 'wishlist', component: WishlistComponent, data: { label: 'global.my_wishes' } },
+      { path: 'addresses', component: AddressesComponent, data: { label: 'global.shipment_address' } },
+      // { path: 'reviews', component: AccountReviewsComponent, data: { label: 'account_reviews.my_reviews' } },
+      { path: 'discount', component: AccountDiscountComponent, data: { label: 'global.my_discounts' } }
     ]
   }
 ];

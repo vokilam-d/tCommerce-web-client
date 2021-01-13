@@ -83,6 +83,7 @@
     border-left-width: 0;
     white-space: nowrap;
     transition: all 0.2s ease;
+    cursor: pointer;
 
     &--active {
       background: rgba($primary, 0.4);

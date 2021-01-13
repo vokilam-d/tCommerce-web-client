@@ -15,9 +15,11 @@ export class CartModalComponent extends NgUnsubscribe implements OnInit {
   isModalVisible: boolean = false;
   private unlisten: () => void;
 
-  constructor(private customerService: CustomerService,
-              private router: Router,
-              private renderer: Renderer2) {
+  constructor(
+    private customerService: CustomerService,
+    private router: Router,
+    private renderer: Renderer2
+  ) {
     super();
   }
 

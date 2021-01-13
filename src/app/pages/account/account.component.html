@@ -7,23 +7,26 @@
        *ngIf="customer && !emailConfirmationSent && !customer.isEmailConfirmed"
   >
     <h3 class="confirm-contact__title">
-      Ваш email не подтверждён
+      {{ 'account.email_not_verified' | translate }}
     </h3>
 
     <div class="confirm-contact__text">
-      Пожалуйста, нажмите на кнопку ниже для подтверждения Вашей электронной почты
+      {{ 'account.press_to_verify_email' | translate }}
     </div>
 
-    <button class="confirm-contact__btn" (click)="sendEmailConfirm()" type="button">Подтвердить email</button>
+    <button class="confirm-contact__btn" (click)="sendEmailConfirm()" type="button">
+      {{ 'account.verify_email' | translate }}
+    </button>
   </div>
 
   <div class="account__confirm-contact confirm-contact confirm-contact--success" *ngIf="emailConfirmationSent">
     <h3 class="confirm-contact__title">
-      Спасибо!
+      {{ 'account.thanks!' | translate }}
     </h3>
 
-    <div class="confirm-contact__text">
-      На ваш email <b>{{ customer.email }}</b> было отправлено письмо с инструкцией для подтверждения электронной почты
+    <div class="confirm-contact__text"
+         [innerHTML]="'account.email_verify_sent' | translate:{email: customer.email}"
+    >
     </div>
   </div>
 
@@ -42,7 +45,7 @@
         </li>
         <li class="tabs__tab">
           <a class="tabs__link" (click)="logout()">
-            Выйти
+            {{ 'account.logout' | translate }}
           </a>
         </li>
       </ul>

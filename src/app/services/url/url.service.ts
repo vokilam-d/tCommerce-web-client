@@ -38,7 +38,7 @@ export class UrlService {
     this.location.go(pathname, params.toString());
   }
 
-  buildPathForLang(lang: Language): string {
+  buildCurrentPathWithLang(lang: Language): string {
     let path = this.location.path(true);
 
     // remove current lang from path

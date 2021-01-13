@@ -28,8 +28,9 @@ export class LinkedCategoriesComponent implements OnChanges, OnInit {
   @Input() isLoading: boolean;
   @ViewChildren('itemRef') itemRefList: QueryList<ElementRef>;
 
-  constructor(private deviceService: DeviceService,
-              private cdr: ChangeDetectorRef
+  constructor(
+    private deviceService: DeviceService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {

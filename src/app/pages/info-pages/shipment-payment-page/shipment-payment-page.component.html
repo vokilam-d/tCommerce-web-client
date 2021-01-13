@@ -6,18 +6,25 @@
   <h1 class="page__title">{{ 'global.shipment_and_payment' | translate }}</h1>
 
   <div class="page__content info-page">
-    <p><strong>Доставка</strong> заказов в отделение курьерской службы Новая Почта (в некоторых городах также возможна адресная доставка Новой Почтой).<br>Стоимость доставки не входит в стоимость заказа, оплачивается отдельно при получении заказа сотруднику Новой почты.<br><br>Заказы обрабатываются за 1 день, Вы можете в любое время оставить заказ через корзину на сайте. Заказы по телефону принимаются с понедельника по пятницу с 9:00 до 18:00.</p>
-    <p>Бесплатная доставка в отделение Новой почты при оформлении заказа от 1000 грн.</p>
-    <p><a class="main-link" href="https://novaposhta.ua/ru/tracking" target="_blank" rel="noopener">Отследить посылку на сайте Новой почты</a></p>
+    <p [innerHTML]="'shipment_payment_page.content_1' | translate"></p>
+    <p>{{ 'shipment_payment_page.content_2' | translate }}</p>
+    <p>{{ 'shipment_payment_page.content_3' | translate }}</p>
+    <p>{{ 'shipment_payment_page.content_4' | translate }}</p>
+
+    <p><a class="main-link" href="https://novaposhta.ua/ru/tracking" target="_blank" rel="noopener">{{ 'shipment_payment_page.content_1' | translate }}</a></p>
+
     <p>
-      <strong>Оплата</strong> заказов возможна в трёх вариантах.<br>
-      1. Предоплата на карту. Комиссия по тарифам Вашего банка (для Привата 0.5% минимум 5 грн). Номер карты Вам отправят в смс уведомлении на телефон.<br>
-      2. Наложенный платёж. Комиссия Новой почты 2% + 20 грн (оплачивается отдельно при получении товара в отделении Новой Почты). Оплата товара при получении в отделении Новой Почты.<br>
-      3. Онлайн-оплата картой. Комиссия 2.5%.
+      <span [innerHTML]="'shipment_payment_page.payment_title' | translate"></span><br>
+      1. {{ 'shipment_payment_page.payment_1' | translate }}<br>
+      2. {{ 'shipment_payment_page.payment_2' | translate }}<br>
+      3. {{ 'shipment_payment_page.payment_3' | translate }}
     </p>
+
     <p>
-      <strong>Внимание!</strong> <br>
-      Просьба проверять товар при получении посылки в отделении Новой Почты. При обнаружении несоответствия комплектации или брака сразу позвоните нам, мы постараемся оперативно исправить ошибку.
+      <strong>
+        {{ 'shipment_payment_page.content_5_title' | translate }}
+      </strong><br>
+      {{ 'shipment_payment_page.content_5' | translate }}
     </p>
   </div>
 

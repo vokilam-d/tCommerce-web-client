@@ -31,12 +31,12 @@ export class LangSelectorComponent implements OnInit {
     this.languages = [
       {
         code: Language.RU,
-        link: this.urlService.buildPathForLang(Language.RU),
+        link: this.urlService.buildCurrentPathWithLang(Language.RU),
         label: 'RU'
       },
       {
         code: Language.UK,
-        link: this.urlService.buildPathForLang(Language.UK),
+        link: this.urlService.buildCurrentPathWithLang(Language.UK),
         label: 'UA'
       }
     ];

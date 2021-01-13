@@ -8,6 +8,7 @@ import { FooterModule } from '../../footer/footer.module';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
 import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [NotFoundComponent],
@@ -18,7 +19,8 @@ import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.mo
     FooterModule,
     BreadcrumbsModule,
     RecentlyViewedProductsModule,
-    LangRouterLinkModule
+    LangRouterLinkModule,
+    TranslateModule
   ]
 })
 export class NotFoundModule { }
