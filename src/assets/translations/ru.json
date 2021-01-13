@@ -168,5 +168,11 @@
 
   "service_menu": {
     "login_to_account": "Войти в кабинет"
+  },
+
+  "select_autocomplete": {
+    "not_selected": "Не выбрано",
+    "no_matches": "Не найдено ни одного варианта",
+    "enter_search_query": "Введите в поле поисковый запрос"
   }
 }
