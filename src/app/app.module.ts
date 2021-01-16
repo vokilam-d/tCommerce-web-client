@@ -4,7 +4,7 @@ import { APP_INITIALIZER, Injector, LOCALE_ID, NgModule, PLATFORM_ID } from '@an
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule, registerLocaleData } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpBackend, HttpClient, HttpClientModule } from '@angular/common/http';
 import { CustomerModalModule } from './customer-modal/customer-modal.module';
 import { NotyModule } from './noty/noty.module';
 import { CartModalModule } from './cart-modal/cart-modal.module';
@@ -16,13 +16,10 @@ import { Router } from '@angular/router';
 import { ButtonUpModule } from './button-up/button-up.module';
 import { AnnouncementModule } from './announcement/announcement.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { languageLoaderBrowserFactory } from './services/language/language-loader.browser';
+import { DEFAULT_LANG } from './shared/constants';
 
 registerLocaleData(localeRu);
-
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/translations/', '.json');
-}
 
 @NgModule({
   declarations: [
@@ -32,10 +29,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
+        useFactory: languageLoaderBrowserFactory,
+        deps: [HttpBackend, TransferState]
       },
-      defaultLanguage: 'ru'
+      defaultLanguage: DEFAULT_LANG
     }),
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     TransferHttpCacheModule,

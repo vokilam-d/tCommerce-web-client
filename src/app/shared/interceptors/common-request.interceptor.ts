@@ -7,7 +7,6 @@ import { LanguageService } from '../../services/language/language.service';
 
 @Injectable()
 export class CommonRequestInterceptor implements HttpInterceptor {
-
   constructor(
     @Optional() @Inject(REQUEST) private serverReq: Request,
     private languageService: LanguageService
@@ -33,6 +32,6 @@ export class CommonRequestInterceptor implements HttpInterceptor {
   private getParams(params: HttpParams) {
     const lang = this.languageService.getCurrentLang();
 
-    return params.set('lang', lang)
+    return params.set('lang', lang);
   }
 }
