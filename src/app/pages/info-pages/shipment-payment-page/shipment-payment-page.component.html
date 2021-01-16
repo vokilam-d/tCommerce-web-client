@@ -6,16 +6,18 @@
   <h1 class="page__title">{{ 'global.shipment_and_payment' | translate }}</h1>
 
   <div class="page__content info-page">
-    <p [innerHTML]="'shipment_payment_page.content_1' | translate"></p>
-    <p>{{ 'shipment_payment_page.content_2' | translate }}</p>
+    <p>
+      <span [innerHTML]="'shipment_payment_page.content_1' | translate"></span><br>
+      {{ 'shipment_payment_page.content_2' | translate }}
+    </p>
     <p>{{ 'shipment_payment_page.content_3' | translate }}</p>
-    <p>{{ 'shipment_payment_page.content_4' | translate }}</p>
+    <p [innerHTML]="'shipment_payment_page.content_4' | translate"></p>
 
-    <p><a class="main-link" href="https://novaposhta.ua/ru/tracking" target="_blank" rel="noopener">{{ 'shipment_payment_page.content_1' | translate }}</a></p>
+    <p><a class="main-link" href="https://novaposhta.ua/ru/tracking" target="_blank" rel="noopener">{{ 'shipment_payment_page.track' | translate }}</a></p>
 
     <p>
       <span [innerHTML]="'shipment_payment_page.payment_title' | translate"></span><br>
-      1. {{ 'shipment_payment_page.payment_1' | translate }}<br>
+      1. <span [innerHTML]="'shipment_payment_page.payment_1' | translate"></span><br>
       2. {{ 'shipment_payment_page.payment_2' | translate }}<br>
       3. {{ 'shipment_payment_page.payment_3' | translate }}
     </p>

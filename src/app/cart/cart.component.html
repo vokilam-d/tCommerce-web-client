@@ -75,7 +75,7 @@
 
               <div class="item__row" *ngIf="item.additionalServices?.length">
                 <div class="item__additional-service" *ngFor="let service of item.additionalServices">
-                  {{ service.name }} (+{{ service.price }}{{ prices.itemsCost }} {{ 'global.uah' | translate }})
+                  {{ service.name }} (+{{ service.price }} {{ 'global.uah' | translate }})
                 </div>
               </div>
 

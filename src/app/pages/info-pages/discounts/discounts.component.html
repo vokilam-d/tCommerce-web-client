@@ -6,21 +6,32 @@
   <h1 class="page__title">{{ 'discounts_page.discounts_in_store_title' | translate }}</h1>
 
   <div class="page__content info-page">
-    <p><em>{{ 'discounts_page.orders_discounts' | translate }}</em></p>
-
-    <p>{{ 'discounts_page.content_1' | translate }}</p>
-
-    <p>{{ 'discounts_page.content_2_1' | translate }} <a class="main-link" langRouterLink="/account">{{ 'global.my_account' | translate }}</a> {{ 'discounts_page.content_2_2' | translate }} </p>
-
-    <p [innerHTML]="'discounts_page.content_3' | translate"></p>
+    <p [innerHTML]="'discounts_page.content_1' | translate"></p>
+    <p><em>{{ 'discounts_page.content_2' | translate }}</em></p>
 
     <p>
-      {{ 'discounts_page.content_4_1' | translate }} <a class="main-link" langRouterLink="/account/orders">{{ 'global.my_orders' | translate }}</a>. {{ 'discounts_page.content_4_2' | translate }} <a class="main-link" langRouterLink="/account/discount">{{ 'global.my_discounts' | translate }}</a>.
+      <span [innerHTML]="'discounts_page.cost_percent_map' | translate:{ from: 500, percent: 5 }"></span><br>
+      <span [innerHTML]="'discounts_page.cost_percent_map' | translate:{ from: 1500, percent: 10 }"></span><br>
+      {{ 'discounts_page.content_3' | translate }}<br>
+      {{ 'discounts_page.content_4' | translate }}<br>
+      {{ 'discounts_page.content_5' | translate }}<br>
     </p>
 
-    <p><strong>{{ 'discounts_page.content_5' | translate }}</strong></p>
+    <p><em>{{ 'discounts_page.content_6' | translate }}</em></p>
 
-    <p>{{ 'discounts_page.content_6' | translate }}</p>
+    <p>{{ 'discounts_page.content_7' | translate }}</p>
+
+    <p>{{ 'discounts_page.content_8_1' | translate }} <a class="main-link" langRouterLink="/account">{{ 'global.my_account' | translate }}</a> {{ 'discounts_page.content_8_2' | translate }} </p>
+
+    <p [innerHTML]="'discounts_page.content_9' | translate"></p>
+
+    <p>
+      {{ 'discounts_page.content_10_1' | translate }} <a class="main-link" langRouterLink="/account/orders">{{ 'global.my_orders' | translate }}</a>. {{ 'discounts_page.content_10_2' | translate }} <a class="main-link" langRouterLink="/account/discount">{{ 'global.my_discounts' | translate }}</a>.
+    </p>
+
+    <p><strong>{{ 'discounts_page.content_11' | translate }}</strong></p>
+
+    <p>{{ 'discounts_page.content_12' | translate }}</p>
     <p>
       <span [innerHTML]="'discounts_page.orders_percent_map' | translate:{ from: 500, to: 1499, percent: 3 }"></span><br>
       <span [innerHTML]="'discounts_page.orders_percent_map' | translate:{ from: 1500, to: 2999, percent: 5 }"></span><br>
@@ -28,19 +39,7 @@
       <span [innerHTML]="'discounts_page.orders_percent_map_last' | translate:{ from: 5000, percent: 10 }"></span>
     </p>
 
-    <p><em>{{ 'discounts_page.cost_discounts' | translate }}</em></p>
-    <p>
-      <span [innerHTML]="'discounts_page.cost_percent_map' | translate:{ from: 500, percent: 5 }"></span><br>
-      <span [innerHTML]="'discounts_page.cost_percent_map' | translate:{ from: 1500, percent: 10 }"></span><br>
-      {{ 'discounts_page.content_7' | translate }}
-      {{ 'discounts_page.content_8' | translate }}
-      {{ 'discounts_page.content_9' | translate }}
-    </p>
-
-
-    <p><em>{{ 'discounts_page.content_10' | translate }}</em></p>
-
-    <p>{{ 'discounts_page.content_11' | translate }}</p>
+    <p>{{ 'discounts_page.content_13' | translate }}</p>
   </div>
 
   <recently-viewed-products></recently-viewed-products>
