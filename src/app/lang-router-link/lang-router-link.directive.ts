@@ -54,9 +54,11 @@ export class LangRouterLinkDirective extends RouterLinkWithHref {
       commandsWithLang.push(routeLang);
     }
 
-    commandsWithLang.push(...href.split('/'));
+    if (href.length) {
+      commandsWithLang.push(...href.split('/'));
+    }
 
     this.routerLink = commandsWithLang;
-    this.href = this.urlTree.toString();
+    this.ngOnChanges({}); // This triggers updating "href" attribute
   }
 }
