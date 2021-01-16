@@ -45,7 +45,8 @@
     "to_buy": "Купить",
     "oops_something_went_wrong": "Что-то пошло не так. Пожалуйста, попробуйте позже",
     "review_successfully_added": "Ваш отзыв успешно оставлен",
-    "items_cost": "Стоимость товаров"
+    "items_cost": "Стоимость товаров",
+    "added": "Добавлено"
   },
 
   "rating": {
@@ -86,7 +87,6 @@
   },
 
   "blog_post_list": {
-    "added": "Добавлено"
   },
 
   "blog_toolbar": {
