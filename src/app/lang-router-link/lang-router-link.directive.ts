@@ -33,32 +33,31 @@ export class LangRouterLinkDirective extends RouterLinkWithHref {
       commands = Array.isArray(data) ? data : [data];
     }
 
-    const tree = this._router.createUrlTree(commands, {
-      relativeTo: this._route,
-      queryParams: this.queryParams,
-      fragment: this.fragment,
-      queryParamsHandling: this.queryParamsHandling,
-      preserveFragment: this.preserveFragment
-    });
-
-    let href = tree.toString();
-    const commandsWithLang: any[] = [];
-
-    if (href.startsWith('/')) {
-      commandsWithLang.push('/');
-      href = href.slice(1);
-    }
-
+    const isFromRoot = typeof commands[0] === 'string' && commands[0].startsWith('/');
     const routeLang = this.languageService.getCurrentRouteLang();
-    if (routeLang) {
-      commandsWithLang.push(routeLang);
+
+    if (routeLang && isFromRoot) {
+      const tree = this._router.createUrlTree(commands, {
+        relativeTo: this._route,
+        queryParams: this.queryParams,
+        fragment: this.fragment,
+        queryParamsHandling: this.queryParamsHandling,
+        preserveFragment: this.preserveFragment
+      });
+
+      // get href without preceding slash
+      const href = tree.toString().slice(1);
+      const commandsWithLang: any[] = ['/', routeLang];
+
+      if (href.length) {
+        commandsWithLang.push(...href.split('/'));
+      }
+
+      this.routerLink = commandsWithLang;
+    } else {
+      this.routerLink = commands;
     }
 
-    if (href.length) {
-      commandsWithLang.push(...href.split('/'));
-    }
-
-    this.routerLink = commandsWithLang;
     this.ngOnChanges({}); // This triggers updating "href" attribute
   }
 }

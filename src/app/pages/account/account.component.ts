@@ -68,14 +68,17 @@ export class AccountComponent extends NgUnsubscribe implements OnInit {
   }
 
   private setChildRoutes() {
-    this.childRoutes = this.route.routeConfig.children
-      .filter(route => route.data && route.data.label)
-      .map(route => {
-        return {
-          link: route.path === '' ? './' : route.path,
-          label: route.data.label
-        };
-      });
+    const childRoutes = this.route.routeConfig.children.filter(route => route.data && route.data.label);
+
+    const childRouteLabels = childRoutes.map(route => route.data.label);
+    this.languageService.getTranslation(childRouteLabels).subscribe(texts => {
+
+      this.childRoutes = childRoutes.map(route => ({
+        link: route.path === '' ? './' : route.path,
+        label: texts[route.data.label]
+      }));
+
+    });
   }
 
   private handleBreadcrumbs() {
