@@ -56,4 +56,9 @@ export class UrlService {
 
     return path;
   }
+
+  buildCurrentUrlWithLang(lang: Language): string {
+    const path = this.buildCurrentPathWithLang(lang);
+    return `https://klondike.com.ua${path}`;
+  }
 }

@@ -1,6 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { MetaTagsDto } from '../../shared/dtos/meta-tags.dto';
 import { Meta, Title } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
+import { Language } from '../../shared/enums/language.enum';
+import { UrlService } from '../url/url.service';
 
 export interface IOgTags {
   type: 'product' | 'article';
@@ -16,9 +19,12 @@ export interface IOgTags {
 })
 export class HeadService {
 
-  constructor(private title: Title,
-              private meta: Meta) {
-  }
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private title: Title,
+    private meta: Meta,
+    private urlService: UrlService
+  ) { }
 
   setMeta(metaTags: MetaTagsDto, ogTags?: IOgTags) {
     // this.title.setTitle('STG | ' + metaTags.title || '');
@@ -37,5 +43,22 @@ export class HeadService {
         this.meta.updateTag({ property: 'og:image', content: ogTags.image });
       }
     }
+
+    this.setHreflangLinks();
+  }
+
+  setHreflangLinks() {
+    const languages = [Language.RU, Language.UK];
+    languages.forEach(lang => {
+      const link = this.document.head.querySelector<HTMLLinkElement>(`link[rel='alternate'][hreflang='${lang}']`)
+        || this.document.createElement('link');
+
+      link.rel = 'alternate';
+      link.hreflang = lang;
+      link.href = this.urlService.buildCurrentUrlWithLang(lang);
+
+      const firstHeadChild = this.document.head.firstChild;
+      this.document.head.insertBefore(link, firstHeadChild);
+    });
   }
 }
