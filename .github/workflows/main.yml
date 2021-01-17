@@ -5,41 +5,54 @@ on:
     tags: v[0-9]+.[0-9]+.[0-9]+
 
 env:
-  IMAGE_NAME: ${{ secrets.DOCKER_LOGIN }}/tcommerce-web-client
+  DOCKER_IMAGE_NAME: ${{ secrets.DOCKER_LOGIN }}/tcommerce-web-client
+  GH_DOCKER_IMAGE_NAME: ghcr.io/${{ secrets.GHCR_DOCKER_USERNAME }}/tcommerce-web-client
 
 jobs:
   build-push:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Log into Docker registry
-      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
-    - name: Build images (multistage)
-      run: |
-        docker pull ${IMAGE_NAME}:builder
-        docker pull ${IMAGE_NAME}:latest
+      - uses: actions/checkout@v2
 
-        docker build \
-          --target builder \
-          --cache-from ${IMAGE_NAME}:builder \
-          -t ${IMAGE_NAME}:builder \
-          .
-        docker build \
-          --cache-from ${IMAGE_NAME}:latest \
-          --cache-from ${IMAGE_NAME}:builder \
-          -t ${IMAGE_NAME}:latest \
-          .
-    - name: Push images
-      run: |
-        # Strip git ref prefix from version
-        VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+      - name: Log into Docker registry
+        run: |
+          docker --version
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
+          echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ secrets.GHCR_DOCKER_USERNAME }} --password-stdin
 
-        docker push ${IMAGE_NAME}:builder
-        docker push ${IMAGE_NAME}:latest
+      - name: Pull images for cache
+        run: |
+          docker pull ${GH_DOCKER_IMAGE_NAME}:builder || true
+          docker pull ${GH_DOCKER_IMAGE_NAME}:latest || true
 
-        docker tag ${IMAGE_NAME}:latest ${IMAGE_NAME}:${VERSION}
-        docker push ${IMAGE_NAME}:${VERSION}
+      - name: Build images (multistage)
+        run: |
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+          docker build \
+            --target builder \
+            --cache-from ${GH_DOCKER_IMAGE_NAME}:builder \
+            -t ${GH_DOCKER_IMAGE_NAME}:builder \
+            .
+
+          docker build \
+            --cache-from ${GH_DOCKER_IMAGE_NAME}:latest \
+            --cache-from ${GH_DOCKER_IMAGE_NAME}:builder \
+            -t ${GH_DOCKER_IMAGE_NAME}:latest \
+            -t ${DOCKER_IMAGE_NAME}:latest \
+            -t ${DOCKER_IMAGE_NAME}:${VERSION} \
+            .
+
+      - name: Push images
+        run: |
+          # Remove this and use "--all-tags" option after github updates to docker v20
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+          docker push ${GH_DOCKER_IMAGE_NAME}:builder
+          docker push ${GH_DOCKER_IMAGE_NAME}:latest
+          docker push ${DOCKER_IMAGE_NAME}:latest
+          docker push ${DOCKER_IMAGE_NAME}:${VERSION}
 
   deploy:
     needs: build-push
