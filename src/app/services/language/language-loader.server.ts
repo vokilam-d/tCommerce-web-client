@@ -3,16 +3,18 @@ import { Observable, of } from 'rxjs';
 import { TransferState } from '@angular/platform-browser';
 import { Language } from '../../shared/enums/language.enum';
 import { makeLangStateKey } from '../../shared/helpers/make-lang-state-key.function';
+import { encodeTranslation } from './translation-encode.function';
 
 export class LanguageLoaderServer implements TranslateLoader {
   constructor(private transferState: TransferState) {}
 
   public getTranslation(lang: Language): Observable<any> {
-    const data = require(`../../../assets/translations/${lang}.json`);
+    const translation = require(`../../../assets/translations/${lang}.json`);
 
-    this.transferState.set(makeLangStateKey(lang), data);
+    const encodedTranslation = encodeTranslation(translation);
+    this.transferState.set(makeLangStateKey(lang), encodedTranslation);
 
-    return of(data);
+    return of(translation);
   }
 }
 
