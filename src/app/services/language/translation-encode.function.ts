@@ -1,14 +1,16 @@
+type Translation = { [key: string]: any };
+
 const transformStr = (str: string, type: 'encode' | 'decode'): string => {
   let transformedStr: string = '';
-  let offset = -4;
+  let offset = -3;
   if (type === 'encode') {
     offset = Math.abs(offset);
   }
 
   for (let i = 0; i < str.length; i++) {
     if (i % 3 === 0) {
-      const newCode: number = str.charCodeAt(i) + offset;
-      transformedStr += String.fromCharCode(newCode);
+      const newCode: number = str.codePointAt(i) + offset;
+      transformedStr += String.fromCodePoint(newCode);
     } else {
       transformedStr += str.charAt(i);
     }
@@ -17,13 +19,14 @@ const transformStr = (str: string, type: 'encode' | 'decode'): string => {
   return transformedStr;
 }
 
-export const encodeTranslation = (translations: { [key: string]: any }): string => {
+// FOR SOME REASON, AFTER THIS FUNCTION TRANSLATIONS ARE IN INVALID ENCODING, WHEN TRANSFERRED TO BROWSER IN HTML
+export const encodeTranslation = (translations: Translation): string => {
   const translationStr = JSON.stringify(translations);
 
   return transformStr(translationStr, 'encode');
 }
 
-export const decodeTranslation = (encodedTranslation: string): { [key: string]: any } => {
+export const decodeTranslation = (encodedTranslation: string): Translation => {
   const decodedStr = transformStr(encodedTranslation, 'decode');
 
   return JSON.parse(decodedStr);
