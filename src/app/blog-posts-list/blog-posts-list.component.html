@@ -37,7 +37,7 @@
       </div>
 
       <div class="item__category">
-        {{ 'global.category' | translate }}: <a class="item__category-link main-link" *ngIf="item.category" [langRouterLink]="['/', 'blog', item.category.slug + '.html']">{{ item.category.name }}</a>
+        {{ 'global.category' | translate }}: <a class="item__category-link main-link" *ngIf="item.category" [langRouterLink]="['/', 'blog', item.category.slug]">{{ item.category.name }}</a>
       </div>
 
       <div class="item__publish-date">

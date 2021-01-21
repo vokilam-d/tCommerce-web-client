@@ -61,7 +61,7 @@ export class BlogPostComponent implements OnInit {
     this.languageService.getTranslation('global.blog').subscribe(text => {
       this.breadcrumbs = [
         { title: text, link: 'blog' },
-        { title: this.post.category.name, link: `blog/${this.post.category.slug}.html` },
+        { title: this.post.category.name, link: `blog/${this.post.category.slug}` },
         { title: this.post.name, link: `blog/${this.post.slug}` },
       ];
     });
