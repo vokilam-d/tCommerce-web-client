@@ -92,7 +92,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
       .subscribe(
         response => {
           const order = response.data;
-          this.analytics.orderSuccess(order.id, order.prices.totalCost);
+          this.analytics.trackOrderPlaced(order);
 
           vibrate();
           this.router.navigate(['/', 'order-success'], { state: { order } });

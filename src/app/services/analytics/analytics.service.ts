@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { OrderDto } from '../../shared/dtos/order.dto';
 
 declare const gtag: any;
+declare const fbq: any;
 
 @Injectable({
   providedIn: 'root'
@@ -30,14 +32,31 @@ export class AnalyticsService {
     this.trackEvent('Confirm order', 'Confirm order', 'Confirm order', totalCost);
   }
 
-  orderSuccess(orderId: string, totalCost: number) {
+  trackOrderPlaced(order: OrderDto) {
+    const totalCost = order.prices.totalCost;
+
     this.trackEvent('Order success', 'Order success', 'Order success', totalCost);
 
     gtag('event', 'conversion', {
       'send_to': 'AW-930099759/az7OCJeAt8QBEK_kwLsD',
       'value': totalCost,
       'currency': 'UAH',
-      'transaction_id': orderId
+      'transaction_id': order.id
+    });
+
+    const contents = [];
+    for (const item of order.items) {
+      contents.push({
+        id: item.sku,
+        quantity: item.qty
+      })
+    }
+
+    fbq('track', 'Purchase', {
+      value: totalCost,
+      currency: 'UAH',
+      contents,
+      content_type: 'product'
     });
   }
 
