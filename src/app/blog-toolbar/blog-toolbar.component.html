@@ -1,6 +1,6 @@
 <div class="toolbar">
   <div class="toolbar__title" (click)="toggleContent(content.Categories)">
-    Категории
+    {{ 'global.categories' | translate }}
     <i class="mbi mbi-io-add toolbar__title-icon"></i>
   </div>
 
@@ -8,14 +8,14 @@
       [class.toolbar__content--visible]="isVisible[content.Categories]"
   >
     <li *ngFor="let category of categories">
-      <a class="category main-link" [routerLink]="['/', 'blog', category.slug]">
+      <a class="category main-link" [langRouterLink]="['/', 'blog', category.slug]">
         {{ category.name }} ({{ category.postsCount }})
       </a>
     </li>
   </ul>
 
   <div class="toolbar__title" (click)="toggleContent(content.LastPosts)">
-    Последние статьи
+    {{ 'global.last_posts' | translate }}
     <i class="mbi mbi-io-add toolbar__title-icon"></i>
   </div>
 
@@ -23,7 +23,7 @@
       [class.toolbar__content--visible]="isVisible[content.LastPosts]"
   >
     <li *ngFor="let lastPost of lastPosts">
-      <a class="last-post main-link" [routerLink]="['/', 'blog', lastPost.slug]">
+      <a class="last-post main-link" [langRouterLink]="['/', 'blog', lastPost.slug]">
         {{ lastPost.name }}
       </a>
     </li>

@@ -7,7 +7,7 @@
           type="button"
   >
     <span *ngIf="activeOptionLabel as label">{{ label }}</span>
-    <span *ngIf="!activeOptionLabel" class="autocomplete__empty-active">- Не выбрано -</span>
+    <span *ngIf="!activeOptionLabel" class="autocomplete__empty-active">- {{ 'select_autocomplete.not_selected' | translate }} -</span>
 
     <i class="select__icon mbi mbi-chevron-down"></i>
   </button>
@@ -16,7 +16,7 @@
 
     <div class="autocomplete__input-container">
       <input class="autocomplete__input form__input"
-             [placeholder]="getPlaceholder()"
+             [placeholder]="placeholder"
              autofocus
              autocomplete="nope"
              #input
@@ -27,8 +27,8 @@
          *ngIf="!options.length && !isSearchInProgress"
          [ngSwitch]="!!input.value"
     >
-      <ng-container *ngSwitchCase="true">Не найдено ни одного варианта</ng-container>
-      <ng-container *ngSwitchCase="false">Введите в поле поисковый запрос</ng-container>
+      <ng-container *ngSwitchCase="true">{{ 'select_autocomplete.no_matches' | translate }}</ng-container>
+      <ng-container *ngSwitchCase="false">{{ 'select_autocomplete.enter_search_query' | translate }}</ng-container>
     </div>
 
     <preloader class="autocomplete__preloader" *ngIf="isSearchInProgress"></preloader>

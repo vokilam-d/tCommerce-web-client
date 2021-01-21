@@ -7,6 +7,7 @@ import { HeaderModule } from '../../../header/header.module';
 import { BreadcrumbsModule } from '../../../breadcrumbs/breadcrumbs.module';
 import { FooterModule } from '../../../footer/footer.module';
 import { RecentlyViewedProductsModule } from '../../../recently-viewed-products/recently-viewed-products.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { RecentlyViewedProductsModule } from '../../../recently-viewed-products/
     HeaderModule,
     BreadcrumbsModule,
     FooterModule,
-    RecentlyViewedProductsModule
+    RecentlyViewedProductsModule,
+    TranslateModule.forChild()
   ]
 })
 export class PolicyModule { }

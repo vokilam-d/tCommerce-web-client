@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CustomerModalComponent } from './customer-modal.component';
 import { LoginFormModule } from '../login-form/login-form.module';
 import { RegistrationFormModule } from '../registration-form/registration-form.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { RegistrationFormModule } from '../registration-form/registration-form.m
   imports: [
     CommonModule,
     LoginFormModule,
-    RegistrationFormModule
+    RegistrationFormModule,
+    TranslateModule.forChild()
   ],
   exports: [CustomerModalComponent]
 })

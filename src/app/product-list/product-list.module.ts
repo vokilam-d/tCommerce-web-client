@@ -11,6 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { BreadcrumbsModule } from '../breadcrumbs/breadcrumbs.module';
 import { FilterBarComponent } from './filter-bar/filter-bar.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { FilterBarComponent } from './filter-bar/filter-bar.component';
     FormsModule,
     SharedModule,
     RouterModule,
-    BreadcrumbsModule
+    BreadcrumbsModule,
+    TranslateModule.forChild()
   ],
   exports: [ProductListComponent, SortingComponent]
 })

@@ -4,6 +4,8 @@ import { BlogPostsListComponent } from './blog-posts-list.component';
 import { RouterModule } from '@angular/router';
 import { PaginationModule } from '../pagination/pagination.module';
 import { SharedModule } from '../shared/shared.module';
+import { LangRouterLinkModule } from '../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -12,7 +14,9 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     RouterModule,
     PaginationModule,
-    SharedModule
+    SharedModule,
+    LangRouterLinkModule,
+    TranslateModule.forChild()
   ],
   exports: [BlogPostsListComponent]
 })

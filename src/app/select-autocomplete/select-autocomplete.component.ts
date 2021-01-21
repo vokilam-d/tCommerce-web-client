@@ -6,7 +6,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
-  Input,
+  Input, OnInit,
   Output,
   ViewChild
 } from '@angular/core';
@@ -30,6 +30,7 @@ import { DEFAULT_ERROR_TEXT } from '../shared/constants';
 import { SettlementDto } from '../shared/dtos/settlement.dto';
 import { WarehouseDto } from '../shared/dtos/warehouse.dto';
 import { ISelectOption } from './select-option.interface';
+import { LanguageService } from '../services/language/language.service';
 
 @Component({
   selector: 'select-autocomplete',
@@ -42,12 +43,13 @@ import { ISelectOption } from './select-option.interface';
   }],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectAutocompleteComponent extends NgUnsubscribe implements AfterViewInit, ControlValueAccessor {
+export class SelectAutocompleteComponent extends NgUnsubscribe implements OnInit, AfterViewInit, ControlValueAccessor {
 
   isSearchInProgress: boolean = false;
   searchError: string = null;
   isVisible: boolean = false;
   options: ISelectOption[] = [];
+  placeholder: string = '';
   private value: any;
   private inputSubscription: Subscription;
 
@@ -60,8 +62,14 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements AfterV
   @ViewChild('input') inputRef: ElementRef<HTMLInputElement>;
 
   constructor(private addressService: AddressService,
-              private cdr: ChangeDetectorRef) {
+              private cdr: ChangeDetectorRef,
+              private languageService: LanguageService
+  ) {
     super();
+  }
+
+  ngOnInit() {
+    this.getPlaceholder(this.type);
   }
 
   ngAfterViewInit() {
@@ -163,14 +171,9 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements AfterV
     }
   }
 
-  getPlaceholder() {
-    switch (this.type) {
-      case 'settlement':
-        return 'Название города';
-      case 'warehouse':
-        return 'Улица или номер отделения';
-      case 'street':
-        return 'Название улицы';
-    }
+  getPlaceholder(type: string) {
+    this.languageService.getTranslation(`select_autocomplete.${type}`).subscribe(text => {
+      this.placeholder = text;
+    });
   }
 }

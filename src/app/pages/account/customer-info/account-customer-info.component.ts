@@ -10,6 +10,7 @@ import { CustomValidators } from '../../../shared/classes/validators';
 import { CustomerService } from '../../../services/customer/customer.service';
 import { CustomerDto, UpdateCustomerDto } from '../../../shared/dtos/customer.dto';
 import { HeadService } from '../../../services/head/head.service';
+import { LanguageService } from '../../../services/language/language.service';
 
 @Component({
   selector: 'account-customer-info',
@@ -26,10 +27,12 @@ export class AccountCustomerInfoComponent implements OnInit {
 
   get customer() { return this.customerService.customer; }
 
-  constructor(private customerService: CustomerService,
-              private headService: HeadService,
-              private formBuilder: FormBuilder) {
-  }
+  constructor(
+    private customerService: CustomerService,
+    private headService: HeadService,
+    private formBuilder: FormBuilder,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit(): void {
     this.setMeta();
@@ -110,7 +113,7 @@ export class AccountCustomerInfoComponent implements OnInit {
     this.customerService.updateCustomer(dto)
       .subscribe(
         _ => {
-          this.showSuccessMessage('Ваши данные успешно изменены');
+          this.showSuccessMessage('account_customer_info.success_edit');
           this.closeForms();
         },
         error => {
@@ -125,7 +128,7 @@ export class AccountCustomerInfoComponent implements OnInit {
     this.customerService.updatePassword(dto)
       .subscribe(
         _ => {
-          this.showSuccessMessage('Ваш пароль успешно изменён');
+          this.showSuccessMessage('account_customer_info.password_change');
           this.closeForms();
         },
         error => {
@@ -134,9 +137,11 @@ export class AccountCustomerInfoComponent implements OnInit {
       );
   }
 
-  private showSuccessMessage(msg: string) {
-    this.formSuccess = msg;
-    setTimeout(() => this.formSuccess = null, 5000);
+  private showSuccessMessage(msgKey: string) {
+    this.languageService.getTranslation(msgKey).subscribe(text => {
+      this.formSuccess = text;
+      setTimeout(() => this.formSuccess = null, 5000);
+    });
   }
 
   private showErrorMessage(error: any) {
@@ -145,6 +150,8 @@ export class AccountCustomerInfoComponent implements OnInit {
   }
 
   private setMeta() {
-    this.headService.setMeta({ title: 'Личный кабинет', description: 'Личный кабинет' });
+    this.languageService.getTranslation('account_customer_info.account').subscribe(text => {
+      this.headService.setMeta({ title: text, description: text });
+    });
   }
 }

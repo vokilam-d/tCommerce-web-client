@@ -3,6 +3,7 @@ import { CategoryService } from '../category/category.service';
 import { CategoryTreeItem } from '../../shared/dtos/category-tree.dto';
 import { HeadService } from '../../services/head/head.service';
 import { UPLOADED_HOST } from '../../shared/constants';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'index',
@@ -15,9 +16,11 @@ export class IndexComponent implements OnInit {
 
   get categories(): CategoryTreeItem[] { return this.categoryService.categories; }
 
-  constructor(private categoryService: CategoryService,
-              private headService: HeadService) {
-  }
+  constructor(
+    private categoryService: CategoryService,
+    private headService: HeadService,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit() {
     this.setMeta();
@@ -32,10 +35,14 @@ export class IndexComponent implements OnInit {
   }
 
   private setMeta() {
-    this.headService.setMeta({
-      title: 'Клондайк для творчества! Интернет-магазин художественных товаров',
-      description: 'В магазине Клондайк можно купить товары для золочения (поталь, мордан, шеллак), художественные товары (акриловые краски, масляные краски, художественные кисти) и многое другое',
-      keywords: ''
+    const title = 'index.meta_title';
+    const description = 'index.meta_description';
+    this.languageService.getTranslation([title, description]).subscribe(texts => {
+      this.headService.setMeta({
+        title: texts[title],
+        description: texts[description],
+        keywords: ''
+      });
     });
   }
 }

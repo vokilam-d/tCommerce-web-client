@@ -8,12 +8,12 @@
        *ngIf="addressForm.get('lastName') as lastName"
        [class.field--invalid]="isControlInvalid(lastName)"
   >
-    <label for="addr-lastName" class="form__label">Фамилия</label>
+    <label for="addr-lastName" class="form__label">{{ 'global.last_name' | translate }}</label>
     <div class="form__control">
       <input class="form__input" [formControl]="lastName" type="text" id="addr-lastName">
 
       <div class="form__input-error" *ngIf="isControlInvalid(lastName)">
-        Это обязательное поле
+        {{ 'address_form.required_field' | translate }}
       </div>
     </div>
   </div>
@@ -22,12 +22,12 @@
        *ngIf="addressForm.get('firstName') as firstName"
        [class.field--invalid]="isControlInvalid(firstName)"
   >
-    <label for="addr-firstName" class="form__label">Имя</label>
+    <label for="addr-firstName" class="form__label">{{ 'global.name' | translate }}</label>
     <div class="form__control">
       <input class="form__input" [formControl]="firstName" type="text" id="addr-firstName">
 
       <div class="form__input-error" *ngIf="isControlInvalid(firstName)">
-        Это обязательное поле
+        {{ 'address_form.required_field' | translate }}
       </div>
     </div>
   </div>
@@ -36,12 +36,12 @@
        *ngIf="addressForm.get('middleName') as middleName"
        [class.field--invalid]="isControlInvalid(middleName)"
   >
-    <label for="addr-middleName" class="form__label">Отчество</label>
+    <label for="addr-middleName" class="form__label">{{ 'global.parent_name' | translate }}</label>
     <div class="form__control">
       <input class="form__input" [formControl]="middleName" type="text" id="addr-middleName">
 
       <div class="form__input-error" *ngIf="isControlInvalid(middleName)">
-        Это обязательное поле
+        {{ 'address_form.required_field' | translate }}
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
        *ngIf="addressForm.get('phone') as phone"
        [class.field--invalid]="isControlInvalid(phone)"
   >
-    <label for="addr-phone" class="form__label">Телефон</label>
+    <label for="addr-phone" class="form__label">{{ 'address_form.phone' | translate }}</label>
     <div class="form__control">
       <input class="form__input"
              [formControl]="phone"
@@ -61,7 +61,7 @@
       >
 
       <div class="form__input-error" *ngIf="isControlInvalid(phone)">
-        Это обязательное поле
+        {{ 'address_form.required_field' | translate }}
       </div>
     </div>
   </div>
@@ -70,7 +70,7 @@
        *ngIf="addressForm.get('addressType') as addressTypeControl"
        [class.field--invalid]="isControlInvalid(addressTypeControl)"
   >
-    <label class="form__label">Тип доставки <span class="address-type">Новой Почтой</span></label>
+    <label class="form__label">{{ 'address_form.shipment_type' | translate }} <span class="address-type">{{ 'address_form.by_nova_poshta' | translate }}</span></label>
     <label class="form__control form__control--radio" *ngFor="let addressType of addressTypes">
       <input class="form__radio-input"
              [value]="addressType"
@@ -87,19 +87,19 @@
       ></i>
 
       <span [ngSwitch]="addressType">
-        <ng-container *ngSwitchCase="addressTypeEnum.WAREHOUSE">В отделение</ng-container>
-        <ng-container *ngSwitchCase="addressTypeEnum.DOORS">Адресная</ng-container>
+        <ng-container *ngSwitchCase="addressTypeEnum.WAREHOUSE">{{ 'address_form.to_warehouse' | translate }}</ng-container>
+        <ng-container *ngSwitchCase="addressTypeEnum.DOORS">{{ 'address_form.to_address' | translate }}</ng-container>
 
         <span class="shipment-payer" *ngIf="shipmentPayerMap" [ngSwitch]="shipmentPayerMap.get(addressType)">
-          <ng-container *ngSwitchCase="shipmentPayerEnum.RECIPIENT">(оплачивается получателем)</ng-container>
-          <ng-container *ngSwitchCase="shipmentPayerEnum.SENDER">(бесплатно)</ng-container>
+          <ng-container *ngSwitchCase="shipmentPayerEnum.RECIPIENT">{{ 'address_form.recipient_payer' | translate }}</ng-container>
+          <ng-container *ngSwitchCase="shipmentPayerEnum.SENDER">{{ 'address_form.sender_payer' | translate }}</ng-container>
         </span>
       </span>
     </label>
   </div>
 
   <div class="form__control-container" *ngIf="addressForm.get('settlement') as settlementControl">
-    <label class="form__label">Город</label>
+    <label class="form__label">{{ 'address_form.settlement' | translate }}</label>
     <div class="form__control">
       <select-autocomplete type="settlement"
                            [activeOptionLabel]="settlementControl.value"
@@ -107,7 +107,7 @@
       ></select-autocomplete>
 
       <div class="form__input-error" *ngIf="isControlInvalid(settlementControl)">
-        Это обязательное поле
+        {{ 'address_form.required_field' | translate }}
       </div>
     </div>
   </div>
@@ -120,7 +120,7 @@
            *ngIf="addressForm.get('address') as addressControl"
            [class.field--invalid]="isControlInvalid(addressControl)"
       >
-        <label class="form__label">Отделение</label>
+        <label class="form__label">{{ 'address_form.warehouse' | translate }}</label>
         <div class="form__control">
           <select-autocomplete type="warehouse"
                                [settlementId]="settlementIdControl.value"
@@ -130,7 +130,7 @@
           ></select-autocomplete>
 
           <div class="form__input-error" *ngIf="isControlInvalid(addressControl)">
-            Это обязательное поле
+            {{ 'address_form.required_field' | translate }}
           </div>
         </div>
       </div>
@@ -143,7 +143,7 @@
            *ngIf="addressForm.get('address') as addressControl"
            [class.field--invalid]="isControlInvalid(addressControl)"
       >
-        <label class="form__label">Улица</label>
+        <label class="form__label">{{ 'address_form.street' | translate }}</label>
         <div class="form__control">
           <select-autocomplete type="street"
                                [settlementId]="settlementIdControl.value"
@@ -153,7 +153,7 @@
           ></select-autocomplete>
 
           <div class="form__input-error" *ngIf="isControlInvalid(addressControl)">
-            Это обязательное поле
+            {{ 'address_form.required_field' | translate }}
           </div>
         </div>
       </div>
@@ -162,12 +162,12 @@
            *ngIf="addressForm.get('buildingNumber') as buildingNumber"
            [class.field--invalid]="isOptionalControlInvalid('buildingNumber')"
       >
-        <label for="addr-buildingNumber" class="form__label">Номер дома</label>
+        <label for="addr-buildingNumber" class="form__label">{{ 'address_form.building_number' | translate }}</label>
         <div class="form__control">
           <input class="form__input" [formControl]="buildingNumber" type="text" id="addr-buildingNumber">
 
           <div class="form__input-error" *ngIf="isOptionalControlInvalid('buildingNumber')">
-            Это обязательное поле
+            {{ 'address_form.required_field' | translate }}
           </div>
         </div>
       </div>
@@ -176,7 +176,7 @@
            *ngIf="addressForm.get('flat') as flat"
            [class.field--invalid]="isOptionalControlInvalid('flat')"
       >
-        <label for="addr-flat" class="form__label">Квартира</label>
+        <label for="addr-flat" class="form__label">{{ 'address_form.flat' | translate }}</label>
         <div class="form__control">
           <input class="form__input" [formControl]="flat" type="text" id="addr-flat">
         </div>
@@ -188,7 +188,7 @@
   <div class="form__control-container is-default"
        *ngIf="showIsDefault && addressForm.get('isDefault') as isDefault"
   >
-    <label class="form__label" for="addr-isDefault">Установить по умолчанию?</label>
+    <label class="form__label" for="addr-isDefault">{{ 'address_form.set_default' | translate }}</label>
     <input class="is-default__input"
            [formControl]="isDefault"
            id="addr-isDefault"

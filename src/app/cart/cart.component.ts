@@ -27,8 +27,9 @@ export class CartComponent implements OnInit {
   @Output('continueShopping') continueShoppingEvt = new EventEmitter();
   @ViewChild(QuantityControlComponent) qtyCmp: QuantityControlComponent;
 
-  constructor(private customerService: CustomerService,
-              private analyticsService: AnalyticsService
+  constructor(
+    private customerService: CustomerService,
+    private analyticsService: AnalyticsService
   ) { }
 
   ngOnInit(): void {

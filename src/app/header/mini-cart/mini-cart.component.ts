@@ -11,8 +11,9 @@ export class MiniCartComponent implements OnInit {
 
   get items() { return this.customerService.cart; }
 
-  constructor(private customerService: CustomerService,
-              private analyticsService: AnalyticsService
+  constructor(
+    private customerService: CustomerService,
+    private analyticsService: AnalyticsService
   ) { }
 
   ngOnInit(): void {

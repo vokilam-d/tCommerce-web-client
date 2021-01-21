@@ -37,28 +37,27 @@
       <img class="order__img item__img" [src]="uploadedHost + item.imageUrl" [alt]="item.name" loading="lazy">
 
       <div class="item__description">
-        <a class="item__name main-link" [routerLink]="['/', item.slug]" target="_blank">
+        <a class="item__name main-link" [langRouterLink]="['/', item.slug]" target="_blank">
           {{ item.name }}
         </a>
 
         <div class="item__additional-services" *ngIf="item.additionalServices?.length">
           <div class="item__additional-service" *ngFor="let service of item.additionalServices">
-            {{ service.name }} (+{{ service.price }}грн)
+            {{ service.name }} (+{{ service.price }}{{ 'global.uah' | translate }})
           </div>
         </div>
 
         <div class="item__price-container">
-          <div class="item__price">{{ item.price }} грн</div>
-          <div class="item__qty">{{ item.qty }} шт.</div>
-          <div class="item__cost">{{ item.cost }} грн
-          </div>
+          <div class="item__price">{{ item.price }} {{ 'global.uah' | translate }}</div>
+          <div class="item__qty">{{ item.qty }} {{ 'global.pcs.' | translate }}</div>
+          <div class="item__cost">{{ item.cost }} {{ 'global.uah' | translate }}</div>
         </div>
       </div>
     </div>
 
     <div class="order__info">
       <div class="order__info-label">
-        Адрес доставки:
+        {{ 'global.shipment_address' | translate }}:
       </div>
       <div class="order__info-value">
         {{ order.shipment.recipient.settlement }}, {{ order.shipment.recipient.address }}
@@ -69,7 +68,7 @@
 
     <div class="order__info">
       <div class="order__info-label">
-        Способ доставки:
+        {{ 'global.shipment_method' | translate }}:
       </div>
       <div class="order__info-value">
         {{ order.shippingMethodName }}
@@ -78,7 +77,7 @@
 
     <div class="order__info">
       <div class="order__info-label">
-        Способ оплаты:
+        {{ 'global.payment_method' | translate }}:
       </div>
       <div class="order__info-value">
         {{ order.paymentMethodName }}
@@ -87,7 +86,7 @@
 
     <div class="order__info" *ngIf="order.clientNote as note">
       <div class="order__info-label">
-        Комментарий:
+        {{ 'account_orders.comment' | translate }}:
       </div>
       <div class="order__info-value">
         {{ note }}
@@ -96,18 +95,18 @@
 
     <div class="order__info">
       <div class="order__info-label">
-        Перезванивать ли Вам для уточнения заказа?
+        {{ 'global.is_callback_needed' | translate }}
       </div>
 
       <div class="order__info-value" [ngSwitch]="order.isCallbackNeeded">
-        <ng-container *ngSwitchCase="true">Да</ng-container>
-        <ng-container *ngSwitchCase="false">Нет</ng-container>
+        <ng-container *ngSwitchCase="true">{{ 'global.yes' | translate }}</ng-container>
+        <ng-container *ngSwitchCase="false">{{ 'global.no' | translate }}</ng-container>
       </div>
     </div>
 
     <div class="order__info" *ngIf="order.shipment.trackingNumber">
       <div class="order__info-label">
-        Номер ТТН Новой почты:
+        {{ 'account_orders.tracking_number' | translate }}:
       </div>
       <div class="order__info-value">
         {{ order.shipment.trackingNumber }}
@@ -116,7 +115,7 @@
 
     <div class="order__info" *ngIf="order.shipment.statusDescription">
       <div class="order__info-label">
-        Статус посылки:
+        {{ 'account_orders.tracking_status' | translate }}:
       </div>
       <div class="order__info-value">
         {{ order.shipment.statusDescription }}
@@ -124,7 +123,7 @@
     </div>
 
     <div class="order__info order__discount" *ngIf="order.prices.discountValue as discountValue">
-      Скидка ({{ order.prices.discountLabel }}, {{ order.prices.discountPercent }}%): {{ discountValue }} грн
+      {{ 'global.discount' | translate }} ({{ order.prices.discountLabel }}, {{ order.prices.discountPercent }}%): {{ discountValue }} {{ 'global.uah' | translate }}
     </div>
   </div>
 
@@ -134,7 +133,7 @@
     </div>
 
     <div class="order__price">
-      Итого: {{ order.prices.totalCost }} грн
+      {{ 'global.total_cost' | translate }}: {{ order.prices.totalCost }} {{ 'global.uah' | translate }}
     </div>
   </div>
 

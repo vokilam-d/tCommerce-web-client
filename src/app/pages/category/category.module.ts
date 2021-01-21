@@ -9,6 +9,7 @@ import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { ProductListModule } from '../../product-list/product-list.module';
 import { RecentlyViewedProductsModule } from '../../recently-viewed-products/recently-viewed-products.module';
 import { LinkedCategoriesModule } from '../../linked-categories/linked-categories.module';
+import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
 
 @NgModule({
   declarations: [CategoryComponent],
@@ -20,7 +21,8 @@ import { LinkedCategoriesModule } from '../../linked-categories/linked-categorie
     BreadcrumbsModule,
     ProductListModule,
     RecentlyViewedProductsModule,
-    LinkedCategoriesModule
+    LinkedCategoriesModule,
+    LangRouterLinkModule
   ]
 })
 export class CategoryModule { }

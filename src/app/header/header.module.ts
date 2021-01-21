@@ -10,6 +10,9 @@ import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 import { ServiceMenuModule } from '../service-menu/service-menu.module';
 import { MiniCartComponent } from './mini-cart/mini-cart.component';
 import { MiniAccountComponent } from './mini-account/mini-account.component';
+import { LangRouterLinkModule } from '../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { LangSelectorModule } from '../lang-selector/lang-selector.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { MiniAccountComponent } from './mini-account/mini-account.component';
     RouterModule,
     SharedModule,
     ServiceMenuModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LangRouterLinkModule,
+    TranslateModule,
+    LangSelectorModule
   ],
   exports: [
     HeaderComponent

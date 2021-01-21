@@ -1,7 +1,7 @@
 <form class="form login-form" [formGroup]="form" ngNativeValidate>
 
   <div class="form__control-container">
-    <label class="form__label" for="login">Email или номер телефона</label>
+    <label class="form__label" for="login">{{ 'login_form.email_or_phone' | translate }}</label>
     <div class="form__control">
       <input class="form__input"
              [class.form__input--invalid]="isControlInvalid('login')"
@@ -14,7 +14,7 @@
   </div>
 
   <div class="form__control-container" *ngIf="state === 'login'">
-    <label class="form__label" for="password">Пароль</label>
+    <label class="form__label" for="password">{{ 'global.password' | translate }}</label>
     <div class="form__control">
       <input class="form__input"
              [class.form__input--invalid]="isControlInvalid('password')"
@@ -26,7 +26,7 @@
   </div>
 
   <div class="login-form__reset-sent" *ngIf="state === 'reset' && isResetEmailSent">
-    На указанный email было отправлено письмо с инструкцией для восстановления пароля
+    {{ 'login_form.reset_email_sent' | translate }}
   </div>
 
   <div class="form__error" *ngIf="formError as error">
@@ -34,21 +34,21 @@
   </div>
 
   <button class="form__switch-auth login-form__toggle-state" (click)="toggleState()" type="button">
-    <ng-container *ngIf="state === 'login'">Забыли пароль?</ng-container>
-    <ng-container *ngIf="state === 'reset'">Я вспомнил пароль</ng-container>
+    <ng-container *ngIf="state === 'login'">{{ 'login_form.forgot_password' | translate }}</ng-container>
+    <ng-container *ngIf="state === 'reset'">{{ 'login_form.email_or_phone' | translate }}</ng-container>
   </button>
 
   <button class="btn form__submit" [class.form__submit--loading]="isLoading" (click)="submit()" type="submit">
-    <ng-container *ngIf="state === 'login'">Войти</ng-container>
-    <ng-container *ngIf="state === 'reset'">Восстановить пароль</ng-container>
+    <ng-container *ngIf="state === 'login'">{{ 'global.to_login' | translate }}</ng-container>
+    <ng-container *ngIf="state === 'reset'">{{ 'login_form.reset_password' | translate }}</ng-container>
 
     <preloader class="form__submit-preloader" *ngIf="isLoading"></preloader>
   </button>
 
-  <button class="form__switch-auth" (click)="switchToRegister()" type="button">Создать новый аккаунт</button>
+  <button class="form__switch-auth" (click)="switchToRegister()" type="button">{{ 'login_form.create_account' | translate }}</button>
 
   <div class="form__delimiter">
-    <div class="form__delimiter-text">или</div>
+    <div class="form__delimiter-text">{{ 'login_form.or' | translate }}</div>
   </div>
 
   <auth-social class="form__social" (authSuccess)="socialAuthFinish()"></auth-social>

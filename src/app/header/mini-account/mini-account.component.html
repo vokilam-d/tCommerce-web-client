@@ -1,6 +1,6 @@
 <div class="toolbar-item account">
 
-  <a class="account__link" *ngIf="isLoggedIn; else notLoggedTmpl" [routerLink]="['/', 'account']">
+  <a class="account__link" *ngIf="isLoggedIn; else notLoggedTmpl" [langRouterLink]="['/', 'account']">
     <i class="toolbar-item__icon mbi mbi-user"></i>
 
     <div class="account__login-text">{{ customerName }}</div>
@@ -10,22 +10,22 @@
     <button class="account__link" (click)="onLoginClick()">
       <i class="toolbar-item__icon mbi mbi-user"></i>
 
-      <span class="account__login-text">Войти</span>
+      <span class="account__login-text">{{ 'global.to_login' | translate }}</span>
     </button>
   </ng-template>
 
   <ul class="account__menu" *ngIf="isLoggedIn">
     <li>
-      <a class="account__menu-link" [routerLink]="['/', 'account']">Мой кабинет</a>
+      <a class="account__menu-link" [langRouterLink]="['/', 'account']">{{ 'global.my_account' | translate }}</a>
     </li>
     <li>
-      <a class="account__menu-link" [routerLink]="['/', 'cart']">Моя корзина</a>
+      <a class="account__menu-link" [langRouterLink]="['/', 'cart']">{{ 'mini_account.my_cart' | translate }}</a>
     </li>
     <li>
-      <a class="account__menu-link" [routerLink]="['/', 'account', 'orders']">Мои заказы</a>
+      <a class="account__menu-link" [langRouterLink]="['/', 'account', 'orders']">{{ 'global.my_orders' | translate }}</a>
     </li>
     <li>
-      <a class="account__menu-link" (click)="logout()">Выход</a>
+      <a class="account__menu-link" (click)="logout()">{{ 'mini_account.logout' | translate }}</a>
     </li>
   </ul>
 </div>

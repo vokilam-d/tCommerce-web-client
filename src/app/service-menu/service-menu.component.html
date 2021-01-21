@@ -9,27 +9,31 @@
     <ng-container *ngIf="layout === 'vertical'">
       <a class="service-menu__link"
          *ngIf="isLoggedIn; else notLoggedTmpl"
-         [routerLink]="['/', 'account']"
+         [langRouterLink]="['/', 'account']"
       >
-        Мой кабинет
+        {{ 'global.my_account' | translate }}
       </a>
 
       <ng-template #notLoggedTmpl>
         <button class="service-menu__link main-link" (click)="onLoginClick()">
-          Войти в кабинет
+          {{ 'service_menu.login_to_account' | translate }}
         </button>
       </ng-template>
-      <a class="service-menu__link main-link" *ngIf="false" [routerLink]="['/', 'account', 'wishlist']">Мои желания</a>
+      <a class="service-menu__link main-link"
+         *ngIf="false" [langRouterLink]="['/', 'account', 'wishlist']"
+      >
+        {{ 'global.my_wishes' | translate }}
+      </a>
     </ng-container>
 
-    <a class="service-menu__link main-link" routerLink="/skidki">Скидки</a>
-    <a class="service-menu__link main-link" routerLink="/dostavka-i-oplata">Доставка и оплата</a>
-    <a class="service-menu__link main-link" routerLink="/vozvrat-tovara">Возврат и обмен</a>
-    <a class="service-menu__link main-link" *ngIf="isInFooter" routerLink="/politika-konfidencialnosti">Политика конфиденциальности</a>
-    <a class="service-menu__link main-link" routerLink="/contacts">Контакты</a>
-    <a class="service-menu__link main-link" routerLink="/blog">Блог</a>
-    <a class="service-menu__link main-link" routerLink="/otzyvy">
-      Отзывы о нас
+    <a class="service-menu__link main-link" langRouterLink="/skidki">{{ 'global.discounts' | translate }}</a>
+    <a class="service-menu__link main-link" langRouterLink="/dostavka-i-oplata">{{ 'global.shipment_and_payment' | translate }}</a>
+    <a class="service-menu__link main-link" langRouterLink="/vozvrat-tovara">{{ 'global.repayments' | translate }}</a>
+    <a class="service-menu__link main-link" *ngIf="isInFooter" langRouterLink="/politika-konfidencialnosti">{{ 'global.privacy_policy' | translate }}</a>
+    <a class="service-menu__link main-link" langRouterLink="/contacts">{{ 'global.contacts' | translate }}</a>
+    <a class="service-menu__link main-link" langRouterLink="/blog">{{ 'global.blog' | translate }}</a>
+    <a class="service-menu__link main-link" langRouterLink="/otzyvy">
+      {{ 'global.store_reviews' | translate }}
       <span class="service-menu__count" *ngIf="storeReviewsCount"> ({{ storeReviewsCount }})</span>
     </a>
   </div>

@@ -72,9 +72,7 @@ export class RatingStarsComponent implements OnChanges, AfterViewInit {
   }
 
   onMouseMove(e) {
-    if (this.isDisabled) {
-      return;
-    }
+    if (this.isDisabled) { return; }
 
     const cursorPositionX = e.clientX;
     const ratingBarElLeftPosition = this.ratingBarElParams.left;
@@ -94,7 +92,7 @@ export class RatingStarsComponent implements OnChanges, AfterViewInit {
   }
 
   onClick() {
-    if (this.isDisabled) { return }
+    if (this.isDisabled) { return; }
 
     this.quickReview.emit(this.ratingOnHover);
   }

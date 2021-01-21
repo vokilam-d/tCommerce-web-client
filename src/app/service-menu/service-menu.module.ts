@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServiceMenuComponent } from './service-menu.component';
 import { RouterModule } from '@angular/router';
+import { LangRouterLinkModule } from '../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -9,6 +11,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule,
+    LangRouterLinkModule,
+    TranslateModule.forChild()
   ],
   exports: [ServiceMenuComponent]
 })

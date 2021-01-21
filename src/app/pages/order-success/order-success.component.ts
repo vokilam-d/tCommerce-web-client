@@ -6,6 +6,7 @@ import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../../shared/constants';
 import { HeadService } from '../../services/head/head.service';
 import { OrderService } from '../checkout/order.service';
+import { LanguageService } from '../../services/language/language.service';
 
 declare const Wayforpay: any;
 
@@ -18,17 +19,19 @@ export class OrderSuccessComponent implements OnInit {
 
   uploadedHost = UPLOADED_HOST;
   order: OrderDto;
-  breadcrumbs: IBreadcrumb[] = SUCCESS_BREADCRUMBS;
+  breadcrumbs: IBreadcrumb[] = [];
   paymentError: string = null;
   paymentSuccess: boolean = false;
   private wayforpay: any;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any,
-              @Inject(LOCALE_ID) private locale: string,
-              private headService: HeadService,
-              private orderService: OrderService,
-              private router: Router) {
-  }
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
+    @Inject(LOCALE_ID) private locale: string,
+    private headService: HeadService,
+    private orderService: OrderService,
+    private router: Router,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) { return; }
@@ -43,7 +46,7 @@ export class OrderSuccessComponent implements OnInit {
   }
 
   private init() {
-    this.breadcrumbs = [...SUCCESS_BREADCRUMBS, { title: `Заказ №${this.order.id}` }];
+    this.setBreadcrumbs();
     this.setMeta();
 
     if (this.order.isOnlinePayment) {
@@ -85,7 +88,9 @@ export class OrderSuccessComponent implements OnInit {
 
 
   private setMeta() {
-    this.headService.setMeta({ title: `Заказ №${this.order.id}`, description: `Заказ №${this.order.id}` });
+    this.languageService.getTranslation('order_success.order').subscribe(text => {
+      this.headService.setMeta({ title: `${text} №${this.order.id}`, description: `${text} №${this.order.id}` });
+    });
   }
 
   private showGoogleCustomerReview() {
@@ -115,15 +120,23 @@ export class OrderSuccessComponent implements OnInit {
     gcrScript.setAttribute("defer", 'true');
     document.getElementsByTagName("head")[0].appendChild(gcrScript);
   }
-}
 
-const SUCCESS_BREADCRUMBS: IBreadcrumb[] = [
-  {
-    title: 'Мой кабинет',
-    link: 'account'
-  },
-  {
-    title: 'Мои заказы',
-    link: 'account/orders'
+  private setBreadcrumbs() {
+    this.languageService.getTranslation(['global.my_account', 'global.my_orders', 'order_success.order'])
+      .subscribe(texts => {
+        this.breadcrumbs = [
+          {
+            title: texts['global.my_account'],
+            link: 'account'
+          },
+          {
+            title: texts['global.my_orders'],
+            link: 'account/orders'
+          },
+          {
+            title: `${texts['order_success.order']} №${this.order.id}`
+          }
+        ];
+      });
   }
-];
+}

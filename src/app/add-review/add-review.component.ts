@@ -51,10 +51,12 @@ export class AddReviewComponent implements OnInit, OnDestroy {
   @Input() uploadUrl: string;
   @Output() addReview = new EventEmitter<IAddReviewFormValue>();
 
-  constructor(private formBuilder: FormBuilder,
-              private renderer: Renderer2,
-              private http: HttpClient,
-              private customerService: CustomerService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private renderer: Renderer2,
+    private http: HttpClient,
+    private customerService: CustomerService
+  ) { }
 
   ngOnInit(): void {
     if (!this.uploadUrl) {

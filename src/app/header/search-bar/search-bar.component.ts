@@ -1,25 +1,16 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Inject,
-  OnInit, Output,
-  PLATFORM_ID,
-  ViewChild
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { catchError, debounceTime, distinctUntilChanged, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { fromEvent, of } from 'rxjs';
 import { API_HOST, DEFAULT_ERROR_TEXT, SEARCH_QUERY_PARAM, UPLOADED_HOST } from '../../shared/constants';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
-import { isPlatformBrowser } from '@angular/common';
 import { ProductService } from '../../pages/product/services/product.service';
 import { AutocompleteItemDto } from '../../shared/dtos/autocomplete-item.dto';
 import { HttpClient } from '@angular/common/http';
 import { ResponseDto } from '../../shared/dtos/response.dto';
 import { AutocompleteItemType } from '../../shared/enums/autocomplete-item-type.enum';
+import { DeviceService } from '../../services/device-detector/device.service';
 
 @Component({
   selector: 'search-bar',
@@ -41,11 +32,13 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
 
   @Output() isSearchBarInFocus = new EventEmitter();
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any,
-              private productService: ProductService,
-              private route: ActivatedRoute,
-              private http: HttpClient,
-              private router: Router) {
+  constructor(
+    private deviceService: DeviceService,
+    private productService: ProductService,
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private router: Router
+  ) {
     super();
   }
 
@@ -85,7 +78,7 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
   }
 
   private handleAutocomplete() {
-    if (!isPlatformBrowser(this.platformId)) { return; }
+    if (!this.deviceService.isPlatformBrowser()) { return; }
 
     this.searchControl.valueChanges
       .pipe(
@@ -114,7 +107,7 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
   }
 
   private handleHotkeys() {
-    if (!isPlatformBrowser(this.platformId)) { return; }
+    if (!this.deviceService.isPlatformBrowser()) { return; }
 
     fromEvent(this.inputRef.nativeElement, 'keydown')
       .pipe( takeUntil(this.ngUnsubscribe) )

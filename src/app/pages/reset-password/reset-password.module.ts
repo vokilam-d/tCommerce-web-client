@@ -8,6 +8,8 @@ import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { FooterModule } from '../../footer/footer.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     BreadcrumbsModule,
     FooterModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LangRouterLinkModule,
+    TranslateModule.forChild()
   ]
 })
 export class ResetPasswordModule { }

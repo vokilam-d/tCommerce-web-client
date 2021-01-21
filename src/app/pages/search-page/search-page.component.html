@@ -5,11 +5,11 @@
 
   <div class="search__container">
     <h1 class="search__title" *ngIf="searchQuery">
-      Поиск: "{{ searchQuery }}"
+      {{ 'global.search' | translate }}: "{{ searchQuery }}"
     </h1>
 
     <div class="search__no-query" *ngIf="!searchQuery">
-      Задайте поисковый запрос
+      {{ 'search_page.set_query' | translate }}
     </div>
 
     <product-list class="search__products"

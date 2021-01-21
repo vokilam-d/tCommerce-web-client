@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DUMMY_PATH } from './shared/constants';
+import { BLOG_PATH, DUMMY_PATH } from './shared/constants';
 import { PageTypeEnum } from './shared/enums/page-type.enum';
 
 
@@ -79,10 +79,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/search-page/search-page.module').then(m => m.SearchPageModule)
   },
   {
-    path: 'blog',
+    path: BLOG_PATH,
     children: [
       {
         path: '',
+        pathMatch: 'full',
         loadChildren: () => import('./pages/blog-pages/blog/blog.module').then(m => m.BlogModule)
       }
     ]

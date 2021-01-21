@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { EMediaVariant } from '../../../shared/enums/media-variant.enum';
+import { LanguageService } from '../../../services/language/language.service';
 
 @Component({
   selector: 'blog-post',
@@ -25,12 +26,14 @@ export class BlogPostComponent implements OnInit {
   mediaVariants = EMediaVariant;
   contentHtml: SafeHtml;
 
-  constructor(private jsonLdService: JsonLdService,
-              private route: ActivatedRoute,
-              private headService: HeadService,
-              private domSanitizer: DomSanitizer,
-              private blogService: BlogService) {
-  }
+  constructor(
+    private jsonLdService: JsonLdService,
+    private route: ActivatedRoute,
+    private headService: HeadService,
+    private domSanitizer: DomSanitizer,
+    private blogService: BlogService,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit(): void {
     this.fetchPost();
@@ -55,11 +58,13 @@ export class BlogPostComponent implements OnInit {
   }
 
   private setBreadcrumbs() {
-    this.breadcrumbs = [
-      { title: 'Блог', link: 'blog' },
-      { title: this.post.category.name, link: `blog/${this.post.category.slug}` },
-      { title: this.post.name, link: `blog/${this.post.slug}` },
-    ]
+    this.languageService.getTranslation('global.blog').subscribe(text => {
+      this.breadcrumbs = [
+        { title: text, link: 'blog' },
+        { title: this.post.category.name, link: `blog/${this.post.category.slug}` },
+        { title: this.post.name, link: `blog/${this.post.slug}` },
+      ];
+    });
   }
 
   private setMeta() {

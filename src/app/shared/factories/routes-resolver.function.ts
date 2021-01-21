@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { API_HOST, DUMMY_PATH } from '../constants';
+import { API_HOST, BLOG_PATH, DUMMY_PATH } from '../constants';
 import { Route, Router, Routes } from '@angular/router';
 import { InjectionToken, Injector } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
@@ -8,19 +8,20 @@ import { PageTypeEnum } from '../enums/page-type.enum';
 import { tap } from 'rxjs/operators';
 import { ResponseDto } from '../dtos/response.dto';
 import { isPlatformServer } from '@angular/common';
+import { Language } from '../enums/language.enum';
 
 export const PAGES_TOKEN = new InjectionToken<PageRegistryDto[]>('pages_token');
 export const PAGES_STATE_KEY = makeStateKey<PageRegistryDto[]>('pages_state_key');
 
 function updateConfig(router: Router, pages: PageRegistryDto[]) {
   let staticRoutes = router.config;
+
   const dummyRouteIdx = staticRoutes.findIndex(route => route.path === DUMMY_PATH);
-  const dummyRoute = staticRoutes[dummyRouteIdx];
-  staticRoutes.splice(dummyRouteIdx, 1);
+  const [dummyRoute] = staticRoutes.splice(dummyRouteIdx, 1);
 
-  const blogRouteIdx = staticRoutes.findIndex(route => route.path === 'blog');
+  const blogRouteIdx = staticRoutes.findIndex(route => route.path === BLOG_PATH);
 
-  const routesFromPages: Routes = [];
+  const dynamicRoutes: Routes = [];
   pages.forEach(page => {
     const isBlogPage = page.type === PageTypeEnum.BlogPost || page.type === PageTypeEnum.BlogCategory;
     const path = page.slug;
@@ -37,11 +38,25 @@ function updateConfig(router: Router, pages: PageRegistryDto[]) {
     if (isBlogPage) {
       staticRoutes[blogRouteIdx].children.push(route);
     } else {
-      routesFromPages.push(route);
+      dynamicRoutes.push(route);
     }
   });
 
-  router.resetConfig([...staticRoutes.slice(0, -1), ...routesFromPages, staticRoutes[staticRoutes.length - 1]]);
+  const [notFoundRoute] = staticRoutes.splice(staticRoutes.length - 1, 1);
+
+  const routes = [...staticRoutes, ...dynamicRoutes];
+
+  const ruRoute: Route = {
+    path: '',
+    children: routes
+  };
+
+  const ukRoute: Route = {
+    path: 'ua',
+    children: routes
+  };
+
+  router.resetConfig([ruRoute, ukRoute, notFoundRoute]);
 }
 
 export function routesResolver(http: HttpClient, router: Router, injector: Injector, state: TransferState, platformId: any) {

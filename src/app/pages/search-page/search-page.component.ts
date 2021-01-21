@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HeadService } from '../../services/head/head.service';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { SEARCH_QUERY_PARAM } from '../../shared/constants';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'search-page',
@@ -20,7 +21,9 @@ export class SearchPageComponent extends NgUnsubscribe implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private sanitizer: DomSanitizer,
-              private headService: HeadService) {
+              private headService: HeadService,
+              private languageService: LanguageService
+  ) {
     super();
   }
 
@@ -39,15 +42,20 @@ export class SearchPageComponent extends NgUnsubscribe implements OnInit {
   }
 
   private setBreadcrumbs() {
-    this.breadcrumbs = [{ title: `Результаты поиска` }];
+    this.languageService.getTranslation('search_page.search_result').subscribe(text => {
+      this.breadcrumbs = [{ title: text }];
+    });
   }
 
   private setMeta() {
-    let title = `Результаты поиска`;
-    if (this.searchQuery) {
-      title += `: "${this.searchQuery}"`;
-    }
+    this.languageService.getTranslation('search_page.search_result').subscribe(text => {
+      let title = text;
 
-    this.headService.setMeta({ title, description: '' });
+      if (this.searchQuery) {
+        title += `: "${this.searchQuery}"`;
+      }
+
+      this.headService.setMeta({ title, description: '' });
+    });
   }
 }

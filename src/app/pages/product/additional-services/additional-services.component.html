@@ -9,6 +9,6 @@
 
   <label class="services__service" *ngFor="let service of additionalServices">
     <input class="services__checkbox" [(ngModel)]="service.isSelected" type="checkbox" name="">
-    <span class="services__name">{{ service.name }} (+{{ service.price }}грн)</span>
+    <span class="services__name">{{ service.name }} (+{{ service.price }}{{ 'global.uah' | translate }})</span>
   </label>
 </div>

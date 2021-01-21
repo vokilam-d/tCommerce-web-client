@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HeadService } from '../../../services/head/head.service';
+import { LanguageService } from '../../../services/language/language.service';
 
 @Component({
   selector: 'wishlist',
@@ -8,13 +9,18 @@ import { HeadService } from '../../../services/head/head.service';
 })
 export class WishlistComponent implements OnInit {
 
-  constructor(private headService: HeadService) { }
+  constructor(
+    private headService: HeadService,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit(): void {
     this.setMeta();
   }
 
   private setMeta() {
-    this.headService.setMeta({ title: 'Мои желания', description: 'Мои желания' });
+    this.languageService.getTranslation('global.my_wishes').subscribe(text => {
+      this.headService.setMeta({ title: text, description: text });
+    });
   }
 }

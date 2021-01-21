@@ -3,6 +3,7 @@ import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
 import { CustomerService } from '../../services/customer/customer.service';
 import { HeadService } from '../../services/head/head.service';
 import { Router } from '@angular/router';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'cart-page',
@@ -11,20 +12,25 @@ import { Router } from '@angular/router';
 })
 export class CartPageComponent implements OnInit {
 
-  breadcrumbs: IBreadcrumb[] = [{ title: 'Корзина' }];
+  breadcrumbs: IBreadcrumb[] = []
   get isCartEmpty(): boolean { return !this.customerService.cart || !this.customerService.cart.length; }
 
-  constructor(private customerService: CustomerService,
-              private router: Router,
-              private headService: HeadService
+  constructor(
+    private customerService: CustomerService,
+    private router: Router,
+    private headService: HeadService,
+    private languageService: LanguageService
   ) { }
 
   ngOnInit(): void {
-    this.setMeta();
+    this.setMetaAndBreadcrumbs();
   }
 
-  private setMeta() {
-    this.headService.setMeta({ title: 'Корзина', description: 'Корзина' });
+  private setMetaAndBreadcrumbs() {
+    this.languageService.getTranslation('global.cart').subscribe(text => {
+      this.headService.setMeta({ title: text, description: text });
+      this.breadcrumbs = [{ title: text }];
+    });
   }
 
   onContinueShopping() {

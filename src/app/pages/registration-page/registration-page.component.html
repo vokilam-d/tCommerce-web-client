@@ -1,9 +1,9 @@
 <app-header></app-header>
 
 <div class="page container not-found">
-  <breadcrumbs [breadcrumbs]="[{ title: 'Регистрация' }]"></breadcrumbs>
+  <breadcrumbs [breadcrumbs]="[{ title: 'global.register' | translate }]"></breadcrumbs>
 
-  <h1 class="page__title">Регистрация</h1>
+  <h1 class="page__title">{{ 'global.register' | translate }}</h1>
 
   <div class="page__content">
     <registration-form (registeredBySocial)="onRegister()"

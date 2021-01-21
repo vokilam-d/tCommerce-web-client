@@ -1,17 +1,17 @@
 <div class="filters-bar" *ngIf="selectedFiltersInBar?.length">
-        
+
   <p class="filters-bar__selected-count" *ngIf="filteredCount">
-    Выбрано товаров: {{ filteredCount }}
-  </p>   
+    {{ 'filter_bar.filtered_count' | translate }}: {{ filteredCount }}
+  </p>
 
   <div class="filters-bar__item filters-bar__item--clear-all">
     <button class="filters-bar__item--btn" (click)="unselectAll()">
-      Сбросить все
+      {{ 'filter_bar.to_clear_all' | translate }}: {{ filteredCount }}
     </button>
   </div>
   <ul class="filters-bar__filters-box">
     <ng-container *ngFor="let activeFilter of selectedFiltersInBar" [ngSwitch]="activeFilter.type">
-            
+
       <ng-container *ngSwitchCase="'checkbox'">
         <li class="filters-bar__item selected" *ngFor="let value of activeFilter.values">
           <div class="selected__label">
@@ -22,7 +22,7 @@
           </button>
         </li>
       </ng-container>
-                          
+
       <ng-container *ngSwitchCase="'range'">
         <li class="filters-bar__item selected">
           <div class="selected__label">
@@ -33,9 +33,9 @@
           </button>
         </li>
       </ng-container>
-        
+
     </ng-container>
-          
-  </ul> 
-  
+
+  </ul>
+
 </div>

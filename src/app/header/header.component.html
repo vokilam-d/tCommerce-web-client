@@ -3,6 +3,8 @@
     <div class="top-menu__content">
       <service-menu class="top-menu__menu"></service-menu>
 
+      <lang-selector class="top-menu__lang"></lang-selector>
+
       <div class="top-menu__phones phones">
         <div class="phones__content">
           <a class="phones__phone" href="tel:+380502627214">+38 (050) 26-27-214</a>
@@ -19,15 +21,15 @@
   <div class="container">
     <div class="header__content">
 
-      <a class="header__logo" routerLink="/">
+      <a class="header__logo" langRouterLink="/">
         <img class="header__logo-img" src="../../assets/images/logo.png" alt="Klondike" loading="lazy">
-        <span class="header__logo-text">Клондайк - товары для творчества!</span>
+        <span class="header__logo-text">{{ 'header.slogan' | translate }}</span>
       </a>
 
       <div class="catalog-toggle" [class.catalog-toggle--is-catalog]="isSidebarCatalog">
         <div class="catalog-toggle__btn">
           <i class="mbi mbi-menu catalog-toggle__btn-icon"></i>
-          <div class="catalog-toggle__text">Каталог товаров</div>
+          <div class="catalog-toggle__text">{{ 'header.catalog' | translate }}</div>
           <i class="mbi mbi-ios-arrow-down catalog-toggle__arrow"></i>
         </div>
 

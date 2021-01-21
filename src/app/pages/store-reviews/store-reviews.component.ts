@@ -16,6 +16,7 @@ import { SortingComponent } from '../../product-list/sorting/sorting.component';
 import { PaginationComponent } from '../../pagination/pagination.component';
 import { SortingPaginatingFilterDto } from '../../shared/dtos/spf.dto';
 import { ActivatedRoute } from '@angular/router';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'store-reviews',
@@ -42,14 +43,18 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   @ViewChild(PaginationComponent) paginationCmp: PaginationComponent;
 
 
-  constructor(private headService: HeadService,
-              private notyService: NotyService,
-              private jsonLdService: JsonLdService,
-              private storeReviewService: StoreReviewService,
-              private deviceService: DeviceService,
-              private scrollToService: ScrollToService,
-              private route: ActivatedRoute
-  ) { super(); }
+  constructor(
+    private headService: HeadService,
+    private notyService: NotyService,
+    private jsonLdService: JsonLdService,
+    private storeReviewService: StoreReviewService,
+    private deviceService: DeviceService,
+    private scrollToService: ScrollToService,
+    private route: ActivatedRoute,
+    private languageService: LanguageService
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.setMeta();
@@ -85,10 +90,12 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   }
 
   private setMeta() {
-    this.headService.setMeta({
-      title: 'Отзывы Интернет магазина klondike',
-      description: 'Отзывы Интернет магазина klondike',
-      keywords: ''
+    this.languageService.getTranslation('store_reviews.klondike_reviews').subscribe(text => {
+      this.headService.setMeta({
+        title: text,
+        description: text,
+        keywords: ''
+      });
     });
   }
 
@@ -142,7 +149,9 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   }
 
   private showReviewSuccess() {
-    this.notyService.success(`Ваш отзыв успешно оставлен`);
+    this.languageService.getTranslation('global.review_successfully_added').subscribe(text => {
+      this.notyService.success(text);
+    });
   }
 
   private setJsonLd() {
@@ -191,7 +200,7 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   }
 
   setInputPlaceholder() {
-    this.inputPlaceholder = `Тут Вы можете оставить отзыв о магазине “Клондайк” (например, оценить скорость доставки, качество консультации).
-Мы очень благодарны за обратную связь, каждый Ваш отзыв вдохновляет нас!`;
+    this.languageService.getTranslation('store_reviews.text_placeholder')
+      .subscribe(text => this.inputPlaceholder = text);
   }
 }

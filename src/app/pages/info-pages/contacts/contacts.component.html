@@ -1,14 +1,14 @@
 <app-header></app-header>
 
 <div class="page container not-found">
-  <breadcrumbs [breadcrumbs]="[{ title: 'Контакты' }]"></breadcrumbs>
+  <breadcrumbs [breadcrumbs]="[{ title: 'global.contacts' | translate }]"></breadcrumbs>
 
-  <h1 class="page__title">Контакты</h1>
+  <h1 class="page__title">{{ 'global.contacts' | translate }}</h1>
 
   <div class="page__content info-page">
-    <p>Заказы обрабатываются за 1 день, Вы можете в любое время оставить заказ через корзину на сайте. Заказы по телефону принимаются с понедельника по пятницу с 9:00 до 18:00.</p>
+    <p>{{ 'contacts_page.info' | translate }}</p>
     <br>
-    <p><a class="main-link" href="tel:+380502627214">+38 (050) 26-27-214</a> (на этом номере доступен Viber/Telegram)</p>
+    <p><a class="main-link" href="tel:+380502627214">+38 (050) 26-27-214</a> ({{ 'contacts_page.has_viber' | translate }})</p>
     <p><a class="main-link" href="tel:+380678811962">+38 (067) 88-11-962</a></p>
     <p><a class="main-link" href="tel:+380933444342">+38 (093) 34-44-342</a></p>
     <p><a class="main-link" href="mailto:info@klondike.com.ua">info@klondike.com.ua</a></p>

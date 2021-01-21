@@ -1,7 +1,7 @@
 <form class="form" [formGroup]="form" ngNativeValidate>
 
   <div class="form__control-container">
-    <label class="form__label" for="firstName">Имя</label>
+    <label class="form__label" for="firstName">{{ 'global.name' | translate }}</label>
     <div class="form__control">
       <input class="form__input"
              [class.form__input--invalid]="isControlInvalid('firstName')"
@@ -14,7 +14,7 @@
   </div>
 
   <div class="form__control-container">
-    <label class="form__label" for="lastName">Фамилия</label>
+    <label class="form__label" for="lastName">{{ 'global.last_name' | translate }}</label>
     <div class="form__control">
       <input class="form__input"
              [class.form__input--invalid]="isControlInvalid('lastName')"
@@ -40,7 +40,7 @@
   </div>
 
   <div class="form__control-container">
-    <label class="form__label" for="password">Пароль</label>
+    <label class="form__label" for="password">{{ 'global.password' | translate }}</label>
     <div class="form__control">
       <input class="form__input"
              [class.form__input--invalid]="isControlInvalid('password')"
@@ -50,13 +50,13 @@
              required
       >
       <div class="form__input-error" *ngIf="isControlInvalid('password')">
-        Пароль должен быть не менее 6 символов, состоять из цифр и латинских букв, в том числе заглавных
+        {{ 'global.password_should_consist_of' | translate }}
       </div>
     </div>
   </div>
 
   <div class="form__control-container">
-    <label class="form__label" for="passwordConfirm">Повторите пароль</label>
+    <label class="form__label" for="passwordConfirm">{{ 'registration_form.confirm_password' | translate }}</label>
     <div class="form__control">
       <input class="form__input"
              [class.form__input--invalid]="isControlInvalid('passwordConfirm')"
@@ -65,7 +65,7 @@
              type="password"
       >
       <div class="form__input-error" *ngIf="isControlInvalid('passwordConfirm')">
-        Пароли не совпадают
+        {{ 'global.passwords_dont_match' | translate }}
       </div>
     </div>
   </div>
@@ -75,14 +75,14 @@
   </div>
 
   <button class="btn form__submit" [class.form__submit--loading]="isLoading" (click)="submit()" type="submit">
-    Зарегистрироваться
+    {{ 'registration_form.to_sign_up' | translate }}
     <preloader class="form__submit-preloader" *ngIf="isLoading"></preloader>
   </button>
 
-  <button class="form__switch-auth" (click)="switchToLogin()" type="button">У меня уже есть аккаунт</button>
+  <button class="form__switch-auth" (click)="switchToLogin()" type="button">{{ 'registration_form.have_account' | translate }}</button>
 
   <div class="form__delimiter">
-    <div class="form__delimiter-text">или</div>
+    <div class="form__delimiter-text">{{ 'registration_form.or' | translate }}</div>
   </div>
 
   <auth-social class="form__social" (authSuccess)="socialAuthSuccess()"></auth-social>

@@ -39,10 +39,10 @@
 
         <div class="post__footer">
           <div class="post__publish-date">
-            <span class="post__footer-title">Добавлено: </span><time>{{ post.publishedAt | date }}</time>
+            <span class="post__footer-title">{{ 'global.added' | translate }}: </span><time>{{ post.publishedAt | date }}</time>
           </div>
           <div class="post__category" *ngIf="post.category">
-            <span class="post__footer-title">Категория: </span> <a class="post__category-link" [routerLink]="['/', 'blog', post.category.slug]">{{ post.category.name }}</a>
+            <span class="post__footer-title">{{ 'global.category' | translate }}: </span> <a class="post__category-link" [langRouterLink]="['/', 'blog', post.category.slug]">{{ post.category.name }}</a>
           </div>
         </div>
       </ng-container>

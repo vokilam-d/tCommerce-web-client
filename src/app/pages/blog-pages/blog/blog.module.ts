@@ -9,6 +9,7 @@ import { FooterModule } from '../../../footer/footer.module';
 import { BlogToolbarModule } from '../../../blog-toolbar/blog-toolbar.module';
 import { BlogPostsListModule } from '../../../blog-posts-list/blog-posts-list.module';
 import { RecentlyViewedProductsModule } from '../../../recently-viewed-products/recently-viewed-products.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { RecentlyViewedProductsModule } from '../../../recently-viewed-products/
     FooterModule,
     BlogToolbarModule,
     BlogPostsListModule,
-    RecentlyViewedProductsModule
+    RecentlyViewedProductsModule,
+    TranslateModule.forChild()
   ]
 })
 export class BlogModule { }

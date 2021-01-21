@@ -20,6 +20,8 @@ import { LinkedCategoriesModule } from '../../linked-categories/linked-categorie
 import { AggregatedProductsComponent } from './aggregated-products/aggregated-products.component';
 import { AdditionalServicesComponent } from './additional-services/additional-services.component';
 import { ProductVariantsModule } from '../../product-variants/product-variants.module';
+import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent, AggregatedProductsComponent, AdditionalServicesComponent],
@@ -38,7 +40,9 @@ import { ProductVariantsModule } from '../../product-variants/product-variants.m
     ReviewModule,
     RecentlyViewedProductsModule,
     LinkedCategoriesModule,
-    ProductVariantsModule
+    ProductVariantsModule,
+    LangRouterLinkModule,
+    TranslateModule.forChild()
   ]
 })
 export class ProductModule { }

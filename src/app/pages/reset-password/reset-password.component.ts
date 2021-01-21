@@ -7,6 +7,7 @@ import { finalize } from 'rxjs/operators';
 import { ResetPasswordDto } from '../../shared/dtos/reset-password.dto';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeadService } from '../../services/head/head.service';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'reset-password',
@@ -25,8 +26,9 @@ export class ResetPasswordComponent implements OnInit {
               private route: ActivatedRoute,
               private headService: HeadService,
               private router: Router,
-              private customerService: CustomerService) {
-  }
+              private customerService: CustomerService,
+              private languageService: LanguageService
+  ) { }
 
   ngOnInit(): void {
     this.setMeta();
@@ -109,6 +111,8 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   private setMeta() {
-    this.headService.setMeta({ title: 'Восстановление пароля', description: 'Восстановление пароля' });
+    this.languageService.getTranslation('reset_password.password_recovery').subscribe(text => {
+      this.headService.setMeta({ title: text, description: text });
+    });
   }
 }

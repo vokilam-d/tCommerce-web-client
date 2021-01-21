@@ -6,6 +6,8 @@ import { OrderSuccessComponent } from './order-success.component';
 import { HeaderModule } from '../../header/header.module';
 import { FooterModule } from '../../footer/footer.module';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
+import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
     OrderSuccessRoutingModule,
     HeaderModule,
     FooterModule,
-    BreadcrumbsModule
+    BreadcrumbsModule,
+    LangRouterLinkModule,
+    TranslateModule.forChild()
   ]
 })
 export class OrderSuccessModule { }
