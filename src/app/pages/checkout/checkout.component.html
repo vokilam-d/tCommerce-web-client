@@ -39,7 +39,7 @@
     <preloader class="checkout__preloader" *ngIf="isOrderLoading"></preloader>
 
     <main class="checkout__form">
-      <div class="checkout__info-error" *ngIf="orderError as error">
+      <div class="checkout__info-error checkout-error" *ngIf="orderError as error">
         {{ error }}
       </div>
 
