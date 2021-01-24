@@ -6,9 +6,11 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
-  Input, OnInit,
-  Output,
-  ViewChild
+  Input,
+  OnInit,
+  Output, QueryList,
+  ViewChild,
+  ViewChildren
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EMPTY, fromEvent, Observable, Subscription } from 'rxjs';
@@ -31,6 +33,7 @@ import { SettlementDto } from '../shared/dtos/settlement.dto';
 import { WarehouseDto } from '../shared/dtos/warehouse.dto';
 import { ISelectOption } from './select-option.interface';
 import { LanguageService } from '../services/language/language.service';
+import { DeviceService } from '../services/device-detector/device.service';
 
 @Component({
   selector: 'select-autocomplete',
@@ -49,6 +52,7 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements OnInit
   searchError: string = null;
   isVisible: boolean = false;
   options: ISelectOption[] = [];
+  activeIndex: number = null;
   placeholder: string = '';
   private value: any;
   private inputSubscription: Subscription;
@@ -60,10 +64,12 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements OnInit
   @Output() select: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('input') inputRef: ElementRef<HTMLInputElement>;
+  @ViewChildren('options') optionsRef: QueryList<any>;
 
   constructor(private addressService: AddressService,
               private cdr: ChangeDetectorRef,
-              private languageService: LanguageService
+              private languageService: LanguageService,
+              private deviceService: DeviceService
   ) {
     super();
   }
@@ -76,6 +82,7 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements OnInit
     if (!this.type) {
       throw new Error('"type" is not provided!');
     }
+    this.handleHotkeys();
   }
 
   onChange = (_: any) => {};
@@ -124,7 +131,7 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements OnInit
         debounceTime(200),
         distinctUntilChanged(),
         map((event: InputEvent) => (event.target as HTMLInputElement).value.trim()),
-        startWith(''),
+        startWith(this.inputRef.nativeElement.value),
         tap(() => {
           this.isSearchInProgress = true;
           this.cdr.markForCheck();
@@ -141,6 +148,7 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements OnInit
       )
       .subscribe(
         response => {
+          this.activeIndex = null;
           this.options = this.transformResponse(response);
           this.searchError = null;
           this.isSearchInProgress = false;
@@ -174,6 +182,63 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements OnInit
   getPlaceholder(type: string) {
     this.languageService.getTranslation(`select_autocomplete.${type}`).subscribe(text => {
       this.placeholder = text;
+    });
+  }
+
+  private handleHotkeys() {
+    if (!this.deviceService.isPlatformBrowser()) { return; }
+
+    fromEvent(this.inputRef.nativeElement, 'keydown')
+      .pipe( takeUntil(this.ngUnsubscribe) )
+      .subscribe(
+        (event: KeyboardEvent) => {
+          switch (event.key) {
+            case 'Escape':
+              this.cdr.markForCheck();
+              this.toggleVisibility(false);
+              break;
+
+            case 'Enter':
+              const option = this.options[this.activeIndex];
+              this.selectOption(option);
+              break;
+
+            case 'ArrowDown':
+              event.preventDefault();
+              this.cdr.markForCheck();
+
+              if (this.activeIndex === this.options.length  - 1 || this.activeIndex === null) {
+                this.activeIndex = 0;
+              } else {
+                this.activeIndex += 1;
+              }
+
+              this.scrollToOption();
+              break;
+
+            case 'ArrowUp':
+              event.preventDefault();
+              this.cdr.markForCheck();
+
+              if (this.activeIndex === 0 || this.activeIndex === null) {
+                this.activeIndex = this.options.length  - 1;
+              } else {
+                this.activeIndex -= 1;
+              }
+
+              this.scrollToOption();
+              break;
+          }
+        }
+      );
+  }
+
+  private scrollToOption() {
+    this.optionsRef.find((option, index) => {
+      if (index === this.activeIndex) {
+        option.nativeElement.scrollIntoView({'block': 'nearest'});
+        return option;
+      }
     });
   }
 }
