@@ -1,4 +1,4 @@
-<div class="select autocomplete" (clickOutside)="toggleVisibility(false)">
+<div class="select" (clickOutside)="toggleVisibility(false)">
 
   <button class="form__select select__active"
           [class.field__select--active]="isVisible"
@@ -7,39 +7,38 @@
           type="button"
   >
     <span *ngIf="activeOptionLabel as label">{{ label }}</span>
-    <span *ngIf="!activeOptionLabel" class="autocomplete__empty-active">- {{ 'select_autocomplete.not_selected' | translate }} -</span>
+    <span *ngIf="!activeOptionLabel" class="select__empty-active">- {{ 'select_autocomplete.not_selected' | translate }} -</span>
 
     <i class="select__icon mbi mbi-chevron-down"></i>
   </button>
 
-  <div class="select__options autocomplete__options" [class.autocomplete__options--hidden]="!isVisible">
+  <input class="select__input form__input"
+         [class.select__options--hidden]="!isVisible"
+         [placeholder]="placeholder"
+         autofocus
+         autocomplete="nope"
+         #input
+  >
 
-    <div class="autocomplete__input-container">
-      <input class="autocomplete__input form__input"
-             [placeholder]="placeholder"
-             autofocus
-             autocomplete="nope"
-             #input
-      >
+  <div class="select__options" [class.select__options--hidden]="!isVisible">
+    <preloader class="select__preloader" *ngIf="isSearchInProgress"></preloader>
+
+    <div class="select__option"
+         *ngFor="let option of options; let indexOfOption=index"
+         [class.select__option--active]="option.isSelected || indexOfOption === activeIndex"
+         (click)="selectOption(option)"
+         #options
+    >
+
+      {{ option.view || option.data }}
     </div>
 
-    <div class="autocomplete__no-options"
+    <div class="select__no-options"
          *ngIf="!options.length && !isSearchInProgress"
          [ngSwitch]="!!input.value"
     >
       <ng-container *ngSwitchCase="true">{{ 'select_autocomplete.no_matches' | translate }}</ng-container>
       <ng-container *ngSwitchCase="false">{{ 'select_autocomplete.enter_search_query' | translate }}</ng-container>
-    </div>
-
-    <preloader class="autocomplete__preloader" *ngIf="isSearchInProgress"></preloader>
-
-    <div class="select__option autocomplete__option"
-         *ngFor="let option of options"
-         [class.select__option--active]="option.isSelected"
-         (click)="selectOption(option)"
-    >
-
-      {{ option.view || option.data }}
     </div>
   </div>
 </div>
