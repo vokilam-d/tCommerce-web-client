@@ -64,7 +64,7 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements OnInit
   @Output() select: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('input') inputRef: ElementRef<HTMLInputElement>;
-  @ViewChildren('options') optionsRef: QueryList<any>;
+  @ViewChildren('options') optionsRef: QueryList<ElementRef>;
 
   constructor(private addressService: AddressService,
               private cdr: ChangeDetectorRef,
@@ -234,10 +234,9 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements OnInit
   }
 
   private scrollToOption() {
-    this.optionsRef.find((option, index) => {
+    this.optionsRef.forEach((option, index) => {
       if (index === this.activeIndex) {
         option.nativeElement.scrollIntoView({'block': 'nearest'});
-        return option;
       }
     });
   }
