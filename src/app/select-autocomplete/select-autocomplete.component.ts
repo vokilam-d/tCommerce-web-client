@@ -194,8 +194,8 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements OnInit
         (event: KeyboardEvent) => {
           switch (event.key) {
             case 'Escape':
-              this.cdr.markForCheck();
               this.toggleVisibility(false);
+              this.cdr.markForCheck();
               break;
 
             case 'Enter':
@@ -205,7 +205,6 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements OnInit
 
             case 'ArrowDown':
               event.preventDefault();
-              this.cdr.markForCheck();
 
               if (this.activeIndex === this.options.length  - 1 || this.activeIndex === null) {
                 this.activeIndex = 0;
@@ -214,11 +213,11 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements OnInit
               }
 
               this.scrollToOption();
+              this.cdr.markForCheck();
               break;
 
             case 'ArrowUp':
               event.preventDefault();
-              this.cdr.markForCheck();
 
               if (this.activeIndex === 0 || this.activeIndex === null) {
                 this.activeIndex = this.options.length  - 1;
@@ -227,6 +226,7 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements OnInit
               }
 
               this.scrollToOption();
+              this.cdr.markForCheck();
               break;
           }
         }
