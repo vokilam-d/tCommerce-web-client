@@ -98,15 +98,15 @@
     </label>
   </div>
 
-  <div class="form__control-container" *ngIf="addressForm.get('settlement') as settlementControl">
+  <div class="form__control-container" *ngIf="addressForm.get('settlementFull') as settlementFullControl">
     <label class="form__label">{{ 'address_form.settlement' | translate }}</label>
     <div class="form__control">
       <select-autocomplete type="settlement"
-                           [activeOptionLabel]="settlementControl.value"
+                           [activeOptionLabel]="settlementFullControl.value"
                            (select)="onSettlementSelect($event)"
       ></select-autocomplete>
 
-      <div class="form__input-error" *ngIf="isControlInvalid(settlementControl)">
+      <div class="form__input-error" *ngIf="isControlInvalid(settlementFullControl)">
         {{ 'address_form.required_field' | translate }}
       </div>
     </div>
@@ -117,19 +117,19 @@
     <ng-container *ngSwitchCase="addressTypeEnum.WAREHOUSE">
 
       <div class="form__control-container"
-           *ngIf="addressForm.get('address') as addressControl"
-           [class.field--invalid]="isControlInvalid(addressControl)"
+           *ngIf="addressForm.get('addressFull') as addressFullControl"
+           [class.field--invalid]="isControlInvalid(addressFullControl)"
       >
         <label class="form__label">{{ 'address_form.warehouse' | translate }}</label>
         <div class="form__control">
           <select-autocomplete type="warehouse"
                                [settlementId]="settlementIdControl.value"
                                [isDisabled]="!settlementIdControl.value"
-                               [activeOptionLabel]="addressControl.value"
+                               [activeOptionLabel]="addressFullControl.value"
                                (select)="onWarehouseSelect($event)"
           ></select-autocomplete>
 
-          <div class="form__input-error" *ngIf="isControlInvalid(addressControl)">
+          <div class="form__input-error" *ngIf="isControlInvalid(addressFullControl)">
             {{ 'address_form.required_field' | translate }}
           </div>
         </div>
@@ -140,19 +140,19 @@
     <ng-container *ngSwitchCase="addressTypeEnum.DOORS">
 
       <div class="form__control-container"
-           *ngIf="addressForm.get('address') as addressControl"
-           [class.field--invalid]="isControlInvalid(addressControl)"
+           *ngIf="addressForm.get('addressFull') as addressFullControl"
+           [class.field--invalid]="isControlInvalid(addressFullControl)"
       >
         <label class="form__label">{{ 'address_form.street' | translate }}</label>
         <div class="form__control">
           <select-autocomplete type="street"
                                [settlementId]="settlementIdControl.value"
                                [isDisabled]="!settlementIdControl.value"
-                               [activeOptionLabel]="addressControl.value"
+                               [activeOptionLabel]="addressFullControl.value"
                                (select)="onStreetSelect($event)"
           ></select-autocomplete>
 
-          <div class="form__input-error" *ngIf="isControlInvalid(addressControl)">
+          <div class="form__input-error" *ngIf="isControlInvalid(addressFullControl)">
             {{ 'address_form.required_field' | translate }}
           </div>
         </div>

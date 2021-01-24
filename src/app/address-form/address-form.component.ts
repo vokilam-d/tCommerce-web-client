@@ -29,7 +29,6 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
   shipmentPayerEnum = ShipmentPayerEnum;
 
   get settlementIdControl() {
-    const settlementIdProp: keyof ShipmentAddressDto = 'settlementId';
     return this.addressForm.get(settlementIdProp);
   }
 
@@ -67,8 +66,10 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
       phone: [address.phone || DEFAULT_PHONE_NUMBER_VALUE, CustomValidators.phoneNumber],
       addressType: [address.addressType, Validators.required],
       settlement: [address.settlement, Validators.required],
+      settlementFull: [address.settlement, Validators.required],
       settlementId: [address.settlementId, Validators.required],
       address: [address.address, Validators.required],
+      addressFull: [address.address, Validators.required],
       addressId: [address.addressId, Validators.required],
       buildingNumber: address.buildingNumber,
       flat: address.flat
@@ -102,9 +103,6 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
     let isValid: boolean = true;
 
     if (this.addressForm.valid) {
-      const addressTypeProp: keyof ShipmentAddressDto = 'addressType';
-      const buildingProp: keyof ShipmentAddressDto = 'buildingNumber';
-
       if (this.addressForm.get(addressTypeProp).value === AddressTypeEnum.DOORS && !this.addressForm.get(buildingProp).value) {
         isValid = false;
       }
@@ -125,31 +123,24 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
   }
 
   onSettlementSelect(settlement: SettlementDto) {
-    const settlementIdProp: keyof ShipmentAddressDto = 'settlementId';
-    const settlementProp: keyof ShipmentAddressDto = 'settlement';
-
     this.addressForm.get(settlementIdProp).setValue(settlement.id);
-    this.addressForm.get(settlementProp).setValue(settlement.fullName);
+    this.addressForm.get(settlementProp).setValue(settlement.nameWithType);
+    this.addressForm.get(settlementFullProp).setValue(settlement.fullName);
   }
 
   onWarehouseSelect(warehouse: WarehouseDto) {
-    const addressIdProp: keyof ShipmentAddressDto = 'addressId';
-    const addressProp: keyof ShipmentAddressDto = 'address';
-
     this.addressForm.get(addressIdProp).setValue(warehouse.id);
-    this.addressForm.get(addressProp).setValue(warehouse.description);
+    this.addressForm.get(addressProp).setValue(warehouse.name);
+    this.addressForm.get(addressFullProp).setValue(warehouse.description);
   }
 
   onStreetSelect(street: StreetDto) {
-    const addressIdProp: keyof ShipmentAddressDto = 'addressId';
-    const addressProp: keyof ShipmentAddressDto = 'address';
-
     this.addressForm.get(addressIdProp).setValue(street.id);
     this.addressForm.get(addressProp).setValue(street.name);
+    this.addressForm.get(addressFullProp).setValue(street.name);
   }
 
   isOptionalControlInvalid(prop: keyof ShipmentAddressDto) {
-    const addressTypeProp: keyof ShipmentAddressDto = 'addressType';
     const addressType: AddressTypeEnum = this.addressForm.get(addressTypeProp).value;
     const control = this.addressForm.get(prop);
 
@@ -160,13 +151,6 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
   }
 
   private handleAutoResetFields() {
-    const addressTypeProp: keyof ShipmentAddressDto = 'addressType';
-    const addressIdProp: keyof ShipmentAddressDto = 'addressId';
-    const addressProp: keyof ShipmentAddressDto = 'address';
-    const settlementProp: keyof ShipmentAddressDto = 'settlement';
-    const buildingProp: keyof ShipmentAddressDto = 'buildingNumber';
-    const flantProp: keyof ShipmentAddressDto = 'flat';
-
     merge(
       this.addressForm.get(addressTypeProp).valueChanges,
       this.addressForm.get(settlementProp).valueChanges
@@ -175,6 +159,7 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
       .subscribe(() => {
         this.addressForm.get(addressIdProp).reset('', { emitEvent: false });
         this.addressForm.get(addressProp).reset('', { emitEvent: false });
+        this.addressForm.get(addressFullProp).reset('', { emitEvent: false });
       });
 
     this.addressForm.get(addressTypeProp).valueChanges
@@ -182,8 +167,18 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
       .subscribe((addressType: AddressTypeEnum) => {
         if (addressType === AddressTypeEnum.WAREHOUSE) {
           this.addressForm.get(buildingProp).reset('', { emitEvent: false });
-          this.addressForm.get(flantProp).reset('', { emitEvent: false });
+          this.addressForm.get(flatProp).reset('', { emitEvent: false });
         }
       });
   }
 }
+
+const addressTypeProp: keyof ShipmentAddressDto = 'addressType';
+const addressIdProp: keyof ShipmentAddressDto = 'addressId';
+const addressProp: keyof ShipmentAddressDto = 'address';
+const addressFullProp: keyof ShipmentAddressDto = 'addressFull';
+const settlementIdProp: keyof ShipmentAddressDto = 'settlementId';
+const settlementProp: keyof ShipmentAddressDto = 'settlement';
+const settlementFullProp: keyof ShipmentAddressDto = 'settlementFull';
+const buildingProp: keyof ShipmentAddressDto = 'buildingNumber';
+const flatProp: keyof ShipmentAddressDto = 'flat';
