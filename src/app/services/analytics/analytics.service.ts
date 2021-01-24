@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { OrderDto } from '../../shared/dtos/order.dto';
+import { Language } from '../../shared/enums/language.enum';
 
 declare const gtag: any;
 declare const fbq: any;
@@ -58,6 +59,10 @@ export class AnalyticsService {
       contents,
       content_type: 'product'
     });
+  }
+
+  changeLang(langCode: Language) {
+    this.trackEvent('Change lang', langCode, '');
   }
 
   private trackEvent(category: string, action: string, label: string, value?: number) {

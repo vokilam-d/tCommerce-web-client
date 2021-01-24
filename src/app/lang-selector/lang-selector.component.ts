@@ -5,6 +5,7 @@ import { UrlService } from '../services/url/url.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
 import { takeUntil } from 'rxjs/operators';
+import { AnalyticsService } from '../services/analytics/analytics.service';
 
 @Component({
   selector: 'lang-selector',
@@ -24,7 +25,8 @@ export class LangSelectorComponent extends NgUnsubscribe implements OnInit {
   constructor(
     private languageService: LanguageService,
     private urlService: UrlService,
-    private router: Router
+    private router: Router,
+    private analyticsService: AnalyticsService
   ) {
     super();
   }
@@ -53,5 +55,9 @@ export class LangSelectorComponent extends NgUnsubscribe implements OnInit {
         label: 'UA'
       }
     ];
+  }
+
+  changeLang(langCode: Language): void {
+    this.analyticsService.changeLang(langCode);
   }
 }

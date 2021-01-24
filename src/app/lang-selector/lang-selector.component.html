@@ -4,6 +4,7 @@
        *ngIf="lang.code !== activeLanguageCode; else activeLangTmpl"
        [class.languages__link--big]="size === 'big'"
        [href]="lang.link"
+       (click)="changeLang(lang.code)"
     >
       {{ lang.label }}
     </a>
