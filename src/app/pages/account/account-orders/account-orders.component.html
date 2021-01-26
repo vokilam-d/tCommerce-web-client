@@ -123,7 +123,7 @@
     </div>
 
     <div class="order__info order__discount" *ngIf="order.prices.discountValue as discountValue">
-      {{ 'global.discount' | translate }} ({{ order.prices.discountLabel }}, {{ order.prices.discountPercent }}%): {{ discountValue }} {{ 'global.uah' | translate }}
+      {{ 'global.discount' | translate }}: {{ discountValue }} {{ 'global.uah' | translate }}
     </div>
   </div>
 

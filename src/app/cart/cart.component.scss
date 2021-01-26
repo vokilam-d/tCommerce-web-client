@@ -98,18 +98,6 @@
     }
   }
 
-  &__discount-description {
-    margin: 3px 0 0;
-    font-size: 13px;
-    color: rgba($dark, 0.6);
-
-    @include respond-to($media_large) {
-      margin-top: 0;
-      display: inline;
-      font-size: inherit;
-    }
-  }
-
   &__btn {
     display: block;
     width: 100%;
