@@ -60,7 +60,7 @@
         {{ 'global.shipment_address' | translate }}:
       </div>
       <div class="order__info-value">
-        {{ order.shipment.recipient.settlement }}, {{ order.shipment.recipient.address }}
+        {{ order.shipment.recipient.settlementFull || order.shipment.recipient.settlement }}, {{ order.shipment.recipient.addressFull || order.shipment.recipient.address }}
         <span *ngIf="order.shipment.recipient.buildingNumber as buildingNumber">, {{ buildingNumber }}</span>&nbsp;
         <span *ngIf="order.shipment.recipient.flat as flat">, {{ flat }}</span>
       </div>
