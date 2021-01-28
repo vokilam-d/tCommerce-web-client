@@ -48,12 +48,37 @@ registerLocaleData(localeRu);
     AnnouncementModule
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'ru' },
-    { provide: HTTP_INTERCEPTORS, useClass: CommonRequestInterceptor, multi: true },
-    { provide: APP_INITIALIZER, useFactory: routesResolver, deps: [HttpClient, Router, Injector, TransferState, PLATFORM_ID], multi: true },
-    { provide: ErrorHandler, useValue: Sentry.createErrorHandler({ showDialog: true, }) },
-    { provide: Sentry.TraceService, deps: [Router] },
-    { provide: APP_INITIALIZER, useFactory: () => () => {}, deps: [Sentry.TraceService], multi: true }
+    {
+      provide: LOCALE_ID,
+      useValue: 'ru'
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CommonRequestInterceptor,
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: routesResolver,
+      deps: [HttpClient, Router, Injector, TransferState, PLATFORM_ID],
+      multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler({
+        showDialog: false
+      })
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router]
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => () => {},
+      deps: [Sentry.TraceService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
