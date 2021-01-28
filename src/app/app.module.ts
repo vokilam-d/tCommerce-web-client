@@ -1,5 +1,5 @@
 import { BrowserModule, BrowserTransferStateModule, TransferState } from '@angular/platform-browser';
-import { APP_INITIALIZER, Injector, LOCALE_ID, NgModule, PLATFORM_ID } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, Injector, LOCALE_ID, NgModule, PLATFORM_ID } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +18,7 @@ import { AnnouncementModule } from './announcement/announcement.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { languageLoaderBrowserFactory } from './services/language/language-loader.browser';
 import { DEFAULT_LANG } from './shared/constants';
+import * as Sentry from "@sentry/angular";
 
 registerLocaleData(localeRu);
 
@@ -47,9 +48,37 @@ registerLocaleData(localeRu);
     AnnouncementModule
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'ru' },
-    { provide: HTTP_INTERCEPTORS, useClass: CommonRequestInterceptor, multi: true },
-    { provide: APP_INITIALIZER, useFactory: routesResolver, deps: [HttpClient, Router, Injector, TransferState, PLATFORM_ID], multi: true }
+    {
+      provide: LOCALE_ID,
+      useValue: 'ru'
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CommonRequestInterceptor,
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: routesResolver,
+      deps: [HttpClient, Router, Injector, TransferState, PLATFORM_ID],
+      multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler({
+        showDialog: false
+      })
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router]
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => () => {},
+      deps: [Sentry.TraceService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

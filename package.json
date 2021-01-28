@@ -26,6 +26,8 @@
     "@nguniversal/express-engine": "^11.0.1",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
+    "@sentry/angular": "^6.0.2",
+    "@sentry/tracing": "^6.0.2",
     "axios": "^0.21.1",
     "express": "^4.15.2",
     "ngx-mask": "^10.0.4",
