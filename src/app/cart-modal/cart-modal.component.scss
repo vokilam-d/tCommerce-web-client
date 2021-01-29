@@ -1,6 +1,12 @@
 @import "variables";
 @import "mixins";
 
-.modal {
+.cart-modal {
   max-width: 900px;
+
+  &__content {
+    @include respond-to($media_large) {
+      padding-bottom: 0;
+    }
+  }
 }

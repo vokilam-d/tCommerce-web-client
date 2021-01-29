@@ -22,7 +22,7 @@
   &__info {
     @include respond-to($media_large) {
       position: sticky;
-      bottom: -50px;
+      bottom: 0;
       z-index: 5;
       margin-top: 15px;
       padding: 20px;

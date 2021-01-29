@@ -1,6 +1,6 @@
 <div class="modal-overlay" *ngIf="isModalVisible" (click)="closeModal()"></div>
 
-<div class="modal" *ngIf="isModalVisible">
+<div class="modal cart-modal" *ngIf="isModalVisible">
   <div class="modal__header">
     <div class="modal__title">
       {{ 'global.cart' | translate }}
@@ -11,7 +11,7 @@
     </button>
   </div>
 
-  <div class="modal__content">
+  <div class="modal__content cart-modal__content">
     <cart [isCrossSellVisible]="isCrossSellVisible" (continueShopping)="closeModal()"></cart>
   </div>
 </div>
