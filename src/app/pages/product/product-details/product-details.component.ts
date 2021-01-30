@@ -27,13 +27,14 @@ export class ProductDetailsComponent implements OnInit {
   @ViewChild(AddReviewComponent) addReviewCmp: AddReviewComponent;
   @ViewChild('reviewsRef') reviewsRef: ElementRef;
 
-  constructor(private http: HttpClient,
-              private deviceService: DeviceService,
-              private scrollToService: ScrollToService,
-              private jsonLdService: JsonLdService,
-              private productReviewService: ProductReviewService,
-              private notyService: NotyService,
-              private languageService: LanguageService
+  constructor(
+    private http: HttpClient,
+    private deviceService: DeviceService,
+    private scrollToService: ScrollToService,
+    private jsonLdService: JsonLdService,
+    private productReviewService: ProductReviewService,
+    private notyService: NotyService,
+    private languageService: LanguageService
   ) { }
 
   ngOnInit(): void {
@@ -99,6 +100,7 @@ export class ProductDetailsComponent implements OnInit {
     reviewDto.email = formValue.email;
     reviewDto.medias = formValue.medias;
     reviewDto.rating = formValue.rating;
+    reviewDto.source = formValue.source;
 
     reviewDto.productId = this.product.productId;
     reviewDto.productVariantId = this.product.variantId;
@@ -121,13 +123,6 @@ export class ProductDetailsComponent implements OnInit {
   scrollToReviews() {
     const offset = this.deviceService.isMobile() ? -20 : -200;
     this.scrollToService.scrollTo({ target: this.reviewsRef, offset });
-  }
-
-  scrollToReviewsAndSetFocus() {
-    if (!this.deviceService.isPlatformBrowser()) { return; }
-
-    this.scrollToReviews();
-    setTimeout(() => this.addReviewCmp.focusTextInput(), 450);
   }
 
   private setJsonLd() {

@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -14,6 +15,10 @@ import { CustomerService } from '../services/customer/customer.service';
 import { HttpClient } from '@angular/common/http';
 import { INPUT_MEDIA_ACCEPT_TYPES, UPLOADED_HOST } from '../shared/constants';
 import { MediaDto } from '../shared/dtos/media.dto';
+import { UrlService } from '../services/url/url.service';
+import { ActivatedRoute } from '@angular/router';
+import { DeviceService } from '../services/device-detector/device.service';
+import { ScrollToService } from '../services/scroll-to/scroll-to.service';
 
 enum EAddReviewFormControl {
   Name = 'name',
@@ -28,6 +33,7 @@ export interface IAddReviewFormValue {
   email: string;
   rating: number;
   medias: MediaDto[];
+  source: any;
 }
 
 @Component({
@@ -35,7 +41,7 @@ export interface IAddReviewFormValue {
   templateUrl: './add-review.component.html',
   styleUrls: ['./add-review.component.scss']
 })
-export class AddReviewComponent implements OnInit, OnDestroy {
+export class AddReviewComponent implements OnInit, AfterViewInit, OnDestroy {
 
   uploadedHost = UPLOADED_HOST;
   isModalVisible: boolean = false;
@@ -55,7 +61,10 @@ export class AddReviewComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private renderer: Renderer2,
     private http: HttpClient,
-    private customerService: CustomerService
+    private scrollToService: ScrollToService,
+    private customerService: CustomerService,
+    private route: ActivatedRoute,
+    private deviceService: DeviceService
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +73,12 @@ export class AddReviewComponent implements OnInit, OnDestroy {
     }
 
     this.buildForm();
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.handleLeaveReviewQueryParam();
+    }, 100);
   }
 
   ngOnDestroy(): void {
@@ -99,10 +114,12 @@ export class AddReviewComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     const formValue = this.form.value;
+    const fromParam = this.route.snapshot.queryParamMap.get('from');
 
     this.addReview.emit({
       ...formValue,
-      medias: this.medias
+      medias: this.medias,
+      source: fromParam
     });
   }
 
@@ -133,7 +150,14 @@ export class AddReviewComponent implements OnInit, OnDestroy {
     this.medias.splice(idx, 1);
   }
 
-  focusTextInput() {
+  private handleLeaveReviewQueryParam() {
+    if (!this.deviceService.isPlatformBrowser()) { return; }
+
+    const param = this.route.snapshot.queryParamMap.get('leave-review');
+    if (!param) { return; }
+
+    const offset = this.deviceService.isMobile() ? -20 : -200;
+    this.scrollToService.scrollTo({ target: this.reviewTextareaRef, offset });
     this.reviewTextareaRef.nativeElement.focus();
   }
 }

@@ -6,6 +6,7 @@ export class AddStoreReviewDto {
   rating: number;
   text: string;
   medias: MediaDto[];
+  source: any;
 }
 
 export class StoreReviewDto extends AddStoreReviewDto {

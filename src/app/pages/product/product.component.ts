@@ -35,7 +35,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
   categories: LinkedCategoryDto[] = [];
   isLoading: boolean = false;
   discountValue: number;
-  needToShowReviewForm: boolean = null;
   needToShowReviews: boolean = false;
   isClosed: boolean;
   quickReview: number;
@@ -60,7 +59,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     logDebug(`[ProductComponent] "${this.route.snapshot.data.slug}" ngOnInit`);
-    this.needToShowReviewForm = JSON.parse(this.route.snapshot.queryParamMap.get('leave-review'));
     this.needToShowReviews = this.route.snapshot.fragment === 'reviews';
     this.fetchProduct();
     this.setSavedTooltipState();
@@ -68,7 +66,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.handleReviewFromEmail();
       this.handleUrlReviewsFragment();
     }, 100);
   }
@@ -86,7 +83,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.setDiscountValue();
         this.setBreadcrumbs();
         this.setMeta();
-        this.handleReviewFromEmail();
         this.handleUrlReviewsFragment();
         this.handleRecentlyViewedProducts();
         this.handleProductView();
@@ -176,13 +172,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   private setDiscountValue() {
     this.discountValue = Math.ceil((this.product.oldPrice - this.product.price) / this.product.oldPrice * 100);
-  }
-
-  private handleReviewFromEmail() {
-    if (!this.needToShowReviewForm || !this.detailsCmp) { return; }
-    this.needToShowReviewForm = null;
-
-    this.detailsCmp.scrollToReviewsAndSetFocus();
   }
 
   private handleUrlReviewsFragment() {

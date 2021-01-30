@@ -25,6 +25,7 @@ export class AddProductReviewDto {
   rating: number;
   text: string;
   medias: MediaDto[];
+  source: any;
 }
 
 export class ProductReviewDto extends AddProductReviewDto {

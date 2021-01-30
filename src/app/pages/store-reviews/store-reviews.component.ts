@@ -106,6 +106,7 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
     reviewDto.email = formValue.email;
     reviewDto.medias = formValue.medias;
     reviewDto.rating = formValue.rating;
+    reviewDto.source = formValue.source;
 
     this.storeReviewService.addReview(reviewDto)
       .subscribe(
