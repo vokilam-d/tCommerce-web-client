@@ -108,6 +108,7 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
     if (this.isLoading) { this.fetchSub.unsubscribe(); }
+    this.error = null;
     this.fetchSub = this.productService.fetchProductsByFilters(spf)
       .subscribe(
         response => {
