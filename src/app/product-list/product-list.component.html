@@ -44,15 +44,23 @@
 
     <main class="product-list__content">
       <ol class="product-list__items" #itemsRef>
-        <li class="product-list__item" *ngFor="let item of items" #itemRef>
-          <product-list-item [item]="item" [parentNameForAnalytics]="parentNameForAnalytics"></product-list-item>
-        </li>
-
         <li class="product-list__preloader-container"
             *ngIf="isLoading"
             [class.product-list__preloader-container--overlay]="items"
         >
           <preloader class="product-list__preloader"></preloader>
+        </li>
+
+        <li class="product-list__no-items" *ngIf="items?.length === 0">
+          {{ 'product_list.no_items_found' | translate }}
+        </li>
+
+        <li class="product-list__error" *ngIf="error as error">
+          {{ error }}
+        </li>
+
+        <li class="product-list__item" *ngFor="let item of items" #itemRef>
+          <product-list-item [item]="item" [parentNameForAnalytics]="parentNameForAnalytics"></product-list-item>
         </li>
 
         <ng-container *ngIf="!items && !error">
@@ -64,14 +72,6 @@
             <div class="placeholder__item placeholder__btn"></div>
           </li>
         </ng-container>
-
-        <li class="product-list__no-items" *ngIf="items?.length === 0">
-          {{ 'product_list.no_items_found' | translate }}
-        </li>
-
-        <li class="product-list__error" *ngIf="error as error">
-          {{ error }}
-        </li>
       </ol>
 
       <pagination class="product-list__pagination"
