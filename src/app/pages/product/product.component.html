@@ -77,6 +77,10 @@
       <div class="product__gallery">
         <product-gallery [medias]="product.medias"></product-gallery>
 
+        <span class="product__label" [ngClass]="getLabelClass()" *ngIf="product.label">
+          {{ product.label }}
+        </span>
+
         <span class="product__sale-label" *ngIf="product.oldPrice">
           -{{ discountValue }}%
         </span>

@@ -45,6 +45,7 @@ export class ProductDto {
   relatedProducts: LinkedProductDto[];
   isDiscountApplicable: boolean;
   additionalServiceIds: number[];
+  label: string;
 
   safeFullDescription: SafeHtml;
 }

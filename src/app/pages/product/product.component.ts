@@ -18,6 +18,7 @@ import { AnalyticsService } from '../../services/analytics/analytics.service';
 import { AdditionalServicesComponent } from './additional-services/additional-services.component';
 import { onWindowLoad } from '../../shared/helpers/on-window-load.function';
 import { logDebug } from '../../shared/helpers/debug.function';
+import { ProductLabelTypeEnum } from '../../shared/enums/product-label-type.enum';
 
 @Component({
   selector: 'product',
@@ -195,6 +196,15 @@ export class ProductComponent implements OnInit, AfterViewInit {
     onWindowLoad(this, () => {
       this.productService.incrementViewsCount(this.product.id).subscribe();
     });
+  }
+
+  public getLabelClass() {
+    switch (this.product.label) {
+      case ProductLabelTypeEnum.New:
+        return 'product__label--new';
+      case ProductLabelTypeEnum.Top:
+        return 'product__label--top';
+    }
   }
 }
 
