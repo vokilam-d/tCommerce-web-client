@@ -1,4 +1,5 @@
 import { ProductVariantGroupDto } from './product-variant.dto';
+import { ProductLabelTypeEnum } from '../enums/product-label-type.enum';
 
 export class ProductListItemDto {
   id: string;
@@ -6,6 +7,10 @@ export class ProductListItemDto {
   variantId: string;
   name: string;
   mediaUrl: string;
+  label: {
+    type: ProductLabelTypeEnum,
+    text: string
+  }
   mediaHoverUrl: string;
   mediaAltText: string;
   price: number;

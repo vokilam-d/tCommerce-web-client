@@ -6,6 +6,7 @@ import { SafeHtml } from '@angular/platform-browser';
 import { LinkedProductDto } from './linked-product.dto';
 import { ResponseDto } from './response.dto';
 import { LinkedCategoryDto } from './linked-category.dto';
+import { ProductLabelTypeEnum } from '../enums/product-label-type.enum';
 
 export class ProductCharacteristic {
   label: string;
@@ -45,6 +46,10 @@ export class ProductDto {
   relatedProducts: LinkedProductDto[];
   isDiscountApplicable: boolean;
   additionalServiceIds: number[];
+  label: {
+    type: ProductLabelTypeEnum,
+    text: string
+  }
 
   safeFullDescription: SafeHtml;
 }

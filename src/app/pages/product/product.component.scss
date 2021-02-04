@@ -79,6 +79,30 @@ $arrowSize: 10px;
     }
   }
 
+  &__label {
+    position: absolute;
+    top: 3px;
+    left: 16px;
+    padding: 8px 17px 6px;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    &--new {
+      background: saturate($green, 5%);
+    }
+
+    &--top {
+      background: saturate($purple, 5%);
+    }
+
+    &--few-medias {
+      left: 71px;
+    }
+  }
+
   &__sale-label {
     position: absolute;
     top: 3px;
