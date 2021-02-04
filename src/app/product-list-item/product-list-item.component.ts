@@ -25,7 +25,6 @@ export class ProductListItemComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
-    console.log(this.item.label);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
