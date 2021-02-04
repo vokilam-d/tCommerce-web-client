@@ -199,7 +199,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   public getLabelClass() {
-    switch (this.product.label) {
+    switch (this.product.label.type) {
       case ProductLabelTypeEnum.New:
         return 'product__label--new';
       case ProductLabelTypeEnum.Top:

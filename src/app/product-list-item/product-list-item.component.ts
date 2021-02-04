@@ -4,6 +4,7 @@ import { finalize } from 'rxjs/operators';
 import { CustomerService } from '../services/customer/customer.service';
 import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../shared/constants';
 import { AnalyticsService } from '../services/analytics/analytics.service';
+import { ProductLabelTypeEnum } from '../shared/enums/product-label-type.enum';
 
 @Component({
   selector: 'product-list-item',
@@ -24,6 +25,7 @@ export class ProductListItemComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
+    console.log(this.item.label);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -58,6 +60,15 @@ export class ProductListItemComponent implements OnInit, OnChanges {
       return '/assets/images/no-img.jpg';
     } else {
       return this.uploadedHost + this.item.mediaUrl;
+    }
+  }
+
+  public getLabelClass() {
+    switch (this.item.label.type) {
+      case ProductLabelTypeEnum.New:
+        return 'item__label--new';
+      case ProductLabelTypeEnum.Top:
+        return 'item__label--top';
     }
   }
 

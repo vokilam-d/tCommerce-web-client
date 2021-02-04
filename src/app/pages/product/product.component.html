@@ -77,8 +77,8 @@
       <div class="product__gallery">
         <product-gallery [medias]="product.medias"></product-gallery>
 
-        <span class="product__label" [ngClass]="getLabelClass()" *ngIf="product.label">
-          {{ product.label }}
+        <span class="product__label" [class.product__label--few-medias]="product.medias.length > 1" [ngClass]="getLabelClass()" *ngIf="product.label">
+          {{ product.label.text }}
         </span>
 
         <span class="product__sale-label" *ngIf="product.oldPrice">
