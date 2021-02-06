@@ -50,7 +50,7 @@ async function handleUpdatePages(req: express.Request) {
 
 function handleResponse(req: express.Request, res: express.Response) {
   logDebug(`[handleResponse] "${req.url}" Start`);
-  const targetUrl = req.url.slice(1); // slice preceding slash "/"
+  const targetUrl = decodeURIComponent(req.url.slice(1)); // slice preceding slash "/"
   const foundPage = pages.find(page => page.slug === targetUrl);
 
   if (foundPage?.redirectSlug) {
