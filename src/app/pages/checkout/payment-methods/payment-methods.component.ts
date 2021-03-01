@@ -48,6 +48,7 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
         response => {
           this.error = null;
           this.methods = response.data;
+          this.setMethodIcon();
           this.buildForm();
         },
         error => {
@@ -66,6 +67,21 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
       });
 
     this.handleMethodsState();
+  }
+
+  private setMethodIcon() {
+    this.methods.forEach(method => {
+      switch (method.paymentType) {
+        case PaymentTypeEnum.CASH_ON_DELIVERY:
+          method.icon = '/assets/images/nova_poshta_icon.jpg';
+          break;
+        case PaymentTypeEnum.ONLINE_PAYMENT:
+          method.icon = '/assets/images/wayforpay_icon.png';
+          break;
+        case PaymentTypeEnum.PAY_TO_CARD:
+          method.icon = '/assets/images/credit_card_icon.svg';
+      }
+    });
   }
 
   private handleMethodsState() { // todo wow so ugly, much refactor

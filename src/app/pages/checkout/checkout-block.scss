@@ -27,6 +27,11 @@
     width: 80%;
   }
 
+  &__method-icon {
+    max-width: 56px;
+    max-height: 35px;
+  }
+
   &__tooltip {
     width: 100%;
     margin: 6px 0 0;
@@ -35,4 +40,9 @@
     border-radius: 2px;
     color: #d0d0d0;
   }
+}
+
+.icon-container {
+  width: 56px;
+  margin-right: 10px;
 }

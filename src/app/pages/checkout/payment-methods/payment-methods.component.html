@@ -31,6 +31,10 @@
          }"
       ></div>
 
+      <div class="icon-container">
+        <img class="checkout-block__method-icon" src="{{ method.icon }}" alt="logo">
+      </div>
+
       <div class="checkout-block__method">{{ method.name }}</div>
 
       <div class="checkout-block__tooltip" *ngIf="method.disabledState">

@@ -5,6 +5,7 @@ export class PaymentMethodDto {
   name: string;
   price: number;
   paymentType: PaymentTypeEnum;
+  icon?: string;
 
   // custom transforms
   disabledState: null | true;
