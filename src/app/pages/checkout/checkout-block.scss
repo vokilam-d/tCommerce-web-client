@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 .checkout-block {
   &__title {
@@ -20,16 +21,31 @@
 
   &__tooltip-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.method {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__icon-container {
+    width: 56px;
+    margin-right: 10px;
   }
 
-  &__method {
-    width: 80%;
-  }
-
-  &__method-icon {
-    max-width: 56px;
+  &__icon {
     max-height: 35px;
+  }
+
+  &__text {
+    width: 80%;
+
+    @include respond-to($media_medium) {
+      width: 100%;
+    }
   }
 
   &__tooltip {
@@ -40,9 +56,4 @@
     border-radius: 2px;
     color: #d0d0d0;
   }
-}
-
-.icon-container {
-  width: 56px;
-  margin-right: 10px;
 }
