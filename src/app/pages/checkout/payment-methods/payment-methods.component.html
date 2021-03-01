@@ -16,28 +16,30 @@
            *ngFor="let method of methods"
            [class.form__control--disabled]="method.disabledState"
     >
-      <input class="form__radio-input"
-             [value]="method"
-             [formControl]="methodControl"
-             [attr.disabled]="method.disabledState"
-             name="payment-method"
-             type="radio"
-      >
+      <div class="checkout-block__method method">
+        <input class="form__radio-input"
+               [value]="method"
+               [formControl]="methodControl"
+               [attr.disabled]="method.disabledState"
+               name="payment-method"
+               type="radio"
+        >
 
-      <div class="form__radio-icon"
-         [ngClass]="{
+        <div class="form__radio-icon"
+             [ngClass]="{
            'form__radio-icon--checked form__radio-icon--checked:before': methodControl.value === method,
            'form__radio-icon--unchecked': methodControl.value !== method
          }"
-      ></div>
+        ></div>
 
-      <div class="icon-container">
-        <img class="checkout-block__method-icon" src="{{ method.icon }}" alt="logo">
+        <div class="method__icon-container">
+          <img class="method__icon" src="{{ method.icon }}" alt="logo">
+        </div>
+
+        <div class="method__text">{{ method.name }}</div>
       </div>
 
-      <div class="checkout-block__method">{{ method.name }}</div>
-
-      <div class="checkout-block__tooltip" *ngIf="method.disabledState">
+      <div class="method__tooltip" *ngIf="method.disabledState">
         <ng-container *ngFor="let reason of method.disabledReasons">
           {{ reason }}<br>
         </ng-container>
