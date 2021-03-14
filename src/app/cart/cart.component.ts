@@ -52,7 +52,7 @@ export class CartComponent implements OnInit {
   deleteFromCart(item: OrderItemDto) {
     this.customerService.deleteFromCart(item);
     this.resetCartError();
-    this.analyticsService.removeFromCart(item.name, item.price);
+    this.analyticsService.removeFromCart(item.sku, item.name, item.price, item.qty);
   }
 
   checkout() {

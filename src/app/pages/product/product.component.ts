@@ -87,6 +87,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.handleUrlReviewsFragment();
         this.handleRecentlyViewedProducts();
         this.handleProductView();
+        this.analyticsService.trackViewContent(this.product);
         logDebug(`[ProductComponent] "${slug}" fetchProduct response subscribe end`);
       },
       error => this.fetchError = error.error?.message || DEFAULT_ERROR_TEXT
@@ -164,7 +165,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         }
       );
 
-    this.analyticsService.addToCart(this.product.name, this.product.price, `Product page`);
+    this.analyticsService.addToCart(this.product.sku, this.product.name, this.product.price, `Product page`);
   }
 
   addToWishlist() {

@@ -47,7 +47,7 @@ export class ProductListItemComponent implements OnInit, OnChanges {
         }
       );
 
-    this.analyticsService.addToCart(this.item.name, this.item.price, this.parentNameForAnalytics);
+    this.analyticsService.addToCart(this.item.sku, this.item.name, this.item.price, this.parentNameForAnalytics);
   }
 
   addToWishlist() {

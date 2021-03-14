@@ -61,6 +61,6 @@ export class AggregatedProductsComponent implements OnInit {
         error => this.notyService.error(error.error?.message || DEFAULT_ERROR_TEXT)
       );
 
-    this.analyticsService.addToCart(product.name, product.price, `Aggregated products`);
+    this.analyticsService.addToCart(product.sku, product.name, product.price, `Aggregated products`);
   }
 }
