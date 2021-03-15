@@ -1,10 +1,36 @@
 <div class="checkout-block__content">
-  <label class="form__control form__control--checkbox">
-    <input class="form__checkbox-input"
+  <label class="form__control form__control--radio">
+    <input class="form__radio-input"
            [formControl]="isCallbackNeededControl"
+           [value]="false"
            name="callback"
-           type="checkbox"
+           type="radio"
     >
+
+    <div class="form__radio-icon"
+         [ngClass]="{
+           'form__radio-icon--checked form__radio-icon--checked:before': isCallbackNeededControl.value === false,
+           'form__radio-icon--unchecked': isCallbackNeededControl.value !== false
+         }"
+    ></div>
+
+    {{ 'callback_needed.do_not_call_me_back' | translate }}
+  </label>
+
+  <label class="form__control form__control--radio">
+    <input class="form__radio-input"
+           [formControl]="isCallbackNeededControl"
+           [value]="true"
+           name="callback"
+           type="radio"
+    >
+
+    <div class="form__radio-icon"
+         [ngClass]="{
+           'form__radio-icon--checked form__radio-icon--checked:before': isCallbackNeededControl.value === true,
+           'form__radio-icon--unchecked': isCallbackNeededControl.value !== true
+         }"
+    ></div>
 
     {{ 'callback_needed.call_me_back' | translate }}
   </label>
