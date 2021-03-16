@@ -14,7 +14,7 @@ $inputBorderColor: #ddd;
   animation: fadeIn 0.2s ease;
 
   @include respond-to($media_large) {
-    background: transparent;
+    display: none;
   }
 
   &__close {
