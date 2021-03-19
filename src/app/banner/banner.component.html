@@ -1,0 +1,17 @@
+<section class="banner">
+  <div class="banner__grid">
+    <div *ngFor="let bannerItem of banner; let i = index" class="banner__item banner__item--{{i}}">
+      <img class="banner__img" [src]="setBannerItemSrc(bannerItem)" alt="img">
+
+      <div class="banner__sale-label" *ngIf="bannerItem?.oldPrice">
+        <span class="banner__sale-label--discount">-{{ discountValue }}%</span>
+        <span class="banner__sale-label--price">{{ bannerItem?.price }} грн</span>
+        <span class="banner__sale-label--old-price">{{ bannerItem?.oldPrice }} грн</span>
+      </div>
+
+      <span class="banner__label" [ngClass]="getLabelClass(bannerItem)" *ngIf="bannerItem?.label">
+        {{ bannerItem.label }}
+      </span>
+    </div>
+  </div>
+</section>
