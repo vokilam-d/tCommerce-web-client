@@ -54,6 +54,6 @@ export class BannerComponent extends NgUnsubscribe implements OnInit {
 
   private setDiscountValue(bannerItem) {
     if (!bannerItem.oldPrice) { return; }
-    this.discountValue = Math.ceil((bannerItem.oldPrice - bannerItem.price) / bannerItem.oldPrice * 100);
+    bannerItem.discountValue = Math.ceil((bannerItem.oldPrice - bannerItem.price) / bannerItem.oldPrice * 100);
   }
 }
