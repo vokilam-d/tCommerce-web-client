@@ -10,6 +10,7 @@ import { RecentlyViewedProductsModule } from '../../recently-viewed-products/rec
 import { RecentlyAddedProductsModule } from '../../recently-added-products/recently-added-products.module';
 import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { BannerModule } from '../../banner/banner.module';
 
 @NgModule({
   declarations: [IndexComponent, PostsPreviewComponent],
@@ -21,7 +22,8 @@ import { TranslateModule } from '@ngx-translate/core';
     RecentlyViewedProductsModule,
     RecentlyAddedProductsModule,
     LangRouterLinkModule,
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    BannerModule
   ]
 })
 export class IndexModule { }
