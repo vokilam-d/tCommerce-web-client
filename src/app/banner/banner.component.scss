@@ -109,7 +109,7 @@
     }
 
     &--old-price {
-      color: rgba(49, 49, 49, 0.6);
+      color: rgba($dark, 0.6);
       text-decoration: line-through;
     }
   }
