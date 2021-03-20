@@ -11,5 +11,8 @@ export class BannerItemDto {
   price?: number;
   oldPrice?: number;
   discountValue?: number;
-  label?: ProductLabelTypeEnum;
+  label?: {
+    type: ProductLabelTypeEnum;
+    text: string;
+  };
 }

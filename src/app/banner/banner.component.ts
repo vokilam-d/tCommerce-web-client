@@ -16,8 +16,6 @@ export class BannerComponent extends NgUnsubscribe implements OnInit {
   banner: BannerItemDto[];
   uploadedHost = UPLOADED_HOST;
 
-  discountValue: number;
-
   constructor(private bannerService: BannerService) {
     super();
   }
@@ -43,8 +41,8 @@ export class BannerComponent extends NgUnsubscribe implements OnInit {
     return `${this.uploadedHost}${bannerItemUrl}`;
   }
 
-  getLabelClass(bannerItem) {
-    switch (bannerItem?.label) {
+  getLabelClass(bannerItem: BannerItemDto) {
+    switch (bannerItem?.label.type) {
       case ProductLabelTypeEnum.New:
         return 'banner__label--new';
       case ProductLabelTypeEnum.Top:
