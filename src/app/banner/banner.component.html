@@ -1,6 +1,9 @@
 <section class="banner">
   <div class="banner__grid">
-    <div *ngFor="let bannerItem of banner; let i = index" class="banner__item banner__item--{{i}}">
+    <a class="banner__item banner__item--{{i}}"
+       *ngFor="let bannerItem of banner; let i = index"
+       [langRouterLink]="'/' + bannerItem.slug"
+    >
       <img class="banner__img" [src]="setBannerItemSrc(bannerItem)" alt="img">
 
       <div class="banner__sale-label" *ngIf="bannerItem?.oldPrice">
@@ -12,6 +15,6 @@
       <span class="banner__label" [ngClass]="getLabelClass(bannerItem)" *ngIf="bannerItem?.label">
         {{ bannerItem.label }}
       </span>
-    </div>
+    </a>
   </div>
 </section>
