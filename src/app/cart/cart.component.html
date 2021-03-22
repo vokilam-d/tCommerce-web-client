@@ -27,17 +27,14 @@
         </div>
       </div>
 
-      <div class="cart__cost-error" *ngIf="!canPlaceOrder">
-        {{ 'global.minimal_order_cost' | translate }}: {{ minimalOrderCost }} {{ 'global.uah' | translate }}.
-      </div>
-
       <div class="cart__btns">
-        <a class="cart__btn btn btn--default" *ngIf="canPlaceOrder" (click)="checkout()" langRouterLink="/checkout">
+        <a class="cart__btn cart__btn--checkout btn btn--default" *ngIf="canPlaceOrder" (click)="checkout()" langRouterLink="/checkout">
           {{ 'cart.checkout' | translate }} <i class="cart__btn-icon mbi mbi-arrow-right"></i>
         </a>
-        <a class="cart__btn btn btn--default" *ngIf="!canPlaceOrder" disabled>
-          {{ 'cart.checkout' | translate }} <i class="cart__btn-icon mbi mbi-arrow-right"></i>
-        </a>
+
+        <div class="cart__btn cart__cost-error" *ngIf="!canPlaceOrder">
+          {{ 'global.minimal_order_cost' | translate }}: {{ minimalOrderCost }} {{ 'global.uah' | translate }}.
+        </div>
 
         <button class="cart__btn cart__btn--continue btn" (click)="continueShopping()">
           {{ 'cart.resume_shopping' | translate }}
