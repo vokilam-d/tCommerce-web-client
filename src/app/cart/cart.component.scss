@@ -10,6 +10,7 @@
   &__btn {
     display: block;
     width: 100%;
+    min-height: 48px;
     margin: 13px 0 0;
     padding-top: 10px;
     padding-bottom: 9px;
@@ -38,7 +39,11 @@
 
     &--checkout {
       border: 2px solid $green;
-      background: #fafafa
+      background-color: #fdfdfd;
+
+      &:hover {
+        background-color: #fafafa;
+      }
     }
   }
 
@@ -68,8 +73,8 @@
 
   &__cost-error {
     display: block;
-    margin: 20px 0 5px;
-    padding: 12px 17px 11px;
+    margin: 18px 0 0;
+    padding: 13px 15px;
     background: rgba($red, 0.15);
     border: 1px solid rgba($red, 0.4);
     color: red;
