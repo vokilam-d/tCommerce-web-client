@@ -236,7 +236,7 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements OnInit
   private scrollToOption() {
     this.optionsRef.forEach((option, index) => {
       if (index === this.activeIndex) {
-        option.nativeElement.scrollIntoView({'block': 'nearest'});
+        option.nativeElement.scrollIntoView({ block: 'nearest' });
       }
     });
   }

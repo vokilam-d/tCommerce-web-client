@@ -35,10 +35,8 @@
 
     <div class="select__no-options"
          *ngIf="!options.length && !isSearchInProgress"
-         [ngSwitch]="!!input.value"
     >
-      <ng-container *ngSwitchCase="true">{{ 'select_autocomplete.no_matches' | translate }}</ng-container>
-      <ng-container *ngSwitchCase="false">{{ 'select_autocomplete.enter_search_query' | translate }}</ng-container>
+      <ng-container *ngIf="!!input.value">{{ 'select_autocomplete.no_matches' | translate }}</ng-container>
     </div>
   </div>
 </div>
