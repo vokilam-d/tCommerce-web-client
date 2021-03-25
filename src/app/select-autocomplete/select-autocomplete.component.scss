@@ -38,10 +38,10 @@
   }
 
   &__input {
-    font-size: 15px;
     min-height: 37px;
 
     &::placeholder {
+      font-size: 15px;
       font-weight: bold;
     }
   }
