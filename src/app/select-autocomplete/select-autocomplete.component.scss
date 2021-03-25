@@ -6,14 +6,7 @@
 
   &__preloader {
     position: absolute;
-    top: 12px;
-    left: 0;
-    right: 0;
-  }
-
-  &__input {
-    position: absolute;
-    top: 0;
+    top: 58px;
     left: 0;
     right: 0;
   }
@@ -29,23 +22,36 @@
     color: $disabledTextColor;
   }
 
-  &__options {
+  &__container {
     position: absolute;
-    top: calc(100% + 10px);
+    top: 100%;
     left: 0;
     right: 0;
-    min-height: 37px;
+    min-height: 96px;
     max-height: 350px;
-    overflow: auto;
+    padding: 5px 10px;
     background: #fff;
-    border: 1px solid $borderColor;
+    border: 1px solid #e9e9e9;
     border-radius: 3px;
-    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 2px 3px rgb(0 0 0 / 30%);
     z-index: 101;
+  }
 
-    @include respond-to($media_large) {
-      top: calc(100% + 4px);
+  &__input {
+    min-height: 37px;
+
+    &::placeholder {
+      font-weight: bold;
     }
+  }
+
+  &__options-container {
+    max-height: 300px;
+    padding: 5px 10px;
+    overflow: auto;
+  }
+
+  &__options {
 
     &--hidden {
       display: none;
@@ -55,6 +61,7 @@
   &__option {
     display: flex;
     align-items: center;
+    min-height: 37px;
     padding: 12px 10px;
     font-size: 13px;
     text-align: left;
@@ -67,14 +74,18 @@
   }
 
   &__no-options {
-    margin: 15px 0 20px;
+    position: relative;
+    height: 37px;
     color: rgba($dark, 0.6);
     font-size: 12px;
     text-align: center;
+  }
 
-    @include respond-to($media_large) {
-      margin: 25px 0;
-    }
+  &__no-options-text {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    right: 0;
   }
 
   &__icon {
