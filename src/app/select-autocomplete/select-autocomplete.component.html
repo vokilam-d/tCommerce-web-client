@@ -12,31 +12,36 @@
     <i class="select__icon mbi mbi-chevron-down"></i>
   </button>
 
-  <input class="select__input form__input"
-         [class.select__options--hidden]="!isVisible"
-         [placeholder]="placeholder"
-         autofocus
-         autocomplete="nope"
-         #input
-  >
-
-  <div class="select__options" [class.select__options--hidden]="!isVisible">
-    <preloader class="select__preloader" *ngIf="isSearchInProgress"></preloader>
-
-    <div class="select__option"
-         *ngFor="let option of options; let indexOfOption=index"
-         [class.select__option--active]="option.isSelected || indexOfOption === activeIndex"
-         (click)="selectOption(option)"
-         #options
+  <div class="select__container" [class.select__options--hidden]="!isVisible">
+    <input class="select__input form__input"
+           [placeholder]="placeholder"
+           autofocus
+           autocomplete="nope"
+           #input
     >
 
-      {{ option.view || option.data }}
-    </div>
+    <div class="select__options-container">
+      <div class="select__options">
+        <preloader class="select__preloader" *ngIf="isSearchInProgress"></preloader>
 
-    <div class="select__no-options"
-         *ngIf="!options.length && !isSearchInProgress"
-    >
-      <ng-container *ngIf="!!input.value">{{ 'select_autocomplete.no_matches' | translate }}</ng-container>
+        <div class="select__option"
+             *ngFor="let option of options; let indexOfOption=index"
+             [class.select__option--active]="option.isSelected || indexOfOption === activeIndex"
+             (click)="selectOption(option)"
+             #options
+        >
+
+          {{ option.view || option.data }}
+        </div>
+
+        <div class="select__no-options"
+             *ngIf="!options.length && !isSearchInProgress"
+        >
+          <ng-container *ngIf="!!input.value">
+            <span class="select__no-options-text">{{ 'select_autocomplete.no_matches' | translate }}</span>
+          </ng-container>
+        </div>
+      </div>
     </div>
   </div>
 </div>

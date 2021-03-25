@@ -180,7 +180,7 @@ export class SelectAutocompleteComponent extends NgUnsubscribe implements OnInit
   }
 
   getPlaceholder(type: string) {
-    this.languageService.getTranslation(`select_autocomplete.${type}`).subscribe(text => {
+    this.languageService.getTranslation(`select_autocomplete.search_pick_from_list`).subscribe(text => {
       this.placeholder = text;
     });
   }
