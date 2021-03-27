@@ -4,67 +4,172 @@
       novalidate
 >
 
-  <div class="form__control-container"
-       *ngIf="addressForm.get('lastName') as lastName"
-       [class.field--invalid]="isControlInvalid(lastName)"
-  >
-    <label for="addr-lastName" class="form__label">{{ 'global.last_name' | translate }}</label>
-    <div class="form__control">
-      <input class="form__input" [formControl]="lastName" type="text" id="addr-lastName">
+  <div class="form__personal-info-block personal-info">
 
-      <div class="form__input-error" *ngIf="isControlInvalid(lastName)">
-        {{ 'address_form.required_field' | translate }}
+    <div class="form__control-container personal-info__form__control"
+         *ngIf="addressForm.get('lastName') as lastName"
+         [class.field--invalid]="isControlInvalid(lastName)"
+    >
+      <label for="addr-lastName" class="form__label">{{ 'global.last_name' | translate }}</label>
+      <div class="form__control">
+        <input class="form__input" [formControl]="lastName" type="text" id="addr-lastName">
+
+        <div class="form__input-error" *ngIf="isControlInvalid(lastName)">
+          {{ 'address_form.required_field' | translate }}
+        </div>
       </div>
     </div>
+
+    <div class="form__control-container personal-info__form__control"
+         *ngIf="addressForm.get('firstName') as firstName"
+         [class.field--invalid]="isControlInvalid(firstName)"
+    >
+      <label for="addr-firstName" class="form__label">{{ 'global.name' | translate }}</label>
+      <div class="form__control">
+        <input class="form__input" [formControl]="firstName" type="text" id="addr-firstName">
+
+        <div class="form__input-error" *ngIf="isControlInvalid(firstName)">
+          {{ 'address_form.required_field' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form__control-container personal-info__form__control"
+         *ngIf="addressForm.get('middleName') as middleName"
+         [class.field--invalid]="isControlInvalid(middleName)"
+    >
+      <label for="addr-middleName" class="form__label">{{ 'global.parent_name' | translate }}</label>
+      <div class="form__control">
+        <input class="form__input" [formControl]="middleName" type="text" id="addr-middleName">
+
+        <div class="form__input-error" *ngIf="isControlInvalid(middleName)">
+          {{ 'address_form.required_field' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form__control-container personal-info__form__control"
+         *ngIf="addressForm.get('phone') as phone"
+         [class.field--invalid]="isControlInvalid(phone)"
+    >
+      <label for="addr-phone" class="form__label">{{ 'address_form.phone' | translate }}</label>
+      <div class="form__control">
+        <input class="form__input"
+               [formControl]="phone"
+               mask="+00 (000) 000-00-00-00000000000"
+               inputmode="tel"
+               type="text"
+               id="addr-phone"
+        >
+
+        <div class="form__input-error" *ngIf="isControlInvalid(phone)">
+          {{ 'address_form.required_field' | translate }}
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <div class="form__control-container"
-       *ngIf="addressForm.get('firstName') as firstName"
-       [class.field--invalid]="isControlInvalid(firstName)"
+       *ngIf="addressForm.get('recipientType') as recipientTypeControl"
+       [class.field--invalid]="isControlInvalid(recipientTypeControl)"
   >
-    <label for="addr-firstName" class="form__label">{{ 'global.name' | translate }}</label>
-    <div class="form__control">
-      <input class="form__input" [formControl]="firstName" type="text" id="addr-firstName">
-
-      <div class="form__input-error" *ngIf="isControlInvalid(firstName)">
-        {{ 'address_form.required_field' | translate }}
-      </div>
-    </div>
-  </div>
-
-  <div class="form__control-container"
-       *ngIf="addressForm.get('middleName') as middleName"
-       [class.field--invalid]="isControlInvalid(middleName)"
-  >
-    <label for="addr-middleName" class="form__label">{{ 'global.parent_name' | translate }}</label>
-    <div class="form__control">
-      <input class="form__input" [formControl]="middleName" type="text" id="addr-middleName">
-
-      <div class="form__input-error" *ngIf="isControlInvalid(middleName)">
-        {{ 'address_form.required_field' | translate }}
-      </div>
-    </div>
-  </div>
-
-  <div class="form__control-container"
-       *ngIf="addressForm.get('phone') as phone"
-       [class.field--invalid]="isControlInvalid(phone)"
-  >
-    <label for="addr-phone" class="form__label">{{ 'address_form.phone' | translate }}</label>
-    <div class="form__control">
-      <input class="form__input"
-             [formControl]="phone"
-             mask="+00 (000) 000-00-00-00000000000"
-             inputmode="tel"
-             type="text"
-             id="addr-phone"
+    <label class="form__label">{{ 'address_form.recipient' | translate }}</label>
+    <label class="form__control form__control--radio" *ngFor="let recipientType of recipientTypes">
+      <input class="form__radio-input"
+             [value]="recipientType"
+             [formControl]="recipientTypeControl"
+             name="address-type"
+             type="radio"
       >
 
-      <div class="form__input-error" *ngIf="isControlInvalid(phone)">
-        {{ 'address_form.required_field' | translate }}
-      </div>
-    </div>
+      <i class="mbi form__radio-icon"
+         [ngClass]="{
+           'form__radio-icon--checked form__radio-icon--checked:before': recipientTypeControl.value === recipientType,
+           'form__radio-icon--unchecked': recipientTypeControl.value !== recipientType
+         }"
+      ></i>
+
+      <span [ngSwitch]="recipientType">
+        <ng-container *ngSwitchCase="recipientTypeEnum.CUSTOMER">{{ 'address_form.i_am' | translate }}</ng-container>
+        <ng-container *ngSwitchCase="recipientTypeEnum.ANOTHER_PERSON">{{ 'address_form.another_person' | translate }}</ng-container>
+      </span>
+    </label>
   </div>
+
+  <ng-container [ngSwitch]="addressForm.get('recipientType').value">
+
+    <ng-container *ngSwitchCase="recipientTypeEnum.ANOTHER_PERSON">
+
+      <div class="form__personal-info-block personal-info">
+
+        <div class="form__control-container personal-info__form__control"
+             *ngIf="addressForm.get('recipientLastName') as recipientLastName"
+             [class.field--invalid]="isControlInvalid(recipientLastName)"
+        >
+          <label for="addr-recipientLastName" class="form__label">{{ 'global.last_name' | translate }}</label>
+          <div class="form__control">
+            <input class="form__input" [formControl]="recipientLastName" type="text" id="addr-recipientLastName">
+
+            <div class="form__input-error" *ngIf="isControlInvalid(recipientLastName)">
+              {{ 'address_form.required_field' | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form__control-container personal-info__form__control"
+             *ngIf="addressForm.get('recipientFirstName') as recipientFirstName"
+             [class.field--invalid]="isControlInvalid(recipientFirstName)"
+        >
+          <label for="addr-recipientFirstName" class="form__label">{{ 'global.name' | translate }}</label>
+          <div class="form__control">
+            <input class="form__input" [formControl]="recipientFirstName" type="text" id="addr-recipientFirstName">
+
+            <div class="form__input-error" *ngIf="isControlInvalid(recipientFirstName)">
+              {{ 'address_form.required_field' | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form__control-container personal-info__form__control"
+             *ngIf="addressForm.get('recipientMiddleName') as recipientMiddleName"
+             [class.field--invalid]="isControlInvalid(recipientMiddleName)"
+        >
+          <label for="addr-recipientMiddleName" class="form__label">{{ 'global.parent_name' | translate }}</label>
+          <div class="form__control">
+            <input class="form__input" [formControl]="recipientMiddleName" type="text" id="addr-recipientMiddleName">
+
+            <div class="form__input-error" *ngIf="isControlInvalid(recipientMiddleName)">
+              {{ 'address_form.required_field' | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form__control-container personal-info__form__control"
+             *ngIf="addressForm.get('recipientPhone') as recipientPhone"
+             [class.field--invalid]="isControlInvalid(recipientPhone)"
+        >
+          <label for="addr-recipientPhone" class="form__label">{{ 'address_form.phone' | translate }}</label>
+          <div class="form__control">
+            <input class="form__input"
+                   [formControl]="recipientPhone"
+                   mask="+00 (000) 000-00-00-00000000000"
+                   inputmode="tel"
+                   type="text"
+                   id="addr-recipientPhone"
+            >
+
+            <div class="form__input-error" *ngIf="isControlInvalid(recipientPhone)">
+              {{ 'address_form.required_field' | translate }}
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </ng-container>
+
+  </ng-container>
 
   <div class="form__control-container"
        *ngIf="addressForm.get('addressType') as addressTypeControl"
@@ -98,92 +203,97 @@
     </label>
   </div>
 
-  <div class="form__control-container" *ngIf="addressForm.get('settlementFull') as settlementFullControl">
-    <label class="form__label">{{ 'address_form.settlement' | translate }}</label>
-    <div class="form__control">
-      <select-autocomplete type="settlement"
-                           [activeOptionLabel]="settlementFullControl.value"
-                           (select)="onSettlementSelect($event)"
-      ></select-autocomplete>
+  <div class="form__address-block address-block">
 
-      <div class="form__input-error" *ngIf="isControlInvalid(settlementFullControl)">
-        {{ 'address_form.required_field' | translate }}
+    <div class="form__control-container address-block__form__control address-block__form__control--settlement" *ngIf="addressForm.get('settlementFull') as settlementFullControl">
+      <label class="form__label">{{ 'address_form.settlement' | translate }}</label>
+      <div class="form__control">
+        <select-autocomplete type="settlement"
+                             [activeOptionLabel]="settlementFullControl.value"
+                             (select)="onSettlementSelect($event)"
+        ></select-autocomplete>
+
+        <div class="form__input-error" *ngIf="isControlInvalid(settlementFullControl)">
+          {{ 'address_form.required_field' | translate }}
+        </div>
       </div>
     </div>
+
+    <ng-container [ngSwitch]="addressForm.get('addressType').value">
+
+      <ng-container *ngSwitchCase="addressTypeEnum.WAREHOUSE">
+
+        <div class="form__control-container address-block__form__control address-block__form__control--warehouse"
+             *ngIf="addressForm.get('addressFull') as addressFullControl"
+             [class.field--invalid]="isControlInvalid(addressFullControl)"
+        >
+          <label class="form__label">{{ 'address_form.warehouse' | translate }}</label>
+          <div class="form__control">
+            <select-autocomplete type="warehouse"
+                                 [settlementId]="settlementIdControl.value"
+                                 [isDisabled]="!settlementIdControl.value"
+                                 [activeOptionLabel]="addressFullControl.value"
+                                 (select)="onWarehouseSelect($event)"
+            ></select-autocomplete>
+
+            <div class="form__input-error" *ngIf="isControlInvalid(addressFullControl)">
+              {{ 'address_form.required_field' | translate }}
+            </div>
+          </div>
+        </div>
+
+      </ng-container>
+
+      <ng-container *ngSwitchCase="addressTypeEnum.DOORS">
+
+        <div class="form__control-container address-block__form__control address-block__form__control--street"
+             *ngIf="addressForm.get('addressFull') as addressFullControl"
+             [class.field--invalid]="isControlInvalid(addressFullControl)"
+        >
+          <label class="form__label">{{ 'address_form.street' | translate }}</label>
+          <div class="form__control">
+            <select-autocomplete type="street"
+                                 [settlementId]="settlementIdControl.value"
+                                 [isDisabled]="!settlementIdControl.value"
+                                 [activeOptionLabel]="addressFullControl.value"
+                                 (select)="onStreetSelect($event)"
+            ></select-autocomplete>
+
+            <div class="form__input-error" *ngIf="isControlInvalid(addressFullControl)">
+              {{ 'address_form.required_field' | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form__control-container address-block__form__control"
+             *ngIf="addressForm.get('buildingNumber') as buildingNumber"
+             [class.field--invalid]="isOptionalControlInvalid('buildingNumber')"
+        >
+          <label for="addr-buildingNumber" class="form__label">{{ 'address_form.building_number' | translate }}</label>
+          <div class="form__control">
+            <input class="form__input" [formControl]="buildingNumber" type="text" id="addr-buildingNumber">
+
+            <div class="form__input-error" *ngIf="isOptionalControlInvalid('buildingNumber')">
+              {{ 'address_form.required_field' | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form__control-container address-block__form__control"
+             *ngIf="addressForm.get('flat') as flat"
+             [class.field--invalid]="isOptionalControlInvalid('flat')"
+        >
+          <label for="addr-flat" class="form__label">{{ 'address_form.flat' | translate }}</label>
+          <div class="form__control">
+            <input class="form__input" [formControl]="flat" type="text" id="addr-flat">
+          </div>
+        </div>
+
+      </ng-container>
+
+    </ng-container>
+
   </div>
-
-  <ng-container [ngSwitch]="addressForm.get('addressType').value">
-
-    <ng-container *ngSwitchCase="addressTypeEnum.WAREHOUSE">
-
-      <div class="form__control-container"
-           *ngIf="addressForm.get('addressFull') as addressFullControl"
-           [class.field--invalid]="isControlInvalid(addressFullControl)"
-      >
-        <label class="form__label">{{ 'address_form.warehouse' | translate }}</label>
-        <div class="form__control">
-          <select-autocomplete type="warehouse"
-                               [settlementId]="settlementIdControl.value"
-                               [isDisabled]="!settlementIdControl.value"
-                               [activeOptionLabel]="addressFullControl.value"
-                               (select)="onWarehouseSelect($event)"
-          ></select-autocomplete>
-
-          <div class="form__input-error" *ngIf="isControlInvalid(addressFullControl)">
-            {{ 'address_form.required_field' | translate }}
-          </div>
-        </div>
-      </div>
-
-    </ng-container>
-
-    <ng-container *ngSwitchCase="addressTypeEnum.DOORS">
-
-      <div class="form__control-container"
-           *ngIf="addressForm.get('addressFull') as addressFullControl"
-           [class.field--invalid]="isControlInvalid(addressFullControl)"
-      >
-        <label class="form__label">{{ 'address_form.street' | translate }}</label>
-        <div class="form__control">
-          <select-autocomplete type="street"
-                               [settlementId]="settlementIdControl.value"
-                               [isDisabled]="!settlementIdControl.value"
-                               [activeOptionLabel]="addressFullControl.value"
-                               (select)="onStreetSelect($event)"
-          ></select-autocomplete>
-
-          <div class="form__input-error" *ngIf="isControlInvalid(addressFullControl)">
-            {{ 'address_form.required_field' | translate }}
-          </div>
-        </div>
-      </div>
-
-      <div class="form__control-container"
-           *ngIf="addressForm.get('buildingNumber') as buildingNumber"
-           [class.field--invalid]="isOptionalControlInvalid('buildingNumber')"
-      >
-        <label for="addr-buildingNumber" class="form__label">{{ 'address_form.building_number' | translate }}</label>
-        <div class="form__control">
-          <input class="form__input" [formControl]="buildingNumber" type="text" id="addr-buildingNumber">
-
-          <div class="form__input-error" *ngIf="isOptionalControlInvalid('buildingNumber')">
-            {{ 'address_form.required_field' | translate }}
-          </div>
-        </div>
-      </div>
-
-      <div class="form__control-container"
-           *ngIf="addressForm.get('flat') as flat"
-           [class.field--invalid]="isOptionalControlInvalid('flat')"
-      >
-        <label for="addr-flat" class="form__label">{{ 'address_form.flat' | translate }}</label>
-        <div class="form__control">
-          <input class="form__input" [formControl]="flat" type="text" id="addr-flat">
-        </div>
-      </div>
-
-    </ng-container>
-  </ng-container>
 
   <div class="form__control-container is-default"
        *ngIf="showIsDefault && addressForm.get('isDefault') as isDefault"

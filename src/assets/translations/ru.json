@@ -78,7 +78,10 @@
     "street": "Улица",
     "building_number": "Номер дома",
     "flat": "Квартира",
-    "set_default": "Установить по умолчанию?"
+    "set_default": "Установить по умолчанию?",
+    "recipient": "Кто получатель?",
+    "i_am": "Я",
+    "another_person": "Другой человек"
   },
 
   "auth_social": {

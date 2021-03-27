@@ -1,3 +1,12 @@
+@import "variables";
+@import "mixins";
+
+
 .address-form {
   display: block;
+  margin-top: 0;
+
+  @include respond-to($media_large) {
+    width: 100%;
+  }
 }

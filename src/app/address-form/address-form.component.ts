@@ -12,6 +12,7 @@ import { merge } from 'rxjs';
 import { DEFAULT_PHONE_NUMBER_VALUE } from '../shared/constants';
 import { CustomValidators } from '../shared/classes/validators';
 import { ShipmentPayerEnum } from '../shared/enums/shipment-payer.enum';
+import { recipientTypeEnum } from '../shared/enums/recipient-type.enum';
 
 export type ShipmentPayerMap = Map<AddressTypeEnum, ShipmentPayerEnum>;
 
@@ -24,9 +25,11 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
 
   addressForm: FormGroup;
   addressTypes: AddressTypeEnum[] = [AddressTypeEnum.WAREHOUSE, AddressTypeEnum.DOORS];
+  recipientTypes: recipientTypeEnum[] = [recipientTypeEnum.CUSTOMER, recipientTypeEnum.ANOTHER_PERSON];
 
   addressTypeEnum = AddressTypeEnum;
   shipmentPayerEnum = ShipmentPayerEnum;
+  recipientTypeEnum = recipientTypeEnum;
 
   get settlementIdControl() {
     return this.addressForm.get(settlementIdProp);
@@ -64,7 +67,12 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
       lastName: [address.lastName, Validators.required],
       middleName: [address.middleName],
       phone: [address.phone || DEFAULT_PHONE_NUMBER_VALUE, CustomValidators.phoneNumber],
+      recipientFirstName: [address.recipientFirstName, Validators.required],
+      recipientMiddleName: [address.recipientMiddleName, Validators.required],
+      recipientLastName: [address.recipientLastName, Validators.required],
+      recipientPhone: [address.recipientPhone || DEFAULT_PHONE_NUMBER_VALUE, CustomValidators.phoneNumber],
       addressType: [address.addressType, Validators.required],
+      recipientType: [address.recipientType, Validators.required],
       settlement: [address.settlement, Validators.required],
       settlementFull: [address.settlement, Validators.required],
       settlementId: [address.settlementId, Validators.required],
@@ -73,11 +81,11 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
       addressId: [address.addressId, Validators.required],
       buildingNumber: address.buildingNumber,
       flat: address.flat
-    }
+    };
 
     this.addressForm = this.formBuilder.group(controls);
     this.addressForm.valueChanges.subscribe(address => {
-      this.valueChanged.emit(address)
+      this.valueChanged.emit(address);
     });
 
     this.handleAutoResetFields();
