@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { OrderDto } from '../../shared/dtos/order.dto';
 import { Language } from '../../shared/enums/language.enum';
 import { ProductDto } from '../../shared/dtos/product.dto';
+import { DeviceService } from '../device-detector/device.service';
 
 declare const gtag: any;
 declare const fbq: any;
@@ -11,15 +12,9 @@ declare const fbq: any;
 })
 export class AnalyticsService {
 
-  constructor() { }
+  constructor(private deviceService: DeviceService) { }
 
   trackViewContent(product: ProductDto) {
-    fbq('track', 'ViewContent', {
-      content_ids: [product.sku],
-      value: product.price,
-      currency: 'UAH',
-      content_type: 'product'
-    });
     gtag('event', 'view_item', {
       items: [{
         id: product.sku,
@@ -27,17 +22,20 @@ export class AnalyticsService {
         currency: 'UAH'
       }]
     });
+
+    if (!this.deviceService.isPlatformServer()) {
+      fbq('track', 'ViewContent', {
+        content_ids: [product.sku],
+        value: product.price,
+        currency: 'UAH',
+        content_type: 'product'
+      });
+    }
   }
 
   addToCart(sku: string, productName: string, productPrice: number, source: string) {
     const action = `Add to cart from ${source}`
     this.trackEvent('Add to cart', action, productName, productPrice);
-    fbq('track', 'AddToCart', {
-      content_ids: [sku],
-      value: productPrice,
-      currency: 'UAH',
-      content_type: 'product'
-    });
     gtag('event', 'add_to_cart', {
       currency: 'UAH',
       items: [{
@@ -49,6 +47,15 @@ export class AnalyticsService {
       }],
       value: productPrice
     });
+
+    if (!this.deviceService.isPlatformServer()) {
+      fbq('track', 'AddToCart', {
+        content_ids: [sku],
+        value: productPrice,
+        currency: 'UAH',
+        content_type: 'product'
+      });
+    }
   }
 
   removeFromCart(sku: string, productName: string, productPrice: number, productQty: number) {
@@ -135,19 +142,21 @@ export class AnalyticsService {
       value: totalCost
     })
 
-    const purchasedContents = [];
-    for (const item of order.items) {
-      purchasedContents.push({
-        id: item.sku,
-        quantity: item.qty
-      })
+    if (!this.deviceService.isPlatformServer()) {
+      const purchasedContents = [];
+      for (const item of order.items) {
+        purchasedContents.push({
+          id: item.sku,
+          quantity: item.qty
+        })
+      }
+      fbq('track', 'Purchase', {
+        value: totalCost,
+        currency: 'UAH',
+        contents: purchasedContents,
+        content_type: 'product'
+      });
     }
-    fbq('track', 'Purchase', {
-      value: totalCost,
-      currency: 'UAH',
-      contents: purchasedContents,
-      content_type: 'product'
-    });
   }
 
   changeLang(langCode: Language) {
