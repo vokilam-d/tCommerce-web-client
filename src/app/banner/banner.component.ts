@@ -26,8 +26,8 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
 
   isDeviceMobile: boolean;
 
-  @ViewChild('sliderListRef', { static: false }) sliderListRef: ElementRef;
-  @ViewChild('sliderTrackRef', { static: false }) sliderTrackRef: ElementRef;
+  @ViewChild('sliderListRef') sliderListRef: ElementRef;
+  @ViewChild('sliderTrackRef') sliderTrackRef: ElementRef;
 
   constructor(
     private bannerService: BannerService,
