@@ -15,6 +15,10 @@ export class AnalyticsService {
   constructor(private deviceService: DeviceService) { }
 
   trackViewContent(product: ProductDto) {
+    if (!this.deviceService.isPlatformBrowser()) {
+      return;
+    }
+
     gtag('event', 'view_item', {
       items: [{
         id: product.sku,
@@ -23,17 +27,19 @@ export class AnalyticsService {
       }]
     });
 
-    if (!this.deviceService.isPlatformServer()) {
-      fbq('track', 'ViewContent', {
-        content_ids: [product.sku],
-        value: product.price,
-        currency: 'UAH',
-        content_type: 'product'
-      });
-    }
+    fbq('track', 'ViewContent', {
+      content_ids: [product.sku],
+      value: product.price,
+      currency: 'UAH',
+      content_type: 'product'
+    });
   }
 
   addToCart(sku: string, productName: string, productPrice: number, source: string) {
+    if (!this.deviceService.isPlatformBrowser()) {
+      return;
+    }
+
     const action = `Add to cart from ${source}`
     this.trackEvent('Add to cart', action, productName, productPrice);
     gtag('event', 'add_to_cart', {
@@ -48,17 +54,19 @@ export class AnalyticsService {
       value: productPrice
     });
 
-    if (!this.deviceService.isPlatformServer()) {
-      fbq('track', 'AddToCart', {
-        content_ids: [sku],
-        value: productPrice,
-        currency: 'UAH',
-        content_type: 'product'
-      });
-    }
+    fbq('track', 'AddToCart', {
+      content_ids: [sku],
+      value: productPrice,
+      currency: 'UAH',
+      content_type: 'product'
+    });
   }
 
   removeFromCart(sku: string, productName: string, productPrice: number, productQty: number) {
+    if (!this.deviceService.isPlatformBrowser()) {
+      return;
+    }
+
     this.trackEvent('Remove from cart', 'Remove from cart', productName, productPrice);
     const qty = productQty ? productQty : 1;
     gtag('event', 'remove_from_cart', {
@@ -75,18 +83,31 @@ export class AnalyticsService {
   }
 
   showCart() {
+    if (!this.deviceService.isPlatformBrowser()) {
+      return;
+    }
     this.trackEvent('Show cart', 'Show cart', 'Show cart');
   }
 
   editOrder() {
+    if (!this.deviceService.isPlatformBrowser()) {
+      return;
+    }
     this.trackEvent('Edit order', 'Edit order', 'Edit order');
   }
 
   confirmOrder(totalCost: number) {
+    if (!this.deviceService.isPlatformBrowser()) {
+      return;
+    }
     this.trackEvent('Confirm order', 'Confirm order', 'Confirm order', totalCost);
   }
 
   trackOrderPlaced(order: OrderDto) {
+    if (!this.deviceService.isPlatformBrowser()) {
+      return;
+    }
+
     const totalCost = order.prices.totalCost;
 
     this.trackEvent('Order success', 'Order success', 'Order success', totalCost);
@@ -142,24 +163,26 @@ export class AnalyticsService {
       value: totalCost
     })
 
-    if (!this.deviceService.isPlatformServer()) {
-      const purchasedContents = [];
-      for (const item of order.items) {
-        purchasedContents.push({
-          id: item.sku,
-          quantity: item.qty
-        })
-      }
-      fbq('track', 'Purchase', {
-        value: totalCost,
-        currency: 'UAH',
-        contents: purchasedContents,
-        content_type: 'product'
-      });
+    const purchasedContents = [];
+    for (const item of order.items) {
+      purchasedContents.push({
+        id: item.sku,
+        quantity: item.qty
+      })
     }
+    fbq('track', 'Purchase', {
+      value: totalCost,
+      currency: 'UAH',
+      contents: purchasedContents,
+      content_type: 'product'
+    });
   }
 
   changeLang(langCode: Language) {
+    if (!this.deviceService.isPlatformBrowser()) {
+      return;
+    }
+
     this.trackEvent('Change lang', langCode, '');
   }
 
