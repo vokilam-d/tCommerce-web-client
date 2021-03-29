@@ -27,7 +27,6 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
 
   @ViewChild('sliderListRef') sliderListRef: ElementRef;
   @ViewChild('sliderTrackRef') sliderTrackRef: ElementRef;
-  @ViewChild('dotsRef') dotsRef: ElementRef;
 
   constructor(
     private bannerService: BannerService,
@@ -104,6 +103,9 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
         if (swipe === 'next') {
           if (this.slideIndex < this.banner.length - 1) {
             this.slideIndex += 1;
+            this.transformSlide();
+          } else if (this.slideIndex === this.banner.length - 1) {
+            this.slideIndex = 0;
             this.transformSlide();
           }
         } else {
