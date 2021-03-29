@@ -18,3 +18,36 @@
     </a>
   </div>
 </section>
+
+<div class="slider" *ngIf="isDeviceMobile">
+  <div class="slider__list" #sliderListRef>
+    <div class="slider__track" #sliderTrackRef>
+      <a class="slider__slide banner__item banner__item--{{i}}"
+         *ngFor="let bannerItem of banner; let i = index"
+         [langRouterLink]="'/' + bannerItem.slug"
+         (touchstart)="swipe($event, 'start')"
+         (touchend)="swipe($event, 'end')"
+      >
+        <img class="banner__img" [src]="setBannerItemSrc(bannerItem)" alt="img">
+
+        <div class="banner__sale-label" *ngIf="bannerItem?.oldPrice">
+          <span class="banner__sale-label--discount">-{{ bannerItem?.discountValue }}%</span>
+          <span class="banner__sale-label--price">{{ bannerItem?.price }} грн</span>
+          <span class="banner__sale-label--old-price">{{ bannerItem?.oldPrice }} грн</span>
+        </div>
+
+        <span class="banner__label" [ngClass]="getLabelClass(bannerItem)" *ngIf="bannerItem?.label">
+          {{ bannerItem.label.text }}
+        </span>
+      </a>
+    </div>
+
+    <div class="slider__dots" #dotsRef>
+      <span
+        class="slider__dot"
+        *ngFor="let bannerItem of banner; let i = index"
+        [ngClass]="getSlideActiveClass(i)"
+      ></span>
+    </div>
+  </div>
+</div>
