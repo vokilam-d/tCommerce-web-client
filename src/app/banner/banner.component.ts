@@ -26,8 +26,8 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
 
   isDeviceMobile: boolean;
 
-  @ViewChild('sliderListRef', { static: true }) sliderListRef: ElementRef;
-  @ViewChild('sliderTrackRef', { static: true }) sliderTrackRef: ElementRef;
+  @ViewChild('sliderListRef') sliderListRef: ElementRef;
+  @ViewChild('sliderTrackRef') sliderTrackRef: ElementRef;
 
   constructor(
     private bannerService: BannerService,
@@ -83,8 +83,7 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
   }
 
   private getSlideWidth() {
-    if (this.deviceService.isPlatformServer()) { return; }
-    this.cdr.detectChanges();
+    if (this.deviceService.isPlatformServer() || !this.deviceService.isMobile()) { return; }
     this.slideWidth = this.sliderListRef.nativeElement.getBoundingClientRect().width;
   }
 
