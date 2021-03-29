@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BannerService } from '../services/banner/banner.service';
 import { BannerItemDto } from '../shared/dtos/banner-item.dto';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
@@ -26,12 +26,13 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
 
   isDeviceMobile: boolean;
 
-  @ViewChild('sliderListRef') sliderListRef: ElementRef;
-  @ViewChild('sliderTrackRef') sliderTrackRef: ElementRef;
+  @ViewChild('sliderListRef', { static: true }) sliderListRef: ElementRef;
+  @ViewChild('sliderTrackRef', { static: true }) sliderTrackRef: ElementRef;
 
   constructor(
     private bannerService: BannerService,
-    private deviceService: DeviceService
+    private deviceService: DeviceService,
+    private cdr: ChangeDetectorRef
   ) {
     super();
   }
@@ -56,6 +57,7 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
         });
 
         if (this.isDeviceMobile) {
+          this.cdr.detectChanges();
           this.showSlides();
         }
       });
@@ -82,6 +84,7 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
 
   private getSlideWidth() {
     if (this.deviceService.isPlatformServer()) { return; }
+    this.cdr.detectChanges();
     this.slideWidth = this.sliderListRef.nativeElement.getBoundingClientRect().width;
   }
 
@@ -119,6 +122,7 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
   }
 
   private showSlides() {
+    if (this.deviceService.isPlatformServer()) { return; }
     if (this.slideIndex === this.banner.length) {
       this.slideIndex = 0;
     }
