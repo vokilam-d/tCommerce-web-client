@@ -59,7 +59,7 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
   }
 
   public setBannerItemSrc(bannerItem) {
-    const bannerItemUrl = bannerItem?.media?.variantsUrls?.original;
+    const bannerItemUrl = bannerItem?.media?.variantsUrls?.medium;
     return `${this.uploadedHost}${bannerItemUrl}`;
   }
 
@@ -78,7 +78,7 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
   }
 
   private getSlideWidth() {
-    if (this.deviceService.isPlatformServer() || !this.deviceService.isMobile()) { return; }
+    if (this.deviceService.isPlatformServer()) { return; }
     this.slideWidth = this.sliderListRef.nativeElement.getBoundingClientRect().width;
   }
 
