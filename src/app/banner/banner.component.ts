@@ -81,6 +81,7 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
   }
 
   private getSlideWidth() {
+    if (this.deviceService.isPlatformServer()) { return; }
     this.slideWidth = this.sliderListRef.nativeElement.getBoundingClientRect().width;
   }
 
