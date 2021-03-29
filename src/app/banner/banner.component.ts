@@ -24,8 +24,6 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
   private swipeCoord: [number, number];
   private swipeTime: number;
 
-  isDeviceMobile: boolean;
-
   @ViewChild('sliderListRef') sliderListRef: ElementRef;
   @ViewChild('sliderTrackRef') sliderTrackRef: ElementRef;
 
@@ -38,7 +36,6 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
   }
 
   ngOnInit(): void {
-    this.isDeviceMobile = this.deviceService.isMobile();
     this.getBanner();
   }
 
@@ -52,19 +49,17 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
       .subscribe(response => {
         this.banner = response.data;
 
+        this.cdr.detectChanges();
+        this.showSlides();
+
         this.banner.forEach(bannerItem => {
           this.setDiscountValue(bannerItem);
         });
-
-        if (this.isDeviceMobile) {
-          this.cdr.detectChanges();
-          this.showSlides();
-        }
       });
   }
 
   public setBannerItemSrc(bannerItem) {
-    const bannerItemUrl = bannerItem?.media?.variantsUrls?.original;
+    const bannerItemUrl = bannerItem?.media?.variantsUrls?.medium;
     return `${this.uploadedHost}${bannerItemUrl}`;
   }
 
@@ -83,7 +78,7 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
   }
 
   private getSlideWidth() {
-    if (this.deviceService.isPlatformServer() || !this.deviceService.isMobile()) { return; }
+    if (this.deviceService.isPlatformServer()) { return; }
     this.slideWidth = this.sliderListRef.nativeElement.getBoundingClientRect().width;
   }
 

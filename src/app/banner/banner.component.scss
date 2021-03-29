@@ -123,6 +123,10 @@
   user-select: none;
   touch-action: pan-y;
 
+  @include respond-to($media_medium) {
+    display: none;
+  }
+
   &__list {
     width: 100%;
     height: 100%;
