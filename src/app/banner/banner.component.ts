@@ -19,6 +19,7 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
 
   private slideWidth: number = 0;
   private slideIndex: number = 0;
+  private slideChangeTime = 2000;
 
   private swipeCoord: [number, number];
   private swipeTime: number;
@@ -31,7 +32,7 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
   constructor(
     private bannerService: BannerService,
     private deviceService: DeviceService
-    ) {
+  ) {
     super();
   }
 
@@ -103,15 +104,14 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
         if (swipe === 'next') {
           if (this.slideIndex < this.banner.length - 1) {
             this.slideIndex += 1;
-            this.transformSlide();
-          } else if (this.slideIndex === this.banner.length - 1) {
+          } else {
             this.slideIndex = 0;
-            this.transformSlide();
           }
+          this.updateSliderPosition();
         } else {
           if (this.slideIndex > 0) {
             this.slideIndex -= 1;
-            this.transformSlide();
+            this.updateSliderPosition();
           }
         }
       }
@@ -119,28 +119,19 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
   }
 
   private showSlides() {
-    let offset: number;
-
-    this.slideIndex++;
-
     if (this.slideIndex === this.banner.length) {
       this.slideIndex = 0;
-      offset = this.slideWidth;
     }
 
-    if (this.slideIndex < this.banner.length) {
-      offset = this.slideIndex * this.slideWidth;
-    }
-
-    this.sliderTrackRef.nativeElement.style.transition = 'transform 0.5s';
-    this.sliderTrackRef.nativeElement.style.transform = `translate3d(-${offset}px, 0px, 0px)`;
+    this.updateSliderPosition();
 
     setTimeout(() => {
+      this.slideIndex++;
       this.showSlides();
-    }, 2000);
+    }, this.slideChangeTime);
   }
 
-  private transformSlide() {
+  private updateSliderPosition() {
     this.sliderTrackRef.nativeElement.style.transition = 'transform 0.5s';
     this.sliderTrackRef.nativeElement.style.transform = `translate3d(-${this.slideIndex * this.slideWidth}px, 0px, 0px)`;
   }
