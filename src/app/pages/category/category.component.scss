@@ -42,54 +42,94 @@
 
 .child-categories {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   margin-top: 10px;
   padding: 5px 0;
 
-  @include respond-to($media_medium) {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
   &__category {
-    width: 100%;
-    margin: 3px 0;
+    width: calc(100% / 3);
+    border-width: 0 1px 1px 0;
+    border-color: $borderColor;
+    border-style: solid;
+
+    &:nth-child(3n) {
+      border-right: none;
+    }
 
     @include respond-to($media_medium) {
-      width: 33.33%;
-      padding: 0 5px;
+      width: calc(100% / 5);
+
+      &:nth-child(3n) {
+        border-right: 1px solid $borderColor;
+      }
+
+      &:nth-child(5n) {
+        border-right: none;
+      }
+    }
+
+    @include respond-to(800px) {
+      width: calc(100% / 6);
+
+      &:nth-child(3n), &:nth-child(5n) {
+        border-right: 1px solid $borderColor;
+      }
+
+      &:nth-child(6n) {
+        border-right: none;
+      }
+    }
+
+    @include respond-to($media_large) {
+      width: calc(100% / 8);
+
+      &:nth-child(3n), &:nth-child(5n), &:nth-child(6n) {
+        border-right: 1px solid $borderColor;
+      }
+
+      &:nth-child(8n) {
+        border-right: none;
+      }
     }
   }
 
   &__link {
     display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
-    padding: 5px 15px;
-    border-radius: 5px;
-    font-size: 18px;
-    box-shadow: 0 0 3px #c3c3c3;
+    height: 100%;
+    padding: 5px;
+    font-size: 12px;
+
 
     @include respond-to($media_medium) {
-      padding: 10px 15px;
+      padding: 8px 5px;
+      font-size: 13px;
 
       &:hover {
-        background-color: rgba($grey, 0.1);
-        box-shadow: 1px 1px 6px 0 #cccccc;
-        transition: all 0.2s ease-in-out;
-        color: $dark;
+        color: $action;
       }
     }
   }
 
   &__img {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
-    margin-right: 10px;
     border-radius: 3px;
+
+    @include respond-to($media_large) {
+      width: 100px;
+      height: 100px;
+    }
   }
 
   &__name {
+    margin-top: 5px;
+    text-align: center;
+    hyphens: auto;
+
     @include respond-to($media_medium) {
       overflow: hidden;
       text-overflow: ellipsis;
