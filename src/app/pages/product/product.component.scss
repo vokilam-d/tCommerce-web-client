@@ -66,13 +66,18 @@ $arrowSize: 10px;
   }
 
   &__info {
+    display: flex;
+    flex-direction: column;
+
     @include respond-to($media_medium) {
+      display: initial;
       width: 48%;
     }
   }
 
   &__store-info {
     margin: 15px 0 0;
+    order: 1;
 
     @include respond-to($media_medium) {
       margin-top: 0;
@@ -135,6 +140,7 @@ $arrowSize: 10px;
     margin: 20px 0 0;
     padding: 20px 0 0;
     border-top: 1px solid $borderColor;
+    order: 0;
 
     @include respond-to($media_large) {
       display: flex;
@@ -256,6 +262,7 @@ $arrowSize: 10px;
     padding: 20px 0 0;
     border-top: 1px solid $borderColor;
     font-size: 16px;
+    order: 2;
   }
 
   &__details {
