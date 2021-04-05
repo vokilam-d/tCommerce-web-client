@@ -19,7 +19,9 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
 
   private slideWidth: number = 0;
   private slideIndex: number = 0;
-  private slideChangeTime = 2000;
+
+  private sliderTimeout: number;
+  private slideChangeTime = 3000;
 
   private swipeCoord: [number, number];
   private swipeTime: number;
@@ -89,6 +91,7 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
     if (action === 'start') {
       this.swipeCoord = coord;
       this.swipeTime = time;
+      clearTimeout(this.sliderTimeout);
     } else if (action === 'end') {
       const direction = [coord[0] - this.swipeCoord[0], coord[1] - this.swipeCoord[1]];
       const duration = time - this.swipeTime;
@@ -112,6 +115,8 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
           }
         }
       }
+
+      this.showSlides();
     }
   }
 
@@ -123,10 +128,10 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
 
     this.updateSliderPosition();
 
-    setTimeout(() => {
+    this.sliderTimeout = setTimeout(() => {
       this.slideIndex++;
       this.showSlides();
-    }, this.slideChangeTime);
+    }, this.slideChangeTime) as any;
   }
 
   private updateSliderPosition() {

@@ -6,9 +6,13 @@
     >
       <img class="banner__img" [src]="setBannerItemSrc(bannerItem)" alt="img">
 
+      <div class="banner__sale-label" *ngIf="bannerItem?.price && !bannerItem?.oldPrice">
+        <span class="banner__sale-label--price-black">{{ bannerItem?.price }} грн</span>
+      </div>
+
       <div class="banner__sale-label" *ngIf="bannerItem?.oldPrice">
         <span class="banner__sale-label--discount">-{{ bannerItem?.discountValue }}%</span>
-        <span class="banner__sale-label--price">{{ bannerItem?.price }} грн</span>
+        <span class="banner__sale-label--price-red">{{ bannerItem?.price }} грн</span>
         <span class="banner__sale-label--old-price">{{ bannerItem?.oldPrice }} грн</span>
       </div>
 
@@ -30,9 +34,13 @@
       >
         <img class="banner__img" [src]="setBannerItemSrc(bannerItem)" alt="img">
 
+        <div class="banner__sale-label" *ngIf="bannerItem?.price && !bannerItem?.oldPrice">
+          <span class="banner__sale-label--price-black">{{ bannerItem?.price }} грн</span>
+        </div>
+
         <div class="banner__sale-label" *ngIf="bannerItem?.oldPrice">
           <span class="banner__sale-label--discount">-{{ bannerItem?.discountValue }}%</span>
-          <span class="banner__sale-label--price">{{ bannerItem?.price }} грн</span>
+          <span class="banner__sale-label--price-red">{{ bannerItem?.price }} грн</span>
           <span class="banner__sale-label--old-price">{{ bannerItem?.oldPrice }} грн</span>
         </div>
 

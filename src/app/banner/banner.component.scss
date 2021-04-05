@@ -103,8 +103,13 @@
       color: #fff;
     }
 
-    &--price {
+    &--price-red {
       color: red;
+      font-size: 19px;
+    }
+
+    &--price-black {
+      color: $dark;
       font-size: 19px;
     }
 
