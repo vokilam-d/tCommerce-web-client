@@ -38,8 +38,8 @@
         </div>
 
         <div class="banner__sale-label sale-label" *ngIf="bannerItem?.oldPrice">
-          <span class="sale-label__price sale-label__price--red">{{ bannerItem?.price }} грн</span>
           <span class="sale-label__old-price">{{ bannerItem?.oldPrice }} грн</span>
+          <span class="sale-label__price sale-label__price--red">{{ bannerItem?.price }} грн</span>
         </div>
 
         <span class="banner__label" [ngClass]="getLabelClass(bannerItem)" *ngIf="bannerItem?.label">
