@@ -93,30 +93,40 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+}
 
-    &--discount {
-      align-self: flex-end;
-      padding: 5px 6px;
-      border-radius: 2px;
-      font-size: 13px;
-      background: saturate($red, 8%);
-      color: #fff;
-    }
+.sale-label {
 
-    &--price-red {
+  &__discount {
+    align-self: flex-end;
+    margin: 0 0 2px;
+    padding: 5px 6px;
+    border-radius: 2px;
+    font-size: 13px;
+    background: saturate($red, 8%);
+    color: #fff;
+  }
+
+  &__price {
+    padding: 4px 6px 3px;
+    border-radius: 3px;
+    font-size: 19px;
+    background-color: rgba($action, 0.6);
+
+    &--red {
       color: red;
-      font-size: 19px;
     }
 
-    &--price-black {
+    &--black {
       color: $dark;
-      font-size: 19px;
     }
+  }
 
-    &--old-price {
-      color: rgba($dark, 0.6);
-      text-decoration: line-through;
-    }
+  &__old-price {
+    font-size: 17px;
+    color: rgba($dark, 0.6);
+    text-decoration: line-through;
   }
 }
 

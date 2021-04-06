@@ -6,14 +6,13 @@
     >
       <img class="banner__img" [src]="setBannerItemSrc(bannerItem)" alt="img">
 
-      <div class="banner__sale-label" *ngIf="bannerItem?.price && !bannerItem?.oldPrice">
-        <span class="banner__sale-label--price-black">{{ bannerItem?.price }} грн</span>
+      <div class="banner__sale-label sale-label" *ngIf="bannerItem?.price && !bannerItem?.oldPrice">
+        <span class="sale-label__price sale-label__price--black">{{ bannerItem?.price }} грн</span>
       </div>
 
-      <div class="banner__sale-label" *ngIf="bannerItem?.oldPrice">
-        <span class="banner__sale-label--discount">-{{ bannerItem?.discountValue }}%</span>
-        <span class="banner__sale-label--price-red">{{ bannerItem?.price }} грн</span>
-        <span class="banner__sale-label--old-price">{{ bannerItem?.oldPrice }} грн</span>
+      <div class="banner__sale-label sale-label" *ngIf="bannerItem?.oldPrice">
+        <span class="sale-label__old-price">{{ bannerItem?.oldPrice }} грн</span>
+        <span class="sale-label__price sale-label__price--red">{{ bannerItem?.price }} грн</span>
       </div>
 
       <span class="banner__label" [ngClass]="getLabelClass(bannerItem)" *ngIf="bannerItem?.label">
@@ -34,14 +33,13 @@
       >
         <img class="banner__img" [src]="setBannerItemSrc(bannerItem)" alt="img">
 
-        <div class="banner__sale-label" *ngIf="bannerItem?.price && !bannerItem?.oldPrice">
-          <span class="banner__sale-label--price-black">{{ bannerItem?.price }} грн</span>
+        <div class="banner__sale-label sale-label" *ngIf="bannerItem?.price && !bannerItem?.oldPrice">
+          <span class="sale-label__price sale-label__price--black">{{ bannerItem?.price }} грн</span>
         </div>
 
-        <div class="banner__sale-label" *ngIf="bannerItem?.oldPrice">
-          <span class="banner__sale-label--discount">-{{ bannerItem?.discountValue }}%</span>
-          <span class="banner__sale-label--price-red">{{ bannerItem?.price }} грн</span>
-          <span class="banner__sale-label--old-price">{{ bannerItem?.oldPrice }} грн</span>
+        <div class="banner__sale-label sale-label" *ngIf="bannerItem?.oldPrice">
+          <span class="sale-label__price sale-label__price--red">{{ bannerItem?.price }} грн</span>
+          <span class="sale-label__old-price">{{ bannerItem?.oldPrice }} грн</span>
         </div>
 
         <span class="banner__label" [ngClass]="getLabelClass(bannerItem)" *ngIf="bannerItem?.label">
