@@ -45,8 +45,8 @@ export class AnalyticsService {
     gtag('event', 'add_to_cart', {
       currency: 'UAH',
       items: [{
-        item_id: sku,
-        item_name: productName,
+        id: sku,
+        name: productName,
         price: productPrice,
         currency: 'UAH',
         quantity: 1
@@ -72,8 +72,8 @@ export class AnalyticsService {
     gtag('event', 'remove_from_cart', {
       currency: 'UAH',
       items: [{
-        item_id: sku,
-        item_name: productName,
+        id: sku,
+        name: productName,
         price: productPrice,
         currency: 'UAH',
         quantity: qty
@@ -113,62 +113,62 @@ export class AnalyticsService {
     this.trackEvent('Order success', 'Order success', 'Order success', totalCost);
 
     gtag('event', 'conversion', {
-      'send_to': 'AW-930099759/az7OCJeAt8QBEK_kwLsD',
-      'value': totalCost,
-      'currency': 'UAH',
-      'transaction_id': order.id
+      send_to: 'AW-930099759/az7OCJeAt8QBEK_kwLsD',
+      value: totalCost,
+      currency: 'UAH',
+      transaction_id: order.id
     });
 
     // Below is Artem suggested way of pushing 'purchase' event
-    const products = [];
+    const orderedProducts = [];
     for (const item of order.items) {
       const priceUSD = item.price ? item.price / 28.0 : 0.0;
-      //todo: rework to use backend exchange rate later? USD??
-      products.push({
+      // todo: rework to use backend exchange rate later? USD??
+      orderedProducts.push({
         name: item.name,
         id: item.sku,
         price: priceUSD,
         quantity: item.qty
-      })
+      });
     }
     const priceTotalUSD = order.prices?.totalCost ? order.prices.totalCost / 28.0 : 0.0;
     gtag({
-      'ecommerce': {
-        'purchase': {
-          'actionField': {
-            'id': order.id,
-            'revenue': priceTotalUSD
+      ecommerce: {
+        purchase: {
+          actionField: {
+            id: order.id,
+            revenue: priceTotalUSD
           },
-          'products': products
+          products: orderedProducts
         }
       },
-      'event': 'gtm-ecommerce'
+      event: 'gtm-ecommerce'
     });
 
-    //Maybe instead of the above 'purchase' event we may use only the below 'purchase' event. Lets's use both for now to test
+    // Maybe instead of the above 'purchase' event we may use only the below 'purchase' event. Lets's use both for now to test
     const purchasedItems = [];
     for (const item of order.items) {
       purchasedItems.push({
-        item_id: item.sku,
-        item_name: item.name,
+        id: item.sku,
+        name: item.name,
         price: item.price,
         currency: 'UAH',
         quantity: item.qty
-      })
+      });
     }
     gtag('event', 'purchase', {
       currency: 'UAH',
       items: purchasedItems,
       transaction_id: order.id,
       value: totalCost
-    })
+    });
 
     const purchasedContents = [];
     for (const item of order.items) {
       purchasedContents.push({
         id: item.sku,
         quantity: item.qty
-      })
+      });
     }
     fbq('track', 'Purchase', {
       value: totalCost,
