@@ -8,7 +8,7 @@ import { NotyService } from '../../noty/noty.service';
 import { JsonLdService } from '../../services/json-ld/json-ld.service';
 import { SafeHtml } from '@angular/platform-browser';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
-import { takeUntil } from 'rxjs/operators';
+import { finalize, takeUntil } from 'rxjs/operators';
 import { DeviceService } from '../../services/device-detector/device.service';
 import { ScrollToService } from '../../services/scroll-to/scroll-to.service';
 import { ESort } from '../../shared/enums/sort.enum';
@@ -34,6 +34,7 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   page: number;
   sortOptions: ESort[] = [ESort.New, ESort.Old, ESort.Popularity,ESort.HighRating, ESort.LowRating];
   inputPlaceholder: string;
+  isLoading: boolean = false;
   get averageReviewsRating(): number { return this.storeReviewService.averageRating; }
   get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
@@ -108,7 +109,10 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
     reviewDto.rating = formValue.rating;
     reviewDto.source = formValue.source;
 
+    this.isLoading = true;
+
     this.storeReviewService.addReview(reviewDto)
+      .pipe(finalize(() => this.isLoading = false))
       .subscribe(
         response => {
           this.reviews.unshift(response.data);

@@ -49,7 +49,16 @@
           <input class="add-review__input" [formControlName]="controlNames.Email" [id]="controlNames.Email" type="email" required>
         </div>
 
-        <button class="btn add-review__btn add-review__submit" type="submit">{{ 'add_review.leave_review' | translate }}</button>
+        <button
+          class="btn add-review__btn add-review__submit form__submit"
+          [class.form__submit--loading]="isLoading"
+          [disabled]="isLoading"
+          type="submit"
+        >
+          {{ 'add_review.leave_review' | translate }}
+
+          <preloader class="form__submit-preloader" *ngIf="isLoading"></preloader>
+        </button>
       </div>
     </div>
   </form>

@@ -11,6 +11,7 @@ import { API_HOST, DEFAULT_ERROR_TEXT } from '../../../shared/constants';
 import { NotyService } from '../../../noty/noty.service';
 import { DeviceService } from '../../../services/device-detector/device.service';
 import { LanguageService } from '../../../services/language/language.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'product-details',
@@ -22,6 +23,7 @@ export class ProductDetailsComponent implements OnInit {
   jsonLd: SafeHtml;
   mediaUploadUrl: string = `${API_HOST}/api/v1/product-reviews/media`;
   reviews: ProductReviewDto[] = [];
+  isLoading: boolean = false;
 
   @Input() product: ProductDto;
   @ViewChild(AddReviewComponent) addReviewCmp: AddReviewComponent;
@@ -106,8 +108,10 @@ export class ProductDetailsComponent implements OnInit {
     reviewDto.productVariantId = this.product.variantId;
     reviewDto.productName = this.product.name;
 
+    this.isLoading = true;
 
     this.productReviewService.addReview(reviewDto)
+      .pipe(finalize(() => this.isLoading = false))
       .subscribe(
         response => {
           this.reviews.push(response.data);
