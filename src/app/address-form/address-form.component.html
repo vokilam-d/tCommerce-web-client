@@ -10,7 +10,7 @@
   >
     <label for="addr-lastName" class="form__label">{{ 'global.last_name' | translate }}</label>
     <div class="form__control">
-      <input class="form__input" [formControl]="lastName" type="text" id="addr-lastName">
+      <input class="form__input capitalize" [formControl]="lastName" type="text" id="addr-lastName">
 
       <div class="form__input-error" *ngIf="isControlInvalid(lastName)">
         {{ 'address_form.required_field' | translate }}
@@ -24,7 +24,7 @@
   >
     <label for="addr-firstName" class="form__label">{{ 'global.name' | translate }}</label>
     <div class="form__control">
-      <input class="form__input" [formControl]="firstName" type="text" id="addr-firstName">
+      <input class="form__input capitalize" [formControl]="firstName" type="text" id="addr-firstName">
 
       <div class="form__input-error" *ngIf="isControlInvalid(firstName)">
         {{ 'address_form.required_field' | translate }}
@@ -38,7 +38,7 @@
   >
     <label for="addr-middleName" class="form__label">{{ 'global.parent_name' | translate }}</label>
     <div class="form__control">
-      <input class="form__input" [formControl]="middleName" type="text" id="addr-middleName">
+      <input class="form__input capitalize" [formControl]="middleName" type="text" id="addr-middleName">
 
       <div class="form__input-error" *ngIf="isControlInvalid(middleName)">
         {{ 'address_form.required_field' | translate }}
