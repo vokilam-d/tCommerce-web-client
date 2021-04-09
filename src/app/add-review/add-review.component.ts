@@ -53,6 +53,7 @@ export class AddReviewComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('reviewTextareaRef') reviewTextareaRef: ElementRef;
 
   @Input() isColumnLayout: boolean;
+  @Input() isLoading: boolean;
   @Input() inputPlaceholder: string = '';
   @Input() uploadUrl: string;
   @Output() addReview = new EventEmitter<IAddReviewFormValue>();
