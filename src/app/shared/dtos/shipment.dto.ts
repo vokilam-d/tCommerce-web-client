@@ -12,7 +12,5 @@ export class ShipmentDto {
   recipient?: ShipmentAddressDto;
   shipmentType?: ShipmentTypeEnum = ShipmentTypeEnum.WAREHOUSE_WAREHOUSE;
   payerType?: ShipmentPayerEnum = ShipmentPayerEnum.RECIPIENT;
-  paymentMethod?: ShipmentPaymentMethodEnum = ShipmentPaymentMethodEnum.CASH;
-  date?: string;
   backwardMoneyDelivery?: string;
 }

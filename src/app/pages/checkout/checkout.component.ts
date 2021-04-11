@@ -4,7 +4,6 @@ import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive'
 import { filter, finalize, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { OrderCustomerInfoComponent } from './order-customer-info/order-customer-info.component';
-import { AddOrderDto } from '../../shared/dtos/order.dto';
 import { OrderService } from './order.service';
 import { DEFAULT_ERROR_TEXT, MINIMAL_ORDER_COST, UPLOADED_HOST } from '../../shared/constants';
 import { normalizePhoneNumber } from '../../shared/helpers/normalize-phone-number.function';
@@ -13,6 +12,7 @@ import { HeadService } from '../../services/head/head.service';
 import { AnalyticsService } from '../../services/analytics/analytics.service';
 import { vibrate } from '../../shared/helpers/vibrate.function';
 import { LanguageService } from '../../services/language/language.service';
+import { AddOrderDto } from '../../shared/dtos/add-order.dto';
 
 @Component({
   selector: 'checkout',
@@ -82,7 +82,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
     dto.address.phone = normalizePhoneNumber(dto.address.phone);
     dto.paymentMethodId = this.orderService.paymentMethod.id;
     dto.isCallbackNeeded = this.orderService.isCallbackNeeded;
-    dto.clientNote = this.orderService.clientNote;
+    dto.note = this.orderService.note;
     dto.items = this.customerService.cart;
 
     this.orderError = null;
