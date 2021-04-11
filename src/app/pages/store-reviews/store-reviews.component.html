@@ -18,7 +18,12 @@
 
       <div class="store-reviews__actions">
         <div class="store-reviews__add-review">
-          <add-review [uploadUrl]="mediaUploadUrl" [inputPlaceholder]="inputPlaceholder" (addReview)="onReviewAdd($event)"></add-review>
+          <add-review
+            [uploadUrl]="mediaUploadUrl"
+            [inputPlaceholder]="inputPlaceholder"
+            [isLoading]="isLoading"
+            (addReview)="onReviewAdd($event)"
+          ></add-review>
         </div>
 
         <div class="sorting">

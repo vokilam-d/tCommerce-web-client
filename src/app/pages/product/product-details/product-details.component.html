@@ -23,7 +23,13 @@
         <span class="reviews__count" *ngIf="product.textReviewsCount> 0">({{ product.textReviewsCount }})</span>
       </h3>
 
-      <add-review class="reviews__add" [isColumnLayout]="true" [uploadUrl]="mediaUploadUrl" (addReview)="onReviewAdd($event)"></add-review>
+      <add-review
+        class="reviews__add"
+        [isColumnLayout]="true"
+        [uploadUrl]="mediaUploadUrl"
+        [isLoading]="isLoading"
+        (addReview)="onReviewAdd($event)"
+      ></add-review>
     </div>
 
     <review class="reviews__review"

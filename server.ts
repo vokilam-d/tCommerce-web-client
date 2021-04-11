@@ -17,7 +17,7 @@ import { logDebug } from './src/app/shared/helpers/debug.function';
 
 let isPagesUpdateStarted: boolean = false;
 let pages: PageRegistryDto[] = [];
-const thirtySeconds = 30 * 1000;
+const pagesUpdateInterval = 10 * 1000; // 10 sec
 
 async function updatePages(apiHost: string) {
   if (apiHost.indexOf('http') !== 0) {
@@ -38,7 +38,7 @@ async function updatePages(apiHost: string) {
     console.error(ex.response ? ex.response.data : ex.toString());
   }
 
-  setTimeout(() => updatePages(apiHost), thirtySeconds);
+  setTimeout(() => updatePages(apiHost), pagesUpdateInterval);
 }
 
 async function handleUpdatePages(req: express.Request) {

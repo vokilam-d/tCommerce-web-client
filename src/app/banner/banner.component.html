@@ -4,17 +4,47 @@
        *ngFor="let bannerItem of banner; let i = index"
        [langRouterLink]="'/' + bannerItem.slug"
     >
-      <img class="banner__img" [src]="setBannerItemSrc(bannerItem)" alt="img">
-
-      <div class="banner__sale-label" *ngIf="bannerItem?.oldPrice">
-        <span class="banner__sale-label--discount">-{{ bannerItem?.discountValue }}%</span>
-        <span class="banner__sale-label--price">{{ bannerItem?.price }} грн</span>
-        <span class="banner__sale-label--old-price">{{ bannerItem?.oldPrice }} грн</span>
-      </div>
-
-      <span class="banner__label" [ngClass]="getLabelClass(bannerItem)" *ngIf="bannerItem?.label">
-        {{ bannerItem.label.text }}
-      </span>
+      <ng-container *ngTemplateOutlet="bannerItemTmpl; context: { bannerItem: bannerItem }"></ng-container>
     </a>
   </div>
 </section>
+
+<div class="slider">
+  <div class="slider__list" #sliderListRef>
+    <div class="slider__track" #sliderTrackRef>
+      <a class="slider__slide banner__item banner__item--{{i}}"
+         *ngFor="let bannerItem of banner; let i = index"
+         [langRouterLink]="'/' + bannerItem.slug"
+         (touchstart)="swipe($event, 'start')"
+         (touchend)="swipe($event, 'end')"
+      >
+        <ng-container *ngTemplateOutlet="bannerItemTmpl; context: { bannerItem: bannerItem }"></ng-container>
+      </a>
+    </div>
+
+    <div class="slider__dots">
+      <span
+        class="slider__dot"
+        *ngFor="let bannerItem of banner; let i = index"
+        [ngClass]="getSlideActiveClass(i)"
+      ></span>
+    </div>
+  </div>
+</div>
+
+<ng-template #bannerItemTmpl let-bannerItem="bannerItem">
+  <img class="banner__img" [src]="setBannerItemSrc(bannerItem)" alt="img">
+
+  <div class="banner__sale-label sale-label" *ngIf="bannerItem?.price && !bannerItem?.oldPrice">
+    <span class="sale-label__price sale-label__price--black">{{ bannerItem?.price }} грн</span>
+  </div>
+
+  <div class="banner__sale-label sale-label" *ngIf="bannerItem?.oldPrice">
+    <span class="sale-label__old-price">{{ bannerItem?.oldPrice }} грн</span>
+    <span class="sale-label__price sale-label__price--red">{{ bannerItem?.price }} грн</span>
+  </div>
+
+  <span class="banner__label" [ngClass]="getLabelClass(bannerItem)" *ngIf="bannerItem?.label">
+    {{ bannerItem.label.text }}
+  </span>
+</ng-template>
