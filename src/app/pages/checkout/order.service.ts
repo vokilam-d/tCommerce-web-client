@@ -16,7 +16,7 @@ export class OrderService {
 
   paymentMethod: PaymentMethodDto;
   isCallbackNeeded: boolean = false;
-  clientNote: string = '';
+  note: string = '';
   addressType$ = new BehaviorSubject<AddressTypeEnum>(null);
 
   constructor(private http: HttpClient,
@@ -35,7 +35,7 @@ export class OrderService {
   private resetOrder() {
     this.paymentMethod = null;
     this.isCallbackNeeded = false;
-    this.clientNote = '';
+    this.note = '';
 
     this.customerService.resetCart();
   }

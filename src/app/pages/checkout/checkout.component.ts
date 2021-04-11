@@ -82,7 +82,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
     dto.address.phone = normalizePhoneNumber(dto.address.phone);
     dto.paymentMethodId = this.orderService.paymentMethod.id;
     dto.isCallbackNeeded = this.orderService.isCallbackNeeded;
-    dto.clientNote = this.orderService.clientNote;
+    dto.note = this.orderService.note;
     dto.items = this.customerService.cart;
 
     this.orderError = null;

@@ -1,31 +1,32 @@
 import { OrderItemDto } from './order-item.dto';
 import { ShipmentAddressDto } from './shipment-address.dto';
-import { ShipmentTypeEnum } from '../enums/shipment-type.enum';
 import { ShipmentDto } from './shipment.dto';
 import { OrderPricesDto } from './order-prices.dto';
+import { OrderContactInfoDto } from './order-contact-info.dto';
+import { ContactInfoDto } from './contact-info.dto';
 
-class BaseOrderDto {
-  email: string;
+export class AddOrderDto {
+  customerContactInfo: OrderContactInfoDto;
+  recipientContactInfo: ContactInfoDto;
+  address: ShipmentAddressDto;
   paymentMethodId: string;
-  shipmentType?: ShipmentTypeEnum;
   isCallbackNeeded: boolean;
   items: OrderItemDto[];
-  clientNote: string;
+  note: string;
 }
 
-export class AddOrderDto extends BaseOrderDto {
-  address: ShipmentAddressDto;
-}
-
-export class OrderDto extends BaseOrderDto {
+export class OrderDto {
   id: string;
-  shippingMethodName: string;
   paymentMethodName: string;
+  contactInfo: OrderContactInfoDto;
   shipment: ShipmentDto;
-  status: any;
+  status: string;
   prices: OrderPricesDto;
   createdAt: Date;
   isOnlinePayment: boolean;
+  isCallbackNeeded: boolean;
+  items: OrderItemDto[];
+  note: string;
 
   // custom transforms
   isExpanded: boolean;
