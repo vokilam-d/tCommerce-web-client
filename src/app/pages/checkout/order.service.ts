@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { PaymentMethodDto } from '../../shared/dtos/payment-method.dto';
 import { HttpClient } from '@angular/common/http';
-import { AddOrderDto, OrderDto } from '../../shared/dtos/order.dto';
+import { OrderDto } from '../../shared/dtos/order.dto';
 import { CustomerService } from '../../services/customer/customer.service';
 import { tap } from 'rxjs/operators';
 import { ResponseDto } from '../../shared/dtos/response.dto';
 import { API_HOST } from '../../shared/constants';
 import { AddressTypeEnum } from '../../shared/enums/address-type.enum';
 import { BehaviorSubject } from 'rxjs';
+import { AddOrderDto } from '../../shared/dtos/add-order.dto';
 
 @Injectable({
   providedIn: 'root'
