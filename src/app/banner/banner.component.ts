@@ -122,7 +122,7 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
 
   private showSlides() {
     if (this.deviceService.isPlatformServer()) { return; }
-    if (this.slideIndex === this.banner.length) {
+    if (this.slideIndex === this.banner.length - 1) {
       this.slideIndex = 0;
     }
 
