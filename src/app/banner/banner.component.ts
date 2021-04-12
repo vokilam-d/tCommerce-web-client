@@ -136,7 +136,7 @@ export class BannerComponent extends NgUnsubscribe implements OnInit, AfterViewI
 
   private updateSliderPosition() {
     this.sliderTrackRef.nativeElement.style.transition = 'transform 0.5s';
-    this.sliderTrackRef.nativeElement.style.transform = `translate3d(-${this.slideIndex * this.slideWidth}px, 0px, 0px)`;
+    this.sliderTrackRef.nativeElement.style.transform = `translate3d(-${(this.slideIndex * this.slideWidth) / 2}px, 0px, 0px)`;
   }
 
   public getSlideActiveClass(index: number) {
