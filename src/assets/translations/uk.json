@@ -158,6 +158,7 @@
   "account_orders": {
     "comment": "Коментар",
     "tracking_number": "Номер ТТН Нової пошти",
+    "no_orders": "Тут з'являться залишені Вами замовлення",
     "tracking_status": "Статус посилки"
   },
 

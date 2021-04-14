@@ -4,6 +4,10 @@
 
 <preloader class="preloader" *ngIf="isLoading"></preloader>
 
+<div class="no-orders" *ngIf="!orders?.length">
+  {{ 'account_orders.no_orders' | translate }}
+</div>
+
 <div class="order" *ngFor="let order of orders" [class.order--expanded]="order.isExpanded">
 
   <div class="order__header">
