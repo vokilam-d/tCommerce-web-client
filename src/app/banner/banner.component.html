@@ -21,14 +21,6 @@
         <ng-container *ngTemplateOutlet="bannerItemTmpl; context: { bannerItem: bannerItem }"></ng-container>
       </a>
     </div>
-
-    <div class="slider__dots">
-      <span
-        class="slider__dot"
-        *ngFor="let bannerItem of banner; let i = index"
-        [ngClass]="getSlideActiveClass(i)"
-      ></span>
-    </div>
   </div>
 </div>
 
