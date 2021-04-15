@@ -6,6 +6,11 @@
   color: $red;
 }
 
+.no-orders {
+  margin: 25px 0 0;
+  color: rgba($dark, 0.6);
+}
+
 .order {
   $order: &;
 
@@ -224,4 +229,3 @@
     flex-shrink: 0;
   }
 }
-
