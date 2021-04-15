@@ -15,14 +15,14 @@
 
     <ng-container *ngIf="!infoForm && !passwordForm">
       <div class="info__row">
-        {{ customer.firstName }} {{ customer.lastName }}
+        {{ customer.contactInfo.firstName }} {{ customer.contactInfo.lastName }}
       </div>
 
       <div class="info__row">
-        {{ customer.email }}
+        {{ customer.contactInfo.email }}
       </div>
 
-      <div class="info__row" *ngIf="customer.phoneNumber as phone">
+      <div class="info__row" *ngIf="customer.contactInfo.phoneNumber as phone">
         {{ phone | mask: '+00 (000) 000-00-00-00000000000' }}
       </div>
 
@@ -34,65 +34,18 @@
       </div>
     </ng-container>
 
-    <form class="form info-form" *ngIf="infoForm"
-          [formGroup]="infoForm"
-          (ngSubmit)="onInfoFormSubmit()"
-          ngNativeValidate
-    >
+    <div class="form info-form" *ngIf="infoForm">
 
-      <div class="form__control-container">
-        <label for="firstName" class="form__label">{{ 'global_name' | translate }}</label>
-        <input class="form__input"
-               [class.form__input--invalid]="isControlInvalid(infoForm, 'firstName')"
-               formControlName="firstName"
-               id="firstName"
-               type="text"
-               required
-        >
-      </div>
+      <contact-info [contactInfo]="customer.contactInfo"></contact-info>
 
-      <div class="form__control-container">
-        <label for="lastName" class="form__label">{{ 'global.last_name' | translate }}</label>
-        <input class="form__input"
-               [class.form__input--invalid]="isControlInvalid(infoForm, 'lastName')"
-               formControlName="lastName"
-               id="lastName"
-               type="text"
-               required
-        >
-      </div>
-
-      <div class="form__control-container">
-        <label for="phoneNumber" class="form__label">{{ 'account_customer_info.phone_number' | translate }}</label>
-        <input class="form__input"
-               formControlName="phoneNumber"
-               mask="+00 (000) 000-00-00-00000000000"
-               inputmode="tel"
-               type="text"
-               id="phoneNumber"
-               required
-        >
-      </div>
-
-      <div class="form__control-container">
-        <label for="email" class="form__label">Email</label>
-        <input class="form__input"
-               [class.form__input--invalid]="isControlInvalid(infoForm, 'email')"
-               formControlName="email"
-               id="email"
-               type="email"
-               required
-        >
-      </div>
-
-      <button class="btn form__submit" [class.form__submit--loading]="isLoading" type="submit">
+      <button class="btn form__submit" [class.form__submit--loading]="isLoading" (click)="onInfoFormSubmit()">
         {{ 'global.save' | translate }}
 
         <preloader class="form__submit-preloader" *ngIf="isLoading"></preloader>
       </button>
 
       <button class="btn btn--default info-form__cancel" (click)="closeForms()" type="button">{{ 'global.cancel' | translate }}</button>
-    </form>
+    </div>
 
     <form class="form info-form"
           *ngIf="passwordForm"

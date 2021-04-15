@@ -18,6 +18,7 @@ import { AddressFormModule } from '../../address-form/address-form.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { ContactInfoModule } from '../../contact-info/contact-info.module';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { TranslateModule } from '@ngx-translate/core';
     AddressFormModule,
     NgxMaskModule,
     LangRouterLinkModule,
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    ContactInfoModule
   ]
 })
 export class AccountModule { }

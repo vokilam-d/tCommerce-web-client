@@ -46,7 +46,9 @@
     "oops_something_went_wrong": "Щось пішло не так. Будь ласка, спробуйте пізніше",
     "review_successfully_added": "Ваш відгук успішно залишений",
     "items_cost": "Вартість товарів",
-    "added": "Додано"
+    "added": "Додано",
+    "edit": "Змінити",
+    "contact_info": "Контактна інформація"
   },
 
   "rating": {

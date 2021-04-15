@@ -1,22 +1,33 @@
 <div class="customer-contact-info">
-  <div class="customer-contact-info__title">{{ 'customer_contact_info.contact_info' | translate }}</div>
-
-  <div class="customer-contact-info__email">
-    <label class="form__label" for="email">{{ 'order_customer_info.email' | translate }}</label>
-    <div class="form__control">
-      <input class="form__input"
-             [formControl]="emailControl"
-             [class.form__input--invalid]="isEmailInvalid()"
-             id="email"
-             type="email"
-      >
-
-      <div class="form__input-error" *ngIf="isEmailInvalid()">
-        {{ 'order_customer_info.invalid_email' | translate }}
-      </div>
-    </div>
+  <div class="customer-contact-info__header">
+    <div class="customer-contact-info__title">{{ 'global.contact_info' | translate }}</div>
+    <div class="customer-contact-info__btn" *ngIf="customer" (click)="toggleFormVisibility()">{{ 'global.edit' | translate }}</div>
   </div>
 
-  <contact-info [contactInfo]="contactInfo"></contact-info>
+  <ng-container *ngIf="!customer || isFormVisible; else customerInfo">
+    <div class="customer-contact-info__email">
+      <label class="form__label" for="email">{{ 'order_customer_info.email' | translate }}</label>
+      <div class="form__control">
+        <input class="form__input"
+               [formControl]="emailControl"
+               [class.form__input--invalid]="isEmailInvalid()"
+               id="email"
+               type="email"
+        >
+
+        <div class="form__input-error" *ngIf="isEmailInvalid()">
+          {{ 'order_customer_info.invalid_email' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <contact-info [contactInfo]="contactInfo"></contact-info>
+  </ng-container>
+
+  <ng-template #customerInfo>
+    <div class="customer-contact-info__info">{{ customer.contactInfo.firstName }} {{ customer.contactInfo.middleName }} {{ customer.contactInfo.lastName }}</div>
+    <div class="customer-contact-info__info">{{ customer.contactInfo.email }}</div>
+    <div class="customer-contact-info__info">{{ customer.contactInfo.phoneNumber }}</div>
+  </ng-template>
 </div>
 
