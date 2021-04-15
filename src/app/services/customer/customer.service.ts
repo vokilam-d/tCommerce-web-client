@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, EMPTY, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { CustomerDto, UpdateCustomerDto, UpdatePasswordDto } from '../../shared/dtos/customer.dto';
+import { CustomerDto, UpdatePasswordDto } from '../../shared/dtos/customer.dto';
 import { HttpClient } from '@angular/common/http';
 import { ResponseDto } from '../../shared/dtos/response.dto';
 import { LoginDto } from '../../shared/dtos/login.dto';
@@ -18,6 +18,7 @@ import { CalculatePricesDto } from '../../shared/dtos/calculate-prices.dto';
 import { vibrate } from '../../shared/helpers/vibrate.function';
 import { DeviceService } from '../device-detector/device.service';
 import { onWindowLoad } from '../../shared/helpers/on-window-load.function';
+import { CustomerContactInfoDto } from '../../shared/dtos/customer-contact-info.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +38,8 @@ export class CustomerService { // todo split to CartService
   get customer() { return this._customer.getValue(); }
   get cart() { return this._cart; }
   get isLoggedIn(): boolean { return !!this.customer; }
-  get customerName(): string { return this.customer ? `${this.customer.firstName} ${this.customer.lastName}` : ''; }
-  get customerEmail(): string { return this.customer ? this.customer.email : ''; }
+  get customerName(): string { return this.customer ? `${this.customer.contactInfo.firstName} ${this.customer.contactInfo.lastName}` : ''; }
+  get customerEmail(): string { return this.customer ? this.customer.contactInfo.email : ''; }
 
   constructor(
     private router: Router,
@@ -121,8 +122,8 @@ export class CustomerService { // todo split to CartService
     return this.http.post<ResponseDto<boolean>>(`${API_HOST}/api/v1/customer/confirm-email`, { token });
   }
 
-  updateCustomer(dto: UpdateCustomerDto) {
-    return this.http.patch<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer`, dto)
+  updateCustomer(dto: CustomerContactInfoDto) {
+    return this.http.put<ResponseDto<CustomerDto>>(`${API_HOST}/api/v1/customer/contact-info`, dto)
       .pipe(
         tap(response => this.setCustomer(response.data))
       );
@@ -202,7 +203,7 @@ export class CustomerService { // todo split to CartService
   }
 
   private saveToCart(item: OrderItemDto) {
-    let itemToSave = { ...item };
+    const itemToSave = { ...item };
 
     const alreadyAddedIdx = this._cart.findIndex(cartItem => cartItem.sku === item.sku);
     if (alreadyAddedIdx === -1) {

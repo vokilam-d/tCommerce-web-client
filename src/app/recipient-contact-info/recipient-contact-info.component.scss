@@ -1,0 +1,12 @@
+@import "variables";
+@import "mixins";
+
+.recipient-contact-info {
+  margin: 0 0 15px;
+
+  &__title {
+    margin: 0 0 15px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,30 @@
+<div class="recipient-contact-info">
+  <div class="recipient-contact-info__title">{{ 'address_form.recipient' | translate }}</div>
+
+  <label class="form__control form__control--radio" *ngFor="let recipientType of recipientTypes">
+    <input class="form__radio-input"
+           [value]="recipientType"
+           [formControl]="recipientControl"
+           name="address-type"
+           type="radio"
+    >
+
+    <i class="mbi form__radio-icon"
+       [ngClass]="{
+         'form__radio-icon--checked form__radio-icon--checked:before': recipientControl.value === recipientType,
+         'form__radio-icon--unchecked': recipientControl.value !== recipientType
+       }"
+    ></i>
+
+    <span [ngSwitch]="recipientType">
+      <ng-container *ngSwitchCase="recipientTypeEnum.CUSTOMER">{{ 'address_form.me' | translate }}</ng-container>
+      <ng-container *ngSwitchCase="recipientTypeEnum.ANOTHER_PERSON">{{ 'address_form.another_person' | translate }}</ng-container>
+    </span>
+  </label>
+
+  <ng-container *ngIf="recipientControl.value === recipientTypeEnum.ANOTHER_PERSON">
+
+    <contact-info [contactInfo]="contactInfo"></contact-info>
+
+  </ng-container>
+</div>

@@ -1,0 +1,22 @@
+<div class="customer-contact-info">
+  <div class="customer-contact-info__title">{{ 'customer_contact_info.contact_info' | translate }}</div>
+
+  <div class="customer-contact-info__email">
+    <label class="form__label" for="email">{{ 'order_customer_info.email' | translate }}</label>
+    <div class="form__control">
+      <input class="form__input"
+             [formControl]="emailControl"
+             [class.form__input--invalid]="isEmailInvalid()"
+             id="email"
+             type="email"
+      >
+
+      <div class="form__input-error" *ngIf="isEmailInvalid()">
+        {{ 'order_customer_info.invalid_email' | translate }}
+      </div>
+    </div>
+  </div>
+
+  <contact-info [contactInfo]="contactInfo"></contact-info>
+</div>
+

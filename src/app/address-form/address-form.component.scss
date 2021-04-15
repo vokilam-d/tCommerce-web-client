@@ -1,4 +1,39 @@
 @import "variables";
+@import "mixins";
+
+$breakpoint: 800px;
+
+.address-type-block {
+  &__title {
+    margin: 0 0 15px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+.address-block {
+  margin: 13px 0 0;
+
+  @include respond-to($breakpoint) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0;
+  }
+
+  &__form__control {
+    @include respond-to($breakpoint) {
+      width: calc(50% - 10px);
+      margin: 13px 0 0;
+    }
+
+    &--settlement, &--warehouse, &--street {
+      @include respond-to($media_large) {
+        width: 100%;
+      }
+    }
+  }
+}
 
 .is-default {
   cursor: pointer;

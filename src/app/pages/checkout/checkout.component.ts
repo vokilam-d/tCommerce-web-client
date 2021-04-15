@@ -3,7 +3,7 @@ import { CustomerService } from '../../services/customer/customer.service';
 import { NgUnsubscribe } from '../../shared/directives/ng-unsubscribe.directive';
 import { filter, finalize, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { OrderCustomerInfoComponent } from './order-customer-info/order-customer-info.component';
+import { RecipientAddressComponent } from './recipient-address/recipient-address.component';
 import { OrderService } from './order.service';
 import { DEFAULT_ERROR_TEXT, MINIMAL_ORDER_COST, UPLOADED_HOST } from '../../shared/constants';
 import { normalizePhoneNumber } from '../../shared/helpers/normalize-phone-number.function';
@@ -13,6 +13,8 @@ import { AnalyticsService } from '../../services/analytics/analytics.service';
 import { vibrate } from '../../shared/helpers/vibrate.function';
 import { LanguageService } from '../../services/language/language.service';
 import { AddOrderDto } from '../../shared/dtos/add-order.dto';
+import { CustomerContactInfoComponent } from '../../customer-contact-info/customer-contact-info.component';
+import { RecipientContactInfoComponent } from '../../recipient-contact-info/recipient-contact-info.component';
 
 @Component({
   selector: 'checkout',
@@ -32,7 +34,9 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   get isLoggedIn() { return this.customerService.isLoggedIn; }
   get canPlaceOrder() { return this.prices.totalCost >= this.minimalOrderCost; }
 
-  @ViewChild(OrderCustomerInfoComponent) infoCmp: OrderCustomerInfoComponent;
+  @ViewChild(RecipientAddressComponent) recipientAddressCmp: RecipientAddressComponent;
+  @ViewChild(CustomerContactInfoComponent) customerContactInfoCmp: CustomerContactInfoComponent;
+  @ViewChild(RecipientContactInfoComponent) recipientContactInfoCmp: RecipientContactInfoComponent;
   @ViewChild('checkoutRef') checkoutRef: ElementRef;
 
   constructor(
@@ -63,13 +67,19 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   }
 
   placeOrder() {
-    if (!this.infoCmp.checkInfoValidity()) {
+    if (!this.customerContactInfoCmp.checkValidity()) {
+      return;
+    }
+    if (!this.recipientContactInfoCmp.checkValidity()) {
+      return;
+    }
+    if (!this.recipientAddressCmp.checkAddressValidity()) {
       return;
     }
     if (!this.orderService.paymentMethod) {
       this.languageService.getTranslation('checkout.payment_not_selected').subscribe(text => {
         this.setError(text);
-      })
+      });
       return;
     }
     if (!this.canPlaceOrder) {
@@ -77,9 +87,9 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
     }
 
     const dto = new AddOrderDto();
-    dto.email = this.infoCmp.getEmail();
-    dto.address = this.infoCmp.getAddress();
-    dto.address.phone = normalizePhoneNumber(dto.address.phone);
+    dto.customerContactInfo = this.customerContactInfoCmp.getValue();
+    dto.recipientContactInfo = this.recipientContactInfoCmp.getValue();
+    dto.address = this.recipientAddressCmp.getAddress();
     dto.paymentMethodId = this.orderService.paymentMethod.id;
     dto.isCallbackNeeded = this.orderService.isCallbackNeeded;
     dto.note = this.orderService.note;
@@ -120,7 +130,7 @@ export class CheckoutComponent extends NgUnsubscribe implements OnInit {
   private setMeta() {
     this.languageService.getTranslation('checkout.checkout').subscribe(text => {
       this.headService.setMeta({ title: `Klondike | ${text}`, description: text });
-    })
+    });
   }
 
   setItemImg(item) {

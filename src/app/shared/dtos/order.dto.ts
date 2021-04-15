@@ -1,12 +1,12 @@
 import { OrderItemDto } from './order-item.dto';
 import { ShipmentDto } from './shipment.dto';
 import { OrderPricesDto } from './order-prices.dto';
-import { OrderContactInfoDto } from './order-contact-info.dto';
+import { CustomerContactInfoDto } from './customer-contact-info.dto';
 
 export class OrderDto {
   id: string;
   paymentMethodName: string;
-  contactInfo: OrderContactInfoDto;
+  customerContactInfo: CustomerContactInfoDto;
   shipment: ShipmentDto;
   status: string;
   prices: OrderPricesDto;
