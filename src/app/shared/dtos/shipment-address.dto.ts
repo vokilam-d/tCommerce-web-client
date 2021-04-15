@@ -1,5 +1,5 @@
 import { AddressTypeEnum } from '../enums/address-type.enum';
-import { recipientTypeEnum } from '../enums/recipient-type.enum';
+import { RecipientTypeEnum } from '../enums/recipient-type.enum';
 
 export class ShipmentAddressDto {
   isDefault: boolean = false;
@@ -8,7 +8,7 @@ export class ShipmentAddressDto {
   settlementFull: string = '';
   settlementId: string = '';
   addressType: AddressTypeEnum = AddressTypeEnum.WAREHOUSE;
-  recipientType: recipientTypeEnum = recipientTypeEnum.CUSTOMER;
+  recipientType: RecipientTypeEnum = RecipientTypeEnum.CUSTOMER;
   addressId: string = '';
   address?: string = '';
   addressFull?: string = '';

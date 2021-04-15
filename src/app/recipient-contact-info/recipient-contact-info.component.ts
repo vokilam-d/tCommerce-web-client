@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { recipientTypeEnum } from '../shared/enums/recipient-type.enum';
+import { RecipientTypeEnum } from '../shared/enums/recipient-type.enum';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { ContactInfoDto } from '../shared/dtos/contact-info.dto';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
@@ -15,8 +15,8 @@ export class RecipientContactInfoComponent extends NgUnsubscribe implements OnIn
 
   contactInfo: ContactInfoDto;
 
-  recipientTypes: recipientTypeEnum[] = [recipientTypeEnum.CUSTOMER, recipientTypeEnum.ANOTHER_PERSON];
-  recipientTypeEnum = recipientTypeEnum;
+  recipientTypes: RecipientTypeEnum[] = [RecipientTypeEnum.CUSTOMER, RecipientTypeEnum.ANOTHER_PERSON];
+  recipientTypeEnum = RecipientTypeEnum;
   recipientControl: FormControl = new FormControl();
 
   @ViewChild(ContactInfoComponent) contactInfoCmp: ContactInfoComponent;
@@ -31,19 +31,19 @@ export class RecipientContactInfoComponent extends NgUnsubscribe implements OnIn
   }
 
   private setDefaultRecipientOption() {
-    this.recipientControl.setValue(recipientTypeEnum.CUSTOMER);
+    this.recipientControl.setValue(RecipientTypeEnum.CUSTOMER);
   }
 
   private handleRecipientControl() {
     this.recipientControl.valueChanges
       .pipe( takeUntil(this.ngUnsubscribe) )
       .subscribe(value => {
-        this.contactInfo = value === recipientTypeEnum.CUSTOMER ? null : new ContactInfoDto();
+        this.contactInfo = value === RecipientTypeEnum.CUSTOMER ? null : new ContactInfoDto();
       });
   }
 
   checkValidity(): boolean {
-    if (this.recipientControl.value === recipientTypeEnum.CUSTOMER) {
+    if (this.recipientControl.value === RecipientTypeEnum.CUSTOMER) {
       return true;
     } else {
       return this.contactInfoCmp.checkValidity();
@@ -51,7 +51,7 @@ export class RecipientContactInfoComponent extends NgUnsubscribe implements OnIn
   }
 
   getValue(): ContactInfoDto {
-    if (this.recipientControl.value === recipientTypeEnum.CUSTOMER) {
+    if (this.recipientControl.value === RecipientTypeEnum.CUSTOMER) {
       return null;
     } else {
       return this.contactInfoCmp.getValue();
