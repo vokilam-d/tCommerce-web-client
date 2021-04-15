@@ -9,10 +9,8 @@ import { takeUntil } from 'rxjs/operators';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
 import { ScrollToService } from '../services/scroll-to/scroll-to.service';
 import { merge } from 'rxjs';
-import { DEFAULT_PHONE_NUMBER_VALUE } from '../shared/constants';
-import { CustomValidators } from '../shared/classes/validators';
 import { ShipmentPayerEnum } from '../shared/enums/shipment-payer.enum';
-import { recipientTypeEnum } from '../shared/enums/recipient-type.enum';
+import { markControlsAsTouched } from '../shared/helpers/mark-controls-as-touched.function';
 
 export type ShipmentPayerMap = Map<AddressTypeEnum, ShipmentPayerEnum>;
 
@@ -25,11 +23,9 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
 
   addressForm: FormGroup;
   addressTypes: AddressTypeEnum[] = [AddressTypeEnum.WAREHOUSE, AddressTypeEnum.DOORS];
-  recipientTypes: recipientTypeEnum[] = [recipientTypeEnum.CUSTOMER, recipientTypeEnum.ANOTHER_PERSON];
 
   addressTypeEnum = AddressTypeEnum;
   shipmentPayerEnum = ShipmentPayerEnum;
-  recipientTypeEnum = recipientTypeEnum;
 
   get settlementIdControl() {
     return this.addressForm.get(settlementIdProp);
@@ -63,14 +59,6 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
   private buildAddressForm(address: ShipmentAddressDto) {
     const controls: Partial<Record<keyof ShipmentAddressDto, any>> = {
       isDefault: [address.isDefault],
-      firstName: [address.firstName, Validators.required],
-      lastName: [address.lastName, Validators.required],
-      middleName: [address.middleName],
-      phone: [address.phone || DEFAULT_PHONE_NUMBER_VALUE, CustomValidators.phoneNumber],
-      recipientFirstName: [address.recipientFirstName, Validators.required],
-      recipientMiddleName: [address.recipientMiddleName, Validators.required],
-      recipientLastName: [address.recipientLastName, Validators.required],
-      recipientPhone: [address.recipientPhone || DEFAULT_PHONE_NUMBER_VALUE, CustomValidators.phoneNumber],
       addressType: [address.addressType, Validators.required],
       recipientType: [address.recipientType, Validators.required],
       settlement: [address.settlement, Validators.required],
@@ -91,18 +79,6 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
     this.handleAutoResetFields();
   }
 
-  private validateControls(form: FormGroup | FormArray) {
-    Object.keys(form.controls).forEach(controlName => {
-      const control = form.get(controlName);
-
-      if (control instanceof FormControl) {
-        control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup || control instanceof FormArray) {
-        this.validateControls(control);
-      }
-    });
-  }
-
   isControlInvalid(control: AbstractControl) {
     return !control.valid && control.touched;
   }
@@ -120,7 +96,7 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
     }
 
     if (!isValid) {
-      this.validateControls(this.addressForm);
+      markControlsAsTouched(this.addressForm);
       this.scrollToService.scrollTo({ target: this.elementRef, offset: -50 });
     }
     return isValid;

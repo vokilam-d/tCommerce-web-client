@@ -80,7 +80,7 @@
     "flat": "Квартира",
     "set_default": "Установить по умолчанию?",
     "recipient": "Кто получатель?",
-    "i_am": "Я",
+    "me": "Я",
     "another_person": "Другой человек"
   },
 
@@ -462,5 +462,9 @@
     "order_items": "Товары в заказе",
     "in_amount_of": "на сумму",
     "continue_shopping": "Продолжить покупки"
+  },
+
+  "customer_contact_info": {
+    "contact_info": "Контактная информация"
   }
 }

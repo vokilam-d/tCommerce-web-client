@@ -12,14 +12,6 @@ export class ShipmentAddressDto {
   addressId: string = '';
   address?: string = '';
   addressFull?: string = '';
-  phone: string = '';
-  recipientPhone: string = '';
-  firstName: string = '';
-  lastName: string = '';
-  middleName: string = '';
-  recipientFirstName: string = '';
-  recipientLastName: string = '';
-  recipientMiddleName: string = '';
   buildingNumber?: string = '';
   flat?: string = '';
 }

@@ -1,12 +1,10 @@
 import { OrderItemDto } from './order-item.dto';
 import { ShipmentAddressDto } from './shipment-address.dto';
+import { CustomerContactInfoDto } from './customer-contact-info.dto';
 
 export class CustomerDto {
   id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
+  contactInfo: CustomerContactInfoDto;
   cart: OrderItemDto[];
   addresses: ShipmentAddressDto[];
   isEmailConfirmed: boolean;
@@ -16,12 +14,6 @@ export class CustomerDto {
   orderIds: number[];
   reviewIds: number[];
   wishlistProductIds: number[];
-}
-
-export class UpdateCustomerDto implements Pick<CustomerDto, 'firstName' | 'lastName' | 'email'> {
-  firstName: string;
-  lastName: string;
-  email: string;
 }
 
 export class UpdatePasswordDto {
