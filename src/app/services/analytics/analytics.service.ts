@@ -19,6 +19,14 @@ export class AnalyticsService {
       return;
     }
 
+  // todo Add 1.'ecomm_category' 2.serverside USD conversion 3. isSaleItem: false 4. same event for 'cart'!! and maybe ecomm_pagetype searchresults/category/purchase
+    gtag('event', 'page_view', {
+      send_to: 'AW-930099759',
+      ecomm_pagetype: 'product',
+      ecomm_prodid: product.sku,
+      ecomm_totalvalue: product.price ? product.price / 28.0 : 1.0,
+    });
+
     gtag('event', 'view_item', {
       items: [{
         id: product.sku,
