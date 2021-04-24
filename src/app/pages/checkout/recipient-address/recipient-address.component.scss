@@ -1,0 +1,20 @@
+@import "variables";
+@import "mixins";
+
+
+.address-form {
+  display: block;
+  margin-top: 0;
+
+  @include respond-to($media_large) {
+    width: 100%;
+  }
+}
+
+.address-block {
+  &__title {
+    margin: 0 0 15px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+}

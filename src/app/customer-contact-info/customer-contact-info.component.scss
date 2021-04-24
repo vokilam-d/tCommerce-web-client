@@ -1,0 +1,30 @@
+@import "variables";
+@import "mixins";
+
+.customer-contact-info {
+  margin: 0 0 15px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__title {
+    margin: 0 0 15px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &__btn {
+    margin: 1px 0 0 15px;
+    font-size: 14px;
+    color: $blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  &__info {
+    font-size: 15px;
+    margin: 10px 0;
+  }
+}

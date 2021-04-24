@@ -6,12 +6,14 @@ import { CheckoutComponent } from './checkout.component';
 import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
 import { CallbackNeededComponent } from './callback-needed/callback-needed.component';
 import { OrderNoteComponent } from './order-note/order-note.component';
-import { OrderCustomerInfoComponent } from './order-customer-info/order-customer-info.component';
+import { RecipientAddressComponent } from './recipient-address/recipient-address.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { AddressFormModule } from '../../address-form/address-form.module';
 import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { CustomerContactInfoModule } from '../../customer-contact-info/customer-contact-info.module';
+import { RecipientContactInfoModule } from '../../recipient-contact-info/recipient-contact-info.module';
 
 
 @NgModule({
@@ -20,7 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
     PaymentMethodsComponent,
     CallbackNeededComponent,
     OrderNoteComponent,
-    OrderCustomerInfoComponent
+    RecipientAddressComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,9 @@ import { TranslateModule } from '@ngx-translate/core';
     SharedModule,
     AddressFormModule,
     LangRouterLinkModule,
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    CustomerContactInfoModule,
+    RecipientContactInfoModule
   ],
   providers: []
 })

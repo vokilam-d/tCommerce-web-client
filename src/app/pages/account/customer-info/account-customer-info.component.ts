@@ -8,9 +8,9 @@ import {
 } from '../../../shared/constants';
 import { CustomValidators } from '../../../shared/classes/validators';
 import { CustomerService } from '../../../services/customer/customer.service';
-import { CustomerDto, UpdateCustomerDto } from '../../../shared/dtos/customer.dto';
 import { HeadService } from '../../../services/head/head.service';
 import { LanguageService } from '../../../services/language/language.service';
+import { CustomerContactInfoDto } from '../../../shared/dtos/customer-contact-info.dto';
 
 @Component({
   selector: 'account-customer-info',
@@ -39,11 +39,11 @@ export class AccountCustomerInfoComponent implements OnInit {
   }
 
   openInfoForm() {
-    const infoControls: Partial<Record<keyof CustomerDto, any>> = {
-      firstName: [this.customerService.customer.firstName],
-      lastName: [this.customerService.customer.lastName],
-      email: [this.customerService.customer.email, Validators.pattern(IS_EMAIL_REGEX)],
-      phoneNumber: [this.customerService.customer.phoneNumber || DEFAULT_PHONE_NUMBER_VALUE, CustomValidators.phoneNumber]
+    const infoControls: Partial<Record<keyof CustomerContactInfoDto, any>> = {
+      firstName: [this.customerService.customer.contactInfo.firstName],
+      lastName: [this.customerService.customer.contactInfo.lastName],
+      email: [this.customerService.customer.contactInfo.email, Validators.pattern(IS_EMAIL_REGEX)],
+      phoneNumber: [this.customerService.customer.contactInfo.phoneNumber || DEFAULT_PHONE_NUMBER_VALUE, CustomValidators.phoneNumber]
     };
 
     this.infoForm = this.formBuilder.group(infoControls);
@@ -109,7 +109,7 @@ export class AccountCustomerInfoComponent implements OnInit {
   }
 
   private updateInfo() {
-    const dto: UpdateCustomerDto = this.infoForm.value;
+    const dto: CustomerContactInfoDto = this.infoForm.value;
     this.customerService.updateCustomer(dto)
       .subscribe(
         _ => {

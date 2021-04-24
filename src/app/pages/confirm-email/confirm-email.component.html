@@ -7,7 +7,7 @@
 
   <div class="page__content">
 
-    <preloader class="confirm__preloader" *ngIf="isLoading; else loadedTmpl"></preloader>
+    <preloader *ngIf="isLoading; else loadedTmpl"></preloader>
 
     <ng-template #loadedTmpl>
 
@@ -16,8 +16,8 @@
       </div>
 
       <ng-template #successTmpl>
-        <div class="confirm__success">
-          {{ 'confirm_email.success_1' | translate }} <a class="reset__success-link" langRouterLink="/login">{{ 'confirm_email.success_2' | translate }}</a>
+        <div>
+          {{ 'confirm_email.success_1' | translate }} <a class="main-link" langRouterLink="/login">{{ 'confirm_email.success_2' | translate }}</a>
         </div>
       </ng-template>
     </ng-template>

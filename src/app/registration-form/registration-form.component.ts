@@ -34,6 +34,7 @@ export class RegistrationFormComponent implements OnInit {
     const controls: Record<keyof RegisterDto, any> = {
       firstName: [''],
       lastName: [''],
+      middleName: [''],
       email: ['', Validators.pattern(IS_EMAIL_REGEX)],
       password: ['', Validators.pattern(VALID_PASSWORD_REGEX)]
     };

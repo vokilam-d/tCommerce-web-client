@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddressFormComponent } from './address-form.component';
+import { CustomerContactInfoComponent } from './customer-contact-info.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
-import { SelectAutocompleteModule } from '../select-autocomplete/select-autocomplete.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ContactInfoModule } from '../contact-info/contact-info.module';
+import { NgxMaskModule } from 'ngx-mask';
+
 
 
 @NgModule({
-  declarations: [AddressFormComponent],
+  declarations: [CustomerContactInfoComponent],
+  exports: [CustomerContactInfoComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    SharedModule,
-    SelectAutocompleteModule,
     TranslateModule.forChild(),
+    NgxMaskModule.forRoot({ validation: false }),
     ContactInfoModule
-  ],
-  exports: [AddressFormComponent]
+  ]
 })
-export class AddressFormModule { }
+export class CustomerContactInfoModule { }

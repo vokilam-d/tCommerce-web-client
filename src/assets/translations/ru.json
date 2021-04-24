@@ -46,7 +46,9 @@
     "oops_something_went_wrong": "Что-то пошло не так. Пожалуйста, попробуйте позже",
     "review_successfully_added": "Ваш отзыв успешно оставлен",
     "items_cost": "Стоимость товаров",
-    "added": "Добавлено"
+    "added": "Добавлено",
+    "edit": "Изменить",
+    "contact_info": "Контактная информация"
   },
 
   "rating": {
@@ -78,7 +80,10 @@
     "street": "Улица",
     "building_number": "Номер дома",
     "flat": "Квартира",
-    "set_default": "Установить по умолчанию?"
+    "set_default": "Установить по умолчанию?",
+    "recipient": "Кто получатель?",
+    "me": "Я",
+    "another_person": "Другой человек"
   },
 
   "auth_social": {
@@ -158,12 +163,13 @@
   "account_orders": {
     "comment": "Комментарий",
     "tracking_number": "Номер ТТН Новой почты",
+    "no_orders": "Здесь появятся оставленные Вами заказы",
     "tracking_status": "Статус посылки"
   },
 
   "addresses": {
     "addresses": "Адреса доставок",
-    "no_saved": "У вас пока ещё нет сохранённых адресов",
+    "no_saved": "У Вас пока ещё нет сохранённых адресов",
     "is_by_default": "выбран по умолчанию",
     "edit": "Изменить",
     "add_address": "Добавить новый адрес",
@@ -459,5 +465,9 @@
     "order_items": "Товары в заказе",
     "in_amount_of": "на сумму",
     "continue_shopping": "Продолжить покупки"
+  },
+
+  "customer_contact_info": {
+    "contact_info": "Контактная информация"
   }
 }

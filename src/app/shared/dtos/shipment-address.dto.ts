@@ -1,19 +1,17 @@
 import { AddressTypeEnum } from '../enums/address-type.enum';
+import { RecipientTypeEnum } from '../enums/recipient-type.enum';
 
 export class ShipmentAddressDto {
   isDefault: boolean = false;
   id?: string;
-  settlement: string = '';
-  settlementFull: string = '';
+  settlementName: string = '';
+  settlementNameFull: string = '';
   settlementId: string = '';
-  addressType: AddressTypeEnum = AddressTypeEnum.WAREHOUSE;
+  type: AddressTypeEnum = AddressTypeEnum.WAREHOUSE;
+  recipientType: RecipientTypeEnum = RecipientTypeEnum.CUSTOMER;
   addressId: string = '';
-  address?: string = '';
-  addressFull?: string = '';
-  phone: string = '';
-  firstName: string = '';
-  lastName: string = '';
-  middleName: string = '';
+  addressName?: string = '';
+  addressNameFull?: string = '';
   buildingNumber?: string = '';
   flat?: string = '';
 }
