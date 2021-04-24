@@ -40,7 +40,7 @@ import { ContactInfoModule } from '../../contact-info/contact-info.module';
     SharedModule,
     ReactiveFormsModule,
     AddressFormModule,
-    NgxMaskModule,
+    NgxMaskModule.forRoot({ validation: false }),
     LangRouterLinkModule,
     TranslateModule.forChild(),
     ContactInfoModule

@@ -22,6 +22,7 @@ export class CustomerContactInfoComponent extends NgUnsubscribe implements OnIni
   isFormVisible: boolean = false;
 
   get customer$() { return this.customerService.customer$; }
+  get canShowForm() { return this.customer?.contactInfo.phoneNumber; }
 
   @ViewChild(ContactInfoComponent) contactInfoCmp: ContactInfoComponent;
 
@@ -76,7 +77,7 @@ export class CustomerContactInfoComponent extends NgUnsubscribe implements OnIni
       isValid = false;
     }
 
-    if (!this.contactInfoCmp.checkValidity()) {
+    if (this.isFormVisible && !this.contactInfoCmp.checkValidity()) {
       isValid = false;
     }
 
@@ -84,9 +85,10 @@ export class CustomerContactInfoComponent extends NgUnsubscribe implements OnIni
   }
 
   getValue(): CustomerContactInfoDto {
+    const contactInfo: ContactInfoDto = this.isFormVisible ? this.contactInfoCmp.getValue() : this.customer.contactInfo;
     return {
       email: this.emailControl.value,
-      ...this.contactInfoCmp.getValue()
+      ...contactInfo
     };
   }
 

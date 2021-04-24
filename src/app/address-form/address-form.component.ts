@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ShipmentAddressDto } from '../shared/dtos/shipment-address.dto';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddressTypeEnum } from '../shared/enums/address-type.enum';
 import { SettlementDto } from '../shared/dtos/settlement.dto';
 import { WarehouseDto } from '../shared/dtos/warehouse.dto';
@@ -59,13 +59,13 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
   private buildAddressForm(address: ShipmentAddressDto) {
     const controls: Partial<Record<keyof ShipmentAddressDto, any>> = {
       isDefault: [address.isDefault],
-      addressType: [address.addressType, Validators.required],
+      type: [address.type, Validators.required],
       recipientType: [address.recipientType, Validators.required],
-      settlement: [address.settlement, Validators.required],
-      settlementFull: [address.settlement, Validators.required],
+      settlementName: [address.settlementName, Validators.required],
+      settlementNameFull: [address.settlementNameFull, Validators.required],
       settlementId: [address.settlementId, Validators.required],
-      address: [address.address, Validators.required],
-      addressFull: [address.address, Validators.required],
+      addressName: [address.addressName, Validators.required],
+      addressNameFull: [address.addressNameFull, Validators.required],
       addressId: [address.addressId, Validators.required],
       buildingNumber: address.buildingNumber,
       flat: address.flat
@@ -157,12 +157,12 @@ export class AddressFormComponent extends NgUnsubscribe implements OnInit, OnCha
   }
 }
 
-const addressTypeProp: keyof ShipmentAddressDto = 'addressType';
+const addressTypeProp: keyof ShipmentAddressDto = 'type';
 const addressIdProp: keyof ShipmentAddressDto = 'addressId';
-const addressProp: keyof ShipmentAddressDto = 'address';
-const addressFullProp: keyof ShipmentAddressDto = 'addressFull';
+const addressProp: keyof ShipmentAddressDto = 'addressName';
+const addressFullProp: keyof ShipmentAddressDto = 'addressNameFull';
 const settlementIdProp: keyof ShipmentAddressDto = 'settlementId';
-const settlementProp: keyof ShipmentAddressDto = 'settlement';
-const settlementFullProp: keyof ShipmentAddressDto = 'settlementFull';
+const settlementProp: keyof ShipmentAddressDto = 'settlementName';
+const settlementFullProp: keyof ShipmentAddressDto = 'settlementNameFull';
 const buildingProp: keyof ShipmentAddressDto = 'buildingNumber';
 const flatProp: keyof ShipmentAddressDto = 'flat';

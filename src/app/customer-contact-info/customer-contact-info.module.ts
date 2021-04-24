@@ -4,6 +4,7 @@ import { CustomerContactInfoComponent } from './customer-contact-info.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ContactInfoModule } from '../contact-info/contact-info.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
@@ -14,6 +15,7 @@ import { ContactInfoModule } from '../contact-info/contact-info.module';
     CommonModule,
     ReactiveFormsModule,
     TranslateModule.forChild(),
+    NgxMaskModule.forRoot({ validation: false }),
     ContactInfoModule
   ]
 })

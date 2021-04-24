@@ -1,7 +1,7 @@
 <div class="customer-contact-info">
   <div class="customer-contact-info__header">
     <div class="customer-contact-info__title">{{ 'global.contact_info' | translate }}</div>
-    <div class="customer-contact-info__btn" *ngIf="customer" (click)="toggleFormVisibility()">{{ 'global.edit' | translate }}</div>
+    <div class="customer-contact-info__btn" *ngIf="canShowForm" (click)="toggleFormVisibility()">{{ 'global.edit' | translate }}</div>
   </div>
 
   <ng-container *ngIf="!customer || isFormVisible; else customerInfo">
@@ -26,8 +26,7 @@
 
   <ng-template #customerInfo>
     <div class="customer-contact-info__info">{{ customer.contactInfo.firstName }} {{ customer.contactInfo.middleName }} {{ customer.contactInfo.lastName }}</div>
-    <div class="customer-contact-info__info">{{ customer.contactInfo.email }}</div>
-    <div class="customer-contact-info__info">{{ customer.contactInfo.phoneNumber }}</div>
+    <div class="customer-contact-info__info" *ngIf="customer.contactInfo.email">{{ customer.contactInfo.email }}</div>
+    <div class="customer-contact-info__info">{{ customer.contactInfo.phoneNumber | mask: '+00 (000) 000-00-00-00000000000' }}</div>
   </ng-template>
 </div>
-

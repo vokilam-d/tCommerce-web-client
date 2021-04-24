@@ -6,7 +6,7 @@
 
   <div class="address-type-block">
     <div class="form__control-container"
-         *ngIf="addressForm.get('addressType') as addressTypeControl"
+         *ngIf="addressForm.get('type') as addressTypeControl"
          [class.field--invalid]="isControlInvalid(addressTypeControl)"
     >
       <label class="form__label">{{ 'address_form.shipment_type' | translate }}</label>
@@ -40,7 +40,7 @@
 
   <div class="form__address-block address-block">
 
-    <div class="form__control-container address-block__form__control address-block__form__control--settlement" *ngIf="addressForm.get('settlementFull') as settlementFullControl">
+    <div class="form__control-container address-block__form__control address-block__form__control--settlement" *ngIf="addressForm.get('settlementNameFull') as settlementFullControl">
       <label class="form__label">{{ 'address_form.settlement' | translate }}</label>
       <div class="form__control">
         <select-autocomplete type="settlement"
@@ -54,12 +54,12 @@
       </div>
     </div>
 
-    <ng-container [ngSwitch]="addressForm.get('addressType').value">
+    <ng-container [ngSwitch]="addressForm.get('type').value">
 
       <ng-container *ngSwitchCase="addressTypeEnum.WAREHOUSE">
 
         <div class="form__control-container address-block__form__control address-block__form__control--warehouse"
-             *ngIf="addressForm.get('addressFull') as addressFullControl"
+             *ngIf="addressForm.get('addressNameFull') as addressFullControl"
              [class.field--invalid]="isControlInvalid(addressFullControl)"
         >
           <label class="form__label">{{ 'address_form.warehouse' | translate }}</label>
@@ -82,7 +82,7 @@
       <ng-container *ngSwitchCase="addressTypeEnum.DOORS">
 
         <div class="form__control-container address-block__form__control address-block__form__control--street"
-             *ngIf="addressForm.get('addressFull') as addressFullControl"
+             *ngIf="addressForm.get('addressNameFull') as addressFullControl"
              [class.field--invalid]="isControlInvalid(addressFullControl)"
         >
           <label class="form__label">{{ 'address_form.street' | translate }}</label>

@@ -4,6 +4,7 @@ import { ContactInfoComponent } from './contact-info.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
@@ -13,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     SharedModule,
+    NgxMaskModule.forRoot({ validation: false }),
     ReactiveFormsModule,
     TranslateModule.forChild()
   ]

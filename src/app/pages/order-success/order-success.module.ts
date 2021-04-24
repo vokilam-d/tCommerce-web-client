@@ -8,6 +8,7 @@ import { FooterModule } from '../../footer/footer.module';
 import { BreadcrumbsModule } from '../../breadcrumbs/breadcrumbs.module';
 import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
     HeaderModule,
     FooterModule,
     BreadcrumbsModule,
+    NgxMaskModule.forRoot({ validation: false }),
     LangRouterLinkModule,
     TranslateModule.forChild()
   ]

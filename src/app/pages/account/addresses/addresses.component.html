@@ -16,10 +16,10 @@
 
     <ul class="addresses__list">
       <li class="addresses__item" *ngFor="let address of addresses">
-        {{ address.lastName}} {{ address.firstName }}, {{ address.phone }}, {{ address.settlementFull || address.settlement }}
+        {{ address.settlementNameFull || address.settlementName }}
         <br>
 
-        {{ address.addressFull || address.address }}<ng-container *ngIf="address.addressType === addressTypes.DOORS">, {{ address.buildingNumber }}, <ng-container *ngIf="address.flat as flat">{{ flat }}</ng-container></ng-container>
+        {{ address.addressNameFull || address.addressName }}<ng-container *ngIf="address.type === addressTypes.DOORS">, {{ address.buildingNumber }}, <ng-container *ngIf="address.flat as flat">{{ flat }}</ng-container></ng-container>
         <br>
 
         <ng-container *ngIf="address.isDefault">

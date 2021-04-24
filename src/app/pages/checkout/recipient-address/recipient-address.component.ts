@@ -47,7 +47,7 @@ export class RecipientAddressComponent extends NgUnsubscribe implements OnInit {
         if (customer?.addresses?.length > 0) {
           const defaultAddress = customer.addresses.find(address => address.isDefault) || customer.addresses[0];
           this.addressOptionControl = this.formBuilder.control(defaultAddress);
-          this.saveAddressType(defaultAddress.addressType);
+          this.saveAddressType(defaultAddress.type);
         } else {
           this.addressOptionControl = null;
           this.saveAddressType(null);
@@ -75,7 +75,7 @@ export class RecipientAddressComponent extends NgUnsubscribe implements OnInit {
   }
 
   onAddressChange(address: ShipmentAddressDto) {
-    this.saveAddressType(address.addressType);
+    this.saveAddressType(address.type);
   }
 
   getShipmentPayerMap(): ShipmentPayerMap {

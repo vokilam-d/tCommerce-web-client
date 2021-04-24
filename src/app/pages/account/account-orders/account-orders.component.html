@@ -64,9 +64,9 @@
         {{ 'global.shipment_address' | translate }}:
       </div>
       <div class="order__info-value">
-        {{ order.shipment.recipient.settlementFull || order.shipment.recipient.settlement }}, {{ order.shipment.recipient.addressFull || order.shipment.recipient.address }}
-        <span *ngIf="order.shipment.recipient.buildingNumber as buildingNumber">, {{ buildingNumber }}</span>&nbsp;
-        <span *ngIf="order.shipment.recipient.flat as flat">, {{ flat }}</span>
+        {{ order.shipment.recipient.address.settlementNameFull || order.shipment.recipient.address.settlementName }}, {{ order.shipment.recipient.address.addressNameFull || order.shipment.recipient.address.addressName }}
+        <span *ngIf="order.shipment.recipient.address.buildingNumber as buildingNumber">, {{ buildingNumber }}</span>&nbsp;
+        <span *ngIf="order.shipment.recipient.address.flat as flat">, {{ flat }}</span>
       </div>
     </div>
 
@@ -75,7 +75,7 @@
         {{ 'global.shipment_method' | translate }}:
       </div>
       <div class="order__info-value">
-        {{ order.shippingMethodName }}
+        {{ order.shipment.shippingMethodDescription }}
       </div>
     </div>
 

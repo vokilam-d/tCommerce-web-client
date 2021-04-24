@@ -19,7 +19,7 @@
          }"
         ></i>
 
-        {{ address.settlementFull || address.settlement }}, {{ address.addressFull || address.address }}<ng-container *ngIf="address.addressType === addressTypeEnum.DOORS">, {{ address.buildingNumber }}, <ng-container *ngIf="address.flat as flat">{{ flat }}</ng-container></ng-container>
+        {{ address.settlementFullName || address.settlementName }}, {{ address.addressFullName || address.addressName }}<ng-container *ngIf="address.type === addressTypeEnum.DOORS">, {{ address.buildingNumber }}, <ng-container *ngIf="address.flat as flat">{{ flat }}</ng-container></ng-container>
       </label>
 
       <label class="form__control form__control--radio">
