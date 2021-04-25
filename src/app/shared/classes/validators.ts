@@ -13,8 +13,12 @@ export class CustomValidators {
   }
 
   static phoneNumber(phoneControl: AbstractControl): ValidationErrors | null {
-    const value: string = phoneControl.value;
+    const value: string = phoneControl.value.trim();
     if (!value) {
+      return { error: true };
+    }
+
+    if (value.length < 7) {
       return { error: true };
     }
 

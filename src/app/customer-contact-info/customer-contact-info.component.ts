@@ -19,7 +19,7 @@ export class CustomerContactInfoComponent extends NgUnsubscribe implements OnIni
   emailControl: FormControl = new FormControl('', [Validators.pattern(IS_EMAIL_REGEX), Validators.required]);
   customer: CustomerDto;
   contactInfo: ContactInfoDto;
-  isFormVisible: boolean = false;
+  isFormVisible: boolean = true;
 
   get customer$() { return this.customerService.customer$; }
   get canShowForm() { return this.customer?.contactInfo.phoneNumber; }
@@ -45,6 +45,7 @@ export class CustomerContactInfoComponent extends NgUnsubscribe implements OnIni
         if (this.customer) {
           this.contactInfo = customer.contactInfo;
           this.setCustomerEmail();
+          this.isFormVisible = false;
         } else {
           this.contactInfo = new ContactInfoDto();
           this.handleEmail();

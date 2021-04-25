@@ -3,7 +3,7 @@
  * @param phoneNumber
  */
 export function normalizePhoneNumber(phoneNumber: string): string {
-  phoneNumber = phoneNumber.replace(/[\+\-_ ]/g, '');
+  phoneNumber = phoneNumber.replace(/[()+\-_ ]/g, '');
 
   if (phoneNumber.indexOf('0') === 0) {
     phoneNumber = `38${phoneNumber}`;
