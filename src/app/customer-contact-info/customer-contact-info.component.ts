@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { CustomerService } from '../services/customer/customer.service';
 import { IS_EMAIL_REGEX } from '../shared/constants';
@@ -8,6 +8,7 @@ import { CustomerDto } from '../shared/dtos/customer.dto';
 import { ContactInfoDto } from '../shared/dtos/contact-info.dto';
 import { ContactInfoComponent } from '../contact-info/contact-info.component';
 import { CustomerContactInfoDto } from '../shared/dtos/customer-contact-info.dto';
+import { ScrollToService } from '../services/scroll-to/scroll-to.service';
 
 @Component({
   selector: 'customer-contact-info',
@@ -27,7 +28,9 @@ export class CustomerContactInfoComponent extends NgUnsubscribe implements OnIni
   @ViewChild(ContactInfoComponent) contactInfoCmp: ContactInfoComponent;
 
   constructor(
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private scrollToService: ScrollToService,
+    private elementRef: ElementRef
   ) {
     super();
   }
@@ -45,7 +48,9 @@ export class CustomerContactInfoComponent extends NgUnsubscribe implements OnIni
         if (this.customer) {
           this.contactInfo = customer.contactInfo;
           this.setCustomerEmail();
-          this.isFormVisible = false;
+          if (this.customer.contactInfo.phoneNumber) {
+            this.isFormVisible = false;
+          }
         } else {
           this.contactInfo = new ContactInfoDto();
           this.handleEmail();
@@ -80,6 +85,10 @@ export class CustomerContactInfoComponent extends NgUnsubscribe implements OnIni
 
     if (this.isFormVisible && !this.contactInfoCmp.checkValidity()) {
       isValid = false;
+    }
+
+    if (!isValid) {
+      this.scrollToService.scrollTo({ target: this.elementRef, offset: -50 });
     }
 
     return isValid;

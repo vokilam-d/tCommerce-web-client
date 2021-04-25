@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DEFAULT_PHONE_NUMBER_VALUE } from '../shared/constants';
 import { CustomValidators } from '../shared/classes/validators';
@@ -10,7 +10,7 @@ import { markControlsAsTouched } from '../shared/helpers/mark-controls-as-touche
   templateUrl: './contact-info.component.html',
   styleUrls: ['./contact-info.component.scss']
 })
-export class ContactInfoComponent implements OnInit {
+export class ContactInfoComponent implements OnInit, OnChanges {
 
   contactForm: FormGroup;
 
@@ -21,7 +21,12 @@ export class ContactInfoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.buildContactInfoForm(this.contactInfo);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.contactInfo.currentValue) {
+      this.buildContactInfoForm(this.contactInfo);
+    }
   }
 
   private buildContactInfoForm(contactInfo: ContactInfoDto) {
