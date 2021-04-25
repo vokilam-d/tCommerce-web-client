@@ -13,7 +13,7 @@
       {{ error }}
     </div>
 
-    <ng-container *ngIf="!infoForm && !passwordForm">
+    <ng-container *ngIf="!isInfoFormVisible && !passwordForm">
       <div class="info__row">
         {{ customer.contactInfo.firstName }} {{ customer.contactInfo.lastName }}
       </div>
@@ -34,7 +34,7 @@
       </div>
     </ng-container>
 
-    <div class="form info-form" *ngIf="infoForm">
+    <div class="form info-form" *ngIf="isInfoFormVisible">
 
       <contact-info [contactInfo]="customer.contactInfo"></contact-info>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   DEFAULT_ERROR_TEXT,
@@ -11,6 +11,7 @@ import { CustomerService } from '../../../services/customer/customer.service';
 import { HeadService } from '../../../services/head/head.service';
 import { LanguageService } from '../../../services/language/language.service';
 import { CustomerContactInfoDto } from '../../../shared/dtos/customer-contact-info.dto';
+import { ContactInfoComponent } from '../../../contact-info/contact-info.component';
 
 @Component({
   selector: 'account-customer-info',
@@ -19,13 +20,15 @@ import { CustomerContactInfoDto } from '../../../shared/dtos/customer-contact-in
 })
 export class AccountCustomerInfoComponent implements OnInit {
 
-  infoForm: FormGroup;
   passwordForm: FormGroup;
   formError: string;
   formSuccess: string | null = null;
   isLoading: boolean = false;
+  isInfoFormVisible: boolean = false;
 
   get customer() { return this.customerService.customer; }
+
+  @ViewChild(ContactInfoComponent) contactInfoCmp: ContactInfoComponent;
 
   constructor(
     private customerService: CustomerService,
@@ -39,14 +42,7 @@ export class AccountCustomerInfoComponent implements OnInit {
   }
 
   openInfoForm() {
-    const infoControls: Partial<Record<keyof CustomerContactInfoDto, any>> = {
-      firstName: [this.customerService.customer.contactInfo.firstName],
-      lastName: [this.customerService.customer.contactInfo.lastName],
-      email: [this.customerService.customer.contactInfo.email, Validators.pattern(IS_EMAIL_REGEX)],
-      phoneNumber: [this.customerService.customer.contactInfo.phoneNumber || DEFAULT_PHONE_NUMBER_VALUE, CustomValidators.phoneNumber]
-    };
-
-    this.infoForm = this.formBuilder.group(infoControls);
+    this.isInfoFormVisible = true;
   }
 
   openPasswordForm() {
@@ -64,9 +60,7 @@ export class AccountCustomerInfoComponent implements OnInit {
     this.formError = null;
     this.formSuccess = null;
 
-    if (this.infoForm.invalid) {
-      this.validateControls(this.infoForm);
-    } else {
+    if (!this.contactInfoCmp.checkValidity()) {
       this.updateInfo();
     }
   }
@@ -104,12 +98,15 @@ export class AccountCustomerInfoComponent implements OnInit {
 
   closeForms() {
     this.formError = null;
-    this.infoForm = null;
     this.passwordForm = null;
+    this.isInfoFormVisible = false;
   }
 
   private updateInfo() {
-    const dto: CustomerContactInfoDto = this.infoForm.value;
+    const dto: CustomerContactInfoDto = {
+      ...this.contactInfoCmp.getValue(),
+      email: this.customer.contactInfo.email
+    };
     this.customerService.updateCustomer(dto)
       .subscribe(
         _ => {
