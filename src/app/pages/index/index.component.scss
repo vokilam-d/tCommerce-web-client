@@ -113,6 +113,10 @@ $breakpoint: 500px;
 
     &--link {
       color: $dark;
+
+      @include respond-to($media_medium) {
+        color: $link;
+      }
     }
 
     @include respond-to($media_medium) {
@@ -120,12 +124,6 @@ $breakpoint: 500px;
       font-size: 18px;
       font-weight: 600;
       text-align: initial;
-    }
-
-    @include respond-to($media_medium) {
-      &--link {
-        color: $link;
-      }
     }
   }
 
