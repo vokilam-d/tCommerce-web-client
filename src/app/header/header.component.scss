@@ -34,11 +34,10 @@
 
   &__content {
     position: relative;
-    padding: 10px 0;
+    padding: 10px 0 15px;
 
     @include respond-to($media_medium) {
       padding-top: 15px;
-      padding-bottom: 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -118,7 +117,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 0;
+  padding: 10px 0 0;
 
   @include respond-to($media_medium) {
     width: 100%;
@@ -160,8 +159,8 @@
 }
 
 .fixed-container {
-  height: 40px;
-  margin: 8px 0 0;
+  height: 42px;
+  margin: 2px 0 0;
 
   @include respond-to($media_medium) {
     width: 60%;
@@ -183,7 +182,7 @@
     top: 0;
     left: 0;
     right: 0;
-    padding: 4px 8px 3px;
+    padding: 10px 8px;
     margin: 0;
     border-bottom: 1px solid rgba(233, 233, 233, 0.5);
     background-color: #ffffff;

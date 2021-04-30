@@ -78,12 +78,13 @@
     justify-content: space-evenly;
     align-items: center;
     height: 100%;
-    padding: 8px 6px;
+    padding: 5px 6px;
     font-size: 12px;
 
 
     @include respond-to($media_medium) {
       justify-content: unset;
+      padding: 8px 6px;
       font-size: 14px;
     }
 
@@ -95,15 +96,10 @@
   }
 
   &__img {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     object-fit: contain;
     border-radius: 3px;
-
-    @include respond-to($media_medium) {
-      width: 90px;
-      height: 90px;
-    }
 
     @include respond-to($media_large) {
       width: 110px;
