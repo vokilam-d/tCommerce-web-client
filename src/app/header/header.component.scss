@@ -34,7 +34,7 @@
 
   &__content {
     position: relative;
-    padding: 10px 0 18px;
+    padding: 10px 0 20px;
 
     @include respond-to($media_medium) {
       padding-top: 15px;
