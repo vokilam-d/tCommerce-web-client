@@ -162,7 +162,7 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
 
   @HostListener("window:scroll", [])
   onWindowScroll() {
-    const fixedMobileSearchBarHeight = 47;
+    const fixedMobileSearchBarHeight = 60;
     const productListHeaderEl = this.productListHeaderRef.nativeElement;
 
     this.isFixed = window.pageYOffset > this.headerPosition;
