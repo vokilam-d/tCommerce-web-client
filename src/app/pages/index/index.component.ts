@@ -4,7 +4,6 @@ import { CategoryTreeItem } from '../../shared/dtos/category-tree.dto';
 import { HeadService } from '../../services/head/head.service';
 import { UPLOADED_HOST } from '../../shared/constants';
 import { LanguageService } from '../../services/language/language.service';
-import { DeviceService } from '../../services/device-detector/device.service';
 
 @Component({
   selector: 'index',
@@ -16,13 +15,11 @@ export class IndexComponent implements OnInit {
   uploadedHost = UPLOADED_HOST;
 
   get categories(): CategoryTreeItem[] { return this.categoryService.categories; }
-  get isMobileDevice(): boolean { return this.deviceService.isMobile(); }
 
   constructor(
     private categoryService: CategoryService,
     private headService: HeadService,
-    private languageService: LanguageService,
-    private deviceService: DeviceService
+    private languageService: LanguageService
   ) { }
 
   ngOnInit() {

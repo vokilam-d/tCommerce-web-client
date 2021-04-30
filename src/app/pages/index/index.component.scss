@@ -111,7 +111,7 @@ $breakpoint: 500px;
     text-align: center;
     hyphens: auto;
 
-    &--dark {
+    &--link {
       color: $dark;
     }
 
@@ -120,6 +120,12 @@ $breakpoint: 500px;
       font-size: 18px;
       font-weight: 600;
       text-align: initial;
+    }
+
+    @include respond-to($media_medium) {
+      &--link {
+        color: $link;
+      }
     }
   }
 
