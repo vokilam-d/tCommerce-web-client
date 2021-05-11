@@ -74,7 +74,7 @@ export class OrderSuccessComponent implements OnInit {
       .subscribe(
         response => {
           const wfpPayload = response.data;
-          // wfpPayload.straightWidget =  true;
+          wfpPayload.straightWidget =  true;
 
           this.wayforpay.run(
             wfpPayload,
