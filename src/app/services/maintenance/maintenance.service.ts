@@ -16,7 +16,7 @@ export class MaintenanceService {
 
   constructor(private http: HttpClient) { }
 
-  setMaintenanceInfo(): Observable<boolean> {
+  setMaintenanceInfo(): Promise<boolean> {
     return this.http.get<ResponseDto<MaintenanceInfoDto>>(`${API_HOST}/api/v1/maintenance`)
       .pipe(
         tap(response => {
@@ -25,6 +25,7 @@ export class MaintenanceService {
           this.maintenanceEndTime = endTime ? new Date(endTime) : null;
         }),
         map(response => true)
-      );
+      )
+      .toPromise();
   }
 }

@@ -23,7 +23,6 @@
 
   @include respond-to($media_medium) {
     flex-direction: column;
-    align-self: flex-start;
     margin: 15px 0 0;
   }
 }
