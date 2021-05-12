@@ -19,6 +19,7 @@ import { vibrate } from '../../shared/helpers/vibrate.function';
 import { DeviceService } from '../device-detector/device.service';
 import { onWindowLoad } from '../../shared/helpers/on-window-load.function';
 import { CustomerContactInfoDto } from '../../shared/dtos/customer-contact-info.dto';
+import { MaintenanceService } from '../maintenance/maintenance.service';
 
 @Injectable({
   providedIn: 'root'
@@ -44,12 +45,15 @@ export class CustomerService { // todo split to CartService
   constructor(
     private router: Router,
     private http: HttpClient,
-    private deviceService: DeviceService
+    private deviceService: DeviceService,
+    private maintenanceService: MaintenanceService
   ) {
 
-    this.fetchCustomer().subscribe({
-      error(err) { console.log(`${new Date().toISOString()} - Could not fetch customer`, err.message); }
-    });
+    if (!this.maintenanceService.isMaintenanceInProgress) {
+      this.fetchCustomer().subscribe({
+        error(err) { console.log(`${new Date().toISOString()} - Could not fetch customer`, err.message); }
+      });
+    }
   }
 
   fetchCustomer(): Observable<ResponseDto<CustomerDto>> {

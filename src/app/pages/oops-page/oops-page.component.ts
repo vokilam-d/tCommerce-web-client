@@ -8,8 +8,7 @@ import { MaintenanceService } from '../../services/maintenance/maintenance.servi
 })
 export class OopsPageComponent implements OnInit {
 
-  // get maintenanceEndTime(): Date { return this.maintenanceService.maintenanceEndTime; }
-  maintenanceEndTime: Date = new Date();
+  get maintenanceEndTime(): Date { return this.maintenanceService.maintenanceEndTime; }
 
   constructor(
     private maintenanceService: MaintenanceService
