@@ -18,9 +18,13 @@ import { AnnouncementModule } from './announcement/announcement.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { languageLoaderBrowserFactory } from './services/language/language-loader.browser';
 import { DEFAULT_LANG } from './shared/constants';
-import * as Sentry from "@sentry/angular";
+import * as Sentry from '@sentry/angular';
+import { MaintenanceService } from './services/maintenance/maintenance.service';
+import { OopsPageModule } from './pages/oops-page/oops-page.module';
 
 registerLocaleData(localeRu);
+
+export function setMaintenanceInfo(maintenance: MaintenanceService) { return () => maintenance.setMaintenanceInfo(); }
 
 @NgModule({
   declarations: [
@@ -35,7 +39,7 @@ registerLocaleData(localeRu);
       },
       defaultLanguage: DEFAULT_LANG
     }),
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule.withServerTransition({appId: 'serverApp'}),
     TransferHttpCacheModule,
     BrowserTransferStateModule,
     HttpClientModule,
@@ -45,7 +49,8 @@ registerLocaleData(localeRu);
     NotyModule,
     CartModalModule,
     ButtonUpModule,
-    AnnouncementModule
+    AnnouncementModule,
+    OopsPageModule
   ],
   providers: [
     {
@@ -77,6 +82,12 @@ registerLocaleData(localeRu);
       provide: APP_INITIALIZER,
       useFactory: () => () => {},
       deps: [Sentry.TraceService],
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: setMaintenanceInfo,
+      deps: [MaintenanceService],
       multi: true
     }
   ],
