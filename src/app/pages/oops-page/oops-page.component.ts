@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MaintenanceService } from '../../services/maintenance/maintenance.service';
 
 @Component({
   selector: 'oops-page',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OopsPageComponent implements OnInit {
 
-  constructor() { }
+  // get maintenanceEndTime(): Date { return this.maintenanceService.maintenanceEndTime; }
+  maintenanceEndTime: Date = new Date();
+
+  constructor(
+    private maintenanceService: MaintenanceService
+  ) { }
 
   ngOnInit(): void {
   }

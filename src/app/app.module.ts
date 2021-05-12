@@ -24,7 +24,7 @@ import { OopsPageModule } from './pages/oops-page/oops-page.module';
 
 registerLocaleData(localeRu);
 
-export function setMaintenanceInfo(maintenance: MaintenanceService) { return maintenance.setMaintenanceInfo(); }
+export function setMaintenanceInfo(maintenance: MaintenanceService) { return () => maintenance.setMaintenanceInfo(); }
 
 @NgModule({
   declarations: [

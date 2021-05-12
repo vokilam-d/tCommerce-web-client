@@ -1,5 +1,87 @@
-img {
+@import "variables";
+@import "mixins";
+
+@font-face {
+  font-family: 'DS-Digital';
+  src: url('../../../assets/fonts/digital-font/DS-Digital-Italic.woff2') format('woff2'),
+  url('../../../assets/fonts/digital-font/DS-Digital-Italic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+.oops-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px 0 0;
+
+  @include respond-to($media_medium) {
+    flex-direction: column;
+    align-self: flex-start;
+    margin: 15px 0 0;
+  }
+}
+
+.logo-text {
+  flex-shrink: 1;
+  display: block;
+  margin: 0;
+  text-align: center;
+  font-size: 12px;
+
+  @include respond-to($media_medium) {
+    margin: 8px 0 0;
+    font-size: 14px;
+  }
+}
+
+.logo-img {
+  display: block;
+  width: 120px;
+
+  @include respond-to($media_medium) {
+    width: 190px;
+  }
+}
+
+.oops-text {
+  margin: 20px 0 0;
+  text-align: center;
+  font-size: 15px;
+  color: #407898;
+
+  @include respond-to($media_medium) {
+    font-size: 30px;
+  }
+}
+
+.time {
+  margin: 20px 0 0;
+  text-align: center;
+  font-family: 'DS-Digital', sans-serif;
+  font-size: 20px;
+  color: #407898;
+
+  @include respond-to($media_medium) {
+    font-size: 50px;
+  }
+}
+
+.maintenance-img {
+  align-self: center;
   width: 100%;
   height: 100%;
+  margin: 10px 0 0;
   object-fit: contain;
+
+  @include respond-to($media_medium) {
+    width: 70%;
+    height: 70%;
+  }
 }

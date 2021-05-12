@@ -11,8 +11,8 @@ import { API_HOST } from '../../shared/constants';
 })
 export class MaintenanceService {
 
-  private isMaintenanceInProgress: boolean = false;
-  private maintenanceEndTime: Date | null = null;
+  public isMaintenanceInProgress: boolean = false;
+  public maintenanceEndTime: Date | null = null;
 
   constructor(private http: HttpClient) { }
 

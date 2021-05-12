@@ -4,6 +4,7 @@ import { JsonLdService } from './services/json-ld/json-ld.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { LanguageService } from './services/language/language.service';
+import { MaintenanceService } from './services/maintenance/maintenance.service';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +16,14 @@ export class AppComponent implements OnInit {
   localBusinessJsonLd: SafeHtml;
   webSiteJsonLd: SafeHtml;
 
+  get isMaintenanceInProgress(): boolean { return this.maintenanceService.isMaintenanceInProgress; }
+
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private jsonLdService: JsonLdService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private maintenanceService: MaintenanceService
   ) { }
 
   ngOnInit() {

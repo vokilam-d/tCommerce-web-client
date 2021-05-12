@@ -1,11 +1,11 @@
 <div [innerHTML]="localBusinessJsonLd"></div>
 <div [innerHTML]="webSiteJsonLd"></div>
 
-<ng-container>
+<ng-container *ngIf="isMaintenanceInProgress">
   <oops-page></oops-page>
 </ng-container>
 
-<ng-container>
+<ng-container *ngIf="!isMaintenanceInProgress">
   <announcement></announcement>
   <router-outlet></router-outlet>
 </ng-container>

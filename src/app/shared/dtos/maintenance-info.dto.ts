@@ -1,4 +1,4 @@
 export class MaintenanceInfoDto {
   isMaintenanceInProgress: boolean;
-  maintenanceEndTime?: string;
+  maintenanceEndTime: string | null;
 }
