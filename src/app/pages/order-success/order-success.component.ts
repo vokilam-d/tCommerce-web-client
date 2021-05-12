@@ -62,7 +62,7 @@ export class OrderSuccessComponent implements OnInit {
     script.src = 'https://secure.wayforpay.com/server/pay-widget.js';
     script.onerror = error => this.paymentError = (error as any) || DEFAULT_ERROR_TEXT;
     script.onload = () => {
-      this.wayforpay = new Wayforpay;
+      this.wayforpay = new Wayforpay();
       this.pay();
     }
 
