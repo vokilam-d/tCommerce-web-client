@@ -2,16 +2,48 @@
 @import "mixins";
 
 .breadcrumbs {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-top: 5px;
-  font-size: 15px;
-  line-height: 1.375;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    width: 30px;
+    background: linear-gradient(to left, #fff, transparent);
+
+    @include respond-to($media_large) {
+      display: none;
+    }
+  }
+
+  &__container {
+    overflow: auto;
+
+    @include respond-to($media_large) {
+      overflow: initial;
+    }
+  }
+
+  &__list {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    font-size: 15px;
+    line-height: 1.375;
+  }
 
   &__item {
     position: relative;
     margin: 4px 17px 0 0;
+    white-space: nowrap;
+
+    @include respond-to($media_large) {
+      white-space: normal;
+    }
 
     &:not(:last-child)::after {
       display: inline-block;
