@@ -39,8 +39,12 @@
         ></catalog-menu>
       </div>
 
-      <div class="fixed-container" [class.fixed-container--is-catalog]="isSidebarCatalog">
-        <div class="header__toolbar toolbar" [class.fixed]="isFixed" [class.fixed--opened-search-bar]="isSearchBarInFocus" #toolbarRef>
+      <div class="header__toolbar-container" [class.header__toolbar-container--is-catalog]="isSidebarCatalog">
+        <div class="header__toolbar toolbar"
+             [class.toolbar--fixed]="isFixed"
+             [class.toolbar--fixed-opened-search-bar]="isSearchBarInFocus"
+             #toolbarRef
+        >
           <div class="toolbar__menu" (click)="openMenu()">
             <i class="toolbar__menu-icon mbi mbi-menu"></i>
           </div>

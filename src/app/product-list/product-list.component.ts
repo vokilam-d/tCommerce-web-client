@@ -25,6 +25,7 @@ import { FilterDto } from '../shared/dtos/filter.dto';
 import { DEFAULT_ERROR_TEXT } from '../shared/constants';
 import { Subscription } from 'rxjs';
 import { ESort } from '../shared/enums/sort.enum';
+import { ToolbarService } from '../services/toolbar/toolbar.service';
 
 @Component({
   selector: 'product-list',
@@ -59,10 +60,12 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild(SortingComponent) sortingCmp: SortingComponent;
   @ViewChild(PaginationComponent) paginationCmp: PaginationComponent;
 
-  constructor(private productService: ProductService,
-              private scrollToService: ScrollToService,
-              private changeDetectorRef: ChangeDetectorRef,
-              private renderer: Renderer2
+  constructor(
+    private productService: ProductService,
+    private scrollToService: ScrollToService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private renderer: Renderer2,
+    private toolbarService: ToolbarService
   ) { }
 
   ngOnInit(): void {
@@ -162,16 +165,16 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
 
   @HostListener("window:scroll", [])
   onWindowScroll() {
-    const fixedMobileSearchBarHeight = 60;
+    const toolbarHeight = this.toolbarService.toolbarElHeight;
     const productListHeaderEl = this.productListHeaderRef.nativeElement;
 
     this.isFixed = window.pageYOffset > this.headerPosition;
 
     if (!this.isFixed) {
-      this.headerPosition = productListHeaderEl.getBoundingClientRect().top + document.documentElement.scrollTop - fixedMobileSearchBarHeight;
+      this.headerPosition = productListHeaderEl.getBoundingClientRect().top + document.documentElement.scrollTop - toolbarHeight;
       this.renderer.setStyle(productListHeaderEl, 'top', '0px');
     } else {
-      this.renderer.setStyle(productListHeaderEl, 'top', `${fixedMobileSearchBarHeight}px`);
+      this.renderer.setStyle(productListHeaderEl, 'top', `${toolbarHeight}px`);
     }
   }
 

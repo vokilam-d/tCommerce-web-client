@@ -1,7 +1,10 @@
 <div class="product-list">
 
-  <div class="fixed-container">
-    <div class="product-list__header" [ngClass]="{ fixed: isFixed }" #headerRef>
+  <div class="product-list__header-container">
+    <div class="product-list__header"
+         [class.product-list__header--fixed]="isFixed"
+         #headerRef
+    >
       <button class="product-list__filter-toggle filter-toggle" (click)="openFilters()">
         {{ 'product_list.filters' | translate }}
         <i class="mbi mbi-cross filter-toggle__icon"></i>

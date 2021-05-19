@@ -3,6 +3,7 @@
 
 .top-menu {
   display: none;
+  border-bottom: 1px solid $borderColor;
 
   @include respond-to($media_large) {
     display: block;
@@ -29,19 +30,19 @@
 }
 
 .header {
-  border-top: 1px solid $borderColor;
-  border-bottom: 1px solid $borderColor;
+  @include respond-to($media_medium) {
+    border-bottom: 1px solid $borderColor;
+  }
 
   &__content {
     position: relative;
-    padding: 10px 0 20px;
 
     @include respond-to($media_medium) {
-      padding-top: 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-direction: row-reverse;
+      padding: 10px 0;
     }
 
     @include respond-to($media_large) {
@@ -50,9 +51,7 @@
   }
 
   &__logo {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    display: none;
 
     @include respond-to($media_medium) {
       display: initial;
@@ -98,6 +97,21 @@
     }
   }
 
+  &__toolbar-container {
+    @include respond-to($media_medium) {
+      width: 60%;
+      height: auto !important;
+      margin: 0;
+      padding: 0 0 0 30px;
+    }
+
+    &--is-catalog {
+      @include respond-to($media_medium) {
+        width: 75%;
+      }
+    }
+  }
+
   &__toolbar {
 
     @include respond-to($media_medium) {
@@ -113,15 +127,36 @@
   }
 }
 
+.container {
+  @include respond-to-less-than($media_medium) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 .toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $zIndexFixedToolbar;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0 0;
+  padding: 5px 8px 4px;
+  background-color: #ffffff;
+  border-bottom: 1px solid $borderColor;
 
   @include respond-to($media_medium) {
     width: 100%;
-    padding: initial;
+    position: static;
+    border: none;
+  }
+
+  &--fixed-opened-search-bar {
+    @include respond-to-less-than($media_medium) {
+      z-index: $zIndexToolbarFixedWithOpenedSearchbar;
+    }
   }
 
   &__item {
@@ -154,44 +189,6 @@
 
     @include respond-to($media_large) {
       display: block;
-    }
-  }
-}
-
-.fixed-container {
-  height: 42px;
-  margin: 2px 0 0;
-
-  @include respond-to($media_medium) {
-    width: 60%;
-    height: auto;
-    margin: 0;
-    padding: 0 0 0 30px;
-  }
-
-  &--is-catalog {
-    @include respond-to($media_medium) {
-      width: 75%;
-    }
-  }
-}
-
-.fixed {
-  @include respond-to-less-than($media_medium) {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 10px 8px;
-    margin: 0;
-    border-bottom: 1px solid rgba(233, 233, 233, 0.5);
-    background-color: #ffffff;
-    z-index: $zIndexFixedToolbar;
-  }
-
-  &--opened-search-bar {
-    @include respond-to-less-than($media_medium) {
-      z-index: $zIndexToolbarFixedWithOpenedSearchbar;
     }
   }
 }

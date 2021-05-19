@@ -10,8 +10,13 @@
 <div class="menu" [class.menu--visible]="isMenuOpened">
   <div class="menu__content">
 
-    <div class="menu__lang-container">
-      <lang-selector size="big"></lang-selector>
+
+    <div class="menu__header">
+      <a class="menu__logo" langRouterLink="/">
+        <img class="menu__logo-img" src="../../assets/images/logo.png" alt="Klondike" loading="lazy">
+      </a>
+
+      <lang-selector class="menu__lang" size="big"></lang-selector>
     </div>
 
     <div class="menu__title menu__title--catalog">{{ 'sidebar_menu.catalog' | translate }}:</div>

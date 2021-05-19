@@ -72,12 +72,12 @@
 
       &:hover {
         background-color: rgba($red, 0.8);
-        color: $white;
+        color: #fff;
       }
-    }            
+    }
   }
 }
-  
+
 .selected {
 
   &__label {
@@ -93,5 +93,5 @@
     &:hover {
       color: rgba($red, 1);
     }
-  }  
+  }
 }
