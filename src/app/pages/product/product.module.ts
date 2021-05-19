@@ -22,9 +22,10 @@ import { AdditionalServicesComponent } from './additional-services/additional-se
 import { ProductVariantsModule } from '../../product-variants/product-variants.module';
 import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { ProductRatingComponent } from './product-rating/product-rating.component';
 
 @NgModule({
-  declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent, AggregatedProductsComponent, AdditionalServicesComponent],
+  declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent, AggregatedProductsComponent, AdditionalServicesComponent, ProductRatingComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,

@@ -35,32 +35,11 @@
 
     <div class="product__rating-sku">
 
-      <div class="product__rating rating">
-        <rating-stars [rating]="product.reviewsAvgRating"
-                      [isDisabled]="addQuickReviewSuccess"
-                      (quickReview)="setQuickReview($event)"
-        ></rating-stars>
-
-        <div class="rating__count">{{ product.allReviewsCount }}</div>
-
-        <div class="rating__text" *ngIf="!addQuickReviewError && !addQuickReviewSuccess">{{ 'product.set_rating' | translate }}</div>
-        <div class="rating__text" *ngIf="addQuickReviewError as error">{{ error }}</div>
-        <div class="rating__text" *ngIf="addQuickReviewSuccess as success">{{ 'product.thank_for_rating' | translate }}</div>
-
-        <div class="rating-tooltip rating-tooltip--bottom tooltip tooltip--bottom" *ngIf="isClosed === false">
-          {{ 'product.to_leave_quick_review' | translate }}
-          <span class="rating-tooltip__close-btn" (click)="closeTooltip()">
-            <span class="rating-tooltip__cross"></span>
-          </span>
-        </div>
-
-        <div class="rating-tooltip rating-tooltip--bottom tooltip tooltip--bottom" *ngIf="quickReview && quickReview !== null">
-          {{ 'product.to_choose_rating' | translate }} <span class="rating-tooltip__rating">{{ quickReview }}</span> ?
-          <button class="rating-tooltip__confirmation-btn" (click)="addQuickReview(quickReview)">{{ 'global.yes' | translate }}</button>
-          <button  class="rating-tooltip__confirmation-btn" (click)="quickReview = null">{{ 'global.no' | translate }}</button>
-        </div>
-
-      </div>
+      <product-rating [reviewsAvgRating]="product.reviewsAvgRating"
+                      [allReviewsCount]="product.allReviewsCount"
+                      [productId]="product.id"
+                      (reviewsUpdated)="onReviewsUpdated($event)"
+      ></product-rating>
 
       <div class="product__sku-container product__sku-container--top">
         <ng-container *ngTemplateOutlet="skuTmpl"></ng-container>

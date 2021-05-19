@@ -29,16 +29,12 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   fetchError: string | null = null;
   addToCartError: string | null = null;
-  addQuickReviewError: string | null = null;
-  addQuickReviewSuccess: boolean = false;
   product: ProductDto;
   breadcrumbs: IBreadcrumb[] = [];
   categories: LinkedCategoryDto[] = [];
   isLoading: boolean = false;
   discountValue: number;
   needToShowReviews: boolean = false;
-  isClosed: boolean;
-  quickReview: number;
   get averageReviewsRating(): number { return this.storeReviewService.averageRating; }
   get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
@@ -62,7 +58,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
     logDebug(`[ProductComponent] "${this.route.snapshot.data.slug}" ngOnInit`);
     this.needToShowReviews = this.route.snapshot.fragment === 'reviews';
     this.fetchProduct();
-    this.setSavedTooltipState();
   }
 
   ngAfterViewInit(): void {
@@ -103,39 +98,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.breadcrumbs.push({ title: this.product.name, link: this.product.slug });
   }
 
-  setQuickReview(rating: number) {
-    this.isClosed = true;
-    this.quickReview = rating;
-  }
-
-  addQuickReview(rating: number) {
-    this.addQuickReviewError = null;
-
-    this.productService.addQuickReview(this.product, rating).subscribe(
-      response => {
-        this.product.allReviewsCount = response.data.allReviewsCount;
-        this.product.reviewsAvgRating = response.data.reviewsAvgRating;
-        this.addQuickReviewSuccess = true;
-      },
-      error => this.addQuickReviewError = error.error?.message || DEFAULT_ERROR_TEXT
-    );
-
-    this.quickReview = null;
-  }
-
-  closeTooltip() {
-    this.isClosed = true;
-    localStorage.setItem('isTooltipClosed', JSON.stringify(this.isClosed));
-  }
-
-  setSavedTooltipState() {
-    if (this.deviceService.isPlatformServer()) {
-      return;
-    }
-
-    this.isClosed = !!localStorage.getItem('isTooltipClosed');
-  }
-
   private setMeta() {
     const ogTags: IOgTags = {
       type: 'product',
@@ -172,6 +134,20 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.wishlistService.addToWishlist(this.product);
   }
 
+  public getLabelClass() {
+    switch (this.product.label.type) {
+      case ProductLabelTypeEnum.New:
+        return 'product__label--new';
+      case ProductLabelTypeEnum.Top:
+        return 'product__label--top';
+    }
+  }
+
+  public onReviewsUpdated(event: { reviewsAvgRating: number; allReviewsCount: number }): void {
+    this.product.allReviewsCount = event.allReviewsCount;
+    this.product.reviewsAvgRating = event.reviewsAvgRating;
+  }
+
   private setDiscountValue() {
     this.discountValue = Math.ceil((this.product.oldPrice - this.product.price) / this.product.oldPrice * 100);
   }
@@ -198,14 +174,4 @@ export class ProductComponent implements OnInit, AfterViewInit {
       this.productService.incrementViewsCount(this.product.id).subscribe();
     });
   }
-
-  public getLabelClass() {
-    switch (this.product.label.type) {
-      case ProductLabelTypeEnum.New:
-        return 'product__label--new';
-      case ProductLabelTypeEnum.Top:
-        return 'product__label--top';
-    }
-  }
 }
-

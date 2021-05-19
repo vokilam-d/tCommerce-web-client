@@ -1,0 +1,150 @@
+@import "variables";
+@import "mixins";
+
+.rating {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &__count {
+    margin: 0 0 0 8px;
+    font-size: 20px;
+    color: #666;
+
+    @include respond-to($media_medium) {
+      font-size: 16px;
+    }
+  }
+
+  &__text {
+    margin-left: 5px;
+    font-size: 16px;
+    color: #999;
+
+    @include respond-to($media_medium) {
+      font-size: 16px;
+    }
+  }
+}
+
+.rating-tooltip {
+  box-sizing: border-box;
+  z-index: 2;
+  display: inline-block;
+  top: 30px;
+  left: 170px;
+  min-width: 260px;
+  border: 1px solid #d9d9d9;
+  background-color: #f3f3f3;
+  box-shadow: 0 0 10px rgba($dark, 0.3);
+  font-size: 15px;
+  color: $dark;
+
+  @include respond-to(360px) {
+    left: 213px;
+  }
+
+  @include respond-to($media_medium) {
+    left: calc(100% + 12px);
+    right: auto;
+    bottom: auto;
+    top: 50%;
+    box-shadow: 5px 5px 20px rgba($dark, 0.3);
+    font-size: 14px;
+    transform: translate(0, -50%);
+
+    @include appear('tooltip-right', $translateX: 20px, $translateY: -50%, $translateToY: -50%);
+  }
+
+  &::after {
+    box-sizing: border-box;
+    left: 60px;
+    border-width: 1px 0 0 1px;
+    border-style: solid;
+    border-color: #d9d9d9;
+    background-color: #f3f3f3;
+
+    @include respond-to(360px) {
+      left: 7%;
+    }
+
+    @include respond-to($media_medium) {
+      bottom: auto;
+      top: 50%;
+      left: -5px;
+      border-width: 0 0 1px 1px;
+      transform: translate(0, -50%) rotate(45deg);
+    }
+  }
+
+  &__close-btn {
+    position: absolute;
+    z-index: 3;
+    top: -10px;
+    right: -10px;
+    padding: 10px;
+    border-radius: 50%;
+    border: 1px solid #d9d9d9;
+    background-color: #f3f3f3;
+    box-shadow: 2px 2px 6px rgba($dark, 0.3);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__cross {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    overflow: hidden;
+
+    &::before {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 2px;
+      margin-top: -1px;
+      content: '';
+      background: #0842a7;
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 2px;
+      margin-top: -1px;
+      content: '';
+      background: #0842a7;
+      transform: rotate(-45deg);
+    }
+  }
+
+  &__rating {
+    font-size: 15px;
+    font-weight: bolder;
+  }
+
+  &__confirmation-btn {
+    width: 39px;
+    padding: 5px 0;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    background-color: #e5e5e5;
+
+    &:first-of-type {
+      margin-right: 4px;
+    }
+
+    &:hover {
+      background-color: #eaeaea;
+    }
+  }
+}

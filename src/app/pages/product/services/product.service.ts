@@ -50,12 +50,12 @@ export class ProductService {
     return JSON.parse(localStorage.getItem(VIEWED_PRODUCT_IDS_KEY));
   }
 
-  addQuickReview(product: ProductDto, rating: number) {
+  addQuickReview(productId: string, rating: number) {
     const dto: AddProductQuickReviewDto = {
       rating
     };
 
-    return this.http.post<ResponseDto<ProductDto>>(`${API_HOST}/api/v1/products/${product.id}/quick-reviews`, dto);
+    return this.http.post<ResponseDto<ProductDto>>(`${API_HOST}/api/v1/products/${productId}/quick-reviews`, dto);
   }
 
   incrementViewsCount(id: string) {

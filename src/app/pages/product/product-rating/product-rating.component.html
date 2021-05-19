@@ -1,0 +1,26 @@
+<div class="rating">
+  <rating-stars [rating]="reviewsAvgRating"
+                [isDisabled]="success"
+                (quickReview)="setQuickReview($event)"
+  ></rating-stars>
+
+  <div class="rating__count">{{ allReviewsCount }}</div>
+
+  <div class="rating__text" *ngIf="!error && !success">{{ 'product.set_rating' | translate }}</div>
+  <div class="rating__text" *ngIf="error as error">{{ error }}</div>
+  <div class="rating__text" *ngIf="success as success">{{ 'product.thank_for_rating' | translate }}</div>
+
+  <div class="rating-tooltip rating-tooltip--bottom tooltip tooltip--bottom" *ngIf="showTooltip">
+    {{ 'product.to_leave_quick_review' | translate }}
+    <span class="rating-tooltip__close-btn" (click)="closeTooltip()">
+            <span class="rating-tooltip__cross"></span>
+          </span>
+  </div>
+
+  <div class="rating-tooltip rating-tooltip--bottom tooltip tooltip--bottom" *ngIf="quickReview && quickReview !== null">
+    {{ 'product.to_choose_rating' | translate }} <span class="rating-tooltip__rating">{{ quickReview }}</span> ?
+    <button class="rating-tooltip__confirmation-btn" (click)="addQuickReview(quickReview)">{{ 'global.yes' | translate }}</button>
+    <button  class="rating-tooltip__confirmation-btn" (click)="quickReview = null">{{ 'global.no' | translate }}</button>
+  </div>
+
+</div>
