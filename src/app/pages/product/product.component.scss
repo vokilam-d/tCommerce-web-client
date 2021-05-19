@@ -7,7 +7,7 @@ $arrowSize: 10px;
   font-size: 16px;
 
   &__title {
-    margin: 10px 0 0;
+    margin: 5px 0 0;
     font-size: 21px;
     line-height: 1.2;
 
@@ -18,10 +18,11 @@ $arrowSize: 10px;
   }
 
   &__rating-sku {
-    margin: 20px 0 0;
+    margin: 8px 0 0;
     padding: 0 5px 0 0;
 
     @include respond-to($media_medium) {
+      margin-top: 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -29,12 +30,31 @@ $arrowSize: 10px;
   }
 
   &__sku-container {
-    display: flex;
-    justify-content: space-between;
+    &--top {
+      display: none;
+
+      @include respond-to($media_medium) {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    &--bottom {
+      margin-left: auto;
+      text-align: right;
+
+      @include respond-to($media_medium) {
+        display: none;
+      }
+    }
   }
 
   &__sku {
-    font-size: 16px;
+    font-size: 12px;
+
+    @include respond-to($media_medium) {
+      font-size: 16px;
+    }
   }
 
   &__sku-value {
@@ -42,15 +62,21 @@ $arrowSize: 10px;
   }
 
   &__vendor-code {
-    margin: 0 0 0 30px;
+    margin: 10px 0 0;
+
+    @include respond-to($media_medium) {
+      margin-top: 0;
+      margin-left: 30px;
+    }
   }
 
   &__info-container {
-    margin: 20px 0 0;
-    padding: 20px 0 0;
+    margin: 9px 0 0;
+    padding: 10px 0 0;
     border-top: 1px solid $borderColor;
 
     @include respond-to($media_medium) {
+      margin-top: 20px;
       display: flex;
       justify-content: space-between;
     }
@@ -137,10 +163,15 @@ $arrowSize: 10px;
   }
 
   &__buy-info {
-    margin: 20px 0 0;
-    padding: 20px 0 0;
+    margin: 12px 0 0;
+    padding: 10px 0 0;
     border-top: 1px solid $borderColor;
     order: 0;
+
+    @include respond-to($media_medium) {
+      margin-top: 20px;
+      padding-top: 20px;
+    }
 
     @include respond-to($media_large) {
       display: flex;
@@ -197,7 +228,12 @@ $arrowSize: 10px;
   }
 
   &__qty {
-    margin: 0 0 0 35px;
+    display: none;
+
+    @include respond-to($media_medium) {
+      display: block;
+      margin: 0 0 0 35px;
+    }
 
     @include respond-to($media_large) {
       margin-left: 20px;
@@ -209,9 +245,13 @@ $arrowSize: 10px;
   }
 
   &__actions {
-    margin: 20px 0 0;
+    margin: 10px 0 0;
     display: flex;
     justify-content: space-between;
+
+    @include respond-to($media_medium) {
+      margin-top: 20px;
+    }
 
     @include respond-to($media_large) {
       margin: 0 0 0 20px;
@@ -258,16 +298,25 @@ $arrowSize: 10px;
   }
 
   &__categories {
-    margin: 20px 0 0;
-    padding: 20px 0 0;
+    margin: 15px 0 0;
+    padding: 15px 0 0;
     border-top: 1px solid $borderColor;
     font-size: 16px;
     order: 2;
+
+    @include respond-to($media_medium) {
+      margin-top: 20px;
+      padding-top: 20px;
+    }
   }
 
   &__details {
     display: block;
-    margin: 30px 0 0;
+    margin: 15px 0 0;
+
+    @include respond-to($media_medium) {
+      margin-top: 30px;
+    }
   }
 
   &__related {
@@ -341,14 +390,12 @@ $arrowSize: 10px;
 .rating {
   position: relative;
   margin-right: auto;
-  margin-bottom: 20px;
   display: flex;
   align-items: center;
 
   @include respond-to($media_medium) {
     margin-bottom: auto;
   }
-
 
   &__count {
     margin: 0 0 0 8px;

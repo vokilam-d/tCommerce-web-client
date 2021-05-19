@@ -37,13 +37,13 @@
   }
 
   &__category {
-    margin: 5px 1px 0 0;
-    padding-top: 8px;
+    margin: 3px 1px 0 0;
+    padding-top: 3px;
     flex-shrink: 0;
 
     @include respond-to($media_medium) {
-      padding-top: 5px;
       margin: 0 8px 2px;
+      padding-top: 5px;
       justify-content: center;
     }
 
@@ -129,4 +129,3 @@
     transform: translateX(10px);
   }
 }
-

@@ -62,14 +62,8 @@
 
       </div>
 
-      <div class="product__sku-container">
-        <div class="product__sku">
-          {{ 'product.sku' | translate }}: <span class="product__sku-value">{{ product.sku }}</span>
-        </div>
-
-        <div class="product__sku product__vendor-code" *ngIf="product.vendorCode">
-          {{ 'product.vendor_code' | translate }}: <span class="product__sku-value">{{ product.vendorCode }}</span>
-        </div>
+      <div class="product__sku-container product__sku-container--top">
+        <ng-container *ngTemplateOutlet="skuTmpl"></ng-container>
       </div>
     </div>
 
@@ -141,6 +135,10 @@
               <quantity-control></quantity-control>
             </div>
 
+            <div class="product__sku-container product__sku-container--bottom">
+              <ng-container *ngTemplateOutlet="skuTmpl"></ng-container>
+            </div>
+
             <additional-services class="product__additional-services"
                                  [ids]="product.additionalServiceIds"
             ></additional-services>
@@ -196,3 +194,13 @@
 </div>
 
 <app-footer></app-footer>
+
+<ng-template #skuTmpl>
+  <div class="product__sku">
+    {{ 'product.sku' | translate }}: <span class="product__sku-value">{{ product.sku }}</span>
+  </div>
+
+  <div class="product__sku product__vendor-code" *ngIf="product.vendorCode">
+    {{ 'product.vendor_code' | translate }}: <span class="product__sku-value">{{ product.vendorCode }}</span>
+  </div>
+</ng-template>
