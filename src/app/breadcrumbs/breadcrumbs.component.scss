@@ -11,8 +11,8 @@
     right: 0;
     bottom: 0;
     display: block;
-    width: 30px;
-    background: linear-gradient(to left, #fff, transparent);
+    width: 40px;
+    background: linear-gradient(to left, rgba(#fff, 0.9) 40%, transparent);
 
     @include respond-to($media_large) {
       display: none;
@@ -32,6 +32,7 @@
     display: flex;
     align-items: center;
     margin-top: 5px;
+    padding-right: 8px;
     font-size: 15px;
     line-height: 1.375;
   }
