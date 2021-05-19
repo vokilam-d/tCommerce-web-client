@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { ResponseDto } from '../../shared/dtos/response.dto';
 import { AutocompleteItemType } from '../../shared/enums/autocomplete-item-type.enum';
 import { DeviceService } from '../../services/device-detector/device.service';
+import { PreventScrollService } from '../../services/prevent-scroll/prevent-scroll.service';
 
 @Component({
   selector: 'search-bar',
@@ -37,6 +38,7 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
     private productService: ProductService,
     private route: ActivatedRoute,
     private http: HttpClient,
+    private preventScrollService: PreventScrollService,
     private router: Router
   ) {
     super();
@@ -49,6 +51,11 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
 
   ngAfterViewInit(): void {
     this.handleHotkeys();
+  }
+
+  ngOnDestroy() {
+    super.ngOnDestroy();
+    this.preventScrollService.isEnabled$.next(false);
   }
 
   private buildControl() {
@@ -69,6 +76,9 @@ export class SearchBarComponent extends NgUnsubscribe implements OnInit, AfterVi
   handleSearchBarInFocus(isSearchBarInFocus: boolean) {
     this.isInFocus = isSearchBarInFocus;
     this.isSearchBarInFocus.emit(isSearchBarInFocus);
+    if (this.deviceService.isMobile()) {
+      this.preventScrollService.isEnabled$.next(this.isInFocus);
+    }
   }
 
   clearInput() {

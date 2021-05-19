@@ -25,8 +25,8 @@ export class ServiceMenuComponent implements OnInit {
 
   onLoginClick() {
     if (!this.isLoggedIn) {
-      this.customerService.showLoginModal();
       this.loginModalOpened.emit();
+      this.customerService.showLoginModal();
     }
   }
 

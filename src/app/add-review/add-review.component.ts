@@ -19,6 +19,7 @@ import { UrlService } from '../services/url/url.service';
 import { ActivatedRoute } from '@angular/router';
 import { DeviceService } from '../services/device-detector/device.service';
 import { ScrollToService } from '../services/scroll-to/scroll-to.service';
+import { PreventScrollService } from '../services/prevent-scroll/prevent-scroll.service';
 
 enum EAddReviewFormControl {
   Name = 'name',
@@ -65,7 +66,8 @@ export class AddReviewComponent implements OnInit, AfterViewInit, OnDestroy {
     private scrollToService: ScrollToService,
     private customerService: CustomerService,
     private route: ActivatedRoute,
-    private deviceService: DeviceService
+    private deviceService: DeviceService,
+    private preventScrollService: PreventScrollService
   ) { }
 
   ngOnInit(): void {
@@ -84,16 +86,19 @@ export class AddReviewComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.unlisten) { this.unlisten(); }
+    this.preventScrollService.isEnabled$.next(false);
   }
 
   openModal() {
     this.isModalVisible = true;
     this.unlisten = this.renderer.listen('window', 'keyup', event => this.onKeyPress(event));
+    this.preventScrollService.isEnabled$.next(true);
   }
 
   closeModal() {
     if (this.unlisten) { this.unlisten(); }
     this.isModalVisible = false;
+    this.preventScrollService.isEnabled$.next(false);
   }
 
   private buildForm() {

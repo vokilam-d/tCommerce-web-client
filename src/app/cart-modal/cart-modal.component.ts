@@ -3,6 +3,7 @@ import { CustomerService } from '../services/customer/customer.service';
 import { NgUnsubscribe } from '../shared/directives/ng-unsubscribe.directive';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { PreventScrollService } from '../services/prevent-scroll/prevent-scroll.service';
 
 @Component({
   selector: 'cart-modal',
@@ -18,6 +19,7 @@ export class CartModalComponent extends NgUnsubscribe implements OnInit {
   constructor(
     private customerService: CustomerService,
     private router: Router,
+    private preventScrollService: PreventScrollService,
     private renderer: Renderer2
   ) {
     super();
@@ -31,6 +33,7 @@ export class CartModalComponent extends NgUnsubscribe implements OnInit {
 
   ngOnDestroy(): void {
     if (this.unlisten) { this.unlisten(); }
+    this.preventScrollService.isEnabled$.next(false);
     super.ngOnDestroy();
   }
 
@@ -41,12 +44,15 @@ export class CartModalComponent extends NgUnsubscribe implements OnInit {
     this.router.events
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => this.closeModal());
+
+    this.preventScrollService.isEnabled$.next(true);
   }
 
   closeModal() {
     if (this.unlisten) { this.unlisten(); }
     this.isModalVisible = false;
     this.isCrossSellVisible = false;
+    this.preventScrollService.isEnabled$.next(false);
   }
 
   private onKeyPress(event: KeyboardEvent) {

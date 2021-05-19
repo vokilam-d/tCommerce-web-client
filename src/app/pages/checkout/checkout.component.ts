@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { RecipientAddressComponent } from './recipient-address/recipient-address.component';
 import { OrderService } from './order.service';
 import { DEFAULT_ERROR_TEXT, MINIMAL_ORDER_COST, UPLOADED_HOST } from '../../shared/constants';
-import { normalizePhoneNumber } from '../../shared/helpers/normalize-phone-number.function';
 import { ScrollToService } from '../../services/scroll-to/scroll-to.service';
 import { HeadService } from '../../services/head/head.service';
 import { AnalyticsService } from '../../services/analytics/analytics.service';

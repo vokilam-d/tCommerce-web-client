@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { JsonLdService } from './services/json-ld/json-ld.service';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { DOCUMENT, Location } from '@angular/common';
 import { LanguageService } from './services/language/language.service';
 import { MaintenanceService } from './services/maintenance/maintenance.service';
+import { PreventScrollService } from './services/prevent-scroll/prevent-scroll.service';
+import { DeviceService } from './services/device-detector/device.service';
 
 @Component({
   selector: 'app-root',
@@ -19,16 +21,21 @@ export class AppComponent implements OnInit {
   get isMaintenanceInProgress(): boolean { return this.maintenanceService.isMaintenanceInProgress; }
 
   constructor(
+    @Inject(DOCUMENT) private document: Document,
     private route: ActivatedRoute,
     private location: Location,
     private jsonLdService: JsonLdService,
     private languageService: LanguageService,
-    private maintenanceService: MaintenanceService
+    private maintenanceService: MaintenanceService,
+    private deviceService: DeviceService,
+    private renderer: Renderer2,
+    private preventScrollService: PreventScrollService
   ) { }
 
   ngOnInit() {
     this.setLang();
     this.setJsonLd();
+    this.handlePreventScroll();
   }
 
   private setLang() {
@@ -74,5 +81,17 @@ export class AppComponent implements OnInit {
 
     this.localBusinessJsonLd = this.jsonLdService.getSafeJsonLd(localJsonLd);
     this.webSiteJsonLd = this.jsonLdService.getSafeJsonLd(websiteJsonLd);
+  }
+
+  private handlePreventScroll() {
+    if (this.deviceService.isPlatformServer()) { return; }
+
+    this.preventScrollService.isEnabled$.subscribe(isEnabled => {
+      if (isEnabled) {
+        this.renderer.setStyle(this.document.body, 'overflow', 'hidden');
+      } else {
+        this.renderer.removeStyle(this.document.body, 'overflow')
+      }
+    });
   }
 }
