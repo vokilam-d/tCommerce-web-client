@@ -12,7 +12,7 @@
     bottom: 0;
     display: block;
     width: 40px;
-    background: linear-gradient(to left, rgba(#fff, 0.9) 40%, transparent);
+    background: linear-gradient(to left, rgba(#fff, 0.9) 40%, rgba(#fff, 0));
 
     @include respond-to($media_large) {
       display: none;
@@ -20,10 +20,10 @@
   }
 
   &__container {
-    overflow: auto;
+    overflow-x: auto;
 
     @include respond-to($media_large) {
-      overflow: initial;
+      overflow-x: initial;
     }
   }
 
