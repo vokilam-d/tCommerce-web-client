@@ -21,9 +21,10 @@
 
   &__container {
     overflow-x: auto;
+    overflow-y: hidden;
 
     @include respond-to($media_large) {
-      overflow-x: initial;
+      overflow: initial;
     }
   }
 
