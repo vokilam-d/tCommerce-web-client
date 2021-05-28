@@ -126,7 +126,7 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
         cashOnDeliveryMethod.disabledReasons.push(texts['payment_methods.no_cash_on_delivery_with_gold']);
 
         onlinePaymentMethod.disabledState = true;
-        onlinePaymentMethod.disabledReasons.push(texts['payment_methods.no_cash_on_delivery_with_gold']);
+        onlinePaymentMethod.disabledReasons.push(texts['payment_methods.no_online_payment_with_gold']);
       }
 
       const isMaxCost = this.customerService.prices.totalCost > this.maxCashOnDeliveryTotalCost;
