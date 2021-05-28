@@ -97,6 +97,7 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
       const cashOnDeliveryMethod = this.methods.find(method => method.paymentType === PaymentTypeEnum.CASH_ON_DELIVERY);
       const onlinePaymentMethod = this.methods.find(method => method.paymentType === PaymentTypeEnum.ONLINE_PAYMENT);
       cashOnDeliveryMethod.disabledReasons = [];
+      onlinePaymentMethod.disabledReasons = [];
 
       this.orderService.addressType$
         .pipe(takeUntil(this.ngUnsubscribe))
