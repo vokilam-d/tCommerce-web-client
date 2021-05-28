@@ -89,14 +89,13 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
       'payment_methods.no_cash_on_delivery_with_address',
       'payment_methods.no_cash_on_delivery_with_gold',
       'payment_methods.no_cash_on_delivery_with_cost',
-      'global.uah'
+      'global.uah',
+      'payment_methods.no_online_payment_with_gold',
     ];
 
     this.languageService.getTranslation(keys).subscribe(texts => {
       const cashOnDeliveryMethod = this.methods.find(method => method.paymentType === PaymentTypeEnum.CASH_ON_DELIVERY);
-      if (!cashOnDeliveryMethod) {
-        return;
-      }
+      const onlinePaymentMethod = this.methods.find(method => method.paymentType === PaymentTypeEnum.ONLINE_PAYMENT);
       cashOnDeliveryMethod.disabledReasons = [];
 
       this.orderService.addressType$
@@ -124,8 +123,10 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
       const disallowedItem = this.customerService.cart.find(item => item.name.toLowerCase().match(/сусаль([ ,])/g));
       if (disallowedItem) {
         cashOnDeliveryMethod.disabledState = true;
-        const reason = texts['payment_methods.no_cash_on_delivery_with_gold'];
-        cashOnDeliveryMethod.disabledReasons.push(reason);
+        cashOnDeliveryMethod.disabledReasons.push(texts['payment_methods.no_cash_on_delivery_with_gold']);
+
+        onlinePaymentMethod.disabledState = true;
+        onlinePaymentMethod.disabledReasons.push(texts['payment_methods.no_cash_on_delivery_with_gold']);
       }
 
       const isMaxCost = this.customerService.prices.totalCost > this.maxCashOnDeliveryTotalCost;
@@ -135,7 +136,6 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
         const uah = texts['global.uah'];
         cashOnDeliveryMethod.disabledReasons.push(`${reason} ${this.maxCashOnDeliveryTotalCost}${uah}`);
       }
-
     });
   }
 }
