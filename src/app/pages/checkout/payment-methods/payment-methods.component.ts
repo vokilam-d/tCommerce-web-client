@@ -93,6 +93,8 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
       'payment_methods.no_online_payment_with_gold',
     ];
 
+    const disallowedItem = this.customerService.cart.find(item => item.name.toLowerCase().match(/сусаль([ ,])/g));
+
     this.languageService.getTranslation(keys).subscribe(texts => {
       const cashOnDeliveryMethod = this.methods.find(method => method.paymentType === PaymentTypeEnum.CASH_ON_DELIVERY);
       const onlinePaymentMethod = this.methods.find(method => method.paymentType === PaymentTypeEnum.ONLINE_PAYMENT);
@@ -121,7 +123,6 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
           }
         });
 
-      const disallowedItem = this.customerService.cart.find(item => item.name.toLowerCase().match(/сусаль([ ,])/g));
       if (disallowedItem) {
         cashOnDeliveryMethod.disabledState = true;
         cashOnDeliveryMethod.disabledReasons.push(texts['payment_methods.no_cash_on_delivery_with_gold']);
@@ -138,5 +139,10 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
         cashOnDeliveryMethod.disabledReasons.push(`${reason} ${this.maxCashOnDeliveryTotalCost}${uah}`);
       }
     });
+
+    if (disallowedItem) {
+      const payToCardMethod = this.methods.find(method => method.paymentType === PaymentTypeEnum.PAY_TO_CARD);
+      this.methodControl.setValue(payToCardMethod);
+    }
   }
 }
