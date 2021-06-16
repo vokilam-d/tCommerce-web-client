@@ -93,7 +93,7 @@ export class PaymentMethodsComponent extends NgUnsubscribe implements OnInit {
       'payment_methods.no_online_payment_with_gold',
     ];
 
-    const disallowedItem = this.customerService.cart.find(item => item.name.toLowerCase().match(/сусаль([ ,])/g));
+    const disallowedItem = this.customerService.cart.find(item => item.name.toLowerCase().match(/сусаль([ ,])|творён|творен/g));
 
     this.languageService.getTranslation(keys).subscribe(texts => {
       const cashOnDeliveryMethod = this.methods.find(method => method.paymentType === PaymentTypeEnum.CASH_ON_DELIVERY);
