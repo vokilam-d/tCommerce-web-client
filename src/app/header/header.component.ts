@@ -12,7 +12,6 @@ import { DeviceService } from '../services/device-detector/device.service';
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
 
-  isFixed: boolean;
   isSearchBarInFocus: boolean;
 
   get categories(): CategoryTreeItem[] { return this.categoryService.categories; }

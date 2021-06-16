@@ -8,7 +8,6 @@ import { CustomerService } from '../../../services/customer/customer.service';
 import { NotyService } from '../../../noty/noty.service';
 import { finalize } from 'rxjs/operators';
 import { AnalyticsService } from '../../../services/analytics/analytics.service';
-import { onWindowLoad } from '../../../shared/helpers/on-window-load.function';
 
 @Component({
   selector: 'aggregated-products',
@@ -17,30 +16,18 @@ import { onWindowLoad } from '../../../shared/helpers/on-window-load.function';
 })
 export class AggregatedProductsComponent implements OnInit {
 
-  tables: AggregatedProductsTableDto[] = [];
+  @Input() tables: AggregatedProductsTableDto[] = [];
   uploadedHost = UPLOADED_HOST;
 
-  @Input() productId: number;
-
-  constructor(private aggregatorService: AggregatorService,
-              private deviceService: DeviceService,
-              private notyService: NotyService,
-              private customerService: CustomerService,
-              private analyticsService: AnalyticsService
+  constructor(
+    private aggregatorService: AggregatorService,
+    private deviceService: DeviceService,
+    private notyService: NotyService,
+    private customerService: CustomerService,
+    private analyticsService: AnalyticsService
   ) { }
 
   ngOnInit(): void {
-    onWindowLoad(this, this.fetchAggregators);
-  }
-
-  private fetchAggregators() {
-    if (this.deviceService.isPlatformServer()) { return; }
-
-    this.aggregatorService.fetchAggregatedProductsTables(this.productId).subscribe(
-      response => {
-        this.tables = response.data;
-      }
-    );
   }
 
   getProductThumbnail(product: AggregatedProductDto) {

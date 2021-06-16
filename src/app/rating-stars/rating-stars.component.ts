@@ -21,6 +21,7 @@ export class RatingStarsComponent implements OnChanges, AfterViewInit {
 
   ratingBarElParams: any;
   ratingOnHover: number;
+  fillId: string = Math.random().toFixed(5);
 
   @Input() rating: number;
   @Input() size: 'default' | 'small' = 'default';
@@ -35,8 +36,9 @@ export class RatingStarsComponent implements OnChanges, AfterViewInit {
   @ViewChild('ratingBarElement') ratingBarElement: ElementRef;
 
 
-  constructor(private renderer: Renderer2,
-              private deviceService: DeviceService
+  constructor(
+    private renderer: Renderer2,
+    private deviceService: DeviceService
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -54,11 +56,7 @@ export class RatingStarsComponent implements OnChanges, AfterViewInit {
     if (this.rating === undefined) { return; }
 
     this.renderer.setAttribute(this.stopElement.nativeElement, 'offset', `${this.rating / 5}`);
-    this.renderer.setAttribute(this.pathElement.nativeElement, 'fill', `url(#${this.getFillId()})`);
-  }
-
-  getFillId() {
-    return `rating-${this.rating}`;
+    this.renderer.setAttribute(this.pathElement.nativeElement, 'fill', `url(#${this.fillId})`);
   }
 
   setRatingBarParams() {

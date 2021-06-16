@@ -3,7 +3,7 @@ import { APP_INITIALIZER, ErrorHandler, Injector, LOCALE_ID, NgModule, PLATFORM_
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CommonModule, registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData, ViewportScroller } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpBackend, HttpClient, HttpClientModule } from '@angular/common/http';
 import { CustomerModalModule } from './customer-modal/customer-modal.module';
 import { NotyModule } from './noty/noty.module';
@@ -12,7 +12,7 @@ import { TransferHttpCacheModule } from '@nguniversal/common';
 import localeRu from '@angular/common/locales/ru';
 import { CommonRequestInterceptor } from './shared/interceptors/common-request.interceptor';
 import { routesResolver } from './shared/factories/routes-resolver.function';
-import { Router } from '@angular/router';
+import { Router, Scroll } from '@angular/router';
 import { ButtonUpModule } from './button-up/button-up.module';
 import { AnnouncementModule } from './announcement/announcement.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -21,6 +21,8 @@ import { DEFAULT_LANG } from './shared/constants';
 import * as Sentry from '@sentry/angular';
 import { MaintenanceService } from './services/maintenance/maintenance.service';
 import { OopsPageModule } from './pages/oops-page/oops-page.module';
+import { filter } from 'rxjs/operators';
+import { DeviceService } from './services/device-detector/device.service';
 
 registerLocaleData(localeRu);
 
@@ -93,5 +95,38 @@ export function setMaintenanceInfo(maintenance: MaintenanceService) { return () 
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  private lastNavigationUrl: string = '';
 
+  constructor(
+    router: Router,
+    viewportScroller: ViewportScroller,
+    deviceService: DeviceService
+  ) {
+    if (deviceService.isPlatformServer()) { return; }
+
+    /**
+     * Custom implementation of "scrollPositionRestoration" to not execute scroll on anchor change
+     */
+    router.events
+      .pipe(
+        filter(e => e instanceof Scroll)
+      )
+      .subscribe((e) => {
+        const scrollEvt = e as unknown as Scroll;
+        const newNavigationUrl = scrollEvt.routerEvent.urlAfterRedirects;
+
+        if (scrollEvt.position) {
+          // backward navigation
+          viewportScroller.scrollToPosition(scrollEvt.position);
+        } else if (!scrollEvt.anchor) {
+          const [lastUrl, lastNavigationFragment] = this.lastNavigationUrl.split('#');
+          if (lastUrl !== newNavigationUrl) {
+            viewportScroller.scrollToPosition([0, 0]);
+          }
+        }
+
+        this.lastNavigationUrl = newNavigationUrl;
+      });
+  }
+}

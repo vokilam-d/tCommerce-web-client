@@ -9,6 +9,10 @@
     max-width: 800px;
   }
 
+  &:first-child {
+    margin-top: 0;
+  }
+
   &__name {
     font-size: 20px;
     font-weight: 600;
@@ -42,9 +46,16 @@
   }
 
   &__img {
+    flex-shrink: 0;
     display: block;
-    max-height: 60px;
-    max-width: 60px;
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+
+    @include respond-to($media_medium) {
+      height: 60px;
+      width: 60px;
+    }
   }
 
   &__name {
@@ -90,4 +101,3 @@
     transform: translate(calc(-50% + 2px), -6px);
   }
 }
-

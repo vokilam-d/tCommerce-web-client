@@ -33,7 +33,6 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   reviewsTotal: number;
   page: number;
   sortOptions: ESort[] = [ESort.New, ESort.Old, ESort.Popularity,ESort.HighRating, ESort.LowRating];
-  inputPlaceholder: string;
   isLoading: boolean = false;
   get averageReviewsRating(): number { return this.storeReviewService.averageRating; }
   get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
@@ -60,7 +59,6 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
   ngOnInit(): void {
     this.setMeta();
     this.notifyOfNewReviewFromEmail();
-    this.setInputPlaceholder();
   }
 
   ngAfterViewInit() {
@@ -202,10 +200,5 @@ export class StoreReviewsComponent extends NgUnsubscribe implements OnInit, Afte
       this.scrollToReviews();
       this.showReviewSuccess();
     }
-  }
-
-  setInputPlaceholder() {
-    this.languageService.getTranslation('store_reviews.text_placeholder')
-      .subscribe(text => this.inputPlaceholder = text);
   }
 }

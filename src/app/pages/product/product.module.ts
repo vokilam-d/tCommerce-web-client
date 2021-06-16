@@ -23,9 +23,10 @@ import { ProductVariantsModule } from '../../product-variants/product-variants.m
 import { LangRouterLinkModule } from '../../lang-router-link/lang-router-link.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProductRatingComponent } from './product-rating/product-rating.component';
+import { ProductReviewsComponent } from './product-reviews/product-reviews.component';
 
 @NgModule({
-  declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent, AggregatedProductsComponent, AdditionalServicesComponent, ProductRatingComponent],
+  declarations: [ProductComponent, ProductGalleryComponent, ProductDetailsComponent, AggregatedProductsComponent, AdditionalServicesComponent, ProductRatingComponent, ProductReviewsComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,

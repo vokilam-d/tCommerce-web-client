@@ -43,7 +43,7 @@ export class ProductListComponent implements OnInit, OnChanges, AfterViewInit {
   error: string;
   isFixed: boolean;
   isFiltersOpened: boolean;
-  headerPosition: number;
+  private headerPosition: number;
   sortOptions: ESort[] = [ESort.Popularity, ESort.New, ESort.Cheap, ESort.Expensive];
   private fetchSub: Subscription;
   get isLoading() { return this.fetchSub?.closed === false; }

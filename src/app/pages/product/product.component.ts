@@ -1,9 +1,8 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from './services/product.service';
 import { ProductDto } from '../../shared/dtos/product.dto';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
-import { ProductDetailsComponent } from './product-details/product-details.component';
 import { HeadService, IOgTags } from '../../services/head/head.service';
 import { WishlistService } from '../../services/wishlist/wishlist.service';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -25,7 +24,7 @@ import { ProductLabelTypeEnum } from '../../shared/enums/product-label-type.enum
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit, AfterViewInit {
+export class ProductComponent implements OnInit {
 
   fetchError: string | null = null;
   addToCartError: string | null = null;
@@ -34,11 +33,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
   categories: LinkedCategoryDto[] = [];
   isLoading: boolean = false;
   discountValue: number;
-  needToShowReviews: boolean = false;
   get averageReviewsRating(): number { return this.storeReviewService.averageRating; }
   get storeReviewsCount(): number { return this.storeReviewService.storeReviewsCount; }
 
-  @ViewChild(ProductDetailsComponent) detailsCmp: ProductDetailsComponent;
   @ViewChild(QuantityControlComponent) qtyCmp: QuantityControlComponent;
   @ViewChild(AdditionalServicesComponent) additionalServicesCmp: AdditionalServicesComponent;
 
@@ -56,14 +53,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     logDebug(`[ProductComponent] "${this.route.snapshot.data.slug}" ngOnInit`);
-    this.needToShowReviews = this.route.snapshot.fragment === 'reviews';
     this.fetchProduct();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.handleUrlReviewsFragment();
-    }, 100);
   }
 
   private fetchProduct() {
@@ -79,7 +69,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.setDiscountValue();
         this.setBreadcrumbs();
         this.setMeta();
-        this.handleUrlReviewsFragment();
         this.handleRecentlyViewedProducts();
         this.handleProductView();
         this.analyticsService.trackViewContent(this.product);
@@ -150,17 +139,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   private setDiscountValue() {
     this.discountValue = Math.ceil((this.product.oldPrice - this.product.price) / this.product.oldPrice * 100);
-  }
-
-  private handleUrlReviewsFragment() {
-    if (!this.needToShowReviews || !this.detailsCmp) { return; }
-    this.needToShowReviews = false;
-
-    this.detailsCmp.scrollToReviews();
-  }
-
-  getRelatedProductsIds(): number[] {
-    return this.product.relatedProducts.map(p => p.productId);
   }
 
   private handleRecentlyViewedProducts() {

@@ -106,6 +106,20 @@
     @include respond-to($media_medium) {
       margin-top: 0;
     }
+
+    &--mobile {
+      @include respond-to($media_medium) {
+        display: none;
+      }
+    }
+
+    &--desktop {
+      display: none;
+
+      @include respond-to($media_medium) {
+        display: inherit;
+      }
+    }
   }
 
   &__label {
@@ -171,7 +185,7 @@
       padding-top: 20px;
     }
 
-    @include respond-to($media_large) {
+    @include respond-to(1200px) {
       display: flex;
       align-items: center;
     }
@@ -295,19 +309,6 @@
     font-size: 26px;
   }
 
-  &__categories {
-    margin: 15px 0 0;
-    padding: 15px 0 0;
-    border-top: 1px solid $borderColor;
-    font-size: 16px;
-    order: 2;
-
-    @include respond-to($media_medium) {
-      margin-top: 20px;
-      padding-top: 20px;
-    }
-  }
-
   &__details {
     display: block;
     margin: 15px 0 0;
@@ -315,17 +316,6 @@
     @include respond-to($media_medium) {
       margin-top: 30px;
     }
-  }
-
-  &__related {
-    display: block;
-    margin: 20px 0 0;
-  }
-
-  &__category {
-    display: inline-block;
-    margin-right: 10px;
-    padding: 5px 5px 5px 0;
   }
 
   &__fetch-error {
@@ -389,7 +379,7 @@
   font-size: 14px;
 
   p {
-    margin: 12px 0 0;
+    margin: 7px 0 0;
     line-height: 1.1;
 
     @include respond-to($media_large) {
@@ -410,8 +400,8 @@
     font-weight: 600;
   }
 
-  &__reviews {
-    margin: 3px 0 0;
+  &__shipment-link {
+    text-transform: lowercase;
   }
 }
 
@@ -421,6 +411,7 @@
 
   &__text {
     margin-right: 5px;
+    text-transform: lowercase;
   }
 
   &__count {

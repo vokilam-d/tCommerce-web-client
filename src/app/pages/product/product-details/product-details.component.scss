@@ -2,52 +2,49 @@
 @import "mixins";
 
 .details {
-  border-top: 1px solid $borderColor;
   font-size: 14px;
 
-  @include respond-to($media_medium) {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  @include respond-to($media_large) {
+    border-top: 1px solid $borderColor;
   }
 
-  &__item {
+  &__row {
+    @include respond-to($media_medium) {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row-reverse;
+    }
+  }
+
+  &__column {
+    @include respond-to($media_medium) {
+      width: 49%;
+    }
+  }
+
+  &__chars-reviews {
+    @include respond-to($media_medium) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__block {
     margin-top: 10px;
     width: 100%;
 
     @include respond-to($media_medium) {
       margin-top: 30px;
     }
-  }
-}
 
-.item {
-
-  &__container {
-    @include respond-to-less-than($media_medium) {
-      display: flex;
-      flex-direction: column;
-      margin-top: 15px;
+    &--related {
+      display: block;
+      margin: 20px 0 0;
     }
 
-    &--description {
-      width: 100%;
-    }
-
-    &--chars {
-      width: auto;
-
+    &--chars-reviews {
       @include respond-to($media_medium) {
-        width: 40%;
-      }
-    }
-
-    &--reviews {
-      width: auto;
-
-      @include respond-to($media_medium) {
-        width: 60%;
-        padding-left: 25px;
+        width: 49%;
       }
     }
   }
@@ -56,36 +53,49 @@
     position: relative;
     display: flex;
     width: 100%;
-    margin: 10px 5px 15px;
+    margin: 20px 0 15px;
     font-size: 18px;
     font-weight: 600;
 
     @include respond-to($media_medium) {
       width: auto;
-      margin: 0;
+      margin: 0 0 10px;
       font-size: 22px;
     }
   }
-}
 
-.description {
-  text-align: justify;
+  &__categories {
+    margin: 10px 0 0;
+    padding: 10px 0 0;
+    border-top: 1px solid $borderColor;
+    font-size: 16px;
 
-  @include respond-to($media_medium) {
-    font-size: 15px;
+    @include respond-to($media_medium) {
+      margin-top: 20px;
+      padding-top: 20px;
+    }
+  }
+
+  &__category {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 5px 5px 0;
+  }
+
+  &__description {
+    text-align: justify;
+
+    @include respond-to($media_medium) {
+      font-size: 15px;
+    }
   }
 }
 
 .chars {
   display: table;
-  padding: 0 10px;
   font-size: 15px;
   width: 100%;
   table-layout: fixed;
-
-  @include respond-to($media_medium) {
-    padding: 0;
-  }
 
   &__item {
     display: table-row;
@@ -123,45 +133,46 @@
   }
 }
 
-.reviews {
-  &__container {
-    display: flex;
-    flex-direction: column;
+.reviews-count {
+  margin: 0 0 0 4px;
+  color: #7d7d7d;
+}
+
+.tabs {
+  @include respond-to($media_large) {
+    display: none;
   }
 
-  &__add {
-    margin: 10px;
-    padding-bottom: 0;
-    font-size: 18px;
-    text-align: center;
+  &__container {
+    background: #f4f4f4;
+    overflow-x: auto;
+    overflow-y: hidden;
 
-    @include respond-to($media_medium) {
-      margin: 10px 0 0;
+    &--fixed {
+      @include respond-to-less-than($media_medium) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+      }
     }
   }
 
-  &__add-btn {
-    display: block;
-    width: 100%;
-    margin: 10px 0 0;
-    padding: 10px 15px;
-    border-radius: 3px;
-    font-size: 16px;
+  &__content {
+    width: fit-content;
+    display: flex;
+    align-items: center;
   }
 
-  &__count {
-    margin: 0 0 0 4px;
-    color: #7d7d7d;
-  }
+  &__tab {
+    padding: 15px 12px 13px;
+    border-bottom: 2px solid rgba(#fff, 0);
+    transition: all 0.2s ease;
 
-  &__review {
-    display: block;
-    margin: 15px 0 0;
-  }
-
-  &__img {
-    width: 20px;
-    padding-left: 5px;
-    opacity: 0.5;
+    &--active {
+      color: darken($primary, 5%);
+      border-bottom-color: $primary;
+    }
   }
 }

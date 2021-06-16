@@ -5,12 +5,13 @@
   border-bottom: 1px solid #d3d3d3;
 
   &__votes-count {
+    margin: 0 0 5px;
     font-size: 14.4px;
     color: #999;
   }
 
   &__rating {
-    margin: 10px 0;
+    margin: 0 0 5px;
   }
 
   &__name-container {
@@ -35,7 +36,7 @@
   }
 
   &__actions {
-    margin: 20px 0 0;
+    margin: 10px 0 0;
     display: flex;
     align-items: center;
     font-size: 12px;

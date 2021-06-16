@@ -27,7 +27,6 @@ export class ProductRatingComponent implements OnInit {
 
   ngOnInit(): void {
     this.setSavedTooltipState();
-    console.log(this.productId);
   }
 
   private setSavedTooltipState() {

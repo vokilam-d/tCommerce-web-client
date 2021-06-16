@@ -13,7 +13,7 @@
         class="add-review__input add-review__textarea"
         [formControlName]="controlNames.Text"
         [id]="controlNames.Text"
-        [placeholder]="inputPlaceholder"
+        [placeholder]="inputPlaceholder | translate"
         rows="4"
         required
         #reviewTextareaRef

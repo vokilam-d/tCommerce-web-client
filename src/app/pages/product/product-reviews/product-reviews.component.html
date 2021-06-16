@@ -1,0 +1,18 @@
+<div class="reviews">
+  <review class="reviews__review"
+          *ngFor="let review of reviews"
+          [review]="review"
+          (vote)="vote(review)"
+          (downvote)="downvote(review)"
+          (addComment)="onAddComment(review, $event)"
+  ></review>
+
+  <add-review
+    class="reviews__add"
+    [isColumnLayout]="true"
+    [uploadUrl]="mediaUploadUrl"
+    [isLoading]="isLoading"
+    (addReview)="onReviewAdd($event)"
+    inputPlaceholder="product_details.add_review_text_placeholder"
+  ></add-review>
+</div>

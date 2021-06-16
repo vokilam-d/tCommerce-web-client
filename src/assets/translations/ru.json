@@ -10,6 +10,8 @@
     "discounts": "Скидки",
     "uah": "грн",
     "pcs.": "шт.",
+    "from": "от",
+    "and": "и",
     "total_cost": "Итого",
     "minimal_order_cost": "Минимальная сумма заказа",
     "cart": "Корзина",
@@ -41,7 +43,8 @@
     "repayments": "Возврат и обмен",
     "privacy_policy": "Политика конфиденциальности",
     "blog": "Блог",
-    "store_reviews": "Отзывы о нас",
+    "reviews": "Отзывы",
+    "reviews_about_us": "Отзывы о нас",
     "to_buy": "Купить",
     "oops_something_went_wrong": "Что-то пошло не так. Пожалуйста, попробуйте позже",
     "review_successfully_added": "Ваш отзыв успешно оставлен",
@@ -446,13 +449,18 @@
     "not_sum_up_with": "не суммируется с",
     "discounts": "накопительными скидками",
     "sales": "и акциями",
-    "order_processing_in_a_day": "Заказы обрабатываются за 1 день",
+    "order_processing_in_a_day": "Отправим быстро",
     "in_stock": "В наличии",
     "out_of_stock": "Нет в наличии"
   },
 
   "product_details": {
-    "reviews": "Отзывы"
+    "aggregators": "Все",
+    "description": "Описание",
+    "characteristics": "Характеристики",
+    "related": "Сопутствующие",
+    "recent": "Просмотренные",
+    "add_review_text_placeholder": "Поделитесь здесь Вашим впечатлением об этом товаре"
   },
 
   "order_success": {

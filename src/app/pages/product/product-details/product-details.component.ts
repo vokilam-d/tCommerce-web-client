@@ -1,50 +1,82 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ProductDto } from '../../../shared/dtos/product.dto';
 import { HttpClient } from '@angular/common/http';
 import { ScrollToService } from '../../../services/scroll-to/scroll-to.service';
 import { ProductReviewService } from '../services/product-review.service';
-import { AddProductReviewDto, ProductReviewDto } from '../../../shared/dtos/product-review.dto';
+import { ProductReviewDto } from '../../../shared/dtos/product-review.dto';
 import { JsonLdService } from '../../../services/json-ld/json-ld.service';
 import { SafeHtml } from '@angular/platform-browser';
-import { AddReviewComponent, IAddReviewFormValue } from '../../../add-review/add-review.component';
-import { API_HOST, DEFAULT_ERROR_TEXT } from '../../../shared/constants';
-import { NotyService } from '../../../noty/noty.service';
 import { DeviceService } from '../../../services/device-detector/device.service';
-import { LanguageService } from '../../../services/language/language.service';
-import { finalize } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AggregatorService } from '../aggregated-products/aggregator.service';
+import { AggregatedProductsTableDto } from '../../../shared/dtos/aggregated-products-table.dto';
+import { ToolbarService } from '../../../services/toolbar/toolbar.service';
+
+type DetailsBlockId = 'aggregators' | 'description' | 'characteristics' | 'reviews' | 'related' | 'recent';
 
 @Component({
   selector: 'product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit, AfterViewInit {
 
   jsonLd: SafeHtml;
-  mediaUploadUrl: string = `${API_HOST}/api/v1/product-reviews/media`;
   reviews: ProductReviewDto[] = [];
-  isLoading: boolean = false;
+  currentDetailsBlockId: string = null;
+  aggregatorTables: AggregatedProductsTableDto[];
+
+  detailsBlocks = BLOCKS;
+
+  isManualScrollInProgress: boolean = false;
+  tabsPosition: number;
+  isTabsFixed: boolean;
 
   @Input() product: ProductDto;
-  @ViewChild(AddReviewComponent) addReviewCmp: AddReviewComponent;
-  @ViewChild('reviewsRef') reviewsRef: ElementRef;
+  @ViewChild('tabsRef') tabsRef: ElementRef<HTMLElement>;
 
   constructor(
     private http: HttpClient,
     private deviceService: DeviceService,
+    private aggregatorService: AggregatorService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private toolbarService: ToolbarService,
+    private renderer: Renderer2,
     private scrollToService: ScrollToService,
     private jsonLdService: JsonLdService,
     private productReviewService: ProductReviewService,
-    private notyService: NotyService,
-    private languageService: LanguageService
   ) { }
 
   ngOnInit(): void {
+    this.fetchAggregators();
+
     if (this.product.textReviewsCount > 0) {
       this.fetchReviews();
     } else {
       this.setJsonLd();
     }
+  }
+
+  ngAfterViewInit() {
+    const fragment = this.route.snapshot.fragment;
+    if (fragment) {
+      this.selectDetailsBlock(fragment as DetailsBlockId);
+    }
+  }
+
+  private fetchAggregators() {
+    this.aggregatorService.fetchAggregatedProductsTables(this.product.productId).subscribe(
+      response => {
+        this.aggregatorTables = response.data;
+        console.log(this.aggregatorTables.length);
+
+        if (this.aggregatorTables.length === 0) {
+          const aggregatorsDetailsBlockId = this.getDetailsBlockId('aggregators');
+          this.detailsBlocks.find(detailsBlock => detailsBlock.id === aggregatorsDetailsBlockId).isVisible = false;
+        }
+      }
+    );
   }
 
   private fetchReviews() {
@@ -57,145 +89,138 @@ export class ProductDetailsComponent implements OnInit {
       );
   }
 
-  vote(review: ProductReviewDto) {
-    this.productReviewService.vote(review.id)
-      .subscribe(
-        _ => {
-          review.voteSuccess = true;
-          review.votesCount += 1;
-        },
-        error => {
-          review.voteError = error.error.message;
-        }
-      );
+  getRelatedProductsIds(): number[] {
+    return this.product.relatedProducts.map(p => p.productId);
   }
 
-  downvote(review: ProductReviewDto) {
-    this.productReviewService.downvote(review.id)
-      .subscribe(
-        _ => {
-          review.voteSuccess = true;
-          if (review.votesCount > 0) {
-            review.votesCount -= 1;
-          }
-        },
-        error => {
-          review.voteError = error.error.message;
-        }
-      );
+  getDetailsBlockId(detailsBlockId: DetailsBlockId): string {
+    return detailsBlockId;
   }
 
-  onAddComment(review: ProductReviewDto, formValue: any) {
-    this.productReviewService.addComment(review.id, formValue)
-      .subscribe(
-        response => {
-          review.comments = response.data.comments;
-        },
-        error => this.notyService.error(error.error?.message || DEFAULT_ERROR_TEXT)
-      );
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    this.handleTabsFixedState();
+    this.handleTabsSelectionAndUrlFragment();
   }
 
-  onReviewAdd(formValue: IAddReviewFormValue) {
-    const reviewDto = new AddProductReviewDto();
-    reviewDto.name = formValue.name;
-    reviewDto.text = formValue.text;
-    reviewDto.email = formValue.email;
-    reviewDto.medias = formValue.medias;
-    reviewDto.rating = formValue.rating;
-    reviewDto.source = formValue.source;
+  private handleTabsFixedState() {
+    if (!this.deviceService.isMobile()) {
+      return;
+    }
 
-    reviewDto.productId = this.product.productId;
-    reviewDto.productVariantId = this.product.variantId;
-    reviewDto.productName = this.product.name;
+    const toolbarHeight = this.toolbarService.toolbarElHeight;
+    const tabsEl = this.tabsRef.nativeElement;
 
-    this.isLoading = true;
+    this.isTabsFixed = window.pageYOffset > this.tabsPosition;
 
-    this.productReviewService.addReview(reviewDto)
-      .pipe(finalize(() => this.isLoading = false))
-      .subscribe(
-        response => {
-          this.reviews.push(response.data);
-          this.addReviewCmp.closeModal();
-          this.showReviewSuccess();
-        },
-        error => {
-          console.warn(error);
-        }
-      );
+    if (!this.isTabsFixed) {
+      this.tabsPosition = tabsEl.getBoundingClientRect().top + document.documentElement.scrollTop - toolbarHeight;
+      this.renderer.setStyle(tabsEl, 'top', '0px');
+      this.renderer.setStyle(tabsEl.parentElement, 'height', `auto`);
+    } else {
+      this.renderer.setStyle(tabsEl, 'top', `${toolbarHeight}px`);
+      this.renderer.setStyle(tabsEl.parentElement, 'height', `${toolbarHeight}px`);
+    }
   }
 
-  scrollToReviews() {
-    const offset = this.deviceService.isMobile() ? -20 : -200;
-    this.scrollToService.scrollTo({ target: this.reviewsRef, offset });
+  private handleTabsSelectionAndUrlFragment() {
+    if (this.isManualScrollInProgress || !this.deviceService.isMobile()) {
+      return;
+    }
+
+    const scrollPosition = window.pageYOffset;
+
+    let currentEl: HTMLElement;
+    for (const detailsBlock of Object.values(this.detailsBlocks)) {
+      const el = document.getElementById(detailsBlock.id);
+      if (el && el.offsetTop < (scrollPosition + 100)) {
+        currentEl = el;
+      }
+    }
+
+    let needToUpdateUrlFragment: boolean = false;
+
+    if (currentEl) {
+      const fragment = this.getDetailsBlockId(currentEl.id as DetailsBlockId);
+      if (this.currentDetailsBlockId !== fragment) {
+        this.currentDetailsBlockId = fragment;
+        needToUpdateUrlFragment = true;
+        // currentEl.scrollIntoView(false);
+      }
+    } else {
+      if (this.currentDetailsBlockId) {
+        this.currentDetailsBlockId = null;
+        needToUpdateUrlFragment = true;
+      }
+    }
+
+    if (needToUpdateUrlFragment) {
+      this.updateUrlFragment();
+    }
   }
 
   private setJsonLd() {
-
-    const jsonLd: any = {
-      '@context': 'http://schema.org',
-      '@type': 'Product',
-      itemCondition: 'https://schema.org/NewCondition',
-      description: this.product.fullDescription,
-      name: this.product.name,
-      offers: {
-        '@type': 'Offer',
-        availability: this.product.isInStock ? 'http://schema.org/InStock' : 'http://schema.org/OutOfStock',
-        price: Math.round(this.product.price),
-        priceCurrency: 'UAH',
-        priceValidUntil: '2040-12-08',
-        url: `https://klondike.com.ua/${this.product.slug}`
-      },
-      url: `https://klondike.com.ua/${this.product.slug}`
-    };
-
-    if (this.product.vendorCode) {
-      jsonLd.sku = this.product.vendorCode;
-      jsonLd.identifier = this.product.sku;
-    } else {
-      jsonLd.sku = this.product.sku;
-    }
-
-    if (this.product.gtin) {
-      jsonLd.gtin = this.product.gtin;
-    }
-
-    const manufacturer = this.product.characteristics.find(c => c.code === 'manufacturer');
-    if (manufacturer) {
-      jsonLd.brand = manufacturer;
-      jsonLd.manufacturer = manufacturer;
-    }
-
-    if (this.product.medias[0]) {
-      jsonLd.image = `https://klondike.com.ua${this.product.medias[0].variantsUrls.original}`;
-    }
-
-    if (this.product.textReviewsCount > 0) {
-      jsonLd.aggregateRating = {
-        '@type': 'AggregateRating',
-        ratingValue: this.product.reviewsAvgRating,
-        reviewCount: this.product.allReviewsCount
-      };
-
-      jsonLd.review = this.reviews.map(review => ({
-        '@type': 'Review',
-        author: review.name,
-        datePublished: review.createdAt,
-        description: review.text,
-        "reviewRating": {
-          "@type": "Rating",
-          "bestRating": "5",
-          "ratingValue": review.rating,
-          "worstRating": "1"
-        }
-      }));
-    }
-
-    this.jsonLd = this.jsonLdService.getSafeJsonLd(jsonLd);
+    this.jsonLd = this.jsonLdService.getSafeJsonLdForProduct(this.product, this.reviews);
   }
 
-  private showReviewSuccess() {
-    this.languageService.getTranslation('global.review_successfully_added').subscribe(text => {
-      this.notyService.success(text);
-    });
+  selectDetailsBlock(detailsBlockId: DetailsBlockId) {
+    this.isManualScrollInProgress = true;
+    this.scrollToService.scrollTo({ target: detailsBlockId, offset: -100 })
+      .subscribe({ complete: () => this.isManualScrollInProgress = false });
+
+    if (this.currentDetailsBlockId !== detailsBlockId) {
+      this.currentDetailsBlockId = detailsBlockId;
+      this.updateUrlFragment();
+    }
+  }
+
+  isDetailsBlockActive(detailsBlockId: DetailsBlockId): boolean {
+    const isFirstVisible = this.detailsBlocks.filter(detailsBlock => detailsBlock.isVisible)[0]?.id === detailsBlockId;
+    if (isFirstVisible) {
+      return this.currentDetailsBlockId === detailsBlockId || this.currentDetailsBlockId === null;
+    }
+
+    return this.currentDetailsBlockId === detailsBlockId;
+  }
+
+  isDetailsBlockVisible(detailsBlockId: DetailsBlockId): boolean {
+    return this.detailsBlocks.find(detailsBlock => detailsBlock.id === detailsBlockId).isVisible;
+  }
+
+  private updateUrlFragment() {
+    this.router.navigate(['.'], { relativeTo: this.route, fragment: this.currentDetailsBlockId, replaceUrl: true })
   }
 }
+
+const BLOCKS: { id: DetailsBlockId, label: string, isVisible: boolean }[] = [
+  {
+    id: 'aggregators',
+    label: 'product_details.aggregators',
+    isVisible: true
+  },
+  {
+    id: 'description',
+    label: 'product_details.description',
+    isVisible: true
+  },
+  {
+    id: 'characteristics',
+    label: 'product_details.characteristics',
+    isVisible: true
+  },
+  {
+    id: 'reviews',
+    label: 'global.reviews',
+    isVisible: true
+  },
+  {
+    id: 'related',
+    label: 'product_details.related',
+    isVisible: true
+  },
+  {
+    id: 'recent',
+    label: 'product_details.recent',
+    isVisible: true
+  }
+];

@@ -2,43 +2,86 @@
 
 <div class="details">
 
-  <div class="details__item item">
-    <div class="item__container item__container--description html-description">
-      <div class="description html-description" [innerHTML]="product.safeFullDescription"></div>
-    </div>
-  </div>
-
-  <div class="details__item item__container item__container--chars">
-    <div class="chars">
-      <div class="chars__item" *ngFor="let char of product.characteristics, first as first">
-        <div class="chars__cell chars__label" [class.chars__cell--first]="first">{{ char.label }}</div>
-        <div class="chars__cell chars__value" [class.chars__cell--first]="first">{{ char.value }}</div>
+  <div class="details__tabs-container tabs">
+    <div class="tabs__container"
+         [class.tabs__container--fixed]="isTabsFixed"
+         #tabsRef
+    >
+      <div class="tabs__content">
+        <ng-container *ngFor="let detailsBlock of detailsBlocks">
+          <div class="tabs__tab"
+               *ngIf="isDetailsBlockVisible(detailsBlock.id)"
+               [class.tabs__tab--active]="isDetailsBlockActive(detailsBlock.id)"
+               (click)="selectDetailsBlock(detailsBlock.id)"
+          >
+            {{ detailsBlock.label | translate }}
+          </div>
+        </ng-container>
       </div>
     </div>
   </div>
 
-  <div class="details__item item__container item__container--reviews reviews" #reviewsRef>
-    <div class="reviews__container">
-      <h3 class="item__title">{{ 'product_details.reviews' | translate }}
-        <span class="reviews__count" *ngIf="product.textReviewsCount> 0">({{ product.textReviewsCount }})</span>
-      </h3>
-
-      <add-review
-        class="reviews__add"
-        [isColumnLayout]="true"
-        [uploadUrl]="mediaUploadUrl"
-        [isLoading]="isLoading"
-        (addReview)="onReviewAdd($event)"
-      ></add-review>
+  <div class="details__row">
+    <div class="details__column" *ngIf="isDetailsBlockVisible('aggregators')">
+      <div class="details__block" [id]="getDetailsBlockId('aggregators')">
+        <aggregated-products [tables]="aggregatorTables"></aggregated-products>
+      </div>
     </div>
 
-    <review class="reviews__review"
-            *ngFor="let review of reviews"
-            [review]="review"
-            (vote)="vote(review)"
-            (downvote)="downvote(review)"
-            (addComment)="onAddComment(review, $event)"
-    ></review>
+    <div [class.details__column]="isDetailsBlockVisible('aggregators')">
+      <div class="details__block" [id]="getDetailsBlockId('description')">
+        <div class="details__description html-description" [innerHTML]="product.safeFullDescription"></div>
+
+        <div class="details__categories">
+          {{ 'global.categories' | translate }}:&nbsp;
+
+          <a class="details__category main-link"
+             *ngFor="let category of product.categories, last as last"
+             [langRouterLink]="'/' + category.slug"
+          >
+            {{ category.name }}
+          </a>
+        </div>
+      </div>
+
+      <div [class.details__chars-reviews]="!isDetailsBlockVisible('aggregators')">
+        <div class="details__block"
+             [class.details__block--chars-reviews]="!isDetailsBlockVisible('aggregators')"
+             [id]="getDetailsBlockId('characteristics')"
+        >
+          <h3 class="details__title">{{ 'product_details.characteristics' | translate }}</h3>
+
+          <div class="chars">
+            <div class="chars__item" *ngFor="let char of product.characteristics, first as first">
+              <div class="chars__cell chars__label" [class.chars__cell--first]="first">{{ char.label }}</div>
+              <div class="chars__cell chars__value" [class.chars__cell--first]="first">{{ char.value }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="details__block reviews"
+             [class.details__block--chars-reviews]="!isDetailsBlockVisible('aggregators')"
+             [id]="getDetailsBlockId('reviews')"
+        >
+          <h3 class="details__title">{{ 'global.reviews' | translate }}
+            <span class="reviews-count" *ngIf="product.textReviewsCount> 0">({{ product.textReviewsCount }})</span>
+          </h3>
+
+          <product-reviews [product]="product" [reviews]="reviews"></product-reviews>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <products-preview class="details__block details__block--related"
+                    [id]="getDetailsBlockId('related')"
+                    [ids]="getRelatedProductsIds()"
+                    [type]="'linkedProducts'"
+                    parentNameForAnalytics="Related products"
+  ></products-preview>
+
+  <div class="details__block" [id]="getDetailsBlockId('recent')">
+    <recently-viewed-products></recently-viewed-products>
   </div>
 
 </div>

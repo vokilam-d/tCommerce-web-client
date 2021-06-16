@@ -20,9 +20,9 @@
         <div class="store-reviews__add-review">
           <add-review
             [uploadUrl]="mediaUploadUrl"
-            [inputPlaceholder]="inputPlaceholder"
             [isLoading]="isLoading"
             (addReview)="onReviewAdd($event)"
+            inputPlaceholder="store_reviews.text_placeholder"
           ></add-review>
         </div>
 

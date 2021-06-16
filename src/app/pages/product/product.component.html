@@ -61,25 +61,8 @@
 
       <div class="product__info">
 
-        <div class="product__store-info store-info">
-          <p><a class="store-info__link main-link" langRouterLink="/dostavka-i-oplata">{{ 'product.free_shipment' | translate }}</a> {{ 'product.for_orders_from' | translate }} 1000 {{ 'global.uah' | translate }} <span class="store-info__tip">({{ 'product.except_overall' | translate }})</span>
-          </p>
-
-          <p *ngIf="product.isDiscountApplicable">
-            <span class="store-info__discount">-5%</span> {{ 'product.for_orders_from' | translate }} 500 {{ 'global.uah' | translate }}<br>
-            <span class="store-info__discount">-10%</span> {{ 'product.for_orders_from' | translate }} 1500 {{ 'global.uah' | translate }}<br>
-            <span class="store-info__tip">({{ 'product.not_sum_up_with' | translate }} <a class="store-info__link main-link" langRouterLink="/skidki">{{ 'product.discounts' | translate }}</a> {{ 'product.sales' | translate }})</span>
-          </p>
-
-          <p>
-            {{ 'product.order_processing_in_a_day' | translate }}!
-            <a class="store-info__reviews store-reviews" langRouterLink="/otzyvy">
-              <span class="store-reviews__text main-link">{{ 'global.store_reviews' | translate }}</span>
-              <span class="store-reviews__average">{{ averageReviewsRating }}</span>
-              <rating-stars class="store-reviews__stars" [isSmall]="true" [isDisabled]="true" [rating]="averageReviewsRating"></rating-stars>
-              <span class="store-reviews__count">({{ storeReviewsCount }})</span>
-            </a>
-          </p>
+        <div class="product__store-info product__store-info--desktop">
+          <ng-container *ngTemplateOutlet="storeInfoTmpl"></ng-container>
         </div>
 
         <product-variants class="product__variants"
@@ -123,6 +106,10 @@
             ></additional-services>
           </div>
 
+          <div class="product__store-info product__store-info--mobile">
+            <ng-container *ngTemplateOutlet="storeInfoTmpl"></ng-container>
+          </div>
+
           <div class="product__actions">
             <button class="btn product__buy"
                     *ngIf="product.isInStock"
@@ -142,33 +129,12 @@
             </button>
           </div>
         </div>
-
-        <div class="product__categories">
-          {{ 'global.categories' | translate }}:&nbsp;
-
-          <a class="product__category main-link"
-             *ngFor="let category of product.categories, last as last"
-             [langRouterLink]="'/' + category.slug"
-          >
-            {{ category.name }}
-          </a>
-        </div>
       </div>
     </div>
 
     <product-details class="product__details" [product]="product"></product-details>
 
-    <aggregated-products [productId]="product.productId"></aggregated-products>
-
-    <products-preview class="product__related"
-                      [ids]="getRelatedProductsIds()"
-                      [type]="'linkedProducts'"
-                      parentNameForAnalytics="Related products"
-    ></products-preview>
-
   </ng-container>
-
-  <recently-viewed-products></recently-viewed-products>
 
 </div>
 
@@ -181,5 +147,31 @@
 
   <div class="product__sku product__vendor-code" *ngIf="product.vendorCode">
     {{ 'product.vendor_code' | translate }}: <span class="product__sku-value">{{ product.vendorCode }}</span>
+  </div>
+</ng-template>
+
+<ng-template #storeInfoTmpl>
+  <div class="store-info">
+    <p *ngIf="product.isDiscountApplicable; else noDiscountsTextTmpl">
+      <span class="store-info__discount">-5%</span> {{ 'global.and' | translate }} <a class="store-info__shipment-link main-link" langRouterLink="/dostavka-i-oplata">{{ 'product.free_shipment' | translate }}</a> {{ 'global.from' | translate }} 1000 {{ 'global.uah' | translate }}<br>
+      <span class="store-info__discount">-10%</span> {{ 'product.for_orders_from' | translate }}  1500 {{ 'global.uah' | translate }}<br>
+      <span class="store-info__tip">({{ 'product.not_sum_up_with' | translate }} <a class="store-info__link main-link" langRouterLink="/skidki">{{ 'product.discounts' | translate }}</a> {{ 'product.sales' | translate }})</span>
+    </p>
+
+    <ng-template #noDiscountsTextTmpl>
+      <p>
+        <a class="main-link" langRouterLink="/dostavka-i-oplata">{{ 'product.free_shipment' | translate }}</a> {{ 'product.for_orders_from' | translate }} 1000 {{ 'global.uah' | translate }} <span class="store-info__tip">({{ 'product.except_overall' | translate }})</span>
+      </p>
+    </ng-template>
+
+    <p>
+      {{ 'product.order_processing_in_a_day' | translate }} ->
+      <a class="store-info__reviews store-reviews" langRouterLink="/otzyvy">
+        <span class="store-reviews__text main-link">{{ 'global.reviews' | translate }}</span>
+        <span class="store-reviews__average">{{ averageReviewsRating }}</span>
+        <rating-stars class="store-reviews__stars" [isSmall]="true" [isDisabled]="true" [rating]="averageReviewsRating"></rating-stars>
+        <span class="store-reviews__count">({{ storeReviewsCount }})</span>
+      </a>
+    </p>
   </div>
 </ng-template>

@@ -14,6 +14,8 @@ import { API_HOST } from '../../../shared/constants';
 })
 export class ProductReviewService {
 
+  mediaUploadUrl: string = `${API_HOST}/api/v1/product-reviews/media`;
+
   constructor(private http: HttpClient) { }
 
   fetchProductReviews(productId: number) {
