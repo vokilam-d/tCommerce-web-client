@@ -4,6 +4,7 @@ export class AggregatedProductDto {
   name: string;
   sku: string;
   price: number;
+  isInStock: boolean;
 
   // custom transforms
   isLoading: boolean;

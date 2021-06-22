@@ -89,6 +89,11 @@
       margin-left: 13px;
       font-size: inherit;
     }
+
+    &--out-of-stock {
+      min-width: 78px;
+      text-align: center;
+    }
   }
 
   &__preloader {

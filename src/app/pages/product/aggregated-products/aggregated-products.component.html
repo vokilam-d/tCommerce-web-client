@@ -13,12 +13,21 @@
         {{ product.price }}<span class="product__currency"> {{ 'global.uah' | translate }}</span>
       </span>
 
-      <button class="product__buy btn" (click)="addToCart(product)">
+      <button
+        class="product__buy btn btn--transparent"
+        *ngIf="product.isInStock; else notInStockTmpl"
+        (click)="addToCart(product)"
+      >
         {{ 'global.to_buy' | translate }}
 
         <preloader class="product__preloader" *ngIf="product.isLoading"></preloader>
       </button>
 
+      <ng-template #notInStockTmpl>
+        <div class="product__buy product__buy--out-of-stock">
+          {{ 'global.out_of_stock' | translate }}
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

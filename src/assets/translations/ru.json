@@ -51,7 +51,8 @@
     "items_cost": "Стоимость товаров",
     "added": "Добавлено",
     "edit": "Изменить",
-    "contact_info": "Контактная информация"
+    "contact_info": "Контактная информация",
+    "out_of_stock": "Нет в наличии"
   },
 
   "rating": {
@@ -392,10 +393,6 @@
     "recently_added_products": "Недавно добавленные товары"
   },
 
-  "product_list_item": {
-    "out_of_stock": "Нет в наличии"
-  },
-
   "product_list": {
     "filters": "Фильтры",
     "no_items_found": "По заданным параметрам не найдено ни одного товара"
@@ -450,8 +447,7 @@
     "discounts": "накопительными скидками",
     "sales": "и акциями",
     "order_processing_in_a_day": "Отправим быстро",
-    "in_stock": "В наличии",
-    "out_of_stock": "Нет в наличии"
+    "in_stock": "В наличии"
   },
 
   "product_details": {

@@ -51,7 +51,8 @@
     "items_cost": "Вартість товарів",
     "added": "Додано",
     "edit": "Змінити",
-    "contact_info": "Контактна інформація"
+    "contact_info": "Контактна інформація",
+    "out_of_stock": "Немає в наявності"
   },
 
   "rating": {
@@ -389,10 +390,6 @@
     "recently_added_products": "Нещодавно додані товари"
   },
 
-  "product_list_item": {
-    "out_of_stock": "Немає в наявності"
-  },
-
   "product_list": {
     "filters": "Фільтри",
     "no_items_found": "По заданих параметрах не знайдено жодного товару"
@@ -447,8 +444,7 @@
     "discounts": "накопичувальними знижками",
     "sales": "і акціями",
     "order_processing_in_a_day": "Відправимо швидко",
-    "in_stock": "У наявності",
-    "out_of_stock": "Немає в наявності"
+    "in_stock": "У наявності"
   },
 
   "product_details": {

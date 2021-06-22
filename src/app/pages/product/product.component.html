@@ -81,7 +81,7 @@
             <div class="product__price-container">
               <div class="product__stock" [class.product__stock--available]="product.isInStock">
                 <ng-container *ngIf="product.isInStock">{{ 'product.in_stock' | translate }}</ng-container>
-                <ng-container *ngIf="!product.isInStock">{{ 'product.out_of_stock' | translate }}</ng-container>
+                <ng-container *ngIf="!product.isInStock">{{ 'global.out_of_stock' | translate }}</ng-container>
               </div>
 
               <div class="product__price" [class.product__price--special]="product.oldPrice">
