@@ -1,6 +1,6 @@
 <div class="table" *ngFor="let table of tables">
-  <div class="table__name">
-    {{ table.name }}
+  <div class="table__name" *ngIf="table.name as name">
+    {{ name }}
   </div>
 
   <div class="table__products">
