@@ -69,7 +69,6 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
     this.aggregatorService.fetchAggregatedProductsTables(this.product.productId).subscribe(
       response => {
         this.aggregatorTables = response.data;
-        console.log(this.aggregatorTables.length);
 
         if (this.aggregatorTables.length === 0) {
           const aggregatorsDetailsBlockId = this.getDetailsBlockId('aggregators');
