@@ -95,7 +95,7 @@ export class OrderSuccessComponent implements OnInit {
 
   private showGoogleCustomerReview() {
     const orderId = this.order.id;
-    // const email = this.order.email;
+    const email = this.order.customerContactInfo.email;
     const deliveryDate = new Date();
     deliveryDate.setDate(deliveryDate.getDate() + 7);
     const formattedDate: string = formatDate(deliveryDate, 'yyyy-MM-dd', this.locale);
@@ -106,7 +106,7 @@ export class OrderSuccessComponent implements OnInit {
           {
             "merchant_id": 139367975,
             "order_id": orderId,
-            // "email": email,
+            "email": email,
             "delivery_country": "UA",
             "estimated_delivery_date": formattedDate,
             "opt_in_style": "CENTER_DIALOG"
