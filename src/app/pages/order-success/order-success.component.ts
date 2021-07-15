@@ -1,5 +1,5 @@
-import { Component, Inject, LOCALE_ID, OnInit, PLATFORM_ID } from '@angular/core';
-import { formatDate, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { OrderDto } from '../../shared/dtos/order.dto';
 import { IBreadcrumb } from '../../breadcrumbs/breadcrumbs.interface';
@@ -7,6 +7,7 @@ import { DEFAULT_ERROR_TEXT, UPLOADED_HOST } from '../../shared/constants';
 import { HeadService } from '../../services/head/head.service';
 import { OrderService } from '../checkout/order.service';
 import { LanguageService } from '../../services/language/language.service';
+import { DeviceService } from '../../services/device-detector/device.service';
 
 declare const Wayforpay: any;
 
@@ -25,16 +26,16 @@ export class OrderSuccessComponent implements OnInit {
   private wayforpay: any;
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: any,
     @Inject(LOCALE_ID) private locale: string,
     private headService: HeadService,
+    private deviceService: DeviceService,
     private orderService: OrderService,
     private router: Router,
     private languageService: LanguageService
   ) { }
 
   ngOnInit(): void {
-    if (!isPlatformBrowser(this.platformId)) { return; }
+    if (!this.deviceService.isPlatformBrowser()) { return; }
 
     this.order = window.history.state.order;
     if (!this.order) {

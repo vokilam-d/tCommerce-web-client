@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { DeviceService } from '../../services/device-detector/device.service';
 
 @Component({
   selector: 'oauth-success',
@@ -8,10 +8,12 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class OauthSuccessComponent implements OnInit {
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any) { }
+  constructor(
+    private deviceService: DeviceService
+  ) { }
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
+    if (this.deviceService.isPlatformBrowser()) {
       window.close();
     }
   }
