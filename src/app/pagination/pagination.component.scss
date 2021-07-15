@@ -7,6 +7,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
+
+    @include respond-to($media_large) {
+      padding: 10px;
+    }
   }
 
   &__arrow-btn {
