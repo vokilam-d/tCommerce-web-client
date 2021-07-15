@@ -10,6 +10,10 @@
   &__products {
     margin: 20px 0 0;
     display: block;
+
+    @include respond-to($media_large) {
+      margin: 0;
+    }
   }
 
   &__heading {
@@ -46,6 +50,11 @@
   margin-top: 10px;
   padding: 5px 0;
 
+  @include respond-to($media_large) {
+    margin-top: 5px;
+    padding: 0;
+  }
+
   &__category {
     width: calc(100% / 3);
     border-width: 0 1px 1px 0;
@@ -67,8 +76,8 @@
     }
 
     @include respond-to($media_large) {
-      width: calc((100% / 8) - 30px);
-      margin: 0 15px 20px;
+      width: calc((100% / 11) - 10px);
+      margin: 0 0 5px;
     }
   }
 
@@ -84,7 +93,7 @@
 
     @include respond-to($media_medium) {
       justify-content: unset;
-      padding: 8px 6px;
+      padding: 0 5px;
       font-size: 14px;
     }
 
@@ -115,6 +124,10 @@
     @include respond-to($media_medium) {
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    @include respond-to($media_large) {
+      font-size: 12px;
     }
   }
 }

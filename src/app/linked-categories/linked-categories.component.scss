@@ -1,17 +1,18 @@
 @import "variables";
 @import "mixins";
 
-.container {
-  overflow: auto;
-}
-
 .categories {
   display: flex;
   flex-wrap: nowrap;
   font-size: 14px;
+  overflow: auto;
 
   @include respond-to($media_medium) {
     margin-top: 20px;
+  }
+
+  @include respond-to($media_large) {
+    margin-top: 15px;
   }
 
   &__swipe {

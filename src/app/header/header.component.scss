@@ -19,10 +19,6 @@
     flex-grow: 2;
   }
 
-  &__lang {
-    margin: 0 10px 0 0;
-  }
-
   &__phones {
     flex-shrink: 0;
     min-width: 0;
@@ -47,6 +43,7 @@
 
     @include respond-to($media_large) {
       flex-direction: row;
+      padding: 0;
     }
   }
 
@@ -93,7 +90,7 @@
     }
 
     @include respond-to($media_large) {
-      font-size: 14px;
+      display: none;
     }
   }
 
@@ -103,6 +100,10 @@
       height: auto !important;
       margin: 0;
       padding: 0 0 0 30px;
+    }
+
+    @include respond-to($media_large) {
+      padding: 0 0 0 10px;
     }
 
     &--is-catalog {
@@ -191,6 +192,15 @@
       display: block;
     }
   }
+
+  &__lang {
+    display: none;
+
+    @include respond-to($media_large) {
+      display: block;
+      margin: 0 50px;
+    }
+  }
 }
 
 .phones {
@@ -246,7 +256,7 @@
   z-index: 3;
 
   @include respond-to($media_large) {
-    width: 16%;
+    width: 15%;
     display: block;
   }
 

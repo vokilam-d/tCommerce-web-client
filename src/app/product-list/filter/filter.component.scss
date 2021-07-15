@@ -23,6 +23,10 @@
     font-size: 15px;
     font-weight: 600;
     text-transform: uppercase;
+
+    @include respond-to($media_large) {
+      padding: 20px 0 0;
+    }
   }
 
   &__checkbox {

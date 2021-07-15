@@ -34,7 +34,11 @@
       position: static;
       flex-shrink: 0;
       width: 290px;
-      padding: 0 5px;
+      margin: 15px 0 0;
+      padding: 0;
+      border-width: 1px 1px 0 0;
+      border-style: solid;
+      border-color: $borderColor;
       transform: none;
       z-index: auto;
     }
@@ -57,7 +61,8 @@
     padding: 0;
 
     @include respond-to($media_large) {
-      padding: 0 0 15px 0;
+      margin: 5px 0 0;
+      padding: 0 0 5px 0;
     }
   }
 
