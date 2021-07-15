@@ -6,7 +6,7 @@
   &__block {
     margin: 20px 0 0;
     padding: 0 0 20px;
-    border-bottom: 1px solid #d8d8d8;
+    border-bottom: 1px solid $borderColor;
 
     @include respond-to($media_large) {
       padding-left: 10px;
@@ -15,6 +15,10 @@
 
     &:first-child {
       margin-top: 0;
+    }
+
+    &:last-child {
+      border-bottom: none;
     }
   }
 
